@@ -1,8 +1,8 @@
 // React
 import React from 'react';
 export default function IconButton(props) {
-    let rippleClass = `ripple-${props.color}`;
-    let hoverClass = `hover-${props.color}`;
+    let rippleClass = `ripple-${props.color || 'primary'}`;
+    let hoverClass = `hover-${props.color || 'primary'}`;
     let colorClass = `${props.color || 'primary'}-color`;
     let className = "vieolo-icon-button " + " " + colorClass + " " + rippleClass + " " + hoverClass + " " + (props.className || "");
     if (props.tooltip)
