@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Button(props: {
 	text: string,
-	onClick?: () => void,
+	onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
 	disabled? : boolean,
 	color: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' | 'alert' | 'accessory-blue' | 'accessory-orange' | 'accessory-green',
 	startIcon?: React.ReactNode,
