@@ -6,7 +6,7 @@ export default function Button(props: {
 	text: string,
 	onClick?: () => void,
 	disabled? : boolean,
-	color: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' | 'alert' | 'accessoryBlue' | 'accessoryOrange' | 'accessoryGreen',
+	color: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' | 'alert' | 'accessory-blue' | 'accessory-orange' | 'accessory-green',
 	startIcon?: React.ReactNode,
 	endIcon?: React.ReactNode,
 	fullWidth?: boolean,
@@ -19,7 +19,7 @@ export default function Button(props: {
 	variant?: 'text' | 'outlined' | 'contained'
 }) {
 	let s: {[key: string]: any} = {};
-	let c: string = `global-button`;
+	let c: string = `vieolo-button`;
 
 	if (props.toLowerCase) {
 		s['textTransform'] = 'initial';		
@@ -31,7 +31,10 @@ export default function Button(props: {
 
 	if (props.className) c += " " + props.className;
 
-	if (props.color) c += " " + props.color + "-background";
+	if (props.color) {
+		c += " " + props.color + "-background";
+		c += " " + "ripple-" + props.color 
+	}
 	
 	if (props.disabled) c += " disabled";
 

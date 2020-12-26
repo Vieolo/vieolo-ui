@@ -5,7 +5,7 @@ import React from 'react';
 
 
 export default function IconButton(props: {
-	color?: 'primary' | 'secondary' | 'tertiary' | 'background' | 'alert' | 'error' | 'success' | 'accessoryOrange' | 'accessoryBlue' | 'accessoryGreen',
+	color?: 'primary' | 'secondary' | 'tertiary' | 'background' | 'alert' | 'error' | 'success' | 'accessory-orange' | 'accessory-blue' | 'accessory-green',
 	className?: string,
 	disabled?: boolean,
 	size?: 'small' | 'medium',
@@ -15,32 +15,15 @@ export default function IconButton(props: {
 	tooltipPosition?: 'up' | 'down' | 'left' | 'right' | 'up-left' | 'up-right' | 'down-left' | 'down-right'
 }) {
 
-	let rippleClass: string;
-    let hoverClass: string;
-    let colorClass = `${props.color || 'primary'}-color`;
+	let rippleClass: string = `ripple-${props.color}`;
+    let hoverClass: string = `hover-${props.color}`;
+	let colorClass = `${props.color || 'primary'}-color`;	
 
-	if (props.color == "error") {
-		rippleClass = "ripple-error";
-		hoverClass = "hover-error";
-	}else if (props.color == "alert") {
-		rippleClass = "ripple-alert";
-		hoverClass = "hover-alert";
-	}else if (props.color == "success") {
-		rippleClass = "ripple-success";
-		hoverClass = "hover-success";
-	}else if (props.color == "accessoryOrange") {
-		rippleClass = "ripple-accessory-orange";
-		hoverClass = "hover-accessory-orange";
-	}else {
-		rippleClass = 'ripple-tertiary';
-		hoverClass = "hover-tertiary";
-	}
-
-	let className = "icon-button " + " " + colorClass + " " + rippleClass + " " + hoverClass + " " + (props.className || "");
+	let className = "vieolo-icon-button " + " " + colorClass + " " + rippleClass + " " + hoverClass + " " + (props.className || "");
 
 	if (props.tooltip) className += " tooltip";
 
-	if (props.size == "small") className += " icon-button-small";
+	if (props.size == "small") className += " vieolo-icon-button-small";
 
 	if (props.disabled) className += " disabled";	
 

@@ -2,7 +2,7 @@
 import React from 'react';
 export default function Button(props) {
     let s = {};
-    let c = `global-button`;
+    let c = `vieolo-button`;
     if (props.toLowerCase) {
         s['textTransform'] = 'initial';
     }
@@ -11,8 +11,10 @@ export default function Button(props) {
     }
     if (props.className)
         c += " " + props.className;
-    if (props.color)
+    if (props.color) {
         c += " " + props.color + "-background";
+        c += " " + "ripple-" + props.color;
+    }
     if (props.disabled)
         c += " disabled";
     return React.createElement("button", { className: c, onClick: props.onClick, style: s },

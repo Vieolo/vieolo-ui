@@ -1,6 +1,6 @@
 import React from 'react';
 export default function IconButton(props: {
-    color?: 'primary' | 'secondary' | 'tertiary' | 'background' | 'alert' | 'error' | 'success' | 'accessoryOrange' | 'accessoryBlue' | 'accessoryGreen';
+    color?: 'primary' | 'secondary' | 'tertiary' | 'background' | 'alert' | 'error' | 'success' | 'accessory-orange' | 'accessory-blue' | 'accessory-green';
     className?: string;
     disabled?: boolean;
     size?: 'small' | 'medium';

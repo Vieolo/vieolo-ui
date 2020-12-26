@@ -3,7 +3,7 @@ export default function Button(props: {
     text: string;
     onClick?: () => void;
     disabled?: boolean;
-    color: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' | 'alert' | 'accessoryBlue' | 'accessoryOrange' | 'accessoryGreen';
+    color: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' | 'alert' | 'accessory-blue' | 'accessory-orange' | 'accessory-green';
     startIcon?: React.ReactNode;
     endIcon?: React.ReactNode;
     fullWidth?: boolean;
