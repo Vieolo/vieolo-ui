@@ -8,7 +8,8 @@ export default function Input(props: {
     placeholder?: string,
     onChange: (v: string) => void,
     error: boolean,
-    size?: 'small' | 'medium' | 'large' | 'full'
+    size?: 'small' | 'medium' | 'large' | 'full',
+    type?: 'text' | 'number' | 'password'
 }) {
     let size = props.size || 'medium';
     let width = '180px';
@@ -17,6 +18,7 @@ export default function Input(props: {
     else if (size == 'full') width = '100%';
 
     return <input
+        type={props.type || 'text'}
         value={props.value}
         placeholder={props.placeholder}
         onChange={e => { props.onChange(e.target.value) }}
