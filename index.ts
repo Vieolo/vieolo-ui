@@ -1,9 +1,15 @@
 import Button from './src/button';
 import IconButton from './src/icon_button';
 import Input from './src/input';
+import InputSet from './src/input_set';
+import Textarea from './src/textarea';
+import TextareaSet from './src/textarea_set';
 
 export {
     Button,
     IconButton,
-    Input
+    Input,
+    InputSet,
+    Textarea,
+    TextareaSet
 }
