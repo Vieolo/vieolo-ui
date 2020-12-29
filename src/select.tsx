@@ -52,9 +52,11 @@ export default class Select extends React.Component<
 
     componentDidMount() {
         document.addEventListener("click", this.handleClickOutside);
+        document.querySelector('main').style.overflow = 'hidden';
     }
     componentWillUnmount() {
         document.removeEventListener("click", this.handleClickOutside);
+        document.querySelector('main').style.overflow = 'auto';
     }
 
     getSelectedItem(value: string) : SelectItemType {
