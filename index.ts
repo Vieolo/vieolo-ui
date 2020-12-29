@@ -4,6 +4,7 @@ import Input from './src/input';
 import InputSet from './src/input_set';
 import Textarea from './src/textarea';
 import TextareaSet from './src/textarea_set';
+import Select from './src/select';
 
 export {
     Button,
@@ -11,5 +12,6 @@ export {
     Input,
     InputSet,
     Textarea,
-    TextareaSet
+    TextareaSet,
+    Select
 }
