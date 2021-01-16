@@ -1,0 +1,304 @@
+* {box-sizing:border-box}
+
+
+$box-shadow: 0px 3px 10px rgba(27, 78, 96,0.2);
+$box-shadow-dark: 0px 3px 10px rgba(27, 78, 96,0.5);
+$reverse-box-shadow: -2px -3px 15px rgba(0,0,0,.2);
+
+$universal-border-radius: 10px;
+
+
+
+// Pallet Colors
+
+$background-color: #FFFFFB;
+$hover-color: #CCE6F5;
+$border-color: #f2f2f2;
+
+
+$primary-color-normal: rgb(7, 6, 35);
+$primary-color-transparent: rgba(7, 6, 35, 0.3);
+$primary-color-light: rgb(152, 148, 214);
+$primary-color-gradient: linear-gradient(to right bottom, #090934, #090931, #09082e, #09082a, #080727, #080624, #080622, #07051f, #06051c, #050419, #040415, #030311);
+
+$secondary-color-normal: #3E88C2;
+$secondary-color-transparent: rgba(62, 136, 194, 0.3);
+$secondary-color-light: rgb(26, 15, 46);
+$secondary-color-gradient: linear-gradient(to right bottom, #71a7d3, #659fcf, #5997cb, #4c90c6, #3e88c2);
+
+$tertiary-color-normal: rgb(207, 219, 242);
+$tertiary-color-transparent: rgba(207, 219, 242, 0.3);
+$tertiary-color-light: rgb(26, 15, 46);
+$tertiary-color-gradient: linear-gradient(to right bottom, #d5e7fb, #d2e6fc, #cfe5fc, #cde3fd, #cae2fe, #c6e0fe, #c2ddfe, #bedbfe, #b8d7fd, #b1d3fd, #abd0fc, #a4ccfb);
+
+$alert-color-normal: rgb(225, 188, 41);
+$alert-color-transparent: rgba(225, 188, 41, 0.3);
+$alert-color-light: rgb(26, 15, 46);
+$alert-color-gradient: linear-gradient(to right bottom, #e9c843, #e7c63e, #e6c43a, #e4c135, #e3bf30, #e3bf2d, #e4be2a, #e4be26, #e6c024, #e9c122, #ebc320, #eec41d);
+
+$error-color-normal: rgb(245, 0, 87);
+$error-color-transparent: rgba(252, 232, 239, 1);
+$error-color-light: rgb(26, 15, 46);
+$error-color-gradient: linear-gradient(to right bottom, #f23c7c, #f33576, #f42d6f, #f52468, #f51961, #f3135d, #f20a59, #f00055, #ec0054, #e80053, #e50051, #e10050);
+
+$success-color-normal: rgb(24, 139, 108);
+$success-color-transparent: rgba(24, 139, 108, 0.3);
+$success-color-light: rgb(26, 15, 46);
+$success-color-gradient: linear-gradient(to right bottom, #209979, #1f9676, #1d9374, #1c9171, #1a8e6f, #198e6f, #188f6f, #178f6f, #169271, #149573, #139874, #119b76);
+
+
+$disable-color-normal: #b0bec5;
+$disable-color-gradient: linear-gradient(to right bottom, #c5cdd1, #c0c9ce, #bac5cb, #b5c2c8, #b0bec5);
+
+
+$accessory-orange-normal: wheat;
+$accessory-orange-transparent: rgba(245, 222, 179, 0.3);
+$accessory-orange-light: rgb(26, 15, 46);
+$accessory-orange-gradient: linear-gradient(to right bottom, #f4e5c9, #f4e3c3, #f5e2be, #f5e0b8, #f5deb3);
+
+$accessory-blue-normal: rgb(25, 118, 210);
+$accessory-blue-transparent: rgba(245, 222, 179, 0.3);
+$accessory-blue-light: rgb(26, 15, 46);
+$accessory-blue-gradient: linear-gradient(to right bottom, #4795e3, #3d8ddf, #3285db, #267ed6, #1976d2);
+
+$accessory-green-normal: rgb(152, 227, 214);
+$accessory-green-transparent: rgba(245, 222, 179, 0.3);
+$accessory-green-light: rgb(26, 15, 46);
+$accessory-green-gradient: linear-gradient(to right bottom, #ccf9f2, #bff4eb, #b2eee4, #a5e9dd, #98e3d6);
+
+
+// Pallet Mixins
+
+@mixin primary-background {
+	background-color: $primary-color-normal;
+	color: white;
+}
+
+
+@mixin secondary-background {
+	background-color: $secondary-color-normal;	
+	color: white;
+}
+
+@mixin tertiary-background {
+	background-color: $tertiary-color-normal;
+	color: black;
+}
+
+@mixin alert-background {
+	background-color: $alert-color-normal;	
+	color: white;
+}
+
+@mixin error-background {
+	background-color: $error-color-normal;
+	color: white;
+}
+
+@mixin success-background {
+	background-color: $success-color-normal;
+	color: black;
+}
+
+@mixin disable-background {
+	background-color: $disable-color-normal;
+	color: black;
+}
+
+@mixin accessory-orange-background {
+	background-color: $accessory-orange-normal;
+	color: black;
+}
+
+@mixin accessory-blue-background {
+	background-color: $accessory-blue-normal;
+	color: white;
+}
+
+@mixin accessory-green-background {
+	background-color: $accessory-green-normal;
+	color: white;
+}
+
+
+
+
+
+
+@mixin primary-color {
+	color: $primary-color-normal;
+}
+
+
+@mixin secondary-color {
+	color: $secondary-color-normal;
+}
+
+@mixin tertiary-color {
+	color: $tertiary-color-normal;
+}
+
+@mixin alert-color {
+	color: $alert-color-normal;
+}
+
+@mixin error-color {
+	color: $error-color-normal;
+}
+
+@mixin success-color {
+	color: $success-color-normal;
+}
+
+@mixin disable-color {
+	color: $disable-color-normal;
+}
+
+@mixin accessory-orange-color {
+	color: $accessory-orange-normal;
+}
+
+@mixin accessory-blue-color {
+	color: $accessory-blue-normal;
+}
+
+@mixin accessory-green-color {
+	color: $accessory-green-normal;
+}
+
+
+
+
+
+
+%ripple {
+	background-position: center;
+	transition: background 0.8s;
+	  
+	&:active {
+		background-size: 100%;
+		transition: background 0s;
+	}
+}
+
+@mixin ripple-error {
+	@extend %ripple;
+	&:active {
+		background-color: $error-color-transparent;
+		background: $error-color-transparent;
+	}	
+}
+
+@mixin ripple-alert {
+	@extend %ripple;
+	&:active {
+		background-color: $error-color-normal;
+		background: $error-color-normal;		
+	}
+}
+
+
+@mixin ripple-success {
+	@extend %ripple;
+	&:active {
+		background-color: $success-color-normal;
+		background: $success-color-normal;
+	}
+}
+
+@mixin ripple-accessory-orange {
+	@extend %ripple;
+	&:active {
+		background-color: $accessory-orange-normal;
+		background: $accessory-orange-normal;
+	}
+}
+
+@mixin ripple-primary {
+	@extend %ripple;
+	&:active {
+		background-color: $primary-color-transparent;
+		background: $primary-color-transparent;
+	}
+}
+
+
+
+
+
+@mixin hover-primary {
+	&:hover {
+		background-color: $primary-color-light;
+		background: $primary-color-light;
+	}
+}
+
+
+
+@mixin hover-tertiary {
+	&:hover {
+		background-color: $tertiary-color-transparent;
+		background: $tertiary-color-transparent;
+	}
+}
+
+
+@mixin hover-error {
+	&:hover {
+		background-color: $error-color-transparent;
+		background: $error-color-transparent;
+	}
+}
+
+@mixin hover-alert {
+	&:hover {
+		background-color: $alert-color-transparent;
+		background: $alert-color-transparent;
+	}
+}
+
+@mixin hover-success {
+	&:hover {
+		background-color: $success-color-normal;
+		background: $success-color-normal;
+	}
+}
+
+@mixin hover-accessory-orange {
+	&:hover {
+		background-color: $accessory-orange-transparent;
+		background: $accessory-orange-transparent;
+	}
+}
+
+
+
+
+// Sizes
+
+$laptop13BreakPoint: 1400px;
+$laptop15BreakPoint: 1550px;
+$desktopBreakPoint: 1900px;
+$tablet13LandscapeBreakPoint: 1400px;
+$tablet11LandscapeBreakPoint: 1200px;
+$tablet10LandscapeBreakPoint: 1050px;
+$tablet13PortraitBreakPoint: 1050px;
+$tablet11PortraitBreakPoint: 900px;
+$tablet10PortraitBreakPoint: 800px;
+$mobileBreakPoint: 700px;
+$drawer-width: 180px;
+$drawer-item-width: 160px;
+$navbar-height: 50px;
+
+
+
+
+
+// Fonts
+$paragraph-font-family: 'Roboto Condensed', sans-serif;;
+$paragraph-font-light-weight: 300;
+$paragraph-font-regular-weight: 400;
+
+$header-font-family: 'Montserrat', sans-serif;
+$header-font-bold-weight: 600;
+

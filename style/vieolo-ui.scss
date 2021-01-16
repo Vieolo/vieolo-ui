@@ -1,0 +1,325 @@
+@use 'base';
+@use 'general';
+
+
+.vieolo-button {
+	position: relative;
+	overflow: hidden;
+	outline: 0;
+	border: 0;
+	height: 40px;	
+	border-radius: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: $box-shadow;
+	cursor: pointer;
+	background-position: center;
+	transition: background 0.8s;
+	font-size: 16px;
+	min-width: 50px;
+	@include font-header;
+
+	span {
+		@include center-by-flex-row;
+	}
+
+	.start-icon {
+		margin-right: 5px;
+	}
+
+	.end-icon {
+		margin-left: 5px;
+	}
+}
+
+
+.vieolo-input {
+	height: 30px;
+	line-height: 30px;
+	border-radius: 5px;
+	background-color: #f2f2f2;
+	border: 2px solid #f2f2f2;
+	font-size: 14px;
+	box-sizing: border-box;
+	padding: 2px 5px;
+	
+	&:focus,
+	&:active {
+	  outline: none;
+	}
+}
+
+
+.vieolo-switch {
+	.switch-input {
+		display: none;
+	}
+	
+	.switch-label {
+		position: relative;
+		display: inline-block;	
+		cursor: pointer;
+		font-weight: 500;
+		text-align: left;
+		margin: 0;
+		padding: 16px 0 16px 44px;
+
+		&:before,
+		&:after {
+			content: "";
+			position: absolute;
+			margin: 0;
+			outline: 0;
+			top: 50%;
+			-ms-transform: translate(0, -50%);
+			-webkit-transform: translate(0, -50%);
+			transform: translate(0, -50%);
+			-webkit-transition: all 0.3s ease;
+			transition: all 0.3s ease;
+		}
+
+		&:before {
+			left: 1px;
+			width: 34px;
+			height: 14px;
+			background-color: #9E9E9E;
+			border-radius: 8px;
+		}
+
+		&:after {
+			left: 0;
+			width: 20px;
+			height: 20px;
+			background-color: #FAFAFA;
+			border-radius: 50%;
+			box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.14), 0 2px 2px 0 rgba(0, 0, 0, 0.098), 0 1px 5px 0 rgba(0, 0, 0, 0.084);
+		}
+
+		.switch-on {
+			display: none;
+		}
+
+		.switch-off {
+			display: inline-block;
+		}
+	}
+ 
+  	.switch-input:checked + .switch-label:before {
+		background-color: $secondary-color-transparent;
+	}
+
+  	.switch-input:checked + .switch-label:after {
+		background-color: $secondary-color-normal;
+		-ms-transform: translate(80%, -50%);
+		-webkit-transform: translate(80%, -50%);
+		transform: translate(80%, -50%);
+	}
+  
+	.switch-input:checked + .switch-label .switch-on {
+		display: inline-block;
+	}
+	.switch-input:checked + .switch-label .switch-off {
+		display: none;
+	}
+}
+
+
+
+
+
+.vieolo-icon-button {
+	border-radius: 50%;
+	height: 40px;
+	width: 40px;
+	background-color: white;
+	border: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+
+	&:active {
+		outline: none;
+	}
+}
+
+.vieolo-icon-button-small {
+	height: 22px;
+	width: 22px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	svg {
+		width: 16px;
+		height: 16px;
+	}
+}
+
+
+
+.vieolo-select {
+	position: relative;
+	display: inline-block;
+
+	.select-button {
+		@include card-light-shadow;
+		margin: 0 auto;		
+		@include tertiary-background;
+		height: 45px;
+		cursor: pointer;
+		display: flex;
+		flex-flow: column;
+		@include no-text-overflow;
+		width: 130px;
+		padding: 0 5px;
+		justify-content: center;
+
+		@media all and (max-width: $laptop13BreakPoint) {
+			width: 100px;
+		}
+	
+		.button-title {
+			font-size: 11px;
+			margin: 0;			
+	
+			@media all and (max-width: $laptop13BreakPoint) {
+				font-size: 10px;
+			}
+		}
+	
+		.button-value {
+			font-size: 15px;
+			font-weight: 600;
+			margin: 0;
+			@include no-text-overflow;
+	
+			@media all and (max-width: $laptop13BreakPoint) {
+				font-size: 13px;
+			}
+		}
+	}
+
+	.select-button-error {
+		@include error-color;
+	}
+
+	.select-dropdown {
+		position: absolute;
+		top: 50%;
+		width: 150px;
+		z-index: 2;
+		padding: 10px 2px;
+		background-color: white;
+		box-shadow: $box-shadow-dark;
+		border-radius: 5px;
+		max-height: 200px;
+		overflow-y: auto;
+	}
+	  
+	.select-item {
+		padding: 5px;
+		height: 20px;
+		cursor: pointer;
+		border-radius: 5px;
+		@include transition;
+		color: $primary-color-normal;
+		font-size: 12px;
+		@include no-text-overflow;
+		display: flex;
+		align-items: center;
+
+		&:hover {
+			background-color: $hover-color;
+		}
+	}
+
+	.select-item-selected {
+		@include tertiary-background;
+	}	
+
+	.category-name {
+		font-size: 12px;
+		margin: 10px 0 3px 0;
+		@include font-header;
+	}
+}
+
+
+
+
+.vieolo-modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 99;
+	background-color: rgba(0,0,0, 0.4);
+	@include center-by-flex-column;
+}
+
+
+.vieolo-modal-header {
+	@include primary-background;
+	@include center-by-flex-row;
+	text-align: center;
+	margin-top: 0;
+	padding: 10px 0;
+	border-radius: 10px 10px 0 0;
+	@include font-header;
+
+	& > p {
+		margin: 5px 0;
+	}
+}
+
+.vieolo-modal-button-footer {
+	border-radius: 0 0 10px 10px;
+	border-top: 1px solid gray;
+	padding: 10px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	background-color: white;
+}
+
+
+
+
+
+.vieolo-dropdown-menu {
+	position: relative;
+  	display: inline-block;
+	
+	.dropdown {
+		position: absolute;
+		top: 100%;
+		left: -110px;
+		width: 150px;
+		z-index: 2;		
+		padding: 10px;
+		@include card-dark-shadow;
+	}
+	  
+	.dropdown-item {
+		padding: 10px;
+		//height: 20px;
+		cursor: pointer;
+		border-radius: $universal-border-radius;
+		@include transition;
+		color: $primary-color-normal;
+
+		&:hover {
+			background-color: $hover-color;
+		}
+	}
+}
+
+
+
+

@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { Fragment } from 'react';
 export default class Select extends React.Component {
     constructor(props) {
         super(props);
@@ -51,5 +51,13 @@ export default class Select extends React.Component {
     }
 }
 function SelectItem(props) {
-    return React.createElement("div", { className: `select-item${props.isSelected ? " select-item-selected" : ''}`, onClick: () => { props.onSelect(props.item); } }, props.item.title);
+    let className = "select-item";
+    if (props.isSelected)
+        className += " select-item-selected";
+    if (props.item.category)
+        className += " select-item-category";
+    return React.createElement(Fragment, null,
+        props.item.category &&
+            React.createElement("p", { className: "category-name" }, props.item.category),
+        React.createElement("div", { className: className, onClick: () => { props.onSelect(props.item); } }, props.item.title));
 }

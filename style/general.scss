@@ -1,0 +1,179 @@
+@use 'base';
+
+
+
+
+// Default HTML Tags
+
+body {
+    margin: 0;
+    font-family: $paragraph-font-family;
+}
+
+
+
+
+
+
+// Mixins -------------------------------
+
+@mixin transition {
+	transition: all ease 0.5s;
+}
+
+@mixin card-light-shadow {
+	border-radius: $universal-border-radius;
+	box-shadow: $box-shadow;
+	background-color: white;
+}
+
+@mixin card-dark-shadow {
+	border-radius: $universal-border-radius;
+	box-shadow: $box-shadow-dark;
+	background-color: white;
+}
+
+@mixin card-no-shadow {
+	background-color: white;
+	border-radius: $universal-border-radius;
+	border: 2px solid $border-color;
+}
+
+@mixin card-selectable {
+	cursor: pointer;
+	@include transition;
+
+	&:hover {
+		background-color: $hover-color;
+	}
+}
+
+@mixin card-selectable-gradient {
+	cursor: pointer;
+	@include transition;
+
+	&:hover {
+		background: $hover-color;
+		background-image: $hover-color;
+	}
+}
+
+@mixin card-header {
+	@include primary-background;
+	text-align: center;
+	margin-top: 0;
+	padding: 10px 0;
+	border-radius: 10px 10px 0 0;
+	@include font-header;
+}
+
+@mixin card-button-footer {
+	border-radius: 0 0 10px 10px;
+	border-top: 1px solid gray;
+	padding: 10px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+@mixin nonselectable {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+
+
+@mixin disabled {
+	pointer-events: none;
+	opacity: 0.4;
+}
+
+@mixin input-error {
+	border: 2px solid $error-color-normal !important;
+}
+
+@mixin div-error-border {
+	border: 3px solid $error-color-normal !important;
+}
+
+@mixin no-text-overflow {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
+@mixin flex-start {
+	display: flex;
+}
+
+
+@mixin flex-center {
+	display: flex;
+	justify-content: center;
+}
+
+@mixin flex-row-space-around {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+@mixin flex-row-space-between {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+
+@mixin flex-column {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+}
+
+
+@mixin center-by-transform {
+	margin-left: 50%;
+	transform: translateX(-50%);
+}
+
+@mixin center-by-flex-row {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-items: center;
+}
+
+@mixin center-by-flex-column {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+}
+
+
+
+
+
+// Fonts
+
+@mixin font-light {
+	font-family: $paragraph-font-family;
+	font-weight: $paragraph-font-light-weight
+}
+
+
+@mixin font-normal {
+	font-family: $paragraph-font-family;
+	font-weight: $paragraph-font-regular-weight
+}
+
+@mixin font-header {
+	font-family: $header-font-family;
+	font-weight: $header-font-bold-weight
+}

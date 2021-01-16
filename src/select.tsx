@@ -1,10 +1,11 @@
 // React
-import React from 'react';
+import React, { Fragment } from 'react';
 
 
 type SelectItemType = {
     title: string,
-    value: string
+    value: string,
+    category?: string
 }
 
 type SelectProps = {
@@ -100,8 +101,28 @@ export default class Select extends React.Component<
 }
 
 
-function SelectItem(props: {item: SelectItemType, isSelected: boolean, onSelect: (item: SelectItemType) => void}) {
+function SelectItem(props: {
+    item: SelectItemType, 
+    isSelected: boolean, 
+    onSelect: (item: SelectItemType) => void    
+}) {
 
-    return <div className={`select-item${props.isSelected ? " select-item-selected" : ''}`} onClick={() => {props.onSelect(props.item)}}>{props.item.title}</div>
+    let className= "select-item";
+
+    if (props.isSelected) className += " select-item-selected";
+    if (props.item.category) className += " select-item-category";
+
+    return <Fragment>
+        {
+            props.item.category &&
+            <p className="category-name">{props.item.category}</p>
+        }
+        <div 
+            className={className} 
+            onClick={() => {props.onSelect(props.item)}}
+            > 
+            {props.item.title}
+        </div>
+    </Fragment> 
 
 }
