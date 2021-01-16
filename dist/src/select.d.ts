@@ -2,6 +2,7 @@ import React from 'react';
 declare type SelectItemType = {
     title: string;
     value: string;
+    category?: string;
 };
 declare type SelectProps = {
     title: string;
