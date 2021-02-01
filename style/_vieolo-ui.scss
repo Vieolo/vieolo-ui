@@ -135,6 +135,33 @@ body {
 }
 
 
+.vieolo-switch-set {
+	padding: 5px;	
+	cursor: pointer;
+	display: grid;
+	grid-template-columns: 1fr 50px;
+	
+	p {
+		margin: 0;
+		@include nonselectable;
+	}
+
+	.title-container {
+		display: flex;
+		flex-flow: column;
+		justify-content: center;
+
+		.subtitle {
+			font-size: 12px;
+			@include font-light;
+		}
+	}
+
+	.switch-container {
+		@include center-by-flex-row;
+	}
+}
+
 
 
 
