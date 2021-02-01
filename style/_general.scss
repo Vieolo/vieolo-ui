@@ -2,6 +2,34 @@
 
 
 
+// Fonts
+
+@mixin font-light {
+	font-family: $paragraph-font-family;
+	font-weight: $paragraph-font-light-weight
+}
+.font-light {
+	@include font-light;
+}
+
+
+@mixin font-normal {
+	font-family: $paragraph-font-family;
+	font-weight: $paragraph-font-regular-weight
+}
+.font-normal {
+	@include font-normal;
+}
+
+
+@mixin font-header {
+	font-family: $header-font-family;
+	font-weight: $header-font-bold-weight
+}
+.font-header {
+	@include font-header;
+}
+
 
 
 
@@ -211,33 +239,3 @@
 }
 
 
-
-
-
-// Fonts
-
-@mixin font-light {
-	font-family: $paragraph-font-family;
-	font-weight: $paragraph-font-light-weight
-}
-.font-light {
-	@include font-light;
-}
-
-
-@mixin font-normal {
-	font-family: $paragraph-font-family;
-	font-weight: $paragraph-font-regular-weight
-}
-.font-normal {
-	@include font-normal;
-}
-
-
-@mixin font-header {
-	font-family: $header-font-family;
-	font-weight: $header-font-bold-weight
-}
-.font-header {
-	@include font-header;
-}
