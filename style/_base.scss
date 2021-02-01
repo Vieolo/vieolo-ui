@@ -73,51 +73,81 @@ $accessory-green-gradient: linear-gradient(to right bottom, #ccf9f2, #bff4eb, #b
 	background-color: $primary-color-normal;
 	color: white;
 }
+.primary-background {
+	@include primary-background;
+}
 
 
 @mixin secondary-background {
 	background-color: $secondary-color-normal;	
 	color: white;
 }
+.secondary-background {
+	@include secondary-background;
+}
 
 @mixin tertiary-background {
 	background-color: $tertiary-color-normal;
 	color: black;
+}
+.tertiary-background {
+	@include tertiary-background;
 }
 
 @mixin alert-background {
 	background-color: $alert-color-normal;	
 	color: white;
 }
+.alert-background {
+	@include alert-background;
+}
 
 @mixin error-background {
 	background-color: $error-color-normal;
 	color: white;
+}
+.error-background {
+	@include error-background;
 }
 
 @mixin success-background {
 	background-color: $success-color-normal;
 	color: black;
 }
+.success-background {
+	@include success-background;
+}
 
 @mixin disable-background {
 	background-color: $disable-color-normal;
 	color: black;
+}
+.disable-background {
+	@include disable-background;
 }
 
 @mixin accessory-orange-background {
 	background-color: $accessory-orange-normal;
 	color: black;
 }
+.accessory-orange-background {
+	@include accessory-orange-background;
+}
 
 @mixin accessory-blue-background {
 	background-color: $accessory-blue-normal;
 	color: white;
 }
+.accessory-blue-background {
+	@include accessory-blue-background;
+}
 
 @mixin accessory-green-background {
 	background-color: $accessory-green-normal;
 	color: white;
+}
+.accessory-green-background {
+	@include accessory-green-background;
 }
 
 
@@ -128,42 +158,72 @@ $accessory-green-gradient: linear-gradient(to right bottom, #ccf9f2, #bff4eb, #b
 @mixin primary-color {
 	color: $primary-color-normal;
 }
+.primary-color {
+	@include primary-color;
+}
 
 
 @mixin secondary-color {
 	color: $secondary-color-normal;
 }
+.secondary-color {
+	@include secondary-color;
+}
 
 @mixin tertiary-color {
 	color: $tertiary-color-normal;
+}
+.tertiary-color {
+	@include tertiary-color;
 }
 
 @mixin alert-color {
 	color: $alert-color-normal;
 }
+.alert-color {
+	@include alert-color;
+}
 
 @mixin error-color {
 	color: $error-color-normal;
+}
+.error-color {
+	@include error-color;
 }
 
 @mixin success-color {
 	color: $success-color-normal;
 }
+.success-color {
+	@include success-color;
+}
 
 @mixin disable-color {
 	color: $disable-color-normal;
+}
+.disable-color {
+	@include disable-color;
 }
 
 @mixin accessory-orange-color {
 	color: $accessory-orange-normal;
 }
+.accessory-orange-color {
+	@include accessory-orange-color;
+}
 
 @mixin accessory-blue-color {
 	color: $accessory-blue-normal;
 }
+.accessory-blue-color {
+	@include accessory-blue-color;
+}
 
 @mixin accessory-green-color {
 	color: $accessory-green-normal;
+}
+.accessory-green-color {
+	@include accessory-green-color;
 }
 
 
@@ -188,6 +248,9 @@ $accessory-green-gradient: linear-gradient(to right bottom, #ccf9f2, #bff4eb, #b
 		background: $error-color-transparent;
 	}	
 }
+.ripple-error {
+	@include ripple-error;
+}
 
 @mixin ripple-alert {
 	@extend %ripple;
@@ -195,6 +258,9 @@ $accessory-green-gradient: linear-gradient(to right bottom, #ccf9f2, #bff4eb, #b
 		background-color: $error-color-normal;
 		background: $error-color-normal;		
 	}
+}
+.ripple-alert {
+	@include ripple-alert;
 }
 
 
@@ -205,6 +271,9 @@ $accessory-green-gradient: linear-gradient(to right bottom, #ccf9f2, #bff4eb, #b
 		background: $success-color-normal;
 	}
 }
+.ripple-success {
+	@include ripple-success;
+}
 
 @mixin ripple-accessory-orange {
 	@extend %ripple;
@@ -213,6 +282,9 @@ $accessory-green-gradient: linear-gradient(to right bottom, #ccf9f2, #bff4eb, #b
 		background: $accessory-orange-normal;
 	}
 }
+.ripple-accessory-orange {
+	@include ripple-accessory-orange;
+}
 
 @mixin ripple-primary {
 	@extend %ripple;
@@ -220,6 +292,9 @@ $accessory-green-gradient: linear-gradient(to right bottom, #ccf9f2, #bff4eb, #b
 		background-color: $primary-color-transparent;
 		background: $primary-color-transparent;
 	}
+}
+.ripple-primary {
+	@include ripple-primary;
 }
 
 
@@ -232,6 +307,9 @@ $accessory-green-gradient: linear-gradient(to right bottom, #ccf9f2, #bff4eb, #b
 		background: $primary-color-light;
 	}
 }
+.hover-primary {
+	@include hover-primary;
+}
 
 
 
@@ -241,6 +319,9 @@ $accessory-green-gradient: linear-gradient(to right bottom, #ccf9f2, #bff4eb, #b
 		background: $tertiary-color-transparent;
 	}
 }
+.hover-tertiary {
+	@include hover-tertiary;
+}
 
 
 @mixin hover-error {
@@ -249,12 +330,18 @@ $accessory-green-gradient: linear-gradient(to right bottom, #ccf9f2, #bff4eb, #b
 		background: $error-color-transparent;
 	}
 }
+.hover-error {
+	@include hover-error;
+}
 
 @mixin hover-alert {
 	&:hover {
 		background-color: $alert-color-transparent;
 		background: $alert-color-transparent;
 	}
+}
+.hover-alert {
+	@include hover-alert;
 }
 
 @mixin hover-success {
@@ -263,12 +350,18 @@ $accessory-green-gradient: linear-gradient(to right bottom, #ccf9f2, #bff4eb, #b
 		background: $success-color-normal;
 	}
 }
+.hover-success {
+	@include hover-success;
+}
 
 @mixin hover-accessory-orange {
 	&:hover {
 		background-color: $accessory-orange-transparent;
 		background: $accessory-orange-transparent;
 	}
+}
+.hover-accessory-orange {
+	@include hover-accessory-orange;
 }
 
 

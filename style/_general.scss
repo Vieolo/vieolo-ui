@@ -10,11 +10,17 @@
 @mixin transition {
 	transition: all ease 0.5s;
 }
+.transition {
+	@include transition;
+}
 
 @mixin card-light-shadow {
 	border-radius: $universal-border-radius;
 	box-shadow: $box-shadow;
 	background-color: white;
+}
+.card-light-shadow {
+	@include card-light-shadow;
 }
 
 @mixin card-dark-shadow {
@@ -22,11 +28,17 @@
 	box-shadow: $box-shadow-dark;
 	background-color: white;
 }
+.card-dark-shadow {
+	@include card-dark-shadow;
+}
 
 @mixin card-no-shadow {
 	background-color: white;
 	border-radius: $universal-border-radius;
 	border: 2px solid $border-color;
+}
+.card-no-shadow {
+	@include card-no-shadow;
 }
 
 @mixin card-selectable {
@@ -36,6 +48,9 @@
 	&:hover {
 		background-color: $hover-color;
 	}
+}
+.card-selectable {
+	@include card-selectable;
 }
 
 @mixin card-selectable-gradient {
@@ -47,6 +62,9 @@
 		background-image: $hover-color;
 	}
 }
+.card-selectable-gradient {
+	@include card-selectable-gradient;
+}
 
 @mixin card-header {
 	@include primary-background;
@@ -55,6 +73,9 @@
 	padding: 10px 0;
 	border-radius: 10px 10px 0 0;
 	@include font-header;
+}
+.card-header {
+	@include card-header;
 }
 
 @mixin card-button-footer {
@@ -65,6 +86,9 @@
 	justify-content: flex-end;
 	align-items: center;
 }
+.card-button-footer {
+	@include card-button-footer;
+}
 
 @mixin nonselectable {
 	-webkit-touch-callout: none;
@@ -74,6 +98,9 @@
 	-ms-user-select: none;
 	user-select: none;
 }
+.nonselectable {
+	@include nonselectable;
+}
 
 
 
@@ -81,13 +108,22 @@
 	pointer-events: none;
 	opacity: 0.4;
 }
+.disabled {
+	@include disabled;
+}
 
 @mixin input-error {
 	border: 2px solid $error-color-normal !important;
 }
+.input-error {
+	@include input-error;
+}
 
 @mixin div-error-border {
 	border: 3px solid $error-color-normal !important;
+}
+.div-error-border {
+	@include div-error-border;
 }
 
 @mixin no-text-overflow {
@@ -95,16 +131,26 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+.no-text-overflow {
+	@include no-text-overflow;
+}
 
 
 @mixin flex-start {
 	display: flex;
+}
+.flex-start {
+	@include flex-start;
 }
 
 
 @mixin flex-center {
 	display: flex;
 	justify-content: center;
+	align-items: center;
+}
+.flex-center {
+	@include flex-center;
 }
 
 @mixin flex-row-space-around {
@@ -112,11 +158,17 @@
 	justify-content: space-around;
 	align-items: center;
 }
+.flex-row-space-around {
+	@include flex-row-space-around;
+}
 
 @mixin flex-row-space-between {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+.flex-row-space-between {
+	@include flex-row-space-between;
 }
 
 
@@ -125,11 +177,17 @@
 	flex-flow: column;
 	align-items: center;
 }
+.flex-column {
+	@include flex-column;
+}
 
 
 @mixin center-by-transform {
 	margin-left: 50%;
 	transform: translateX(-50%);
+}
+.center-by-transform {
+	@include center-by-transform;
 }
 
 @mixin center-by-flex-row {
@@ -138,12 +196,18 @@
 	justify-content: center;
 	align-items: center;
 }
+.center-by-flex-row {
+	@include center-by-flex-row;
+}
 
 @mixin center-by-flex-column {
 	display: flex;
 	flex-flow: column;
 	justify-content: center;
 	align-items: center;
+}
+.center-by-flex-column {
+	@include center-by-flex-column;
 }
 
 
@@ -156,14 +220,24 @@
 	font-family: $paragraph-font-family;
 	font-weight: $paragraph-font-light-weight
 }
+.font-light {
+	@include font-light;
+}
 
 
 @mixin font-normal {
 	font-family: $paragraph-font-family;
 	font-weight: $paragraph-font-regular-weight
 }
+.font-normal {
+	@include font-normal;
+}
+
 
 @mixin font-header {
 	font-family: $header-font-family;
 	font-weight: $header-font-bold-weight
+}
+.font-header {
+	@include font-header;
 }
