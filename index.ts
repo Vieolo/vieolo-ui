@@ -7,6 +7,8 @@ import Modal from './src/modal';
 import Textarea from './src/textarea';
 import TextareaSet from './src/textarea_set';
 import Select from './src/select';
+import Switch from './src/switch';
+import SwitchSet from './src/switch_set';
 
 export {
     Button,
@@ -17,5 +19,7 @@ export {
     Modal,
     Textarea,
     TextareaSet,
-    Select
+    Select,
+    Switch,
+    SwitchSet
 }
