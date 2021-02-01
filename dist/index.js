@@ -7,4 +7,6 @@ import Modal from './src/modal';
 import Textarea from './src/textarea';
 import TextareaSet from './src/textarea_set';
 import Select from './src/select';
-export { Button, DropDownMenu, IconButton, Input, InputSet, Modal, Textarea, TextareaSet, Select };
+import Switch from './src/switch';
+import SwitchSet from './src/switch_set';
+export { Button, DropDownMenu, IconButton, Input, InputSet, Modal, Textarea, TextareaSet, Select, Switch, SwitchSet };
