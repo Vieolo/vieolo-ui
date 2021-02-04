@@ -186,6 +186,7 @@
 
 @mixin flex-start {
 	display: flex;
+	align-items: center;
 }
 .flex-start {
 	@include flex-start;
