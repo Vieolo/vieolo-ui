@@ -131,6 +131,26 @@
 }
 
 
+@mixin grid-two-column {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 10px;
+}
+.grid-two-column {
+	@include grid-two-column;
+}
+
+
+@mixin grid-three-column {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	column-gap: 10px;
+}
+.grid-three-column {
+	@include grid-three-column;
+}
+
+
 
 @mixin disabled {
 	pointer-events: none;
