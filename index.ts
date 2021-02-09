@@ -1,5 +1,6 @@
 import Button from './src/button';
 import DropDownMenu from './src/dropdown_menu';
+import FileInput from './src/file_input';
 import IconButton from './src/icon_button';
 import Input from './src/input';
 import InputSet from './src/input_set';
@@ -13,6 +14,7 @@ import SwitchSet from './src/switch_set';
 export {
     Button,
     DropDownMenu,
+    FileInput,
     IconButton,
     Input,
     InputSet,
