@@ -1,4 +1,5 @@
 import Button from './src/button';
+import Chip from './src/chip';
 import DropDownMenu from './src/dropdown_menu';
 import FileInput from './src/file_input';
 import IconButton from './src/icon_button';
@@ -10,4 +11,4 @@ import TextareaSet from './src/textarea_set';
 import Select from './src/select';
 import Switch from './src/switch';
 import SwitchSet from './src/switch_set';
-export { Button, DropDownMenu, FileInput, IconButton, Input, InputSet, Modal, Textarea, TextareaSet, Select, Switch, SwitchSet };
+export { Button, Chip, DropDownMenu, FileInput, IconButton, Input, InputSet, Modal, Textarea, TextareaSet, Select, Switch, SwitchSet };

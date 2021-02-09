@@ -380,3 +380,34 @@ body {
 	}
 }
 
+
+.vieolo-chip {
+	height: 28px;
+	border-radius: 12px;
+	display: inline-flex;
+	align-items: center;	
+	box-sizing: border-box;	
+
+	.chip-content {
+		height: 30px;
+		border-radius: 14px;
+		padding: 2px 5px;
+		@include center-by-flex-row;
+		border: 1px solid $secondary-color-normal;
+
+		p {
+			font-size: 11px;
+			@include font-header;
+			@include nonselectable;
+		}
+
+		& > span {
+			margin-left: 5px;
+		}
+	}
+
+	.chip-content-selected {
+		@include secondary-background;
+	}
+}
+
