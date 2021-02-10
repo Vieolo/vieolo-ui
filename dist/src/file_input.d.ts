@@ -6,4 +6,5 @@ export default function FileInput(props: {
     text?: string;
     multiple?: boolean;
     accept?: string;
+    validateFileName?: boolean;
 }): JSX.Element;

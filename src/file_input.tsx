@@ -12,7 +12,8 @@ export default function FileInput(props: {
     onError: (error: string) => void,
     text?: string,
     multiple?: boolean,
-    accept?: string
+    accept?: string,
+    validateFileName?: boolean
 }) {
     
     return <form className="vieolo-file-input">
@@ -23,9 +24,20 @@ export default function FileInput(props: {
             title={""}
             accept={props.accept}
             onChange={e => {
-                if (!fileValidation({ file: e.target.files[0] }).isValid) {
-                    props.onError('File(s) have prohibited characters!');
-                } else props.onChange(e.target.files);
+                let allFilesValid = true;
+                if (props.validateFileName) {
+                    let fileList = e.target.files;
+
+                    for (let file of fileList) {
+                        if (!fileValidation({ file: file }).isValid) {
+                            props.onError('File(s) have prohibited characters!');
+                            allFilesValid = false;
+                            return;
+                        }        
+                    }
+                }
+                
+                if (allFilesValid) props.onChange(e.target.files);
             }}
         />
         <div>
