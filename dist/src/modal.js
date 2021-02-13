@@ -5,7 +5,7 @@ export default class Modal extends React.Component {
         super(props);
         this.handleClickOutside = (event) => {
             if (this.container.current && !this.container.current.contains(event.target)) {
-                this.props.onClose();
+                this.props.onClose(event);
             }
         };
         this.container = React.createRef();
