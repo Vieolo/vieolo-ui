@@ -12,16 +12,27 @@ export default {
     component: Input,
     argTypes: {
         type: {
-          control: {
-            type: 'select',
-            options: [
-              'text', 
-              'password', 
-              'number'
-            ],
-          },
+            control: {
+                type: 'select',
+                options: [
+                    'text',
+                    'password',
+                    'number'
+                ],
+            },
+        },
+        size: {
+            control: {
+                type: 'select',
+                options: [
+                    'small',
+                    'medium',
+                    'large',
+                    'full'
+                ],
+            },
         }
-      },
+    },
 } as Meta;
 
 
@@ -30,7 +41,7 @@ Empty.args = {
     error: false,
     onChange: action("onChange"),
     value: "",
-    placeholder: "Value",    
+    placeholder: "Value",
 } as TextareaProps;
 
 
@@ -38,7 +49,7 @@ export const WithoutError = Template.bind({});
 WithoutError.args = {
     error: false,
     onChange: action("onChange"),
-    value: "Value"    
+    value: "Value"
 } as TextareaProps;
 
 
@@ -46,7 +57,7 @@ export const WithError = Template.bind({});
 WithError.args = {
     error: true,
     onChange: action("onChange"),
-    value: "Value"    
+    value: "Value"
 } as TextareaProps;
 
 

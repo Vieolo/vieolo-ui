@@ -74,20 +74,23 @@ body {
 	}
 }
 
+.vieolo-input-set,
 .vieolo-textarea-set {
 	.label-container {
 		height: 30px;
 		@include flex-row-space-between;
-		padding-right: 5px;
+		padding: 0 5px;
 
 		label {
 			margin: 0;
+			font-size: 12px;
+        	@include font-header;
 		}
 
 		.tip-icon {
 			font-size: 12px;
-			height: 15px;
-			width: 15px;
+			height: 14px;
+			width: 14px;
 			border-radius: 50%;
 			@include font-header;
 			@include center-by-flex-row;
