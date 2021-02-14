@@ -8,6 +8,7 @@ import InputSet from './src/input_set';
 import Modal from './src/modal';
 import Textarea from './src/textarea';
 import TextareaSet from './src/textarea_set';
+import TimePicker from './src/time_picker';
 import Select from './src/select';
 import Switch from './src/switch';
 import SwitchSet from './src/switch_set';
@@ -23,6 +24,7 @@ export {
     Modal,
     Textarea,
     TextareaSet,
+    TimePicker,
     Select,
     Switch,
     SwitchSet
