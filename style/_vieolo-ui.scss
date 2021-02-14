@@ -74,6 +74,192 @@ body {
 	}
 }
 
+.vieolo-textarea-set {
+	.label-container {
+		height: 30px;
+		@include flex-row-space-between;
+		padding-right: 5px;
+
+		label {
+			margin: 0;
+		}
+
+		.tip-icon {
+			font-size: 12px;
+			height: 15px;
+			width: 15px;
+			border-radius: 50%;
+			@include font-header;
+			@include center-by-flex-row;
+			@include primary-background;
+		}
+	}
+}
+
+.vieolo-tooltip {
+	position: relative;
+
+	&:hover {
+		.tooltip-text-up,
+		.tooltip-text-up-left,
+		.tooltip-text-up-right,
+		.tooltip-text-down,
+		.tooltip-text-down-left,
+		.tooltip-text-down-right,
+		.tooltip-text-right,
+		.tooltip-text-left,
+		.tooltiptext {
+			visibility: visible;
+			z-index: 999;
+
+			p {
+				margin-top: 3px;
+				margin-bottom: 3px;
+				font-size: 10px;
+			}
+
+			p:first-child {
+				margin-top: 0;
+			}
+
+			p:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	.tooltip-text-up,
+	.tooltip-text-up-left,
+	.tooltip-text-up-right,
+	.tooltip-text-down,
+	.tooltip-text-down-left,
+	.tooltip-text-down-right,
+	.tooltip-text-right,
+	.tooltip-text-left,
+	.tooltiptext {
+		visibility: hidden;
+		width: 120px;
+		@include primary-background;
+		text-align: center;
+		border-radius: 6px;
+		padding: 5px;
+		display: block;
+
+		/* Position the tooltip */
+		position: absolute;
+		z-index: 10;
+
+		&:before {
+			bottom: 20px;
+			content: " ";
+			display: block;
+		}
+	}
+
+	.tooltiptext,
+	.tooltip-text-up {
+		bottom: 100%;
+		left: 50%;
+		margin-left: -60px;
+
+		::after {
+			content: " ";
+			position: absolute;
+			top: 100%; /* At the bottom of the tooltip */
+			left: 50%;
+			margin-left: -5px;
+			border-width: 5px;
+			border-style: solid;
+			border-color: black transparent transparent transparent;
+		}
+	}
+
+	.tooltip-text-down {
+		top: 110%;
+		left: 50%;
+		margin-left: -60px;
+
+		&::after {
+			content: " ";
+			position: absolute;
+			bottom: 100%; /* At the top of the tooltip */
+			left: 50%;
+			margin-left: -5px;
+			border-width: 5px;
+			border-style: solid;
+			border-color: transparent transparent black transparent;
+		}
+	}
+
+	.tooltip-text-right {
+		right: -110%;
+		top: -110%;
+
+		&::after {
+			content: " ";
+			position: absolute;
+			top: 50%;
+			right: 100%; /* To the left of the tooltip */
+			margin-top: -5px;
+			border-width: 5px;
+			border-style: solid;
+			border-color: transparent black transparent transparent;
+		}
+	}
+
+	.tooltip-text-left {
+		right: 110%;
+		top: 20%;
+
+		&::after {
+			content: " ";
+			position: absolute;
+			top: 50%;
+			left: 100%; /* To the right of the tooltip */
+			margin-top: -5px;
+			border-width: 5px;
+			border-style: solid;
+			border-color: transparent transparent transparent black;
+		}
+	}
+
+	.tooltip-text-up-left {
+		right: 100%;
+		bottom: 100%;
+	}
+
+	.tooltip-text-up-right {
+		left: 100%;
+		bottom: 100%;
+	}
+
+	.tooltip-text-down-left {
+		right: 100%;
+		top: 100%;
+	}
+
+	.tooltip-text-down-right {
+		left: 100%;
+		top: 100%;
+	}
+
+	.tooltip-text-small {
+		width: 120px;
+		margin-left: -60px;
+		font-size: 12px;
+	}
+
+	.tooltip-text-medium {
+		width: 180px;
+		margin-left: -90px;
+	}
+
+	.tooltip-text-large {
+		width: 240px;
+		margin-left: -120px;
+	}
+}
+
 .vieolo-switch {
 	.switch-input {
 		display: none;
