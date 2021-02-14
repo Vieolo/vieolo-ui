@@ -357,3 +357,57 @@ body {
 
 
 
+.vieolo-file-input {
+	width: 100%;
+	height: 100%;
+	border: 4px dashed #f2f2f2;
+	position: relative;
+	@include center-by-flex-row;
+	box-sizing: border-box;
+
+	div {
+		@include center-by-flex-row;
+	}
+
+	input{
+		position: absolute;
+		margin: 0;
+		padding: 0;
+		width: 100%;
+		height: 100%;
+		outline: none;
+		opacity: 0;
+	}
+}
+
+
+.vieolo-chip {
+	height: 28px;
+	border-radius: 12px;
+	display: inline-flex;
+	align-items: center;	
+	box-sizing: border-box;	
+
+	.chip-content {
+		height: 30px;
+		border-radius: 14px;
+		padding: 2px 5px;
+		@include center-by-flex-row;
+		border: 1px solid $secondary-color-normal;
+
+		p {
+			font-size: 11px;
+			@include font-header;
+			@include nonselectable;
+		}
+
+		& > span {
+			margin-left: 5px;
+		}
+	}
+
+	.chip-content-selected {
+		@include secondary-background;
+	}
+}
+

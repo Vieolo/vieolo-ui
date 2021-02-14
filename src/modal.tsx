@@ -2,7 +2,7 @@
 import React from 'react';
 
 
-export default class Modal extends React.Component<{onClose: () => void}, {}> {
+export default class Modal extends React.Component<{onClose: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void}, {}> {
 
     container: React.RefObject<unknown>;
 
@@ -12,9 +12,9 @@ export default class Modal extends React.Component<{onClose: () => void}, {}> {
     }
 
 
-    handleClickOutside = (event: any) => {
+    handleClickOutside = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         if (this.container.current && !(this.container.current as any).contains(event.target)) {
-            this.props.onClose();
+            this.props.onClose(event);
         }
     };
 
