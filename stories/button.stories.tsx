@@ -10,7 +10,6 @@ const Template: Story<ButtonProps> = (args) => <Button {...args} />;
 export default {
     title: 'Button',
     component: Button,
-    parameters: { actions: { argTypesRegex: '^on.*' } },
 } as Meta;
 
 
