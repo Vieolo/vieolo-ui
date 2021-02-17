@@ -3,15 +3,21 @@ import React from 'react';
 
 
 // Components
-import Input from './input';
+import InputSet from './input_set';
 
 
 export default function TimePicker(props: { 
     value: string,
-    onChange: (hour: number, minute: number, text: string) => void
+    onChange: (hour: number, minute: number, text: string) => void,
+    label?: string,
+    disabled?: boolean,
+    tip?: string
 }): JSX.Element {
 
-    return <Input 
+    return <InputSet
+        label={props.label || ''}
+        disabled={props.disabled}
+        tip={props.tip}
         error={parseInputTimeToCustomDate(props.value)[0] == null}
         onChange={v => {
             // Preventing the user to type more than 5 characters
