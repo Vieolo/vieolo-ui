@@ -3,15 +3,21 @@ import React from 'react';
 
 
 // Components
-import Input from './input';
+import InputSet from './input_set';
 
 
 export default function TimePicker(props: { 
     value: string,
-    onChange: (hour: number, minute: number, text: string) => void
+    onChange: (hour: number, minute: number, text: string) => void,
+    label?: string,
+    disabled?: boolean,
+    tip?: string
 }): JSX.Element {
 
-    return <Input 
+    return <InputSet
+        label={props.label || ''}
+        disabled={props.disabled}
+        tip={props.tip}
         error={parseInputTimeToCustomDate(props.value)[0] == null}
         onChange={v => {
             // Preventing the user to type more than 5 characters
@@ -22,6 +28,9 @@ export default function TimePicker(props: {
 
             // Adding ":" in between the second and third character if the third character is not ":"
             if (props.value.length == 2 && v.length == 3 && v[2] != ":") v = `${v[0]}${v[1]}:${v[2]}`
+
+            // Preventing the user to enter more than one ":"
+            if (props.value.length == 3 && v.length == 4 && v[2] == ":" && v[3] == ":") return;
             
             let [h, m] = parseInputTimeToCustomDate(v);
             props.onChange(h, m, v);
@@ -40,8 +49,11 @@ export function parseInputTimeToCustomDate(input: string) : [number, number] {
 
 	let splited = input.split(':');
 
+    let numberRegex = /[0-9]{2}/u;
+
 	if (splited[0].length != 2 || splited[1].length != 2) return [null, null];
 	else if (isNaN(parseInt(splited[0])) || isNaN(parseInt(splited[1]))) return [null, null];
+    else if (!numberRegex.test(splited[0]) || !numberRegex.test(splited[1])) return [null, null]
 	
 	let hour = parseInt(splited[0]);
 	let minute = parseInt(splited[1]);
