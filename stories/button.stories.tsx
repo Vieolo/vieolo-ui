@@ -26,3 +26,24 @@ Secondary.args = {
     ...Primary.args,
     color: 'secondary',    
 } as ButtonProps;
+
+
+export const Tertiary = Template.bind({});
+Tertiary.args = {
+    ...Primary.args,
+    color: 'tertiary',    
+} as ButtonProps;
+
+
+export const Alert = Template.bind({});
+Alert.args = {
+    ...Primary.args,
+    color: 'alert',    
+} as ButtonProps;
+
+
+export const ErrorColor = Template.bind({});
+ErrorColor.args = {
+    ...Primary.args,
+    color: 'error',    
+} as ButtonProps;
