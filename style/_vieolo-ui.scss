@@ -43,6 +43,17 @@ body {
 	}
 }
 
+.vieolo-tip-icon {
+	cursor: help;
+	font-size: 12px;
+	height: 14px;
+	width: 14px;
+	border-radius: 50%;
+	@include font-header;
+	@include center-by-flex-row;
+	@include primary-background;
+}
+
 .vieolo-input {
 	height: 30px;
 	line-height: 30px;
@@ -87,15 +98,7 @@ body {
         	@include font-header;
 		}
 
-		.tip-icon {
-			font-size: 12px;
-			height: 14px;
-			width: 14px;
-			border-radius: 50%;
-			@include font-header;
-			@include center-by-flex-row;
-			@include primary-background;
-		}
+		
 	}
 }
 

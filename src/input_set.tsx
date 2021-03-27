@@ -1,8 +1,11 @@
 // React
 import React from 'react';
 
+// Private Components
+import TipIcon from './private/tip_icon';
 
-// Components
+
+// Public Components
 import Input from './input';
 
 
@@ -34,7 +37,7 @@ export default function TextareaSet(props: {
             {
                 props.tip &&
                 <div className="tip-div vieolo-tooltip">
-                    <div className="tip-icon">!</div>
+                    <TipIcon />
                     <div className="tooltip-text-small tooltip-text-down-left">{props.tip}</div>
                 </div>
             }
