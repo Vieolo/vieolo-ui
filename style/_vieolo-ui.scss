@@ -536,8 +536,7 @@ body {
 		border-radius: $universal-border-radius / 2;
 		@include transition;
 		color: $primary-color-normal;
-		display: flex;
-		align-items: center;
+		@include flex-start;
 
 		&:hover {
 			background-color: $hover-color;
