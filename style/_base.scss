@@ -264,8 +264,8 @@ $accessory-green-text: black !default;
 @mixin ripple-alert {
 	@extend %ripple;
 	&:active {
-		background-color: $error-color-normal;
-		background: $error-color-normal;		
+		background-color: $alert-color-transparent;
+		background: $alert-color-transparent;		
 	}
 }
 .ripple-alert {
@@ -304,6 +304,29 @@ $accessory-green-text: black !default;
 }
 .ripple-primary {
 	@include ripple-primary;
+}
+
+@mixin ripple-secondary {
+	@extend %ripple;
+	&:active {
+		background-color: $secondary-color-transparent;
+		background: $secondary-color-transparent;
+	}
+}
+.ripple-secondary {
+	@include ripple-secondary;
+}
+
+
+@mixin ripple-tertiary {
+	@extend %ripple;
+	&:active {
+		background-color: $primary-color-transparent;
+		background: $primary-color-transparent;
+	}
+}
+.ripple-tertiary {
+	@include ripple-tertiary;
 }
 
 
@@ -388,9 +411,9 @@ $tablet13PortraitBreakPoint: 1050px;
 $tablet11PortraitBreakPoint: 900px;
 $tablet10PortraitBreakPoint: 800px;
 $mobileBreakPoint: 700px;
-$drawer-width: 180px;
-$drawer-item-width: 160px;
-$navbar-height: 50px;
+$drawer-width: 180px !default;
+$drawer-item-width: 160px !default;
+$navbar-height: 50px !default;
 
 
 
