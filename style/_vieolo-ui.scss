@@ -95,10 +95,8 @@ body {
 		label {
 			margin: 0;
 			font-size: 12px;
-        	@include font-header;
+			@include font-header;
 		}
-
-		
 	}
 }
 
@@ -525,23 +523,28 @@ body {
 	.dropdown {
 		position: absolute;
 		top: 100%;
-		left: -110px;
-		width: 150px;
+		left: -110px;		
 		z-index: 2;
-		padding: 10px;
+		padding: 5px;
 		@include card-dark-shadow;
 	}
 
 	.dropdown-item {
-		padding: 10px;
+		padding: 5px;
 		//height: 20px;
 		cursor: pointer;
-		border-radius: $universal-border-radius;
+		border-radius: $universal-border-radius / 2;
 		@include transition;
 		color: $primary-color-normal;
+		display: flex;
+		align-items: center;
 
 		&:hover {
 			background-color: $hover-color;
+		}
+
+		p {
+			padding: 0px 3px;
 		}
 	}
 }
