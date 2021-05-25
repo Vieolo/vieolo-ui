@@ -1,7 +1,7 @@
 // React
 import React from 'react';
 // Installed Packges
-import { fileValidation } from '@vieolo/validation';
+import { fileValidation } from '@vieolo/validation-js';
 export default function FileInput(props) {
     return React.createElement("form", { className: "vieolo-file-input" },
         React.createElement("input", { type: "file", value: '', multiple: props.multiple || false, title: "", accept: props.accept, onChange: e => {
