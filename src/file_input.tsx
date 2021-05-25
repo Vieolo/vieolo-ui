@@ -3,7 +3,7 @@ import React from 'react';
 
 
 // Installed Packges
-import { fileValidation } from '@vieolo/validation';
+import { fileValidation } from '@vieolo/validation-js';
 
 
 export default function FileInput(props: {
