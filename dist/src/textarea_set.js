@@ -1,6 +1,8 @@
 // React
 import React from 'react';
-// Components
+// Private Components
+import TipIcon from './private/tip_icon';
+// Public Components
 import Textarea from './textarea';
 export default function TextareaSet(props) {
     let size = props.size || 'medium';
@@ -16,7 +18,7 @@ export default function TextareaSet(props) {
             React.createElement("label", null, props.label),
             props.tip &&
                 React.createElement("div", { className: "tip-div vieolo-tooltip" },
-                    React.createElement("div", { className: "tip-icon" }, "!"),
+                    React.createElement(TipIcon, null),
                     React.createElement("div", { className: "tooltip-text-small tooltip-text-down-left" }, props.tip))),
         React.createElement(Textarea, { value: props.value, error: props.error, onChange: props.onChange, placeholder: props.placeholder || '', size: props.size }));
 }

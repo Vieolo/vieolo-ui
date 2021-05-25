@@ -25,6 +25,9 @@ describe("TimePicker", () => {
         expect(parseInputTimeToCustomDate('12:66')).toEqual([null, null]);
         expect(parseInputTimeToCustomDate('-2:-6')).toEqual([null, null]);
         expect(parseInputTimeToCustomDate('12: 13')).toEqual([null, null]);
+        expect(parseInputTimeToCustomDate('1d:1d')).toEqual([null, null]);
+        expect(parseInputTimeToCustomDate('d1:d1')).toEqual([null, null]);
+        expect(parseInputTimeToCustomDate('2d:11')).toEqual([null, null]);
 
         // Correct Values
         let correct = parseInputTimeToCustomDate('12:34');

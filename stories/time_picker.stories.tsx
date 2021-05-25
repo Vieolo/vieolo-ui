@@ -32,3 +32,30 @@ Invalid.args = {
     ...Empty.args,
     value: "24:23",
 } as TimePickerProps;
+
+
+export const WithLabel = Template.bind({});
+WithLabel.args = {    
+    ...Empty.args,
+    value: "20:23",
+    label: "Start Time"
+} as TimePickerProps;
+
+
+export const WithTip = Template.bind({});
+WithTip.args = {    
+    ...Empty.args,
+    value: "20:23",
+    label: "Start Time",
+    tip: "There are some information to be considered."
+} as TimePickerProps;
+
+
+export const Disabled = Template.bind({});
+Disabled.args = {    
+    ...Empty.args,
+    value: "20:23",
+    label: "Start Time",
+    tip: "There are some information to be considered.",
+    disabled: true
+} as TimePickerProps;
