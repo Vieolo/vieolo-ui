@@ -1,6 +1,6 @@
 {
-  "name": "vieolo-ui",
-  "version": "0.1.0",
+  "name": "@vieolo/vieolo-ui",
+  "version": "0.7.1",
   "private": true,
   "main": "dist/export.js",
   "dependencies": {
@@ -12,6 +12,7 @@
     "@types/react": "^17.0.8",
     "@types/react-dom": "^17.0.5",
     "@vieolo/validation-js": "github:Vieolo/validation-js#master",
+    "node-sass": "^6.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
