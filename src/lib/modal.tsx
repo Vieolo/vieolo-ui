@@ -20,11 +20,13 @@ export default class Modal extends React.Component<{onClose: (event: React.Mouse
 
 
     componentDidMount() {                
-        document.querySelector('main').style.overflow = 'hidden';        
+        let main = document.querySelector('main');
+        if (main) main.style.overflow = 'hidden';        
     }
 
     componentWillUnmount() {
-        document.querySelector('main').style.overflow = 'auto';
+        let main = document.querySelector('main');
+        if (main) main.style.overflow = 'auto';
     }
 
 

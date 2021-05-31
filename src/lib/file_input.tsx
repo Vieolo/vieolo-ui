@@ -26,9 +26,9 @@ export default function FileInput(props: {
             onChange={e => {
                 let allFilesValid = true;
                 if (props.validateFileName) {
-                    let fileList = e.target.files;
+                    let fileList = e.target.files as FileList;
 
-                    for (let file of fileList) {
+                    for (let file of fileList as any) {
                         if (!fileValidation({ file: file }).isValid) {
                             props.onError('File(s) have prohibited characters!');
                             allFilesValid = false;
@@ -37,7 +37,7 @@ export default function FileInput(props: {
                     }
                 }
                 
-                if (allFilesValid) props.onChange(e.target.files);
+                if (allFilesValid) props.onChange(e.target.files as FileList);
             }}
         />
         <div>

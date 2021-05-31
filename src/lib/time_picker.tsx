@@ -8,7 +8,7 @@ import InputSet from './input_set';
 
 export default function TimePicker(props: { 
     value: string,
-    onChange: (hour: number, minute: number, text: string) => void,
+    onChange: (hour: number | null, minute: number | null, text: string | null) => void,
     label?: string,
     disabled?: boolean,
     tip?: string
@@ -43,7 +43,7 @@ export default function TimePicker(props: {
 }
 
 
-export function parseInputTimeToCustomDate(input: string) : [number, number] {
+export function parseInputTimeToCustomDate(input: string) : [number | null, number | null] {
 	if (input.length != 5) return [null, null];
 	else if (!input.includes(':')) return [null, null];
 
