@@ -1,17 +1,42 @@
 {
-	"compilerOptions": {
-		"outDir": "./dist/",
-		"noImplicitAny": true,
-		"module": "ES6",
-		"target": "ES2018",
-		"esModuleInterop": true,
-		"jsx": "react",
-		"allowJs": true,
-		"moduleResolution": "Node",
-        "allowSyntheticDefaultImports": true,
-        "declaration": true
-	},
-	"files": [
-		"index.ts"
-	]
+  "compilerOptions": {
+    "target": "ES2018",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "outDir": "./dist",
+    "noImplicitAny": true,
+    "declaration": true,
+    "noEmit": true
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.stories.tsx",
+    "./src/setupTests.ts",
+    "./src/App.tsx",
+    "./src/index.tsx",
+    "./src/reportWebVitals.ts"
+  ],
+  "files": [
+    "./src/export.ts"
+  ]
 }
