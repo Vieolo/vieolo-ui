@@ -5,7 +5,7 @@ The component package containing the UI components of Vieolo OÜ
 to install, add the following to the `dependency` key of the `package.json` file of the project.
 
 ```json
-"@vieolo/vieolo-ui": "github:Vieolo/vieolo-ui#0.8.0"
+"@vieolo/vieolo-ui": "github:Vieolo/vieolo-ui#0.8.1"
 ```
 
 ## Development View
