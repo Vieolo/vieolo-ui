@@ -63,7 +63,7 @@ export default class Select extends React.Component<
     }
 
     getSelectedItem(value: string) : SelectItemType {
-        return this.props.items.filter(i => i.value == value)[0]
+        return this.props.items.filter(i => i.value === value)[0]
     }
 
     render(): React.ReactNode {
@@ -83,8 +83,9 @@ export default class Select extends React.Component<
                         {
                             this.props.items.map(item => {
                                 return <SelectItem 
+                                    key={item.title}
                                     item={item}
-                                    isSelected={this.props.selectedItem == item.value}
+                                    isSelected={this.props.selectedItem === item.value}
                                     onSelect={(t: SelectItemType) => {
                                         this.setState({
                                             open: false,

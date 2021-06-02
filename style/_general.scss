@@ -31,6 +31,103 @@
 }
 
 
+@mixin typography-title-large {
+	@include font-header;
+	font-size: 20px;
+	margin: 0;
+	font-weight: 600;
+	color: $normal-text-color;
+}
+.typography-title-large {
+	@include typography-title-large;
+}
+
+@mixin typography-title-medium {
+	@include font-header;
+	font-size: 18px;
+	margin: 0;
+	font-weight: 600;
+	color: $normal-text-color;
+}
+.typography-title-medium {
+	@include typography-title-medium;
+}
+
+@mixin typography-title-small {
+	@include font-header;
+	font-size: 16px;
+	margin: 0;
+	font-weight: 600;
+	color: $normal-text-color;
+}
+.typography-title-small {
+	@include typography-title-small;
+}
+
+@mixin typography-paragraph-large {
+	@include font-normal;
+	font-size: 16px;
+	margin: 0;
+	font-weight: 400;
+	color: $normal-text-color;
+}
+.typography-paragraph-large {
+	@include typography-paragraph-large;
+}
+
+@mixin typography-paragraph-medium {
+	@include font-normal;
+	font-size: 14px;
+	margin: 0;
+	font-weight: 400;
+	color: $normal-text-color;
+}
+.typography-paragraph-medium {
+	@include typography-paragraph-medium;
+}
+
+@mixin typography-paragraph-small {
+	@include font-normal;
+	font-size: 12px;
+	margin: 0;
+	font-weight: 400;
+	color: $normal-text-color;
+}
+.typography-paragraph-small {
+	@include typography-paragraph-small;
+}
+
+@mixin typography-caption-large {
+	@include font-normal;
+	font-size: 12px;
+	margin: 0;
+	color: gray;
+}
+.typography-caption-large {
+	@include typography-caption-large;
+}
+
+@mixin typography-caption-medium {
+	@include font-normal;
+	font-size: 10px;
+	margin: 0;
+	color: gray;
+}
+.typography-caption-medium {
+	@include typography-caption-medium;
+}
+
+@mixin typography-caption-small {
+	@include font-normal;
+	font-size: 8px;
+	margin: 0;
+	color: gray;
+}
+.typography-caption-small {
+	@include typography-caption-small;
+}
+
+
 
 
 // Mixins -------------------------------
