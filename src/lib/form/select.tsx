@@ -35,10 +35,19 @@ type SelectProps = {
 export default function Select(props: SelectProps) {
 
     let [open, setOpen] = useState<boolean>(false);
-    let [container, setContainer] = useState(useRef(null));
+    // eslint-disable-next-line
+    let [container, setContainer] = useState(useRef(null)); 
     let [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
+
+        const handleClickOutside = (event: any) => {
+            if (container.current && !(container.current as any).contains(event.target)) {
+                setOpen(false);
+                setSearchQuery("");
+            }
+        }
+
         document.addEventListener("click", handleClickOutside);
         let main = document.querySelector('main')
         if (main) main.style.overflow = 'hidden';
@@ -48,15 +57,10 @@ export default function Select(props: SelectProps) {
             let main = document.querySelector('main');
             if (main) main.style.overflow = 'auto';
         }
-    }, [])
+    }, [container])
 
 
-    function handleClickOutside(event: any) {
-        if (container.current && !(container.current as any).contains(event.target)) {
-            setOpen(false);
-            setSearchQuery("");
-        }
-    };
+    
 
     function getSelectedItems(values: string[]): SelectItemType[] {
         return props.items.filter(i => values.includes(i.value))
