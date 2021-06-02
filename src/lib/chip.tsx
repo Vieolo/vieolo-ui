@@ -3,7 +3,7 @@ import React from 'react';
 
 
 // Components
-import IconButton from './icon_button';
+import IconButton from './button/icon_button';
 
 
 export default function Chip(props: {
