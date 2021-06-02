@@ -4,7 +4,7 @@
   "private": true,
   "main": "dist/export.js",
   "author": {
-    "name": "Vieolo OÜ"    
+    "name": "Vieolo OÜ"
   },
   "repository": {
     "type": "git",
@@ -13,11 +13,8 @@
   "bugs": {
     "url": "https://github.com/Vieolo/vieolo-ui.git/issues"
   },
-  "homepage": "https://github.com/Vieolo/vieolo-ui.git#readme",
   "license": "UNLICENSED",
-  "dependencies": {
-    "@material-ui/core": "^4.11.4",
-    "@material-ui/icons": "^4.11.2",
+  "devDependencies": {
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -25,12 +22,16 @@
     "@types/node": "^12.20.13",
     "@types/react": "^17.0.8",
     "@types/react-dom": "^17.0.5",
+    "typescript": "^4.3.2"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "@vieolo/validation-js": "github:Vieolo/validation-js#master",
     "node-sass": "^6.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "typescript": "^4.3.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
