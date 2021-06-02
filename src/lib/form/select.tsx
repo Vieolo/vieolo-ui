@@ -7,6 +7,10 @@ import TypographyParagraphSmall from '../typography/typography_paragraph_small';
 import TypographyTitleSmall from '../typography/typography_title_small';
 
 
+// Material UI
+import DownIcon from '@material-ui/icons/ArrowDropDownRounded';
+
+
 type SelectItemType = {
     title: string,
     value: string,
@@ -56,8 +60,12 @@ export default function Select(props: SelectProps) {
 
     return <div className="vieolo-select" ref={container as any}>
         <div className={`select-button${props.error ? ' select-button-error' : ''}`} onClick={() => setOpen(true)}>
-            <TypographyParagraphSmall text={props.title} className="button-title" />
-            <TypographyTitleSmall text={thisSelectedItem ? thisSelectedItem.title : ""} className="button-value" />
+            <div className="button-text">
+                <TypographyParagraphSmall text={props.title} className="button-title" />
+                <TypographyTitleSmall text={thisSelectedItem ? thisSelectedItem.title : ""} className="button-value" />
+            </div>
+
+            <DownIcon />
         </div>
 
         {
