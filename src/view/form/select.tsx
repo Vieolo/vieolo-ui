@@ -12,13 +12,18 @@ export function selectOptions(): { [key: string]: SelectPropsType } {
         title: string,
         value: string,
         category?: string
-    }[] = [{title: "One", value: "1"}, {title: "Two", value: "2"}];
+    }[] = [
+        {title: "One", value: "1"}, 
+        {title: "Two", value: "2"}, 
+        {title: "Three", value: "3", category: "Third"},
+        {title: "One Two Three Four Five", value: "4"} 
+    ];
 
     let baseProps: SelectPropsType = {
         error: false,
         items: selectItems,
         onSelect: () => { },
-        selectedItem: "",
+        selectedItems: [],
         title: "Users"
     }
 
@@ -28,30 +33,59 @@ export function selectOptions(): { [key: string]: SelectPropsType } {
         },
         "Selected": {
             ...baseProps,
-            selectedItem: "1",            
+            selectedItems: ["1"],            
         },
         "With Error": {
             ...baseProps,
             error: true,
-            selectedItem: "1",
+            selectedItems: ["1"],
         },
+        "Clearable": {
+            ...baseProps,
+            error: false,
+            selectedItems: ["1"],
+            clearable: true
+        },
+        "Searchable": {
+            ...baseProps,
+            error: false,
+            selectedItems: ["1"],
+            searchable: true
+        },
+        "Multiple Choice": {
+            ...baseProps,
+            error: false,
+            selectedItems: ["1", "2"],
+            multipleChoice: true
+        },
+        "Multiple + Searchable + Clearable": {
+            ...baseProps,
+            error: false,
+            selectedItems: ["1", "2"],
+            multipleChoice: true,
+            clearable: true,
+            searchable: true
+        }
     }
 }
 
 
 export function SelectCreator(props: {p: SelectPropsType}) {
-    let [selected, setSelected] = useState<string>(props.p.selectedItem || "");
+    let [selected, setSelected] = useState<string[]>(props.p.selectedItems || []);
 
     useEffect(() => {
-        setSelected(props.p.selectedItem);
-    }, [props.p.selectedItem])
+        setSelected(props.p.selectedItems);
+    }, [props.p.selectedItems])
 
     return <Select 
         error={props.p.error}
         items={props.p.items}
         onSelect={o => setSelected(o)}
-        selectedItem={selected}
+        selectedItems={selected}
         title={props.p.title}
+        clearable={props.p.clearable}
+        searchable={props.p.searchable}
+        multipleChoice={props.p.multipleChoice}
     />
 
 }

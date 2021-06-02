@@ -1,5 +1,17 @@
 // React
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
+
+// Typography
+import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
+import TypographyParagraphSmall from '../typography/typography_paragraph_small';
+import TypographyTitleSmall from '../typography/typography_title_small';
+
+// Material UI
+import DownIcon from '@material-ui/icons/ArrowDropDownRounded';
+import CloseIcon from '@material-ui/icons/CloseRounded';
+
+// Components
+import IconButton from '../button/icon_button';
 
 
 type SelectItemType = {
@@ -11,106 +23,120 @@ type SelectItemType = {
 type SelectProps = {
     title: string,
     items: SelectItemType[],
-    selectedItem: string,
-    onSelect: (value: string) => void,
-    error: boolean
+    selectedItems: string[],
+    onSelect: (values: string[]) => void,
+    error: boolean,
+    clearable?: boolean,
+    searchable?: boolean,
+    multipleChoice?: boolean
 }
 
 
-export default class Select extends React.Component<
-    SelectProps,
-    {
-        open: boolean
-    }
-> {
+export default function Select(props: SelectProps) {
 
-    container: React.RefObject<unknown>;
+    let [open, setOpen] = useState<boolean>(false);
+    let [container, setContainer] = useState(useRef(null));
+    let [searchQuery, setSearchQuery] = useState("");
 
-    constructor(props: SelectProps) {
-        super(props as any);
-        this.state = {
-            open: false
-        };
-        this.container = React.createRef();
-    }
+    useEffect(() => {
+        document.addEventListener("click", handleClickOutside);
+        let main = document.querySelector('main')
+        if (main) main.style.overflow = 'hidden';
 
-    handleButtonClick = () => {
-        this.setState(state => {
-            return {
-                open: !this.state.open
-            };
-        });
-    };
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+            let main = document.querySelector('main');
+            if (main) main.style.overflow = 'auto';
+        }
+    }, [])
 
-    handleClickOutside = (event: any) => {
-        if (this.container.current && !(this.container.current as any).contains(event.target)) {
-            this.setState({
-                open: false,
-            });
+
+    function handleClickOutside(event: any) {
+        if (container.current && !(container.current as any).contains(event.target)) {
+            setOpen(false);
+            setSearchQuery("");
         }
     };
 
-
-    componentDidMount() {
-        document.addEventListener("click", this.handleClickOutside);
-        let main = document.querySelector('main')
-        if (main) main.style.overflow = 'hidden';
-    }
-    componentWillUnmount() {
-        document.removeEventListener("click", this.handleClickOutside);
-        let main = document.querySelector('main');
-        if (main) main.style.overflow = 'auto';
+    function getSelectedItems(values: string[]): SelectItemType[] {
+        return props.items.filter(i => values.includes(i.value))
     }
 
-    getSelectedItem(value: string) : SelectItemType {
-        return this.props.items.filter(i => i.value === value)[0]
-    }
 
-    render(): React.ReactNode {
 
-        let thisSelectedItem = this.getSelectedItem(this.props.selectedItem);
+    let thisSelectedItems = getSelectedItems(props.selectedItems);
 
-        return (
-            <div className="vieolo-select" ref={this.container as any}>
-                <div className={`select-button${this.props.error ? ' select-button-error' : ''}`} onClick={() => {this.setState({open: true})}}>
-                    <p className="button-title">{this.props.title}</p>
-                    <p className="button-value">{thisSelectedItem ? thisSelectedItem.title : null}</p>
-                </div>
-
+    return <div className="vieolo-select" ref={container as any}>
+        <div className={`select-button${props.error ? ' select-button-error' : ''}`} onClick={() => {
+            setOpen(true);
+            setSearchQuery("");
+        }}>
+            <div className="button-text">
+                <TypographyParagraphSmall text={props.title} className="button-title" />
                 {
-                    this.state.open &&
-                    <div className="select-dropdown">
-                        {
-                            this.props.items.map(item => {
-                                return <SelectItem 
-                                    key={item.title}
-                                    item={item}
-                                    isSelected={this.props.selectedItem === item.value}
-                                    onSelect={(t: SelectItemType) => {
-                                        this.setState({
-                                            open: false,
-                                        })
-                                        this.props.onSelect(t.value);
-                                    }} 
-                                    />
-                            })
-                        }
-                    </div>
+                    (props.searchable && open)
+                    ? <input
+                        autoFocus
+                        value={searchQuery}
+                        onChange={e => setSearchQuery(e.target.value)}
+                        placeholder="Search..."
+                    />
+                    : <TypographyTitleSmall text={thisSelectedItems.map(s => s.title).join(", ")} className="button-value" />
+                }                
+            </div>
+
+            {
+                (!props.clearable || (props.clearable && (!props.selectedItems || props.selectedItems.length === 0)))
+                ? <DownIcon />
+                : <IconButton 
+                    icon={<CloseIcon />}
+                    onClick={() => props.onSelect([])}
+                    color="error"
+                    size="small"
+                />
+            }
+            
+        </div>
+
+        {
+            open &&
+            <div className="select-dropdown">
+                {
+                    props.items.filter(item => (!searchQuery.trim() || item.title.toLowerCase().includes(searchQuery.toLowerCase()))).map(item => {
+                        return <SelectItem
+                            key={item.title}
+                            item={item}
+                            isSelected={props.selectedItems.includes(item.value)}
+                            onSelect={(t: SelectItemType) => {
+                                if (props.multipleChoice) {
+                                    let newSelected = [...props.selectedItems];
+                                    if (props.selectedItems.includes(item.value)) newSelected = newSelected.filter(f => f !== item.value);
+                                    else newSelected.push(item.value);
+                                    props.onSelect(newSelected);
+                                }else {
+                                    setOpen(false);
+                                    setSearchQuery("");
+                                    props.onSelect([t.value]);
+                                }
+                            }}
+                        />
+                    })
                 }
             </div>
-        )
-    }
+        }
+    </div>
+
 
 }
 
 
 function SelectItem(props: {
-    item: SelectItemType, 
-    isSelected: boolean, 
-    onSelect: (item: SelectItemType) => void    
+    item: SelectItemType,
+    isSelected: boolean,
+    onSelect: (item: SelectItemType) => void
 }) {
 
-    let className= "select-item";
+    let className = "select-item";
 
     if (props.isSelected) className += " select-item-selected";
     if (props.item.category) className += " select-item-category";
@@ -120,12 +146,12 @@ function SelectItem(props: {
             props.item.category &&
             <p className="category-name">{props.item.category}</p>
         }
-        <div 
-            className={className} 
-            onClick={() => {props.onSelect(props.item)}}
-            > 
-            {props.item.title}
+        <div
+            className={className}
+            onClick={() => { props.onSelect(props.item) }}
+        >
+            <TypographyParagraphMedium text={props.item.title} />
         </div>
-    </Fragment> 
+    </Fragment>
 
 }
