@@ -12,9 +12,16 @@ import CloseIcon from '@material-ui/icons/CloseRounded';
 import IconButton from '../button/icon_button';
 export default function Select(props) {
     let [open, setOpen] = useState(false);
+    // eslint-disable-next-line
     let [container, setContainer] = useState(useRef(null));
     let [searchQuery, setSearchQuery] = useState("");
     useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (container.current && !container.current.contains(event.target)) {
+                setOpen(false);
+                setSearchQuery("");
+            }
+        };
         document.addEventListener("click", handleClickOutside);
         let main = document.querySelector('main');
         if (main)
@@ -25,14 +32,7 @@ export default function Select(props) {
             if (main)
                 main.style.overflow = 'auto';
         };
-    }, []);
-    function handleClickOutside(event) {
-        if (container.current && !container.current.contains(event.target)) {
-            setOpen(false);
-            setSearchQuery("");
-        }
-    }
-    ;
+    }, [container]);
     function getSelectedItems(values) {
         return props.items.filter(i => values.includes(i.value));
     }
