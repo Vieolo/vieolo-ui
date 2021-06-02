@@ -24,18 +24,15 @@ export default function ItemRow(props: {
     cardStyle?: 'card-light-shadow' | 'card-dark-shadow' | 'card-no-shadow'
 }) {
 
-    let className: string = "vieolo-item-row";
-    if (props.cardStyle) className += " " + props.cardStyle;
-
-
     let contentClassName: string = "item-content";
     if (props.selected) contentClassName += " item-selected";
     if (props.onClick) contentClassName += " item-clickable";
+    if (props.cardStyle) contentClassName += " " + props.cardStyle;
 
     if (props.leadingIcon) contentClassName += " item-with-icon";
     else contentClassName += " item-without-icon";
 
-    return <div className={className}>
+    return <div className={"vieolo-item-row"}>
 
         <div className={contentClassName} onClick={() => {
             if (props.onClick) props.onClick();

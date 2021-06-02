@@ -611,7 +611,7 @@ body {
 
 	.item-selected {
 		background-color: $tertiary-color-normal;
-		border-radius: inherit;
+		border-color: $tertiary-color-normal;
 	}
 
 	.item-content {

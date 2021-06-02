@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Component
 import Select from '../../lib/form/select';
@@ -8,9 +8,15 @@ type SelectPropsType = React.ComponentProps<typeof Select>;
 
 export function selectOptions(): { [key: string]: SelectPropsType } {
 
+    let selectItems: {
+        title: string,
+        value: string,
+        category?: string
+    }[] = [{title: "One", value: "1"}, {title: "Two", value: "2"}];
+
     let baseProps: SelectPropsType = {
         error: false,
-        items: [],
+        items: selectItems,
         onSelect: () => { },
         selectedItem: "",
         title: "Users"
@@ -22,13 +28,11 @@ export function selectOptions(): { [key: string]: SelectPropsType } {
         },
         "Selected": {
             ...baseProps,
-            selectedItem: "1",
-            items: [{title: "Ramtin", value: "1"}]
+            selectedItem: "1",            
         },
         "With Error": {
             ...baseProps,
             error: true,
-            items: [{ title: "Ramtin", value: "1" }],            
             selectedItem: "1",
         },
     }
@@ -36,11 +40,17 @@ export function selectOptions(): { [key: string]: SelectPropsType } {
 
 
 export function SelectCreator(props: {p: SelectPropsType}) {
+    let [selected, setSelected] = useState<string>(props.p.selectedItem || "");
+
+    useEffect(() => {
+        setSelected(props.p.selectedItem);
+    }, [props.p.selectedItem])
+
     return <Select 
         error={props.p.error}
         items={props.p.items}
-        onSelect={props.p.onSelect}
-        selectedItem={props.p.selectedItem}
+        onSelect={o => setSelected(o)}
+        selectedItem={selected}
         title={props.p.title}
     />
 
