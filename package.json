@@ -3,6 +3,18 @@
   "version": "0.7.1",
   "private": true,
   "main": "dist/export.js",
+  "author": {
+    "name": "Vieolo OÜ"    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vieolo/vieolo-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Vieolo/vieolo-ui.git/issues"
+  },
+  "homepage": "https://github.com/Vieolo/vieolo-ui.git#readme",
+  "license": "UNLICENSED",
   "dependencies": {
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
