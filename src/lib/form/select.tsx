@@ -1,6 +1,11 @@
 // React
 import React, { Fragment } from 'react';
 
+// Typography
+import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
+import TypographyParagraphSmall from '../typography/typography_paragraph_small';
+import TypographyTitleSmall from '../typography/typography_title_small';
+
 
 type SelectItemType = {
     title: string,
@@ -66,6 +71,9 @@ export default class Select extends React.Component<
         return this.props.items.filter(i => i.value === value)[0]
     }
 
+    //<p className="button-title">{this.props.title}</p>
+    //                <p className="button-value">{thisSelectedItem ? thisSelectedItem.title : null}</p>
+
     render(): React.ReactNode {
 
         let thisSelectedItem = this.getSelectedItem(this.props.selectedItem);
@@ -73,8 +81,8 @@ export default class Select extends React.Component<
         return (
             <div className="vieolo-select" ref={this.container as any}>
                 <div className={`select-button${this.props.error ? ' select-button-error' : ''}`} onClick={() => {this.setState({open: true})}}>
-                    <p className="button-title">{this.props.title}</p>
-                    <p className="button-value">{thisSelectedItem ? thisSelectedItem.title : null}</p>
+                    <TypographyParagraphSmall text={this.props.title} className="button-title" />
+                    <TypographyTitleSmall text={thisSelectedItem ? thisSelectedItem.title : ""} className="button-value" />
                 </div>
 
                 {
@@ -124,7 +132,7 @@ function SelectItem(props: {
             className={className} 
             onClick={() => {props.onSelect(props.item)}}
             > 
-            {props.item.title}
+            <TypographyParagraphMedium text={props.item.title} />
         </div>
     </Fragment> 
 

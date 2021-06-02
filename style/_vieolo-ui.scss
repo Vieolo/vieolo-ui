@@ -397,65 +397,54 @@ body {
 .vieolo-select {
 	position: relative;
 	display: inline-block;
+	width: 160px;
 
 	.select-button {
-		@include card-light-shadow;
+		@include card-no-shadow;
 		margin: 0 auto;
 		@include tertiary-background;
+		border-color: $tertiary-color-normal;
 		height: 45px;
 		cursor: pointer;
 		display: flex;
 		flex-flow: column;
 		@include no-text-overflow;
-		width: 130px;
+		width: 160px;
 		padding: 0 5px;
 		justify-content: center;
 
-		@media all and (max-width: $laptop13BreakPoint) {
-			width: 100px;
-		}
 
 		.button-title {
-			font-size: 11px;
 			margin: 0;
-
-			@media all and (max-width: $laptop13BreakPoint) {
-				font-size: 10px;
-			}
 		}
 
 		.button-value {
-			font-size: 15px;
-			font-weight: 600;
 			margin: 0;
 			@include no-text-overflow;
-
-			@media all and (max-width: $laptop13BreakPoint) {
-				font-size: 13px;
-			}
 		}
 	}
 
 	.select-button-error {
-		@include error-color;
+		p {
+			@include error-color;
+		}		
 	}
 
 	.select-dropdown {
 		position: absolute;
-		top: 50%;
-		width: 150px;
+		top: 100%;
+		width: 160px;
 		z-index: 2;
-		padding: 10px 2px;
 		background-color: white;
 		box-shadow: $box-shadow-dark;
 		border-radius: 5px;
-		max-height: 200px;
+		max-height: 240px;
 		overflow-y: auto;
 	}
 
 	.select-item {
 		padding: 5px;
-		height: 20px;
+		height: 30px;
 		cursor: pointer;
 		border-radius: 5px;
 		@include transition;
@@ -476,7 +465,7 @@ body {
 
 	.category-name {
 		font-size: 12px;
-		margin: 10px 0 3px 0;
+		margin: 10px 0px 3px 10px;
 		@include font-header;
 	}
 }

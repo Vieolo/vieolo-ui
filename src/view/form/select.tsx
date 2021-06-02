@@ -12,7 +12,7 @@ export function selectOptions(): { [key: string]: SelectPropsType } {
         title: string,
         value: string,
         category?: string
-    }[] = [{title: "One", value: "1"}, {title: "Two", value: "2"}];
+    }[] = [{title: "One", value: "1"}, {title: "Two", value: "2"}, {title: "Three", value: "3", category: "Third"}];
 
     let baseProps: SelectPropsType = {
         error: false,
