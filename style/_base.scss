@@ -12,15 +12,18 @@ $universal-border-radius: 10px !default;
 // Pallet Colors
 
 $background-color: #FFFFFB !default;
-$hover-color: #CCE6F5 !default;
+$hover-color: rgb(220, 247, 231) !default;
 $border-color: #f2f2f2 !default;
 
+$normal-text-color: #2e2e2e !default;
+$gray-text-color: gray !default;
 
-$primary-color-normal: rgb(7, 6, 35) !default;
-$primary-color-transparent: rgba(7, 6, 35, 0.3) !default;
-$primary-color-light: rgb(152, 148, 214) !default;
-$primary-color-gradient: linear-gradient(to right bottom, #090934, #090931, #09082e, #09082a, #080727, #080624, #080622, #07051f, #06051c, #050419, #040415, #030311) !default;
-$primary-color-text: white !default;
+
+$primary-color-normal: #2e2e2e !default;
+$primary-color-transparent: rgba(46, 46, 46, 0.3) !default;
+$primary-color-light: #888888 !default;
+$primary-color-gradient: linear-gradient(to right bottom, #444444, #404040, #3b3b3b, #373737, #333333, #2f2f2f, #2c2c2c, #282828, #232323, #1f1f1f, #1a1a1a, #161616) !default;
+$primary-color-text: #e0e0e0 !default;
 
 $secondary-color-normal: #3E88C2 !default;
 $secondary-color-transparent: rgba(62, 136, 194, 0.3) !default;
@@ -28,11 +31,11 @@ $secondary-color-light: rgb(26, 15, 46) !default;
 $secondary-color-gradient: linear-gradient(to right bottom, #71a7d3, #659fcf, #5997cb, #4c90c6, #3e88c2) !default;
 $secondary-color-text: white !default;
 
-$tertiary-color-normal: rgb(207, 219, 242) !default;
-$tertiary-color-transparent: rgba(207, 219, 242, 0.3) !default;
-$tertiary-color-light: rgb(26, 15, 46) !default;
-$tertiary-color-gradient: linear-gradient(to right bottom, #d5e7fb, #d2e6fc, #cfe5fc, #cde3fd, #cae2fe, #c6e0fe, #c2ddfe, #bedbfe, #b8d7fd, #b1d3fd, #abd0fc, #a4ccfb) !default;
-$tertiary-color-text: black !default;
+$tertiary-color-normal: #c9dfd2 !default;
+$tertiary-color-transparent: rgba(201, 223, 210, 0.3) !default;
+$tertiary-color-light: rgb(220, 247, 231) !default;
+$tertiary-color-gradient: linear-gradient(to right bottom, #e6f6ec, #e0f2e7, #dbede2, #d5e9dd, #d0e5d8, #cae1d3, #c4dece, #bedac9, #b6d6c3, #aed2bc, #a7cdb6, #9fc9b0) !default;
+$tertiary-color-text: #2e2e2e !default;
 
 $alert-color-normal: rgb(225, 188, 41) !default;
 $alert-color-transparent: rgba(225, 188, 41, 0.3) !default;
