@@ -23,11 +23,12 @@ type SelectItemType = {
 type SelectProps = {
     title: string,
     items: SelectItemType[],
-    selectedItem: string,
-    onSelect: (value: string) => void,
+    selectedItems: string[],
+    onSelect: (values: string[]) => void,
     error: boolean,
     clearable?: boolean,
-    searchable?: boolean
+    searchable?: boolean,
+    multipleChoice?: boolean
 }
 
 
@@ -57,13 +58,13 @@ export default function Select(props: SelectProps) {
         }
     };
 
-    function getSelectedItem(value: string): SelectItemType {
-        return props.items.filter(i => i.value === value)[0]
+    function getSelectedItems(values: string[]): SelectItemType[] {
+        return props.items.filter(i => values.includes(i.value))
     }
 
 
 
-    let thisSelectedItem = getSelectedItem(props.selectedItem);
+    let thisSelectedItems = getSelectedItems(props.selectedItems);
 
     return <div className="vieolo-select" ref={container as any}>
         <div className={`select-button${props.error ? ' select-button-error' : ''}`} onClick={() => {
@@ -80,16 +81,16 @@ export default function Select(props: SelectProps) {
                         onChange={e => setSearchQuery(e.target.value)}
                         placeholder="Search..."
                     />
-                    : <TypographyTitleSmall text={thisSelectedItem ? thisSelectedItem.title : ""} className="button-value" />
+                    : <TypographyTitleSmall text={thisSelectedItems.map(s => s.title).join(", ")} className="button-value" />
                 }                
             </div>
 
             {
-                (!props.clearable || (props.clearable && (!props.selectedItem || !props.selectedItem.trim())))
+                (!props.clearable || (props.clearable && (!props.selectedItems || props.selectedItems.length == 0)))
                 ? <DownIcon />
                 : <IconButton 
                     icon={<CloseIcon />}
-                    onClick={() => props.onSelect("")}
+                    onClick={() => props.onSelect([])}
                     color="error"
                     size="small"
                 />
@@ -105,11 +106,18 @@ export default function Select(props: SelectProps) {
                         return <SelectItem
                             key={item.title}
                             item={item}
-                            isSelected={props.selectedItem === item.value}
+                            isSelected={props.selectedItems.includes(item.value)}
                             onSelect={(t: SelectItemType) => {
-                                setOpen(false);
-                                setSearchQuery("");
-                                props.onSelect(t.value);
+                                if (props.multipleChoice) {
+                                    let newSelected = [...props.selectedItems];
+                                    if (props.selectedItems.includes(item.value)) newSelected = newSelected.filter(f => f != item.value);
+                                    else newSelected.push(item.value);
+                                    props.onSelect(newSelected);
+                                }else {
+                                    setOpen(false);
+                                    setSearchQuery("");
+                                    props.onSelect([t.value]);
+                                }
                             }}
                         />
                     })
