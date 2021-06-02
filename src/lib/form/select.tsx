@@ -1,5 +1,5 @@
 // React
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useRef, useState } from 'react';
 
 // Typography
 import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
@@ -22,103 +22,75 @@ type SelectProps = {
 }
 
 
-export default class Select extends React.Component<
-    SelectProps,
-    {
-        open: boolean
-    }
-> {
+export default function Select(props: SelectProps) {
 
-    container: React.RefObject<unknown>;
+    let [open, setOpen] = useState<boolean>(false);
+    let [container, setContainer] = useState(useRef(null));
 
-    constructor(props: SelectProps) {
-        super(props as any);
-        this.state = {
-            open: false
-        };
-        this.container = React.createRef();
-    }
+    useEffect(() => {
+        document.addEventListener("click", handleClickOutside);
+        let main = document.querySelector('main')
+        if (main) main.style.overflow = 'hidden';
 
-    handleButtonClick = () => {
-        this.setState(state => {
-            return {
-                open: !this.state.open
-            };
-        });
-    };
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+            let main = document.querySelector('main');
+            if (main) main.style.overflow = 'auto';
+        }
+    }, [])
 
-    handleClickOutside = (event: any) => {
-        if (this.container.current && !(this.container.current as any).contains(event.target)) {
-            this.setState({
-                open: false,
-            });
+
+    function handleClickOutside(event: any) {
+        if (container.current && !(container.current as any).contains(event.target)) {
+            setOpen(false);
         }
     };
 
-
-    componentDidMount() {
-        document.addEventListener("click", this.handleClickOutside);
-        let main = document.querySelector('main')
-        if (main) main.style.overflow = 'hidden';
-    }
-    componentWillUnmount() {
-        document.removeEventListener("click", this.handleClickOutside);
-        let main = document.querySelector('main');
-        if (main) main.style.overflow = 'auto';
+    function getSelectedItem(value: string): SelectItemType {
+        return props.items.filter(i => i.value === value)[0]
     }
 
-    getSelectedItem(value: string) : SelectItemType {
-        return this.props.items.filter(i => i.value === value)[0]
-    }
 
-    //<p className="button-title">{this.props.title}</p>
-    //                <p className="button-value">{thisSelectedItem ? thisSelectedItem.title : null}</p>
 
-    render(): React.ReactNode {
+    let thisSelectedItem = getSelectedItem(props.selectedItem);
 
-        let thisSelectedItem = this.getSelectedItem(this.props.selectedItem);
+    return <div className="vieolo-select" ref={container as any}>
+        <div className={`select-button${props.error ? ' select-button-error' : ''}`} onClick={() => setOpen(true)}>
+            <TypographyParagraphSmall text={props.title} className="button-title" />
+            <TypographyTitleSmall text={thisSelectedItem ? thisSelectedItem.title : ""} className="button-value" />
+        </div>
 
-        return (
-            <div className="vieolo-select" ref={this.container as any}>
-                <div className={`select-button${this.props.error ? ' select-button-error' : ''}`} onClick={() => {this.setState({open: true})}}>
-                    <TypographyParagraphSmall text={this.props.title} className="button-title" />
-                    <TypographyTitleSmall text={thisSelectedItem ? thisSelectedItem.title : ""} className="button-value" />
-                </div>
-
+        {
+            open &&
+            <div className="select-dropdown">
                 {
-                    this.state.open &&
-                    <div className="select-dropdown">
-                        {
-                            this.props.items.map(item => {
-                                return <SelectItem 
-                                    key={item.title}
-                                    item={item}
-                                    isSelected={this.props.selectedItem === item.value}
-                                    onSelect={(t: SelectItemType) => {
-                                        this.setState({
-                                            open: false,
-                                        })
-                                        this.props.onSelect(t.value);
-                                    }} 
-                                    />
-                            })
-                        }
-                    </div>
+                    props.items.map(item => {
+                        return <SelectItem
+                            key={item.title}
+                            item={item}
+                            isSelected={props.selectedItem === item.value}
+                            onSelect={(t: SelectItemType) => {
+                                setOpen(false);
+                                props.onSelect(t.value);
+                            }}
+                        />
+                    })
                 }
             </div>
-        )
-    }
+        }
+    </div>
+
 
 }
 
 
 function SelectItem(props: {
-    item: SelectItemType, 
-    isSelected: boolean, 
-    onSelect: (item: SelectItemType) => void    
+    item: SelectItemType,
+    isSelected: boolean,
+    onSelect: (item: SelectItemType) => void
 }) {
 
-    let className= "select-item";
+    let className = "select-item";
 
     if (props.isSelected) className += " select-item-selected";
     if (props.item.category) className += " select-item-category";
@@ -128,12 +100,12 @@ function SelectItem(props: {
             props.item.category &&
             <p className="category-name">{props.item.category}</p>
         }
-        <div 
-            className={className} 
-            onClick={() => {props.onSelect(props.item)}}
-            > 
+        <div
+            className={className}
+            onClick={() => { props.onSelect(props.item) }}
+        >
             <TypographyParagraphMedium text={props.item.title} />
         </div>
-    </Fragment> 
+    </Fragment>
 
 }
