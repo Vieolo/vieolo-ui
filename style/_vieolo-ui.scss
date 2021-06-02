@@ -387,6 +387,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	padding-top: 4px;
 
 	svg {
 		width: 16px;
@@ -425,7 +426,11 @@ body {
 				margin: 0;
 				@include no-text-overflow;
 			}
-		}		
+		}
+
+		.vieolo-icon-button {
+			background-color: $tertiary-color-normal;
+		}
 	}
 
 	.select-button-error {

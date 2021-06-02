@@ -40,6 +40,12 @@ export function selectOptions(): { [key: string]: SelectPropsType } {
             error: true,
             selectedItem: "1",
         },
+        "Clearable": {
+            ...baseProps,
+            error: false,
+            selectedItem: "1",
+            clearable: true
+        },
     }
 }
 
@@ -57,6 +63,7 @@ export function SelectCreator(props: {p: SelectPropsType}) {
         onSelect={o => setSelected(o)}
         selectedItem={selected}
         title={props.p.title}
+        clearable={props.p.clearable}
     />
 
 }

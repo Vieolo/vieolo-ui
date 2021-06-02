@@ -6,9 +6,12 @@ import TypographyParagraphMedium from '../typography/typography_paragraph_medium
 import TypographyParagraphSmall from '../typography/typography_paragraph_small';
 import TypographyTitleSmall from '../typography/typography_title_small';
 
-
 // Material UI
 import DownIcon from '@material-ui/icons/ArrowDropDownRounded';
+import CloseIcon from '@material-ui/icons/CloseRounded';
+
+// Components
+import IconButton from '../button/icon_button';
 
 
 type SelectItemType = {
@@ -22,7 +25,8 @@ type SelectProps = {
     items: SelectItemType[],
     selectedItem: string,
     onSelect: (value: string) => void,
-    error: boolean
+    error: boolean,
+    clearable?: boolean
 }
 
 
@@ -65,7 +69,17 @@ export default function Select(props: SelectProps) {
                 <TypographyTitleSmall text={thisSelectedItem ? thisSelectedItem.title : ""} className="button-value" />
             </div>
 
-            <DownIcon />
+            {
+                (!props.clearable || (props.clearable && (!props.selectedItem || !props.selectedItem.trim())))
+                ? <DownIcon />
+                : <IconButton 
+                    icon={<CloseIcon />}
+                    onClick={() => props.onSelect("")}
+                    color="error"
+                    size="small"
+                />
+            }
+            
         </div>
 
         {
