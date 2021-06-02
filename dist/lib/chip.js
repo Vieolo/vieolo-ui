@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 // Components
-import IconButton from './icon_button';
+import IconButton from './button/icon_button';
 export default function Chip(props) {
     let s = {};
     if (props.onChipSelect)

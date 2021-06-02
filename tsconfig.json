@@ -34,7 +34,8 @@
     "./src/setupTests.ts",
     "./src/App.tsx",
     "./src/index.tsx",
-    "./src/reportWebVitals.ts"
+    "./src/reportWebVitals.ts",
+    "./src/view"
   ],
   "files": [
     "./src/export.ts"
