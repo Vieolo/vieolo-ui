@@ -410,18 +410,18 @@ body {
 		@include flex-row-space-between;
 		@include no-text-overflow;
 		width: 160px;
-		padding: 0 5px;		
+		padding: 0 5px;
 
 		.button-text {
 			justify-content: center;
 			display: flex;
 			flex-flow: column;
 			width: 120px;
-			
+
 			.button-title {
 				margin: 0;
 			}
-	
+
 			.button-value {
 				margin: 0;
 				@include no-text-overflow;
@@ -431,12 +431,22 @@ body {
 		.vieolo-icon-button {
 			background-color: $tertiary-color-normal;
 		}
+
+		input {
+			background-color: $tertiary-color-normal;
+			border: none;
+
+			&:focus,
+			&:active {
+				outline: none;
+			}
+		}
 	}
 
 	.select-button-error {
 		p {
 			@include error-color;
-		}		
+		}
 	}
 
 	.select-dropdown {
@@ -521,7 +531,7 @@ body {
 	.dropdown {
 		position: absolute;
 		top: 100%;
-		left: -110px;		
+		left: -110px;
 		z-index: 2;
 		padding: 5px;
 		@include card-dark-shadow;
@@ -600,7 +610,7 @@ body {
 }
 
 .vieolo-item-row {
-	width: 100%;	
+	width: 100%;
 	margin: 6px 0;
 
 	.item-clickable {
@@ -633,18 +643,18 @@ body {
 				margin: 2px;
 				@include no-text-overflow;
 			}
-			
+
 			p:nth-child(1) {
-				font-size:14px;
+				font-size: 14px;
 				@include font-header;
 			}
-	
+
 			p:nth-child(2) {
 				font-size: 11px;
 				@include font-light;
-			}		
+			}
 		}
-	
+
 		.button-col {
 			@include flex-start;
 		}

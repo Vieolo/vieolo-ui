@@ -46,6 +46,12 @@ export function selectOptions(): { [key: string]: SelectPropsType } {
             selectedItem: "1",
             clearable: true
         },
+        "Searchable": {
+            ...baseProps,
+            error: false,
+            selectedItem: "1",
+            searchable: true
+        },
     }
 }
 
@@ -64,6 +70,7 @@ export function SelectCreator(props: {p: SelectPropsType}) {
         selectedItem={selected}
         title={props.p.title}
         clearable={props.p.clearable}
+        searchable={props.p.searchable}
     />
 
 }
