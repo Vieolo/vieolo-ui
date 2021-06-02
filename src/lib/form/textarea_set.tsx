@@ -3,7 +3,7 @@ import React from 'react';
 
 
 // Private Components
-import TipIcon from './private/tip_icon';
+import TipIcon from '../private/tip_icon';
 
 
 // Public Components
