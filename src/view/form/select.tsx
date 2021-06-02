@@ -58,6 +58,14 @@ export function selectOptions(): { [key: string]: SelectPropsType } {
             selectedItems: ["1", "2"],
             multipleChoice: true
         },
+        "Multiple + Searchable + Clearable": {
+            ...baseProps,
+            error: false,
+            selectedItems: ["1", "2"],
+            multipleChoice: true,
+            clearable: true,
+            searchable: true
+        }
     }
 }
 

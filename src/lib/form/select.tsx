@@ -86,7 +86,7 @@ export default function Select(props: SelectProps) {
             </div>
 
             {
-                (!props.clearable || (props.clearable && (!props.selectedItems || props.selectedItems.length == 0)))
+                (!props.clearable || (props.clearable && (!props.selectedItems || props.selectedItems.length === 0)))
                 ? <DownIcon />
                 : <IconButton 
                     icon={<CloseIcon />}
@@ -110,7 +110,7 @@ export default function Select(props: SelectProps) {
                             onSelect={(t: SelectItemType) => {
                                 if (props.multipleChoice) {
                                     let newSelected = [...props.selectedItems];
-                                    if (props.selectedItems.includes(item.value)) newSelected = newSelected.filter(f => f != item.value);
+                                    if (props.selectedItems.includes(item.value)) newSelected = newSelected.filter(f => f !== item.value);
                                     else newSelected.push(item.value);
                                     props.onSelect(newSelected);
                                 }else {
