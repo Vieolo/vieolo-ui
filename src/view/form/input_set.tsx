@@ -1,6 +1,9 @@
 // React
 import React, { useEffect, useState } from 'react';
 
+// Materail UI
+import LoopIcon from '@material-ui/icons/LoopRounded'
+
 // Component
 import InputSet from '../../lib/form/input_set';
 
@@ -53,6 +56,23 @@ export function inputSetOptions(): { [key: string]: InputSetPropsType } {
             ...baseProps,
             tip: "This is a tip displayed to the user"
         },
+        "With Action Button": {
+            ...baseProps,
+            actionButton: {
+                description: "This button does something nice!",
+                icon: <LoopIcon />,
+                onClick: () => {}
+            }
+        },
+        "With Action Button and Tip": {
+            ...baseProps,
+            actionButton: {
+                description: "This button does something nice!",
+                icon: <LoopIcon />,
+                onClick: () => {}
+            },
+            tip: "This is a tip displayed to the user"
+        },
         "Type -- Number": {
             ...baseProps,
             type: 'number'
@@ -83,6 +103,7 @@ export function InputSetCreator(props: {p: InputSetPropsType}) {
         size={props.p.size}
         tip={props.p.tip}
         type={props.p.type}
+        actionButton={props.p.actionButton}
     />
 
 }
