@@ -1,5 +1,5 @@
-/// <reference types="react" />
-export default function TextareaSet(props: {
+import React from 'react';
+export default function InputSet(props: {
     label: string;
     placeholder?: string;
     tip?: string;
@@ -9,4 +9,9 @@ export default function TextareaSet(props: {
     disabled?: boolean;
     size?: 'small' | 'medium' | 'large' | 'full';
     type?: 'text' | 'number' | 'password';
+    actionButton?: {
+        description: string;
+        icon: React.ReactNode;
+        onClick: () => void;
+    };
 }): JSX.Element;

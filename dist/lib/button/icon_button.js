@@ -5,7 +5,7 @@ export default function IconButton(props) {
     let colorClass = `${props.color || 'primary'}-color`;
     let className = `vieolo-icon-button ${colorClass} ${rippleClass} ${hoverClass} ${props.className || ""}`;
     if (props.tooltip)
-        className += " tooltip";
+        className += " vieolo-tooltip";
     if (props.size === "small")
         className += " vieolo-icon-button-small";
     if (props.disabled)

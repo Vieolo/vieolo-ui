@@ -1,6 +1,11 @@
 # Change Log
 
 
+### 0.8.2 (2020-06-19)
+
+- Added action button to the `InputSet`
+
+
 ### 0.8.1 (2020-06-03)
 
 - Fixed the `uesEffect` error of `Select`
