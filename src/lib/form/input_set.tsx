@@ -7,10 +7,11 @@ import TipIcon from '../private/tip_icon';
 
 // Public Components
 import Input from './input';
+import IconButton from '../button/icon_button';
 
 
 
-export default function TextareaSet(props: {
+export default function InputSet(props: {
     label: string,
     placeholder?: string,
     tip?: string,
@@ -19,14 +20,36 @@ export default function TextareaSet(props: {
     onChange: (value: string) => void,
     disabled?: boolean,
     size?: 'small' | 'medium' | 'large' | 'full',
-    type?: 'text' | 'number' | 'password'
+    type?: 'text' | 'number' | 'password',
+    actionButton?: {
+        description: string,
+        icon: React.ReactNode,
+        onClick: () => void
+    }
 }) {
 
     let size = props.size || 'medium';
     let width = '180px';
-    if (size == 'small') width = '100px';
-    else if (size == 'large') width = '240px';
-    else if (size == 'full') width = '100%';
+    if (size === 'small') width = '100px';
+    else if (size === 'large') width = '240px';
+    else if (size === 'full') width = '100%';
+
+    let actionComponent = <span></span>;
+
+    if (props.actionButton) {
+        actionComponent = <IconButton 
+            icon={props.actionButton.icon}
+            onClick={props.actionButton.onClick}
+            tooltip={props.actionButton.description}
+            tooltipPosition={'down-left'}
+            size={'small'}
+        />
+    }else if (props.tip) {
+        actionComponent = <div className="tip-div vieolo-tooltip">
+            <TipIcon />
+            <div className="tooltip-text-small tooltip-text-down-left">{props.tip}</div>
+        </div>
+    }
 
     return <div
         className={`vieolo-input-set${props.disabled ? ' disabled' : ''}`} style={{width: width}}>
@@ -34,13 +57,7 @@ export default function TextareaSet(props: {
             <label>
                 {props.label}
             </label>
-            {
-                props.tip &&
-                <div className="tip-div vieolo-tooltip">
-                    <TipIcon />
-                    <div className="tooltip-text-small tooltip-text-down-left">{props.tip}</div>
-                </div>
-            }
+            {actionComponent}
         </div>
 
         <Input
