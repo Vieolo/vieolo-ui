@@ -8,6 +8,7 @@ import ItemRow from '../../lib/list/item_row';
 
 // Main Creators
 import { SelectCreator, selectOptions } from '../form/select';
+import { InputSetCreator, inputSetOptions } from '../form/input_set';
 
 
 export default function MainPage(props: {}): JSX.Element {
@@ -18,6 +19,7 @@ export default function MainPage(props: {}): JSX.Element {
     let [selectedData, setSelectedData] = useState<any>(null);
 
     let items: {[key: string]: { title: string, data: any, creator: any }} = {
+        "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator },
         "Select": { title: "Select", data: selectOptions(), creator: SelectCreator }
     }
 
@@ -25,7 +27,7 @@ export default function MainPage(props: {}): JSX.Element {
 
     if (selectedTitle && selectedData) {
         let C = items[selectedTitle].creator;
-        content = <C p={selectedData} />
+        content = <C p={selectedData}/>
     }
 
     return <div className="main-page">
@@ -39,6 +41,7 @@ export default function MainPage(props: {}): JSX.Element {
                         selected={selectedTitle === i.title}
                         cardStyle="card-no-shadow"
                         onClick={() => {
+                            setSelectedData(null);
                             setSelectedTitle(i.title);
                             setSelectedDataOptions(i.data);
                         }}
