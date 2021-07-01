@@ -1,6 +1,6 @@
 {
   "name": "@vieolo/vieolo-ui",
-  "version": "0.8.2",
+  "version": "0.8.3",
   "private": true,
   "main": "dist/export.js",
   "author": {
@@ -22,17 +22,17 @@
     "@types/node": "^12.20.13",
     "@types/react": "^17.0.8",
     "@types/react-dom": "^17.0.5",
-    "typescript": "^4.3.2"
+    "node-sass": "^6.0.1",
+    "react-scripts": "^4.0.3",
+    "typescript": "^4.3.2",
+    "web-vitals": "^2.0.1"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
     "@vieolo/validation-js": "github:Vieolo/validation-js#master",
-    "node-sass": "^6.0.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.2"
+    "react-dom": "^17.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
