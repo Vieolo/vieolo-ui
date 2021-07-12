@@ -9,6 +9,7 @@ import ItemRow from '../../lib/list/item_row';
 // Main Creators
 import { SelectCreator, selectOptions } from '../form/select';
 import { InputSetCreator, inputSetOptions } from '../form/input_set';
+import { DropDownMenuCreator, dropDownMenuOptions } from '../menu/dropdown_menu';
 
 
 export default function MainPage(props: {}): JSX.Element {
@@ -20,7 +21,8 @@ export default function MainPage(props: {}): JSX.Element {
 
     let items: {[key: string]: { title: string, data: any, creator: any }} = {
         "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator },
-        "Select": { title: "Select", data: selectOptions(), creator: SelectCreator }
+        "Select": { title: "Select", data: selectOptions(), creator: SelectCreator },
+        "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator }
     }
 
     let content: React.ReactNode = null;

@@ -6,7 +6,7 @@ type DropDownMenuProps = {
     buttonComponent: React.ReactNode,
     disabled?: boolean,
     items: { title: string, icon?: React.ReactNode }[],
-    onItemSelec: (title: string) => void,
+    onItemSelect: (title: string) => void,
     className?: string
 }
 
@@ -55,7 +55,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
                     props.items.map(item => {
                         return <DropDownMenuItem title={item.title} icon={item.icon} onClick={(t: string) => {
                             setOpen(!open);
-                            props.onItemSelec(t);
+                            props.onItemSelect(t);
                         }} />
                     })
                 }
