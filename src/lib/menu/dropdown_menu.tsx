@@ -42,12 +42,14 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 
 
     function handleButtonClick() {
-        setOpen(!open);
+        if (!props.disabled) setOpen(!open);        
     };
 
+    let className = "vieolo-dropdown-menu";
+    if (props.className) className += ` ${props.className}`;
+    if (props.disabled) className += " disabled";
 
-
-    return <div className={`vieolo-dropdown-menu ${props.className || ''}`} ref={container as any}>
+    return <div className={className} ref={container as any}>
         <div onClick={() => handleButtonClick()}>
             {props.buttonComponent}
         </div>
