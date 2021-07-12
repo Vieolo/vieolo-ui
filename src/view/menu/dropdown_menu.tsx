@@ -33,6 +33,7 @@ export function dropDownMenuOptions(): { [key: string]: DropDownMenuPropsType } 
         items: itemsWithoutIcon,
         buttonComponent: <Button color={"primary"} text="Menu" />,
         onItemSelect: () => {},
+        position: 'right'
     }
 
     return {
@@ -64,6 +65,7 @@ export function DropDownMenuCreator(props: {p: DropDownMenuPropsType}) {
         onItemSelect={props.p.onItemSelect}
         className={props.p.className}
         disabled={props.p.disabled}
+        position={props.p.position}
     />
 
 }

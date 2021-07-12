@@ -7,7 +7,8 @@ type DropDownMenuProps = {
     disabled?: boolean,
     items: { title: string, icon?: React.ReactNode }[],
     onItemSelect: (title: string) => void,
-    className?: string
+    className?: string,
+    position?: 'left' | 'right'
 }
 
 
@@ -50,10 +51,10 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 
         {
             open &&
-            <div className="dropdown">
+            <div className={`dropdown dropdown--${props.position || 'left'}`}>
                 {
                     props.items.map(item => {
-                        return <DropDownMenuItem title={item.title} icon={item.icon} onClick={(t: string) => {
+                        return <DropDownMenuItem key={item.title} title={item.title} icon={item.icon} onClick={(t: string) => {
                             setOpen(!open);
                             props.onItemSelect(t);
                         }} />
