@@ -1,5 +1,5 @@
 // React
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 // Material UI
 import IconOne from '@material-ui/icons/Assignment';
@@ -53,11 +53,6 @@ export function dropDownMenuOptions(): { [key: string]: DropDownMenuPropsType } 
 
 
 export function DropDownMenuCreator(props: {p: DropDownMenuPropsType}) {
-    //let [selected, setSelected] = useState<string[]>(props.p.selectedItems || []);
-
-    //useEffect(() => {
-    //    setSelected(props.p.selectedItems);
-    //}, [props.p.selectedItems])
 
     return <DropDownMenu
         buttonComponent={props.p.buttonComponent}
