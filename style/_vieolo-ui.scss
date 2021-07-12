@@ -530,11 +530,19 @@ body {
 
 	.dropdown {
 		position: absolute;
-		top: 100%;
-		left: -110px;
+		top: 100%;		
 		z-index: 2;
 		padding: 5px;
 		@include card-dark-shadow;
+
+		&--left {
+			left: -110px;
+		}
+
+		&--right {
+			right: -110px;
+		}
+
 	}
 
 	.dropdown-item {
@@ -543,8 +551,9 @@ body {
 		cursor: pointer;
 		border-radius: $universal-border-radius / 2;
 		@include transition;
-		color: $primary-color-normal;
-		@include flex-start;
+		color: $primary-color-normal;		
+		display: flex;
+		align-items: center;
 
 		&:hover {
 			background-color: $hover-color;
