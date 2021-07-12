@@ -1,6 +1,9 @@
 // React
 import React, { useState, useRef, useEffect } from 'react';
 
+// Typography
+import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
+
 
 type DropDownMenuProps = {
     buttonComponent: React.ReactNode,
@@ -74,6 +77,6 @@ function DropDownMenuItem(props: { title: string, onClick: (selectedTitle: strin
             props.icon &&
             props.icon
         }
-        {props.title}
+        <TypographyParagraphMedium  text={props.title} />
     </div>
 }

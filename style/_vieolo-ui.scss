@@ -551,8 +551,9 @@ body {
 		cursor: pointer;
 		border-radius: $universal-border-radius / 2;
 		@include transition;
-		color: $primary-color-normal;
-		@include flex-start;
+		color: $primary-color-normal;		
+		display: flex;
+		align-items: center;
 
 		&:hover {
 			background-color: $hover-color;
