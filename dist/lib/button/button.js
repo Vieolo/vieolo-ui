@@ -12,7 +12,7 @@ export default function Button(props) {
         c += " " + props.className;
     if (props.color) {
         c += " " + props.color + "-background";
-        c += " " + "ripple-" + props.color;
+        c += " ripple-" + props.color;
     }
     if (props.disabled)
         c += " disabled";

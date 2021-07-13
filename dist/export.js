@@ -1,6 +1,6 @@
 import Button from './lib/button/button';
 import Chip from './lib/chip';
-import DropDownMenu from './lib/dropdown_menu';
+import DropDownMenu from './lib/menu/dropdown_menu';
 import FileInput from './lib/form/file_input';
 import IconButton from './lib/button/icon_button';
 import Input from './lib/form/input';

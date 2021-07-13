@@ -1,5 +1,12 @@
 # Change Log
 
+### 0.9.0 (2021-07-13)
+
+- Improved the style of DropDownMenu
+- Added position to the DropDownMenu (default: `left`)
+
+##### Breaking Changes
+- Fixed the typo of `onItemSelec` to `onItemSelect` in the DropDownMenu
 
 ### 0.8.3 (2021-07-01)
 
