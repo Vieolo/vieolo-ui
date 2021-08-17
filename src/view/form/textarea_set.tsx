@@ -1,16 +1,13 @@
 // React
 import React, { useEffect, useState } from "react";
 
-// Materail UI
-import LoopIcon from "@material-ui/icons/LoopRounded";
-
 // Component
-import InputSet from "../../lib/form/input_set";
+import TextareaSet from "../../lib/form/textarea_set";
 
-type inputSetPropsType = React.ComponentProps<typeof InputSet>;
+type textareaSetPropsType = React.ComponentProps<typeof TextareaSet>;
 
-export function inputSetOptions(): { [key: string]: inputSetPropsType } {
-  let baseProps: inputSetPropsType = {
+export function textareaSetOptions(): { [key: string]: textareaSetPropsType } {
+  let baseProps: textareaSetPropsType = {
     error: false,
     label: "Label",
     onChange: (v) => {},
@@ -55,35 +52,10 @@ export function inputSetOptions(): { [key: string]: inputSetPropsType } {
       ...baseProps,
       tip: "This is a tip displayed to the user",
     },
-    "With Action Button": {
-      ...baseProps,
-      actionButton: {
-        description: "This button does something nice!",
-        icon: <LoopIcon />,
-        onClick: () => {},
-      },
-    },
-    "With Action Button and Tip": {
-      ...baseProps,
-      actionButton: {
-        description: "This button does something nice!",
-        icon: <LoopIcon />,
-        onClick: () => {},
-      },
-      tip: "This is a tip displayed to the user",
-    },
-    "Type -- Number": {
-      ...baseProps,
-      type: "number",
-    },
-    "Type -- Password": {
-      ...baseProps,
-      type: "password",
-    },
   };
 }
 
-export function InputSetCreator(props: { p: inputSetPropsType }) {
+export function TextareaSetCreator(props: { p: textareaSetPropsType }) {
   let [value, setValue] = useState<string>(props.p.value);
 
   useEffect(() => {
@@ -91,7 +63,7 @@ export function InputSetCreator(props: { p: inputSetPropsType }) {
   }, [props.p.value]);
 
   return (
-    <InputSet
+    <TextareaSet
       error={props.p.error}
       label={props.p.label}
       onChange={(v) => setValue(v)}
@@ -100,8 +72,6 @@ export function InputSetCreator(props: { p: inputSetPropsType }) {
       placeholder={props.p.placeholder}
       size={props.p.size}
       tip={props.p.tip}
-      type={props.p.type}
-      actionButton={props.p.actionButton}
     />
   );
 }
