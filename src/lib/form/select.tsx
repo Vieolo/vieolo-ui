@@ -109,7 +109,6 @@ export default function Select(props: SelectProps) {
     return <div className="vieolo-select" ref={container as any}>
         <div ref={(el) => {
         if(!el) return;
-        console.log(el.getBoundingClientRect())
         setLeft(el.getBoundingClientRect().left)
         setBottom(el.getBoundingClientRect().bottom)
         setElementWidth(el.getBoundingClientRect().width)}} className={`select-button${props.error ? ' select-button-error' : ''}`} onClick={(e) => {

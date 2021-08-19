@@ -95,7 +95,6 @@ export default function DropDownMenu(props: DropDownMenuProps) {
     return <div className={className} ref={container as any}>
         <div ref={(el) => {
         if(!el) return;
-        console.log(el.getBoundingClientRect())
         setLeft(el.getBoundingClientRect().left)
         setBottom(el.getBoundingClientRect().bottom)
         setElementWidth(el.getBoundingClientRect().width)}} 
