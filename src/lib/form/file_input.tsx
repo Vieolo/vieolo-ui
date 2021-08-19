@@ -41,11 +41,8 @@ export default function FileInput(props: {
             }}
         />
         <div>
-            {
-                props.icon
-                    ? props.icon
-                    : props.text || "Upload a file"
-            }
+            { props.icon && props.icon }
+            { props.text || "Upload a file" }
         </div>
     </form>
 }

@@ -39,6 +39,37 @@ export default function Select(props: SelectProps) {
     let [container, setContainer] = useState(useRef(null)); 
     let [searchQuery, setSearchQuery] = useState("");
 
+    const [left, setLeft] = useState <number> ();
+
+    const [bottom, setBottom] = useState <number> ();
+
+    const [elementWidth, setElementWidth] = useState <number> ();
+
+    const [styles, setStyles] = useState({})
+
+    const {innerWidth: width, innerHeight: height} = window;
+    const halfWidthScreen = width / 2;
+
+    useEffect (() => {
+
+        console.log(left, bottom, elementWidth, halfWidthScreen)
+
+        if (left && elementWidth) {
+            const centerOfElement = left + elementWidth / 2
+            if (centerOfElement <= halfWidthScreen) {
+                setStyles({
+                    left: `${left}px`,
+                    top: `${bottom}px`
+                })
+            } else if (centerOfElement >= halfWidthScreen) {
+                setStyles({
+                    right: `${width - (left + elementWidth)}px`,
+                    top: `${bottom}px`
+                })
+            }
+        }
+    }, [left, bottom, elementWidth, halfWidthScreen, width])
+
     useEffect(() => {
 
         const handleClickOutside = (event: any) => {
@@ -59,19 +90,29 @@ export default function Select(props: SelectProps) {
         }
     }, [container])
 
-
-    
-
     function getSelectedItems(values: string[]): SelectItemType[] {
         return props.items.filter(i => values.includes(i.value))
     }
 
-
+        useEffect(() => {
+        const handleScroll = () => {
+            setOpen(false)
+        }
+        window.addEventListener("scroll", handleScroll)
+        return () => {
+            window.removeEventListener("scroll", handleScroll)
+        }
+    }, [])
 
     let thisSelectedItems = getSelectedItems(props.selectedItems);
 
     return <div className="vieolo-select" ref={container as any}>
-        <div className={`select-button${props.error ? ' select-button-error' : ''}`} onClick={() => {
+        <div ref={(el) => {
+        if(!el) return;
+        console.log(el.getBoundingClientRect())
+        setLeft(el.getBoundingClientRect().left)
+        setBottom(el.getBoundingClientRect().bottom)
+        setElementWidth(el.getBoundingClientRect().width)}} className={`select-button${props.error ? ' select-button-error' : ''}`} onClick={(e) => {
             setOpen(true);
             setSearchQuery("");
         }}>
@@ -104,7 +145,7 @@ export default function Select(props: SelectProps) {
 
         {
             open &&
-            <div className="select-dropdown">
+            <div className="select-dropdown" style={styles}>
                 {
                     props.items.filter(item => (!searchQuery.trim() || item.title.toLowerCase().includes(searchQuery.toLowerCase()))).map(item => {
                         return <SelectItem

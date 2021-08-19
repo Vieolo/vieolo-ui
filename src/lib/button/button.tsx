@@ -22,7 +22,7 @@ export default function Button(props: {
 	let c: string = `vieolo-button`;
 
 	if (props.toLowerCase) {
-		s['textTransform'] = 'initial';		
+		s['textTransform'] = 'lowercase';		
 	}
 
 	if (props.fontSize) {
@@ -31,6 +31,12 @@ export default function Button(props: {
 
 	if (props.className) c += " " + props.className;
 
+	if (props.variant) c += " " + props.variant;
+
+    if (props.startIcon && props.endIcon) c += " flex-row-space-between";
+    else if (props.startIcon) c += " with-start-icon";
+    else if (props.endIcon) c += " with-end-icon";
+
 	if (props.color) {
 		c += " " + props.color + "-background";
 		c += " ripple-" + props.color 
@@ -38,20 +44,16 @@ export default function Button(props: {
 	
 	if (props.disabled) c += " disabled";
 
+	let size = props.size || "medium";
+    s["width"] = "180px";
+    if (size === "small") s["width"] = "100px";
+    else if (size === "large") s["width"] = "240px";
+    if (props.fullWidth) s["width"] = "100%";
+
 	return <button className={c} onClick={props.onClick} style={s}>
-		{
-			props.startIcon &&
-			<span className="start-icon">
-				{props.startIcon}
-			</span>
-		}
-		{props.text}
-		{
-			props.endIcon &&
-			<span className='end-icon'>
-				{props.endIcon}
-			</span>
-		}
+		{props.startIcon && <span className="start-icon">{props.startIcon}</span>}
+        <p className="button-text">{props.text}</p>
+        {props.endIcon && <span className="end-icon">{props.endIcon}</span>}
 	</button>
 
 }

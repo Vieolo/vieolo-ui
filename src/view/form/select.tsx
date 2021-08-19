@@ -16,7 +16,7 @@ export function selectOptions(): { [key: string]: SelectPropsType } {
         {title: "One", value: "1"}, 
         {title: "Two", value: "2"}, 
         {title: "Three", value: "3", category: "Third"},
-        {title: "One Two Three Four Five", value: "4"} 
+        {title: "One Two Three Four Five", value: "4"},
     ];
 
     let baseProps: SelectPropsType = {
