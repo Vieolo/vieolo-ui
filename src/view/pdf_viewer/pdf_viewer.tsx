@@ -9,14 +9,22 @@ type ViewerPropsType = React.ComponentProps<typeof PDFViewer>;
 export function pdfViewerOptions(): { [key: string]: ViewerPropsType } {
     
     let baseProps: ViewerPropsType = {        
-        filePath: 'http://localhost:3000/sample.pdf',
+        filePath: 'http://localhost:3000/simple.pdf',
         context: 'embedded',
     }
 
     return {
         "Simple": {
             ...baseProps
-        },        
+        },
+        "Odd Shaped": {
+            ...baseProps,
+            filePath: 'http://localhost:3000/odd_shaped.pdf'
+        },
+        "Many Pages": {
+            ...baseProps,
+            filePath: 'http://localhost:3000/many_pages.pdf'
+        },
     }
 }
 

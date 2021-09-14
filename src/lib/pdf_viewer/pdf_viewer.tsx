@@ -29,7 +29,7 @@ export default function PDFViewer(props: { filePath: string | File, context: 'fu
 	let [doc, setDoc] = useState<PDFDocumentProxy | null>(null);
 	let [totalPage, setTotalPage] = useState<number>(0);
 	let [mounted, setMounted] = useState<boolean>(false);
-	let [zoomMultiple, setZoomMultiple] = useState<number>(1);
+	let [zoomMultiple, setZoomMultiple] = useState<number>(0);
 	let [rotation, setRotation] = useState<number>(0);
 	
 	// eslint-disable-next-line
@@ -165,7 +165,7 @@ export default function PDFViewer(props: { filePath: string | File, context: 'fu
 
 
 function PDFPage(props: {
-	pdf: any,
+	pdf: PDFDocumentProxy,
 	pageNumber: number,
 	fileName: string,
 	context: 'full screen' | 'embedded',
@@ -179,7 +179,7 @@ function PDFPage(props: {
 	let [width, setWidth] = useState<number>(100);
 	let [height, setHeight] = useState<number>(100);
 	let [canvas, setCanvas] = useState<string>('');
-	let [currentZoomMultiple, setCurrentZoomMultiple] = useState<number>(1);
+	let [currentZoomMultiple, setCurrentZoomMultiple] = useState<number>(0);
 	let [currentRotation, setCurrentRotation] = useState<number>(0);
 
 	useEffect(() => {
@@ -188,7 +188,8 @@ function PDFPage(props: {
 			props.pageNumber, 
 			canvasID, 
 			props.containerWidth,
-			props.context === 'full screen' ? document.body.clientWidth > 1400 ? document.body.clientWidth > 2000 ? 1.8 : 1.6 : 1.3 : 1, 
+			//props.context === 'full screen' ? document.body.clientWidth > 1400 ? document.body.clientWidth > 2000 ? 1.8 : 1.6 : 1.3 : 1,			
+			1,
 			currentZoomMultiple,
 			currentRotation
 		).then(([canvasURL, newHeight, newWidth]) => {

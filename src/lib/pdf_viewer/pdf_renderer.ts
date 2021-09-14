@@ -36,18 +36,31 @@ export async function renderPDFPageAsCanvas(
 	pageNumber: number, 
 	canvasID: string, 
 	maximumWidth: number, 
-	scale = 1.5, 
-	zoom = 0.0,
-	rotation = 0
+	scale: number, 
+	zoom: number,
+	rotation: number
 ) : Promise<[string, number, number]> {
 	
-	let page = await doc.getPage(pageNumber);
-	
-	let viewport = page.getViewport({scale: scale + zoom, rotation: rotation });
+	let page = await doc.getPage(pageNumber);	
 	
 	// Prepare canvas using PDF page dimensions
 	let canvas = document.getElementById(canvasID) as HTMLCanvasElement; // document.createElement('canvas'); //document.getElementById(canvasID) as HTMLCanvasElement;
 	let canvasContext = canvas.getContext('2d')!;
+
+	let scalingFactor = 1;
+	let orgWidth = page.getViewport({scale: 1}).width;
+
+	if ((maximumWidth * 0.95) < orgWidth) {
+		scalingFactor = ((maximumWidth * 0.95) / orgWidth);
+	}
+
+	console.log(pageNumber, (maximumWidth * 0.95), orgWidth, scalingFactor);
+	let viewport = page.getViewport({
+		scale: scalingFactor + zoom, 
+		rotation: rotation 
+	});
+	console.log(viewport.width);
+	console.log(viewport.height);
 	canvas.height = viewport.height;
 	canvas.width = viewport.width;
 	
