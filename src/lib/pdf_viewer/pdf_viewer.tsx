@@ -31,7 +31,7 @@ export default function PDFViewer(props: { filePath: string | File, context: 'fu
 	let [mounted, setMounted] = useState<boolean>(false);
 	let [zoomMultiple, setZoomMultiple] = useState<number>(1);
 	let [rotation, setRotation] = useState<number>(0);
-	let [documentURL, setDocumentURL] = useState<any>(null);
+	
 	// eslint-disable-next-line
 	let [pageInFocus, setPageInFocus] = useState<number | null>(null);
 	let [pageHeight, setPageHeight] = useState<number>(100);
@@ -65,7 +65,7 @@ export default function PDFViewer(props: { filePath: string | File, context: 'fu
 		if (mounted && props.pageInFocus) {
 			setPageInFocus(props.pageInFocus);
 			(focusRef.current as any).scrollTo(0, 0);
-			(focusRef.current as any).scrollBy({ top: (props.pageInFocus * ((pageHeight * zoomMultiple) + 34)) - ((pageHeight * zoomMultiple) + 34) }) // 30 px for padding-bottom and 4px for margin
+			(focusRef.current as any).scrollBy({ top: (props.pageInFocus * ((pageHeight * zoomMultiple) + 34)) - ((pageHeight * zoomMultiple) + 34) }) // 30 px for padding-bottom and 4px for margin			
 		}
 		// eslint-disable-next-line
 	}, [props.pageInFocus]);
@@ -90,6 +90,7 @@ export default function PDFViewer(props: { filePath: string | File, context: 'fu
 						context={props.context}
 						zoomMultiple={zoomMultiple}
 						rotation={rotation}
+						containerWidth={focusRef.current!.offsetWidth}
 						onSizeChange={(width, height) => {
 							if (height !== pageHeight) setPageHeight(height);
 						}}
@@ -170,7 +171,8 @@ function PDFPage(props: {
 	context: 'full screen' | 'embedded',
 	zoomMultiple: number,
 	rotation: number,
-	onSizeChange: (width: number, height: number) => void
+	onSizeChange: (width: number, height: number) => void,
+	containerWidth: number
 }) {
 
 	let canvasID = `${props.fileName.replace(".", "")}_canvas_${props.pageNumber}`;
@@ -181,7 +183,15 @@ function PDFPage(props: {
 	let [currentRotation, setCurrentRotation] = useState<number>(0);
 
 	useEffect(() => {
-		renderPDFPageAsCanvas(props.pdf, props.pageNumber, canvasID, props.context === 'full screen' ? document.body.clientWidth > 1400 ? document.body.clientWidth > 2000 ? 1.8 : 1.6 : 1.3 : 1, currentZoomMultiple).then(([canvasURL, newHeight, newWidth]) => {
+		renderPDFPageAsCanvas(
+			props.pdf, 
+			props.pageNumber, 
+			canvasID, 
+			props.containerWidth,
+			props.context === 'full screen' ? document.body.clientWidth > 1400 ? document.body.clientWidth > 2000 ? 1.8 : 1.6 : 1.3 : 1, 
+			currentZoomMultiple,
+			currentRotation
+		).then(([canvasURL, newHeight, newWidth]) => {
 			//dispatch(clearLoading());
 			props.onSizeChange(newWidth, newHeight);
 			setCanvas(canvasURL);
@@ -191,7 +201,7 @@ function PDFPage(props: {
 			//setDocumentLoadError(true)
 		});
 		// eslint-disable-next-line
-	}, [renderPDFPageAsCanvas, canvasID, currentZoomMultiple]);
+	}, [renderPDFPageAsCanvas, canvasID, currentZoomMultiple, currentRotation]);
 
 	useEffect(() => {
 		if (props.zoomMultiple !== currentZoomMultiple) {
