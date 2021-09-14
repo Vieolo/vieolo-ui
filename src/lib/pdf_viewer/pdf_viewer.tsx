@@ -3,13 +3,12 @@ import React, { useState, useEffect, useRef } from 'react';
 
 
 // Material UI
-import ZoomInIcon from '@material-ui/icons/ZoomIn';
-import ZoomOutIcon from '@material-ui/icons/ZoomOut';
+import ZoomInIcon from '@material-ui/icons/AddRounded';
+import ZoomOutIcon from '@material-ui/icons/RemoveRounded';
 import DownloadIcon from '@material-ui/icons/CloudDownload';
-import SVGRenderIcon from '@material-ui/icons/TextFieldsRounded';
-import CanvasRenderIcon from '@material-ui/icons/ImageOutlined';
 import RotateLeft from '@material-ui/icons/RotateLeftRounded';
 import RotateRight from '@material-ui/icons/RotateRightRounded';
+import CloseIcon from '@material-ui/icons/CloseRounded';
 
 
 // Components
@@ -96,40 +95,61 @@ export default function PDFViewer(props: { url: string, fileName: string, contex
 			}
 
 			return <div className={props.context === "full screen" ? "vieolo-pdf-viewer-component" : "vieolo-pdf-viewer-component vieolo-pdf-viewer-component-embed"}>
-				<div className="pdf-viewer-toolbar">
-					<IconButton
-						icon={<ZoomOutIcon />}
-						onClick={() => { setZoomMultiple(zoomMultiple - 0.1) }}
-					/>
+				<div className="vieolo-pdf-viewer-component__toolbar">
 
-					<IconButton
-						icon={<DownloadIcon />}
-						onClick={() => {
-							var link = document.createElement("a");
-							link.download = props.fileName.split('___')[1];
-							link.href = props.url;
-							document.body.appendChild(link);
-							link.click();
-							document.body.removeChild(link);
-						}}
-					/>
+					<div className='flex-start'>
+						<IconButton
+							size="small"
+							icon={<CloseIcon />}
+							color="error"
+							onClick={() => { setZoomMultiple(zoomMultiple - 0.1) }}
+						/>
+					</div>
 
-					<IconButton
-						icon={<RotateLeft />}
-						onClick={() => setRotation(rotation - 90)}
-					/>
+					<div className="flex-start">
+						<IconButton
+							size="small"
+							icon={<ZoomOutIcon />}
+							onClick={() => { setZoomMultiple(zoomMultiple - 0.1) }}
+						/>
 
-					<IconButton
-						icon={<RotateRight />}
-						onClick={() => setRotation(rotation + 90)}
-					/>
+						<IconButton
+							size="small"
+							icon={<ZoomInIcon />}
+							onClick={() => { setZoomMultiple(zoomMultiple + 0.1) }}
+						/>
+					</div>
 
-					<IconButton
-						icon={<ZoomInIcon />}
-						onClick={() => { setZoomMultiple(zoomMultiple + 0.1) }}
-					/>
+					<div className="flex-start">
+						<IconButton
+							size="small"
+							icon={<DownloadIcon />}
+							onClick={() => {
+								var link = document.createElement("a");
+								link.download = props.fileName.split('___')[1];
+								link.href = props.url;
+								document.body.appendChild(link);
+								link.click();
+								document.body.removeChild(link);
+							}}
+						/>
+
+						<IconButton
+							size="small"
+							icon={<RotateLeft />}
+							onClick={() => setRotation(rotation - 90)}
+						/>
+
+						<IconButton
+							size="small"
+							icon={<RotateRight />}
+							onClick={() => setRotation(rotation + 90)}
+						/>
+					</div>
+
+
 				</div>
-				<div className="canvas-container" ref={focusRef}>
+				<div className="vieolo-pdf-viewer-component__canvas-container" ref={focusRef}>
 					{pages}
 				</div>
 			</div>
@@ -154,7 +174,6 @@ function PDFPage(props: {
 	let [width, setWidth] = useState<number>(100);
 	let [height, setHeight] = useState<number>(100);
 	let [canvas, setCanvas] = useState<string>('');
-	let [currentRenderType, setCurrentRenderType] = useState<'canvas' | 'svg' | null>(null);
 	let [currentZoomMultiple, setCurrentZoomMultiple] = useState<number>(1);
 	let [currentRotation, setCurrentRotation] = useState<number>(0);
 
@@ -168,7 +187,8 @@ function PDFPage(props: {
 		}).catch((error: any) => {
 			//setDocumentLoadError(true)
 		});
-	}, []);
+		// eslint-disable-next-line
+	}, [renderPDFPageAsCanvas, canvasID]);
 
 	useEffect(() => {
 		if (props.zoomMultiple !== currentZoomMultiple) {
