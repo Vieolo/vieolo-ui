@@ -25,12 +25,21 @@ import { getPDFDocument, renderPDFPageAsCanvas } from './pdf_renderer';
 
 
 
-export default function PDFViewer(props: { filePath: string | File, context: 'full screen' | 'embedded', pageInFocus?: number }) {
+export default function PDFViewer(props: {
+	filePath: string | File,
+	context: 'full screen' | 'embedded',
+	pageInFocus?: number,
+	/** 
+	 * The vertical pixels that has to be deducted to fit the viewer in the page. 
+	 * The given value will be added as a style. e.g. calc(100vh - 100px)
+	*/
+	heightDeduction: number
+}) {
 	let [doc, setDoc] = useState<PDFDocumentProxy | null>(null);
 	let [totalPage, setTotalPage] = useState<number>(0);
 	let [zoomMultiple, setZoomMultiple] = useState<number>(0);
 	let [rotation, setRotation] = useState<number>(0);
-	
+
 	// eslint-disable-next-line
 	let [pageInFocus, setPageInFocus] = useState<number | null>(null);
 	let [pageHeight, setPageHeight] = useState<number>(100);
@@ -97,7 +106,10 @@ export default function PDFViewer(props: { filePath: string | File, context: 'fu
 				)
 			}
 
-			return <div className={props.context === "full screen" ? "vieolo-pdf-viewer-component" : "vieolo-pdf-viewer-component vieolo-pdf-viewer-component-embed"}>
+			return <div
+				className={props.context === "full screen" ? "vieolo-pdf-viewer-component" : "vieolo-pdf-viewer-component"}
+				style={{ height: `calc(100vh - ${props.heightDeduction}px)` }}
+			>
 				<div className="vieolo-pdf-viewer-component__toolbar">
 
 					<div className='flex-start'>
@@ -152,7 +164,11 @@ export default function PDFViewer(props: { filePath: string | File, context: 'fu
 
 
 				</div>
-				<div className="vieolo-pdf-viewer-component__canvas-container" ref={focusRef}>
+				<div
+					className="vieolo-pdf-viewer-component__canvas-container"
+					ref={focusRef}
+					style={{ height: `calc(100vh - ${props.heightDeduction + 30}px)` }}
+				>
 					{pages}
 				</div>
 			</div>
@@ -183,9 +199,9 @@ function PDFPage(props: {
 
 	useEffect(() => {
 		renderPDFPageAsCanvas(
-			props.pdf, 
-			props.pageNumber, 
-			canvasID, 
+			props.pdf,
+			props.pageNumber,
+			canvasID,
 			props.containerWidth,
 			//props.context === 'full screen' ? document.body.clientWidth > 1400 ? document.body.clientWidth > 2000 ? 1.8 : 1.6 : 1.3 : 1,			
 			1,

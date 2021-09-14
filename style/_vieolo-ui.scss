@@ -683,7 +683,6 @@ body {
 
 .vieolo-pdf-viewer-component {
 	background-color: #e4e4e4;
-	height: calc(100vh - 100px);
 	width: 100%;
 	text-align: center;
 	position: relative;
@@ -699,7 +698,6 @@ body {
 
 	&__canvas-container {
 		overflow: auto;
-		height: calc(100vh - 120px);
 		width: 100%;
 		padding: 10px;
 
@@ -710,14 +708,6 @@ body {
 	}
 }
 
-.vieolo-pdf-viewer-component-embed {
-	height: calc(100vh - 290px);
-	border-radius: $universal-border-radius;
-
-	.canvas-container {
-		height: calc(100vh - 290px);
-	}
-}
 
 
 .vieolo-back-button-row {

@@ -11,6 +11,7 @@ export function pdfViewerOptions(): { [key: string]: ViewerPropsType } {
     let baseProps: ViewerPropsType = {        
         filePath: 'http://localhost:3000/simple.pdf',
         context: 'embedded',
+        heightDeduction: 65
     }
 
     return {
@@ -35,6 +36,7 @@ export function PDFViewerCreator(props: {p: ViewerPropsType}) {
         filePath={props.p.filePath}        
         pageInFocus={props.p.pageInFocus}
         context={props.p.context}
+        heightDeduction={props.p.heightDeduction}
     />
 
 }
