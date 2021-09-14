@@ -178,7 +178,7 @@ function PDFPage(props: {
 	let [currentRotation, setCurrentRotation] = useState<number>(0);
 
 	useEffect(() => {
-		renderPDFPageAsCanvas(props.pdf, props.pageNumber, canvasID, props.context === 'full screen' ? document.body.clientWidth > 1400 ? document.body.clientWidth > 2000 ? 1.8 : 1.6 : 1.3 : 1).then(([canvasURL, newHeight, newWidth]) => {
+		renderPDFPageAsCanvas(props.pdf, props.pageNumber, canvasID, props.context === 'full screen' ? document.body.clientWidth > 1400 ? document.body.clientWidth > 2000 ? 1.8 : 1.6 : 1.3 : 1, currentZoomMultiple).then(([canvasURL, newHeight, newWidth]) => {
 			//dispatch(clearLoading());
 			props.onSizeChange(newWidth, newHeight);
 			setCanvas(canvasURL);
@@ -188,7 +188,7 @@ function PDFPage(props: {
 			//setDocumentLoadError(true)
 		});
 		// eslint-disable-next-line
-	}, [renderPDFPageAsCanvas, canvasID]);
+	}, [renderPDFPageAsCanvas, canvasID, currentZoomMultiple]);
 
 	useEffect(() => {
 		if (props.zoomMultiple !== currentZoomMultiple) {
@@ -201,5 +201,6 @@ function PDFPage(props: {
 		// eslint-disable-next-line
 	}, [props.zoomMultiple, props.rotation])
 
-	return <img src={canvas} width={width * props.zoomMultiple} height={height * props.zoomMultiple} key={canvasID} style={{ transform: `rotateZ(${currentRotation}deg)` }} alt="pdf page" />
+	return <canvas id={canvasID} key={canvasID}></canvas>
+	//return <img src={canvas} width={width * props.zoomMultiple} height={height * props.zoomMultiple} key={canvasID} style={{ transform: `rotateZ(${currentRotation}deg)` }} alt="pdf page" />
 }

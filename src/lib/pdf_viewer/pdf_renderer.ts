@@ -31,24 +31,24 @@ export async function getPDFDocument(url: string | File) : Promise<PDFDocumentPr
 
 
 
-export async function renderPDFPageAsCanvas(doc: PDFDocumentProxy, pageNumber: number, canvasID: string, scale = 1.5) : Promise<[string, number, number]> {
+export async function renderPDFPageAsCanvas(doc: PDFDocumentProxy, pageNumber: number, canvasID: string, scale = 1.5, zoom = 0.0) : Promise<[string, number, number]> {
 	
 	let page = await doc.getPage(pageNumber);
 	
-	let viewport = page.getViewport({scale: scale});
+	let viewport = page.getViewport({scale: scale + zoom });
 	
 	// Prepare canvas using PDF page dimensions
-	let canvas = document.createElement('canvas'); //document.getElementById(canvasID) as HTMLCanvasElement;
-	let context = canvas.getContext('2d');
+	let canvas = document.getElementById(canvasID) as HTMLCanvasElement; // document.createElement('canvas'); //document.getElementById(canvasID) as HTMLCanvasElement;
+	let canvasContext = canvas.getContext('2d')!;
 	canvas.height = viewport.height;
 	canvas.width = viewport.width;
 	
 	// Render PDF page into canvas context
 	let renderOptions: RenderParameters = {
-		canvasContext: context as any,
+		canvasContext: canvasContext,
 		viewport: viewport,
 		intent: 'display',
-		renderInteractiveForms: true
+		renderInteractiveForms: true,
 	};
 	
 	//let renderTask = await page.render(renderOptions).promise;
