@@ -10,7 +10,7 @@ import ItemRow from '../../lib/list/item_row';
 import { SelectCreator, selectOptions } from '../form/select';
 import { InputSetCreator, inputSetOptions } from '../form/input_set';
 import { DropDownMenuCreator, dropDownMenuOptions } from '../menu/dropdown_menu';
-import { PDFViewerEmbeddedCreator, pdfViewerEmbeddedOptions } from '../pdf_viewer/pdf_viewer_embedded';
+import { PDFViewerCreator, pdfViewerOptions } from '../pdf_viewer/pdf_viewer';
 
 
 export default function MainPage(props: {}): JSX.Element {
@@ -24,7 +24,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator },
         "Select": { title: "Select", data: selectOptions(), creator: SelectCreator },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator },
-        "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerEmbeddedOptions(), creator: PDFViewerEmbeddedCreator },
+        "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerOptions(), creator: PDFViewerCreator },
     }
 
     let content: React.ReactNode = null;

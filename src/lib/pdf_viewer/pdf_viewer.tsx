@@ -25,12 +25,13 @@ import { getPDFDocument, renderPDFPageAsCanvas } from './pdf_renderer';
 
 
 
-export default function PDFViewer(props: { url: string, fileName: string, context: 'full screen' | 'embedded', pageInFocus?: number }) {
+export default function PDFViewer(props: { filePath: string | File, context: 'full screen' | 'embedded', pageInFocus?: number }) {
 	let [doc, setDoc] = useState<PDFDocumentProxy | null>(null);
 	let [totalPage, setTotalPage] = useState<number>(0);
 	let [mounted, setMounted] = useState<boolean>(false);
 	let [zoomMultiple, setZoomMultiple] = useState<number>(1);
 	let [rotation, setRotation] = useState<number>(0);
+	let [documentURL, setDocumentURL] = useState<any>(null);
 	// eslint-disable-next-line
 	let [pageInFocus, setPageInFocus] = useState<number | null>(null);
 	let [pageHeight, setPageHeight] = useState<number>(100);
@@ -39,11 +40,13 @@ export default function PDFViewer(props: { url: string, fileName: string, contex
 
 	let focusRef = useRef<HTMLImageElement>(null);
 
+	let fileName = typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name;
+
 	useEffect(() => {
 		if (!mounted) {
 			setMounted(true);
 
-			getPDFDocument(props.url).then((d: PDFDocumentProxy) => {
+			getPDFDocument(props.filePath).then((d: PDFDocumentProxy) => {
 				setDoc(d);
 				setTotalPage(d.numPages);
 				/*renderPDFPage(doc.pdf, currentPage, 'pdf_render_page_canvas', 1.3).then((rendered: boolean) => {
@@ -83,7 +86,7 @@ export default function PDFViewer(props: { url: string, fileName: string, contex
 						key={`pdf_page_${i}`}
 						pageNumber={i}
 						pdf={doc}
-						fileName={props.fileName}
+						fileName={fileName}
 						context={props.context}
 						zoomMultiple={zoomMultiple}
 						rotation={rotation}
@@ -126,8 +129,8 @@ export default function PDFViewer(props: { url: string, fileName: string, contex
 							icon={<DownloadIcon />}
 							onClick={() => {
 								var link = document.createElement("a");
-								link.download = props.fileName.split('___')[1];
-								link.href = props.url;
+								link.download = fileName.split('___')[1];
+								link.href = props.filePath as string;
 								document.body.appendChild(link);
 								link.click();
 								document.body.removeChild(link);
