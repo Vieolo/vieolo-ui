@@ -28,7 +28,6 @@ import { getPDFDocument, renderPDFPageAsCanvas } from './pdf_renderer';
 export default function PDFViewer(props: { filePath: string | File, context: 'full screen' | 'embedded', pageInFocus?: number }) {
 	let [doc, setDoc] = useState<PDFDocumentProxy | null>(null);
 	let [totalPage, setTotalPage] = useState<number>(0);
-	let [mounted, setMounted] = useState<boolean>(false);
 	let [zoomMultiple, setZoomMultiple] = useState<number>(0);
 	let [rotation, setRotation] = useState<number>(0);
 	
@@ -43,26 +42,7 @@ export default function PDFViewer(props: { filePath: string | File, context: 'fu
 	let fileName = typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name;
 
 	useEffect(() => {
-		if (!mounted) {
-			setMounted(true);
-
-			getPDFDocument(props.filePath).then((d: PDFDocumentProxy) => {
-				setDoc(d);
-				setTotalPage(d.numPages);
-				/*renderPDFPage(doc.pdf, currentPage, 'pdf_render_page_canvas', 1.3).then((rendered: boolean) => {
-					dispatch(clearLoading());
-				}).catch((error: any) => setDocumentLoadError(true));*/
-
-				if (props.pageInFocus && props.pageInFocus <= totalPage) {
-					setPageInFocus(props.pageInFocus);
-				}
-			}).catch((error: any) => {
-				console.log(error);
-				setDocumentLoadError(true);
-			});
-		}
-
-		if (mounted && props.pageInFocus) {
+		if (props.pageInFocus) {
 			setPageInFocus(props.pageInFocus);
 			(focusRef.current as any).scrollTo(0, 0);
 			(focusRef.current as any).scrollBy({ top: (props.pageInFocus * ((pageHeight * zoomMultiple) + 34)) - ((pageHeight * zoomMultiple) + 34) }) // 30 px for padding-bottom and 4px for margin			
@@ -70,6 +50,25 @@ export default function PDFViewer(props: { filePath: string | File, context: 'fu
 		// eslint-disable-next-line
 	}, [props.pageInFocus]);
 
+
+	useEffect(() => {
+		setTotalPage(0);
+		getPDFDocument(props.filePath).then((d: PDFDocumentProxy) => {
+			setDoc(d);
+			setTotalPage(d.numPages);
+			/*renderPDFPage(doc.pdf, currentPage, 'pdf_render_page_canvas', 1.3).then((rendered: boolean) => {
+				dispatch(clearLoading());
+			}).catch((error: any) => setDocumentLoadError(true));*/
+
+			if (props.pageInFocus && props.pageInFocus <= totalPage) {
+				setPageInFocus(props.pageInFocus);
+			}
+		}).catch((error: any) => {
+			console.log(error);
+			setDocumentLoadError(true);
+		});
+		// eslint-disable-next-line
+	}, [props.filePath]);
 
 
 
@@ -176,9 +175,9 @@ function PDFPage(props: {
 }) {
 
 	let canvasID = `${props.fileName.replace(".", "")}_canvas_${props.pageNumber}`;
-	let [width, setWidth] = useState<number>(100);
-	let [height, setHeight] = useState<number>(100);
-	let [canvas, setCanvas] = useState<string>('');
+	//let [width, setWidth] = useState<number>(100);
+	//let [height, setHeight] = useState<number>(100);
+	//let [canvas, setCanvas] = useState<string>('');
 	let [currentZoomMultiple, setCurrentZoomMultiple] = useState<number>(0);
 	let [currentRotation, setCurrentRotation] = useState<number>(0);
 
@@ -195,9 +194,9 @@ function PDFPage(props: {
 		).then(([canvasURL, newHeight, newWidth]) => {
 			//dispatch(clearLoading());
 			props.onSizeChange(newWidth, newHeight);
-			setCanvas(canvasURL);
-			setWidth(newWidth);
-			setHeight(newHeight);
+			//setCanvas(canvasURL);
+			//setWidth(newWidth);
+			//setHeight(newHeight);
 		}).catch((error: any) => {
 			//setDocumentLoadError(true)
 		});

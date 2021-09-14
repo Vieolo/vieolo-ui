@@ -52,15 +52,11 @@ export async function renderPDFPageAsCanvas(
 
 	if ((maximumWidth * 0.95) < orgWidth) {
 		scalingFactor = ((maximumWidth * 0.95) / orgWidth);
-	}
-
-	console.log(pageNumber, (maximumWidth * 0.95), orgWidth, scalingFactor);
+	}	
 	let viewport = page.getViewport({
 		scale: scalingFactor + zoom, 
 		rotation: rotation 
-	});
-	console.log(viewport.width);
-	console.log(viewport.height);
+	});	
 	canvas.height = viewport.height;
 	canvas.width = viewport.width;
 	
