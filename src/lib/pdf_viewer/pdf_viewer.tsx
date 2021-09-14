@@ -196,40 +196,69 @@ function PDFPage(props: {
 	//let [canvas, setCanvas] = useState<string>('');
 	let [currentZoomMultiple, setCurrentZoomMultiple] = useState<number>(0);
 	let [currentRotation, setCurrentRotation] = useState<number>(0);
+	let [rendered, setRendered] = useState<boolean>(false);
+
+	const isVisible = useOnScreen(canvasID, 0);
 
 	useEffect(() => {
-		renderPDFPageAsCanvas(
-			props.pdf,
-			props.pageNumber,
-			canvasID,
-			props.containerWidth,
-			//props.context === 'full screen' ? document.body.clientWidth > 1400 ? document.body.clientWidth > 2000 ? 1.8 : 1.6 : 1.3 : 1,			
-			1,
-			currentZoomMultiple,
-			currentRotation
-		).then(([canvasURL, newHeight, newWidth]) => {
-			//dispatch(clearLoading());
-			props.onSizeChange(newWidth, newHeight);
-			//setCanvas(canvasURL);
-			//setWidth(newWidth);
-			//setHeight(newHeight);
-		}).catch((error: any) => {
-			//setDocumentLoadError(true)
-		});
+		if (isVisible && (!rendered)) {
+			setRendered(true);
+			renderPDFPageAsCanvas(
+				props.pdf,
+				props.pageNumber,
+				canvasID,
+				props.containerWidth,
+				//props.context === 'full screen' ? document.body.clientWidth > 1400 ? document.body.clientWidth > 2000 ? 1.8 : 1.6 : 1.3 : 1,			
+				1,
+				currentZoomMultiple,
+				currentRotation
+			).then(([canvasURL, newHeight, newWidth]) => {
+				//dispatch(clearLoading());
+				props.onSizeChange(newWidth, newHeight);
+				//setCanvas(canvasURL);
+				//setWidth(newWidth);
+				//setHeight(newHeight);
+			}).catch((error: any) => {
+				//setDocumentLoadError(true)
+			});
+		}
 		// eslint-disable-next-line
-	}, [renderPDFPageAsCanvas, canvasID, currentZoomMultiple, currentRotation]);
+	}, [isVisible, renderPDFPageAsCanvas, canvasID, currentZoomMultiple, currentRotation]);
 
 	useEffect(() => {
 		if (props.zoomMultiple !== currentZoomMultiple) {
+			setRendered(false);
 			setCurrentZoomMultiple(props.zoomMultiple);
 		}
 
 		if (props.rotation !== currentRotation) {
+			setRendered(false);
 			setCurrentRotation(props.rotation);
 		}
 		// eslint-disable-next-line
-	}, [props.zoomMultiple, props.rotation])
+	}, [props.zoomMultiple, props.rotation, setRendered])
 
 	return <canvas id={canvasID} key={canvasID}></canvas>
 	//return <img src={canvas} width={width * props.zoomMultiple} height={height * props.zoomMultiple} key={canvasID} style={{ transform: `rotateZ(${currentRotation}deg)` }} alt="pdf page" />
 }
+
+
+
+function useOnScreen(elementID: string, threshold = 0) {
+
+	const [isIntersecting, setIntersecting] = useState(false)
+
+	
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			([entry]) => setIntersecting(entry.isIntersecting)
+		, {threshold: threshold})
+		observer.observe(document.getElementById(elementID)!);
+		// Remove the observer as soon as the component is unmounted
+		return () => { observer.disconnect() }
+	}, [elementID])
+
+	return isIntersecting
+}
+
