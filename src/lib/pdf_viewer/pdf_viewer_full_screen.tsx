@@ -60,7 +60,7 @@ export default function PDFRenderFullScreen(props: { filePath: string | File, on
                 icon={<CloseIcon />}
                 onBack={props.onExit}
             />
-            <PDFViewer url={documentURL} fileName={fileName} context="page" />
+            <PDFViewer url={documentURL} fileName={fileName} context="full screen" />
         </div>
     </div>
 }

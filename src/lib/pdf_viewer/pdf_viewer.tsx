@@ -26,12 +26,11 @@ import { getPDFDocument, renderPDFPageAsCanvas } from './pdf_renderer';
 
 
 
-export default function PDFViewer(props: { url: string, fileName: string, context: 'page' | 'embedded', pageInFocus?: number }) {
+export default function PDFViewer(props: { url: string, fileName: string, context: 'full screen' | 'embedded', pageInFocus?: number }) {
 	let [doc, setDoc] = useState<PDFDocumentProxy | null>(null);
 	let [totalPage, setTotalPage] = useState<number>(0);
 	let [mounted, setMounted] = useState<boolean>(false);
 	let [zoomMultiple, setZoomMultiple] = useState<number>(1);
-	let [renderType, setRenderType] = useState<'canvas' | 'svg'>('canvas');
 	let [rotation, setRotation] = useState<number>(0);
 	// eslint-disable-next-line
 	let [pageInFocus, setPageInFocus] = useState<number | null>(null);
@@ -88,7 +87,6 @@ export default function PDFViewer(props: { url: string, fileName: string, contex
 						fileName={props.fileName}
 						context={props.context}
 						zoomMultiple={zoomMultiple}
-						renderType={renderType}
 						rotation={rotation}
 						onSizeChange={(width, height) => {
 							if (height !== pageHeight) setPageHeight(height);
@@ -97,7 +95,7 @@ export default function PDFViewer(props: { url: string, fileName: string, contex
 				)
 			}
 
-			return <div className={props.context === "page" ? "vieolo-pdf-viewer-component" : "vieolo-pdf-viewer-component vieolo-pdf-viewer-component-embed"}>
+			return <div className={props.context === "full screen" ? "vieolo-pdf-viewer-component" : "vieolo-pdf-viewer-component vieolo-pdf-viewer-component-embed"}>
 				<div className="pdf-viewer-toolbar">
 					<IconButton
 						icon={<ZoomOutIcon />}
@@ -127,14 +125,6 @@ export default function PDFViewer(props: { url: string, fileName: string, contex
 					/>
 
 					<IconButton
-						icon={renderType === 'canvas' ? <SVGRenderIcon /> : <CanvasRenderIcon />}
-						onClick={() => {
-							if (renderType === 'canvas') setRenderType('svg');
-							else setRenderType('canvas');
-						}}
-					/>
-
-					<IconButton
 						icon={<ZoomInIcon />}
 						onClick={() => { setZoomMultiple(zoomMultiple + 0.1) }}
 					/>
@@ -154,9 +144,8 @@ function PDFPage(props: {
 	pdf: any,
 	pageNumber: number,
 	fileName: string,
-	context: 'page' | 'embedded',
+	context: 'full screen' | 'embedded',
 	zoomMultiple: number,
-	renderType: 'canvas' | 'svg',
 	rotation: number,
 	onSizeChange: (width: number, height: number) => void
 }) {
@@ -169,49 +158,28 @@ function PDFPage(props: {
 	let [currentZoomMultiple, setCurrentZoomMultiple] = useState<number>(1);
 	let [currentRotation, setCurrentRotation] = useState<number>(0);
 
-	function resizeSVGs(thisHeight?: number, thisWidth?: number) {
-
-		let h = thisHeight || height;
-		let w = thisWidth || width;
-
-		let container = document.getElementById(canvasID);
-
-		if (container) container.querySelectorAll('svg').forEach(svg => {
-			svg.style.height = h * props.zoomMultiple + 'px';
-			svg.style.width = w * props.zoomMultiple + 'px';
-		})
-	}
+	useEffect(() => {
+		renderPDFPageAsCanvas(props.pdf, props.pageNumber, canvasID, props.context === 'full screen' ? document.body.clientWidth > 1400 ? document.body.clientWidth > 2000 ? 1.8 : 1.6 : 1.3 : 1).then(([canvasURL, newHeight, newWidth]) => {
+			//dispatch(clearLoading());
+			props.onSizeChange(newWidth, newHeight);
+			setCanvas(canvasURL);
+			setWidth(newWidth);
+			setHeight(newHeight);
+		}).catch((error: any) => {
+			//setDocumentLoadError(true)
+		});
+	}, []);
 
 	useEffect(() => {
-		if (currentRenderType !== props.renderType) {
-			setCurrentRenderType(props.renderType);
-
-			if (props.renderType === 'canvas') {
-				renderPDFPageAsCanvas(props.pdf, props.pageNumber, canvasID, props.context === 'page' ? document.body.clientWidth > 1400 ? document.body.clientWidth > 2000 ? 1.8 : 1.6 : 1.3 : 1).then(([canvasURL, newHeight, newWidth]) => {
-					//dispatch(clearLoading());
-					props.onSizeChange(newWidth, newHeight);
-					setCanvas(canvasURL);
-					setWidth(newWidth);
-					setHeight(newHeight);
-				}).catch((error: any) => {
-					//setDocumentLoadError(true)
-				});
-			} 
-		}
-
 		if (props.zoomMultiple !== currentZoomMultiple) {
 			setCurrentZoomMultiple(props.zoomMultiple);
-			if (props.renderType === 'svg') {
-				resizeSVGs();
-			}
 		}
 
 		if (props.rotation !== currentRotation) {
 			setCurrentRotation(props.rotation);
 		}
 		// eslint-disable-next-line
-	}, [props.renderType, props.zoomMultiple, props.rotation])
+	}, [props.zoomMultiple, props.rotation])
 
-	if (props.renderType === 'canvas') return <img src={canvas} width={width * props.zoomMultiple} height={height * props.zoomMultiple} key={canvasID} style={{ transform: `rotateZ(${currentRotation}deg)` }} alt="pdf page" />
-	else return <div id={canvasID} style={{ height: height * props.zoomMultiple, width: width * props.zoomMultiple, backgroundColor: 'white', transform: `rotateZ(${currentRotation}deg)` }} ></div>
+	return <img src={canvas} width={width * props.zoomMultiple} height={height * props.zoomMultiple} key={canvasID} style={{ transform: `rotateZ(${currentRotation}deg)` }} alt="pdf page" />
 }
