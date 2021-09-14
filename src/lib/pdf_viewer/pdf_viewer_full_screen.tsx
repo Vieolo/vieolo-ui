@@ -13,7 +13,7 @@ import BackButtonRow from '../navigation/back_button_row';
 import { readFileRawContent } from './pdf_renderer';
 
 
-export default function PDFRenderPage(props: { filePath: string | File, onExit: () => void }) {
+export default function PDFRenderFullScreen(props: { filePath: string | File, onExit: () => void }) {
 
     let [documentURL, setDocumentURL] = useState<any>(null);
 
