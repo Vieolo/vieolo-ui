@@ -21,7 +21,7 @@ export default function BackButton(props: {
     let backButtonText = props.backButtonText || 'Go Back';
     let onBack = props.onClick || window.history.back;
 
-    return <div className="global-back-button">
+    return <div className="vieolo-back-button">
         <IconButton
             icon={icon}
             color={'primary'}

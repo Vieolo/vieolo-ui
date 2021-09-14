@@ -18,7 +18,7 @@ export default function BackButtonRow(props: {
             
     let actions = props.actions || [];
 
-    return <div className={`back-button-row${props.centerLarge ? ' back-button-row-center-large' : ''}`}>
+    return <div className={`vieolo-back-button-row${props.centerLarge ? ' vieolo-back-button-row-center-large' : ''}`}>
         <div className="back-button-container">
             {
                 !props.removeBackButton &&

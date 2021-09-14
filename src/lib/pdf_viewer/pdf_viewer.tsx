@@ -97,7 +97,7 @@ export default function PDFViewer(props: { url: string, fileName: string, contex
 				)
 			}
 
-			return <div className={props.context === "page" ? "pdf-viewer-component" : "pdf-viewer-component pdf-viewer-component-embed"}>
+			return <div className={props.context === "page" ? "vieolo-pdf-viewer-component" : "vieolo-pdf-viewer-component vieolo-pdf-viewer-component-embed"}>
 				<div className="pdf-viewer-toolbar">
 					<IconButton
 						icon={<ZoomOutIcon />}
