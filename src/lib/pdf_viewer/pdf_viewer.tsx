@@ -82,6 +82,7 @@ export default function PDFViewer(props: { url: string, fileName: string, contex
 			for (let i = 1; i <= totalPage; i++) {
 				pages.push(
 					<PDFPage
+						key={`pdf_page_${i}`}
 						pageNumber={i}
 						pdf={doc}
 						fileName={props.fileName}
