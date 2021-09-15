@@ -40,7 +40,7 @@ export async function renderPDFPageAsCanvas(
 	maximumWidth: number, 
 	zoom: number,
 	rotation: number,	
-) : Promise<[string, number, number]> {
+) : Promise<[number, number]> {
 	
 	let page = await doc.getPage(pageNumber);
 	
@@ -89,5 +89,5 @@ export async function renderPDFPageAsCanvas(
 		textContent: await page.getTextContent(),		
 	})
 	
-	return [canvas.toDataURL(), viewport.height, viewport.width];
+	return [viewport.height, viewport.width];
 }

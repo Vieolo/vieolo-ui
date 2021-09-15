@@ -686,7 +686,7 @@ body {
 	
 
 	&__toolbar {
-		background-color: $primary-color-normal;
+		background-color: $tertiary-color-normal;
 		height: 30px;
 		padding: 1px;
 		border-radius: inherit;
@@ -701,7 +701,7 @@ body {
 
 		div,
 		canvas {
-			margin-bottom: 30px;
+			margin-bottom: 15px;
 		}
 	}
 

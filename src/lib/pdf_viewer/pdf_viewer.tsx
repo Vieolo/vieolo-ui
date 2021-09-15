@@ -32,11 +32,12 @@ export default function PDFViewer(props: {
 	/** 
 	 * The vertical pixels that has to be deducted to fit the viewer in the page. 
 	 * The given value will be added as a style. e.g. calc(100vh - 100px)
-	*/
+	 */
 	heightDeduction: number
 }) {
 	let [doc, setDoc] = useState<PDFDocumentProxy | null>(null);
 	let [totalPage, setTotalPage] = useState<number>(0);
+	let [currentPage, setCurrentPage] = useState<number>(1);
 	let [zoomMultiple, setZoomMultiple] = useState<number>(0);
 	let [rotation, setRotation] = useState<number>(0);
 
@@ -62,6 +63,7 @@ export default function PDFViewer(props: {
 
 	useEffect(() => {
 		setTotalPage(0);
+		setCurrentPage(1);
 		getPDFDocument(props.filePath).then((d: PDFDocumentProxy) => {
 			setDoc(d);
 			setTotalPage(d.numPages);
@@ -99,6 +101,8 @@ export default function PDFViewer(props: {
 						zoomMultiple={zoomMultiple}
 						rotation={rotation}
 						containerWidth={focusRef.current!.offsetWidth}
+						containerHeight={focusRef.current!.offsetHeight}
+						onGainFocus={fn => setCurrentPage(fn)}
 						onSizeChange={(width, height) => {
 							if (height !== pageHeight) setPageHeight(height);
 						}}
@@ -119,6 +123,10 @@ export default function PDFViewer(props: {
 							color="error"
 							onClick={() => { setZoomMultiple(zoomMultiple - 0.1) }}
 						/>
+					</div>
+
+					<div>
+						<p>{`${currentPage} / ${totalPage}`}</p>
 					</div>
 
 					<div className="flex-start">
@@ -187,23 +195,35 @@ function PDFPage(props: {
 	zoomMultiple: number,
 	rotation: number,
 	onSizeChange: (width: number, height: number) => void,
-	containerWidth: number
+	containerWidth: number,
+	containerHeight: number,
+	onGainFocus: (pageNumber: number) => void,
 }) {
 
 	let canvasID = `${props.fileName.replace(".", "")}_canvas_${props.pageNumber}`;
 	let textLayerID = canvasID.replace("canvas", 'text');
 	let pageID = canvasID.replace("canvas", 'page');
 	//let [width, setWidth] = useState<number>(100);
-	//let [height, setHeight] = useState<number>(100);
+	let [height, setHeight] = useState<number>(100);
 	//let [canvas, setCanvas] = useState<string>('');
 	let [currentZoomMultiple, setCurrentZoomMultiple] = useState<number>(0);
 	let [currentRotation, setCurrentRotation] = useState<number>(0);
 	let [rendered, setRendered] = useState<boolean>(false);
 
 	const isVisible = useOnScreen(canvasID, 0);
+	const isInFocus = useOnScreen(canvasID, Math.min(props.containerHeight/height, 0.5));	
+
+	let onGainFocus = props.onGainFocus;
+	let pageNumber = props.pageNumber;
+
+	useEffect(() => {		
+		if (isInFocus && rendered) {
+			onGainFocus(pageNumber);
+		}
+	}, [isInFocus, onGainFocus, pageNumber, rendered]);
 
 	useEffect(() => {
-		if (isVisible && (!rendered)) {
+		if (isVisible && !rendered) {
 			setRendered(true);
 			renderPDFPageAsCanvas(
 				props.pdf,
@@ -214,12 +234,12 @@ function PDFPage(props: {
 				props.containerWidth,
 				currentZoomMultiple,
 				currentRotation,				
-			).then(([canvasURL, newHeight, newWidth]) => {
+			).then(([newHeight, newWidth]) => {
 				//dispatch(clearLoading());
 				props.onSizeChange(newWidth, newHeight);
 				//setCanvas(canvasURL);
 				//setWidth(newWidth);
-				//setHeight(newHeight);
+				setHeight(newHeight);
 			}).catch((error: any) => {
 				//setDocumentLoadError(true)
 			});
@@ -262,7 +282,7 @@ function useOnScreen(elementID: string, threshold = 0) {
 		observer.observe(document.getElementById(elementID)!);
 		// Remove the observer as soon as the component is unmounted
 		return () => { observer.disconnect() }
-	}, [elementID])
+	}, [elementID, threshold])
 
 	return isIntersecting
 }
