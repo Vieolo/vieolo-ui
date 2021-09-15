@@ -33,7 +33,8 @@ export default function PDFViewer(props: {
 	 * The vertical pixels that has to be deducted to fit the viewer in the page. 
 	 * The given value will be added as a style. e.g. calc(100vh - 100px)
 	 */
-	heightDeduction: number
+	heightDeduction: number,
+	onClose?: () => void
 }) {
 	let [doc, setDoc] = useState<PDFDocumentProxy | null>(null);
 	let [totalPage, setTotalPage] = useState<number>(0);
@@ -55,7 +56,7 @@ export default function PDFViewer(props: {
 		if (props.pageInFocus) {
 			setPageInFocus(props.pageInFocus);
 			(focusRef.current as any).scrollTo(0, 0);
-			(focusRef.current as any).scrollBy({ top: (props.pageInFocus * ((pageHeight) + 15)) - ((pageHeight) + 15)}) // 30 px for padding-bottom and 4px for margin			
+			(focusRef.current as any).scrollBy({ top: (props.pageInFocus * ((pageHeight) + 15)) - ((pageHeight) + 15) }) // 30 px for padding-bottom and 4px for margin			
 		}
 		// eslint-disable-next-line
 	}, [props.pageInFocus]);
@@ -118,12 +119,18 @@ export default function PDFViewer(props: {
 				<div className="vieolo-pdf-viewer-component__toolbar">
 
 					<div className='flex-start'>
-						<IconButton
-							size="small"
-							icon={<CloseIcon />}
-							color="error"
-							onClick={() => { setZoomMultiple(zoomMultiple - 0.1) }}
-						/>
+						{
+							props.onClose &&
+							<IconButton
+								size="small"
+								icon={<CloseIcon />}
+								color="error"
+								disabled={!props.onClose}
+								onClick={() => {
+									if (props.onClose) props.onClose();
+								}}
+							/>
+						}
 					</div>
 
 					<div>
@@ -235,7 +242,7 @@ function PDFPage(props: {
 				textLayerID,
 				props.containerWidth,
 				currentZoomMultiple,
-				currentRotation,				
+				currentRotation,
 			).then(([newHeight, newWidth]) => {
 				//dispatch(clearLoading());
 				props.onSizeChange(newWidth, newHeight);
@@ -262,10 +269,10 @@ function PDFPage(props: {
 		// eslint-disable-next-line
 	}, [props.zoomMultiple, props.rotation, setRendered])
 
-	return <div 
-		className={"vieolo-pdf-viewer-component__page"} 
+	return <div
+		className={"vieolo-pdf-viewer-component__page"}
 		id={pageID}
-		style={{height: rendered ? undefined : props.pageHeight}}
+		style={{ height: rendered ? undefined : props.pageHeight }}
 	>
 		<canvas id={canvasID} key={canvasID} height={rendered ? undefined : props.pageHeight}></canvas>
 		<div className="vieolo-pdf-viewer-component__page__text-layer" id={textLayerID} key={textLayerID}></div>

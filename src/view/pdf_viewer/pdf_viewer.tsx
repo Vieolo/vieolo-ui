@@ -19,6 +19,10 @@ export function pdfViewerOptions(): { [key: string]: ViewerPropsType } {
         "Simple": {
             ...baseProps
         },
+        "Simple, Full functionality": {
+            ...baseProps,
+            onClose: () => {}
+        },
         "Odd Shaped": {
             ...baseProps,
             filePath: 'http://localhost:3000/odd_shaped.pdf'
@@ -49,6 +53,7 @@ export function PDFViewerCreator(props: { p: ViewerPropsType }) {
             pageInFocus={parseInt(pageNumber) || null}
             context={props.p.context}
             heightDeduction={props.p.heightDeduction}
+            onClose={props.p.onClose}
         />
     </div>
 
