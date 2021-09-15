@@ -698,17 +698,14 @@ body {
 		overflow: auto;
 		width: 100%;
 		padding: 10px;
-
-		div,
-		canvas {
-			margin-bottom: 15px;
-		}
 	}
 
 	&__page {
 		position: relative;
 		margin-left: auto;
 		margin-right: auto;
+		margin-bottom: 15px;
+		min-height: 1px;
 
 		::-moz-selection {
 			background: transparent;

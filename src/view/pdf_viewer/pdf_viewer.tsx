@@ -1,17 +1,18 @@
 // React
-import React from 'react';
+import React, { useState } from 'react';
 
 // Component
 import PDFViewer from '../../lib/pdf_viewer/pdf_viewer';
+import Input from '../../lib/form/input';
 
 type ViewerPropsType = React.ComponentProps<typeof PDFViewer>;
 
 export function pdfViewerOptions(): { [key: string]: ViewerPropsType } {
-    
-    let baseProps: ViewerPropsType = {        
+
+    let baseProps: ViewerPropsType = {
         filePath: 'http://localhost:3000/simple.pdf',
         context: 'embedded',
-        heightDeduction: 65
+        heightDeduction: 105
     }
 
     return {
@@ -30,14 +31,26 @@ export function pdfViewerOptions(): { [key: string]: ViewerPropsType } {
 }
 
 
-export function PDFViewerCreator(props: {p: ViewerPropsType}) {
+export function PDFViewerCreator(props: { p: ViewerPropsType }) {
 
-    return <PDFViewer
-        filePath={props.p.filePath}        
-        pageInFocus={props.p.pageInFocus}
-        context={props.p.context}
-        heightDeduction={props.p.heightDeduction}
-    />
+    let [pageNumber, setPageNumber] = useState<string>("");
+
+    return <div>
+        <div className="flex-start">
+            <Input
+                onChange={v => setPageNumber(v)}
+                value={pageNumber}
+                error={false}
+            />
+            
+        </div>
+        <PDFViewer
+            filePath={props.p.filePath}
+            pageInFocus={parseInt(pageNumber) || null}
+            context={props.p.context}
+            heightDeduction={props.p.heightDeduction}
+        />
+    </div>
 
 }
 

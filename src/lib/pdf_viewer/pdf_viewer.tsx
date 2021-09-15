@@ -55,7 +55,7 @@ export default function PDFViewer(props: {
 		if (props.pageInFocus) {
 			setPageInFocus(props.pageInFocus);
 			(focusRef.current as any).scrollTo(0, 0);
-			(focusRef.current as any).scrollBy({ top: (props.pageInFocus * ((pageHeight * zoomMultiple) + 34)) - ((pageHeight * zoomMultiple) + 34) }) // 30 px for padding-bottom and 4px for margin			
+			(focusRef.current as any).scrollBy({ top: (props.pageInFocus * ((pageHeight) + 15)) - ((pageHeight) + 15)}) // 30 px for padding-bottom and 4px for margin			
 		}
 		// eslint-disable-next-line
 	}, [props.pageInFocus]);
@@ -106,6 +106,7 @@ export default function PDFViewer(props: {
 						onSizeChange={(width, height) => {
 							if (height !== pageHeight) setPageHeight(height);
 						}}
+						pageHeight={pageHeight}
 					/>
 				)
 			}
@@ -198,6 +199,7 @@ function PDFPage(props: {
 	containerWidth: number,
 	containerHeight: number,
 	onGainFocus: (pageNumber: number) => void,
+	pageHeight: number,
 }) {
 
 	let canvasID = `${props.fileName.replace(".", "")}_canvas_${props.pageNumber}`;
@@ -211,12 +213,12 @@ function PDFPage(props: {
 	let [rendered, setRendered] = useState<boolean>(false);
 
 	const isVisible = useOnScreen(canvasID, 0);
-	const isInFocus = useOnScreen(canvasID, Math.min(props.containerHeight/height, 0.5));	
+	const isInFocus = useOnScreen(canvasID, Math.min(props.containerHeight / height, 0.5));
 
 	let onGainFocus = props.onGainFocus;
 	let pageNumber = props.pageNumber;
 
-	useEffect(() => {		
+	useEffect(() => {
 		if (isInFocus && rendered) {
 			onGainFocus(pageNumber);
 		}
@@ -260,8 +262,12 @@ function PDFPage(props: {
 		// eslint-disable-next-line
 	}, [props.zoomMultiple, props.rotation, setRendered])
 
-	return <div className={"vieolo-pdf-viewer-component__page"} id={pageID}>
-		<canvas id={canvasID} key={canvasID}></canvas>
+	return <div 
+		className={"vieolo-pdf-viewer-component__page"} 
+		id={pageID}
+		style={{height: rendered ? undefined : props.pageHeight}}
+	>
+		<canvas id={canvasID} key={canvasID} height={rendered ? undefined : props.pageHeight}></canvas>
 		<div className="vieolo-pdf-viewer-component__page__text-layer" id={textLayerID} key={textLayerID}></div>
 	</div>
 	//return <img src={canvas} width={width * props.zoomMultiple} height={height * props.zoomMultiple} key={canvasID} style={{ transform: `rotateZ(${currentRotation}deg)` }} alt="pdf page" />
@@ -273,12 +279,12 @@ function useOnScreen(elementID: string, threshold = 0) {
 
 	const [isIntersecting, setIntersecting] = useState(false)
 
-	
+
 
 	useEffect(() => {
 		const observer = new IntersectionObserver(
 			([entry]) => setIntersecting(entry.isIntersecting)
-		, {threshold: threshold})
+			, { threshold: threshold })
 		observer.observe(document.getElementById(elementID)!);
 		// Remove the observer as soon as the component is unmounted
 		return () => { observer.disconnect() }
