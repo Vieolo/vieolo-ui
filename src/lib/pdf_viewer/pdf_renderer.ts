@@ -33,15 +33,16 @@ export async function getPDFDocument(url: string | File) : Promise<PDFDocumentPr
 
 export async function renderPDFPageAsCanvas(
 	doc: PDFDocumentProxy, 
-	pageNumber: number, 
-	canvasID: string, 
+	pageNumber: number,
+	pageID: string,
+	canvasID: string,
+	textLayerID: string,
 	maximumWidth: number, 
-	scale: number, 
 	zoom: number,
-	rotation: number
+	rotation: number,	
 ) : Promise<[string, number, number]> {
 	
-	let page = await doc.getPage(pageNumber);	
+	let page = await doc.getPage(pageNumber);
 	
 	// Prepare canvas using PDF page dimensions
 	let canvas = document.getElementById(canvasID) as HTMLCanvasElement; // document.createElement('canvas'); //document.getElementById(canvasID) as HTMLCanvasElement;
@@ -59,6 +60,10 @@ export async function renderPDFPageAsCanvas(
 	});	
 	canvas.height = viewport.height;
 	canvas.width = viewport.width;
+
+	let pageElement = document.getElementById(pageID) as HTMLDivElement;
+	pageElement.style.height = viewport.height + 'px';
+	pageElement.style.width = viewport.width + 'px';
 	
 	// Render PDF page into canvas context
 	let renderOptions: RenderParameters = {
@@ -69,6 +74,20 @@ export async function renderPDFPageAsCanvas(
 	};
 		
 	//let renderTask = await page.render(renderOptions).promise;
-	await page.render(renderOptions).promise;
+	await page.render(renderOptions).promise;	
+
+	let textDivs: HTMLElement[] = [];
+	let textLayer = document.getElementById(textLayerID) as HTMLDivElement;
+
+	textLayer.innerHTML = "";
+
+	pdfjsLib.renderTextLayer({
+		viewport: viewport,
+		container: textLayer,
+		enhanceTextSelection: true,
+		textDivs: textDivs,
+		textContent: await page.getTextContent(),		
+	})
+	
 	return [canvas.toDataURL(), viewport.height, viewport.width];
 }

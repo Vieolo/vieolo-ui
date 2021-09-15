@@ -530,7 +530,7 @@ body {
 
 	.dropdown {
 		position: absolute;
-		top: 100%;		
+		top: 100%;
 		z-index: 2;
 		padding: 5px;
 		@include card-dark-shadow;
@@ -542,7 +542,6 @@ body {
 		&--right {
 			right: -110px;
 		}
-
 	}
 
 	.dropdown-item {
@@ -551,7 +550,7 @@ body {
 		cursor: pointer;
 		border-radius: $universal-border-radius / 2;
 		@include transition;
-		color: $primary-color-normal;		
+		color: $primary-color-normal;
 		display: flex;
 		align-items: center;
 
@@ -680,12 +679,11 @@ body {
 	}
 }
 
-
 .vieolo-pdf-viewer-component {
 	background-color: #e4e4e4;
 	width: 100%;
 	text-align: center;
-	position: relative;
+	
 
 	&__toolbar {
 		background-color: $primary-color-normal;
@@ -693,7 +691,7 @@ body {
 		padding: 1px;
 		border-radius: inherit;
 		width: 100%;
-		@include flex-row-space-between;		
+		@include flex-row-space-between;
 	}
 
 	&__canvas-container {
@@ -706,9 +704,93 @@ body {
 			margin-bottom: 30px;
 		}
 	}
+
+	&__page {
+		position: relative;
+
+		&__text-layer {
+			position: absolute;
+			text-align: initial;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			overflow: hidden;
+			opacity: 0.2;
+			line-height: 1;
+
+			span,
+			br {
+				color: transparent;
+				position: absolute;
+				white-space: pre;
+				cursor: text;
+				transform-origin: 0% 0%;
+			}
+
+			.highlight {
+				margin: -1px;
+				padding: 1px;
+				background-color: rgb(255, 202, 252);
+				border-radius: 4px;
+			}
+
+			.highlight.appended {
+				position: initial;
+			}
+
+			.highlight.begin {
+				border-radius: 4px 0 0 4px;
+			}
+
+			.highlight.end {
+				border-radius: 0 4px 4px 0;
+			}
+
+			.highlight.middle {
+				border-radius: 0;
+			}
+
+			.highlight.selected {
+				background-color: rgba(0, 100, 0, 1);
+			}
+
+			&::-moz-selection {
+				background: rgba(0, 0, 255, 1);
+			}
+
+			&::selection {
+				background: rgba(0, 0, 255, 1);
+			}
+
+			br::-moz-selection {
+				background: transparent;
+			}
+
+			br::selection {
+				background: transparent;
+			}
+
+			.endOfContent {
+				display: block;
+				position: absolute;
+				left: 0;
+				top: 100%;
+				right: 0;
+				bottom: 0;
+				z-index: -1;
+				cursor: default;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				user-select: none;
+			}
+
+			.endOfContent.active {
+				top: 0;
+			}
+		}
+	}
 }
-
-
 
 .vieolo-back-button-row {
 	height: 50px;
@@ -748,8 +830,6 @@ body {
 		}
 	}
 }
-
-
 
 .vieolo-back-button {
 	display: flex;

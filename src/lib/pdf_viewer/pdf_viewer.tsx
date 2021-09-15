@@ -191,6 +191,8 @@ function PDFPage(props: {
 }) {
 
 	let canvasID = `${props.fileName.replace(".", "")}_canvas_${props.pageNumber}`;
+	let textLayerID = canvasID.replace("canvas", 'text');
+	let pageID = canvasID.replace("canvas", 'page');
 	//let [width, setWidth] = useState<number>(100);
 	//let [height, setHeight] = useState<number>(100);
 	//let [canvas, setCanvas] = useState<string>('');
@@ -206,12 +208,12 @@ function PDFPage(props: {
 			renderPDFPageAsCanvas(
 				props.pdf,
 				props.pageNumber,
+				pageID,
 				canvasID,
+				textLayerID,
 				props.containerWidth,
-				//props.context === 'full screen' ? document.body.clientWidth > 1400 ? document.body.clientWidth > 2000 ? 1.8 : 1.6 : 1.3 : 1,			
-				1,
 				currentZoomMultiple,
-				currentRotation
+				currentRotation,				
 			).then(([canvasURL, newHeight, newWidth]) => {
 				//dispatch(clearLoading());
 				props.onSizeChange(newWidth, newHeight);
@@ -238,7 +240,10 @@ function PDFPage(props: {
 		// eslint-disable-next-line
 	}, [props.zoomMultiple, props.rotation, setRendered])
 
-	return <canvas id={canvasID} key={canvasID}></canvas>
+	return <div className={"vieolo-pdf-viewer-component__page"} id={pageID}>
+		<canvas id={canvasID} key={canvasID}></canvas>
+		<div className="vieolo-pdf-viewer-component__page__text-layer" id={textLayerID} key={textLayerID}></div>
+	</div>
 	//return <img src={canvas} width={width * props.zoomMultiple} height={height * props.zoomMultiple} key={canvasID} style={{ transform: `rotateZ(${currentRotation}deg)` }} alt="pdf page" />
 }
 
