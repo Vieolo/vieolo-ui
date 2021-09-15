@@ -710,6 +710,14 @@ body {
 		margin-left: auto;
 		margin-right: auto;
 
+		::-moz-selection {
+			background: transparent;
+		}
+
+		::selection {
+			background: transparent;
+		}
+
 		&__text-layer {
 			position: absolute;
 			text-align: initial;
@@ -733,7 +741,7 @@ body {
 			.highlight {
 				margin: -1px;
 				padding: 1px;
-				background-color: rgb(255, 202, 252);
+				background-color: rgba(180, 0, 170, 1);
 				border-radius: 4px;
 			}
 
@@ -757,21 +765,23 @@ body {
 				background-color: rgba(0, 100, 0, 1);
 			}
 
-			&::-moz-selection {
+			::-moz-selection {
 				background: rgba(0, 0, 255, 1);
 			}
 
-			&::selection {
+			::selection {
 				background: rgba(0, 0, 255, 1);
 			}
 
-			br::-moz-selection {
-				background: transparent;
-			}
+			br {
+				::-moz-selection {
+					background: transparent;
+				}
 
-			br::selection {
-				background: transparent;
-			}
+				::selection {
+					background: transparent;
+				}
+			}			
 
 			.endOfContent {
 				display: block;
