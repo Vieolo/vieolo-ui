@@ -9,10 +9,12 @@ import DownloadIcon from '@material-ui/icons/CloudDownload';
 import RotateLeft from '@material-ui/icons/RotateLeftRounded';
 import RotateRight from '@material-ui/icons/RotateRightRounded';
 import CloseIcon from '@material-ui/icons/CloseRounded';
+import ExpandIcon from '@material-ui/icons/FullscreenRounded';
 
 
 // Components
 import IconButton from '../button/icon_button';
+import Modal from '../modal';
 
 // Installed Packages
 import { PDFDocumentProxy } from 'pdfjs-dist/types/display/api';
@@ -20,6 +22,7 @@ import { PDFDocumentProxy } from 'pdfjs-dist/types/display/api';
 
 // Internal
 import { getPDFDocument, renderPDFPageAsCanvas } from './pdf_renderer';
+
 
 
 
@@ -34,13 +37,15 @@ export default function PDFViewer(props: {
 	 * The given value will be added as a style. e.g. calc(100vh - 100px)
 	 */
 	heightDeduction: number,
-	onClose?: () => void
+	onClose?: () => void,
+	expandable?: boolean
 }) {
 	let [doc, setDoc] = useState<PDFDocumentProxy | null>(null);
 	let [totalPage, setTotalPage] = useState<number>(0);
 	let [currentPage, setCurrentPage] = useState<number>(1);
 	let [zoomMultiple, setZoomMultiple] = useState<number>(0);
 	let [rotation, setRotation] = useState<number>(0);
+	let [mode, setMode] = useState<'full screen' | 'embedded'>(props.context);
 
 	// eslint-disable-next-line
 	let [pageInFocus, setPageInFocus] = useState<number | null>(null);
@@ -112,22 +117,26 @@ export default function PDFViewer(props: {
 				)
 			}
 
-			return <div
+			let viewer = <div
 				className={props.context === "full screen" ? "vieolo-pdf-viewer-component" : "vieolo-pdf-viewer-component"}
-				style={{ height: `calc(100vh - ${props.heightDeduction}px)` }}
+				style={{ height: `calc(100vh - ${mode === 'embedded' ? props.heightDeduction : 0}px)` }}
 			>
 				<div className="vieolo-pdf-viewer-component__toolbar">
 
 					<div className='flex-start'>
 						{
-							props.onClose &&
+							(props.onClose || mode === 'full screen') &&
 							<IconButton
 								size="small"
 								icon={<CloseIcon />}
 								color="error"
 								disabled={!props.onClose}
 								onClick={() => {
-									if (props.onClose) props.onClose();
+									if (props.context === 'embedded' && mode === 'full screen') {
+										setMode('embedded');
+									}else {
+										if (props.onClose) props.onClose();
+									}									
 								}}
 							/>
 						}
@@ -176,6 +185,18 @@ export default function PDFViewer(props: {
 							icon={<RotateRight />}
 							onClick={() => setRotation(rotation + 90)}
 						/>
+
+						{
+							(props.expandable && props.context === 'embedded') &&
+							<IconButton
+								size="small"
+								icon={<ExpandIcon />}
+								onClick={() => {
+									if (mode === 'embedded') setMode('full screen');
+									else setMode('embedded');
+								}}
+							/>
+						}
 					</div>
 
 
@@ -183,11 +204,20 @@ export default function PDFViewer(props: {
 				<div
 					className="vieolo-pdf-viewer-component__canvas-container"
 					ref={focusRef}
-					style={{ height: `calc(100vh - ${props.heightDeduction + 30}px)` }}
+					style={{ height: `calc(100vh - ${mode === 'embedded' ? props.heightDeduction + 30 : 10}px)` }}
 				>
 					{pages}
 				</div>
 			</div>
+
+			if (mode === 'embedded') return viewer;
+			else return <Modal
+				onClose={() => {}}
+			>
+				<div className="width--vw-100 height--vh-100">
+					{viewer}
+				</div>
+			</Modal>
 		}
 	}
 
