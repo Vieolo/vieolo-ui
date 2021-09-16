@@ -6,6 +6,7 @@ import IconButton from './lib/button/icon_button';
 import Input from './lib/form/input';
 import InputSet from './lib/form/input_set';
 import Modal from './lib/modal';
+import PDFViewer from './lib/pdf_viewer/pdf_viewer';
 import Textarea from './lib/form/textarea';
 import TextareaSet from './lib/form/textarea_set';
 import TimePicker from './lib/form/time_picker';
@@ -23,6 +24,7 @@ export {
     Input,
     InputSet,
     Modal,
+    PDFViewer,
     Textarea,
     TextareaSet,
     TimePicker,
