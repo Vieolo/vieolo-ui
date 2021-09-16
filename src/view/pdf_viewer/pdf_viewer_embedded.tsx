@@ -7,7 +7,7 @@ import Input from '../../lib/form/input';
 
 type ViewerPropsType = React.ComponentProps<typeof PDFViewer>;
 
-export function pdfViewerOptions(): { [key: string]: ViewerPropsType } {
+export function pdfViewerEmbeddedOptions(): { [key: string]: ViewerPropsType } {
 
     let baseProps: ViewerPropsType = {
         filePath: 'http://localhost:3000/simple.pdf',
@@ -36,7 +36,7 @@ export function pdfViewerOptions(): { [key: string]: ViewerPropsType } {
 }
 
 
-export function PDFViewerCreator(props: { p: ViewerPropsType }) {
+export function PDFViewerEmbeddedCreator(props: { p: ViewerPropsType }) {
 
     let [pageNumber, setPageNumber] = useState<string>("");
 
