@@ -8,6 +8,7 @@ import ItemRow from '../../lib/list/item_row';
 
 // Main Creators
 import { SelectCreator, selectOptions } from '../form/select';
+import { IconButtonCreator, iconButtonOptions } from '../button/icon_button';
 import { InputSetCreator, inputSetOptions } from '../form/input_set';
 import { DropDownMenuCreator, dropDownMenuOptions } from '../menu/dropdown_menu';
 import { PDFViewerEmbeddedCreator, pdfViewerEmbeddedOptions } from '../pdf_viewer/pdf_viewer_embedded';
@@ -22,11 +23,12 @@ export default function MainPage(props: {}): JSX.Element {
     let [selectedData, setSelectedData] = useState<any>(null);
 
     let items: {[key: string]: { title: string, data: any, creator: any }} = {
-        "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator },
-        "Select": { title: "Select", data: selectOptions(), creator: SelectCreator },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator },
+        "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator },
+        "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator },
         "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerEmbeddedOptions(), creator: PDFViewerEmbeddedCreator },
         "PDF Viewer Fullscreen": { title: "PDF Viewer Fullscreen", data: pdfViewerFullScreenOptions(), creator: PDFViewerFullScreenCreator },
+        "Select": { title: "Select", data: selectOptions(), creator: SelectCreator },                
     }
 
     let content: React.ReactNode = null;
