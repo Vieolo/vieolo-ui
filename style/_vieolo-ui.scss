@@ -548,7 +548,7 @@ body {
 		padding: 5px;
 		//height: 20px;
 		cursor: pointer;
-		border-radius: $universal-border-radius / 2;
+		border-radius: $universal-border-radius-half;
 		@include transition;
 		color: $primary-color-normal;
 		display: flex;
