@@ -21,7 +21,8 @@ export function pdfViewerOptions(): { [key: string]: ViewerPropsType } {
         },
         "Simple, Full functionality": {
             ...baseProps,
-            onClose: () => {}
+            onClose: () => {},
+            expandable: true
         },
         "Odd Shaped": {
             ...baseProps,
@@ -54,6 +55,7 @@ export function PDFViewerCreator(props: { p: ViewerPropsType }) {
             context={props.p.context}
             heightDeduction={props.p.heightDeduction}
             onClose={props.p.onClose}
+            expandable={props.p.expandable}
         />
     </div>
 
