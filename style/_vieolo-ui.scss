@@ -524,24 +524,17 @@ body {
 	background-color: white;
 }
 
-.vieolo-dropdown-menu {
-	position: relative;
+.vieolo-dropdown-menu {	
 	display: inline-block;
 
 	.dropdown {
-		position: absolute;
-		top: 100%;
-		z-index: 2;
+		position: fixed;
+		z-index: 99;
+		width: 190px;
 		padding: 5px;
 		@include card-dark-shadow;
-
-		&--left {
-			left: -110px;
-		}
-
-		&--right {
-			right: -110px;
-		}
+		max-height: 240px;
+		overflow: scroll;
 	}
 
 	.dropdown-item {
