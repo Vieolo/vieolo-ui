@@ -30,15 +30,20 @@ export default function DropDownMenu(props: DropDownMenuProps) {
         }
 
         document.addEventListener("click", handleClickOutside);
-        let main = document.querySelector('main')
-        if (main) main.style.overflow = 'hidden';
+        
 
         return () => {
-            document.removeEventListener("click", handleClickOutside);
-            let main = document.querySelector('main');
-            if (main) main.style.overflow = 'auto';
+            document.removeEventListener("click", handleClickOutside);            
         }
     }, [container])
+
+    useEffect(() => {
+        let main = document.querySelector('main')
+        if (main) {
+            if (open) main.style.overflow = 'hidden';
+            else main.style.removeProperty("overflow");
+        }
+    }, [open])
 
 
     function handleButtonClick() {

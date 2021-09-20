@@ -48,17 +48,20 @@ export default function Select(props: SelectProps) {
             }
         }
 
-        document.addEventListener("click", handleClickOutside);
-        let main = document.querySelector('main')
-        if (main) main.style.overflow = 'hidden';
+        document.addEventListener("click", handleClickOutside);        
 
         return () => {
             document.removeEventListener("click", handleClickOutside);
-            let main = document.querySelector('main');
-            if (main) main.style.overflow = 'auto';
         }
     }, [container])
 
+    useEffect(() => {
+        let main = document.querySelector('main')
+        if (main) {
+            if (open) main.style.overflow = 'hidden';
+            else main.style.removeProperty("overflow");
+        }
+    }, [open]);
 
     
 

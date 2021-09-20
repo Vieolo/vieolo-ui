@@ -38,7 +38,7 @@ export default function MainPage(props: {}): JSX.Element {
         content = <C p={selectedData}/>
     }
 
-    return <div className="main-page">
+    return <main className="main-page">
 
         <div className="component-list">
             {
@@ -85,7 +85,7 @@ export default function MainPage(props: {}): JSX.Element {
             }
         </div>
 
-    </div>
+    </main>
 
 }
 
