@@ -396,7 +396,6 @@ body {
 }
 
 .vieolo-select {
-	position: relative;
 	display: inline-block;
 	width: 160px;
 
@@ -450,10 +449,9 @@ body {
 	}
 
 	.select-dropdown {
-		position: absolute;
-		top: 100%;
+		position: fixed;
 		width: 160px;
-		z-index: 2;
+		z-index: 99;
 		background-color: white;
 		box-shadow: $box-shadow-dark;
 		border-radius: 5px;

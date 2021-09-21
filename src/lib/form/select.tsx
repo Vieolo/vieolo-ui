@@ -1,5 +1,5 @@
 // React
-import React, { Fragment, useEffect, useRef, useState } from 'react';
+import React, { Fragment, useEffect, useRef, useState, CSSProperties } from 'react';
 
 // Typography
 import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
@@ -35,8 +35,12 @@ type SelectProps = {
 export default function Select(props: SelectProps) {
 
     let [open, setOpen] = useState<boolean>(false);
+    let [top, setTop] = useState<number>(0);
+    let [left, setLeft] = useState<number>(0);
+    let [bottom, setBottom] = useState<number>(0);
+    let [right, setRight] = useState<number>(0);
     // eslint-disable-next-line
-    let [container, setContainer] = useState(useRef(null)); 
+    let [container, setContainer] = useState(useRef<HTMLDivElement>(null)); 
     let [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
@@ -69,15 +73,51 @@ export default function Select(props: SelectProps) {
         return props.items.filter(i => values.includes(i.value))
     }
 
+    function handleOpen() {
+        if (!open) {
+            let rect = container.current!.getBoundingClientRect();
+            let displaySize = {width: window.innerWidth, height: window.innerHeight}
+            let r = 0,
+                l = 0,
+                t = 0,
+                b = 0;
+            
+            if ((rect.y + 240 + rect.height) > displaySize.height) {
+                b = displaySize.height - rect.y;
+                t = 0;
+            }else {
+                t = rect.top + rect.height;
+                b = 0;
+            }
 
+            if ((rect.x - (160 - rect.width)) < 160) {
+                l = rect.left;
+                r = 0;
+            }else {
+                l = 0;
+                r = displaySize.width - rect.x - rect.width;
+            }
+            
+            setRight(r);
+            setLeft(l);
+            setTop(t);
+            setBottom(b);
+        }
+        setOpen(true);
+        setSearchQuery("");
+    }
 
     let thisSelectedItems = getSelectedItems(props.selectedItems);
 
+    let style: CSSProperties = {}
+
+    if (right !== 0) style.right = right;
+    if (left !== 0) style.left = left;
+    if (top !== 0) style.top = top;
+    if (bottom !== 0) style.bottom = bottom;
+
     return <div className="vieolo-select" ref={container as any}>
-        <div className={`select-button${props.error ? ' select-button-error' : ''}`} onClick={() => {
-            setOpen(true);
-            setSearchQuery("");
-        }}>
+        <div className={`select-button${props.error ? ' select-button-error' : ''}`} onClick={handleOpen}>
             <div className="button-text">
                 <TypographyParagraphSmall text={props.title} className="button-title" />
                 {
@@ -107,7 +147,7 @@ export default function Select(props: SelectProps) {
 
         {
             open &&
-            <div className="select-dropdown">
+            <div className="select-dropdown" style={style}>
                 {
                     props.items.filter(item => (!searchQuery.trim() || item.title.toLowerCase().includes(searchQuery.toLowerCase()))).map(item => {
                         return <SelectItem

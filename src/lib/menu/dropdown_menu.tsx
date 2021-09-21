@@ -91,10 +91,10 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 
     let style: CSSProperties = {}
 
-    if (right != 0) style.right = right;
-    if (left != 0) style.left = left;
-    if (top != 0) style.top = top;
-    if (bottom != 0) style.bottom = bottom;
+    if (right !== 0) style.right = right;
+    if (left !== 0) style.left = left;
+    if (top !== 0) style.top = top;
+    if (bottom !== 0) style.bottom = bottom;
     
 
     return <div className={className} ref={container as any}>
