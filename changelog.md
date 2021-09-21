@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.10.2 (2021-09-22)
+
+- Fixed the `dropdown` class of the `dropdownmenu`
+
 ## 0.10.1 (2021-09-21)
 
 - Fixed the overflow of `main` while using `DropDownMenu` and `Select`
