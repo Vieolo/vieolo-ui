@@ -105,7 +105,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 
         {
             open &&
-            <div className={`dropdown'}`} style={style} >
+            <div className={`dropdown`} style={style} >
                 {
                     props.items.map(item => {
                         return <DropDownMenuItem key={item.title} title={item.title} icon={item.icon} onClick={(t: string) => {
