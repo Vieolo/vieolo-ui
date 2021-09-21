@@ -78,7 +78,7 @@ export default function DropDownMenu(props) {
         style.bottom = bottom;
     return _jsxs("div", Object.assign({ className: className, ref: container }, { children: [_jsx("div", Object.assign({ onClick: () => handleButtonClick() }, { children: props.buttonComponent }), void 0),
             open &&
-                _jsx("div", Object.assign({ className: `dropdown'}`, style: style }, { children: props.items.map(item => {
+                _jsx("div", Object.assign({ className: `dropdown`, style: style }, { children: props.items.map(item => {
                         return _jsx(DropDownMenuItem, { title: item.title, icon: item.icon, onClick: (t) => {
                                 setOpen(!open);
                                 props.onItemSelect(t);
