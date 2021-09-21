@@ -11,6 +11,7 @@ type DropDownMenuProps = {
     items: { title: string, icon?: React.ReactNode }[],
     onItemSelect: (title: string) => void,
     className?: string,
+    /** @deprecated The positioning of the dropdown is calculated automatically */
     position?: 'left' | 'right'
 }
 
@@ -68,7 +69,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
                     b = 0;
                 }
 
-                if ((rect.x - (190 - rect.width)) < 190) {
+                if (props.position === 'right' || (rect.x - (190 - rect.width)) < 190) {
                     l = rect.left;
                     r = 0;
                 }else {
@@ -104,7 +105,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 
         {
             open &&
-            <div className={`dropdown dropdown--${props.position || 'left'}`} style={style} >
+            <div className={`dropdown'}`} style={style} >
                 {
                     props.items.map(item => {
                         return <DropDownMenuItem key={item.title} title={item.title} icon={item.icon} onClick={(t: string) => {
