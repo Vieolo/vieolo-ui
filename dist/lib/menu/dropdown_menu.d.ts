@@ -8,6 +8,7 @@ declare type DropDownMenuProps = {
     }[];
     onItemSelect: (title: string) => void;
     className?: string;
+    /** @deprecated The positioning of the dropdown is calculated automatically */
     position?: 'left' | 'right';
 };
 export default function DropDownMenu(props: DropDownMenuProps): JSX.Element;

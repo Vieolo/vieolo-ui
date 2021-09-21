@@ -12,6 +12,10 @@ import CloseIcon from '@material-ui/icons/CloseRounded';
 import IconButton from '../button/icon_button';
 export default function Select(props) {
     let [open, setOpen] = useState(false);
+    let [top, setTop] = useState(0);
+    let [left, setLeft] = useState(0);
+    let [bottom, setBottom] = useState(0);
+    let [right, setRight] = useState(0);
     // eslint-disable-next-line
     let [container, setContainer] = useState(useRef(null));
     let [searchQuery, setSearchQuery] = useState("");
@@ -23,24 +27,62 @@ export default function Select(props) {
             }
         };
         document.addEventListener("click", handleClickOutside);
-        let main = document.querySelector('main');
-        if (main)
-            main.style.overflow = 'hidden';
         return () => {
             document.removeEventListener("click", handleClickOutside);
-            let main = document.querySelector('main');
-            if (main)
-                main.style.overflow = 'auto';
         };
     }, [container]);
+    useEffect(() => {
+        let main = document.querySelector('main');
+        if (main) {
+            if (open)
+                main.style.overflow = 'hidden';
+            else
+                main.style.removeProperty("overflow");
+        }
+    }, [open]);
     function getSelectedItems(values) {
         return props.items.filter(i => values.includes(i.value));
     }
+    function handleOpen() {
+        if (!open) {
+            let rect = container.current.getBoundingClientRect();
+            let displaySize = { width: window.innerWidth, height: window.innerHeight };
+            let r = 0, l = 0, t = 0, b = 0;
+            if ((rect.y + 240 + rect.height) > displaySize.height) {
+                b = displaySize.height - rect.y;
+                t = 0;
+            }
+            else {
+                t = rect.top + rect.height;
+                b = 0;
+            }
+            if ((rect.x - (160 - rect.width)) < 160) {
+                l = rect.left;
+                r = 0;
+            }
+            else {
+                l = 0;
+                r = displaySize.width - rect.x - rect.width;
+            }
+            setRight(r);
+            setLeft(l);
+            setTop(t);
+            setBottom(b);
+        }
+        setOpen(true);
+        setSearchQuery("");
+    }
     let thisSelectedItems = getSelectedItems(props.selectedItems);
-    return _jsxs("div", Object.assign({ className: "vieolo-select", ref: container }, { children: [_jsxs("div", Object.assign({ className: `select-button${props.error ? ' select-button-error' : ''}`, onClick: () => {
-                    setOpen(true);
-                    setSearchQuery("");
-                } }, { children: [_jsxs("div", Object.assign({ className: "button-text" }, { children: [_jsx(TypographyParagraphSmall, { text: props.title, className: "button-title" }, void 0),
+    let style = {};
+    if (right !== 0)
+        style.right = right;
+    if (left !== 0)
+        style.left = left;
+    if (top !== 0)
+        style.top = top;
+    if (bottom !== 0)
+        style.bottom = bottom;
+    return _jsxs("div", Object.assign({ className: "vieolo-select", ref: container }, { children: [_jsxs("div", Object.assign({ className: `select-button${props.error ? ' select-button-error' : ''}`, onClick: handleOpen }, { children: [_jsxs("div", Object.assign({ className: "button-text" }, { children: [_jsx(TypographyParagraphSmall, { text: props.title, className: "button-title" }, void 0),
                             (props.searchable && open)
                                 ? _jsx("input", { autoFocus: true, value: searchQuery, onChange: e => setSearchQuery(e.target.value), placeholder: "Search..." }, void 0)
                                 : _jsx(TypographyTitleSmall, { text: thisSelectedItems.map(s => s.title).join(", "), className: "button-value" }, void 0)] }), void 0),
@@ -48,7 +90,7 @@ export default function Select(props) {
                         ? _jsx(DownIcon, {}, void 0)
                         : _jsx(IconButton, { icon: _jsx(CloseIcon, {}, void 0), onClick: () => props.onSelect([]), color: "error", size: "small" }, void 0)] }), void 0),
             open &&
-                _jsx("div", Object.assign({ className: "select-dropdown" }, { children: props.items.filter(item => (!searchQuery.trim() || item.title.toLowerCase().includes(searchQuery.toLowerCase()))).map(item => {
+                _jsx("div", Object.assign({ className: "select-dropdown", style: style }, { children: props.items.filter(item => (!searchQuery.trim() || item.title.toLowerCase().includes(searchQuery.toLowerCase()))).map(item => {
                         return _jsx(SelectItem, { item: item, isSelected: props.selectedItems.includes(item.value), onSelect: (t) => {
                                 if (props.multipleChoice) {
                                     let newSelected = [...props.selectedItems];

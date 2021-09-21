@@ -3,9 +3,9 @@ import React from 'react';
 
 // Material UI
 import IconOne from '@material-ui/icons/Assignment';
-import IconTwo from '@material-ui/icons/Backup';
-import IconThree from '@material-ui/icons/Cake';
-import IconFour from '@material-ui/icons/DataUsage';
+// import IconTwo from '@material-ui/icons/Backup';
+// import IconThree from '@material-ui/icons/Cake';
+// import IconFour from '@material-ui/icons/DataUsage';
 
 // Component
 import IconButton from '../../lib/button/icon_button';
@@ -13,20 +13,6 @@ import IconButton from '../../lib/button/icon_button';
 type IconButtonPropsType = React.ComponentProps<typeof IconButton>;
 
 export function iconButtonOptions(): { [key: string]: IconButtonPropsType } {
-
-    let itemsWithoutIcon: {title: string, icon?: React.ReactNode}[] = [
-        {title: "One"},
-        {title: "Two"}, 
-        {title: "Three"},
-        {title: "One Two Three Four Five"}
-    ];
-
-    let itemsWithIcon: {title: string, icon?: React.ReactNode}[] = [
-        {title: "One", icon: <IconOne />},
-        {title: "Two", icon: <IconTwo />}, 
-        {title: "Three", icon: <IconThree />},
-        {title: "One Two Three Four Five", icon: <IconFour />}
-    ];
 
     let baseProps: IconButtonPropsType = {        
         icon: <IconOne />,

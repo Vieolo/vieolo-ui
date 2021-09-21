@@ -1,5 +1,5 @@
 // React
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, CSSProperties } from 'react';
 
 // Typography
 import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
@@ -11,6 +11,7 @@ type DropDownMenuProps = {
     items: { title: string, icon?: React.ReactNode }[],
     onItemSelect: (title: string) => void,
     className?: string,
+    /** @deprecated The positioning of the dropdown is calculated automatically */
     position?: 'left' | 'right'
 }
 
@@ -18,36 +19,84 @@ type DropDownMenuProps = {
 export default function DropDownMenu(props: DropDownMenuProps) {
 
     let [open, setOpen] = useState<boolean>(false);
+    let [top, setTop] = useState<number>(0);
+    let [left, setLeft] = useState<number>(0);
+    let [bottom, setBottom] = useState<number>(0);
+    let [right, setRight] = useState<number>(0);
     // eslint-disable-next-line
-    let [container, setContainer] = useState(useRef(null));
+    let [container, setContainer] = useState(useRef<HTMLDivElement>(null));
 
     useEffect(() => {
 
-        const handleClickOutside = (event: any) => {
+        const handleClickOutside = (event: MouseEvent) => {
             if (container.current && !(container.current as any).contains(event.target)) {
                 setOpen(false);
             }
         }
 
         document.addEventListener("click", handleClickOutside);
-        let main = document.querySelector('main')
-        if (main) main.style.overflow = 'hidden';
+        
 
         return () => {
-            document.removeEventListener("click", handleClickOutside);
-            let main = document.querySelector('main');
-            if (main) main.style.overflow = 'auto';
+            document.removeEventListener("click", handleClickOutside);            
         }
     }, [container])
 
+    useEffect(() => {
+        let main = document.querySelector('main')
+        if (main) {
+            if (open) main.style.overflow = 'hidden';
+            else main.style.removeProperty("overflow");
+        }
+    }, [open])
+
 
     function handleButtonClick() {
-        if (!props.disabled) setOpen(!open);        
+        if (!props.disabled) {
+            if (!open) {
+                let rect = container.current!.getBoundingClientRect();
+                let displaySize = {width: window.innerWidth, height: window.innerHeight}
+                let r = 0,
+                    l = 0,
+                    t = 0,
+                    b = 0;
+                
+                if ((rect.y + 240 + rect.height) > displaySize.height) {
+                    b = displaySize.height - rect.y;
+                    t = 0;
+                }else {
+                    t = rect.top + rect.height;
+                    b = 0;
+                }
+
+                if (props.position === 'right' || (rect.x - (190 - rect.width)) < 190) {
+                    l = rect.left;
+                    r = 0;
+                }else {
+                    l = 0;
+                    r = displaySize.width - rect.x - rect.width;
+                }
+                
+                setRight(r);
+                setLeft(l);
+                setTop(t);
+                setBottom(b);
+            }
+            setOpen(!open);
+        }
     };
 
     let className = "vieolo-dropdown-menu";
     if (props.className) className += ` ${props.className}`;
     if (props.disabled) className += " disabled";
+
+    let style: CSSProperties = {}
+
+    if (right !== 0) style.right = right;
+    if (left !== 0) style.left = left;
+    if (top !== 0) style.top = top;
+    if (bottom !== 0) style.bottom = bottom;
+    
 
     return <div className={className} ref={container as any}>
         <div onClick={() => handleButtonClick()}>
@@ -56,7 +105,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 
         {
             open &&
-            <div className={`dropdown dropdown--${props.position || 'left'}`}>
+            <div className={`dropdown'}`} style={style} >
                 {
                     props.items.map(item => {
                         return <DropDownMenuItem key={item.title} title={item.title} icon={item.icon} onClick={(t: string) => {
