@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.10.1 (2021-09-21)
+
+- Fixed the overflow of `main` while using `DropDownMenu` and `Select`
+- Changed the dropdown of `DropDownMenu` and `Select` to have a fixed position
+
+#### Deprecation
+- The `position` prop of the `DropDownMenu` has been deprecated. The position of the drop down is calculated automatically.
+
 ## 0.10.0 (2021-09-16)
 
 - Added `PDFViewer`
@@ -35,6 +43,6 @@
 - Added `ItemRow` component
 - Added Typography components and classes
 
-##### Breaking Changes
+#### Breaking Changes
 - Changed the `selectedItem` prop of `Select` from `string` to `string[]` 
 - Changed the `tertiary-color` values
