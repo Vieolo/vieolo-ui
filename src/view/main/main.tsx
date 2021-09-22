@@ -11,6 +11,7 @@ import { SelectCreator, selectOptions } from '../form/select';
 import { PeriodSelectorCreator, periodSelectorOptions } from '../date_time/period_selector';
 import { IconButtonCreator, iconButtonOptions } from '../button/icon_button';
 import { InputSetCreator, inputSetOptions } from '../form/input_set';
+import { SwitchSetCreator, switchSetOptions } from '../form/switch_set';
 import { DropDownMenuCreator, dropDownMenuOptions } from '../menu/dropdown_menu';
 import { PDFViewerEmbeddedCreator, pdfViewerEmbeddedOptions } from '../pdf_viewer/pdf_viewer_embedded';
 import { PDFViewerFullScreenCreator, pdfViewerFullScreenOptions } from '../pdf_viewer/pdf_viewer_full_screen';
@@ -31,6 +32,7 @@ export default function MainPage(props: {}): JSX.Element {
         "PDF Viewer Fullscreen": { title: "PDF Viewer Fullscreen", data: pdfViewerFullScreenOptions(), creator: PDFViewerFullScreenCreator },
         "Select": { title: "Select", data: selectOptions(), creator: SelectCreator },
         "Period Selector": { title: "Period Selector", data: periodSelectorOptions(), creator: PeriodSelectorCreator },
+        "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator },
     }
 
     let content: React.ReactNode = null;
