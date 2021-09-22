@@ -8,6 +8,7 @@ import ItemRow from '../../lib/list/item_row';
 
 // Main Creators
 import { SelectCreator, selectOptions } from '../form/select';
+import { PeriodSelectorCreator, periodSelectorOptions } from '../date_time/period_selector';
 import { IconButtonCreator, iconButtonOptions } from '../button/icon_button';
 import { InputSetCreator, inputSetOptions } from '../form/input_set';
 import { DropDownMenuCreator, dropDownMenuOptions } from '../menu/dropdown_menu';
@@ -28,7 +29,8 @@ export default function MainPage(props: {}): JSX.Element {
         "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator },
         "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerEmbeddedOptions(), creator: PDFViewerEmbeddedCreator },
         "PDF Viewer Fullscreen": { title: "PDF Viewer Fullscreen", data: pdfViewerFullScreenOptions(), creator: PDFViewerFullScreenCreator },
-        "Select": { title: "Select", data: selectOptions(), creator: SelectCreator },                
+        "Select": { title: "Select", data: selectOptions(), creator: SelectCreator },
+        "Period Selector": { title: "Period Selector", data: periodSelectorOptions(), creator: PeriodSelectorCreator },
     }
 
     let content: React.ReactNode = null;
