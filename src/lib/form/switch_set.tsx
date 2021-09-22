@@ -1,10 +1,12 @@
 // React
 import React from 'react';
 
-
-
 // Vieolo UI
 import Switch from './switch';
+
+// Typography
+import TypographyParagraphLarge from '../typography/typography_paragraph_large';
+import TypographyCaptionLarge from '../typography/typography_caption_large';
 
 
 
@@ -19,15 +21,15 @@ export default function SwitchSet (props: {
 
 
     return <div className={`vieolo-switch-set${props.disabled ? ' disabled' : ''}`}>
-        <div className="title-container" onClick={() => props.onChange(!props.on)}>
-            <p className="title">{props.title}</p>
+        <div className="vieolo-switch-set__title-container" onClick={() => props.onChange(!props.on)}>
+            <TypographyParagraphLarge text={props.title} />
             {
                 props.subtitle &&
-                <p className="subtitle">{props.subtitle}</p>
+                <TypographyCaptionLarge text={props.subtitle} />
             }
         </div>
 
-        <div className="switch-container">
+        <div className="vieolo-switch-set__switch-container">
             <Switch 
                 on={props.on}
                 onChange={v => {props.onChange(!props.on)}}

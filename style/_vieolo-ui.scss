@@ -343,24 +343,25 @@ body {
 	cursor: pointer;
 	display: grid;
 	grid-template-columns: 1fr 50px;
+	border: 2px solid transparent;
+
+	&:hover {
+		border: 2px solid $hover-color;
+		border-radius: 5px;
+	}
 
 	p {
 		margin: 0;
 		@include nonselectable;
 	}
 
-	.title-container {
+	&__title-container {
 		display: flex;
 		flex-flow: column;
 		justify-content: center;
-
-		.subtitle {
-			font-size: 12px;
-			@include font-light;
-		}
 	}
 
-	.switch-container {
+	&__switch-container {
 		@include center-by-flex-row;
 	}
 }
