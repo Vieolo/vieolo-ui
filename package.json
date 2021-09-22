@@ -1,6 +1,6 @@
 {
   "name": "@vieolo/vieolo-ui",
-  "version": "0.10.2",
+  "version": "0.10.3",
   "private": true,
   "main": "dist/export.js",
   "author": {
@@ -30,6 +30,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
+    "@vieolo/date": "github:Vieolo/date-js#master",
     "@vieolo/validation-js": "github:Vieolo/validation-js#master",
     "pdfjs-dist": "^2.9.359",
     "react": "^17.0.2",

@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.10.3 (2021-09-23)
+
+- Added `PeriodSelector` component
+- Changed the `p` tags of `SwitchSet` with `Typography` components
+
 ## 0.10.2 (2021-09-22)
 
 - Fixed the `dropdown` class of the `dropdownmenu`

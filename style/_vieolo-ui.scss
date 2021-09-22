@@ -343,30 +343,31 @@ body {
 	cursor: pointer;
 	display: grid;
 	grid-template-columns: 1fr 50px;
+	border: 2px solid transparent;
+
+	&:hover {
+		border: 2px solid $hover-color;
+		border-radius: 5px;
+	}
 
 	p {
 		margin: 0;
 		@include nonselectable;
 	}
 
-	.title-container {
+	&__title-container {
 		display: flex;
 		flex-flow: column;
 		justify-content: center;
-
-		.subtitle {
-			font-size: 12px;
-			@include font-light;
-		}
 	}
 
-	.switch-container {
+	&__switch-container {
 		@include center-by-flex-row;
 	}
 }
 
 .vieolo-icon-button {
-	border-radius: 50%;
+	border-radius: 5px;
 	height: 40px;
 	width: 40px;
 	background-color: white;
@@ -837,5 +838,60 @@ body {
 
 	p {
 		margin-left: 10px;
+	}
+}
+
+.vieolo-period-selector {
+	width: 277px;
+	height: 30px;
+	@include flex-start;
+
+	&__carousel-div,
+	&__year-div,
+	&__dropdown-div {
+		height: 30px;
+		border-radius: 5px;
+		@include primary-background;
+
+		svg {
+			color: $primary-color-text;
+		}
+
+		button {
+			background-color: transparent;
+		}
+	}
+
+	&__carousel-div {
+		width: 188px;
+		@include flex-row-space-between;
+
+		p {
+			color: $primary-color-text;
+		}
+	}
+
+	&__year-div {
+		width: 51px;
+		margin-left: 7px;
+		@include center-by-flex-row;
+
+		p {
+			color: $primary-color-text;
+		}
+	}
+
+	&__dropdown-div {
+		width: 30px;
+		height: 30px;
+		margin-left: 7px;
+		@include center-by-flex-row;		
+	}
+
+	&__dropdown-button {
+		width: 30px;
+		height: 30px;
+		@include center-by-flex-row;
+		cursor: pointer;
 	}
 }
