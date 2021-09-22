@@ -349,18 +349,13 @@ body {
 		@include nonselectable;
 	}
 
-	.title-container {
+	&__title-container {
 		display: flex;
 		flex-flow: column;
 		justify-content: center;
-
-		.subtitle {
-			font-size: 12px;
-			@include font-light;
-		}
 	}
 
-	.switch-container {
+	&__switch-container {
 		@include center-by-flex-row;
 	}
 }
