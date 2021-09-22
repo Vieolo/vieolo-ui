@@ -343,6 +343,12 @@ body {
 	cursor: pointer;
 	display: grid;
 	grid-template-columns: 1fr 50px;
+	border: 2px solid transparent;
+
+	&:hover {
+		border: 2px solid $hover-color;
+		border-radius: 5px;
+	}
 
 	p {
 		margin: 0;
