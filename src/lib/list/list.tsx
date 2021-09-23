@@ -1,5 +1,5 @@
 // React
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 
 
 // Typography
@@ -35,14 +35,17 @@ export default function List(props: {
 
     let [query, setQuery] = useState<string>("");
 
-    return <div className="global-list" style={{height: props.height}}>
+    return <div className="global-list" style={{ height: props.height }}>
         <div className="center-by-flex-row"><TypographyTitleMedium text={props.title} className="margin-vertical--10" /></div>
 
-        <ItemRowSearch
-            query={query}
-            cardStyle={props.cardStyle || 'card-no-shadow'}
-            onChange={q => setQuery(q)}
-        />
+        {
+            props.enableSearch &&
+            <ItemRowSearch
+                query={query}
+                cardStyle={props.cardStyle || 'card-no-shadow'}
+                onChange={q => setQuery(q)}
+            />
+        }
 
         {
             props.items.filter(a => !query.trim() || a.title.toLowerCase().includes(query.toLowerCase())).map(a => {
