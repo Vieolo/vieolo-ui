@@ -523,7 +523,7 @@ body {
 	background-color: white;
 }
 
-.vieolo-dropdown-menu {	
+.vieolo-dropdown-menu {
 	display: inline-block;
 
 	.dropdown {
@@ -613,61 +613,70 @@ body {
 	width: 100%;
 	margin: 6px 0;
 
-	.item-clickable {
+	&__item-clickable {
 		cursor: pointer;
 	}
 
-	.item-selected {
+	&__item-selected {
 		background-color: $tertiary-color-normal;
 		border-color: $tertiary-color-normal;
 	}
 
-	.item-content {
+	&__item-content {
 		padding: 0 5px;
 		height: 45px;
+	}
 
-		input {
-			background: transparent;
-			border: none;
+	input {
+		background: transparent;
+		border: none;
+		font-size: 14px;
+		width: 70%;
+		border-radius: inherit;
+
+		&:focus,
+		&:active {
+			outline: none;
+		}
+	}
+
+	&__title-col {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		p {
+			margin: 2px;
+			@include no-text-overflow;
+		}
+
+		p:nth-child(1) {
 			font-size: 14px;
-			width: 70%;
-			border-radius: inherit;
+			@include font-header;
 		}
 
-		.title-col {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-
-			p {
-				margin: 2px;
-				@include no-text-overflow;
-			}
-
-			p:nth-child(1) {
-				font-size: 14px;
-				@include font-header;
-			}
-
-			p:nth-child(2) {
-				font-size: 11px;
-				@include font-light;
-			}
-		}
-
-		.button-col {
-			@include flex-start;
+		p:nth-child(2) {
+			font-size: 11px;
+			@include font-light;
 		}
 	}
 
-	.item-with-icon {
-		display: grid;
-		grid-template-columns: 50px minmax(0, 1fr) 25px;
+	&__button-col {
+		@include center-by-flex-column;
 	}
 
-	.item-without-icon {
+	&__item-with-icon {
 		display: grid;
-		grid-template-columns: minmax(0, 1fr) 25px;
+		grid-template-columns: 40px minmax(0, 1fr) 30px;
+	}
+
+	&__item-without-icon {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) 30px;
+	}
+
+	&__leading-icon-div {
+		@include center-by-flex-column;
 	}
 }
 
@@ -675,7 +684,6 @@ body {
 	background-color: #e4e4e4;
 	width: 100%;
 	text-align: center;
-	
 
 	&__toolbar {
 		background-color: $tertiary-color-normal;
@@ -770,7 +778,7 @@ body {
 				::selection {
 					background: transparent;
 				}
-			}			
+			}
 
 			.endOfContent {
 				display: block;
@@ -885,7 +893,7 @@ body {
 		width: 30px;
 		height: 30px;
 		margin-left: 7px;
-		@include center-by-flex-row;		
+		@include center-by-flex-row;
 	}
 
 	&__dropdown-button {
