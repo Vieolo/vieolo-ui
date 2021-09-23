@@ -24,13 +24,13 @@ export default function ItemRow(props: {
     cardStyle?: 'card-light-shadow' | 'card-dark-shadow' | 'card-no-shadow'
 }) {
 
-    let contentClassName: string = "item-content";
-    if (props.selected) contentClassName += " item-selected";
-    if (props.onClick) contentClassName += " item-clickable";
+    let contentClassName: string = "vieolo-item-row__item-content";
+    if (props.selected) contentClassName += " vieolo-item-row__item-selected";
+    if (props.onClick) contentClassName += " vieolo-item-row__item-clickable";
     if (props.cardStyle) contentClassName += " " + props.cardStyle;
 
-    if (props.leadingIcon) contentClassName += " item-with-icon";
-    else contentClassName += " item-without-icon";
+    if (props.leadingIcon) contentClassName += " vieolo-item-row__item-with-icon";
+    else contentClassName += " vieolo-item-row__item-without-icon";
 
     return <div className={"vieolo-item-row"}>
 
@@ -42,7 +42,7 @@ export default function ItemRow(props: {
                 props.leadingIcon
             }
 
-            <div className="title-col">
+            <div className="vieolo-item-row__title-col">
                 <TypographyParagraphMedium text={props.title} />
                 {
                     props.subTitle &&
@@ -52,7 +52,7 @@ export default function ItemRow(props: {
 
             {
                 (props.buttonClick && props.buttonIcon) &&
-                <div className="button-col">
+                <div className="vieolo-item-row__button-col">
                     <IconButton
                         icon={props.buttonIcon}
                         onClick={props.buttonClick}

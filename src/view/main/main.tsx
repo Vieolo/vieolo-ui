@@ -11,6 +11,7 @@ import { SelectCreator, selectOptions } from '../form/select';
 import { PeriodSelectorCreator, periodSelectorOptions } from '../date_time/period_selector';
 import { IconButtonCreator, iconButtonOptions } from '../button/icon_button';
 import { InputSetCreator, inputSetOptions } from '../form/input_set';
+import { ListCreator, listOptions } from '../list/list';
 import { SwitchSetCreator, switchSetOptions } from '../form/switch_set';
 import { DropDownMenuCreator, dropDownMenuOptions } from '../menu/dropdown_menu';
 import { PDFViewerEmbeddedCreator, pdfViewerEmbeddedOptions } from '../pdf_viewer/pdf_viewer_embedded';
@@ -33,6 +34,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Select": { title: "Select", data: selectOptions(), creator: SelectCreator },
         "Period Selector": { title: "Period Selector", data: periodSelectorOptions(), creator: PeriodSelectorCreator },
         "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator },
+        "List": { title: "List", data: listOptions(), creator: ListCreator },
     }
 
     let content: React.ReactNode = null;
