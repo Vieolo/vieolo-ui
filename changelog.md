@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.10.4 (2021-09-24)
+
+- Add `List` component
+- Exported `ItemRow` and `ItemRowSearch` components
+- Exported `PeriodOptions` enum
+
 ## 0.10.3 (2021-09-23)
 
 - Added `PeriodSelector` component
