@@ -662,17 +662,21 @@ body {
 	}
 
 	&__button-col {
-		@include flex-start;
+		@include center-by-flex-column;
 	}
 
 	&__item-with-icon {
 		display: grid;
-		grid-template-columns: 50px minmax(0, 1fr) 25px;
+		grid-template-columns: 40px minmax(0, 1fr) 30px;
 	}
 
 	&__item-without-icon {
 		display: grid;
-		grid-template-columns: minmax(0, 1fr) 25px;
+		grid-template-columns: minmax(0, 1fr) 30px;
+	}
+
+	&__leading-icon-div {
+		@include center-by-flex-column;
 	}
 }
 

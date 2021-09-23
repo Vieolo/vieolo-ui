@@ -14,8 +14,13 @@ export type ListItem = {
     id: string,
     title: string,
     subTitle?: string,
-    onClick: (id: string) => void,
-    selected: boolean
+    onClick?: () => void,
+    selected: boolean,
+    onButtonClick?: () => void,
+    buttonColor?: 'primary' | 'secondary' | 'tertiary' | 'background' | 'alert' | 'error' | 'success' | 'accessory-orange' | 'accessory-blue' | 'accessory-green',
+    buttonIcon?: React.ReactNode,
+    buttonSize?: 'small' | 'medium',
+    leadingIcon?: React.ReactNode,
 }
 
 
@@ -47,7 +52,12 @@ export default function List(props: {
                     selected={a.selected}
                     title={a.title}
                     subTitle={a.subTitle}
-                    onClick={() => a.onClick(a.id)}
+                    onClick={a.onClick}
+                    buttonClick={a.onButtonClick}
+                    buttonColor={a.buttonColor}
+                    buttonIcon={a.buttonIcon}
+                    buttonSize={a.buttonSize}
+                    leadingIcon={a.leadingIcon}
                 />
             })
         }

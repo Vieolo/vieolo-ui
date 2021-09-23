@@ -1,5 +1,9 @@
 // React
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+
+// Material UI
+import SampleIcon1 from '@material-ui/icons/FaceRounded';
+import SampleIcon2 from '@material-ui/icons/FlipCameraAndroid';
 
 // Component
 import List, { ListItem } from '../../lib/list/list';
@@ -13,20 +17,42 @@ export function listOptions(): { [key: string]: ListPropsType } {
             id: '1',
             onClick: () => alert(`Selected 1`),
             selected: false,
-            title: "One",            
+            title: "One",
         },
         {
             id: '2',
             onClick: () => alert(`Selected 2`),
             selected: true,
             title: "Two",
-            subTitle: "This one has a subtitle"            
+            subTitle: "This one has a subtitle"
         },
         {
             id: '3',
-            onClick: () => alert(`Selected 3`),
+            onButtonClick: () => alert(`Selected 3`),
             selected: false,
-            title: "Three",            
+            title: "Three",
+            buttonColor: 'primary',
+            buttonIcon: <SampleIcon1 />,
+            buttonSize: 'small',
+        },
+        {
+            id: '4',
+            onClick: () => alert(`Selected 4`),
+            selected: false,
+            title: "Four",
+            leadingIcon: <SampleIcon2 />,
+            subTitle: "This one has a subtitle"
+        },
+        {
+            id: '5',
+            onButtonClick: () => alert(`Selected 5`),
+            selected: false,
+            title: "Four",
+            leadingIcon: <SampleIcon2 />,
+            subTitle: "This one has a subtitle",
+            buttonColor: 'error',
+            buttonIcon: <SampleIcon1 />,
+            buttonSize: 'medium',
         }
     ];
 
@@ -34,6 +60,7 @@ export function listOptions(): { [key: string]: ListPropsType } {
         height: '500px',
         items: items,
         title: "List with Items",        
+        enableSearch: false
     }
 
     return {

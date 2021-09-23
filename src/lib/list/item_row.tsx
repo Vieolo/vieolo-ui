@@ -39,7 +39,9 @@ export default function ItemRow(props: {
         }}>
             {
                 props.leadingIcon &&
-                props.leadingIcon
+                <div className="vieolo-item-row__leading-icon-div">
+                    {props.leadingIcon}
+                </div>
             }
 
             <div className="vieolo-item-row__title-col">
@@ -52,7 +54,7 @@ export default function ItemRow(props: {
 
             {
                 (props.buttonClick && props.buttonIcon) &&
-                <div className="vieolo-item-row__button-col">
+                <div className={`vieolo-item-row__button-col`}>
                     <IconButton
                         icon={props.buttonIcon}
                         onClick={props.buttonClick}
