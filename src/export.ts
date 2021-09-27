@@ -8,7 +8,7 @@ import InputSet from './lib/form/input_set';
 import ItemRow from './lib/list/item_row';
 import ItemRowSearch from './lib/list/item_row_search';
 import List, { ListItem as ListItemType } from './lib/list/list';
-import Modal from './lib/modal';
+import Modal from './lib/dialog/modal';
 import PDFViewer from './lib/pdf_viewer/pdf_viewer';
 import PeriodSelector, { PeriodOptions } from './lib/date_time/period_selector';
 import Textarea from './lib/form/textarea';
