@@ -19,6 +19,10 @@ export function pdfViewerEmbeddedOptions(): { [key: string]: ViewerPropsType } {
         "Simple": {
             ...baseProps
         },
+        "Simple 2": {
+            ...baseProps,
+            filePath: 'http://localhost:3000/simple_2.pdf',
+        },
         "Simple, Full functionality": {
             ...baseProps,
             onClose: () => {},
