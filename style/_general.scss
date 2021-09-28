@@ -135,6 +135,17 @@
 
 // Mixins -------------------------------
 
+@mixin clickable {
+	cursor: pointer;
+	
+	&:hover {
+		background-color: $hover-color;
+	}
+}
+.clickable {
+	@include clickable;
+}
+
 @mixin transition {
 	transition: all ease 0.5s;
 }

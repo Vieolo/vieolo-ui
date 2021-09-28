@@ -18,7 +18,12 @@ export default function Table(props: {
     /** The default direction that the new sort will take. Defaults to ascending */
     defaultDirection?: TableSortDirection,
     onSortChange: (sort: string, direction: TableSortDirection) => void,
-    width?: string
+    width?: string,
+    /** 
+     * If a functin is passed, the entire row will be clickable.
+     * It is recommended to avoid using clickable components inside the row when making the row clickable
+     */
+    onRowClick?: (index: number) => void
 }): JSX.Element {
 
     let style: React.CSSProperties = {}
@@ -58,7 +63,7 @@ export default function Table(props: {
 
         {
             props.rows.map(row => {
-                return <div className="vieolo-table__content-row" style={{gridTemplateColumns: props.columnGrid}}>
+                return <div className={`vieolo-table__content-row ${props.onRowClick ? "clickable" : ''}`} style={{gridTemplateColumns: props.columnGrid}}>
                     {
                         row.map(r => {
                             return <div 

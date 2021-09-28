@@ -29,6 +29,13 @@ export function tableOptions(): { [key: string]: TablePropsType } {
         "Basic": {
             ...baseProps
         },
+        "Row Clickable": {
+            ...baseProps,
+            rows: [
+                ["1", "2020-10-10", "Some Description", 'Done']
+            ],
+            onRowClick: i => {}
+        },
     }
 }
 
@@ -50,6 +57,7 @@ export function TableCreator(props: {p: TablePropsType}) {
         sortBy={sort}
         sortDirection={direction}
         width={props.p.width}
+        onRowClick={props.p.onRowClick}
     />
 
 }
