@@ -1,3 +1,6 @@
+// React
+import { Fragment } from "react"
+
 // Typography
 import TypographyTitleSmall from "../typography/typography_title_small"
 
@@ -81,7 +84,7 @@ export default function FormDialog(props: {
 
                     {
                         (props.extraButtons || []).map((e, i) => {
-                            return <>
+                            return <Fragment key={`form_dialog_extra_button_fragment_${i}`} >
                                 <Button
                                     key={`form_dialog_extra_button_button_${i}`}
                                     color={e.color}
@@ -89,7 +92,7 @@ export default function FormDialog(props: {
                                     onClick={e.onClick}
                                 />
                                 <div className="vieolo-form-dialog__footer__spacer--middle" key={`form_dialog_extra_button_spacer_${i}`}></div>
-                            </>
+                            </Fragment>
                         })
                     }
 
