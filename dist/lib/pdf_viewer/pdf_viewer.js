@@ -11,7 +11,7 @@ import CloseIcon from '@material-ui/icons/CloseRounded';
 import ExpandIcon from '@material-ui/icons/FullscreenRounded';
 // Components
 import IconButton from '../button/icon_button';
-import Modal from '../modal';
+import Modal from '../dialog/modal';
 // Internal
 import { getPDFDocument, renderPDFPageAsCanvas } from './pdf_renderer';
 export default function PDFViewer(props) {

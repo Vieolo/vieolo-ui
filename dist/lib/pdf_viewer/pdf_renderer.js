@@ -34,7 +34,7 @@ export async function renderPDFPageAsCanvas(doc, pageNumber, pageID, canvasID, t
     }
     let viewport = page.getViewport({
         scale: scalingFactor + zoom,
-        rotation: rotation
+        rotation: page.rotate === 0 ? rotation : rotation - page.rotate,
     });
     canvas.height = viewport.height;
     canvas.width = viewport.width;

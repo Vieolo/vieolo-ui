@@ -12,6 +12,7 @@ import List, { ListItem as ListItemType } from './lib/list/list';
 import Modal from './lib/dialog/modal';
 import PDFViewer from './lib/pdf_viewer/pdf_viewer';
 import PeriodSelector, { PeriodOptions } from './lib/date_time/period_selector';
+import Table, { TableSortDirection as TableSortDirectionType } from './lib/table/table';
 import Textarea from './lib/form/textarea';
 import TextareaSet from './lib/form/textarea_set';
 import TimePicker from './lib/form/time_picker';
@@ -36,6 +37,7 @@ export {
     PDFViewer,
     PeriodOptions,
     PeriodSelector,
+    Table,
     Textarea,
     TextareaSet,
     TimePicker,
@@ -47,4 +49,5 @@ export {
 
 export type ListItem = ListItemType
 export type FormDialogButton = FormDialogButtonType
+export type TableSortDirection = TableSortDirectionType
 
