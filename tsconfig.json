@@ -21,7 +21,7 @@
     "outDir": "./dist",
     "noImplicitAny": true,
     "declaration": true,
-    "noEmit": false
+    "noEmit": true
   },
   "include": [
     "src"
