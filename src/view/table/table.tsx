@@ -19,7 +19,8 @@ export function tableOptions(): { [key: string]: TablePropsType } {
         headers: ['id', 'Date', 'Description', ''],
         onSortChange: (s, d) => {},
         rows: [
-            ["1", "2020-10-10", "Some Description", <IconButton size="small" onClick={() => {}} icon={<SampleIcon />} />]
+            ["1", "2020-10-10", "Some Description", <IconButton size="small" onClick={() => {}} icon={<SampleIcon />} />],
+            ["2", "2020-10-11", "Some Description", <IconButton size="small" onClick={() => {}} icon={<SampleIcon />} />]
         ],
         sortBy: 'id',
         sortDirection: 'ascending',
@@ -29,10 +30,15 @@ export function tableOptions(): { [key: string]: TablePropsType } {
         "Basic": {
             ...baseProps
         },
+        "Without Sorting": {
+            ...baseProps,
+            disableSort: true
+        },
         "Row Clickable": {
             ...baseProps,
             rows: [
-                ["1", "2020-10-10", "Some Description", 'Done']
+                ["1", "2020-10-10", "Some Description", 'Done'],
+                ["2", "2020-10-11", "Hello World!", 'N/A']
             ],
             onRowClick: i => {}
         },
