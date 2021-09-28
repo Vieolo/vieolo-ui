@@ -2,6 +2,7 @@ import Button from './lib/button/button';
 import Chip from './lib/chip';
 import DropDownMenu from './lib/menu/dropdown_menu';
 import FileInput from './lib/form/file_input';
+import FormDialog, { FormDialogButton as FormDialogButtonType } from './lib/dialog/formDialog';
 import IconButton from './lib/button/icon_button';
 import Input from './lib/form/input';
 import InputSet from './lib/form/input_set';
@@ -24,6 +25,7 @@ export {
     Chip,
     DropDownMenu,
     FileInput,
+    FormDialog,
     IconButton,
     Input,
     InputSet,
@@ -44,4 +46,5 @@ export {
 
 
 export type ListItem = ListItemType
+export type FormDialogButton = FormDialogButtonType
 
