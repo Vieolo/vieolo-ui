@@ -29,7 +29,7 @@ export default function Table(props: {
         <div className="vieolo-table__header-row" style={{gridTemplateColumns: props.columnGrid}}>
             {
                 props.headers.map(h => {
-                    return <div className="vieolo-table__cell">
+                    return <div className="vieolo-table__header-row__cell">
                         {
                             (props.sortBy === h && !props.disableSort) &&
                             <>
@@ -52,7 +52,7 @@ export default function Table(props: {
                     {
                         row.map(r => {
                             return <div 
-                                className="vieolo-table__cell"
+                                className="vieolo-table__content-row__cell"
                             >
                                 {
                                     typeof r === 'string' 

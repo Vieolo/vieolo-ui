@@ -14,7 +14,7 @@ export function tableOptions(): { [key: string]: TablePropsType } {
     
 
     let baseProps: TablePropsType = {        
-        columnGrid: '50px 80px 1fr 50px',
+        columnGrid: '50px 90px 1fr 50px',
         disableSort: false,
         headers: ['id', 'Date', 'Description', ''],
         onSortChange: (s, d) => {},
