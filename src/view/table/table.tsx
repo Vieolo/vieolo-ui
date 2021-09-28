@@ -1,8 +1,8 @@
 // React
-import React from 'react';
+import React, { useState } from 'react';
 
 // Component
-import Table from '../../lib/table/table';
+import Table, { TableSortDirection } from '../../lib/table/table';
 import IconButton from '../../lib/button/icon_button';
 
 // Material UI
@@ -35,14 +35,20 @@ export function tableOptions(): { [key: string]: TablePropsType } {
 
 export function TableCreator(props: {p: TablePropsType}) {
 
+    let [sort, setSort] = useState<string>("id");
+    let [direction, setDirection] = useState<TableSortDirection>('ascending');
+
     return <Table
         columnGrid={props.p.columnGrid}
         disableSort={props.p.disableSort}
         headers={props.p.headers}
-        onSortChange={props.p.onSortChange}
+        onSortChange={(s, d) => {
+            setSort(s);
+            setDirection(d);
+        }}
         rows={props.p.rows}
-        sortBy={props.p.sortBy}
-        sortDirection={props.p.sortDirection}
+        sortBy={sort}
+        sortDirection={direction}
         width={props.p.width}
     />
 

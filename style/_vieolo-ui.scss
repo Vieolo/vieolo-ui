@@ -945,6 +945,7 @@ body {
 			padding: 0px 4px;
 			display: flex;
 			align-items: center;
+			@include nonselectable;
 
 			p {
 				margin: 0;

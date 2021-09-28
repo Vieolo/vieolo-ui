@@ -15,6 +15,8 @@ export default function Table(props: {
     disableSort: boolean,
     sortBy: string,
     sortDirection: TableSortDirection,
+    /** The default direction that the new sort will take. Defaults to ascending */
+    defaultDirection?: TableSortDirection,
     onSortChange: (sort: string, direction: TableSortDirection) => void,
     width?: string
 }): JSX.Element {
@@ -29,7 +31,16 @@ export default function Table(props: {
         <div className="vieolo-table__header-row" style={{gridTemplateColumns: props.columnGrid}}>
             {
                 props.headers.map(h => {
-                    return <div className="vieolo-table__header-row__cell">
+                    return <div 
+                        className="vieolo-table__header-row__cell" 
+                        style={{cursor: props.disableSort ? 'default' : 'pointer'}}
+                        onClick={() => {
+                            if (!props.disableSort) {
+                                props.onSortChange(h, props.sortBy === h ? props.sortDirection === 'ascending' ? 'descending' : 'ascending' : (props.defaultDirection || 'ascending'));
+                            }
+                        }}
+                        >                        
+                        <TypographyTitleSmall text={h} />
                         {
                             (props.sortBy === h && !props.disableSort) &&
                             <>
@@ -38,9 +49,8 @@ export default function Table(props: {
                                     ? <p>&darr;</p>
                                     : <p>&uarr;</p>
                                 }
-                            </>                            
+                            </>
                         }
-                        <TypographyTitleSmall text={h} />
                     </div>
                 })
             }
