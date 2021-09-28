@@ -649,16 +649,6 @@ body {
 			margin: 2px;
 			@include no-text-overflow;
 		}
-
-		p:nth-child(1) {
-			font-size: 14px;
-			@include font-header;
-		}
-
-		p:nth-child(2) {
-			font-size: 11px;
-			@include font-light;
-		}
 	}
 
 	&__button-col {
@@ -901,5 +891,79 @@ body {
 		height: 30px;
 		@include center-by-flex-row;
 		cursor: pointer;
+	}
+}
+
+
+.vieolo-form-dialog {
+	background-color: white;
+	border-radius: 5px;
+
+	&__header {		
+		border-bottom: 1px solid #f2f2f2;
+		height: 40px;
+		padding: 0 10px;
+	}
+
+	&__footer {
+		height: 50px;
+		border-top: 2px solid #f2f2f2;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		padding: 0 10px;
+
+		&__spacer {
+			&--left {
+				margin-left: auto;
+			}
+
+			&--middle {
+				width: 5px;
+			}
+		}
+	}
+}
+
+.vieolo-list {
+	width: 100%;
+	overflow: scroll;
+}
+
+.vieolo-table {	
+	background-color: white;	
+
+	&__header-row {
+		background-color: #f2f2f2;
+		display: grid;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+
+		&__cell {
+			height: 40px;
+			display: flex;
+			padding: 0px 4px;
+			display: flex;
+			align-items: center;
+			@include nonselectable;
+
+			p {
+				margin: 0;
+			}
+		}
+	}
+
+	&__content-row {
+		display: grid;
+		border-bottom: 1px solid #f2f2f2;
+
+		&__cell {
+			height: 40px;
+			display: flex;
+			padding: 0px 4px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
 	}
 }

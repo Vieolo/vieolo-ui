@@ -35,7 +35,7 @@ export default function List(props: {
 
     let [query, setQuery] = useState<string>("");
 
-    return <div className="global-list" style={{ height: props.height }}>
+    return <div className="vieolo-list" style={{ height: props.height }}>
         <div className="center-by-flex-row"><TypographyTitleMedium text={props.title} className="margin-vertical--10" /></div>
 
         {

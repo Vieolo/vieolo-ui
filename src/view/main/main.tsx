@@ -16,6 +16,8 @@ import { SwitchSetCreator, switchSetOptions } from '../form/switch_set';
 import { DropDownMenuCreator, dropDownMenuOptions } from '../menu/dropdown_menu';
 import { PDFViewerEmbeddedCreator, pdfViewerEmbeddedOptions } from '../pdf_viewer/pdf_viewer_embedded';
 import { PDFViewerFullScreenCreator, pdfViewerFullScreenOptions } from '../pdf_viewer/pdf_viewer_full_screen';
+import { FormDialogCreator, formDialogOptions } from '../dialog/form_dialog';
+import { TableCreator, tableOptions } from '../table/table';
 
 
 export default function MainPage(props: {}): JSX.Element {
@@ -35,6 +37,8 @@ export default function MainPage(props: {}): JSX.Element {
         "Period Selector": { title: "Period Selector", data: periodSelectorOptions(), creator: PeriodSelectorCreator },
         "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator },
         "List": { title: "List", data: listOptions(), creator: ListCreator },
+        "Form Dialog": { title: "Form Dialog", data: formDialogOptions(), creator: FormDialogCreator },
+        "Table": { title: "Table", data: tableOptions(), creator: TableCreator },
     }
 
     let content: React.ReactNode = null;

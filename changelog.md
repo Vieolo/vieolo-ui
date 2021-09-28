@@ -1,8 +1,16 @@
 # Change Log
 
+## 0.10.5 (2021-09-28)
+
+- Added `Table` Component
+- Added `FormDialog` Component
+- Fixed the rendition of PDF files with pre-existing rotations ([#36](https://github.com/Vieolo/vieolo-ui/issues/36))
+- Fixed the CSS class name of `list` component ([#33](https://github.com/Vieolo/vieolo-ui/issues/33))
+- Added Typography to the `ItemRow` ([#35](https://github.com/Vieolo/vieolo-ui/issues/35))
+
 ## 0.10.4 (2021-09-24)
 
-- Add `List` component
+- Added `List` component
 - Exported `ItemRow` and `ItemRowSearch` components
 - Exported `PeriodOptions` enum
 
