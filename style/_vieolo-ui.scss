@@ -903,3 +903,34 @@ body {
 		cursor: pointer;
 	}
 }
+
+
+.vieolo-form-dialog {
+	background-color: white;
+	border-radius: 5px;
+
+	&__header {		
+		border-bottom: 1px solid #f2f2f2;
+		height: 40px;
+		padding: 0 10px;
+	}
+
+	&__footer {
+		height: 50px;
+		border-top: 2px solid #f2f2f2;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		padding: 0 10px;
+
+		&__spacer {
+			&--left {
+				margin-left: auto;
+			}
+
+			&--middle {
+				width: 5px;
+			}
+		}
+	}
+}

@@ -39,7 +39,7 @@ export default function FormDialog(props: {
     return <Modal
         onClose={props.onCancel}
     >
-        <div className="vieolo-form-dialog" style={{ width: props.width, padding: props.padding === undefined ? 10 : props.padding }}>
+        <div className="vieolo-form-dialog">
             <div className="vieolo-form-dialog__header flex-row-space-between">
                 <TypographyTitleSmall text={props.headerTitle} />
                 {
@@ -57,28 +57,37 @@ export default function FormDialog(props: {
                 }
             </div>
 
-            {props.children}
+            <div className="vieolo-form-dialog__content" style={{ width: props.width, padding: props.padding === undefined ? 10 : props.padding }}>
+                {props.children}
+            </div>            
 
             {
                 (!props.removeCancelButton || !props.removeSaveButton || !props.extraButtons || props.extraButtons.length === 0) &&
                 <div className="vieolo-form-dialog__footer">
+                    <div className="vieolo-form-dialog__footer__spacer--left"></div>
                     {
                         !props.removeCancelButton &&
-                        <Button
-                            onClick={props.onCancel}
-                            color={"error"}
-                            text={props.cancelText || 'Cancel'}
-                        />
+                        <>
+                            <Button
+                                onClick={props.onCancel}
+                                color={"error"}
+                                text={props.cancelText || 'Cancel'}
+                            />
+                            <div className="vieolo-form-dialog__footer__spacer--middle"></div>
+                        </>
                     }
 
                     {
                         (props.extraButtons || []).map((e, i) => {
-                            return <Button 
-                                key={`form_dialog_extra_button_${i}`}
-                                color={e.color}
-                                text={e.text}
-                                onClick={e.onClick}
-                            />
+                            return <>
+                                <Button
+                                    key={`form_dialog_extra_button_button_${i}`}
+                                    color={e.color}
+                                    text={e.text}
+                                    onClick={e.onClick}
+                                />
+                                <div className="vieolo-form-dialog__footer__spacer--middle" key={`form_dialog_extra_button_spacer_${i}`}></div>
+                            </>
                         })
                     }
 
