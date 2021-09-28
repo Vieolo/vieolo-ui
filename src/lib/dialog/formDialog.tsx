@@ -25,7 +25,7 @@ export default function FormDialog(props: {
     saveText?: string,
     /** defaults to 10 */
     padding?: number,
-    width: number,
+    width: number | string,
     onSave: () => void,
     removeCancelButton?: boolean,
     removeSaveButton?: boolean,
@@ -62,7 +62,7 @@ export default function FormDialog(props: {
             </div>            
 
             {
-                (!props.removeCancelButton || !props.removeSaveButton || !props.extraButtons || props.extraButtons.length === 0) &&
+                (!props.removeCancelButton || !props.removeSaveButton || props.extraButtons || (props.extraButtons || []).length > 0) &&
                 <div className="vieolo-form-dialog__footer">
                     <div className="vieolo-form-dialog__footer__spacer--left"></div>
                     {
