@@ -649,16 +649,6 @@ body {
 			margin: 2px;
 			@include no-text-overflow;
 		}
-
-		p:nth-child(1) {
-			font-size: 14px;
-			@include font-header;
-		}
-
-		p:nth-child(2) {
-			font-size: 11px;
-			@include font-light;
-		}
 	}
 
 	&__button-col {
