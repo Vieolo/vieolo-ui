@@ -1,14 +1,12 @@
 // React
 import React from 'react';
 
-
 // Typography
 import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
-import TypographyCaptionMedium from '../typography/typography_caption_medium';
-
 
 // Components
 import IconButton from '../button/icon_button';
+import TypographyCaptionLarge from '../typography/typography_caption_large';
 
 
 export default function ItemRow(props: {
@@ -48,7 +46,7 @@ export default function ItemRow(props: {
                 <TypographyParagraphMedium text={props.title} />
                 {
                     props.subTitle &&
-                    <TypographyCaptionMedium text={props.subTitle} showTitle />
+                    <TypographyCaptionLarge text={props.subTitle} showTitle />
                 }
             </div>
 
