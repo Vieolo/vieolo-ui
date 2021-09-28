@@ -929,3 +929,41 @@ body {
 	width: 100%;
 	overflow: scroll;
 }
+
+.vieolo-table {	
+	background-color: white;	
+
+	&__header-row {
+		background-color: #f2f2f2;
+		display: grid;
+		border-top-left-radius: 5px;
+		border-top-right-radius: 5px;
+
+		&__cell {
+			height: 40px;
+			display: flex;
+			padding: 0px 4px;
+			display: flex;
+			align-items: center;
+			@include nonselectable;
+
+			p {
+				margin: 0;
+			}
+		}
+	}
+
+	&__content-row {
+		display: grid;
+		border-bottom: 1px solid #f2f2f2;
+
+		&__cell {
+			height: 40px;
+			display: flex;
+			padding: 0px 4px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+	}
+}
