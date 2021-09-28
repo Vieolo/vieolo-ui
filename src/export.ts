@@ -2,13 +2,14 @@ import Button from './lib/button/button';
 import Chip from './lib/chip';
 import DropDownMenu from './lib/menu/dropdown_menu';
 import FileInput from './lib/form/file_input';
+import FormDialog, { FormDialogButton as FormDialogButtonType } from './lib/dialog/formDialog';
 import IconButton from './lib/button/icon_button';
 import Input from './lib/form/input';
 import InputSet from './lib/form/input_set';
 import ItemRow from './lib/list/item_row';
 import ItemRowSearch from './lib/list/item_row_search';
 import List, { ListItem as ListItemType } from './lib/list/list';
-import Modal from './lib/modal';
+import Modal from './lib/dialog/modal';
 import PDFViewer from './lib/pdf_viewer/pdf_viewer';
 import PeriodSelector, { PeriodOptions } from './lib/date_time/period_selector';
 import Textarea from './lib/form/textarea';
@@ -24,6 +25,7 @@ export {
     Chip,
     DropDownMenu,
     FileInput,
+    FormDialog,
     IconButton,
     Input,
     InputSet,
@@ -44,4 +46,5 @@ export {
 
 
 export type ListItem = ListItemType
+export type FormDialogButton = FormDialogButtonType
 

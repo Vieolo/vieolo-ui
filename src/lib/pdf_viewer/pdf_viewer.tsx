@@ -14,7 +14,7 @@ import ExpandIcon from '@material-ui/icons/FullscreenRounded';
 
 // Components
 import IconButton from '../button/icon_button';
-import Modal from '../modal';
+import Modal from '../dialog/modal';
 
 // Installed Packages
 import { PDFDocumentProxy } from 'pdfjs-dist/types/display/api';
