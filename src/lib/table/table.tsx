@@ -32,7 +32,13 @@ export default function Table(props: {
                     return <div className="vieolo-table__cell">
                         {
                             (props.sortBy === h && !props.disableSort) &&
-                            <p>{props.sortDirection === 'ascending' ? "&darr;" : "&uarr;"}</p>
+                            <>
+                                {
+                                props.sortDirection === 'ascending' 
+                                    ? <p>&darr;</p>
+                                    : <p>&uarr;</p>
+                                }
+                            </>                            
                         }
                         <TypographyTitleSmall text={h} />
                     </div>
