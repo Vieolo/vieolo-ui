@@ -27,6 +27,8 @@ export default function FormDialog(props: {
     padding?: number,
     width: number | string,
     onSave: () => void,
+    /** Passing true will cause the save button to be disabled. Usefull when preventing the user from submitting invalid form */
+    saveButtonDisabled?: boolean,
     removeCancelButton?: boolean,
     removeSaveButton?: boolean,
     /** These buttons will be displayed between the cancel and save button */
@@ -97,6 +99,7 @@ export default function FormDialog(props: {
                             onClick={props.onSave}
                             color={"primary"}
                             text={props.saveText || 'Save'}
+                            disabled={props.saveButtonDisabled}
                         />
                     }
                 </div>

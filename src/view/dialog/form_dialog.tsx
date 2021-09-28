@@ -37,6 +37,10 @@ export function formDialogOptions(): { [key: string]: FormDialogPropsType } {
             ...baseProps,
             padding: 30
         },
+        "With Disabled Save": {
+            ...baseProps,
+            saveButtonDisabled: true
+        },
         "With Close Button": {
             ...baseProps,
             headerRightComponent: 'close'
@@ -107,6 +111,7 @@ export function FormDialogCreator(props: {p: FormDialogPropsType}) {
                 removeCancelButton={props.p.removeCancelButton}
                 removeSaveButton={props.p.removeSaveButton}
                 saveText={props.p.saveText}
+                saveButtonDisabled={props.p.saveButtonDisabled}
             >
                 <p>The contents of the dialog</p>
             </FormDialog>
