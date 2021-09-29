@@ -35,8 +35,9 @@ export default function Table(props: {
     return <div className="vieolo-table" style={style}>
         <div className="vieolo-table__header-row" style={{gridTemplateColumns: props.columnGrid}}>
             {
-                props.headers.map(h => {
+                props.headers.map((h, i) => {
                     return <div 
+                        key={`table_header_row_${i}`}
                         className="vieolo-table__header-row__cell" 
                         style={{cursor: props.disableSort ? 'default' : 'pointer'}}
                         onClick={() => {
@@ -62,12 +63,19 @@ export default function Table(props: {
         </div>
 
         {
-            props.rows.map(row => {
-                return <div className={`vieolo-table__content-row ${props.onRowClick ? "clickable" : ''}`} style={{gridTemplateColumns: props.columnGrid}}>
+            props.rows.map((row, i) => {
+                return <div
+                    key={`table_row_${i}`} 
+                    className={`vieolo-table__content-row ${props.onRowClick ? "clickable" : ''}`} style={{gridTemplateColumns: props.columnGrid}}
+                    onClick={() => {
+                        if (props.onRowClick) props.onRowClick(i);
+                    }}
+                    >
                     {
-                        row.map(r => {
+                        row.map((r, z) => {
                             return <div 
                                 className="vieolo-table__content-row__cell"
+                                key={`table_row_${i}_${z}_div`}
                             >
                                 {
                                     typeof r === 'string' 

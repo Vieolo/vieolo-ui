@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.10.6 (2021-09-29)
+
+- Fixed the `onRowClick` of `Table` ([#48](https://github.com/Vieolo/vieolo-ui/issues/48))
+- Fixed the key error of the rows of `Table` ([#47](https://github.com/Vieolo/vieolo-ui/issues/47))
+
 ## 0.10.5 (2021-09-28)
 
 - Added `Table` Component

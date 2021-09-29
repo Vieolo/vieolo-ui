@@ -40,7 +40,7 @@ export function tableOptions(): { [key: string]: TablePropsType } {
                 ["1", "2020-10-10", "Some Description", 'Done'],
                 ["2", "2020-10-11", "Hello World!", 'N/A']
             ],
-            onRowClick: i => {}
+            onRowClick: i => alert(`Index ${i} is selected`)
         },
     }
 }
