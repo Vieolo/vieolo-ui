@@ -62,8 +62,13 @@ export default function Table(props: {
         </div>
 
         {
-            props.rows.map(row => {
-                return <div className={`vieolo-table__content-row ${props.onRowClick ? "clickable" : ''}`} style={{gridTemplateColumns: props.columnGrid}}>
+            props.rows.map((row, i) => {
+                return <div 
+                    className={`vieolo-table__content-row ${props.onRowClick ? "clickable" : ''}`} style={{gridTemplateColumns: props.columnGrid}}
+                    onClick={() => {
+                        if (props.onRowClick) props.onRowClick(i);
+                    }}
+                    >
                     {
                         row.map(r => {
                             return <div 
