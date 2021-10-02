@@ -932,6 +932,13 @@ body {
 
 .vieolo-table {	
 	background-color: white;	
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+
+	&--headless {
+		border-radius: 0px;
+		border: 1px solid #ddd;
+	}
 
 	&__header-row {
 		background-color: #f2f2f2;

@@ -1,5 +1,5 @@
 // React
-import React  from 'react';
+import React from 'react';
 
 // Typography
 import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
@@ -10,6 +10,7 @@ export type TableSortDirection = 'ascending' | 'descending';
 
 export default function Table(props: {
     headers: string[],
+    removeHeaderRow?: boolean,
     rows: React.ReactNode[][],
     columnGrid: string,
     disableSort: boolean,
@@ -32,53 +33,57 @@ export default function Table(props: {
         style.width = `${props.width}`;
     }
 
-    return <div className="vieolo-table" style={style}>
-        <div className="vieolo-table__header-row" style={{gridTemplateColumns: props.columnGrid}}>
-            {
-                props.headers.map((h, i) => {
-                    return <div 
-                        key={`table_header_row_${i}`}
-                        className="vieolo-table__header-row__cell" 
-                        style={{cursor: props.disableSort ? 'default' : 'pointer'}}
-                        onClick={() => {
-                            if (!props.disableSort) {
-                                props.onSortChange(h, props.sortBy === h ? props.sortDirection === 'ascending' ? 'descending' : 'ascending' : (props.defaultDirection || 'ascending'));
-                            }
-                        }}
-                        >                        
-                        <TypographyTitleSmall text={h} />
-                        {
-                            (props.sortBy === h && !props.disableSort) &&
-                            <>
-                                {
-                                props.sortDirection === 'ascending' 
-                                    ? <p>&darr;</p>
-                                    : <p>&uarr;</p>
+    return <div className={`vieolo-table ${props.removeHeaderRow ? 'vieolo-table--headless' : ''}`} style={style}>
+
+        {
+            props.removeHeaderRow !== true &&
+            <div className="vieolo-table__header-row" style={{ gridTemplateColumns: props.columnGrid }}>
+                {
+                    props.headers.map((h, i) => {
+                        return <div
+                            key={`table_header_row_${i}`}
+                            className="vieolo-table__header-row__cell"
+                            style={{ cursor: props.disableSort ? 'default' : 'pointer' }}
+                            onClick={() => {
+                                if (!props.disableSort) {
+                                    props.onSortChange(h, props.sortBy === h ? props.sortDirection === 'ascending' ? 'descending' : 'ascending' : (props.defaultDirection || 'ascending'));
                                 }
-                            </>
-                        }
-                    </div>
-                })
-            }
-        </div>
+                            }}
+                        >
+                            <TypographyTitleSmall text={h} />
+                            {
+                                (props.sortBy === h && !props.disableSort) &&
+                                <>
+                                    {
+                                        props.sortDirection === 'ascending'
+                                            ? <p>&darr;</p>
+                                            : <p>&uarr;</p>
+                                    }
+                                </>
+                            }
+                        </div>
+                    })
+                }
+            </div>
+        }
 
         {
             props.rows.map((row, i) => {
                 return <div
-                    key={`table_row_${i}`} 
-                    className={`vieolo-table__content-row ${props.onRowClick ? "clickable" : ''}`} style={{gridTemplateColumns: props.columnGrid}}
+                    key={`table_row_${i}`}
+                    className={`vieolo-table__content-row ${props.onRowClick ? "clickable" : ''}`} style={{ gridTemplateColumns: props.columnGrid }}
                     onClick={() => {
                         if (props.onRowClick) props.onRowClick(i);
                     }}
-                    >
+                >
                     {
                         row.map((r, z) => {
-                            return <div 
+                            return <div
                                 className="vieolo-table__content-row__cell"
                                 key={`table_row_${i}_${z}_div`}
                             >
                                 {
-                                    typeof r === 'string' 
+                                    typeof r === 'string'
                                         ? <TypographyParagraphMedium text={r} />
                                         : r
                                 }
