@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.10.7 (2021-10-02)
+
+- Added ability to remove the header row of the table ([#49](https://github.com/Vieolo/vieolo-ui/issues/49))
+
 ## 0.10.6 (2021-09-29)
 
 - Fixed the `onRowClick` of `Table` ([#48](https://github.com/Vieolo/vieolo-ui/issues/48))

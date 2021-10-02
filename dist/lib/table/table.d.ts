@@ -2,6 +2,7 @@ import React from 'react';
 export declare type TableSortDirection = 'ascending' | 'descending';
 export default function Table(props: {
     headers: string[];
+    removeHeaderRow?: boolean;
     rows: React.ReactNode[][];
     columnGrid: string;
     disableSort: boolean;
