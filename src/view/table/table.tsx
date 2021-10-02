@@ -42,6 +42,15 @@ export function tableOptions(): { [key: string]: TablePropsType } {
             ],
             onRowClick: i => alert(`Index ${i} is selected`)
         },
+        "Without header": {
+            ...baseProps,
+            removeHeaderRow: true,
+            rows: [
+                ["1", "2020-10-10", "Some Description", 'Done'],
+                ["2", "2020-10-11", "Hello World!", 'N/A']
+            ],
+            onRowClick: i => alert(`Index ${i} is selected`)
+        },
     }
 }
 
@@ -64,6 +73,7 @@ export function TableCreator(props: {p: TablePropsType}) {
         sortDirection={direction}
         width={props.p.width}
         onRowClick={props.p.onRowClick}
+        removeHeaderRow={props.p.removeHeaderRow}
     />
 
 }
