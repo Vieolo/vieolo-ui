@@ -1014,7 +1014,8 @@ body {
 				background-color: $primary-color-normal;
 			}
 			
-			p {
+			p,
+			svg {
 				color: $primary-color-text;
 			}
 		}
