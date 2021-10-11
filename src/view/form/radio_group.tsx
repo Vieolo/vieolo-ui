@@ -1,9 +1,8 @@
 // React
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 // Component
 import RadioGroup from '../../lib/form/radio_group';
-import IconButton from '../../lib/button/icon_button';
 
 // Material UI
 import SampleIcon1 from '@material-ui/icons/AccessibleForwardTwoTone';
@@ -27,14 +26,23 @@ export function radioGroupOptions(): { [key: string]: RadioGroupPropsType } {
     }
 
     return {
-        "Basic": {
+        "Basic Horizontal": {
             ...baseProps
         },
-        "With Custom Padding": {
+        "Basic Vertical": {
+            ...baseProps,
+            direction: 'vertical'
+        },
+        "Horizontal With Custom Padding": {
             ...baseProps,
             horizontalButtonPadding: 30
         },
-        "With Long Text": {
+        "Vertical With Custom Padding": {
+            ...baseProps,
+            horizontalButtonPadding: 30,
+            direction: 'vertical'
+        },
+        "Horizontal With Long Text": {
             ...baseProps,
             horizontalButtonPadding: 30,
             options: [
@@ -43,9 +51,42 @@ export function radioGroupOptions(): { [key: string]: RadioGroupPropsType } {
                 {id: 'Three', button: 'Three'},
             ]   
         },
-        "With Icon": {
+        "Vertical With Long Text": {
             ...baseProps,
             horizontalButtonPadding: 30,
+            direction: 'vertical',
+            options: [
+                {id: 'One', button: 'A Very Long Text'},
+                {id: 'Two', button: 'Two'},
+                {id: 'Three', button: 'Three'},
+            ]   
+        },
+        "Horizontal With Icon": {
+            ...baseProps,
+            horizontalButtonPadding: 30,
+            options: [
+                {
+                    id: 'One', 
+                    button: <SampleIcon1 />
+                },
+                {
+                    id: 'Two', 
+                    button: <SampleIcon2 />
+                },
+                {
+                    id: 'Three', 
+                    button: <SampleIcon3 />
+                },
+                {
+                    id: 'Four', 
+                    button: <SampleIcon4 />
+                },
+            ]   
+        },
+        "Vertical With Icon": {
+            ...baseProps,
+            horizontalButtonPadding: 30,
+            direction: 'vertical',
             options: [
                 {
                     id: 'One', 

@@ -1019,5 +1019,9 @@ body {
 				color: $primary-color-text;
 			}
 		}
+
+		&--vertical {
+			width: 100%;
+		}
 	}
 }

@@ -10,12 +10,14 @@ export default function RadioGroup(props: {
     value: string,
     options: RadioButtonType[],
     onOptionChange: (o: string) => void,
-    direction: 'vertical' | 'horizontal',
+    direction?: 'vertical' | 'horizontal',
     /** Defaults to 10px */
     horizontalButtonPadding?: number
 }) {
 
-    let className = `vieolo-radio-group__radio-contents vieolo-radio-group__radio-contents--${props.direction}`;            
+    let className = `vieolo-radio-group__radio-contents vieolo-radio-group__radio-contents--${props.direction || 'horizontal'}`;
+
+    let buttonClass = 'vieolo-radio-group__radio-button';
 
     return <div className="vieolo-radio-group">
         <div className={className}>
@@ -23,7 +25,7 @@ export default function RadioGroup(props: {
                 props.options.map((o: RadioButtonType) => {
                     return <div 
                         key={o.id} 
-                        className={`vieolo-radio-group__radio-button ${props.value === o.id ? "vieolo-radio-group__radio-button--selected" : ""}`} 
+                        className={`${buttonClass} ${props.value === o.id ? buttonClass +  "--selected" : ""} ${buttonClass}--${props.direction || 'horizontal'}`} 
                         onClick={() => {
                             props.onOptionChange(o.id);
                         }}
