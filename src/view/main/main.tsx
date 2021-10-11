@@ -18,6 +18,7 @@ import { PDFViewerEmbeddedCreator, pdfViewerEmbeddedOptions } from '../pdf_viewe
 import { PDFViewerFullScreenCreator, pdfViewerFullScreenOptions } from '../pdf_viewer/pdf_viewer_full_screen';
 import { FormDialogCreator, formDialogOptions } from '../dialog/form_dialog';
 import { TableCreator, tableOptions } from '../table/table';
+import { RadioGroupCreator, radioGroupOptions } from '../form/radio_group';
 
 
 export default function MainPage(props: {}): JSX.Element {
@@ -39,6 +40,7 @@ export default function MainPage(props: {}): JSX.Element {
         "List": { title: "List", data: listOptions(), creator: ListCreator },
         "Form Dialog": { title: "Form Dialog", data: formDialogOptions(), creator: FormDialogCreator },
         "Table": { title: "Table", data: tableOptions(), creator: TableCreator },
+        "Radio Group": { title: "Radio Group", data: radioGroupOptions(), creator: RadioGroupCreator },
     }
 
     let content: React.ReactNode = null;
