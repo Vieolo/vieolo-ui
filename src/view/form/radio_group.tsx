@@ -35,6 +35,7 @@ export function RadioGroupCreator(props: {p: RadioGroupPropsType}) {
         onOptionChange={o => setSelected(o)}
         options={props.p.options}
         value={selected}
+        horizontalButtonPadding={props.p.horizontalButtonPadding}
     />
 
 }

@@ -974,3 +974,49 @@ body {
 		}
 	}
 }
+
+.vieolo-radio-group {
+	display: inline-block;
+
+	&__radio-contents {
+		border-radius: $universal-border-radius-half;
+		background-color: white;
+		border: 1px solid #f2f2f2;
+
+		&--vertical {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;	
+		}
+
+		&--horizontal {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+
+	&__radio-button {
+		height: 30px;
+		cursor: pointer;
+		@include center-by-flex-row;
+		border-radius: $universal-border-radius-half;
+		
+		&:hover {
+			background-color: #f2f2f2;
+		}
+
+		&--selected {
+			background-color: $primary-color-normal;
+
+			&:hover {
+				background-color: $primary-color-normal;
+			}
+			
+			p {
+				color: $primary-color-text;
+			}
+		}
+	}
+}
