@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.10.8 (2021-10-02)
+
+- Added `RadioGroup` component ([#50](https://github.com/Vieolo/vieolo-ui/issues/50))
+- Added `preValidationNameEditor` function to the `FileInput`
+
 ## 0.10.7 (2021-10-02)
 
 - Added ability to remove the header row of the table ([#49](https://github.com/Vieolo/vieolo-ui/issues/49))

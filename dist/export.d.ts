@@ -16,10 +16,12 @@ import Table, { TableSortDirection as TableSortDirectionType } from './lib/table
 import Textarea from './lib/form/textarea';
 import TextareaSet from './lib/form/textarea_set';
 import TimePicker from './lib/form/time_picker';
+import RadioGroup, { RadioButtonType as RadioButtonTempType } from './lib/form/radio_group';
 import Select from './lib/form/select';
 import Switch from './lib/form/switch';
 import SwitchSet from './lib/form/switch_set';
-export { Button, Chip, DropDownMenu, FileInput, FormDialog, IconButton, Input, InputSet, ItemRow, ItemRowSearch, List, Modal, PDFViewer, PeriodOptions, PeriodSelector, Table, Textarea, TextareaSet, TimePicker, Select, Switch, SwitchSet };
+export { Button, Chip, DropDownMenu, FileInput, FormDialog, IconButton, Input, InputSet, ItemRow, ItemRowSearch, List, Modal, PDFViewer, PeriodOptions, PeriodSelector, Table, Textarea, TextareaSet, TimePicker, RadioGroup, Select, Switch, SwitchSet };
 export declare type ListItem = ListItemType;
 export declare type FormDialogButton = FormDialogButtonType;
 export declare type TableSortDirection = TableSortDirectionType;
+export declare type RadioButtonType = RadioButtonTempType;
