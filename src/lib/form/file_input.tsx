@@ -3,7 +3,7 @@ import React from 'react';
 
 
 // Installed Packges
-import { fileValidation } from '@vieolo/validation-js';
+import { fileNameValidation } from '@vieolo/validation-js';
 
 
 export default function FileInput(props: {
@@ -13,7 +13,12 @@ export default function FileInput(props: {
     text?: string,
     multiple?: boolean,
     accept?: string,
-    validateFileName?: boolean
+    validateFileName?: boolean,
+    /** 
+     * This function (if provided) will change the name of the file prior checking for validation. 
+     * This function is useful if the name of the file will change before being used or uploaded to the server
+     */
+    preValidationNameEditor?: (fileName: string) => string
 }) {
     
     return <form className="vieolo-file-input">
@@ -28,8 +33,9 @@ export default function FileInput(props: {
                 if (props.validateFileName) {
                     let fileList = e.target.files as FileList;
 
-                    for (let file of fileList as any) {
-                        if (!fileValidation({ file: file }).isValid) {
+                    for (let file of fileList as any as File[]) {
+                        let fileName = props.preValidationNameEditor ? props.preValidationNameEditor(file.name) : file.name;
+                        if (!fileNameValidation(fileName)) {
                             props.onError('File(s) have prohibited characters!');
                             allFilesValid = false;
                             return;

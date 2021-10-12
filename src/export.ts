@@ -16,6 +16,7 @@ import Table, { TableSortDirection as TableSortDirectionType } from './lib/table
 import Textarea from './lib/form/textarea';
 import TextareaSet from './lib/form/textarea_set';
 import TimePicker from './lib/form/time_picker';
+import RadioGroup, { RadioButtonType as RadioButtonTempType } from './lib/form/radio_group';
 import Select from './lib/form/select';
 import Switch from './lib/form/switch';
 import SwitchSet from './lib/form/switch_set';
@@ -41,6 +42,7 @@ export {
     Textarea,
     TextareaSet,
     TimePicker,
+    RadioGroup,
     Select,
     Switch,
     SwitchSet
@@ -50,4 +52,5 @@ export {
 export type ListItem = ListItemType
 export type FormDialogButton = FormDialogButtonType
 export type TableSortDirection = TableSortDirectionType
+export type RadioButtonType = RadioButtonTempType
 
