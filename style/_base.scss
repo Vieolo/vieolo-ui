@@ -401,6 +401,229 @@ $accessory-green-text: black !default;
 }
 
 
+.background-color {
+	&--primary-normal {
+		background-color: $primary-color-normal;
+	}
+
+	&--primary-light {
+		background-color: $primary-color-light;
+	}
+
+	&--primary-text {
+		background-color: $primary-color-text;
+	}
+
+	&--secondary-normal {
+		background-color: $secondary-color-normal;
+	}
+
+	&--secondary-light {
+		background-color: $secondary-color-light;
+	}
+
+	&--secondary-text {
+		background-color: $secondary-color-text;
+	}
+
+	&--tertiary-normal {
+		background-color: $tertiary-color-normal;
+	}
+
+	&--tertiary-light {
+		background-color: $tertiary-color-light;
+	}
+
+	&--tertiary-text {
+		background-color: $tertiary-color-text;
+	}
+
+	&--error-normal {
+		background-color: $error-color-normal;
+	}
+
+	&--error-light {
+		background-color: $error-color-light;
+	}
+
+	&--error-text {
+		background-color: $error-color-text;
+	}
+
+	&--success-normal {
+		background-color: $success-color-normal;
+	}
+
+	&--success-light {
+		background-color: $success-color-light;
+	}
+
+	&--success-text {
+		background-color: $success-color-text;
+	}
+
+	&--alert-normal {
+		background-color: $alert-color-normal;
+	}
+
+	&--alert-light {
+		background-color: $alert-color-light;
+	}
+
+	&--alert-text {
+		background-color: $alert-color-text;
+	}
+
+	&--accessory-blue-normal {
+		background-color: $accessory-blue-normal;
+	}
+
+	&--accessory-blue-light {
+		background-color: $accessory-blue-light;
+	}
+
+	&--accessory-blue-text {
+		background-color: $accessory-blue-text;
+	}
+
+	&--accessory-green-normal {
+		background-color: $accessory-green-normal;
+	}
+
+	&--accessory-green-light {
+		background-color: $accessory-green-light;
+	}
+
+	&--accessory-green-text {
+		background-color: $accessory-green-text;
+	}
+
+	&--accessory-orange-normal {
+		background-color: $accessory-orange-normal;
+	}
+
+	&--accessory-orange-light {
+		background-color: $accessory-orange-light;
+	}
+
+	&--accessory-orange-text {
+		background-color: $accessory-orange-text;
+	}
+	
+}
+
+
+.color {
+	&--primary-normal {
+		color: $primary-color-normal;
+	}
+
+	&--primary-light {
+		color: $primary-color-light;
+	}
+
+	&--primary-text {
+		color: $primary-color-text;
+	}
+
+	&--secondary-normal {
+		color: $secondary-color-normal;
+	}
+
+	&--secondary-light {
+		color: $secondary-color-light;
+	}
+
+	&--secondary-text {
+		color: $secondary-color-text;
+	}
+
+	&--tertiary-normal {
+		color: $tertiary-color-normal;
+	}
+
+	&--tertiary-light {
+		color: $tertiary-color-light;
+	}
+
+	&--tertiary-text {
+		color: $tertiary-color-text;
+	}
+
+	&--error-normal {
+		color: $error-color-normal;
+	}
+
+	&--error-light {
+		color: $error-color-light;
+	}
+
+	&--error-text {
+		color: $error-color-text;
+	}
+
+	&--success-normal {
+		color: $success-color-normal;
+	}
+
+	&--success-light {
+		color: $success-color-light;
+	}
+
+	&--success-text {
+		color: $success-color-text;
+	}
+
+	&--alert-normal {
+		color: $alert-color-normal;
+	}
+
+	&--alert-light {
+		color: $alert-color-light;
+	}
+
+	&--alert-text {
+		color: $alert-color-text;
+	}
+
+	&--accessory-blue-normal {
+		color: $accessory-blue-normal;
+	}
+
+	&--accessory-blue-light {
+		color: $accessory-blue-light;
+	}
+
+	&--accessory-blue-text {
+		color: $accessory-blue-text;
+	}
+
+	&--accessory-green-normal {
+		color: $accessory-green-normal;
+	}
+
+	&--accessory-green-light {
+		color: $accessory-green-light;
+	}
+
+	&--accessory-green-text {
+		color: $accessory-green-text;
+	}
+
+	&--accessory-orange-normal {
+		color: $accessory-orange-normal;
+	}
+
+	&--accessory-orange-light {
+		color: $accessory-orange-light;
+	}
+
+	&--accessory-orange-text {
+		color: $accessory-orange-text;
+	}
+	
+}
+
 
 
 // Sizes
