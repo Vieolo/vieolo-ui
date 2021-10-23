@@ -6,7 +6,7 @@ import Table, { TableSortDirection } from '../../lib/table/table';
 import IconButton from '../../lib/button/icon_button';
 
 // Material UI
-import SampleIcon from '@material-ui/icons/RefreshRounded';
+import SampleIcon from '@mui/icons-material/RefreshRounded';
 
 type TablePropsType = React.ComponentProps<typeof Table>;
 

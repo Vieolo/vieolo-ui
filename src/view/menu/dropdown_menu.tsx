@@ -2,10 +2,10 @@
 import React from 'react';
 
 // Material UI
-import IconOne from '@material-ui/icons/Assignment';
-import IconTwo from '@material-ui/icons/Backup';
-import IconThree from '@material-ui/icons/Cake';
-import IconFour from '@material-ui/icons/DataUsage';
+import IconOne from '@mui/icons-material/Assignment';
+import IconTwo from '@mui/icons-material/Backup';
+import IconThree from '@mui/icons-material/Cake';
+import IconFour from '@mui/icons-material/DataUsage';
 
 // Component
 import DropDownMenu from '../../lib/menu/dropdown_menu';

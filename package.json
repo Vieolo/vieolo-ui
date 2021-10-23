@@ -28,8 +28,10 @@
     "web-vitals": "^2.0.1"
   },
   "dependencies": {
-    "@material-ui/core": "^4.11.4",
-    "@material-ui/icons": "^4.11.2",
+    "@emotion/react": "^11.5.0",
+    "@emotion/styled": "^11.3.0",
+    "@mui/icons-material": "^5.0.4",
+    "@mui/material": "^5.0.4",
     "@vieolo/date": "github:Vieolo/date-js#master",
     "@vieolo/validation-js": "github:Vieolo/validation-js#0.1.2",
     "pdfjs-dist": "^2.9.359",

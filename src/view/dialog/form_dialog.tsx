@@ -7,7 +7,7 @@ import Button from '../../lib/button/button';
 import IconButton from '../../lib/button/icon_button';
 
 // Material UI
-import SampleIcon from '@material-ui/icons/RefreshRounded';
+import SampleIcon from '@mui/icons-material/RefreshRounded';
 
 type FormDialogPropsType = React.ComponentProps<typeof FormDialog>;
 
