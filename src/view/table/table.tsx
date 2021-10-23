@@ -51,6 +51,16 @@ export function tableOptions(): { [key: string]: TablePropsType } {
             ],
             onRowClick: i => alert(`Index ${i} is selected`)
         },
+        "With Sticky Header": {
+            ...baseProps,   
+            stickyHeader: true,
+            maxHeight: '300px',         
+            rows: [
+                ...Array(40).fill("").map((z, i) => {
+                    return [i, "2020-10-10", "Some Description", 'Done']
+                })
+            ],
+        }
     }
 }
 
@@ -74,6 +84,8 @@ export function TableCreator(props: {p: TablePropsType}) {
         width={props.p.width}
         onRowClick={props.p.onRowClick}
         removeHeaderRow={props.p.removeHeaderRow}
+        stickyHeader={props.p.stickyHeader}
+        maxHeight={props.p.maxHeight}
     />
 
 }

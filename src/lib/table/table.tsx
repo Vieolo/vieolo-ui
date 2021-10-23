@@ -20,6 +20,8 @@ export default function Table(props: {
     defaultDirection?: TableSortDirection,
     onSortChange: (sort: string, direction: TableSortDirection) => void,
     width?: string,
+    stickyHeader?: boolean,
+    maxHeight?: string,
     /** 
      * If a functin is passed, the entire row will be clickable.
      * It is recommended to avoid using clickable components inside the row when making the row clickable
@@ -33,11 +35,16 @@ export default function Table(props: {
         style.width = `${props.width}`;
     }
 
+    if (props.maxHeight) {
+        style.maxHeight = props.maxHeight;
+        style.overflowY = 'scroll';
+    }
+
     return <div className={`vieolo-table ${props.removeHeaderRow ? 'vieolo-table--headless' : ''}`} style={style}>
 
         {
             props.removeHeaderRow !== true &&
-            <div className="vieolo-table__header-row" style={{ gridTemplateColumns: props.columnGrid }}>
+            <div className={`vieolo-table__header-row ${props.stickyHeader ? 'position--sticky--top-0' : ''}`} style={{ gridTemplateColumns: props.columnGrid}}>
                 {
                     props.headers.map((h, i) => {
                         return <div
