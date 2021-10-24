@@ -157,7 +157,7 @@ export default function Table(props: {
 
                     <IconButton
                         icon={<RightArrowIcon />}
-                        onClick={() => props.pagination!.pageNumber + 1}
+                        onClick={() => props.pagination!.onPageChange(props.pagination!.pageNumber + 1)}
                         color='primary'
                         size='small'
                         disabled={!props.pagination!.hasNextPage}
