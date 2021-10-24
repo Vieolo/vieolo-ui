@@ -2,8 +2,8 @@
 import React from 'react';
 
 // Material UI
-import SampleIcon1 from '@material-ui/icons/FaceRounded';
-import SampleIcon2 from '@material-ui/icons/FlipCameraAndroid';
+import SampleIcon1 from '@mui/icons-material/FaceRounded';
+import SampleIcon2 from '@mui/icons-material/FlipCameraAndroid';
 
 // Component
 import List, { ListItem } from '../../lib/list/list';

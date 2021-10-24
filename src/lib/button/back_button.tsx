@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Material UI
-import ArrowBackIcon from '@material-ui/icons/ArrowBackIosRounded';
+import ArrowBackIcon from '@mui/icons-material/ArrowBackIosRounded';
 
 // Components
 import IconButton from './icon_button';

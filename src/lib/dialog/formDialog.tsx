@@ -11,7 +11,7 @@ import IconButton from "../button/icon_button"
 import Button from '../button/button';
 
 // Material UI
-import CloseIcon from '@material-ui/icons/CloseRounded';
+import CloseIcon from '@mui/icons-material/CloseRounded';
 
 export type FormDialogButton = {
     text: string,

@@ -3,9 +3,9 @@ import TypographyParagraphMedium from '../typography/typography_paragraph_medium
 
 
 // Material UI
-import LeftArrow from '@material-ui/icons/KeyboardArrowLeft';
-import RightArrow from '@material-ui/icons/KeyboardArrowRight';
-import DownArrow from '@material-ui/icons/KeyboardArrowDown';
+import LeftArrow from '@mui/icons-material/KeyboardArrowLeft';
+import RightArrow from '@mui/icons-material/KeyboardArrowRight';
+import DownArrow from '@mui/icons-material/KeyboardArrowDown';
 
 
 // Vieolo UI

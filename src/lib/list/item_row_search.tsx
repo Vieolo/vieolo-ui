@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Material UI
-import CloseIcon from '@material-ui/icons/CloseRounded';
+import CloseIcon from '@mui/icons-material/CloseRounded';
 
 // Vieolo UI
 import IconButton from '../button/icon_button';
