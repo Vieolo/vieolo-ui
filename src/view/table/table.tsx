@@ -30,9 +30,15 @@ export function tableOptions(): { [key: string]: TablePropsType } {
         "Basic": {
             ...baseProps
         },
-        "Without Sorting": {
+        "Without Sorting (Explicit)": {
             ...baseProps,
-            disableSort: true
+            disableSort: true,
+        },
+        "Without Sorting (Implicit)": {
+            ...baseProps,
+            sortBy: null,
+            onSortChange: null,
+            sortDirection: null
         },
         "Dense": {
             ...baseProps,
@@ -50,6 +56,7 @@ export function tableOptions(): { [key: string]: TablePropsType } {
         "Without header": {
             ...baseProps,
             removeHeaderRow: true,
+            headers: undefined,
             rows: [
                 ["1", "2020-10-10", "Some Description", 'Done'],
                 ["2", "2020-10-11", "Hello World!", 'N/A']
@@ -107,16 +114,15 @@ export function TableCreator(props: {p: TablePropsType}) {
         columnGrid={props.p.columnGrid}
         disableSort={props.p.disableSort}
         headers={props.p.headers}
-        onSortChange={(s, d) => {
+        onSortChange={props.p.onSortChange ? (s, d) => {
             setSort(s);
             setDirection(d);
-        }}
+        } : undefined}
         rows={props.p.rows}
-        sortBy={sort}
-        sortDirection={direction}
+        sortBy={props.p.sortBy ? sort : undefined}
+        sortDirection={props.p.sortDirection ? direction : null}
         width={props.p.width}
         onRowClick={props.p.onRowClick}
-        removeHeaderRow={props.p.removeHeaderRow}
         stickyHeader={props.p.stickyHeader}
         maxHeight={props.p.maxHeight}
         pagination={props.p.pagination}

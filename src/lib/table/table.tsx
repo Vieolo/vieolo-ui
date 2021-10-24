@@ -13,16 +13,23 @@ import RightArrowIcon from '@mui/icons-material/ArrowRight';
 export type TableSortDirection = 'ascending' | 'descending';
 
 export default function Table(props: {
-    headers: string[],
+    headers?: string[],
+    /**
+     * @deprecated The headers row is now optional, leaving which will result in absense of header row
+     */
     removeHeaderRow?: boolean,
     rows: React.ReactNode[][],
     columnGrid: string,
-    disableSort: boolean,
-    sortBy: string,
-    sortDirection: TableSortDirection,
+    disableSort?: boolean,
+    sortBy?: string,
+    sortDirection?: TableSortDirection,
     /** The default direction that the new sort will take. Defaults to ascending */
     defaultDirection?: TableSortDirection,
-    onSortChange: (sort: string, direction: TableSortDirection) => void,
+    /**
+     * To make this callback work, `sortBy` and `sortDirection` should be provided and
+     * `disableSort` should also be falsy
+     */
+    onSortChange?: (sort: string, direction: TableSortDirection) => void,
     width?: string,
     stickyHeader?: boolean,
     maxHeight?: string,
@@ -67,16 +74,16 @@ export default function Table(props: {
 
         <div className="vieolo-table__content" style={contentStyle}>
             {
-                props.removeHeaderRow !== true &&
+                (props.removeHeaderRow !== true || Array.isArray(props.headers)) &&
                 <div className={`vieolo-table__header-row ${props.stickyHeader ? 'position--sticky--top-0' : ''}`} style={{ gridTemplateColumns: props.columnGrid }}>
                     {
-                        props.headers.map((h, i) => {
+                        (props.headers || []).map((h, i) => {
                             return <div
                                 key={`table_header_row_${i}`}
                                 className="vieolo-table__header-row__cell"
-                                style={{ cursor: props.disableSort ? 'default' : 'pointer' }}
+                                style={{ cursor: (props.disableSort || !props.sortBy || !props.onSortChange || !props.sortDirection) ? 'default' : 'pointer' }}
                                 onClick={() => {
-                                    if (!props.disableSort) {
+                                    if (!props.disableSort && props.onSortChange && props.sortBy && props.sortDirection) {
                                         props.onSortChange(h, props.sortBy === h ? props.sortDirection === 'ascending' ? 'descending' : 'ascending' : (props.defaultDirection || 'ascending'));
                                     }
                                 }}
