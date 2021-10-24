@@ -34,6 +34,11 @@ export function tableOptions(): { [key: string]: TablePropsType } {
             ...baseProps,
             disableSort: true
         },
+        "Dense": {
+            ...baseProps,
+            disableSort: true,
+            isDense: true
+        },
         "Row Clickable": {
             ...baseProps,
             rows: [
@@ -115,6 +120,7 @@ export function TableCreator(props: {p: TablePropsType}) {
         stickyHeader={props.p.stickyHeader}
         maxHeight={props.p.maxHeight}
         pagination={props.p.pagination}
+        isDense={props.p.isDense}
     />
 
 }

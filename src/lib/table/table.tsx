@@ -26,6 +26,10 @@ export default function Table(props: {
     width?: string,
     stickyHeader?: boolean,
     maxHeight?: string,
+    /**
+     * Converts the height of each row from 40px to 28px
+     */
+    isDense?: boolean,
     /** 
      * If a functin is passed, the entire row will be clickable.
      * It is recommended to avoid using clickable components inside the row when making the row clickable
@@ -97,9 +101,13 @@ export default function Table(props: {
             <div className={(props.maxHeight && props.pagination) && "padding-bottom--40"}>
                 {
                     props.rows.map((row, i) => {
+                        let className = 'vieolo-table__content-row';
+                        if (props.isDense) className += ` ${className}--dense`
+                        if (props.onRowClick) className += ' clickable'
+                        
                         return <div
                             key={`table_row_${i}`}
-                            className={`vieolo-table__content-row ${props.onRowClick ? "clickable" : ''}`} style={{ gridTemplateColumns: props.columnGrid }}
+                            className={className} style={{ gridTemplateColumns: props.columnGrid }}
                             onClick={() => {
                                 if (props.onRowClick) props.onRowClick(i);
                             }}

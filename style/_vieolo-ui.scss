@@ -972,6 +972,14 @@ body {
 			flex-direction: column;
 			justify-content: center;
 		}
+
+		$this: &;
+
+		&--dense {
+			#{$this}__cell {
+				height: 28px;
+			}
+		}
 	}
 
 	&__pagination-row {
