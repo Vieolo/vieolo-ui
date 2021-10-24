@@ -22,13 +22,13 @@ $gray-text-color: gray !default;
 
 $primary-color-normal: #2e2e2e !default;
 $primary-color-transparent: rgba(46, 46, 46, 0.3) !default;
-$primary-color-light: #888888 !default;
+$primary-color-light: #bdbdbd !default;
 $primary-color-gradient: linear-gradient(to right bottom, #444444, #404040, #3b3b3b, #373737, #333333, #2f2f2f, #2c2c2c, #282828, #232323, #1f1f1f, #1a1a1a, #161616) !default;
 $primary-color-text: #e0e0e0 !default;
 
 $secondary-color-normal: #3E88C2 !default;
 $secondary-color-transparent: rgba(62, 136, 194, 0.3) !default;
-$secondary-color-light: rgb(26, 15, 46) !default;
+$secondary-color-light: #b9e1ff !default;
 $secondary-color-gradient: linear-gradient(to right bottom, #71a7d3, #659fcf, #5997cb, #4c90c6, #3e88c2) !default;
 $secondary-color-text: white !default;
 
@@ -61,21 +61,21 @@ $disable-color-normal: #b0bec5 !default;
 $disable-color-gradient: linear-gradient(to right bottom, #c5cdd1, #c0c9ce, #bac5cb, #b5c2c8, #b0bec5) !default;
 
 
-$accessory-orange-normal: wheat !default;
-$accessory-orange-transparent: rgba(245, 222, 179, 0.3) !default;
-$accessory-orange-light: rgb(26, 15, 46) !default;
+$accessory-orange-normal: rgb(255, 127, 80) !default;
+$accessory-orange-transparent: rgba(255, 127, 80, 0.3) !default;
+$accessory-orange-light: rgb(255, 216, 202) !default;
 $accessory-orange-gradient: linear-gradient(to right bottom, #f4e5c9, #f4e3c3, #f5e2be, #f5e0b8, #f5deb3) !default;
 $accessory-orange-text: black !default;
 
 $accessory-blue-normal: rgb(25, 118, 210) !default;
-$accessory-blue-transparent: rgba(245, 222, 179, 0.3) !default;
-$accessory-blue-light: rgb(26, 15, 46) !default;
+$accessory-blue-transparent: rgba(25, 118, 210, 0.3) !default;
+$accessory-blue-light: rgb(65, 160, 255) !default;
 $accessory-blue-gradient: linear-gradient(to right bottom, #4795e3, #3d8ddf, #3285db, #267ed6, #1976d2) !default;
 $accessory-blue-text: white !default;
 
-$accessory-green-normal: rgb(152, 227, 214) !default;
-$accessory-green-transparent: rgba(245, 222, 179, 0.3) !default;
-$accessory-green-light: rgb(26, 15, 46) !default;
+$accessory-green-normal: rgb(82, 219, 196) !default;
+$accessory-green-transparent: rgba(82, 219, 196, 0.3) !default;
+$accessory-green-light: rgb(157, 255, 239) !default;
 $accessory-green-gradient: linear-gradient(to right bottom, #ccf9f2, #bff4eb, #b2eee4, #a5e9dd, #98e3d6) !default;
 $accessory-green-text: black !default;
 
@@ -247,7 +247,7 @@ $accessory-green-text: black !default;
 %ripple {
 	background-position: center;
 	transition: background 0.8s;
-	  
+
 	&:active {
 		background-size: 100%;
 		transition: background 0s;
@@ -257,8 +257,8 @@ $accessory-green-text: black !default;
 @mixin ripple-error {
 	@extend %ripple;
 	&:active {
-		background-color: $error-color-transparent;
-		background: $error-color-transparent;
+		background-color: rgba($error-color-normal, 0.5) !important;
+		background: rgba($error-color-normal, 0.5) !important;
 	}	
 }
 .ripple-error {
@@ -268,8 +268,8 @@ $accessory-green-text: black !default;
 @mixin ripple-alert {
 	@extend %ripple;
 	&:active {
-		background-color: $alert-color-transparent;
-		background: $alert-color-transparent;		
+		background-color: rgba($alert-color-normal, 0.5) !important;
+		background: rgba($alert-color-normal, 0.5) !important;
 	}
 }
 .ripple-alert {
@@ -280,8 +280,8 @@ $accessory-green-text: black !default;
 @mixin ripple-success {
 	@extend %ripple;
 	&:active {
-		background-color: $success-color-normal;
-		background: $success-color-normal;
+		background-color: rgba($success-color-normal, 0.5) !important;
+		background: rgba($success-color-normal, 0.5) !important;
 	}
 }
 .ripple-success {
@@ -291,19 +291,41 @@ $accessory-green-text: black !default;
 @mixin ripple-accessory-orange {
 	@extend %ripple;
 	&:active {
-		background-color: $accessory-orange-normal;
-		background: $accessory-orange-normal;
+		background-color: rgba($accessory-orange-normal, 0.5) !important;
+		background: rgba($accessory-orange-normal, 0.5) !important;
 	}
 }
 .ripple-accessory-orange {
 	@include ripple-accessory-orange;
 }
 
+@mixin ripple-accessory-blue {
+	@extend %ripple;
+	&:active {
+		background-color: rgba($accessory-blue-normal, 0.5) !important;
+		background: rgba($accessory-blue-normal, 0.5) !important;
+	}
+}
+.ripple-accessory-blue {
+	@include ripple-accessory-blue;
+}
+
+@mixin ripple-accessory-green {
+	@extend %ripple;
+	&:active {
+		background-color: rgba($accessory-green-normal, 0.5) !important;
+		background: rgba($accessory-green-normal, 0.5) !important;
+	}
+}
+.ripple-accessory-green {
+	@include ripple-accessory-green;
+}
+
 @mixin ripple-primary {
 	@extend %ripple;
 	&:active {
-		background-color: $primary-color-transparent;
-		background: $primary-color-transparent;
+		background-color: rgba($primary-color-normal, 0.5) !important;
+		background: rgba($primary-color-normal, 0.5) !important;
 	}
 }
 .ripple-primary {
@@ -313,8 +335,8 @@ $accessory-green-text: black !default;
 @mixin ripple-secondary {
 	@extend %ripple;
 	&:active {
-		background-color: $secondary-color-transparent;
-		background: $secondary-color-transparent;
+		background-color: rgba($secondary-color-normal, 0.5) !important;
+		background: rgba($secondary-color-normal, 0.5) !important;
 	}
 }
 .ripple-secondary {
@@ -325,8 +347,8 @@ $accessory-green-text: black !default;
 @mixin ripple-tertiary {
 	@extend %ripple;
 	&:active {
-		background-color: $primary-color-transparent;
-		background: $primary-color-transparent;
+		background-color: rgba($tertiary-color-normal, 0.5) !important;
+		background: rgba($tertiary-color-normal, 0.5) !important;
 	}
 }
 .ripple-tertiary {
@@ -345,6 +367,16 @@ $accessory-green-text: black !default;
 }
 .hover-primary {
 	@include hover-primary;
+}
+
+@mixin hover-secondary {
+	&:hover {
+		background-color: $secondary-color-light;
+		background: $secondary-color-light;
+	}
+}
+.hover-secondary {
+	@include hover-secondary;
 }
 
 
@@ -382,8 +414,8 @@ $accessory-green-text: black !default;
 
 @mixin hover-success {
 	&:hover {
-		background-color: $success-color-normal;
-		background: $success-color-normal;
+		background-color: $success-color-transparent;
+		background: $success-color-transparent;
 	}
 }
 .hover-success {
@@ -398,6 +430,26 @@ $accessory-green-text: black !default;
 }
 .hover-accessory-orange {
 	@include hover-accessory-orange;
+}
+
+@mixin hover-accessory-blue {
+	&:hover {
+		background-color: $accessory-blue-transparent;
+		background: $accessory-blue-transparent;
+	}
+}
+.hover-accessory-blue {
+	@include hover-accessory-blue;
+}
+
+@mixin hover-accessory-green {
+	&:hover {
+		background-color: $accessory-green-transparent;
+		background: $accessory-green-transparent;
+	}
+}
+.hover-accessory-green {
+	@include hover-accessory-green;
 }
 
 
