@@ -7,7 +7,7 @@ import Modal from "./modal";
 import IconButton from "../button/icon_button";
 import Button from '../button/button';
 // Material UI
-import CloseIcon from '@material-ui/icons/CloseRounded';
+import CloseIcon from '@mui/icons-material/CloseRounded';
 export default function FormDialog(props) {
     return _jsx(Modal, Object.assign({ onClose: props.onCancel }, { children: _jsxs("div", Object.assign({ className: "vieolo-form-dialog" }, { children: [_jsxs("div", Object.assign({ className: "vieolo-form-dialog__header flex-row-space-between" }, { children: [_jsx(TypographyTitleSmall, { text: props.headerTitle }, void 0),
                         props.headerRightComponent === 'close' &&

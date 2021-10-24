@@ -1,5 +1,17 @@
 # Change Log
 
+## 0.10.9 (2021-10-24)
+
+- Added sticky header to the `Table` ([#41](https://github.com/Vieolo/vieolo-ui/issues/41))
+- Improved the generic CSS classes ([#26](https://github.com/Vieolo/vieolo-ui/issues/26))
+- Replaced the Material UI v4 with v5
+- Added pagination to the `Table` ([#42](https://github.com/Vieolo/vieolo-ui/issues/42))
+- Added dense layout to the `Table`
+- Improved the hover and ripple color of buttons ([#54](https://github.com/Vieolo/vieolo-ui/issues/54))
+
+#### Deprecation
+- The `removeHeaderRow` prop of the `Table` has been deprecated. The `headers` props is not optional, omitting which will result in a table without the header row.
+
 ## 0.10.8 (2021-10-02)
 
 - Added `RadioGroup` component ([#50](https://github.com/Vieolo/vieolo-ui/issues/50))

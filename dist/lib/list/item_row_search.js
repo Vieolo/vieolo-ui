@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 // Material UI
-import CloseIcon from '@material-ui/icons/CloseRounded';
+import CloseIcon from '@mui/icons-material/CloseRounded';
 // Vieolo UI
 import IconButton from '../button/icon_button';
 export default function ItemRowSearch(props) {
