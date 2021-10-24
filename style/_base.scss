@@ -509,119 +509,126 @@ $accessory-green-text: black !default;
 	&--accessory-orange-text {
 		background-color: $accessory-orange-text;
 	}
+
+	&--hover {
+		background-color: $hover-color;
+	}
+
+	&--white {
+		background-color: white;
+	}
 	
 }
 
 
 .color {
 	&--primary-normal {
-		color: $primary-color-normal;
+		color: $primary-color-normal !important;
 	}
 
 	&--primary-light {
-		color: $primary-color-light;
+		color: $primary-color-light !important;
 	}
 
 	&--primary-text {
-		color: $primary-color-text;
+		color: $primary-color-text !important;
 	}
 
 	&--secondary-normal {
-		color: $secondary-color-normal;
+		color: $secondary-color-normal !important;
 	}
 
 	&--secondary-light {
-		color: $secondary-color-light;
+		color: $secondary-color-light !important;
 	}
 
 	&--secondary-text {
-		color: $secondary-color-text;
+		color: $secondary-color-text !important;
 	}
 
 	&--tertiary-normal {
-		color: $tertiary-color-normal;
+		color: $tertiary-color-normal !important;
 	}
 
 	&--tertiary-light {
-		color: $tertiary-color-light;
+		color: $tertiary-color-light !important;
 	}
 
 	&--tertiary-text {
-		color: $tertiary-color-text;
+		color: $tertiary-color-text !important;
 	}
 
 	&--error-normal {
-		color: $error-color-normal;
+		color: $error-color-normal !important;
 	}
 
 	&--error-light {
-		color: $error-color-light;
+		color: $error-color-light !important;
 	}
 
 	&--error-text {
-		color: $error-color-text;
+		color: $error-color-text !important;
 	}
 
 	&--success-normal {
-		color: $success-color-normal;
+		color: $success-color-normal !important;
 	}
 
 	&--success-light {
-		color: $success-color-light;
+		color: $success-color-light !important;
 	}
 
 	&--success-text {
-		color: $success-color-text;
+		color: $success-color-text !important;
 	}
 
 	&--alert-normal {
-		color: $alert-color-normal;
+		color: $alert-color-normal !important;
 	}
 
 	&--alert-light {
-		color: $alert-color-light;
+		color: $alert-color-light !important;
 	}
 
 	&--alert-text {
-		color: $alert-color-text;
+		color: $alert-color-text !important;
 	}
 
 	&--accessory-blue-normal {
-		color: $accessory-blue-normal;
+		color: $accessory-blue-normal !important;
 	}
 
 	&--accessory-blue-light {
-		color: $accessory-blue-light;
+		color: $accessory-blue-light !important;
 	}
 
 	&--accessory-blue-text {
-		color: $accessory-blue-text;
+		color: $accessory-blue-text !important;
 	}
 
 	&--accessory-green-normal {
-		color: $accessory-green-normal;
+		color: $accessory-green-normal !important;
 	}
 
 	&--accessory-green-light {
-		color: $accessory-green-light;
+		color: $accessory-green-light !important;
 	}
 
 	&--accessory-green-text {
-		color: $accessory-green-text;
+		color: $accessory-green-text !important;
 	}
 
 	&--accessory-orange-normal {
-		color: $accessory-orange-normal;
+		color: $accessory-orange-normal !important;
 	}
 
 	&--accessory-orange-light {
-		color: $accessory-orange-light;
+		color: $accessory-orange-light !important;
 	}
 
 	&--accessory-orange-text {
-		color: $accessory-orange-text;
+		color: $accessory-orange-text !important;
 	}
-	
 }
 
 
@@ -643,6 +650,20 @@ $drawer-item-width: 160px !default;
 $navbar-height: 50px !default;
 
 
+
+.border-radius {
+	&--zero {
+		border-radius: 0px;
+	}
+
+	&--half {
+		border-radius: $universal-border-radius-half;
+	}
+
+	&--full {
+		border-radius: $universal-border-radius;
+	}
+}
 
 
 

@@ -60,6 +60,34 @@ export function tableOptions(): { [key: string]: TablePropsType } {
                     return [i, "2020-10-10", "Some Description", 'Done']
                 })
             ],
+        },
+        "With Basic Pagination": {
+            ...baseProps,
+            pagination: {
+                endIndex: 25,
+                hasNextPage: false,
+                onPageChange: () => {},
+                pageItemCount: 25,
+                pageNumber: 1,
+                startIndex: 1,                
+            }
+        },
+        "With Basic Pagination and Max Height": {
+            ...baseProps,
+            pagination: {
+                endIndex: 25,
+                hasNextPage: false,
+                onPageChange: () => {},
+                pageItemCount: 25,
+                pageNumber: 1,
+                startIndex: 1,                
+            },
+            maxHeight: '500px',
+            rows: [
+                ...Array(25).fill("").map((z, i) => {
+                    return [i, "2020-10-10", "Some Description", 'Done']
+                })
+            ],
         }
     }
 }
@@ -86,6 +114,7 @@ export function TableCreator(props: {p: TablePropsType}) {
         removeHeaderRow={props.p.removeHeaderRow}
         stickyHeader={props.p.stickyHeader}
         maxHeight={props.p.maxHeight}
+        pagination={props.p.pagination}
     />
 
 }

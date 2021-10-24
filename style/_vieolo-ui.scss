@@ -973,6 +973,13 @@ body {
 			justify-content: center;
 		}
 	}
+
+	&__pagination-row {
+		display: flex;
+		flex-direction: row-reverse;
+		padding: 5px;
+		
+	}
 }
 
 .vieolo-radio-group {
