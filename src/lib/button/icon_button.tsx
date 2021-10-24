@@ -19,7 +19,7 @@ export default function IconButton(props: {
     let hoverClass: string = `hover-${props.color || 'primary'}`;
 	let colorClass = `${props.color || 'primary'}-color`;	
 
-	let className = `vieolo-icon-button ${colorClass} ${rippleClass} ${hoverClass} ${props.className || ""}`;
+	let className = `vieolo-icon-button ${colorClass} ${hoverClass} ${rippleClass} ${props.className || ""}`;
 
 	if (props.tooltip) className += " vieolo-tooltip";
 
