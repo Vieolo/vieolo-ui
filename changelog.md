@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.10.10 (2021-10-24)
+
+- Fixed the next button of pagination of `Table`
+
 ## 0.10.9 (2021-10-24)
 
 - Added sticky header to the `Table` ([#41](https://github.com/Vieolo/vieolo-ui/issues/41))
