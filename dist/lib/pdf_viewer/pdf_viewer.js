@@ -2,13 +2,13 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 // React
 import { useState, useEffect, useRef } from 'react';
 // Material UI
-import ZoomInIcon from '@material-ui/icons/AddRounded';
-import ZoomOutIcon from '@material-ui/icons/RemoveRounded';
-import DownloadIcon from '@material-ui/icons/CloudDownload';
-import RotateLeft from '@material-ui/icons/RotateLeftRounded';
-import RotateRight from '@material-ui/icons/RotateRightRounded';
-import CloseIcon from '@material-ui/icons/CloseRounded';
-import ExpandIcon from '@material-ui/icons/FullscreenRounded';
+import ZoomInIcon from '@mui/icons-material/AddRounded';
+import ZoomOutIcon from '@mui/icons-material/RemoveRounded';
+import DownloadIcon from '@mui/icons-material/CloudDownload';
+import RotateLeft from '@mui/icons-material/RotateLeftRounded';
+import RotateRight from '@mui/icons-material/RotateRightRounded';
+import CloseIcon from '@mui/icons-material/CloseRounded';
+import ExpandIcon from '@mui/icons-material/FullscreenRounded';
 // Components
 import IconButton from '../button/icon_button';
 import Modal from '../dialog/modal';

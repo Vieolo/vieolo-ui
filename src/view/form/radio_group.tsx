@@ -5,10 +5,10 @@ import React, { useState } from 'react';
 import RadioGroup from '../../lib/form/radio_group';
 
 // Material UI
-import SampleIcon1 from '@material-ui/icons/AccessibleForwardTwoTone';
-import SampleIcon2 from '@material-ui/icons/Backspace';
-import SampleIcon3 from '@material-ui/icons/Cached';
-import SampleIcon4 from '@material-ui/icons/Dashboard';
+import SampleIcon1 from '@mui/icons-material/AccessibleForwardTwoTone';
+import SampleIcon2 from '@mui/icons-material/Backspace';
+import SampleIcon3 from '@mui/icons-material/Cached';
+import SampleIcon4 from '@mui/icons-material/Dashboard';
 
 type RadioGroupPropsType = React.ComponentProps<typeof RadioGroup>;
 

@@ -7,8 +7,8 @@ import TypographyParagraphSmall from '../typography/typography_paragraph_small';
 import TypographyTitleSmall from '../typography/typography_title_small';
 
 // Material UI
-import DownIcon from '@material-ui/icons/ArrowDropDownRounded';
-import CloseIcon from '@material-ui/icons/CloseRounded';
+import DownIcon from '@mui/icons-material/ArrowDropDownRounded';
+import CloseIcon from '@mui/icons-material/CloseRounded';
 
 // Components
 import IconButton from '../button/icon_button';

@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 // Material UI
-import ArrowBackIcon from '@material-ui/icons/ArrowBackIosRounded';
+import ArrowBackIcon from '@mui/icons-material/ArrowBackIosRounded';
 // Components
 import IconButton from './icon_button';
 // Typography

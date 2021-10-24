@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 
 // Materail UI
-import LoopIcon from '@material-ui/icons/LoopRounded'
+import LoopIcon from '@mui/icons-material/LoopRounded'
 
 // Component
 import InputSet from '../../lib/form/input_set';
