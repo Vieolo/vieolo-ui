@@ -21,3 +21,4 @@ import Select from './lib/form/select';
 import Switch from './lib/form/switch';
 import SwitchSet from './lib/form/switch_set';
 export { Button, Chip, DropDownMenu, FileInput, FormDialog, IconButton, Input, InputSet, ItemRow, ItemRowSearch, List, Modal, PDFViewer, PeriodOptions, PeriodSelector, Table, Textarea, TextareaSet, TimePicker, RadioGroup, Select, Switch, SwitchSet };
+export { TypographyBase, TypographyCaptionLarge, TypographyCaptionMedium, TypographyCaptionSmall, TypographyParagraphLarge, TypographyParagraphMedium, TypographyParagraphSmall, TypographyTitleLarge, TypographyTitleMedium, TypographyTitleSmall } from './lib/typography/index';

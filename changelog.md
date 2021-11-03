@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.10.11 (2021-11-03)
+
+- Exported the `Typography` components
+
 ## 0.10.10 (2021-10-24)
 
 - Fixed the next button of pagination of `Table`
