@@ -54,3 +54,16 @@ export type FormDialogButton = FormDialogButtonType
 export type TableSortDirection = TableSortDirectionType
 export type RadioButtonType = RadioButtonTempType
 
+
+export {
+    TypographyBase,
+    TypographyCaptionLarge,
+    TypographyCaptionMedium,
+    TypographyCaptionSmall,
+    TypographyParagraphLarge,
+    TypographyParagraphMedium,
+    TypographyParagraphSmall,
+    TypographyTitleLarge,
+    TypographyTitleMedium,
+    TypographyTitleSmall
+} from './lib/typography/index'

@@ -25,3 +25,4 @@ export declare type ListItem = ListItemType;
 export declare type FormDialogButton = FormDialogButtonType;
 export declare type TableSortDirection = TableSortDirectionType;
 export declare type RadioButtonType = RadioButtonTempType;
+export { TypographyBase, TypographyCaptionLarge, TypographyCaptionMedium, TypographyCaptionSmall, TypographyParagraphLarge, TypographyParagraphMedium, TypographyParagraphSmall, TypographyTitleLarge, TypographyTitleMedium, TypographyTitleSmall } from './lib/typography/index';
