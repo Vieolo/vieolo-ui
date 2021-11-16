@@ -27,6 +27,8 @@ if (level == 'build') {
 // Updated Version
 let fv = cv.join('.');
 
+console.log(`Bumping the version to ${fv}`);
+
 packageJSON.version = fv;
 
 // Writing the package.json
@@ -74,6 +76,8 @@ fs.writeFileSync('./changelog.md', changeLogLines.join('\n'));
 // Creating a build ************
 
 // Setting the tsconfig's noEmit to false
+
+console.log(`Building The components`);
 
 let tsConfig = JSON.parse(fs.readFileSync('./tsconfig.json').toString());
 tsConfig.compilerOptions.noEmit = false;
