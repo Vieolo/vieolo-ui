@@ -35,7 +35,8 @@
     "./src/App.tsx",
     "./src/index.tsx",
     "./src/reportWebVitals.ts",
-    "./src/view"
+    "./src/view",
+    "version_bump.mjs"
   ],
   "files": [
     "./src/export.ts"
