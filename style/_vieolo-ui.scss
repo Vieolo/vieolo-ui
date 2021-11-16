@@ -13,33 +13,61 @@ body {
 	position: relative;
 	overflow: hidden;
 	outline: 0;
-	border: 0;
-	height: 40px;
-	border-radius: 10px;
-	padding-right: 10px;
-	padding-left: 10px;
-	height: 40px;
+	border-radius: $border-radius-full;
+	padding-right: $base-unit;
+	padding-left: $base-unit;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	box-shadow: $box-shadow;
 	cursor: pointer;
 	background-position: center;
 	transition: background 0.8s;
 	font-size: 16px;
-	min-width: 50px;
+	min-width: 80px;
 	@include font-header;
+
+	&--large {
+		height: $row-height-large;
+	}
+
+	&--medium {
+		height: $row-height-medium;
+	}
+
+	&--small {
+		height: $row-height-small;
+	}
+
+	&--full-width {
+		width: 100%;
+	}
+
+	&--border-radius-full {
+		border-radius: $border-radius-full;
+	}
+
+	&--border-radius-normal {
+		border-radius: $border-radius-normal;
+	}
+
+	&--border-radius-half {
+		border-radius: $border-radius-half;
+	}
+
+	&--border-radius-none {
+		border-radius: 0px;
+	}
 
 	span {
 		@include center-by-flex-row;
 	}
 
 	.start-icon {
-		margin-right: 5px;
+		margin-right: $base-unit-half;
 	}
 
 	.end-icon {
-		margin-left: 5px;
+		margin-left: $base-unit-half;
 	}
 }
 
