@@ -9,6 +9,9 @@ import TypographyTitleMedium from '../typography/typography_title_medium';
 import ItemRowSearch from './item_row_search';
 import ItemRow from './item_row';
 
+// Types
+import { ColorOptionType } from '../private/types';
+
 
 export type ListItem = {
     id: string,
@@ -17,7 +20,7 @@ export type ListItem = {
     onClick?: () => void,
     selected: boolean,
     onButtonClick?: () => void,
-    buttonColor?: 'primary' | 'secondary' | 'tertiary' | 'background' | 'alert' | 'error' | 'success' | 'accessory-orange' | 'accessory-blue' | 'accessory-green',
+    buttonColor?: ColorOptionType,
     buttonIcon?: React.ReactNode,
     buttonSize?: 'small' | 'medium',
     leadingIcon?: React.ReactNode,

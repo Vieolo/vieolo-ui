@@ -1,4 +1,5 @@
 import React from 'react';
+import { ColorOptionType } from '../private/types';
 export default function ItemRow(props: {
     title: string;
     subTitle?: string;
@@ -8,6 +9,6 @@ export default function ItemRow(props: {
     buttonIcon?: React.ReactNode;
     buttonClick?: () => void;
     buttonSize?: 'small' | 'medium';
-    buttonColor?: 'primary' | 'secondary' | 'tertiary' | 'background' | 'alert' | 'error' | 'success' | 'accessory-orange' | 'accessory-blue' | 'accessory-green';
+    buttonColor?: ColorOptionType;
     cardStyle?: 'card-light-shadow' | 'card-dark-shadow' | 'card-no-shadow';
 }): JSX.Element;

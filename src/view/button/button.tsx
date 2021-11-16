@@ -2,45 +2,46 @@
 import React, { useState } from 'react';
 
 // Material UI
-import IconOne from '@mui/icons-material/Assignment';
+// import IconOne from '@mui/icons-material/Assignment';
 // import IconTwo from '@mui/icons-material/Backup';
 // import IconThree from '@mui/icons-material/Cake';
 // import IconFour from '@mui/icons-material/DataUsage';
 
 // Component
-import IconButton from '../../lib/button/icon_button';
+import Button from '../../lib/button/button';
 import Select from '../../lib/form/select';
 
 // Types
 import { ColorOptionType } from '../../lib/private/types';
 
-type IconButtonPropsType = React.ComponentProps<typeof IconButton>;
+type ButtonPropsType = React.ComponentProps<typeof Button>;
 
-export function iconButtonOptions(): { [key: string]: IconButtonPropsType } {
+export function buttonOptions(): { [key: string]: ButtonPropsType } {
 
-    let baseProps: IconButtonPropsType = {
-        icon: <IconOne />,
+    let baseProps: ButtonPropsType = {
         onClick: () => alert("Clicked"),
         color: 'primary',
-        size: 'medium',
+        text: "Button"
     }
 
     return {
         "Base": {
             ...baseProps
-        }
+        },
     }
 }
 
 
-export function IconButtonCreator(props: { p: IconButtonPropsType }) {
+export function ButtonCreator(props: { p: ButtonPropsType }) {
 
     let [color, setColor] = useState<ColorOptionType>('primary');
-    let [emphasis, setEmphasis] = useState<string>('none');
-    let [size, setSize] = useState<string>('medium');
+    let [emphasis, setEmphasis] = useState<string>('high');
+    let [height, setHeight] = useState<string>('medium');
+    let [width, setWidth] = useState<string>('content');
     let [borderRadius, setBorderRadius] = useState<string>('default');
 
     return <div className="grid-two-column">
+
         <div>
             <Select
                 error={false}
@@ -76,16 +77,32 @@ export function IconButtonCreator(props: { p: IconButtonPropsType }) {
 
             <Select
                 error={false}
-                items={(['medium', 'small']).map(c => {
+                items={(['large', 'medium', 'small']).map(c => {
                     return {
                         title: c,
                         value: c
                     }
                 })}
-                onSelect={v => setSize(v[0] as any)}
-                selectedItems={[size]}
-                title={"Size"}
-            />            
+                onSelect={v => setHeight(v[0] as any)}
+                selectedItems={[height]}
+                title={"Height"}
+            />
+
+            <br />
+            <br />
+
+            <Select
+                error={false}
+                items={(['content', 'full']).map(c => {
+                    return {
+                        title: c,
+                        value: c
+                    }
+                })}
+                onSelect={v => setWidth(v[0] as any)}
+                selectedItems={[width]}
+                title={"Width"}
+            />
 
             <br />
             <br />
@@ -103,18 +120,24 @@ export function IconButtonCreator(props: { p: IconButtonPropsType }) {
                 title={"Border Radius"}
             />
         </div>
+
         <div>
-            <IconButton
-                icon={props.p.icon}
+            <Button
                 onClick={props.p.onClick}
                 className={props.p.className}
                 color={color}
                 disabled={props.p.disabled}
-                size={size as any}
+                text={props.p.text}
                 borderRadius={borderRadius as any}
                 emphasis={emphasis as any}
-                tooltip={props.p.tooltip}
-                tooltipPosition={props.p.tooltipPosition}
+                endIcon={props.p.endIcon}
+                fontSize={props.p.fontSize}
+                height={height as any}
+                startIcon={props.p.startIcon}
+                style={props.p.style}
+                toLowerCase={props.p.toLowerCase}
+                type={props.p.type}
+                width={width as any}
             />
         </div>
     </div>
