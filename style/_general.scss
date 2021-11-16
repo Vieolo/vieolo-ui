@@ -262,6 +262,58 @@
 }
 
 
+.grid {
+	display: grid;
+
+	&--one-one {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	&--one-one-two {
+		grid-template-columns: 1fr 1fr 2fr;
+	}
+
+	&--two-one-one {
+		grid-template-columns: 2fr 1fr 1fr;
+	}
+
+	&--one-one-one-one {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+
+	&--one-three {
+		grid-template-columns: 1fr 3fr;
+	}
+
+	&--three-one {
+		grid-template-columns: 3fr 1fr;
+	}
+
+	&--column-gap-half {
+		column-gap: $base-unit-half;
+	}
+
+	&--column-gap-one {
+		column-gap: $base-unit;
+	}
+
+	&--column-gap-two {
+		column-gap: $base-unit * 2;
+	}
+
+	&--row-gap-half {
+		row-gap: $base-unit-half;
+	}
+
+	&--row-gap-one {
+		row-gap: $base-unit;
+	}
+
+	&--row-gap-two {
+		row-gap: $base-unit * 2;
+	}
+}
+
 
 @mixin disabled {
 	pointer-events: none;
