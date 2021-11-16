@@ -1,5 +1,26 @@
 # Change Log
 
+## 0.11.0 (2021-11-17)
+- Added basis of the Vieolo design language
+- Added `half`, `one`, and `two` states to `margin` and `padding` CSS classes
+- Added directional states to `margin` and `padding` CSS classes
+- Added new `border-radius` variables
+- Added `border` CSS class
+- Improved the style of the `IconButton`
+- Improved the style of the `Button`
+- Added `Grid` Component
+
+#### Deprecation
+- `universal-border-radius` CSS variable is deprecated in favor of `border-radius-normal`
+- `ripple-{color}` CSS classes are deprecated in favor of `ripple` class
+- `hover-{color}` CSS classes are deprecated in favor of `hover` class 
+
+#### Breaking Changes
+- `border-radius--full` CSS class has a different value (2BU). use `border-radius--normal` for the old value
+- `Button`'s `fullWidth` prop is replaced with `width`
+- `Button`'s `size` prop is replaced with `height`
+- `Button`'s `variant` prop is replaced with `emphasis`
+
 ## 0.10.11 (2021-11-03)
 
 - Exported the `Typography` components

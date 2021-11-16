@@ -1,4 +1,5 @@
 import React from 'react';
+import { ColorOptionType } from '../private/types';
 export declare type ListItem = {
     id: string;
     title: string;
@@ -6,7 +7,7 @@ export declare type ListItem = {
     onClick?: () => void;
     selected: boolean;
     onButtonClick?: () => void;
-    buttonColor?: 'primary' | 'secondary' | 'tertiary' | 'background' | 'alert' | 'error' | 'success' | 'accessory-orange' | 'accessory-blue' | 'accessory-green';
+    buttonColor?: ColorOptionType;
     buttonIcon?: React.ReactNode;
     buttonSize?: 'small' | 'medium';
     leadingIcon?: React.ReactNode;

@@ -62,9 +62,9 @@ export default function PeriodSelector(props) {
             finalDate = newDate.addYear(change);
         props.onDateChange(finalDate);
     }
-    return _jsxs("div", Object.assign({ className: "vieolo-period-selector" }, { children: [_jsxs("div", Object.assign({ className: "vieolo-period-selector__carousel-div" }, { children: [_jsx(IconButton, { icon: _jsx(LeftArrow, {}, void 0), onClick: () => handleDateChange(-1), size: "small" }, void 0),
+    return _jsxs("div", Object.assign({ className: "vieolo-period-selector" }, { children: [_jsxs("div", Object.assign({ className: "vieolo-period-selector__carousel-div" }, { children: [_jsx(IconButton, { icon: _jsx(LeftArrow, {}, void 0), onClick: () => handleDateChange(-1), size: "small", borderWidth: '0' }, void 0),
                     _jsx(TypographyParagraphMedium, { text: getSelectedDateRepresentation() }, void 0),
-                    _jsx(IconButton, { icon: _jsx(RightArrow, {}, void 0), onClick: () => handleDateChange(1), size: "small" }, void 0)] }), void 0),
+                    _jsx(IconButton, { icon: _jsx(RightArrow, {}, void 0), onClick: () => handleDateChange(1), size: "small", borderWidth: '0' }, void 0)] }), void 0),
             _jsx("div", Object.assign({ className: "vieolo-period-selector__year-div" }, { children: _jsx(TypographyParagraphMedium, { text: props.selectedDate.getFullYear().toString() }, void 0) }), void 0),
             props.periodOptions &&
                 _jsx("div", Object.assign({ className: "vieolo-period-selector__dropdown-div" }, { children: _jsx(DropDownMenu, { buttonComponent: _jsx("div", Object.assign({ className: "vieolo-period-selector__dropdown-button" }, { children: _jsx(DownArrow, {}, void 0) }), void 0), items: props.periodOptions.map(o => {
