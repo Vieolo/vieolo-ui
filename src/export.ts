@@ -3,6 +3,7 @@ import Chip from './lib/chip';
 import DropDownMenu from './lib/menu/dropdown_menu';
 import FileInput from './lib/form/file_input';
 import FormDialog, { FormDialogButton as FormDialogButtonType } from './lib/dialog/formDialog';
+import Grid from './lib/layout/grid';
 import IconButton from './lib/button/icon_button';
 import Input from './lib/form/input';
 import InputSet from './lib/form/input_set';
@@ -28,6 +29,7 @@ export {
     DropDownMenu,
     FileInput,
     FormDialog,
+    Grid,
     IconButton,
     Input,
     InputSet,

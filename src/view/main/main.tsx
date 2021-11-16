@@ -10,6 +10,7 @@ import ItemRow from '../../lib/list/item_row';
 import { SelectCreator, selectOptions } from '../form/select';
 import { PeriodSelectorCreator, periodSelectorOptions } from '../date_time/period_selector';
 import { IconButtonCreator, iconButtonOptions } from '../button/icon_button';
+import { ButtonCreator, buttonOptions } from '../button/button';
 import { InputSetCreator, inputSetOptions } from '../form/input_set';
 import { ListCreator, listOptions } from '../list/list';
 import { SwitchSetCreator, switchSetOptions } from '../form/switch_set';
@@ -29,6 +30,7 @@ export default function MainPage(props: {}): JSX.Element {
     let [selectedData, setSelectedData] = useState<any>(null);
 
     let items: {[key: string]: { title: string, data: any, creator: any }} = {
+        "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator },
         "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator },
         "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator },

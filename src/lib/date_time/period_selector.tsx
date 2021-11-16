@@ -81,6 +81,7 @@ export default function PeriodSelector (props: {
                 icon={<LeftArrow />}
                 onClick={() => handleDateChange(-1)}
                 size="small"
+                borderWidth={'0'}
             />
 
             <TypographyParagraphMedium text={getSelectedDateRepresentation()} />
@@ -89,6 +90,7 @@ export default function PeriodSelector (props: {
                 icon={<RightArrow />}
                 onClick={() => handleDateChange(1)}
                 size="small"
+                borderWidth={'0'}
             />
         </div>
 

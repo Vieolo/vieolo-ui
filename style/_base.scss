@@ -1,12 +1,27 @@
+@use "sass:math";
 
+// Base Unit
+$base-unit: 10px;
+$base-unit-half: math.div($base-unit, 2);
+
+// Heights
+$row-height-small: $base-unit * 3;
+$row-height-medium: $base-unit * 4;
+$row-height-large: $base-unit * 5;
+$row-height-over: $base-unit * 7;
+
+// Border Radius
+$border-radius-normal: $base-unit;
+$border-radius-half: $base-unit-half;
+$border-radius-full: $base-unit * 2;
 
 
 $box-shadow: 0px 3px 10px rgba(27, 78, 96,0.2) !default;
 $box-shadow-dark: 0px 3px 10px rgba(27, 78, 96,0.5) !default;
 $reverse-box-shadow: -2px -3px 15px rgba(0,0,0,.2) !default;
 
-$universal-border-radius: 10px !default;
-$universal-border-radius-half: 5px !default;
+$universal-border-radius: 10px !default; // deprecated
+$universal-border-radius-half: 5px !default; // deprecated
 
 
 
@@ -40,19 +55,19 @@ $tertiary-color-text: #2e2e2e !default;
 
 $alert-color-normal: rgb(225, 188, 41) !default;
 $alert-color-transparent: rgba(225, 188, 41, 0.3) !default;
-$alert-color-light: rgb(26, 15, 46) !default;
+$alert-color-light: rgb(243, 228, 166) !default;
 $alert-color-gradient: linear-gradient(to right bottom, #e9c843, #e7c63e, #e6c43a, #e4c135, #e3bf30, #e3bf2d, #e4be2a, #e4be26, #e6c024, #e9c122, #ebc320, #eec41d) !default;
 $alert-color-text: black !default;
 
 $error-color-normal: rgb(245, 0, 87) !default;
 $error-color-transparent: rgba(252, 232, 239, 1) !default;
-$error-color-light: rgb(26, 15, 46) !default;
+$error-color-light: rgb(255, 168, 198) !default;
 $error-color-gradient: linear-gradient(to right bottom, #f23c7c, #f33576, #f42d6f, #f52468, #f51961, #f3135d, #f20a59, #f00055, #ec0054, #e80053, #e50051, #e10050) !default;
 $error-color-text: white !default;
 
 $success-color-normal: rgb(24, 139, 108) !default;
 $success-color-transparent: rgba(24, 139, 108, 0.3) !default;
-$success-color-light: rgb(26, 15, 46) !default;
+$success-color-light: rgb(163, 224, 208) !default;
 $success-color-gradient: linear-gradient(to right bottom, #209979, #1f9676, #1d9374, #1c9171, #1a8e6f, #198e6f, #188f6f, #178f6f, #169271, #149573, #139874, #119b76) !default;
 $success-color-text: white !default;
 
@@ -243,7 +258,7 @@ $accessory-green-text: black !default;
 
 
 
-
+// These ripple classes are depreciated in favor of ripple--{color}
 %ripple {
 	background-position: center;
 	transition: background 0.8s;
@@ -359,6 +374,7 @@ $accessory-green-text: black !default;
 
 
 
+// These hover classes are depreciated in favor of hover--{color}
 @mixin hover-primary {
 	&:hover {
 		background-color: $primary-color-light;
@@ -684,6 +700,645 @@ $accessory-green-text: black !default;
 }
 
 
+.border {
+	&--px-0 {
+		border-width: 0px;
+	}
+
+	&--px-1 {
+		border-width: 1px;
+	}
+
+	&--px-2 {
+		border-width: 2px;
+	}
+
+	&--solid {
+		border-style: solid;
+	}
+
+	&--dotted {
+		border-style: dotted;
+	}
+
+	&--dashed {
+		border-style: dashed;
+	}
+
+	&--primary-normal {
+		border-color: $primary-color-normal !important;
+	}
+
+	&--primary-light {
+		border-color: $primary-color-light !important;
+	}
+
+	&--primary-text {
+		border-color: $primary-color-text !important;
+	}
+
+	&--secondary-normal {
+		border-color: $secondary-color-normal !important;
+	}
+
+	&--secondary-light {
+		border-color: $secondary-color-light !important;
+	}
+
+	&--secondary-text {
+		border-color: $secondary-color-text !important;
+	}
+
+	&--tertiary-normal {
+		border-color: $tertiary-color-normal !important;
+	}
+
+	&--tertiary-light {
+		border-color: $tertiary-color-light !important;
+	}
+
+	&--tertiary-text {
+		border-color: $tertiary-color-text !important;
+	}
+
+	&--error-normal {
+		border-color: $error-color-normal !important;
+	}
+
+	&--error-light {
+		border-color: $error-color-light !important;
+	}
+
+	&--error-text {
+		border-color: $error-color-text !important;
+	}
+
+	&--success-normal {
+		border-color: $success-color-normal !important;
+	}
+
+	&--success-light {
+		border-color: $success-color-light !important;
+	}
+
+	&--success-text {
+		border-color: $success-color-text !important;
+	}
+
+	&--alert-normal {
+		border-color: $alert-color-normal !important;
+	}
+
+	&--alert-light {
+		border-color: $alert-color-light !important;
+	}
+
+	&--alert-text {
+		border-color: $alert-color-text !important;
+	}
+
+	&--accessory-blue-normal {
+		border-color: $accessory-blue-normal !important;
+	}
+
+	&--accessory-blue-light {
+		border-color: $accessory-blue-light !important;
+	}
+
+	&--accessory-blue-text {
+		border-color: $accessory-blue-text !important;
+	}
+
+	&--accessory-green-normal {
+		border-color: $accessory-green-normal !important;
+	}
+
+	&--accessory-green-light {
+		border-color: $accessory-green-light !important;
+	}
+
+	&--accessory-green-text {
+		border-color: $accessory-green-text !important;
+	}
+
+	&--accessory-orange-normal {
+		border-color: $accessory-orange-normal !important;
+	}
+
+	&--accessory-orange-light {
+		border-color: $accessory-orange-light !important;
+	}
+
+	&--accessory-orange-text {
+		border-color: $accessory-orange-text !important;
+	}
+
+	&--white {
+		border-color: white !important;
+	}
+}
+
+.hover {
+	&--primary-normal {
+		&:hover {
+			background-color: $primary-color-normal;
+		}
+	}
+
+	&--primary-light {
+		&:hover {
+			background-color: $primary-color-light;
+		}
+	}
+
+	&--primary-text {
+		&:hover {
+			background-color: $primary-color-text;
+		}
+	}
+
+	&--secondary-normal {
+		&:hover {
+			background-color: $secondary-color-normal;
+		}
+	}
+
+	&--secondary-light {
+		&:hover {
+			background-color: $secondary-color-light;
+		}
+	}
+
+	&--secondary-text {
+		&:hover {
+			background-color: $secondary-color-text;
+		}
+	}
+
+	&--tertiary-normal {
+		&:hover {
+			background-color: $tertiary-color-normal;
+		}
+	}
+
+	&--tertiary-light {
+		&:hover {
+			background-color: $tertiary-color-light;
+		}
+	}
+
+	&--tertiary-text {
+		&:hover {
+			background-color: $tertiary-color-text;
+		}
+	}
+
+	&--error-normal {
+		&:hover {
+			background-color: $error-color-normal;
+		}
+	}
+
+	&--error-light {
+		&:hover {
+			background-color: $error-color-light;
+		}
+	}
+
+	&--error-text {
+		&:hover {
+			background-color: $error-color-text;
+		}
+	}
+
+	&--success-normal {
+		&:hover {
+			background-color: $success-color-normal;
+		}
+	}
+
+	&--success-light {
+		&:hover {
+			background-color: $success-color-light;
+		}
+	}
+
+	&--success-text {
+		&:hover {
+			background-color: $success-color-text;
+		}
+	}
+
+	&--alert-normal {
+		&:hover {
+			background-color: $alert-color-normal;
+		}
+	}
+
+	&--alert-light {
+		&:hover {
+			background-color: $alert-color-light;
+		}
+	}
+
+	&--alert-text {
+		&:hover {
+			background-color: $alert-color-text;
+		}
+	}
+
+	&--accessory-blue-normal {
+		&:hover {
+			background-color: $accessory-blue-normal;
+		}
+	}
+
+	&--accessory-blue-light {
+		&:hover {
+			background-color: $accessory-blue-light;
+		}	
+	}
+
+	&--accessory-blue-text {
+		&:hover {
+			background-color: $accessory-blue-text;
+		}
+	}
+
+	&--accessory-green-normal {
+		&:hover {
+			background-color: $accessory-green-normal;
+		}
+	}
+
+	&--accessory-green-light {
+		&:hover {
+			background-color: $accessory-green-light;
+		}
+	}
+
+	&--accessory-green-text {
+		&:hover {
+			background-color: $accessory-green-text;
+		}
+	}
+
+	&--accessory-orange-normal {
+		&:hover {
+			background-color: $accessory-orange-normal;
+		}
+	}
+
+	&--accessory-orange-light {
+		&:hover {
+			background-color: $accessory-orange-light;
+		}
+	}
+
+	&--accessory-orange-text {
+		&:hover {
+			background-color: $accessory-orange-text;
+		}
+	}
+}
+
+.hover-border {
+	&--primary-normal {
+		&:hover {
+			border-color: $primary-color-normal !important;
+		}
+	}
+
+	&--primary-light {
+		&:hover {
+			border-color: $primary-color-light !important;
+		}
+	}
+
+	&--primary-text {
+		&:hover {
+			border-color: $primary-color-text !important;
+		}
+	}
+
+	&--secondary-normal {
+		&:hover {
+			border-color: $secondary-color-normal !important;
+		}
+	}
+
+	&--secondary-light {
+		&:hover {
+			border-color: $secondary-color-light !important;
+		}
+	}
+
+	&--secondary-text {
+		&:hover {
+			border-color: $secondary-color-text !important;
+		}
+	}
+
+	&--tertiary-normal {
+		&:hover {
+			border-color: $tertiary-color-normal !important;
+		}
+	}
+
+	&--tertiary-light {
+		&:hover {
+			border-color: $tertiary-color-light !important;
+		}
+	}
+
+	&--tertiary-text {
+		&:hover {
+			border-color: $tertiary-color-text !important;
+		}
+	}
+
+	&--error-normal {
+		&:hover {
+			border-color: $error-color-normal !important;
+		}
+	}
+
+	&--error-light {
+		&:hover {
+			border-color: $error-color-light !important;
+		}
+	}
+
+	&--error-text {
+		&:hover {
+			border-color: $error-color-text !important;
+		}
+	}
+
+	&--success-normal {
+		&:hover {
+			border-color: $success-color-normal !important;
+		}
+	}
+
+	&--success-light {
+		&:hover {
+			border-color: $success-color-light !important;
+		}
+	}
+
+	&--success-text {
+		&:hover {
+			border-color: $success-color-text !important;
+		}
+	}
+
+	&--alert-normal {
+		&:hover {
+			border-color: $alert-color-normal !important;
+		}
+	}
+
+	&--alert-light {
+		&:hover {
+			border-color: $alert-color-light !important;
+		}
+	}
+
+	&--alert-text {
+		&:hover {
+			border-color: $alert-color-text !important;
+		}
+	}
+
+	&--accessory-blue-normal {
+		&:hover {
+			border-color: $accessory-blue-normal !important;
+		}
+	}
+
+	&--accessory-blue-light {
+		&:hover {
+			border-color: $accessory-blue-light !important;
+		}	
+	}
+
+	&--accessory-blue-text {
+		&:hover {
+			border-color: $accessory-blue-text !important;
+		}
+	}
+
+	&--accessory-green-normal {
+		&:hover {
+			border-color: $accessory-green-normal !important;
+		}
+	}
+
+	&--accessory-green-light {
+		&:hover {
+			border-color: $accessory-green-light !important;
+		}
+	}
+
+	&--accessory-green-text {
+		&:hover {
+			border-color: $accessory-green-text !important;
+		}
+	}
+
+	&--accessory-orange-normal {
+		&:hover {
+			border-color: $accessory-orange-normal !important;
+		}
+	}
+
+	&--accessory-orange-light {
+		&:hover {
+			border-color: $accessory-orange-light !important;
+		}
+	}
+
+	&--accessory-orange-text {
+		&:hover {
+			border-color: $accessory-orange-text;
+		}
+	}
+}
+
+.ripple {
+	background-position: center;
+	transition: background 0.8s;
+
+	&:active {
+		background-size: 100%;
+		transition: background 0s;
+	}
+
+	&--primary-normal {
+		&:active {
+			background-color: $primary-color-normal !important;
+		}
+	}
+
+	&--primary-light {
+		&:active {
+			background-color: $primary-color-light !important;
+		}
+	}
+
+	&--primary-text {
+		&:active {
+			background-color: $primary-color-text !important;
+		}
+	}
+
+	&--secondary-normal {
+		&:active {
+			background-color: $secondary-color-normal !important;
+		}
+	}
+
+	&--secondary-light {
+		&:active {
+			background-color: $secondary-color-light !important;
+		}
+	}
+
+	&--secondary-text {
+		&:active {
+			background-color: $secondary-color-text !important;
+		}
+	}
+
+	&--tertiary-normal {
+		&:active {
+			background-color: $tertiary-color-normal !important;
+		}
+	}
+
+	&--tertiary-light {
+		&:active {
+			background-color: $tertiary-color-light !important;
+		}
+	}
+
+	&--tertiary-text {
+		&:active {
+			background-color: $tertiary-color-text !important;
+		}
+	}
+
+	&--error-normal {
+		&:active {
+			background-color: $error-color-normal !important;
+		}
+	}
+
+	&--error-light {
+		&:active {
+			background-color: $error-color-light !important;
+		}
+	}
+
+	&--error-text {
+		&:active {
+			background-color: $error-color-text !important;
+		}
+	}
+
+	&--success-normal {
+		&:active {
+			background-color: $success-color-normal !important;
+		}
+	}
+
+	&--success-light {
+		&:active {
+			background-color: $success-color-light !important;
+		}
+	}
+
+	&--success-text {
+		&:active {
+			background-color: $success-color-text !important;
+		}
+	}
+
+	&--alert-normal {
+		&:active {
+			background-color: $alert-color-normal !important;
+		}
+	}
+
+	&--alert-light {
+		&:active {
+			background-color: $alert-color-light !important;
+		}
+	}
+
+	&--alert-text {
+		&:active {
+			background-color: $alert-color-text !important;
+		}
+	}
+
+	&--accessory-blue-normal {
+		&:active {
+			background-color: $accessory-blue-normal !important;
+		}
+	}
+
+	&--accessory-blue-light {
+		&:active {
+			background-color: $accessory-blue-light !important;
+		}	
+	}
+
+	&--accessory-blue-text {
+		&:active {
+			background-color: $accessory-blue-text !important;
+		}
+	}
+
+	&--accessory-green-normal {
+		&:active {
+			background-color: $accessory-green-normal !important;
+		}
+	}
+
+	&--accessory-green-light {
+		&:active {
+			background-color: $accessory-green-light !important;
+		}
+	}
+
+	&--accessory-green-text {
+		&:active {
+			background-color: $accessory-green-text !important;
+		}
+	}
+
+	&--accessory-orange-normal {
+		&:active {
+			background-color: $accessory-orange-normal !important;
+		}
+	}
+
+	&--accessory-orange-light {
+		&:active {
+			background-color: $accessory-orange-light !important;
+		}
+	}
+
+	&--accessory-orange-text {
+		&:active {
+			background-color: $accessory-orange-text !important;
+		}
+	}
+}
+
+
 
 // Sizes
 
@@ -699,7 +1354,7 @@ $tablet10PortraitBreakPoint: 800px;
 $mobileBreakPoint: 700px;
 $drawer-width: 180px !default;
 $drawer-item-width: 160px !default;
-$navbar-height: 50px !default;
+$navbar-height: $row-height-large !default;
 
 
 
@@ -709,11 +1364,15 @@ $navbar-height: 50px !default;
 	}
 
 	&--half {
-		border-radius: $universal-border-radius-half;
+		border-radius: $border-radius-half;
+	}
+
+	&--normal {
+		border-radius: $border-radius-normal;
 	}
 
 	&--full {
-		border-radius: $universal-border-radius;
+		border-radius: $border-radius-full;
 	}
 }
 
