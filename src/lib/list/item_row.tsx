@@ -8,6 +8,9 @@ import TypographyParagraphMedium from '../typography/typography_paragraph_medium
 import IconButton from '../button/icon_button';
 import TypographyCaptionLarge from '../typography/typography_caption_large';
 
+// Types
+import { ColorOptionType } from '../private/types';
+
 
 export default function ItemRow(props: {
     title: string,
@@ -18,7 +21,7 @@ export default function ItemRow(props: {
     buttonIcon?: React.ReactNode,
     buttonClick?: () => void,
     buttonSize?: 'small' | 'medium',
-    buttonColor?: 'primary' | 'secondary' | 'tertiary' | 'background' | 'alert' | 'error' | 'success' | 'accessory-orange' | 'accessory-blue' | 'accessory-green',
+    buttonColor?: ColorOptionType,
     cardStyle?: 'card-light-shadow' | 'card-dark-shadow' | 'card-no-shadow'
 }) {
 

@@ -395,11 +395,7 @@ body {
 }
 
 .vieolo-icon-button {
-	border-radius: 5px;
-	height: 40px;
-	width: 40px;
-	background-color: white;
-	border: none;
+	border-radius: $base-unit-half;	
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -408,21 +404,44 @@ body {
 	&:active {
 		outline: none;
 	}
-}
 
-.vieolo-icon-button-small {
-	height: 22px;
-	width: 22px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding-top: 4px;
+	&--medium {
+		height: $row-height-medium;
+		width: $row-height-medium;
 
-	svg {
-		width: 16px;
-		height: 16px;
+		svg {
+			width: $row-height-small - $base-unit-half;
+			height: $row-height-small - $base-unit-half;
+		}
+	}
+
+	&--small {
+		height: $row-height-small;
+		width: $row-height-small;
+		
+		svg {
+			width: $row-height-small - $base-unit;
+			height: $row-height-small - $base-unit;
+		}
+	}
+
+	&--border-radius-full {
+		border-radius: $border-radius-full;
+	}
+
+	&--border-radius-normal {
+		border-radius: $border-radius-normal;
+	}
+
+	&--border-radius-half {
+		border-radius: $border-radius-half;
+	}
+
+	&--border-radius-none {
+		border-radius: 0px;
 	}
 }
+
 
 .vieolo-select {
 	display: inline-block;

@@ -1,12 +1,15 @@
 // React
 import React from 'react';
 
+// Types
+import { EmphasisType, BorderRadiusType, ColorOptionType } from '../private/types';
+
 
 export default function Button(props: {
 	text: string,
 	onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
 	disabled? : boolean,
-	color: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' | 'alert' | 'accessory-blue' | 'accessory-orange' | 'accessory-green',
+	color: ColorOptionType,
 	startIcon?: React.ReactNode,
 	endIcon?: React.ReactNode,
 	/** 
@@ -22,9 +25,9 @@ export default function Button(props: {
 	style?: React.CSSProperties,
 	type?: 'button' | 'submit' | 'reset',
 	/** default: high */
-	emphasis?: 'high' | 'medium' | 'low' | 'none',
+	emphasis?: EmphasisType,
 	/** default: `vieolo-button` css class */
-	borderRadius?: 'full' | 'normal' | 'half' | 'none'
+	borderRadius?: BorderRadiusType
 }) {
 	let s: {[key: string]: any} = {};
 	let h = props.height || 'medium';
