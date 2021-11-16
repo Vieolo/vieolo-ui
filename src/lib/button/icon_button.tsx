@@ -19,7 +19,10 @@ export default function IconButton(props: {
 	icon: React.ReactNode,
 	tooltip?: string,
 	tooltipPosition?: 'up' | 'down' | 'left' | 'right' | 'up-left' | 'up-right' | 'down-left' | 'down-right',
-	borderRadius?: BorderRadiusType
+	borderRadius?: BorderRadiusType,
+	style?: React.CSSProperties,
+	/** default: 2 */
+	borderWidth?: '0' | '1' | '2'
 }) {	
 	let c = `vieolo-icon-button vieolo-icon-button--${props.size || 'medium'} vieolo-icon-button--border-radius-${props.borderRadius || 'default'}`;
 	let e = props.emphasis || 'none';
@@ -30,9 +33,9 @@ export default function IconButton(props: {
 	} else if (e === 'medium') {
 		c = `${c} background-color--${col}-light ripple ripple--${col}-normal  border--px-0`;
 	} else if (e === 'low') {
-		c = `${c} background-color--white border--${col}-light hover--${col}-light color--${col}-normal  border--px-2 border--solid`;
+		c = `${c} background-color--white border--${col}-light hover--${col}-light color--${col}-normal  border--px-${props.borderWidth || '2'} border--solid`;
 	}else {
-		c = `${c} background-color--white border--white hover-border--${col}-light color--${col}-normal border--px-2 border--solid ripple--${col}-light`;
+		c = `${c} background-color--white border--white hover-border--${col}-light color--${col}-normal border--px-${props.borderWidth || '2'} border--solid ripple--${col}-light`;
 	}
 
 	if (props.tooltip) c += " vieolo-tooltip";	
@@ -41,7 +44,7 @@ export default function IconButton(props: {
 
 	if (props.className) c += " " + props.className;
 
-	return <button className={c} onClick={props.onClick} >
+	return <button className={c} onClick={props.onClick} style={props.style || {}} >
 		{props.icon}
 		{
 			props.tooltip &&
