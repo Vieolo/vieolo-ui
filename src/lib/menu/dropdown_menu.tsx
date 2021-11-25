@@ -5,10 +5,18 @@ import React, { useState, useRef, useEffect, CSSProperties } from 'react';
 import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
 
 
+export type DropDownMenuItemType = {
+    title: string,
+    /** The unique value of each item which is used to reference this item */
+    value: string,
+    icon?: React.ReactNode
+}
+
+
 type DropDownMenuProps = {
     buttonComponent: React.ReactNode,
     disabled?: boolean,
-    items: { title: string, value: string, icon?: React.ReactNode }[],
+    items: DropDownMenuItemType[],
     onItemSelect: (value: string) => void,
     className?: string,
     /** @deprecated The positioning of the dropdown is calculated automatically */
