@@ -1,8 +1,12 @@
+// Types
+import { BorderRadiusType } from "../private/types";
+
 export default function TabSwitch(props: {
     options: {value: string, title: string}[], 
     value: string, 
     onSelect: (o: string) => void,
-    verticalMargin?: number
+    verticalMargin?: number,
+    borderRadius?: BorderRadiusType
 }) {
     let left = 0;
     let anchors: any = [];
@@ -26,7 +30,7 @@ export default function TabSwitch(props: {
     
     return <div className={`vieolo-tab-switch margin-vertical--${(props.verticalMargin || 10).toString()}`}>
         <nav className="vieolo-tab-switch__tab-nav">
-            <div className="vieolo-tab-switch__selector" style={{"left": left.toString() + "px", "width": "140px"}}></div>
+            <div className={`vieolo-tab-switch__selector border-radius--${props.borderRadius || 'half'}`} style={{"left": left.toString() + "px", "width": "140px"}}></div>
             {anchors}
         </nav>
     </div>
