@@ -92,6 +92,7 @@ export default function Button(props: {
 	if (props.auxiliary) {
 		let aux = <button
 			className={c}
+			type={props.type}
 			style={{
 				borderTopLeftRadius: 0,
 				borderBottomLeftRadius: 0,
