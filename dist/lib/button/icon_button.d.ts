@@ -16,4 +16,5 @@ export default function IconButton(props: {
     style?: React.CSSProperties;
     /** default: 2 */
     borderWidth?: '0' | '1' | '2';
+    type?: 'button' | 'submit' | 'reset';
 }): JSX.Element;

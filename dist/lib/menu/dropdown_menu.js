@@ -79,14 +79,14 @@ export default function DropDownMenu(props) {
     return _jsxs("div", Object.assign({ className: className, ref: container }, { children: [_jsx("div", Object.assign({ onClick: () => handleButtonClick() }, { children: props.buttonComponent }), void 0),
             open &&
                 _jsx("div", Object.assign({ className: `dropdown`, style: style }, { children: props.items.map(item => {
-                        return _jsx(DropDownMenuItem, { title: item.title, icon: item.icon, onClick: (t) => {
+                        return _jsx(DropDownMenuItem, { title: item.title, value: item.value, icon: item.icon, onClick: (v) => {
                                 setOpen(!open);
-                                props.onItemSelect(t);
-                            } }, item.title);
+                                props.onItemSelect(v);
+                            } }, item.value);
                     }) }), void 0)] }), void 0);
 }
 function DropDownMenuItem(props) {
-    return _jsxs("div", Object.assign({ className: "dropdown-item", onClick: () => { props.onClick(props.title); } }, { children: [props.icon &&
+    return _jsxs("div", Object.assign({ className: "dropdown-item", onClick: () => { props.onClick(props.value); } }, { children: [props.icon &&
                 props.icon,
             _jsx(TypographyParagraphMedium, { text: props.title }, void 0)] }), void 0);
 }
