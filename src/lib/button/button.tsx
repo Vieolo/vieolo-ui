@@ -8,7 +8,7 @@ import { EmphasisType, BorderRadiusType, ColorOptionType } from '../private/type
 export default function Button(props: {
 	text: string,
 	onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
-	disabled? : boolean,
+	disabled?: boolean,
 	color: ColorOptionType,
 	startIcon?: React.ReactNode,
 	endIcon?: React.ReactNode,
@@ -27,21 +27,31 @@ export default function Button(props: {
 	/** default: high */
 	emphasis?: EmphasisType,
 	/** default: `vieolo-button` css class */
-	borderRadius?: BorderRadiusType
+	borderRadius?: BorderRadiusType,
+	auxiliary?: {
+		icon: React.ReactNode,
+		onClick: () => void
+	}
 }) {
-	let s: {[key: string]: any} = {};
+	let s: React.CSSProperties = {};
 	let h = props.height || 'medium';
 	let w = props.width || 'content';
 	let c: string = `vieolo-button vieolo-button--${h} vieolo-button--${w}-width vieolo-button--border-radius-${props.borderRadius || 'default'}`;
 	let e = props.emphasis || 'high';
-	
+
 
 	if (props.toLowerCase) {
-		s['textTransform'] = 'initial';		
+		s['textTransform'] = 'initial';
 	}
 
 	if (props.fontSize) {
 		s['fontSize'] = `${props.fontSize}px`;
+	}
+
+	if (props.auxiliary) {
+		s.borderTopRightRadius = 0;
+		s.borderBottomRightRadius = 0;
+		s.marginRight = 2;
 	}
 
 	if (e === 'high') {
@@ -50,15 +60,15 @@ export default function Button(props: {
 		c = `${c} background-color--${props.color}-light ripple ripple--${props.color}-normal  border--px-0`;
 	} else if (e === 'low') {
 		c = `${c} background-color--white border--${props.color}-light hover--${props.color}-light color--${props.color}-normal  border--px-2 border--solid`;
-	}else {
+	} else {
 		c = `${c} background-color--white border--white hover-border--${props.color}-light color--${props.color}-normal border--px-2 border--solid ripple--${props.color}-light`;
 	}
-	
+
 	if (props.disabled) c += " disabled";
 
 	if (props.className) c += " " + props.className;
 
-	return <button className={c} onClick={props.onClick} style={s}>
+	let button = <button className={c} onClick={props.onClick} style={s}>
 		{
 			props.startIcon &&
 			<span className="start-icon">
@@ -74,4 +84,23 @@ export default function Button(props: {
 		}
 	</button>
 
+	if (props.auxiliary) {
+		return <div className="flex">
+			{button}
+			<button
+				className={c}
+				style={{
+					borderTopLeftRadius: 0,
+					borderBottomLeftRadius: 0,
+					width: 40,
+					minWidth: 10,
+				}}
+				onClick={props.auxiliary.onClick}
+			>
+				{props.auxiliary.icon}
+			</button>
+		</div>
+	}
+
+	return button;
 }

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 // Material UI
-// import IconOne from '@mui/icons-material/Assignment';
+import IconOne from '@mui/icons-material/Assignment';
 // import IconTwo from '@mui/icons-material/Backup';
 // import IconThree from '@mui/icons-material/Cake';
 // import IconFour from '@mui/icons-material/DataUsage';
@@ -10,6 +10,7 @@ import React, { useState } from 'react';
 // Component
 import Button from '../../lib/button/button';
 import Select from '../../lib/form/select';
+import SwitchSet from '../../lib/form/switch_set';
 
 // Types
 import { ColorOptionType } from '../../lib/private/types';
@@ -39,6 +40,7 @@ export function ButtonCreator(props: { p: ButtonPropsType }) {
     let [height, setHeight] = useState<string>('medium');
     let [width, setWidth] = useState<string>('content');
     let [borderRadius, setBorderRadius] = useState<string>('default');
+    let [auxiliary, setAuxiliary] = useState<boolean>(false);
 
     return <div className="grid-two-column">
 
@@ -119,6 +121,15 @@ export function ButtonCreator(props: { p: ButtonPropsType }) {
                 selectedItems={[borderRadius]}
                 title={"Border Radius"}
             />
+
+            <div className="padding--one"></div>
+
+            <SwitchSet 
+                on={auxiliary}
+                onChange={v => setAuxiliary(v)}
+                switchID="auxiliary_switch"
+                title="Auxiliary"
+            />
         </div>
 
         <div>
@@ -138,6 +149,7 @@ export function ButtonCreator(props: { p: ButtonPropsType }) {
                 toLowerCase={props.p.toLowerCase}
                 type={props.p.type}
                 width={width as any}
+                auxiliary={auxiliary ? {icon: <IconOne />, onClick: () => {}} : null}
             />
         </div>
     </div>
