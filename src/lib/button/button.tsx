@@ -1,6 +1,9 @@
 // React
 import React from 'react';
 
+// Components
+import DropDownMenu, { DropDownMenuItemType } from '../menu/dropdown_menu';
+
 // Types
 import { EmphasisType, BorderRadiusType, ColorOptionType } from '../private/types';
 
@@ -28,9 +31,11 @@ export default function Button(props: {
 	emphasis?: EmphasisType,
 	/** default: `vieolo-button` css class */
 	borderRadius?: BorderRadiusType,
+	/** Adds an Icon button to the right side of the button */
 	auxiliary?: {
 		icon: React.ReactNode,
-		onClick: () => void
+		onClick: (dropDownItemValue?: string) => void,
+		dropDownMenuItems?: DropDownMenuItemType[]
 	}
 }) {
 	let s: React.CSSProperties = {};
@@ -85,20 +90,33 @@ export default function Button(props: {
 	</button>
 
 	if (props.auxiliary) {
+		let aux = <button
+			className={c}
+			style={{
+				borderTopLeftRadius: 0,
+				borderBottomLeftRadius: 0,
+				width: 40,
+				minWidth: 10,
+			}}
+			onClick={() => {
+				if (!props.auxiliary!.dropDownMenuItems || props.auxiliary!.dropDownMenuItems.length === 0) props.auxiliary!.onClick();
+			}}
+		>
+			{props.auxiliary.icon}
+		</button>
+
 		return <div className="flex">
 			{button}
-			<button
-				className={c}
-				style={{
-					borderTopLeftRadius: 0,
-					borderBottomLeftRadius: 0,
-					width: 40,
-					minWidth: 10,
-				}}
-				onClick={props.auxiliary.onClick}
-			>
-				{props.auxiliary.icon}
-			</button>
+
+			{
+				(props.auxiliary.dropDownMenuItems && props.auxiliary.dropDownMenuItems.length > 0)
+					? <DropDownMenu
+						buttonComponent={aux}
+						items={props.auxiliary.dropDownMenuItems}
+						onItemSelect={v => props.auxiliary!.onClick(v)}
+					/>
+					: aux 
+			}
 		</div>
 	}
 

@@ -10,7 +10,6 @@ import IconTwo from '@mui/icons-material/Restore';
 // Component
 import Button from '../../lib/button/button';
 import Select from '../../lib/form/select';
-import SwitchSet from '../../lib/form/switch_set';
 
 // Types
 import { ColorOptionType } from '../../lib/private/types';
@@ -40,7 +39,7 @@ export function ButtonCreator(props: { p: ButtonPropsType }) {
     let [height, setHeight] = useState<string>('medium');
     let [width, setWidth] = useState<string>('content');
     let [borderRadius, setBorderRadius] = useState<string>('default');
-    let [auxiliary, setAuxiliary] = useState<boolean>(false);
+    let [auxiliary, setAuxiliary] = useState<string>("None");
     let [icon, setIcon] = useState<string>('None');
 
     return <div className="grid-two-column">
@@ -140,11 +139,17 @@ export function ButtonCreator(props: { p: ButtonPropsType }) {
 
             <div className="padding--half"></div>
 
-            <SwitchSet 
-                on={auxiliary}
-                onChange={v => setAuxiliary(v)}
-                switchID="auxiliary_switch"
-                title="Auxiliary"
+            <Select
+                error={false}
+                items={(['None', 'Plain', 'With DropDown']).map(c => {
+                    return {
+                        title: c,
+                        value: c
+                    }
+                })}
+                onSelect={v => setAuxiliary(v[0] as any)}
+                selectedItems={[auxiliary]}
+                title={"Auxiliary Button"}
             />
         </div>
 
@@ -165,7 +170,19 @@ export function ButtonCreator(props: { p: ButtonPropsType }) {
                 toLowerCase={props.p.toLowerCase}
                 type={props.p.type}
                 width={width as any}
-                auxiliary={auxiliary ? {icon: <IconOne />, onClick: () => {}} : null}
+                auxiliary={
+                    auxiliary === "None"
+                        ? null
+                        : auxiliary === "Plain" 
+                            ? {
+                                icon: <IconOne />, onClick: () => {}
+                            } : {
+                                icon: <IconOne />, onClick: v => alert(v), dropDownMenuItems: [
+                                    {title: "One", value: "One"},
+                                    {title: "Two", value: "Two"},
+                                ]
+                            }
+                }
             />
         </div>
     </div>
