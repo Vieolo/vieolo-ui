@@ -16,7 +16,15 @@ export function selectOptions(): { [key: string]: SelectPropsType } {
         {title: "One", value: "1"}, 
         {title: "Two", value: "2"}, 
         {title: "Three", value: "3", category: "Third"},
-        {title: "One Two Three Four Five", value: "4"} 
+        {title: "One Two Three Four Five", value: "4", category: "Third"},
+        {title: "Six", value: "6", category: "Third"},
+        {title: "Seven", value: "7", category: "Third"} ,
+        {title: "Eight", value: "8", category: "Third"},
+        {title: "Nine", value: "9", category: "Third"} ,
+        {title: "Ten", value: "10", category: "Third"},
+        {title: "Eleven", value: "11", category: "Third"} ,
+        {title: "Twelve", value: "12", category: "Third"},
+        {title: "Thirteen", value: "13", category: "Third"} 
     ];
 
     let baseProps: SelectPropsType = {

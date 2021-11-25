@@ -542,8 +542,13 @@ body {
 
 	.category-name {
 		font-size: 12px;
-		margin: 10px 0px 3px 10px;
+		margin: 0;
+		padding: 10px 0px 3px 10px;
 		@include font-header;
+		border-bottom: 1px solid $primary-color-normal;
+		position: sticky;
+		top: 0;
+		background-color: white;
 	}
 }
 
