@@ -26,6 +26,11 @@ body {
 	min-width: 80px;
 	@include font-header;
 
+	svg {
+		height: $base-unit * 2;
+		width: $base-unit * 2;
+	}
+
 	&--large {
 		height: $row-height-large;
 	}
@@ -395,7 +400,7 @@ body {
 }
 
 .vieolo-icon-button {
-	border-radius: $base-unit-half;	
+	border-radius: $base-unit-half;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -418,7 +423,7 @@ body {
 	&--small {
 		height: $row-height-small;
 		width: $row-height-small;
-		
+
 		svg {
 			width: $row-height-small - $base-unit;
 			height: $row-height-small - $base-unit;
@@ -442,7 +447,6 @@ body {
 	}
 }
 
-
 .vieolo-select {
 	display: inline-block;
 	width: 160px;
@@ -452,12 +456,25 @@ body {
 		margin: 0 auto;
 		@include tertiary-background;
 		border-color: $tertiary-color-normal;
-		height: 45px;
 		cursor: pointer;
 		@include flex-row-space-between;
 		@include no-text-overflow;
 		width: 160px;
 		padding: 0 5px;
+
+		&--error {
+			p {
+				@include error-color;
+			}
+		}
+
+		&--medium {
+			height: $row-height-medium;
+		}
+
+		&--small {
+			height: $row-height-small;
+		}
 
 		.button-text {
 			justify-content: center;
@@ -487,12 +504,6 @@ body {
 			&:active {
 				outline: none;
 			}
-		}
-	}
-
-	.select-button-error {
-		p {
-			@include error-color;
 		}
 	}
 
@@ -530,8 +541,13 @@ body {
 
 	.category-name {
 		font-size: 12px;
-		margin: 10px 0px 3px 10px;
+		margin: 0;
+		padding: 10px 0px 3px 10px;
 		@include font-header;
+		border-bottom: 1px solid $primary-color-normal;
+		position: sticky;
+		top: 0;
+		background-color: white;
 	}
 }
 
@@ -941,12 +957,11 @@ body {
 	}
 }
 
-
 .vieolo-form-dialog {
 	background-color: white;
 	border-radius: 5px;
 
-	&__header {		
+	&__header {
 		border-bottom: 1px solid #f2f2f2;
 		height: 40px;
 		padding: 0 10px;
@@ -977,8 +992,8 @@ body {
 	overflow: scroll;
 }
 
-.vieolo-table {	
-	background-color: white;	
+.vieolo-table {
+	background-color: white;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 
@@ -1033,7 +1048,6 @@ body {
 		display: flex;
 		flex-direction: row-reverse;
 		padding: 5px;
-		
 	}
 }
 
@@ -1049,7 +1063,7 @@ body {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			justify-content: center;	
+			justify-content: center;
 		}
 
 		&--horizontal {
@@ -1064,7 +1078,7 @@ body {
 		cursor: pointer;
 		@include center-by-flex-row;
 		border-radius: $universal-border-radius-half;
-		
+
 		&:hover {
 			background-color: #f2f2f2;
 		}
@@ -1075,7 +1089,7 @@ body {
 			&:hover {
 				background-color: $primary-color-normal;
 			}
-			
+
 			p,
 			svg {
 				color: $primary-color-text;
@@ -1087,3 +1101,60 @@ body {
 		}
 	}
 }
+
+.vieolo-tab-switch {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	box-sizing: content-box;
+
+	&__tab-nav {
+		font-size: 15px;
+		padding: 0px;
+		list-style: none;
+		background: #fff;
+		display: inline-block;
+		border-radius: 5px;
+		position: relative;
+
+		@media all and (max-width: 500px) {			
+			font-size: 10px;			
+		}
+
+		&--active {
+			color: #fff !important;
+		}
+
+		a {
+			text-decoration: none;
+			color: #777;
+			font-size: 14px;
+			padding: 6px 0;
+			display: inline-block;
+			position: relative;
+			z-index: 1;
+			transition-duration: 0.6s;
+			cursor: pointer;
+			font-weight: 400;			
+
+			i {
+				margin-right: 5px;
+			}
+		}
+	}	
+
+	&__selector {
+		height: 100%;
+		display: inline-block;
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		z-index: 1;
+		transition-duration: 0.6s;
+		background-color: $primary-color-normal;
+	}
+}
+
+
+
+

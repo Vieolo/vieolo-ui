@@ -69,7 +69,8 @@ export default function PeriodSelector(props) {
             props.periodOptions &&
                 _jsx("div", Object.assign({ className: "vieolo-period-selector__dropdown-div" }, { children: _jsx(DropDownMenu, { buttonComponent: _jsx("div", Object.assign({ className: "vieolo-period-selector__dropdown-button" }, { children: _jsx(DownArrow, {}, void 0) }), void 0), items: props.periodOptions.map(o => {
                             return {
-                                title: o
+                                title: o,
+                                value: o
                             };
                         }), onItemSelect: o => props.onPeriodChange(o) }, void 0) }), void 0)] }), void 0);
 }

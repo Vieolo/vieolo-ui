@@ -1,4 +1,5 @@
 import React from 'react';
+import { DropDownMenuItemType } from '../menu/dropdown_menu';
 import { EmphasisType, BorderRadiusType, ColorOptionType } from '../private/types';
 export default function Button(props: {
     text: string;
@@ -23,4 +24,10 @@ export default function Button(props: {
     emphasis?: EmphasisType;
     /** default: `vieolo-button` css class */
     borderRadius?: BorderRadiusType;
+    /** Adds an Icon button to the right side of the button */
+    auxiliary?: {
+        icon: React.ReactNode;
+        onClick: (dropDownItemValue?: string) => void;
+        dropDownMenuItems?: DropDownMenuItemType[];
+    };
 }): JSX.Element;

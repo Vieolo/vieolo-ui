@@ -107,7 +107,8 @@ export default function PeriodSelector (props: {
                     </div>}
                     items={props.periodOptions.map(o => {
                         return {
-                            title: o
+                            title: o,
+                            value: o
                         }
                     })}
                     onItemSelect={o => props.onPeriodChange(o as PeriodOptions)}

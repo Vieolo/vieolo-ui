@@ -82,7 +82,28 @@ export default function Select(props) {
         style.top = top;
     if (bottom !== 0)
         style.bottom = bottom;
-    return _jsxs("div", Object.assign({ className: "vieolo-select", ref: container }, { children: [_jsxs("div", Object.assign({ className: `select-button${props.error ? ' select-button-error' : ''}`, onClick: handleOpen }, { children: [_jsxs("div", Object.assign({ className: "button-text" }, { children: [_jsx(TypographyParagraphSmall, { text: props.title, className: "button-title" }, void 0),
+    let items = [];
+    let filtered = props.items.filter(item => (!searchQuery.trim() || item.title.toLowerCase().includes(searchQuery.toLowerCase())));
+    for (let i = 0; i < filtered.length; i++) {
+        const item = filtered[i];
+        const prev = i > 0 ? filtered[i - 1] : undefined;
+        items.push(_jsx(SelectItem, { item: item, isSelected: props.selectedItems.includes(item.value), previousItem: prev, onSelect: (t) => {
+                if (props.multipleChoice) {
+                    let newSelected = [...props.selectedItems];
+                    if (props.selectedItems.includes(item.value))
+                        newSelected = newSelected.filter(f => f !== item.value);
+                    else
+                        newSelected.push(item.value);
+                    props.onSelect(newSelected);
+                }
+                else {
+                    setOpen(false);
+                    setSearchQuery("");
+                    props.onSelect([t.value]);
+                }
+            } }, item.title));
+    }
+    return _jsxs("div", Object.assign({ className: "vieolo-select", ref: container }, { children: [_jsxs("div", Object.assign({ className: `select-button${props.error ? ' select-button--error' : ''} select-button--${props.height || 'medium'}`, onClick: handleOpen }, { children: [_jsxs("div", Object.assign({ className: "button-text" }, { children: [_jsx(TypographyParagraphSmall, { text: props.title, className: "button-title" }, void 0),
                             (props.searchable && open)
                                 ? _jsx("input", { autoFocus: true, value: searchQuery, onChange: e => setSearchQuery(e.target.value), placeholder: "Search..." }, void 0)
                                 : _jsx(TypographyTitleSmall, { text: thisSelectedItems.map(s => s.title).join(", "), className: "button-value" }, void 0)] }), void 0),
@@ -90,23 +111,7 @@ export default function Select(props) {
                         ? _jsx(DownIcon, {}, void 0)
                         : _jsx(IconButton, { icon: _jsx(CloseIcon, {}, void 0), onClick: () => props.onSelect([]), color: "error", size: "small" }, void 0)] }), void 0),
             open &&
-                _jsx("div", Object.assign({ className: "select-dropdown", style: style }, { children: props.items.filter(item => (!searchQuery.trim() || item.title.toLowerCase().includes(searchQuery.toLowerCase()))).map(item => {
-                        return _jsx(SelectItem, { item: item, isSelected: props.selectedItems.includes(item.value), onSelect: (t) => {
-                                if (props.multipleChoice) {
-                                    let newSelected = [...props.selectedItems];
-                                    if (props.selectedItems.includes(item.value))
-                                        newSelected = newSelected.filter(f => f !== item.value);
-                                    else
-                                        newSelected.push(item.value);
-                                    props.onSelect(newSelected);
-                                }
-                                else {
-                                    setOpen(false);
-                                    setSearchQuery("");
-                                    props.onSelect([t.value]);
-                                }
-                            } }, item.title);
-                    }) }), void 0)] }), void 0);
+                _jsx("div", Object.assign({ className: "select-dropdown", style: style }, { children: items }), void 0)] }), void 0);
 }
 function SelectItem(props) {
     let className = "select-item";
@@ -114,7 +119,7 @@ function SelectItem(props) {
         className += " select-item-selected";
     if (props.item.category)
         className += " select-item-category";
-    return _jsxs(Fragment, { children: [props.item.category &&
+    return _jsxs(Fragment, { children: [(props.item.category && (!props.previousItem || props.item.category !== props.previousItem.category)) &&
                 _jsx("p", Object.assign({ className: "category-name" }, { children: props.item.category }), void 0),
             _jsx("div", Object.assign({ className: className, onClick: () => { props.onSelect(props.item); } }, { children: _jsx(TypographyParagraphMedium, { text: props.item.title }, void 0) }), void 0)] }, void 0);
 }

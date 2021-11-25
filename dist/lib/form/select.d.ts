@@ -13,6 +13,7 @@ declare type SelectProps = {
     clearable?: boolean;
     searchable?: boolean;
     multipleChoice?: boolean;
+    height?: 'medium' | 'small';
 };
 export default function Select(props: SelectProps): JSX.Element;
 export {};

@@ -5,11 +5,19 @@ import React, { useState, useRef, useEffect, CSSProperties } from 'react';
 import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
 
 
+export type DropDownMenuItemType = {
+    title: string,
+    /** The unique value of each item which is used to reference this item */
+    value: string,
+    icon?: React.ReactNode
+}
+
+
 type DropDownMenuProps = {
     buttonComponent: React.ReactNode,
     disabled?: boolean,
-    items: { title: string, icon?: React.ReactNode }[],
-    onItemSelect: (title: string) => void,
+    items: DropDownMenuItemType[],
+    onItemSelect: (value: string) => void,
     className?: string,
     /** @deprecated The positioning of the dropdown is calculated automatically */
     position?: 'left' | 'right'
@@ -108,9 +116,9 @@ export default function DropDownMenu(props: DropDownMenuProps) {
             <div className={`dropdown`} style={style} >
                 {
                     props.items.map(item => {
-                        return <DropDownMenuItem key={item.title} title={item.title} icon={item.icon} onClick={(t: string) => {
+                        return <DropDownMenuItem key={item.value} title={item.title} value={item.value} icon={item.icon} onClick={(v: string) => {
                             setOpen(!open);
-                            props.onItemSelect(t);
+                            props.onItemSelect(v);
                         }} />
                     })
                 }
@@ -121,9 +129,9 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 
 }
 
-function DropDownMenuItem(props: { title: string, onClick: (selectedTitle: string) => void, icon?: React.ReactNode }) {
+function DropDownMenuItem(props: { title: string, value: string, onClick: (selectedValue: string) => void, icon?: React.ReactNode }) {
 
-    return <div className="dropdown-item" onClick={() => { props.onClick(props.title) }}>
+    return <div className="dropdown-item" onClick={() => { props.onClick(props.value) }}>
         {
             props.icon &&
             props.icon

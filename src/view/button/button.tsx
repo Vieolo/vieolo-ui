@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 
 // Material UI
-// import IconOne from '@mui/icons-material/Assignment';
-// import IconTwo from '@mui/icons-material/Backup';
+import IconOne from '@mui/icons-material/Assignment';
+import IconTwo from '@mui/icons-material/Restore';
 // import IconThree from '@mui/icons-material/Cake';
 // import IconFour from '@mui/icons-material/DataUsage';
 
@@ -39,6 +39,8 @@ export function ButtonCreator(props: { p: ButtonPropsType }) {
     let [height, setHeight] = useState<string>('medium');
     let [width, setWidth] = useState<string>('content');
     let [borderRadius, setBorderRadius] = useState<string>('default');
+    let [auxiliary, setAuxiliary] = useState<string>("None");
+    let [icon, setIcon] = useState<string>('None');
 
     return <div className="grid-two-column">
 
@@ -119,6 +121,36 @@ export function ButtonCreator(props: { p: ButtonPropsType }) {
                 selectedItems={[borderRadius]}
                 title={"Border Radius"}
             />
+
+            <div className="padding--half"></div>
+
+            <Select
+                error={false}
+                items={(['None', 'Start', 'End']).map(c => {
+                    return {
+                        title: c,
+                        value: c
+                    }
+                })}
+                onSelect={v => setIcon(v[0] as any)}
+                selectedItems={[icon]}
+                title={"Icon"}
+            />
+
+            <div className="padding--half"></div>
+
+            <Select
+                error={false}
+                items={(['None', 'Plain', 'With DropDown']).map(c => {
+                    return {
+                        title: c,
+                        value: c
+                    }
+                })}
+                onSelect={v => setAuxiliary(v[0] as any)}
+                selectedItems={[auxiliary]}
+                title={"Auxiliary Button"}
+            />
         </div>
 
         <div>
@@ -130,14 +162,27 @@ export function ButtonCreator(props: { p: ButtonPropsType }) {
                 text={props.p.text}
                 borderRadius={borderRadius as any}
                 emphasis={emphasis as any}
-                endIcon={props.p.endIcon}
+                endIcon={icon === 'End' ? <IconTwo /> : null}
                 fontSize={props.p.fontSize}
                 height={height as any}
-                startIcon={props.p.startIcon}
+                startIcon={icon === "Start" ? <IconTwo /> : null}
                 style={props.p.style}
                 toLowerCase={props.p.toLowerCase}
                 type={props.p.type}
                 width={width as any}
+                auxiliary={
+                    auxiliary === "None"
+                        ? null
+                        : auxiliary === "Plain" 
+                            ? {
+                                icon: <IconOne />, onClick: () => {}
+                            } : {
+                                icon: <IconOne />, onClick: v => alert(v), dropDownMenuItems: [
+                                    {title: "One", value: "One"},
+                                    {title: "Two", value: "Two"},
+                                ]
+                            }
+                }
             />
         </div>
     </div>

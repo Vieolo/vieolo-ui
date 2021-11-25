@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.12.0 (2021-11-25)
+- Added auxiliary button to `Button` ([#65](https://github.com/Vieolo/vieolo-ui/issues/65))
+- Added optional type to `IconButton` ([#61](https://github.com/Vieolo/vieolo-ui/issues/61))
+- Added height control to `Select` ([#62](https://github.com/Vieolo/vieolo-ui/issues/62))
+- Improved the display of categories in `Select` ([#64](https://github.com/Vieolo/vieolo-ui/issues/64))
+- Added `TabSwitch` component ([#63](https://github.com/Vieolo/vieolo-ui/issues/63))
+
+#### Breaking Changes
+- `DropDownMenu` items now require a unique value
+
 ## 0.11.0 (2021-11-17)
 - Added basis of the Vieolo design language
 - Added `half`, `one`, and `two` states to `margin` and `padding` CSS classes
