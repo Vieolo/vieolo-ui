@@ -15,18 +15,18 @@ type DropDownMenuPropsType = React.ComponentProps<typeof DropDownMenu>;
 
 export function dropDownMenuOptions(): { [key: string]: DropDownMenuPropsType } {
 
-    let itemsWithoutIcon: {title: string, icon?: React.ReactNode}[] = [
-        {title: "One"},
-        {title: "Two"}, 
-        {title: "Three"},
-        {title: "One Two Three Four Five"}
+    let itemsWithoutIcon: {title: string, value: string, icon?: React.ReactNode}[] = [
+        {title: "One", value: "One"},
+        {title: "Two", value: "Two"}, 
+        {title: "Three", value: "Three"},
+        {title: "One Two Three Four Five", value: "Four"}
     ];
 
-    let itemsWithIcon: {title: string, icon?: React.ReactNode}[] = [
-        {title: "One", icon: <IconOne />},
-        {title: "Two", icon: <IconTwo />}, 
-        {title: "Three", icon: <IconThree />},
-        {title: "One Two Three Four Five", icon: <IconFour />}
+    let itemsWithIcon: {title: string, value: string, icon?: React.ReactNode}[] = [
+        {title: "One", icon: <IconOne />, value: "One"},
+        {title: "Two", icon: <IconTwo />, value: "Two"}, 
+        {title: "Three", icon: <IconThree />, value: "Three"},
+        {title: "One Two Three Four Five", icon: <IconFour />, value: "Four"}
     ];
 
     let baseProps: DropDownMenuPropsType = {        
