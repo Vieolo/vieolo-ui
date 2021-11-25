@@ -26,6 +26,11 @@ body {
 	min-width: 80px;
 	@include font-header;
 
+	svg {
+		height: $base-unit * 2;
+		width: $base-unit * 2;
+	}
+
 	&--large {
 		height: $row-height-large;
 	}

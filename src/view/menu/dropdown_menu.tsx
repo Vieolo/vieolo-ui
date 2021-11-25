@@ -8,25 +8,25 @@ import IconThree from '@mui/icons-material/Cake';
 import IconFour from '@mui/icons-material/DataUsage';
 
 // Component
-import DropDownMenu from '../../lib/menu/dropdown_menu';
+import DropDownMenu, { DropDownMenuItemType } from '../../lib/menu/dropdown_menu';
 import Button from '../../lib/button/button';
 
 type DropDownMenuPropsType = React.ComponentProps<typeof DropDownMenu>;
 
 export function dropDownMenuOptions(): { [key: string]: DropDownMenuPropsType } {
 
-    let itemsWithoutIcon: {title: string, icon?: React.ReactNode}[] = [
-        {title: "One"},
-        {title: "Two"}, 
-        {title: "Three"},
-        {title: "One Two Three Four Five"}
+    let itemsWithoutIcon: DropDownMenuItemType[] = [
+        {title: "One", value: "One"},
+        {title: "Two", value: "Two"}, 
+        {title: "Three", value: "Three"},
+        {title: "One Two Three Four Five", value: "Four"}
     ];
 
-    let itemsWithIcon: {title: string, icon?: React.ReactNode}[] = [
-        {title: "One", icon: <IconOne />},
-        {title: "Two", icon: <IconTwo />}, 
-        {title: "Three", icon: <IconThree />},
-        {title: "One Two Three Four Five", icon: <IconFour />}
+    let itemsWithIcon: DropDownMenuItemType[] = [
+        {title: "One", icon: <IconOne />, value: "One"},
+        {title: "Two", icon: <IconTwo />, value: "Two"}, 
+        {title: "Three", icon: <IconThree />, value: "Three"},
+        {title: "One Two Three Four Five", icon: <IconFour />, value: "Four"}
     ];
 
     let baseProps: DropDownMenuPropsType = {        
