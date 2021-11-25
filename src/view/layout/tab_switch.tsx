@@ -33,6 +33,7 @@ export function TabSwitchCreator(props: { p: TabSwitchPropsType }) {
 
     let [tab, setTab] = useState<string>("One");
     let [borderRadius, setBorderRadius] = useState<string>(null);
+    let [tabWidth, setTabWidth] = useState<string>("140");
 
     return <div className="grid-two-column">
         <div>
@@ -48,6 +49,21 @@ export function TabSwitchCreator(props: { p: TabSwitchPropsType }) {
                 selectedItems={[borderRadius]}
                 title={"Border Radius"}
             />
+
+            <div className="padding--one"></div>
+
+            <Select
+                error={false}
+                items={(['140', '100', '80', '200']).map(c => {
+                    return {
+                        title: c,
+                        value: c
+                    }
+                })}
+                onSelect={v => setTabWidth(v[0] as any)}
+                selectedItems={[tabWidth]}
+                title={"Tab Width"}
+            />
         </div>
 
         <div>
@@ -57,6 +73,7 @@ export function TabSwitchCreator(props: { p: TabSwitchPropsType }) {
                 value={tab}
                 verticalMargin={props.p.verticalMargin}
                 borderRadius={borderRadius as any}
+                tabWidth={parseInt(tabWidth)}
             />
         </div>
     </div>
