@@ -35,6 +35,11 @@ export function selectOptions(): { [key: string]: SelectPropsType } {
             ...baseProps,
             selectedItems: ["1"],            
         },
+        "Small": {
+            ...baseProps,
+            selectedItems: ["1"],
+            height: 'small'
+        },
         "With Error": {
             ...baseProps,
             error: true,
@@ -86,6 +91,7 @@ export function SelectCreator(props: {p: SelectPropsType}) {
         clearable={props.p.clearable}
         searchable={props.p.searchable}
         multipleChoice={props.p.multipleChoice}
+        height={props.p.height}
     />
 
 }

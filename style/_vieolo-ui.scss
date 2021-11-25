@@ -457,12 +457,25 @@ body {
 		margin: 0 auto;
 		@include tertiary-background;
 		border-color: $tertiary-color-normal;
-		height: 45px;
 		cursor: pointer;
 		@include flex-row-space-between;
 		@include no-text-overflow;
 		width: 160px;
 		padding: 0 5px;
+
+		&--error {
+			p {
+				@include error-color;
+			}
+		}
+
+		&--medium {
+			height: $row-height-medium;
+		}
+
+		&--small {
+			height: $row-height-small;
+		}
 
 		.button-text {
 			justify-content: center;
@@ -492,12 +505,6 @@ body {
 			&:active {
 				outline: none;
 			}
-		}
-	}
-
-	.select-button-error {
-		p {
-			@include error-color;
 		}
 	}
 

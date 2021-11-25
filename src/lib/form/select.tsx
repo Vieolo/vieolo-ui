@@ -28,7 +28,8 @@ type SelectProps = {
     error: boolean,
     clearable?: boolean,
     searchable?: boolean,
-    multipleChoice?: boolean
+    multipleChoice?: boolean,
+    height?: 'medium' | 'small'
 }
 
 
@@ -117,7 +118,7 @@ export default function Select(props: SelectProps) {
     if (bottom !== 0) style.bottom = bottom;
 
     return <div className="vieolo-select" ref={container as any}>
-        <div className={`select-button${props.error ? ' select-button-error' : ''}`} onClick={handleOpen}>
+        <div className={`select-button${props.error ? ' select-button--error' : ''} select-button--${props.height || 'medium'}`} onClick={handleOpen}>
             <div className="button-text">
                 <TypographyParagraphSmall text={props.title} className="button-title" />
                 {
