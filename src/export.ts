@@ -14,6 +14,7 @@ import Modal from './lib/dialog/modal';
 import PDFViewer from './lib/pdf_viewer/pdf_viewer';
 import PeriodSelector, { PeriodOptions } from './lib/date_time/period_selector';
 import Table, { TableSortDirection as TableSortDirectionType } from './lib/table/table';
+import TabSwitch from './lib/layout/tab_switch';
 import Textarea from './lib/form/textarea';
 import TextareaSet from './lib/form/textarea_set';
 import TimePicker from './lib/form/time_picker';
@@ -41,6 +42,7 @@ export {
     PeriodOptions,
     PeriodSelector,
     Table,
+    TabSwitch,
     Textarea,
     TextareaSet,
     TimePicker,
