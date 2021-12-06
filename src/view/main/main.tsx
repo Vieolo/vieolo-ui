@@ -28,7 +28,8 @@ export type ViewData = {
     variables: {
         [key: string]: {
             options: any[],
-            default: any
+            default: any,
+            type?: 'number' | "string" | "boolean"
         }
     }
 };
@@ -51,7 +52,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Period Selector": { title: "Period Selector", data: periodSelectorOptions(), creator: PeriodSelectorCreator },
         "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator },
         "List": { title: "List", data: listOptions(), creator: ListCreator },
-        // "Form Dialog": { title: "Form Dialog", data: formDialogOptions(), creator: FormDialogCreator },
+        "Form Dialog": { title: "Form Dialog", data: formDialogOptions(), creator: FormDialogCreator },
         // "Table": { title: "Table", data: tableOptions(), creator: TableCreator },
         // "Radio Group": { title: "Radio Group", data: radioGroupOptions(), creator: RadioGroupCreator },
         // "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator },
@@ -109,10 +110,10 @@ export default function MainPage(props: {}): JSX.Element {
                                 })}
                                 onSelect={v => {
                                     let temp = { ...finalState }
-                                    temp[k] = v[0];
+                                    temp[k] = variable.type && variable.type === 'number' ? +v[0] : v[0];
                                     setFinalState(temp);
                                 }}
-                                selectedItems={[finalState[k]]}
+                                selectedItems={[finalState[k].toString()]}
                                 title={k}
                             />
                         </div>
