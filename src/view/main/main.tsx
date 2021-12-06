@@ -47,7 +47,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator },
         "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerEmbeddedOptions(), creator: PDFViewerEmbeddedCreator },
         "PDF Viewer Fullscreen": { title: "PDF Viewer Fullscreen", data: pdfViewerFullScreenOptions(), creator: PDFViewerFullScreenCreator },
-        // "Select": { title: "Select", data: selectOptions(), creator: SelectCreator },
+        "Select": { title: "Select", data: selectOptions(), creator: SelectCreator },
         // "Period Selector": { title: "Period Selector", data: periodSelectorOptions(), creator: PeriodSelectorCreator },
         // "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator },
         // "List": { title: "List", data: listOptions(), creator: ListCreator },
