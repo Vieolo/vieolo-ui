@@ -53,7 +53,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator },
         "List": { title: "List", data: listOptions(), creator: ListCreator },
         "Form Dialog": { title: "Form Dialog", data: formDialogOptions(), creator: FormDialogCreator },
-        // "Table": { title: "Table", data: tableOptions(), creator: TableCreator },
+        "Table": { title: "Table", data: tableOptions(), creator: TableCreator },
         // "Radio Group": { title: "Radio Group", data: radioGroupOptions(), creator: RadioGroupCreator },
         // "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator },
     }
