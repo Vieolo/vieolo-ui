@@ -8,115 +8,56 @@ import RadioGroup from '../../lib/form/radio_group';
 import SampleIcon1 from '@mui/icons-material/AccessibleForwardTwoTone';
 import SampleIcon2 from '@mui/icons-material/Backspace';
 import SampleIcon3 from '@mui/icons-material/Cached';
-import SampleIcon4 from '@mui/icons-material/Dashboard';
+
+// Types
+import { ViewData } from '../main/main';
 
 type RadioGroupPropsType = React.ComponentProps<typeof RadioGroup>;
 
-export function radioGroupOptions(): { [key: string]: RadioGroupPropsType } {    
-
-    let baseProps: RadioGroupPropsType = {
-        direction: 'horizontal',
-        onOptionChange: () => {},
-        value: 'One',
-        options: [
-            {id: 'One', button: 'One'},
-            {id: 'Two', button: 'Two'},
-            {id: 'Three', button: 'Three'},
-        ]
-    }
+export function radioGroupOptions(): ViewData {
 
     return {
-        "Basic Horizontal": {
-            ...baseProps
-        },
-        "Basic Vertical": {
-            ...baseProps,
-            direction: 'vertical'
-        },
-        "Horizontal With Custom Padding": {
-            ...baseProps,
-            horizontalButtonPadding: 30
-        },
-        "Vertical With Custom Padding": {
-            ...baseProps,
-            horizontalButtonPadding: 30,
-            direction: 'vertical'
-        },
-        "Horizontal With Long Text": {
-            ...baseProps,
-            horizontalButtonPadding: 30,
-            options: [
-                {id: 'One', button: 'A Very Long Text'},
-                {id: 'Two', button: 'Two'},
-                {id: 'Three', button: 'Three'},
-            ]   
-        },
-        "Vertical With Long Text": {
-            ...baseProps,
-            horizontalButtonPadding: 30,
-            direction: 'vertical',
-            options: [
-                {id: 'One', button: 'A Very Long Text'},
-                {id: 'Two', button: 'Two'},
-                {id: 'Three', button: 'Three'},
-            ]   
-        },
-        "Horizontal With Icon": {
-            ...baseProps,
-            horizontalButtonPadding: 30,
-            options: [
-                {
-                    id: 'One', 
-                    button: <SampleIcon1 />
-                },
-                {
-                    id: 'Two', 
-                    button: <SampleIcon2 />
-                },
-                {
-                    id: 'Three', 
-                    button: <SampleIcon3 />
-                },
-                {
-                    id: 'Four', 
-                    button: <SampleIcon4 />
-                },
-            ]   
-        },
-        "Vertical With Icon": {
-            ...baseProps,
-            horizontalButtonPadding: 30,
-            direction: 'vertical',
-            options: [
-                {
-                    id: 'One', 
-                    button: <SampleIcon1 />
-                },
-                {
-                    id: 'Two', 
-                    button: <SampleIcon2 />
-                },
-                {
-                    id: 'Three', 
-                    button: <SampleIcon3 />
-                },
-                {
-                    id: 'Four', 
-                    button: <SampleIcon4 />
-                },
-            ]   
-        },
+        constants: {
+
+        } as Partial<RadioGroupPropsType>,
+        variables: {
+            direction: {
+                options: ['horizontal', "vertical"],
+                default: "horizontal"
+            },
+            horizontalButtonPadding: {
+                options: ["10", "20", "30"],
+                default: 10,
+                type: 'number'
+            },
+            withIcon: {
+                options: [false, true],
+                default: false
+            }
+        }
     }
 }
 
 
-export function RadioGroupCreator(props: {p: RadioGroupPropsType}) {
+export function RadioGroupCreator(props: { p: RadioGroupPropsType }) {
     let [selected, setSelected] = useState<string>("One");
 
-    return <RadioGroup 
+    let textOptions = [
+        {id: 'One', button: 'A Very Long Text'},
+        {id: 'Two', button: 'Two'},
+        {id: 'Three', button: 'Three'},
+    ];
+
+    let iconOptions = [
+        { id: 'One', button: <SampleIcon1 /> },
+        { id: 'Two', button: <SampleIcon2 /> },
+        { id: 'Three', button: <SampleIcon3 /> },
+    ];
+
+    return <RadioGroup
         direction={props.p.direction}
         onOptionChange={o => setSelected(o)}
-        options={props.p.options}
+        options={(props.p as any).withIcon ? iconOptions : textOptions}
         value={selected}
         horizontalButtonPadding={props.p.horizontalButtonPadding}
     />
