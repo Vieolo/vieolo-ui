@@ -49,7 +49,7 @@ export default function MainPage(props: {}): JSX.Element {
         "PDF Viewer Fullscreen": { title: "PDF Viewer Fullscreen", data: pdfViewerFullScreenOptions(), creator: PDFViewerFullScreenCreator },
         "Select": { title: "Select", data: selectOptions(), creator: SelectCreator },
         "Period Selector": { title: "Period Selector", data: periodSelectorOptions(), creator: PeriodSelectorCreator },
-        // "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator },
+        "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator },
         // "List": { title: "List", data: listOptions(), creator: ListCreator },
         // "Form Dialog": { title: "Form Dialog", data: formDialogOptions(), creator: FormDialogCreator },
         // "Table": { title: "Table", data: tableOptions(), creator: TableCreator },
