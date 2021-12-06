@@ -1,191 +1,92 @@
 // React
-import React, { useState } from 'react';
+import React from 'react';
 
 // Material UI
 import IconOne from '@mui/icons-material/Assignment';
 import IconTwo from '@mui/icons-material/Restore';
-// import IconThree from '@mui/icons-material/Cake';
-// import IconFour from '@mui/icons-material/DataUsage';
 
 // Component
 import Button from '../../lib/button/button';
-import Select from '../../lib/form/select';
 
 // Types
 import { ColorOptionType } from '../../lib/private/types';
+import { ViewData } from '../main/main';
 
 type ButtonPropsType = React.ComponentProps<typeof Button>;
 
-export function buttonOptions(): { [key: string]: ButtonPropsType } {
-
-    let baseProps: ButtonPropsType = {
-        onClick: () => alert("Clicked"),
-        color: 'primary',
-        text: "Button"
-    }
-
+export function buttonOptions(): ViewData {
+    
     return {
-        "Base": {
-            ...baseProps
-        },
+        constants: {
+            onClick: () => { },
+            text: "Button"
+        } as Partial<ButtonPropsType>,
+        variables: {
+            color: {
+                options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'] as ColorOptionType[],
+                selected: 'primary'
+            },
+            emphasis: {
+                options: ['high', 'medium', 'low', 'none'],
+                selected: 'high'
+            },
+            height: {
+                options: ['large', 'medium', 'small'],
+                selected: 'medium'
+            },
+            width: {
+                options: ['content', 'full'],
+                selected: 'content'
+            },
+            borderRadius: {
+                options: ['default', 'full', 'normal', 'half', 'none'],
+                selected: 'default'
+            },
+            icon: {
+                options: ['None', 'Start', 'End'],
+                selected: 'None'
+            },
+            auxiliaryButton: {
+                options: ['None', 'Plain', 'With DropDown'],
+                selected: 'None'
+            }
+        }
     }
 }
 
 
 export function ButtonCreator(props: { p: ButtonPropsType }) {
 
-    let [color, setColor] = useState<ColorOptionType>('primary');
-    let [emphasis, setEmphasis] = useState<string>('high');
-    let [height, setHeight] = useState<string>('medium');
-    let [width, setWidth] = useState<string>('content');
-    let [borderRadius, setBorderRadius] = useState<string>('default');
-    let [auxiliary, setAuxiliary] = useState<string>("None");
-    let [icon, setIcon] = useState<string>('None');
-
-    return <div className="grid-two-column">
-
-        <div>
-            <Select
-                error={false}
-                items={(['primary', 'secondary', 'tertiary', 'error', 'success', 'alert', 'accessory-blue', 'accessory-green', 'accessory-orange'] as ColorOptionType[]).map(c => {
-                    return {
-                        title: c,
-                        value: c
+    return <Button
+        onClick={props.p.onClick}
+        className={props.p.className}
+        color={props.p.color}
+        disabled={props.p.disabled}
+        text={props.p.text}
+        borderRadius={props.p.borderRadius as any}
+        emphasis={props.p.emphasis as any}
+        endIcon={(props.p as any).icon === 'End' ? <IconTwo /> : null}
+        fontSize={props.p.fontSize}
+        height={props.p.height as any}
+        startIcon={(props.p as any).icon === "Start" ? <IconTwo /> : null}
+        style={props.p.style}
+        toLowerCase={props.p.toLowerCase}
+        type={props.p.type}
+        width={props.p.width as any}
+        auxiliary={
+            (props.p as any).auxiliaryButton === "None"
+                ? null
+                : (props.p as any).auxiliaryButton === "Plain"
+                    ? {
+                        icon: <IconOne />, onClick: () => { }
+                    } : {
+                        icon: <IconOne />, onClick: v => alert(v), dropDownMenuItems: [
+                            { title: "One", value: "One" },
+                            { title: "Two", value: "Two" },
+                        ]
                     }
-                })}
-                onSelect={v => setColor(v[0] as any)}
-                selectedItems={[color]}
-                title={"Color"}
-            />
-
-            <br />
-            <br />
-
-            <Select
-                error={false}
-                items={(['high', 'medium', 'low', 'none']).map(c => {
-                    return {
-                        title: c,
-                        value: c
-                    }
-                })}
-                onSelect={v => setEmphasis(v[0] as any)}
-                selectedItems={[emphasis]}
-                title={"Emphasis"}
-            />
-
-            <br />
-            <br />
-
-            <Select
-                error={false}
-                items={(['large', 'medium', 'small']).map(c => {
-                    return {
-                        title: c,
-                        value: c
-                    }
-                })}
-                onSelect={v => setHeight(v[0] as any)}
-                selectedItems={[height]}
-                title={"Height"}
-            />
-
-            <br />
-            <br />
-
-            <Select
-                error={false}
-                items={(['content', 'full']).map(c => {
-                    return {
-                        title: c,
-                        value: c
-                    }
-                })}
-                onSelect={v => setWidth(v[0] as any)}
-                selectedItems={[width]}
-                title={"Width"}
-            />
-
-            <br />
-            <br />
-
-            <Select
-                error={false}
-                items={(['default', 'full', 'normal', 'half', 'none']).map(c => {
-                    return {
-                        title: c,
-                        value: c
-                    }
-                })}
-                onSelect={v => setBorderRadius(v[0] as any)}
-                selectedItems={[borderRadius]}
-                title={"Border Radius"}
-            />
-
-            <div className="padding--half"></div>
-
-            <Select
-                error={false}
-                items={(['None', 'Start', 'End']).map(c => {
-                    return {
-                        title: c,
-                        value: c
-                    }
-                })}
-                onSelect={v => setIcon(v[0] as any)}
-                selectedItems={[icon]}
-                title={"Icon"}
-            />
-
-            <div className="padding--half"></div>
-
-            <Select
-                error={false}
-                items={(['None', 'Plain', 'With DropDown']).map(c => {
-                    return {
-                        title: c,
-                        value: c
-                    }
-                })}
-                onSelect={v => setAuxiliary(v[0] as any)}
-                selectedItems={[auxiliary]}
-                title={"Auxiliary Button"}
-            />
-        </div>
-
-        <div>
-            <Button
-                onClick={props.p.onClick}
-                className={props.p.className}
-                color={color}
-                disabled={props.p.disabled}
-                text={props.p.text}
-                borderRadius={borderRadius as any}
-                emphasis={emphasis as any}
-                endIcon={icon === 'End' ? <IconTwo /> : null}
-                fontSize={props.p.fontSize}
-                height={height as any}
-                startIcon={icon === "Start" ? <IconTwo /> : null}
-                style={props.p.style}
-                toLowerCase={props.p.toLowerCase}
-                type={props.p.type}
-                width={width as any}
-                auxiliary={
-                    auxiliary === "None"
-                        ? null
-                        : auxiliary === "Plain" 
-                            ? {
-                                icon: <IconOne />, onClick: () => {}
-                            } : {
-                                icon: <IconOne />, onClick: v => alert(v), dropDownMenuItems: [
-                                    {title: "One", value: "One"},
-                                    {title: "Two", value: "Two"},
-                                ]
-                            }
-                }
-            />
-        </div>
-    </div>
+        }
+    />
 
 }
 
