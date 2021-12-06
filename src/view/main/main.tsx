@@ -28,7 +28,7 @@ export type ViewData = {
     variables: {
         [key: string]: {
             options: any[],
-            selected: any
+            default: any
         }
     }
 };
@@ -42,7 +42,7 @@ export default function MainPage(props: {}): JSX.Element {
 
     let items: { [key: string]: { title: string, data: ViewData, creator: any } } = {
         "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator },
-        // "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator },
+        "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator },
         // "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator },
         // "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator },
         // "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerEmbeddedOptions(), creator: PDFViewerEmbeddedCreator },
@@ -81,7 +81,7 @@ export default function MainPage(props: {}): JSX.Element {
 
                             for (let z = 0; z < Object.keys(i.data.variables).length; z++) {
                                 const variable = Object.keys(i.data.variables)[z];
-                                finalState[variable] = i.data.variables[variable].selected;
+                                finalState[variable] = i.data.variables[variable].default;
                             }
                             setFinalState(finalState);
                         }}

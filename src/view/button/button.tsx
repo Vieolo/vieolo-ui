@@ -24,31 +24,31 @@ export function buttonOptions(): ViewData {
         variables: {
             color: {
                 options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'] as ColorOptionType[],
-                selected: 'primary'
+                default: 'primary'
             },
             emphasis: {
                 options: ['high', 'medium', 'low', 'none'],
-                selected: 'high'
+                default: 'high'
             },
             height: {
                 options: ['large', 'medium', 'small'],
-                selected: 'medium'
+                default: 'medium'
             },
             width: {
                 options: ['content', 'full'],
-                selected: 'content'
+                default: 'content'
             },
             borderRadius: {
                 options: ['default', 'full', 'normal', 'half', 'none'],
-                selected: 'default'
+                default: 'default'
             },
             icon: {
                 options: ['None', 'Start', 'End'],
-                selected: 'None'
+                default: 'None'
             },
             auxiliaryButton: {
                 options: ['None', 'Plain', 'With DropDown'],
-                selected: 'None'
+                default: 'None'
             }
         }
     }
