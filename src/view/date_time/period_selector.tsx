@@ -5,32 +5,24 @@ import React, { useState } from 'react';
 // Component
 import PeriodSelector, { PeriodOptions } from '../../lib/date_time/period_selector';
 
+// Types
+import { ViewData } from '../main/main';
+
 type PeriodSelectorPropsType = React.ComponentProps<typeof PeriodSelector>;
 
-export function periodSelectorOptions(): { [key: string]: PeriodSelectorPropsType } {
-    
-    let baseProps: PeriodSelectorPropsType = {
-        onDateChange: () => {},
-        onPeriodChange: () => {},
-        period: PeriodOptions.month,
-        selectedDate: new VDate(),
-    }
+export function periodSelectorOptions(): ViewData {
 
     return {
-        "Monthly, Basic": {
-            ...baseProps
-        },
-        "Monthly, with other period options": {
-            ...baseProps,
-            periodOptions: [
-                PeriodOptions.day,
-                PeriodOptions.week,
-                PeriodOptions.month,
-                PeriodOptions.quarter,
-                PeriodOptions.year
-            ]
+        constants: {            
+        } as Partial<PeriodSelectorPropsType>,
+        variables: {
+            otherPeriodOptions: {
+                options: [false, true],
+                default: false,
+            }
         }
     }
+        
 }
 
 
@@ -43,7 +35,13 @@ export function PeriodSelectorCreator(props: {p: PeriodSelectorPropsType}) {
         onPeriodChange={p => setSelectedPeriod(p)}
         period={selectedPeriod}
         selectedDate={selectedDate}
-        periodOptions={props.p.periodOptions}
+        periodOptions={(props.p as any).otherPeriodOptions ? [
+            PeriodOptions.day,
+            PeriodOptions.week,
+            PeriodOptions.month,
+            PeriodOptions.quarter,
+            PeriodOptions.year
+        ] : null}
     />
 
 }
