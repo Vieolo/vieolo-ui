@@ -5,38 +5,35 @@ import React, { useState } from 'react';
 import PDFViewer from '../../lib/pdf_viewer/pdf_viewer';
 import Input from '../../lib/form/input';
 
+// Types
+import { ViewData } from '../main/main';
+
 type ViewerPropsType = React.ComponentProps<typeof PDFViewer>;
 
-export function pdfViewerEmbeddedOptions(): { [key: string]: ViewerPropsType } {
-
-    let baseProps: ViewerPropsType = {
-        filePath: 'http://localhost:3000/simple.pdf',
-        context: 'embedded',
-        heightDeduction: 105
-    }
+export function pdfViewerEmbeddedOptions(): ViewData {
 
     return {
-        "Simple": {
-            ...baseProps
-        },
-        "Simple 2": {
-            ...baseProps,
-            filePath: 'http://localhost:3000/simple_2.pdf',
-        },
-        "Simple, Full functionality": {
-            ...baseProps,
-            onClose: () => {},
-            expandable: true
-        },
-        "Odd Shaped": {
-            ...baseProps,
-            filePath: 'http://localhost:3000/odd_shaped.pdf'
-        },
-        "Many Pages": {
-            ...baseProps,
-            filePath: 'http://localhost:3000/many_pages.pdf'
-        },
+        constants: {
+            context: 'embedded',
+            heightDeduction: 105
+        } as Partial<ViewerPropsType>,
+        variables: {
+            filePath: {
+                options: [
+                    '/simple.pdf',
+                    '/simple_2.pdf',
+                    '/odd_shaped.pdf',
+                    '/many_pages.pdf'
+                ],
+                default: '/simple.pdf'
+            },
+            expandable: {
+                options: [false, true],
+                default: false
+            }
+        }
     }
+
 }
 
 
@@ -45,7 +42,7 @@ export function PDFViewerEmbeddedCreator(props: { p: ViewerPropsType }) {
     let [pageNumber, setPageNumber] = useState<string>("");
 
     return <div>
-        <div className="flex-start">
+        <div className="flex-start margin-bottom--half">
             <Input
                 onChange={v => setPageNumber(v)}
                 value={pageNumber}
