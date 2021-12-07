@@ -56,6 +56,18 @@ export function listOptions(): ViewData {
             buttonColor: 'error',
             buttonIcon: <SampleIcon1 />,
             buttonSize: 'medium',
+        },
+        {
+            id: '6',
+            onButtonClick: () => alert(`Selected 6`),
+            selected: false,
+            title: "Disabled",
+            leadingIcon: <SampleIcon2 />,
+            subTitle: "This one is disabled",
+            buttonColor: 'error',
+            buttonIcon: <SampleIcon1 />,
+            buttonSize: 'medium',
+            disabled: true
         }
     ];
 
