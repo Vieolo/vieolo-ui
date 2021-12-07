@@ -75,7 +75,7 @@ export default function Select(props: SelectProps) {
 
     useEffect(() => {
         if (itemKeyboardFocus && itemKeyboardRef.current) {            
-            itemKeyboardRef.current.scrollIntoView(false);
+            itemKeyboardRef.current.scrollIntoView({block: 'center'});
         }
     }, [itemKeyboardFocus, itemKeyboardRef])
 
