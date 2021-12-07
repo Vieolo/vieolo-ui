@@ -468,6 +468,11 @@ body {
 		width: 160px;
 		padding: 0 5px;
 
+		&:focus {
+			border: 2px solid $secondary-color-normal;
+			outline: none;
+		}
+
 		&--error {
 			p {
 				@include error-color;

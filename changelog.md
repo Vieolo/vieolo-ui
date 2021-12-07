@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.13.1 (2021-12-07)
+- Improved the keyboard accessibility for `Select`
+
 ## 0.13.0 (2021-12-07)
 - Added emphasis for the buttons in `FormDialog` ([#68](https://github.com/Vieolo/vieolo-ui/issues/68))
 - Added disabled option for the items in `List` ([#67](https://github.com/Vieolo/vieolo-ui/issues/67))
