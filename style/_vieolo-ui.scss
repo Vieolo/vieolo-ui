@@ -543,6 +543,10 @@ body {
 			height: $row-height-medium;
 		}
 
+		&--keyboard-focus {
+			background-color: $primary-color-light;
+		}
+
 		&__category-name {
 			font-size: 12px;
 			margin: 0;
