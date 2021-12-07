@@ -11,4 +11,5 @@ export default function ItemRow(props: {
     buttonSize?: 'small' | 'medium';
     buttonColor?: ColorOptionType;
     cardStyle?: 'card-light-shadow' | 'card-dark-shadow' | 'card-no-shadow';
+    disabled?: boolean;
 }): JSX.Element;

@@ -11,6 +11,7 @@ export declare type ListItem = {
     buttonIcon?: React.ReactNode;
     buttonSize?: 'small' | 'medium';
     leadingIcon?: React.ReactNode;
+    disabled?: boolean;
 };
 export default function List(props: {
     items: ListItem[];

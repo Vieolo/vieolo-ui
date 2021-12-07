@@ -8,9 +8,12 @@ import SampleIcon2 from '@mui/icons-material/FlipCameraAndroid';
 // Component
 import List, { ListItem } from '../../lib/list/list';
 
+// Types
+import { ViewData } from '../main/main';
+
 type ListPropsType = React.ComponentProps<typeof List>;
 
-export function listOptions(): { [key: string]: ListPropsType } {
+export function listOptions(): ViewData {
 
     let items: ListItem[] = [
         {
@@ -53,35 +56,38 @@ export function listOptions(): { [key: string]: ListPropsType } {
             buttonColor: 'error',
             buttonIcon: <SampleIcon1 />,
             buttonSize: 'medium',
+        },
+        {
+            id: '6',
+            onButtonClick: () => alert(`Selected 6`),
+            selected: false,
+            title: "Disabled",
+            leadingIcon: <SampleIcon2 />,
+            subTitle: "This one is disabled",
+            buttonColor: 'error',
+            buttonIcon: <SampleIcon1 />,
+            buttonSize: 'medium',
+            disabled: true
         }
     ];
 
-    let baseProps: ListPropsType = {
-        height: '500px',
-        items: items,
-        title: "List with Items",        
-        enableSearch: false
-    }
-
     return {
-        "basic": {
-            ...baseProps
-        },
-        "With Search": {
-            ...baseProps,
-            enableSearch: true
-        },
-        "Card Style -- light shadow": {
-            ...baseProps,
-            enableSearch: true,
-            cardStyle: "card-light-shadow"
-        },
-        "Card Style -- dark shadow": {
-            ...baseProps,
-            enableSearch: true,
-            cardStyle: "card-dark-shadow"
+        constants: {
+            height: '500px',
+            title: "List with Items", 
+            items: items
+        } as Partial<ListPropsType>,
+        variables: {
+            enableSearch: {
+                options: [false, true],
+                default: false
+            },
+            cardStyle: {
+                options: ["card-no-shadow", 'card-light-shadow', "card-dark-shadow"],
+                default: 'card-no-shadow'
+            }
         }
-    }
+    }    
 }
 
 
