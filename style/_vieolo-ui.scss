@@ -372,7 +372,7 @@ body {
 }
 
 .vieolo-switch-set {
-	padding: 5px;
+	padding: $base-unit-half;
 	cursor: pointer;
 	display: grid;
 	grid-template-columns: 1fr 50px;
@@ -380,7 +380,13 @@ body {
 
 	&:hover {
 		border: 2px solid $hover-color;
-		border-radius: 5px;
+		border-radius: $base-unit-half;
+	}
+
+	&:focus {
+		border: 2px solid $hover-color;
+		border-radius: $base-unit-half;
+		outline: none;
 	}
 
 	p {

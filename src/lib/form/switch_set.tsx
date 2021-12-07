@@ -20,7 +20,15 @@ export default function SwitchSet (props: {
 }) {    
 
 
-    return <div className={`vieolo-switch-set${props.disabled ? ' disabled' : ''}`}>
+    return <div 
+        className={`vieolo-switch-set${props.disabled ? ' disabled' : ''}`} 
+        tabIndex={0}
+        onKeyDown={e => {
+            if (["Enter", "Space"].includes(e.code)) {
+                props.onChange(!props.on)
+            }
+        }}
+    >
         <div className="vieolo-switch-set__title-container" onClick={() => props.onChange(!props.on)}>
             <TypographyParagraphLarge text={props.title} />
             {
