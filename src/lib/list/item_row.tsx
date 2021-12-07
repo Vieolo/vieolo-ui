@@ -22,7 +22,8 @@ export default function ItemRow(props: {
     buttonClick?: () => void,
     buttonSize?: 'small' | 'medium',
     buttonColor?: ColorOptionType,
-    cardStyle?: 'card-light-shadow' | 'card-dark-shadow' | 'card-no-shadow'
+    cardStyle?: 'card-light-shadow' | 'card-dark-shadow' | 'card-no-shadow',
+    disabled?: boolean
 }) {
 
     let contentClassName: string = "vieolo-item-row__item-content";
@@ -33,7 +34,7 @@ export default function ItemRow(props: {
     if (props.leadingIcon) contentClassName += " vieolo-item-row__item-with-icon";
     else contentClassName += " vieolo-item-row__item-without-icon";
 
-    return <div className={"vieolo-item-row"}>
+    return <div className={`vieolo-item-row ${props.disabled ? 'disabled' : ''}`}>
 
         <div className={contentClassName} onClick={() => {
             if (props.onClick) props.onClick();
