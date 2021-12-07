@@ -12,12 +12,14 @@ import CloseIcon from '@mui/icons-material/CloseRounded';
 
 // Components
 import IconButton from '../button/icon_button';
+import { TypographyCaptionMedium } from '../typography';
 
 
 type SelectItemType = {
     title: string,
     value: string,
-    category?: string
+    category?: string,
+    subTitle?: string,
 }
 
 type SelectProps = {
@@ -43,6 +45,8 @@ export default function Select(props: SelectProps) {
     // eslint-disable-next-line
     let [container, setContainer] = useState(useRef<HTMLDivElement>(null));
     let [searchQuery, setSearchQuery] = useState("");
+    let [itemKeyboardFocus, setItemKeyboardFocus] = useState<string>("");
+    let itemKeyboardRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
 
@@ -50,6 +54,7 @@ export default function Select(props: SelectProps) {
             if (container.current && !(container.current as any).contains(event.target)) {
                 setOpen(false);
                 setSearchQuery("");
+                setItemKeyboardFocus("");
             }
         }
 
@@ -68,13 +73,19 @@ export default function Select(props: SelectProps) {
         }
     }, [open]);
 
+    useEffect(() => {
+        if (itemKeyboardFocus && itemKeyboardRef.current) {            
+            itemKeyboardRef.current.scrollIntoView({block: 'center'});
+        }
+    }, [itemKeyboardFocus, itemKeyboardRef])
+
 
 
     function getSelectedItems(values: string[]): SelectItemType[] {
         return props.items.filter(i => values.includes(i.value))
     }
 
-    function handleOpen() {
+    function handleOpen(openedByKeyboard?: boolean) {
         if (!open) {
             let rect = container.current!.getBoundingClientRect();
             let displaySize = { width: window.innerWidth, height: window.innerHeight }
@@ -106,6 +117,21 @@ export default function Select(props: SelectProps) {
         }
         setOpen(true);
         setSearchQuery("");
+        if (openedByKeyboard) setItemKeyboardFocus(props.selectedItems[0]);
+    }
+
+    function handleSelectItem(item: SelectItemType | undefined) {
+        if (!item) return;
+        if (props.multipleChoice) {
+            let newSelected = [...props.selectedItems];
+            if (props.selectedItems.includes(item.value)) newSelected = newSelected.filter(f => f !== item.value);
+            else newSelected.push(item.value);
+            props.onSelect(newSelected);
+        } else {
+            setOpen(false);
+            setSearchQuery("");
+            props.onSelect([item.value]);
+        }
     }
 
     let thisSelectedItems = getSelectedItems(props.selectedItems);
@@ -117,37 +143,60 @@ export default function Select(props: SelectProps) {
     if (top !== 0) style.top = top;
     if (bottom !== 0) style.bottom = bottom;
 
-    let items = [];
+    let items: React.ReactNode[] = [];
     let filtered = props.items.filter(item => (!searchQuery.trim() || item.title.toLowerCase().includes(searchQuery.toLowerCase())));
 
     for (let i = 0; i < filtered.length; i++) {
         const item = filtered[i];
-        const prev = i > 0 ? filtered[i-1] : undefined
+        const prev = i > 0 ? filtered[i - 1] : undefined
 
         items.push(<SelectItem
             key={item.title}
             item={item}
             isSelected={props.selectedItems.includes(item.value)}
             previousItem={prev}
-            onSelect={(t: SelectItemType) => {
-                if (props.multipleChoice) {
-                    let newSelected = [...props.selectedItems];
-                    if (props.selectedItems.includes(item.value)) newSelected = newSelected.filter(f => f !== item.value);
-                    else newSelected.push(item.value);
-                    props.onSelect(newSelected);
-                } else {
-                    setOpen(false);
-                    setSearchQuery("");
-                    props.onSelect([t.value]);
-                }
-            }}
+            onKeyboardFocus={itemKeyboardFocus === item.value}
+            onSelect={(t: SelectItemType) => handleSelectItem(t)}
+            itemRef={item.value === itemKeyboardFocus ? itemKeyboardRef : undefined}
         />)
     }
 
     return <div className="vieolo-select" ref={container as any}>
-        <div className={`select-button${props.error ? ' select-button--error' : ''} select-button--${props.height || 'medium'}`} onClick={handleOpen}>
-            <div className="button-text">
-                <TypographyParagraphSmall text={props.title} className="button-title" />
+        <div
+            className={`vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${props.height || 'medium'}`}
+            onClick={() => handleOpen()}
+            tabIndex={0}
+            onKeyDown={e => {
+                if (e.code === "Enter" || e.code === "Space") {
+                    if (!open) handleOpen(true);
+                    else if (itemKeyboardFocus) {
+                        handleSelectItem(filtered.find(f => f.value === itemKeyboardFocus))
+                    }
+                } else if (e.code === "ArrowDown" && open) {
+                    if (!itemKeyboardFocus) setItemKeyboardFocus(filtered[0].value)
+                    else {
+                        let lastIndex = filtered.map(f => f.value).indexOf(itemKeyboardFocus);
+                        if ((lastIndex + 1) < filtered.length) setItemKeyboardFocus(filtered[lastIndex + 1].value)
+                    }
+                } else if (e.code === "ArrowUp" && open) {
+                    if (itemKeyboardFocus) {
+                        let lastIndex = filtered.map(f => f.value).indexOf(itemKeyboardFocus);
+                        if (lastIndex > 0) setItemKeyboardFocus(filtered[lastIndex - 1].value)
+                    }
+                } else if (e.code === "Escape" && open) {
+                    setOpen(false);
+                    setSearchQuery("");
+                    setItemKeyboardFocus("");
+                } else if (e.code === "Backspace" && !open && props.clearable) {
+                    props.onSelect([]);
+                }
+            }}
+        >
+            <div className="vieolo-select__select-button__button-text" onClick={e => {
+                e.stopPropagation();
+                handleOpen();
+            }}>
+                <TypographyParagraphSmall text={props.title} className="vieolo-select__select-button__button-text__button-title" />
                 {
                     (props.searchable && open)
                         ? <input
@@ -156,7 +205,7 @@ export default function Select(props: SelectProps) {
                             onChange={e => setSearchQuery(e.target.value)}
                             placeholder="Search..."
                         />
-                        : <TypographyTitleSmall text={thisSelectedItems.map(s => s.title).join(", ")} className="button-value" />
+                        : <TypographyTitleSmall text={thisSelectedItems.map(s => s.title).join(", ")} className="vieolo-select__select-button__button-text__button-value" />
                 }
             </div>
 
@@ -175,7 +224,7 @@ export default function Select(props: SelectProps) {
 
         {
             open &&
-            <div className="select-dropdown" style={style}>
+            <div className="vieolo-select__select-dropdown" style={style}>
                 {items}
             </div>
         }
@@ -189,24 +238,33 @@ function SelectItem(props: {
     item: SelectItemType,
     isSelected: boolean,
     onSelect: (item: SelectItemType) => void,
-    previousItem?: SelectItemType
+    previousItem?: SelectItemType,
+    onKeyboardFocus: boolean,
+    itemRef?: React.RefObject<HTMLDivElement>
 }) {
 
-    let className = "select-item";
+    let className = "vieolo-select__select-item";
 
-    if (props.isSelected) className += " select-item-selected";
-    if (props.item.category) className += " select-item-category";
+    if (props.isSelected) className += " vieolo-select__select-item--selected";
+    if (props.item.category) className += " vieolo-select__select-item--category";
+    if (props.item.subTitle) className += " vieolo-select__select-item--subtitle";
+    if (props.onKeyboardFocus) className += " vieolo-select__select-item--keyboard-focus";
 
     return <Fragment>
         {
             (props.item.category && (!props.previousItem || props.item.category !== props.previousItem.category)) &&
-            <p className="category-name">{props.item.category}</p>
+            <p className="vieolo-select__select-item__category-name">{props.item.category}</p>
         }
         <div
             className={className}
             onClick={() => { props.onSelect(props.item) }}
+            ref={props.itemRef}
         >
             <TypographyParagraphMedium text={props.item.title} />
+            {
+                props.item.subTitle &&
+                <TypographyCaptionMedium text={props.item.subTitle} />
+            }
         </div>
     </Fragment>
 
