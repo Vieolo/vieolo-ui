@@ -114,7 +114,7 @@ export default function MainPage(props: {}): JSX.Element {
                                     setFinalState(temp);
                                 }}
                                 selectedItems={[finalState[k].toString()]}
-                                title={k}
+                                title={camelCaseToWords(k)}
                             />
                         </div>
                     } else {
@@ -127,7 +127,7 @@ export default function MainPage(props: {}): JSX.Element {
                                     setFinalState(temp);
                                 }}
                                 switchID={`${k}_switch`}
-                                title={k}
+                                title={camelCaseToWords(k)}
                             />
                         </div>
                     }
@@ -148,3 +148,8 @@ export default function MainPage(props: {}): JSX.Element {
 
 }
 
+
+function camelCaseToWords(org: string): string {
+    let replaced = org.replace(/([A-Z])/g, " $1");
+    return (replaced.charAt(0).toUpperCase() + replaced.slice(1)).trim();
+}
