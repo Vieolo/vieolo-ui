@@ -12,12 +12,14 @@ import CloseIcon from '@mui/icons-material/CloseRounded';
 
 // Components
 import IconButton from '../button/icon_button';
+import { TypographyCaptionMedium, TypographyCaptionSmall } from '../typography';
 
 
 type SelectItemType = {
     title: string,
     value: string,
-    category?: string
+    category?: string,
+    subTitle?: string,
 }
 
 type SelectProps = {
@@ -145,12 +147,12 @@ export default function Select(props: SelectProps) {
     }
 
     return <div className="vieolo-select" ref={container as any}>
-        <div className={`select-button${props.error ? ' select-button--error' : ''} select-button--${props.height || 'medium'}`} onClick={handleOpen}>
-            <div className="button-text" onClick={e => {
+        <div className={`vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${props.height || 'medium'}`} onClick={handleOpen}>
+            <div className="vieolo-select__button-text" onClick={e => {
                 e.stopPropagation();
                 handleOpen();
             }}>
-                <TypographyParagraphSmall text={props.title} className="button-title" />
+                <TypographyParagraphSmall text={props.title} className="vieolo-select__button-text__button-title" />
                 {
                     (props.searchable && open)
                         ? <input
@@ -159,7 +161,7 @@ export default function Select(props: SelectProps) {
                             onChange={e => setSearchQuery(e.target.value)}
                             placeholder="Search..."
                         />
-                        : <TypographyTitleSmall text={thisSelectedItems.map(s => s.title).join(", ")} className="button-value"  />
+                        : <TypographyTitleSmall text={thisSelectedItems.map(s => s.title).join(", ")} className="vieolo-select__button-text__button-value"  />
                 }
             </div>
 
@@ -178,7 +180,7 @@ export default function Select(props: SelectProps) {
 
         {
             open &&
-            <div className="select-dropdown" style={style}>
+            <div className="vieolo-select__select-dropdown" style={style}>
                 {items}
             </div>
         }
@@ -195,21 +197,26 @@ function SelectItem(props: {
     previousItem?: SelectItemType
 }) {
 
-    let className = "select-item";
+    let className = "vieolo-select__select-item";
 
-    if (props.isSelected) className += " select-item-selected";
-    if (props.item.category) className += " select-item-category";
+    if (props.isSelected) className += " vieolo-select__select-item--selected";
+    if (props.item.category) className += " vieolo-select__select-item--category";
+    if (props.item.subTitle) className += " vieolo-select__select-item--subtitle";
 
     return <Fragment>
         {
             (props.item.category && (!props.previousItem || props.item.category !== props.previousItem.category)) &&
-            <p className="category-name">{props.item.category}</p>
+            <p className="vieolo-select__select-item__category-name">{props.item.category}</p>
         }
         <div
             className={className}
             onClick={() => { props.onSelect(props.item) }}
         >
             <TypographyParagraphMedium text={props.item.title} />
+            {
+                props.item.subTitle &&
+                <TypographyCaptionMedium text={props.item.subTitle} />
+            }            
         </div>
     </Fragment>
 

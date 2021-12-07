@@ -451,7 +451,7 @@ body {
 	display: inline-block;
 	width: 160px;
 
-	.select-button {
+	&__select-button {
 		@include card-no-shadow;
 		margin: 0 auto;
 		@include tertiary-background;
@@ -476,17 +476,17 @@ body {
 			height: $row-height-small;
 		}
 
-		.button-text {
+		&__button-text {
 			justify-content: center;
 			display: flex;
 			flex-flow: column;
 			width: 120px;
 
-			.button-title {
+			&__button-title {
 				margin: 0;
 			}
 
-			.button-value {
+			&__button-value {
 				margin: 0;
 				@include no-text-overflow;
 			}
@@ -507,48 +507,53 @@ body {
 		}
 	}
 
-	.select-dropdown {
+	&__select-dropdown {
 		position: fixed;
 		width: 160px;
 		z-index: 99;
 		background-color: white;
 		box-shadow: $box-shadow-dark;
-		border-radius: 5px;
+		border-radius: $base-unit-half;
 		max-height: 240px;
 		overflow-y: auto;
 	}
 
-	.select-item {
-		padding: 5px;
-		height: 30px;
+	&__select-item {
+		padding: $base-unit-half;
+		height: $row-height-small;
 		cursor: pointer;
-		border-radius: 5px;
+		border-radius: $base-unit-half;
 		@include transition;
 		color: $primary-color-normal;
 		font-size: 12px;
 		@include no-text-overflow;
 		display: flex;
-		align-items: center;
+		flex-direction: column;
+		justify-content: center;
 
 		&:hover {
 			background-color: $hover-color;
 		}
-	}
 
-	.select-item-selected {
-		@include tertiary-background;
-	}
+		&--selected {
+			@include tertiary-background;
+		}
 
-	.category-name {
-		font-size: 12px;
-		margin: 0;
-		padding: 10px 0px 3px 10px;
-		@include font-header;
-		border-bottom: 1px solid $primary-color-normal;
-		position: sticky;
-		top: 0;
-		background-color: white;
-	}
+		&--subtitle {
+			height: $row-height-medium;
+		}
+
+		&__category-name {
+			font-size: 12px;
+			margin: 0;
+			padding: 10px 0px 3px 10px;
+			@include font-header;
+			border-bottom: 1px solid $primary-color-normal;
+			position: sticky;
+			top: 0;
+			background-color: white;
+		}
+	}	
 }
 
 .vieolo-modal {

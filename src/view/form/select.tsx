@@ -27,7 +27,7 @@ export function selectOptions(): ViewData {
                 {title: "Nine", value: "9", category: "Third"} ,
                 {title: "Ten", value: "10", category: "Third"},
                 {title: "Eleven", value: "11", category: "Third"} ,
-                {title: "Twelve", value: "12", category: "Third"},
+                {title: "Twelve", value: "12", category: "Third", subTitle: "The Substitle"},
                 {title: "Thirteen", value: "13", category: "Third"} 
             ]
         } as Partial<SelectPropsType>,
