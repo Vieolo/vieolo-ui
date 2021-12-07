@@ -2,7 +2,7 @@ import Button from './lib/button/button';
 import Chip from './lib/chip';
 import DropDownMenu, { DropDownMenuItemType as DropDownMenuItemTypeTemp } from './lib/menu/dropdown_menu';
 import FileInput from './lib/form/file_input';
-import FormDialog, { FormDialogButton as FormDialogButtonType } from './lib/dialog/formDialog';
+import FormDialog, { FormDialogAccessoryButton as FormDialogAccessoryButtonType, FormDialogMainButton as FormDialogMainButtonType } from './lib/dialog/formDialog';
 import Grid from './lib/layout/grid';
 import IconButton from './lib/button/icon_button';
 import Input from './lib/form/input';
@@ -54,7 +54,8 @@ export {
 
 
 export type ListItem = ListItemType
-export type FormDialogButton = FormDialogButtonType
+export type FormDialogAccessoryButton = FormDialogAccessoryButtonType
+export type FormDialogMainButton = FormDialogMainButtonType
 export type TableSortDirection = TableSortDirectionType
 export type RadioButtonType = RadioButtonTempType
 export type DropDownMenuItemType = DropDownMenuItemTypeTemp

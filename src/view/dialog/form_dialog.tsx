@@ -66,7 +66,6 @@ export function FormDialogCreator(props: { p: FormDialogPropsType }) {
             onCancel={() => {}}
             onSave={props.p.onSave}
             width={props.p.width}
-            cancelText={props.p.cancelText}
             extraButtons={(props.p as any).withExtraButtons ? [
                 { color: 'alert', text: 'Extra 1', onClick: () => alert("You clicked on extra 1") },
                 { color: 'secondary', text: 'Extra 2', onClick: () => alert("You clicked on extra 2") },
@@ -80,7 +79,6 @@ export function FormDialogCreator(props: { p: FormDialogPropsType }) {
             padding={props.p.padding}
             removeCancelButton={props.p.removeCancelButton}
             removeSaveButton={props.p.removeSaveButton}
-            saveText={props.p.saveText}
             saveButtonDisabled={props.p.saveButtonDisabled}
         >
             <p>The contents of the dialog</p>
