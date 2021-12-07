@@ -4,31 +4,30 @@ import React, { useState } from 'react';
 // Component
 import SwitchSet from '../../lib/form/switch_set';
 
+// Types
+import { ViewData } from '../main/main';
+
 type SwitchSetPropsType = React.ComponentProps<typeof SwitchSet>;
 
-export function switchSetOptions(): { [key: string]: SwitchSetPropsType } {
-    
-    let baseProps: SwitchSetPropsType = {
-        on: false,
-        onChange: () => {},
-        switchID: 'sample_id',
-        title: "Switch Title",
-    }
+export function switchSetOptions(): ViewData {
 
     return {
-        "Basic": {
-            ...baseProps
-        },
-        "With Subtitle": {
-            ...baseProps,
-            subtitle: "Switching this switch results in a change that no one expects",
-        },
-        "Disabled": {
-            ...baseProps,
-            subtitle: "Switching this switch results in a change that no one expects",
-            disabled: true
+        constants: {
+            switchID: 'sample_id',
+            title: "Switch Title",
+        } as Partial<SwitchSetPropsType>,
+        variables: {
+            disabled: {
+                options: [false, true],
+                default: false,
+            },
+            withSubtitle: {
+                options: [true, false],
+                default: false
+            }
         }
     }
+     
 }
 
 
@@ -41,7 +40,7 @@ export function SwitchSetCreator(props: {p: SwitchSetPropsType}) {
         switchID={props.p.switchID}
         title={props.p.title}
         disabled={props.p.disabled}
-        subtitle={props.p.subtitle}
+        subtitle={(props.p as any).withSubtitle ? "Switching this switch results in a change that no one expects" : null}
     />
 
 }

@@ -5,34 +5,30 @@ import React, { useState } from 'react';
 import PDFViewer from '../../lib/pdf_viewer/pdf_viewer';
 import Button from '../../lib/button/button';
 
+// Types
+import { ViewData } from '../main/main';
+
 type ViewerPropsType = React.ComponentProps<typeof PDFViewer>;
 
-export function pdfViewerFullScreenOptions(): { [key: string]: ViewerPropsType } {
-
-    let baseProps: ViewerPropsType = {
-        filePath: 'http://localhost:3000/simple.pdf',
-        context: 'full screen',
-        heightDeduction: 0
-    }
+export function pdfViewerFullScreenOptions(): ViewData {
 
     return {
-        "Simple": {
-            ...baseProps
-        },
-        "Simple, Full functionality": {
-            ...baseProps,
-            onClose: () => {},
-            expandable: true
-        },
-        "Odd Shaped": {
-            ...baseProps,
-            filePath: 'http://localhost:3000/odd_shaped.pdf'
-        },
-        "Many Pages": {
-            ...baseProps,
-            filePath: 'http://localhost:3000/many_pages.pdf'
-        },
-    }
+        constants: {
+            context: 'full screen',
+            heightDeduction: 0
+        } as Partial<ViewerPropsType>,
+        variables: {
+            filePath: {
+                options: [
+                    '/simple.pdf',
+                    '/simple_2.pdf',
+                    '/odd_shaped.pdf',
+                    '/many_pages.pdf'
+                ],
+                default: '/simple.pdf'
+            }
+        }
+    }  
 }
 
 

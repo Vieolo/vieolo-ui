@@ -7,82 +7,47 @@ import LoopIcon from '@mui/icons-material/LoopRounded'
 // Component
 import InputSet from '../../lib/form/input_set';
 
+// Types
+import { ViewData } from '../main/main';
+
 type InputSetPropsType = React.ComponentProps<typeof InputSet>;
 
-export function inputSetOptions(): { [key: string]: InputSetPropsType } {    
-
-    let baseProps: InputSetPropsType = {
-        error: false,
-        label: "Label",
-        onChange: v => {},
-        value: "Value",
-    }
+export function inputSetOptions(): ViewData {
 
     return {
-        "Empty": {
-            ...baseProps,
-            value: ''
-        },
-        "With Error": {
-            ...baseProps,
-            error: true,
-        },
-        "Disabled": {
-            ...baseProps,
-            disabled: true
-        },
-        "With Placeholder": {
-            ...baseProps,
-            value: "",
-            placeholder: "Search..."
-        },
-        "Size -- Small": {
-            ...baseProps,
-            size: 'small',
-        },
-        "Size -- Medium": {
-            ...baseProps,
-            size: 'medium',
-        },
-        "Size -- Large": {
-            ...baseProps,
-            size: 'large',
-        },
-        "Size -- Full Width": {
-            ...baseProps,
-            size: 'full',
-        },
-        "With Tip": {
-            ...baseProps,
-            tip: "This is a tip displayed to the user"
-        },
-        "With Action Button": {
-            ...baseProps,
-            actionButton: {
-                description: "This button does something nice!",
-                icon: <LoopIcon />,
-                onClick: () => {}
-            }
-        },
-        "With Action Button and Tip": {
-            ...baseProps,
-            actionButton: {
-                description: "This button does something nice!",
-                icon: <LoopIcon />,
-                onClick: () => {}
+        constants: {            
+        } as Partial<InputSetPropsType>,
+        variables: {
+            error: {
+                options: [false, true],
+                default: false,
             },
-            tip: "This is a tip displayed to the user"
-        },
-        "Type -- Number": {
-            ...baseProps,
-            type: 'number'
-        },
-        "Type -- Password": {
-            ...baseProps,
-            type: 'password'
+            disabled: {
+                options: [false, true],
+                default: false,
+            },
+            withPlaceholder: {
+                options: [false, true],
+                default: false,
+            },
+            size: {
+                options: ["small", "medium", "large", "full"],
+                default: 'medium'
+            },
+            withTip: {
+                options: [false, true],
+                default: false,
+            },
+            withActionButton: {
+                options: [false, true],
+                default: false,
+            },
+            type: {
+                options: ['text', 'number', 'password'],
+                default: "text"
+            }
         }
-
-    }
+    }    
 }
 
 
@@ -95,15 +60,19 @@ export function InputSetCreator(props: {p: InputSetPropsType}) {
 
     return <InputSet 
         error={props.p.error}
-        label={props.p.label}
+        label={"Label"}
         onChange={v => setValue(v)}
         value={value}
         disabled={props.p.disabled}
-        placeholder={props.p.placeholder}
+        placeholder={(props.p as any).withPlaceholder ? 'Placeholder...' : null}
         size={props.p.size}
-        tip={props.p.tip}
+        tip={(props.p as any).withTip ? "This is a tip to the user" : null}
         type={props.p.type}
-        actionButton={props.p.actionButton}
+        actionButton={(props.p as any).withActionButton ? {
+            description: "This button does something nice!",
+            icon: <LoopIcon />,
+            onClick: () => {}
+        } : null}
     />
 
 }

@@ -39,74 +39,81 @@ export default function FormDialog(props: {
     children?: React.ReactNode,
     headerTitle: string,
     /** This component will be displayed on the right side of the header. You can either pass a component or pass 'close' which renders a close button */
-    headerRightComponent?: 'close' | React.ReactNode
+    headerRightComponent?: 'close' | React.ReactNode,
+    /** If true, will not display the dialog as a modal */
+    inline?: boolean
 }) {
+
+    let dialog = <div className="vieolo-form-dialog">
+        <div className="vieolo-form-dialog__header flex-row-space-between">
+            <TypographyTitleSmall text={props.headerTitle} />
+            {
+                props.headerRightComponent === 'close' &&
+                <IconButton
+                    icon={<CloseIcon />}
+                    onClick={props.onCancel}
+                    color={'primary'}
+                    size={'small'}
+                />
+            }
+            {
+                (props.headerRightComponent && props.headerRightComponent !== 'close') &&
+                props.headerRightComponent
+            }
+        </div>
+
+        <div className="vieolo-form-dialog__content" style={{ width: props.width, padding: props.padding === undefined ? 10 : props.padding }}>
+            {props.children}
+        </div>
+
+        {
+            (!props.removeCancelButton || !props.removeSaveButton || props.extraButtons || (props.extraButtons || []).length > 0) &&
+            <div className="vieolo-form-dialog__footer">
+                <div className="vieolo-form-dialog__footer__spacer--left"></div>
+                {
+                    !props.removeCancelButton &&
+                    <>
+                        <Button
+                            onClick={props.onCancel}
+                            color={"error"}
+                            text={props.cancelText || 'Cancel'}
+                        />
+                        <div className="vieolo-form-dialog__footer__spacer--middle"></div>
+                    </>
+                }
+
+                {
+                    (props.extraButtons || []).map((e, i) => {
+                        return <Fragment key={`form_dialog_extra_button_fragment_${i}`} >
+                            <Button
+                                key={`form_dialog_extra_button_button_${i}`}
+                                color={e.color}
+                                text={e.text}
+                                onClick={e.onClick}
+                            />
+                            <div className="vieolo-form-dialog__footer__spacer--middle" key={`form_dialog_extra_button_spacer_${i}`}></div>
+                        </Fragment>
+                    })
+                }
+
+                {
+                    !props.removeSaveButton &&
+                    <Button
+                        onClick={props.onSave}
+                        color={"primary"}
+                        text={props.saveText || 'Save'}
+                        disabled={props.saveButtonDisabled}
+                    />
+                }
+            </div>
+        }
+    </div>
+
+    if (props.inline) return dialog;
+
     return <Modal
         onClose={props.onCancel}
     >
-        <div className="vieolo-form-dialog">
-            <div className="vieolo-form-dialog__header flex-row-space-between">
-                <TypographyTitleSmall text={props.headerTitle} />
-                {
-                    props.headerRightComponent === 'close' &&
-                    <IconButton
-                        icon={<CloseIcon />}
-                        onClick={props.onCancel}
-                        color={'primary'}
-                        size={'small'}
-                    />
-                }
-                {
-                    (props.headerRightComponent && props.headerRightComponent !== 'close') &&
-                    props.headerRightComponent
-                }
-            </div>
-
-            <div className="vieolo-form-dialog__content" style={{ width: props.width, padding: props.padding === undefined ? 10 : props.padding }}>
-                {props.children}
-            </div>            
-
-            {
-                (!props.removeCancelButton || !props.removeSaveButton || props.extraButtons || (props.extraButtons || []).length > 0) &&
-                <div className="vieolo-form-dialog__footer">
-                    <div className="vieolo-form-dialog__footer__spacer--left"></div>
-                    {
-                        !props.removeCancelButton &&
-                        <>
-                            <Button
-                                onClick={props.onCancel}
-                                color={"error"}
-                                text={props.cancelText || 'Cancel'}
-                            />
-                            <div className="vieolo-form-dialog__footer__spacer--middle"></div>
-                        </>
-                    }
-
-                    {
-                        (props.extraButtons || []).map((e, i) => {
-                            return <Fragment key={`form_dialog_extra_button_fragment_${i}`} >
-                                <Button
-                                    key={`form_dialog_extra_button_button_${i}`}
-                                    color={e.color}
-                                    text={e.text}
-                                    onClick={e.onClick}
-                                />
-                                <div className="vieolo-form-dialog__footer__spacer--middle" key={`form_dialog_extra_button_spacer_${i}`}></div>
-                            </Fragment>
-                        })
-                    }
-
-                    {
-                        !props.removeSaveButton &&
-                        <Button
-                            onClick={props.onSave}
-                            color={"primary"}
-                            text={props.saveText || 'Save'}
-                            disabled={props.saveButtonDisabled}
-                        />
-                    }
-                </div>
-            }
-        </div>
+        {dialog}
     </Modal>
 }
