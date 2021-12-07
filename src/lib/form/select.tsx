@@ -146,7 +146,10 @@ export default function Select(props: SelectProps) {
 
     return <div className="vieolo-select" ref={container as any}>
         <div className={`select-button${props.error ? ' select-button--error' : ''} select-button--${props.height || 'medium'}`} onClick={handleOpen}>
-            <div className="button-text">
+            <div className="button-text" onClick={e => {
+                e.stopPropagation();
+                handleOpen();
+            }}>
                 <TypographyParagraphSmall text={props.title} className="button-title" />
                 {
                     (props.searchable && open)
@@ -156,7 +159,7 @@ export default function Select(props: SelectProps) {
                             onChange={e => setSearchQuery(e.target.value)}
                             placeholder="Search..."
                         />
-                        : <TypographyTitleSmall text={thisSelectedItems.map(s => s.title).join(", ")} className="button-value" />
+                        : <TypographyTitleSmall text={thisSelectedItems.map(s => s.title).join(", ")} className="button-value"  />
                 }
             </div>
 
