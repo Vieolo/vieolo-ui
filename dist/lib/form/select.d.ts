@@ -3,6 +3,7 @@ declare type SelectItemType = {
     title: string;
     value: string;
     category?: string;
+    subTitle?: string;
 };
 declare type SelectProps = {
     title: string;

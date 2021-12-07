@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.13.0 (2021-12-07)
+- Added emphasis for the buttons in `FormDialog` ([#68](https://github.com/Vieolo/vieolo-ui/issues/68))
+- Added disabled option for the items in `List` ([#67](https://github.com/Vieolo/vieolo-ui/issues/67))
+- Improved click functionality on `Select` ([#66](https://github.com/Vieolo/vieolo-ui/issues/66))
+- Added keyboard accessibility for `Select` ([#38](https://github.com/Vieolo/vieolo-ui/issues/38))
+- Added keyboard accessibility for `SwitchSet` ([#37](https://github.com/Vieolo/vieolo-ui/issues/37))
+
+#### Breaking Changes
+- Changed the button configuration and their relevant types for `FormDialog`
+
 ## 0.12.0 (2021-11-25)
 - Added auxiliary button to `Button` ([#65](https://github.com/Vieolo/vieolo-ui/issues/65))
 - Added optional type to `IconButton` ([#61](https://github.com/Vieolo/vieolo-ui/issues/61))

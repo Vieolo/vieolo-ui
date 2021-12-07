@@ -12,6 +12,6 @@ export default function List(props) {
             props.enableSearch &&
                 _jsx(ItemRowSearch, { query: query, cardStyle: props.cardStyle || 'card-no-shadow', onChange: q => setQuery(q) }, void 0),
             props.items.filter(a => !query.trim() || a.title.toLowerCase().includes(query.toLowerCase())).map(a => {
-                return _jsx(ItemRow, { cardStyle: props.cardStyle || 'card-no-shadow', selected: a.selected, title: a.title, subTitle: a.subTitle, onClick: a.onClick, buttonClick: a.onButtonClick, buttonColor: a.buttonColor, buttonIcon: a.buttonIcon, buttonSize: a.buttonSize, leadingIcon: a.leadingIcon }, a.id);
+                return _jsx(ItemRow, { cardStyle: props.cardStyle || 'card-no-shadow', selected: a.selected, title: a.title, subTitle: a.subTitle, onClick: a.onClick, buttonClick: a.onButtonClick, buttonColor: a.buttonColor, buttonIcon: a.buttonIcon, buttonSize: a.buttonSize, leadingIcon: a.leadingIcon, disabled: a.disabled }, a.id);
             })] }), void 0);
 }

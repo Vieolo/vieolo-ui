@@ -16,7 +16,7 @@ export default function ItemRow(props) {
         contentClassName += " vieolo-item-row__item-with-icon";
     else
         contentClassName += " vieolo-item-row__item-without-icon";
-    return _jsx("div", Object.assign({ className: "vieolo-item-row" }, { children: _jsxs("div", Object.assign({ className: contentClassName, onClick: () => {
+    return _jsx("div", Object.assign({ className: `vieolo-item-row ${props.disabled ? 'disabled' : ''}` }, { children: _jsxs("div", Object.assign({ className: contentClassName, onClick: () => {
                 if (props.onClick)
                     props.onClick();
             } }, { children: [props.leadingIcon &&
