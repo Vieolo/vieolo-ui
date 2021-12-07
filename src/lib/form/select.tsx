@@ -172,14 +172,22 @@ export default function Select(props: SelectProps) {
                     else if (itemKeyboardFocus) {
                         handleSelectItem(filtered.find(f => f.value === itemKeyboardFocus))
                     }
-                } else if (e.code === "ArrowDown" && open) {
+                } else if (e.code === "ArrowDown" && !open) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    handleOpen(true);
+                }else if (e.code === "ArrowDown" && open) {
                     if (!itemKeyboardFocus) setItemKeyboardFocus(filtered[0].value)
                     else {
                         let lastIndex = filtered.map(f => f.value).indexOf(itemKeyboardFocus);
                         if ((lastIndex + 1) < filtered.length) setItemKeyboardFocus(filtered[lastIndex + 1].value)
                     }
+                    e.stopPropagation()
+                    e.preventDefault();
                 } else if (e.code === "ArrowUp" && open) {
                     if (itemKeyboardFocus) {
+                        e.stopPropagation();
+                        e.preventDefault();
                         let lastIndex = filtered.map(f => f.value).indexOf(itemKeyboardFocus);
                         if (lastIndex > 0) setItemKeyboardFocus(filtered[lastIndex - 1].value)
                     }
