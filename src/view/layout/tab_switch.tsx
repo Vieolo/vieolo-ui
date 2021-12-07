@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 
 // Component
 import TabSwitch from '../../lib/layout/tab_switch';
-import Select from '../../lib/form/select';
 
 // Types
 import { ViewData } from '../main/main';

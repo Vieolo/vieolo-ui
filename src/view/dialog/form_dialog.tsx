@@ -1,9 +1,8 @@
 // React
-import React, { useState } from 'react';
+import React from 'react';
 
 // Component
-import FormDialog, { FormDialogButton } from '../../lib/dialog/formDialog';
-import Button from '../../lib/button/button';
+import FormDialog from '../../lib/dialog/formDialog';
 import IconButton from '../../lib/button/icon_button';
 
 // Material UI
@@ -59,13 +58,12 @@ export function formDialogOptions(): ViewData {
 
 export function FormDialogCreator(props: { p: FormDialogPropsType }) {
 
-    let [open, setOpen] = useState<boolean>(false);
 
     return <div className="background-color--primary-light padding--one center-by-flex-row">
         <FormDialog
             inline
             headerTitle={props.p.headerTitle}
-            onCancel={() => setOpen(false)}
+            onCancel={() => {}}
             onSave={props.p.onSave}
             width={props.p.width}
             cancelText={props.p.cancelText}
