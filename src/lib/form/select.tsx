@@ -189,6 +189,10 @@ export default function Select(props: SelectProps) {
                     setItemKeyboardFocus("");
                 } else if (e.code === "Backspace" && !open && props.clearable) {
                     props.onSelect([]);
+                } else if (e.code === "Tab" && open) {
+                    setOpen(false);
+                    setSearchQuery("");
+                    setItemKeyboardFocus("");
                 }
             }}
         >
