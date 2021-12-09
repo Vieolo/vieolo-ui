@@ -16,6 +16,7 @@ import { DropDownMenuCreator, dropDownMenuOptions } from '../menu/dropdown_menu'
 import { PDFViewerEmbeddedCreator, pdfViewerEmbeddedOptions } from '../pdf_viewer/pdf_viewer_embedded';
 import { PDFViewerFullScreenCreator, pdfViewerFullScreenOptions } from '../pdf_viewer/pdf_viewer_full_screen';
 import { FormDialogCreator, formDialogOptions } from '../dialog/form_dialog';
+import { ConfirmationDialogCreator, confirmationDialogOptions } from '../dialog/confirmation_dialog';
 import { TableCreator, tableOptions } from '../table/table';
 import { RadioGroupCreator, radioGroupOptions } from '../form/radio_group';
 import { TabSwitchCreator, tabSwitchOptions } from '../layout/tab_switch';
@@ -53,6 +54,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator },
         "List": { title: "List", data: listOptions(), creator: ListCreator },
         "Form Dialog": { title: "Form Dialog", data: formDialogOptions(), creator: FormDialogCreator },
+        "Confirmation Dialog": { title: "Confirmation Dialog", data: confirmationDialogOptions(), creator: ConfirmationDialogCreator },
         "Table": { title: "Table", data: tableOptions(), creator: TableCreator },
         "Radio Group": { title: "Radio Group", data: radioGroupOptions(), creator: RadioGroupCreator },
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator },
