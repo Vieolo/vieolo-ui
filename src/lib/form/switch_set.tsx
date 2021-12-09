@@ -24,7 +24,7 @@ export default function SwitchSet (props: {
         className={`vieolo-switch-set${props.disabled ? ' disabled' : ''}`} 
         tabIndex={0}
         onKeyDown={e => {
-            if (["Enter", "Space"].includes(e.code)) {
+            if (["Enter", "Space"].includes(e.code) && !props.disabled) {
                 props.onChange(!props.on)
             }
         }}
