@@ -3,6 +3,7 @@ import Chip from './lib/chip';
 import DropDownMenu, { DropDownMenuItemType as DropDownMenuItemTypeTemp } from './lib/menu/dropdown_menu';
 import FileInput from './lib/form/file_input';
 import FormDialog, { FormDialogAccessoryButton as FormDialogAccessoryButtonType, FormDialogMainButton as FormDialogMainButtonType } from './lib/dialog/formDialog';
+import ConfirmationDialog, { ConfirmationDialogMainButton as ConfirmationDialogMainButtonType } from './lib/dialog/confirmationDialog'
 import Grid from './lib/layout/grid';
 import IconButton from './lib/button/icon_button';
 import Input from './lib/form/input';
@@ -27,6 +28,7 @@ import SwitchSet from './lib/form/switch_set';
 export { 
     Button,
     Chip,
+    ConfirmationDialog,
     DropDownMenu,
     FileInput,
     FormDialog,
@@ -59,6 +61,7 @@ export type FormDialogMainButton = FormDialogMainButtonType
 export type TableSortDirection = TableSortDirectionType
 export type RadioButtonType = RadioButtonTempType
 export type DropDownMenuItemType = DropDownMenuItemTypeTemp
+export type ConfirmationDialogMainButton = ConfirmationDialogMainButtonType
 
 
 export {
