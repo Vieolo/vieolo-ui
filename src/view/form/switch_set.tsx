@@ -53,7 +53,7 @@ export function SwitchSetCreator(props: { p: SwitchSetPropsType }) {
                 : <div className='flex'>
                     <TypographyParagraphMedium text='Switch Title' />
                     <div className="padding-left--half"></div>
-                    <a href="">Know More</a>
+                    <a href="/">Know More</a>
                 </div>
         }
         subtitle={
@@ -63,7 +63,7 @@ export function SwitchSetCreator(props: { p: SwitchSetPropsType }) {
                     : <div className='flex'>
                         <TypographyCaptionLarge text='This action is not allowed' />
                         <div className="padding-left--half"></div>
-                        <a href="">Know More</a>
+                        <a href="/">Know More</a>
                     </div>
                 : null
         }
