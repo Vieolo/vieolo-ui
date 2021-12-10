@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.13.3 (2021-12-10)
+- Added `ConfirmationDialog` to the export
+
 ## 0.13.2 (2021-12-10)
 - Added `ConfirmationDialog` component
 - Fixed the keyboard accessibility of `SwitchSet` when disabled ([#69](https://github.com/Vieolo/vieolo-ui/issues/69))
