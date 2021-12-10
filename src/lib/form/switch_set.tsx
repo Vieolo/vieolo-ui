@@ -11,8 +11,8 @@ import TypographyCaptionLarge from '../typography/typography_caption_large';
 
 
 export default function SwitchSet (props: {
-    title: string,
-    subtitle?: string,
+    title: string | React.ReactNode,
+    subtitle?: string | React.ReactNode,
     on: boolean,
     onChange: (v: boolean) => void,
     disabled?: boolean,
@@ -24,16 +24,30 @@ export default function SwitchSet (props: {
         className={`vieolo-switch-set${props.disabled ? ' disabled' : ''}`} 
         tabIndex={0}
         onKeyDown={e => {
-            if (["Enter", "Space"].includes(e.code)) {
+            if (["Enter", "Space"].includes(e.code) && !props.disabled) {
                 props.onChange(!props.on)
             }
         }}
     >
         <div className="vieolo-switch-set__title-container" onClick={() => props.onChange(!props.on)}>
-            <TypographyParagraphLarge text={props.title} />
+            {
+                typeof props.title === 'string'
+                    ? <TypographyParagraphLarge text={props.title} />
+                    : <>
+                        {props.title}
+                    </>                
+            }            
             {
                 props.subtitle &&
-                <TypographyCaptionLarge text={props.subtitle} />
+                <>
+                    {
+                        typeof props.subtitle === 'string'
+                            ? <TypographyCaptionLarge text={props.subtitle} />
+                            : <>
+                                {props.subtitle}
+                            </>
+                    }
+                </>                
             }
         </div>
 
