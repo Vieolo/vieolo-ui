@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.13.2 (2021-12-10)
+- Added `ConfirmationDialog` component
+- Fixed the keyboard accessibility of `SwitchSet` when disabled ([#69](https://github.com/Vieolo/vieolo-ui/issues/69))
+- `SwitchSet` now accepts custom components as well as strings for title and subtitle ([#59](https://github.com/Vieolo/vieolo-ui/issues/59))
+
 ## 0.13.1 (2021-12-07)
 - Improved the keyboard accessibility for `Select`
 
