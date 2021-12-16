@@ -16,11 +16,11 @@ type BarChartData = {
      * The axis that the bars are drawn against
      */
     dataAxis: number,
-    fillColors?: string
+    fillColor?: string
 }
 
 export default function BarChart(props: {
-    direction: 'horizontal' | 'verticak',
+    direction: 'horizontal' | 'vertical',
     sorted?: boolean,
     data: BarChartData[],
     dataAxisMin?: 'zero' | 'smallest value',
@@ -62,7 +62,7 @@ export default function BarChart(props: {
             .style('color', '#fff')
             .text('a simple tooltip');
 
-        if (props.direction === 'horizontal') {
+        if (props.direction === 'vertical') {
 
             // X axis
             const x = d3.scaleBand()
@@ -90,7 +90,7 @@ export default function BarChart(props: {
                 .attr("y", d => y(0))
                 .attr("width", x.bandwidth())
                 .attr("height", d => height - y(0))
-                .attr("fill", finalData[0].fillColors || "#000000")
+                .attr("fill", finalData[0].fillColor || "#000000")
                 .on('mouseover', function (d, i) {
                     console.log(d);
                     tooltip
@@ -142,7 +142,7 @@ export default function BarChart(props: {
                 .attr("y", d => y(d.referenceAxis)!)
                 .attr("width", d => x(0))
                 .attr("height", y.bandwidth())
-                .attr("fill", finalData[0].fillColors || "#000000");
+                .attr("fill", finalData[0].fillColor || "#000000");
 
             svg.selectAll("rect")
                 .transition()

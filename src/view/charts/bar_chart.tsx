@@ -18,7 +18,7 @@ export function barChartOptions(): ViewData {
         variables: {
             direction: {
                 options: ['horizontal', 'vertical'],
-                default: 'horizontal'
+                default: 'vertical'
             },
             sorted: {
                 options: [false, true],
@@ -39,7 +39,7 @@ export function BarChartCreator(props: {p: BarChartPropsType}) {
             {
                 referenceAxis: 'Germany',
                 dataAxis: 80_000_000,
-                fillColors: "teal"
+                fillColor: "teal"
             },
             {
                 referenceAxis: 'Estonia',
