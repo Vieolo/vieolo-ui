@@ -23,6 +23,9 @@ import { TabSwitchCreator, tabSwitchOptions } from '../layout/tab_switch';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
 
+// Charts
+import { barChartOptions, BarChartCreator } from '../charts/bar_chart';
+
 
 export type ViewData = {
     constants: { [key: string]: any },
@@ -58,6 +61,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Table": { title: "Table", data: tableOptions(), creator: TableCreator },
         "Radio Group": { title: "Radio Group", data: radioGroupOptions(), creator: RadioGroupCreator },
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator },
+        "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator },
     }
 
     let content: React.ReactNode = null;
