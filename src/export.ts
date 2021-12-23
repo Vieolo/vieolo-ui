@@ -1,4 +1,6 @@
 import Button from './lib/button/button';
+import CalendarStateful from './lib/date_time/calendar_stateful';
+import CalendarStateless from './lib/date_time/calendar_stateless';
 import Chip from './lib/chip';
 import DatePicker from './lib/date_time/date_picker';
 import DropDownMenu, { DropDownMenuItemType as DropDownMenuItemTypeTemp } from './lib/menu/dropdown_menu';
@@ -28,6 +30,8 @@ import SwitchSet from './lib/form/switch_set';
 
 export { 
     Button,
+    CalendarStateful,
+    CalendarStateless,
     Chip,
     ConfirmationDialog,
     DatePicker,

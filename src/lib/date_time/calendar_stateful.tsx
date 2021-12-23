@@ -23,7 +23,7 @@ import IconButton from '../button/icon_button';
 
 
 
-export default function CalendarStatefull(props: {
+export default function CalendarStateful(props: {
     startDate?: VDate,
     selectedDate?: string[],
     selectedWeek?: { weekNumber: number, startDate: VDate },

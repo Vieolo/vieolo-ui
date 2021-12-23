@@ -11,7 +11,7 @@ import VDate from '@vieolo/date';
 
 
 // Internal Components
-import CalendarStatefull from './calendar_stateful';
+import CalendarStateful from './calendar_stateful';
 
 // TypoGraphy
 import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
@@ -80,7 +80,7 @@ export default function DatePicker(props: {
         </div>
         {
             open &&
-            <CalendarStatefull
+            <CalendarStateful
                 onDateSelect={s => {
                     props.onDateSelect(s);
                     setOpen(false);
