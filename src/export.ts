@@ -1,5 +1,6 @@
 import Button from './lib/button/button';
 import Chip from './lib/chip';
+import DatePicker from './lib/date_time/date_picker';
 import DropDownMenu, { DropDownMenuItemType as DropDownMenuItemTypeTemp } from './lib/menu/dropdown_menu';
 import FileInput from './lib/form/file_input';
 import FormDialog, { FormDialogAccessoryButton as FormDialogAccessoryButtonType, FormDialogMainButton as FormDialogMainButtonType } from './lib/dialog/formDialog';
@@ -29,6 +30,7 @@ export {
     Button,
     Chip,
     ConfirmationDialog,
+    DatePicker,
     DropDownMenu,
     FileInput,
     FormDialog,
