@@ -20,6 +20,7 @@ import { ConfirmationDialogCreator, confirmationDialogOptions } from '../dialog/
 import { TableCreator, tableOptions } from '../table/table';
 import { RadioGroupCreator, radioGroupOptions } from '../form/radio_group';
 import { TabSwitchCreator, tabSwitchOptions } from '../layout/tab_switch';
+import { DatePickerCreator, datePickerOptions } from '../date_time/date_picker';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
 
@@ -44,6 +45,7 @@ export default function MainPage(props: {}): JSX.Element {
 
     let items: { [key: string]: { title: string, data: ViewData, creator: any } } = {
         "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator },
+        "Date Picker": { title: "Date Picker", data: datePickerOptions(), creator: DatePickerCreator },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator },
         "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator },
         "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator },
