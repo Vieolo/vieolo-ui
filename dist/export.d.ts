@@ -1,5 +1,8 @@
 import Button from './lib/button/button';
+import CalendarStateful from './lib/date_time/calendar_stateful';
+import CalendarStateless from './lib/date_time/calendar_stateless';
 import Chip from './lib/chip';
+import DatePicker from './lib/date_time/date_picker';
 import DropDownMenu, { DropDownMenuItemType as DropDownMenuItemTypeTemp } from './lib/menu/dropdown_menu';
 import FileInput from './lib/form/file_input';
 import FormDialog, { FormDialogAccessoryButton as FormDialogAccessoryButtonType, FormDialogMainButton as FormDialogMainButtonType } from './lib/dialog/formDialog';
@@ -23,7 +26,7 @@ import RadioGroup, { RadioButtonType as RadioButtonTempType } from './lib/form/r
 import Select from './lib/form/select';
 import Switch from './lib/form/switch';
 import SwitchSet from './lib/form/switch_set';
-export { Button, Chip, ConfirmationDialog, DropDownMenu, FileInput, FormDialog, Grid, IconButton, Input, InputSet, ItemRow, ItemRowSearch, List, Modal, PDFViewer, PeriodOptions, PeriodSelector, Table, TabSwitch, Textarea, TextareaSet, TimePicker, RadioGroup, Select, Switch, SwitchSet };
+export { Button, CalendarStateful, CalendarStateless, Chip, ConfirmationDialog, DatePicker, DropDownMenu, FileInput, FormDialog, Grid, IconButton, Input, InputSet, ItemRow, ItemRowSearch, List, Modal, PDFViewer, PeriodOptions, PeriodSelector, Table, TabSwitch, Textarea, TextareaSet, TimePicker, RadioGroup, Select, Switch, SwitchSet };
 export declare type ListItem = ListItemType;
 export declare type FormDialogAccessoryButton = FormDialogAccessoryButtonType;
 export declare type FormDialogMainButton = FormDialogMainButtonType;

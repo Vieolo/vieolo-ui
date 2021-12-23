@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.13.4 (2021-12-23)
+- Added `DatePicker` component
+
 ## 0.13.3 (2021-12-10)
 - Added `ConfirmationDialog` to the export
 
