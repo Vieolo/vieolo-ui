@@ -42,9 +42,9 @@ export default function CalendarStatefull(props: {
         // eslint-disable-next-line
     }, [])
     
-    return <div className="calendar-statefull-component">
+    return <div className="vieolo-calendar-statefull-component">
 
-        <div className="calendar-year">
+        <div className="vieolo-calendar-statefull-component__calendar-year">
             <IconButton
                 icon={<PreviousIcon />}
                 size="small"
@@ -67,7 +67,7 @@ export default function CalendarStatefull(props: {
         </div>
 
 
-        <div className="calendar-month">
+        <div className="vieolo-calendar-statefull-component__calendar-month">
             <IconButton
                 icon={<PreviousIcon />}
                 size="small"
