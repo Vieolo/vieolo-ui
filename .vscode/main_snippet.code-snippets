@@ -17,7 +17,7 @@
 	// }
 	"Component Creator": {
 		"scope": "typescriptreact",
-		"prefix": "mainComponentCreator",
+		"prefix": "viewComponentCreator",
 		"body": [
 			"// React",
 			"import React from 'react';",

@@ -1345,3 +1345,15 @@ body {
 		z-index: 11;
 	}
 }
+
+.vieolo-bar-chart {
+	position: relative;
+
+	&__tooltip {
+		position: absolute;
+		@include card-light-shadow;
+		padding: $base-unit;
+		top: 0;
+		//transform: translateX(-50%);
+	}
+}
