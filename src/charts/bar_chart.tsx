@@ -16,7 +16,8 @@ type BarChartData = {
      * The axis that the bars are drawn against
      */
     dataAxis: number,
-    fillColor?: string
+    fillColor?: string,
+    dataDisplay: string
 }
 
 export default function BarChart(props: {
@@ -31,6 +32,14 @@ export default function BarChart(props: {
     let ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
+
+        function getTooltipHTML(values: { title: string, value: string }[]) {
+            return values.map(v => {
+                return `<p class="typography-paragraph-medium">${v.title}: ${v.value}</p>`
+            }).join("");
+        }
+
+
         d3.select(ref.current).html("");
 
         let finalMargin = props.margin || { top: 30, right: 30, bottom: 70, left: 60 };
@@ -52,15 +61,8 @@ export default function BarChart(props: {
         let tooltip = d3
             .select(ref.current)
             .append('div')
-            .attr('class', 'd3-tooltip')
-            .style('position', 'absolute')
-            .style('z-index', '10')
-            .style('visibility', 'hidden')
-            .style('padding', '10px')
-            .style('background', 'rgba(0,0,0,0.6)')
-            .style('border-radius', '4px')
-            .style('color', '#fff')
-            .text('a simple tooltip');
+            .attr('class', 'vieolo-bar-chart__tooltip')
+            .style('visibility', 'hidden');
 
         if (props.direction === 'vertical') {
 
@@ -92,17 +94,18 @@ export default function BarChart(props: {
                 .attr("height", d => height - y(0))
                 .attr("fill", finalData[0].fillColor || "#000000")
                 .on('mouseover', function (d, i) {
-                    console.log(d);
+
+                    let rectElement = d.toElement;
+
                     tooltip
-                      .html(
-                        `<div>Country: ${i.dataAxis}</div><div>Value: ${i.referenceAxis}</div>`
-                      )
-                      .style('visibility', 'visible')
-                      .style('top', d.pageY - 10 + 'px')
-                        .style('left', d.pageX + 10 + 'px');;
+                        .html(
+                            getTooltipHTML([{ title: i.referenceAxis, value: i.dataDisplay }])
+                        )
+                        .style('visibility', 'visible')
+                        .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
 
                     d3.select(this).transition().attr('fill', hoverColor);
-                })                
+                })
                 .on('mouseout', function () {
                     tooltip.html(``).style('visibility', 'hidden');
                     d3.select(this).transition().attr('fill', staticColor);
@@ -144,6 +147,33 @@ export default function BarChart(props: {
                 .attr("height", y.bandwidth())
                 .attr("fill", finalData[0].fillColor || "#000000");
 
+
+            svg.selectAll("mybar")
+                .data(finalData)
+                .join("rect")
+                .attr("x", d => x(0))
+                .attr("y", d => y(d.referenceAxis)!)
+                .attr("width", d => x(0))
+                .attr("height", y.bandwidth())
+                .attr("fill", finalData[0].fillColor || "#000000")
+                .on('mouseover', function (d, i) {
+
+                    let rectElement = d.toElement;
+
+                    tooltip
+                        .html(
+                            getTooltipHTML([{ title: i.referenceAxis, value: i.dataDisplay }])
+                        )
+                        .style('visibility', 'visible')
+                        .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
+
+                    d3.select(this).transition().attr('fill', hoverColor);
+                })
+                .on('mouseout', function () {
+                    tooltip.html(``).style('visibility', 'hidden');
+                    d3.select(this).transition().attr('fill', staticColor);
+                });
+
             svg.selectAll("rect")
                 .transition()
                 .duration(500)
@@ -156,5 +186,5 @@ export default function BarChart(props: {
 
     }, [props.data, props.dataAxisMin, props.height, props.margin, props.direction, props.sorted])
 
-    return <div ref={ref} className='width--pc-100 height--pc-100'></div>
+    return <div ref={ref} className='vieolo-bar-chart width--pc-100 height--pc-100'></div>
 }

@@ -39,15 +39,18 @@ export function BarChartCreator(props: {p: BarChartPropsType}) {
             {
                 referenceAxis: 'Germany',
                 dataAxis: 80_000_000,
-                fillColor: "teal"
+                fillColor: "teal",
+                dataDisplay: "80,000,000.00"
             },
             {
                 referenceAxis: 'Estonia',
-                dataAxis: 1_300_000
+                dataAxis: 1_300_000,
+                dataDisplay: "1,300,000.00"
             },
             {
                 referenceAxis: 'Denmark',
-                dataAxis: 5_000_000
+                dataAxis: 5_000_000,
+                dataDisplay: "5,000,000.00"
             }
         ]}
     />
