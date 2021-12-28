@@ -2,12 +2,13 @@
 import React, { ReactNode, Fragment, useState } from 'react';
 
 // Materail UI
-import ExpandIcon from '@mui/icons-material/ExpandMoreRounded';
-import CollapseIcon from '@mui/icons-material/ExpandLessRounded';
+import SelectedIcon from '@mui/icons-material/RadioButtonChecked';
+import UnSelectedIcon from '@mui/icons-material/RadioButtonUnchecked';
+import AllIcon from '@mui/icons-material/TonalityRounded'
 
 // Vieolo UI
-import IconButton from '../lib/button/icon_button';
 import ContextMenu from '../lib/menu/context_menu';
+import RadioGroup from '../lib/form/radio_group';
 
 // Typography
 import TypographyParagraphMedium from '../lib/typography/typography_paragraph_medium';
@@ -70,10 +71,10 @@ export default function GanttChart(props: {
     dataTitle: string,
     columnTitles: GanttChartColumnTitle[],
     columnGroups?: GanttChartColumnGroup[],
-    initialSize?: "Collapsed" | "Expanded"
+    initialFilter?: "All" | "Full" | "Empty"
 }) {
 
-    let [size, setSize] = useState<"Collapsed" | "Expanded">(props.initialSize ? props.initialSize : "Expanded");
+    let [filter, setFilter] = useState<"All" | "Full" | "Empty">(props.initialFilter || "All");
 
     let [contextMenuRow, setContextMenuRow] = useState<GanttChartItemType | null>(null);
     let [contextMenuPosition, setContextMenuPosition] = useState<{ x: number, y: number } | null>(null);
@@ -83,7 +84,8 @@ export default function GanttChart(props: {
     // Checking the overlap of the items
     for (let i = 0; i < props.data.length; i++) {
         const row = props.data[i];
-        if (size === 'Collapsed' && row.items.length === 0) continue;
+        if (filter === 'Full' && row.items.length === 0) continue;
+        if (filter === 'Empty' && row.items.length > 0) continue;
 
         if (doItemsOverlap(row)) {
             finalData.push(...splitData(row));
@@ -104,10 +106,15 @@ export default function GanttChart(props: {
             <div className="vieolo-gantt-chart__base__item-column">
                 <div className="vieolo-gantt-chart__base__item-column__item-title" style={{ height: props.columnGroups ? '65px' : '45px' }}>
                     <TypographyParagraphMedium text={props.dataTitle} />
-                    <IconButton
-                        icon={size === "Collapsed" ? <ExpandIcon /> : <CollapseIcon />}
-                        onClick={() => setSize(size === "Collapsed" ? "Expanded" : "Collapsed")}
-                        size={"small"}
+                    <RadioGroup 
+                        horizontalButtonPadding={7}
+                        onOptionChange={v => setFilter(v as any)}
+                        options={[
+                            {button: <AllIcon />, id: 'All'},
+                            {button: <SelectedIcon />, id: 'Full'},
+                            {button: <UnSelectedIcon />, id: 'Empty'},
+                        ]}
+                        value={filter}
                     />
                 </div>
             </div>

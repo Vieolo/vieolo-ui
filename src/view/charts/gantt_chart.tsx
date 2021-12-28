@@ -258,6 +258,6 @@ export function GanttChartCreator(props: {p: GanttChartPropsType}) {
         columnGroups={props.p.columnGroups}
         data={replaceItemColor((props.p as any).itemColor, props.p.data)}
         dataTitle='Items'
-        initialSize='Expanded'
+        initialFilter='All'
     />
 }
