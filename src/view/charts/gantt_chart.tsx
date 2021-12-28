@@ -11,7 +11,7 @@ import IconFour from '@mui/icons-material/DataUsage';
 import VDate from '@vieolo/date';
 
 // Component
-import GanttChart, { GanttChartColumnGroup, GanttChartColumnTitle, GanttChartDataType } from '../../charts/gantt_chart';
+import GanttChart, { GanttChartColumnGroup, GanttChartColumnTitle, GanttChartDataType, GanttChartItemType } from '../../charts/gantt_chart';
 
 // Types
 import { ViewData } from '../main/main';
@@ -51,9 +51,34 @@ export function ganttChartOptions(): ViewData {
         }
     }
 
+    let itemsOne: GanttChartItemType[] = [
+        {
+            from: 0,
+            to: 14,
+            color: 'primary',
+            id: 1,
+            onClick: () => {},
+            subItems: [{
+                from: 2, 
+                to: 3
+            }],
+            subtitle: "item one description",
+            title: "Item One",
+            supItems: [{from: 5, to: 6}],
+            contextMenuItems: [
+                {
+                    title: "Edit",
+                    onClick: d => alert("You clicked on edit"),
+                    icon: <IconOne />,
+                    color: 'primary'
+                }
+            ]
+        }
+    ]
+
     let data: GanttChartDataType[] = [
         {
-            items: [],
+            items: itemsOne,
             title: "Item One",
             value: '1',
             subtitle: "subtitle One"

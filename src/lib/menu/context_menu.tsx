@@ -94,12 +94,12 @@ export default function ContextMenu(props: {
     // }
 
 
-    return <div ref={container} className="context-menu" style={{ top: top, left: left }}>
+    return <div ref={container} className="vieolo-context-menu" style={{ top: top, left: left }}>
         {
             props.items.map(i => {
                 return <div
                     key={i.title}
-                    className={`context-menu-row context-menu-row-${i.color || 'primary'} ${i.disabled ? ' disabled' : ''}`}
+                    className={`vieolo-context-menu__menu-row vieolo-context-menu__menu-row-${i.color || 'primary'} ${i.disabled ? ' disabled' : ''}`}
                     onClick={() => { i.onClick(i.title); props.onClose(); }}
                 >
                     {
