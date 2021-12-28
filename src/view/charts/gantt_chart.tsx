@@ -5,7 +5,6 @@ import React from 'react';
 import IconOne from '@mui/icons-material/Assignment';
 import IconTwo from '@mui/icons-material/Backup';
 import IconThree from '@mui/icons-material/Cake';
-import IconFour from '@mui/icons-material/DataUsage';
 
 // Installed Packages
 import VDate from '@vieolo/date';
