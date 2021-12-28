@@ -13,13 +13,14 @@ import ContextMenu from '../lib/menu/context_menu';
 import TypographyParagraphMedium from '../lib/typography/typography_paragraph_medium';
 import TypographyParagraphSmall from '../lib/typography/typography_paragraph_small';
 import TypographyCaptionMedium from '../lib/typography/typography_caption_medium';
+import { ColorOptionType } from '../lib/private/types';
 
 
 export type GanttChartContextMenuItem = {
     title: string,
     icon?: ReactNode,
     onClick: (d: GanttChartItemType) => void,
-    color?: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' | 'alert',
+    color?: ColorOptionType,
     disabled?: boolean
 }
 
@@ -33,7 +34,7 @@ export type GanttChartItemType = {
     icon?: ReactNode,
     disabled?: boolean,
     onClick?: (d: GanttChartItemType) => void,
-    color?: 'primary' | 'secondary' | 'tertiary' | 'error' | 'alert' | 'success' | { border: string, background: string, text: string },
+    color?: ColorOptionType | { border: string, background: string, text: string },
     contextMenuItems?: GanttChartContextMenuItem[],
     subItems?: { from: number, to: number }[],
     supItems?: { from: number, to: number }[]
@@ -171,7 +172,7 @@ export default function GanttChart(props: {
                                     let className = `vieolo-gantt-chart__content-div__row__bar-column__bar`;
 
                                     if (!d.color) className += ` vieolo-gantt-chart__content-div__row__bar-column__bar__bar-primary`;
-                                    else if (typeof d.color === 'string') className += ` vieolo-gantt-chart__content-div__row__bar-column__bar__bar-${d.color || 'primary'}`;
+                                    else if (typeof d.color === 'string') className += ` vieolo-gantt-chart__content-div__row__bar-column__bar--${d.color || 'primary'}`;
 
                                     if (d.disabled) className += ' disabled';
 

@@ -3,11 +3,12 @@ import React, { Fragment, ReactNode, useState, useEffect, useRef } from 'react';
 
 // Hooks
 import { useAppearingContainer } from '../../hooks/useAppearingContainer';
+import { ColorOptionType } from '../private/types';
 
 export type ContextMenuItem = {
     title: string,
     icon?: ReactNode,
-    color?: 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' | 'alert'
+    color?: ColorOptionType
     onClick: (v: string) => void,
     disabled?: boolean
 }

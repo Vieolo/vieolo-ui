@@ -15,6 +15,7 @@ import GanttChart, { GanttChartColumnGroup, GanttChartColumnTitle, GanttChartDat
 
 // Types
 import { ViewData } from '../main/main';
+import { ColorOptionType } from '../../lib/private/types';
 
 type GanttChartPropsType = React.ComponentProps<typeof GanttChart>;
 
@@ -104,7 +105,7 @@ export function ganttChartOptions(): ViewData {
             data: data
         } as Partial<GanttChartPropsType>,
         variables: {
-
+            itemColor: 'colors',
         }
     }
 }
@@ -112,10 +113,24 @@ export function ganttChartOptions(): ViewData {
 
 export function GanttChartCreator(props: {p: GanttChartPropsType}) {
 
+
+    function replaceItemColor(color: ColorOptionType, data: GanttChartDataType[]): GanttChartDataType[] {
+        let d = [...data];
+
+        d.forEach(row => {
+            row.items.forEach(item => {
+                if (typeof item.color === 'string') item.color = color;
+            })
+        })
+
+        return d;
+    }
+
+
     return <GanttChart
         columnTitles={props.p.columnTitles}
         columnGroups={props.p.columnGroups}
-        data={props.p.data}
+        data={replaceItemColor((props.p as any).itemColor, props.p.data)}
         dataTitle='Items'
         initialSize='Expanded'
     />

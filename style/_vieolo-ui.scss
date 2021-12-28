@@ -1523,38 +1523,52 @@ body {
 					svg {
 						align-self: center;
 					}
-				}
 
-				&__bar-primary {
-					background-color: $primary-color-transparent;
-					border: 1px solid $primary-color-normal;
-				}
+					&--primary {
+						background-color: $primary-color-transparent;
+						border: 1px solid $primary-color-normal;
+					}
 
-				&__bar-secondary {
-					background-color: $secondary-color-transparent;
-					border: 1px solid $secondary-color-normal;
-				}
+					&--secondary {
+						background-color: $secondary-color-transparent;
+						border: 1px solid $secondary-color-normal;
+					}
 
-				&__bar-tertiary {
-					background-color: $tertiary-color-transparent;
-					border: 1px solid $tertiary-color-normal;
-				}
+					&--tertiary {
+						background-color: $tertiary-color-transparent;
+						border: 1px solid $tertiary-color-normal;
+					}
 
-				&__bar-error {
-					background-color: $error-color-transparent;
-					border: 1px solid $error-color-normal;
-					color: white;
-				}
+					&--error {
+						background-color: $error-color-transparent;
+						border: 1px solid $error-color-normal;
+					}
 
-				&__bar-success {
-					background-color: $success-color-transparent;
-					border: 1px solid $success-color-normal;
-				}
+					&--success {
+						background-color: $success-color-transparent;
+						border: 1px solid $success-color-normal;
+					}
 
-				&__bar-alert {
-					background-color: $alert-color-transparent;
-					border: 1px solid $alert-color-normal;
-				}
+					&--alert {
+						background-color: $alert-color-transparent;
+						border: 1px solid $alert-color-normal;
+					}
+
+					&--accessory-blue {
+						background-color: $accessory-blue-transparent;
+						border: 1px solid $accessory-blue-normal;
+					}
+
+					&--accessory-green {
+						background-color: $accessory-green-transparent;
+						border: 1px solid $accessory-green-normal;
+					}
+
+					&--accessory-orange {
+						background-color: $accessory-orange-transparent;
+						border: 1px solid $accessory-orange-normal;
+					}
+				}				
 
 				&__bar-start {
 					border-top-left-radius: 0;
