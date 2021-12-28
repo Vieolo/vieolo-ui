@@ -207,7 +207,7 @@ export default function GanttChart(props: {
                                                 let supRight = (s.to / props.columnTitles.length) * 100;
                                                 return <div
                                                     key={`${s.from}_${s.to}_${z}`}
-                                                    className="vieolo-gantt-chart__content-div__row__bar-column__bar__sup-item-bar"
+                                                    className="vieolo-gantt-chart__content-div__row__bar-column__sup-item-bar"
                                                     style={{ left: `${supLeft}%`, width: `${supWidth}%`, right: `${supRight}%` }}
                                                 >
                                                 </div>
@@ -253,7 +253,7 @@ export default function GanttChart(props: {
                                                 let subRight = (s.to / props.columnTitles.length) * 100;
                                                 return <div
                                                     key={`${s.from}_${s.to}_${z}`}
-                                                    className="vieolo-gantt-chart__content-div__row__bar-column__bar__sub-item-bar"
+                                                    className="vieolo-gantt-chart__content-div__row__bar-column__sub-item-bar"
                                                     style={{ left: `${subLeft}%`, width: `${subWidth}%`, right: `${subRight}%` }}
                                                 >
                                                 </div>
