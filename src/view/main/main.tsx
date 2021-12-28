@@ -21,6 +21,7 @@ import { TableCreator, tableOptions } from '../table/table';
 import { RadioGroupCreator, radioGroupOptions } from '../form/radio_group';
 import { TabSwitchCreator, tabSwitchOptions } from '../layout/tab_switch';
 import { DatePickerCreator, datePickerOptions } from '../date_time/date_picker';
+import { ganttChartOptions, GanttChartCreator } from '../charts/gantt_chart';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
 
@@ -28,14 +29,16 @@ import SwitchSet from '../../lib/form/switch_set';
 import { barChartOptions, BarChartCreator } from '../charts/bar_chart';
 
 
+type ViewDataVariable = 'colors' | 'boolean' | {
+    options: any[],
+    default: any,
+    type?: 'number' | "string" | "boolean"
+}
+
 export type ViewData = {
     constants: { [key: string]: any },
     variables: {
-        [key: string]: {
-            options: any[],
-            default: any,
-            type?: 'number' | "string" | "boolean"
-        }
+        [key: string]: ViewDataVariable
     }
 };
 
@@ -50,6 +53,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator },
         "Date Picker": { title: "Date Picker", data: datePickerOptions(), creator: DatePickerCreator },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator },
+        "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator },
         "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator },
         "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator },
         "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerEmbeddedOptions(), creator: PDFViewerEmbeddedCreator },
@@ -89,8 +93,23 @@ export default function MainPage(props: {}): JSX.Element {
                             let finalState = { ...i.data.constants }
 
                             for (let z = 0; z < Object.keys(i.data.variables).length; z++) {
-                                const variable = Object.keys(i.data.variables)[z];
-                                finalState[variable] = i.data.variables[variable].default;
+                                const key = Object.keys(i.data.variables)[z];
+                                const variable = i.data.variables[key];
+                                let finalVariable: ViewDataVariable;
+                                if (variable === 'boolean') {
+                                    finalVariable = {
+                                        options: [false, true],
+                                        default: false
+                                    }
+                                } else if (variable === 'colors') {
+                                    finalVariable = {
+                                        options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'],
+                                        default: 'primary'
+                                    }
+                                } else {
+                                    finalVariable = variable;
+                                }
+                                finalState[key] = finalVariable.default;
                             }
                             setFinalState(finalState);
                         }}
@@ -101,10 +120,25 @@ export default function MainPage(props: {}): JSX.Element {
 
         <div className="state-list">
             {
-                selectedDataOptions != null &&
+                selectedDataOptions != null && selectedDataOptions.variables &&
                 Object.keys(selectedDataOptions.variables).map(k => {
 
-                    let variable = selectedDataOptions.variables[k];
+                    let tempVariable = selectedDataOptions.variables[k];
+                    let variable: ViewDataVariable;
+
+                    if (tempVariable === 'boolean') {
+                        variable = {
+                            options: [false, true],
+                            default: false
+                        }
+                    } else if (tempVariable === 'colors') {
+                        variable = {
+                            options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
+                            default: 'primary'
+                        }
+                    } else {
+                        variable = tempVariable;
+                    }
 
                     if (typeof variable.options[0] === 'string') {
                         return <div key={k} className="margin-bottom--one">
@@ -118,7 +152,9 @@ export default function MainPage(props: {}): JSX.Element {
                                 })}
                                 onSelect={v => {
                                     let temp = { ...finalState }
-                                    temp[k] = variable.type && variable.type === 'number' ? +v[0] : v[0];
+                                    if (typeof variable !== 'string') {
+                                        temp[k] = variable.type && variable.type === 'number' ? +v[0] : v[0];
+                                    }
                                     setFinalState(temp);
                                 }}
                                 selectedItems={[finalState[k].toString()]}

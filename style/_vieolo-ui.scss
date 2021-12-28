@@ -1357,3 +1357,305 @@ body {
 		//transform: translateX(-50%);
 	}
 }
+
+
+
+.vieolo-gantt-chart {
+	border: 2px solid #ddd;
+	border-radius: 5px;
+	position: relative;
+	background-color: white;
+
+	&__base {
+		display: flex;
+		height: 100%;
+
+		&__item-column {
+			width: 100px;
+			height: 100%;
+			text-align: center;
+			border-right: 2px dotted #ddd;
+			box-sizing: border-box;
+
+			&__item-title {
+				height: 45px;
+				@include center-by-flex-column;
+
+				p {
+					margin: 0;
+				}
+			}
+		}
+
+		&__data-column {
+			height: 100%;
+			text-align: center;
+			border-right: 2px dotted #ddd;
+			box-sizing: border-box;
+
+			&__title-container {
+				height: 45px;
+				@include center-by-flex-column;
+				position: sticky;
+				top: 0;
+				background-color: white;
+				z-index: 6;
+
+				p {
+					margin: 0;
+				}
+			}
+		}
+	}
+
+	&__group-div {
+		position: absolute;
+		top: 45px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		width: 100%;
+		height: 20px;
+		display: flex;
+		align-items: center;
+		width: 100%;
+
+		&__item-column {
+			width: 100px;
+			padding-left: 5px;
+			padding-right: 5px;
+			display: flex;
+			flex-flow: column;
+			justify-content: center;
+		}
+
+		&__group-column {
+			width: calc(100% - 100px);
+			position: relative;
+			height: 20px;
+
+			&__group-bar {
+				position: absolute;
+				height: 15px;
+				top: 0px;
+				border-radius: 0 0 2px 2px;
+				box-sizing: border-box;
+				padding: 0 5px;
+				text-align: center;
+				display: flex;
+				flex-flow: column;
+				justify-content: center;
+				border: 1px solid $primary-color-normal;
+				border-top: none;
+				font-size: 10px;
+				@include font-header;
+			}
+		}
+	}
+
+	&__content-div {
+		position: absolute;
+		top: 45px;
+		left: 0;
+		right: 0;
+		bottom: 0;
+
+		&__row:nth-child(odd) {
+			background-color: rgba(232, 232, 255, 0.4);
+		}
+
+		&__row {
+			height: 45px;
+			display: flex;
+			align-items: center;
+			width: 100%;
+
+			&__item-column {
+				width: 100px;
+				padding-left: 5px;
+				padding-right: 5px;
+				display: flex;
+				flex-flow: column;
+				justify-content: center;
+
+				&__title {
+					margin: 0;
+					font-size: 15px;
+					font-weight: bold;
+					@include no-text-overflow;
+				}
+			}
+
+			&__bar-column {
+				width: calc(100% - 100px);
+				position: relative;
+				height: 45px;
+
+				&__bar {
+					position: absolute;
+					height: 35px;
+					top: 5px;
+					border-radius: 5px;
+					box-sizing: border-box;
+					padding: 0 5px;
+					text-align: center;
+					display: flex;
+					flex-flow: column;
+					justify-content: center;
+					border: 1px solid;
+
+					p {
+						margin: 0;
+						padding: 0;
+					}
+
+					&__row-title {
+						font-size: 12px;
+						font-weight: bold;
+						@include no-text-overflow;
+					}
+
+					&__row-subtitle {
+						font-size: 11px;
+						@include no-text-overflow;
+					}
+
+					svg {
+						align-self: center;
+					}
+
+					&--primary {
+						background-color: $primary-color-transparent;
+						border: 1px solid $primary-color-normal;
+					}
+
+					&--secondary {
+						background-color: $secondary-color-transparent;
+						border: 1px solid $secondary-color-normal;
+					}
+
+					&--tertiary {
+						background-color: $tertiary-color-transparent;
+						border: 1px solid $tertiary-color-normal;
+					}
+
+					&--error {
+						background-color: $error-color-transparent;
+						border: 1px solid $error-color-normal;
+					}
+
+					&--success {
+						background-color: $success-color-transparent;
+						border: 1px solid $success-color-normal;
+					}
+
+					&--alert {
+						background-color: $alert-color-transparent;
+						border: 1px solid $alert-color-normal;
+					}
+
+					&--accessory-blue {
+						background-color: $accessory-blue-transparent;
+						border: 1px solid $accessory-blue-normal;
+					}
+
+					&--accessory-green {
+						background-color: $accessory-green-transparent;
+						border: 1px solid $accessory-green-normal;
+					}
+
+					&--accessory-orange {
+						background-color: $accessory-orange-transparent;
+						border: 1px solid $accessory-orange-normal;
+					}
+				}				
+
+				&__bar-start {
+					border-top-left-radius: 0;
+					border-bottom-left-radius: 0;
+					border-left: none;
+				}
+
+				&__bar-end {
+					border-top-right-radius: 0;
+					border-bottom-right-radius: 0;
+					border-right: none;
+				}
+
+				&__bar-subtitle {
+					svg {
+						height: 16px;
+						width: 16px;
+					}
+				}
+
+				&__sup-item-bar {
+					position: absolute;
+					background-color: $success-color-normal;
+					height: 3px;
+					bottom: 36px;
+					z-index: 5;
+				}
+
+				&__sub-item-bar {
+					position: absolute;
+					background-color: $accessory-blue-normal;
+					height: 3px;
+					top: 36px;
+					z-index: 5;
+				}
+			}
+		}
+	}
+
+	.vieolo-radio-group {
+		svg {
+			height: 15px;
+			width: 15px;
+		}
+	}
+}
+
+
+.vieolo-context-menu {
+	box-sizing: border-box;
+	position: fixed;
+	@include card-dark-shadow;
+	border-radius: 5px;
+	z-index: 99;
+
+	&__menu-row {
+		border-radius: 5px;
+		width: 130px;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		padding: 5px;
+
+		&:hover {
+			background-color: #f2f2f2;
+		}
+
+		svg {
+			height: 22px;
+		}
+
+		p {
+			margin: 5px;
+			font-size: 12px;
+			@include font-header;
+		}
+	}
+
+	&__menu-row-primary {
+		svg {
+			color: $primary-color-normal;
+		}
+	}
+
+	&__menu-row-error {
+		svg {
+			color: $error-color-normal;
+		}
+	}
+}
