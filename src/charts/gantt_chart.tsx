@@ -78,10 +78,18 @@ export default function GanttChart(props: {
     let [contextMenuRow, setContextMenuRow] = useState<GanttChartItemType | null>(null);
     let [contextMenuPosition, setContextMenuPosition] = useState<{ x: number, y: number } | null>(null);
 
-    let finalData = props.data;
+    let finalData: GanttChartDataType[] = [];
 
-    if (size === "Collapsed") {
-        finalData = finalData.filter(d => d.items.length > 0);
+    // Checking the overlap of the items
+    for (let i = 0; i < props.data.length; i++) {
+        const row = props.data[i];
+        if (size === 'Collapsed' && row.items.length === 0) continue;
+
+        if (doItemsOverlap(row)) {
+            finalData.push(...splitData(row));
+        } else {
+            finalData.push(row);
+        }
     }
 
     let chartHeight = (Object.keys(finalData).length + 1) * 45;
@@ -296,4 +304,107 @@ export default function GanttChart(props: {
         }
 
     </div>
+}
+
+
+/**
+ * Checks whether the items of the data overlap each other not. This function only checks the overlap
+ * @param data The data containing the items
+ */
+function doItemsOverlap(data: GanttChartDataType): boolean {
+    let cols: number[] = [];
+    let overlap = false;
+
+    for (let i = 0; i < data.items.length; i++) {
+        const item = data.items[i];
+        if (overlap) break;
+        for (let z = item.from; z < item.to; z++) {
+            if (cols.includes(z)) {
+                overlap = true;
+                break;
+            }
+            cols.push(z);
+        }
+    }
+    return overlap;
+}
+
+/**
+ * Checks whether the start and end indices of the data intersects with the occupied indices. This function only checks the overlap
+ * @param array The array of indices of occupied slots
+ * @param rangeStart The start index of the item
+ * @param rangeEnd The end index of the item
+ */
+function doesIntersect(array: number[], rangeStart: number, rangeEnd: number) : boolean {
+    let intersects = false;
+
+    for (let i = 0; i < array.length; i++) {
+        const item = array[i];
+        if (rangeStart === item || rangeEnd === item || (item > rangeStart && item < rangeEnd)) {
+            intersects = true;
+            break;
+        }
+    }
+
+    return intersects;
+}
+
+
+/**
+ * If the items of the data have any overlap (checked before calling this function), the items are splitted and distributed among new lines.
+ * Every new line will be represented by a new GanttChartDataType. The new data object is similar to the original, except it does not have any title and subtitle.
+ * @param data The original data
+ * @returns An array of the GanttChartDataType, with the items splitted between them
+ */
+function splitData(data: GanttChartDataType): GanttChartDataType[] {
+    let d = {...data};
+
+    // The first item is the original row
+    let rowsIndices: number[][] = []
+    let rowData: GanttChartDataType[] = [];
+
+    for (let i = 0; i < d.items.length; i++) {
+        const item = d.items[i];
+        let added = false;        
+        
+        for (let z = 0; z < rowsIndices.length; z++) {
+            const rowIndex = rowsIndices[z];
+            
+            if (doesIntersect(rowIndex, item.from, item.to - 1)) continue;            
+
+            let indices = [];
+
+            for (let k = item.from; k < item.to; k++) {
+                indices.push(k);                
+            }
+
+            rowIndex.push(...indices);
+            rowData[z].items.push(item);
+
+            added = true;
+
+            break;
+        }
+
+        if (!added) {
+            let indices = [];
+
+            for (let k = item.from; k < item.to; k++) {
+                indices.push(k);                
+            }
+
+            rowsIndices.push(indices);
+            rowData.push({
+                ...data,
+                value: data.value + '_' + i,
+                title: i === 0 ? data.title : '',
+                subtitle: i === 0 ? data.subtitle : '',
+                items: [item]
+            })
+        }
+        
+    }
+
+    return rowData;
+
 }

@@ -104,28 +104,91 @@ export function ganttChartOptions(): ViewData {
             disabled: true
         },
         {
-            from: 15,
+            from: 14,
             to: 24,
             color: 'primary',
             id: 4,
             icon: <IconTwo />,
+            onClick: () => {}
+        },
+        {
+            from: 25,
+            to: 28,
+            color: 'primary',
+            id: 5,
+            icon: <IconTwo />,
+            title: "A long title to check for with the icon",
             onClick: () => {}
         }
     ]
 
     let itemsThree: GanttChartItemType[] = [
         {
+            from: 4,
+            to: 10,
+            id: 12,
+            color: 'primary'
+        },
+        {
             from: 10,
             to: 24,
             color: 'primary',
-            id: 5,
+            id: 6,
             onClick: () => {},
             subItems: [{from: 10,  to: 12 }, {from: 14, to: 15}],
             supItems: [{from: 10,  to: 11 }, {from: 16, to: 18}],
             title: "With Everything",
             icon: <IconThree />,
             subtitle: "This item does not have any context menu",
-        },        
+        },
+        {
+            from: 20,
+            to: 25,
+            id: 7,
+            color: 'primary',
+        },
+        {
+            from: 6,
+            to: 11,
+            id: 8,
+            color: 'primary'
+        },
+        {
+            from: 12,
+            to: 15,
+            id: 9,
+            color: 'primary'
+        },
+        {
+            from: 5,
+            to: 28,
+            id: 10,
+            color: 'primary'
+        },
+        {
+            from: 26,
+            to: 29,
+            id: 11,
+            color: 'primary'
+        },
+        {
+            from: 0,
+            to: 6,
+            id: 13,
+            color: 'primary'
+        },
+        {
+            from: 0,
+            to: 6,
+            id: 14,
+            color: 'primary'
+        },
+        {
+            from: 6,
+            to: 10,
+            id: 15,
+            color: 'primary'
+        }
     ]
 
     let data: GanttChartDataType[] = [
@@ -152,6 +215,12 @@ export function ganttChartOptions(): ViewData {
             title: "Item Free",
             value: '4',
             subtitle: "No Items"
+        },
+        {
+            items: itemsOne,
+            title: "Item One",
+            value: '5',
+            subtitle: "subtitle One"
         }
     ]
 
