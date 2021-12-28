@@ -21,6 +21,7 @@ import { TableCreator, tableOptions } from '../table/table';
 import { RadioGroupCreator, radioGroupOptions } from '../form/radio_group';
 import { TabSwitchCreator, tabSwitchOptions } from '../layout/tab_switch';
 import { DatePickerCreator, datePickerOptions } from '../date_time/date_picker';
+import { ganttChartOptions, GanttChartCreator } from '../charts/gantt_chart';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
 
@@ -50,6 +51,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator },
         "Date Picker": { title: "Date Picker", data: datePickerOptions(), creator: DatePickerCreator },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator },
+        "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator },
         "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator },
         "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator },
         "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerEmbeddedOptions(), creator: PDFViewerEmbeddedCreator },
