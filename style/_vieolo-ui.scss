@@ -1582,6 +1582,13 @@ body {
 					border-right: none;
 				}
 
+				&__bar-subtitle {
+					svg {
+						height: 16px;
+						width: 16px;
+					}
+				}
+
 				&__sup-item-bar {
 					position: absolute;
 					background-color: $success-color-normal;

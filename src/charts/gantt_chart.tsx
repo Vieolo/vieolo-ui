@@ -53,15 +53,15 @@ export type GanttChartDataType = {
 
 
 export type GanttChartColumnTitle = {
-    title: string, 
-    subtitle?: string, 
+    title: string,
+    subtitle?: string,
     onClick?: () => void
 }
 
 export type GanttChartColumnGroup = {
-    start: number, 
-    end: number, 
-    title: string 
+    start: number,
+    end: number,
+    title: string
 }
 
 
@@ -106,13 +106,13 @@ export default function GanttChart(props: {
             {
                 props.columnTitles.map((t, i) => {
                     return <div className="vieolo-gantt-chart__base__data-column" style={{ width: colWidth }} key={`${t}_${i}`}>
-                        <div 
-                            className={`vieolo-gantt-chart__base__data-column__title-container${t.onClick ? ' clickable' : ''}`} 
+                        <div
+                            className={`vieolo-gantt-chart__base__data-column__title-container${t.onClick ? ' clickable' : ''}`}
                             style={{ paddingBottom: props.columnGroups ? '0px' : '0', height: props.columnGroups ? '45px' : '45px', width: "100%" }}
                             onClick={() => {
                                 if (t.onClick) t.onClick();
                             }}
-                            >
+                        >
                             <TypographyParagraphMedium text={t.title} />
                             {
                                 t.subtitle &&
@@ -186,6 +186,10 @@ export default function GanttChart(props: {
                                         className += ' vieolo-gantt-chart__content-div__row__bar-column__bar__bar-end';
                                     }
 
+                                    if (d.subtitle) {
+                                        className += ' vieolo-gantt-chart__content-div__row__bar-column__bar-subtitle';
+                                    }
+
                                     let left = (finalStart / props.columnTitles.length) * 100;
                                     let width = ((finalEnd - finalStart) / props.columnTitles.length) * 100;
                                     let right = (finalEnd / props.columnTitles.length) * 100;
@@ -230,18 +234,18 @@ export default function GanttChart(props: {
                                             }}
                                         >
                                             {
-                                                d.title &&
-                                                <p className="vieolo-gantt-chart__content-div__row__bar-column__bar__row-title" title={d.title}>{d.title}</p>
+                                                (d.title || d.icon) &&
+                                                <div className='center-by-flex-row'>
+                                                    {d.icon && d.icon}
+                                                    {
+                                                        d.title &&
+                                                        <p className="vieolo-gantt-chart__content-div__row__bar-column__bar__row-title" title={d.title}>{d.title}</p>
+                                                    }
+                                                </div>
                                             }
                                             {
                                                 d.subtitle &&
                                                 <p className="vieolo-gantt-chart__content-div__row__bar-column__bar__row-subtitle" title={d.subtitle}>{d.subtitle}</p>
-                                            }
-                                            {
-                                                d.icon &&
-                                                <Fragment>
-                                                    {d.icon}
-                                                </Fragment>
                                             }
                                         </div>
 

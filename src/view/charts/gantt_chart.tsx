@@ -63,7 +63,7 @@ export function ganttChartOptions(): ViewData {
                 from: 2, 
                 to: 3
             }],
-            subtitle: "item one description",
+            subtitle: "Has Context Menu",
             title: "Item One",
             supItems: [{from: 5, to: 6}],
             contextMenuItems: [
@@ -74,7 +74,58 @@ export function ganttChartOptions(): ViewData {
                     color: 'primary'
                 }
             ]
+        },
+        {
+            from: 20,
+            to: 25,
+            color: {
+                background: '#ddd',
+                border: 'coral',
+                text: 'magenta',
+            },
+            title: "Custom Color",
+            subtitle: "The color of border, background, and text are given explicitly",
+            id: 2,
         }
+    ]
+
+    let itemsTwo: GanttChartItemType[] = [
+        {
+            from: 0,
+            to: 14,
+            color: 'primary',
+            id: 3,
+            onClick: () => {},
+            subItems: [{
+                from: 5, 
+                to: 7
+            }],
+            title: "Item Three",
+            disabled: true
+        },
+        {
+            from: 15,
+            to: 24,
+            color: 'primary',
+            id: 4,
+            icon: <IconTwo />,
+            onClick: () => {}
+        }
+    ]
+
+    let itemsThree: GanttChartItemType[] = [
+        {
+            from: 10,
+            to: 24,
+            color: 'primary',
+            id: 5,
+            onClick: () => {},
+            subItems: [{from: 10,  to: 12 }, {from: 14, to: 15}],
+            supItems: [{from: 10,  to: 11 }, {from: 16, to: 18}],
+            title: "With Everything",
+            icon: <IconThree />,
+            subtitle: "This item does not have any context menu",
+        },        
     ]
 
     let data: GanttChartDataType[] = [
@@ -85,16 +136,22 @@ export function ganttChartOptions(): ViewData {
             subtitle: "subtitle One"
         },
         {
-            items: [],
+            items: itemsTwo,
             title: "Item Two",
             value: '2',
             subtitle: "subtitle Two"
         },
         {
-            items: [],
+            items: itemsThree,
             title: "Item Three",
             value: '3',
             subtitle: "subtitle Three"
+        },
+        {
+            items: [],
+            title: "Item Free",
+            value: '4',
+            subtitle: "No Items"
         }
     ]
 
