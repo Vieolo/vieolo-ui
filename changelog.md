@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.13.5 (2021-12-29)
+- Added `ContextMenu` Component
+- Added `GanttChart` Component ([#18](https://github.com/Vieolo/vieolo-ui/issues/18))
+- Added `BarChart` Component ([#19](https://github.com/Vieolo/vieolo-ui/issues/19))
+
 ## 0.13.4 (2021-12-23)
 - Added `DatePicker` component
 

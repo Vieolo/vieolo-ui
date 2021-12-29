@@ -1,6 +1,7 @@
 import Button from './lib/button/button';
 import CalendarStateful from './lib/date_time/calendar_stateful';
 import CalendarStateless from './lib/date_time/calendar_stateless';
+import ContextMenu from './lib/menu/context_menu';
 import Chip from './lib/chip';
 import DatePicker from './lib/date_time/date_picker';
 import DropDownMenu, { DropDownMenuItemType as DropDownMenuItemTypeTemp } from './lib/menu/dropdown_menu';
@@ -32,6 +33,7 @@ export {
     Button,
     CalendarStateful,
     CalendarStateless,
+    ContextMenu,
     Chip,
     ConfirmationDialog,
     DatePicker,
@@ -82,3 +84,23 @@ export {
     TypographyTitleMedium,
     TypographyTitleSmall
 } from './lib/typography/index'
+
+
+export {
+    BarChart,
+    GanttChart    
+} from './charts/index'
+
+import {
+    GanttChartColumnGroup as GanttChartColumnGroupTemp,
+    GanttChartColumnTitle as GanttChartColumnTitleTemp,
+    GanttChartContextMenuItem as GanttChartContextMenuItemTemp,
+    GanttChartDataType as GanttChartDataTypeTemp,
+    GanttChartItemType as GanttChartItemTypeTemp
+} from './charts/index';
+
+export type GanttChartColumnGroup = GanttChartColumnGroupTemp;
+export type GanttChartColumnTitle = GanttChartColumnTitleTemp;
+export type GanttChartContextMenuItem = GanttChartContextMenuItemTemp;
+export type GanttChartDataType = GanttChartDataTypeTemp;
+export type GanttChartItemType = GanttChartItemTypeTemp;
