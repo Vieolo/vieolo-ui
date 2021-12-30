@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useState } from 'react';
 import IconButton from '../button/icon_button';
 
 // Typography
@@ -9,8 +9,27 @@ import TypographyTitleSmall from '../typography/typography_title_small';
 // Material UI
 import LeftArrowIcon from '@mui/icons-material/ArrowLeft';
 import RightArrowIcon from '@mui/icons-material/ArrowRight';
+import Checkbox from '../form/checkbox';
 
 export type TableSortDirection = 'ascending' | 'descending';
+
+export type TableRow = {
+    id: string,
+    items: React.ReactNode[],
+    /** 
+     * If a function is passed, the entire row will be clickable.
+     * It is recommended to avoid using clickable components inside the row when making the row clickable
+     */
+    onClick?: () => void,
+    /**
+     * If the table is not checkable, this property is ignored
+     */
+    checked?: boolean,
+    /**
+     * If the table is not checkable, this property is ignored
+     */
+    onCheckChange?: () => void
+}
 
 export default function Table(props: {
     headers?: string[],
@@ -18,7 +37,7 @@ export default function Table(props: {
      * @deprecated The headers row is now optional, leaving which will result in absense of header row
      */
     removeHeaderRow?: boolean,
-    rows: React.ReactNode[][],
+    rows: TableRow[],
     columnGrid: string,
     disableSort?: boolean,
     sortBy?: string,
@@ -37,11 +56,6 @@ export default function Table(props: {
      * Converts the height of each row from 40px to 28px
      */
     isDense?: boolean,
-    /** 
-     * If a functin is passed, the entire row will be clickable.
-     * It is recommended to avoid using clickable components inside the row when making the row clickable
-     */
-    onRowClick?: (index: number) => void,
     /**
      * If the max height prop is provided, the pagination will appear below the max height,
      * adding to the total height
@@ -55,8 +69,20 @@ export default function Table(props: {
         pageItemCount: number,
         onPageChange: (newPage: number) => void,
         onPageItemCountChange?: (newCount: number) => void
-    }
+    },
+    /**
+     * If true, all rows will have a checkbox in the start, allowing the user to check a row
+     * A column of 30px will be added to the beginning of the column grid
+     */
+    isCheckable?: boolean,
+    /**
+     * The on change function of the checkbox in the header
+     * User can check or uncheck all of the items at once
+     */
+    onCheckAll?: (allAreChecked: boolean) => void
 }): JSX.Element {
+
+    let [allChecked, setAllChecked] = useState<boolean>(false);
 
     let style: React.CSSProperties = {}
     let contentStyle: React.CSSProperties = {}
@@ -70,12 +96,27 @@ export default function Table(props: {
         contentStyle.overflowY = 'scroll';
     }
 
+    let columnGrid = props.columnGrid;
+    if (props.isCheckable) columnGrid = `30px ${columnGrid}`;
+
     return <div className={`vieolo-table ${props.removeHeaderRow ? 'vieolo-table--headless' : ''}`} style={style}>
 
         <div className="vieolo-table__content" style={contentStyle}>
             {
                 (props.removeHeaderRow !== true || Array.isArray(props.headers)) &&
-                <div className={`vieolo-table__header-row ${props.stickyHeader ? 'position--sticky--top-0' : ''}`} style={{ gridTemplateColumns: props.columnGrid }}>
+                <div className={`vieolo-table__header-row ${props.stickyHeader ? 'position--sticky--top-0' : ''}`} style={{ gridTemplateColumns: columnGrid }}>
+                    {
+                        props.isCheckable &&
+                        <div className='center-by-flex-row'>
+                            <Checkbox
+                                onChange={(v) => {
+                                    if (props.onCheckAll) props.onCheckAll(v);
+                                    setAllChecked(v);
+                                }}
+                                value={allChecked}
+                            />
+                        </div>
+                    }
                     {
                         (props.headers || []).map((h, i) => {
                             return <div
@@ -108,22 +149,38 @@ export default function Table(props: {
             <div className={(props.maxHeight && props.pagination) && "padding-bottom--40"}>
                 {
                     props.rows.map((row, i) => {
-                        let className = 'vieolo-table__content-row';
-                        if (props.isDense) className += ` ${className}--dense`
-                        if (props.onRowClick) className += ' clickable'
-                        
+                        let baseClass = 'vieolo-table__content-row'
+                        let className = `${baseClass}`;
+                        if (props.isDense) className += ` ${baseClass}--dense`
+                        if (row.checked) className += ` ${baseClass}--checked`
+                        if (row.onClick) className += ' clickable'                        
+
                         return <div
-                            key={`table_row_${i}`}
-                            className={className} style={{ gridTemplateColumns: props.columnGrid }}
+                            key={`table_row_${row.id}`}
+                            className={className} style={{ gridTemplateColumns: columnGrid }}
                             onClick={() => {
-                                if (props.onRowClick) props.onRowClick(i);
+                                if (row.onClick) row.onClick();
                             }}
                         >
                             {
-                                row.map((r, z) => {
+                                props.isCheckable &&
+                                <div className='center-by-flex-row'>
+                                    <Checkbox
+                                        onChange={(v) => {
+                                            if (row.onCheckChange) {
+                                                row.onCheckChange();
+                                                setAllChecked(false);
+                                            }
+                                        }}
+                                        value={row.checked || false}
+                                    />
+                                </div>
+                            }
+                            {
+                                row.items.map((r, z) => {
                                     return <div
                                         className="vieolo-table__content-row__cell"
-                                        key={`table_row_${i}_${z}_div`}
+                                        key={`table_row_${row.id}_${z}_div`}
                                     >
                                         {
                                             typeof r === 'string'

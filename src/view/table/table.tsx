@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 // Component
-import Table, { TableSortDirection } from '../../lib/table/table';
+import Table, { TableSortDirection, TableRow } from '../../lib/table/table';
 import IconButton from '../../lib/button/icon_button';
 
 // Material UI
@@ -20,34 +20,14 @@ export function tableOptions(): ViewData {
             columnGrid: '50px 90px 1fr 50px',
         } as Partial<TablePropsType>,
         variables: {
-            removeHeaders: {
-                options: [false, true],
-                default: false,
-            },
-            disableSort: {
-                options: [false, true],
-                default: false,
-            },
-            isDense: {
-                options: [false, true],
-                default: false,
-            },
-            rowClickable: {
-                options: [false, true],
-                default: false,
-            },
-            stickyHeader: {
-                options: [false, true],
-                default: false,
-            },
-            withPagination: {
-                options: [false, true],
-                default: false,
-            },
-            withMaxHeight: {
-                options: [false, true],
-                default: false,
-            }
+            removeHeaders: "boolean",
+            disableSort: "boolean",
+            isDense: "boolean",
+            rowClickable: "boolean",
+            stickyHeader: "boolean",
+            withPagination: "boolean",
+            withMaxHeight: "boolean",
+            checkable: "boolean"
         }
     }    
 }
@@ -57,25 +37,51 @@ export function TableCreator(props: {p: TablePropsType}) {
 
     let [sort, setSort] = useState<string>("id");
     let [direction, setDirection] = useState<TableSortDirection>('ascending');
+    let [checkedList, setCheckedList] = useState<string[]>([]);
 
-    let normalRows = [
+    let headers = ['id', 'Date', 'Description', ''];
+
+    let normalRows: React.ReactNode[][] = [
         ["1", "2020-10-10", "Some Description", <IconButton size="small" onClick={() => {}} icon={<SampleIcon />} />],
         ["2", "2020-10-11", "Some Description 2", <IconButton size="small" onClick={() => {}} icon={<SampleIcon />} />]
     ];
 
-    let clickableRows = [
+    let clickableRows: React.ReactNode[][] = [
         ["1", "2020-10-10", "Some Description", 'Done'],
         ["2", "2020-10-11", "Hello World!", 'N/A']
     ];
 
-    let manyRows = [
+    let manyRows: React.ReactNode[][] = [
         ...Array(25).fill("").map((z, i) => {
             return [25-i, "2020-10-10", "Some Description", 'Done']
         })
     ]
 
-    let finalRows = (props.p as any).rowClickable ? clickableRows : (props.p as any).withMaxHeight ? manyRows : normalRows;
-    let headers = ['id', 'Date', 'Description', ''];
+    let semiFinalRows: TableRow[] = ((props.p as any).rowClickable ? clickableRows : (props.p as any).withMaxHeight ? manyRows : normalRows).map((r, i) => {
+        return {
+            id: i.toString(),
+            items: r,
+            onClick: (props.p as any).rowClickable ? () => alert(`Index ${i} is selected`) : undefined
+        }
+    });
+
+    let finalRows = props.p.disableSort ? semiFinalRows : [...semiFinalRows].sort((a, b) => {
+        let one = a.items[headers.indexOf(sort)];
+        let two = b.items[headers.indexOf(sort)];
+        if (direction === 'ascending') return one > two ? 1 : -1
+        else return one > two ? -1 : 1
+    }).map(i => {
+        return {
+            id: i.id,
+            items: i.items,
+            checked: checkedList.includes(i.id),
+            onCheckChange: () => {
+                if (checkedList.includes(i.id)) setCheckedList(checkedList.filter(z => z !== i.id));
+                else setCheckedList([...checkedList, i.id]);
+            },
+            onClick: i.onClick
+        }
+    })
 
     return <Table
         columnGrid={props.p.columnGrid}
@@ -85,16 +91,10 @@ export function TableCreator(props: {p: TablePropsType}) {
             setSort(s);
             setDirection(d);
         }}
-        rows={props.p.disableSort ? finalRows : finalRows.sort((a, b) => {
-            let one = a[headers.indexOf(sort)];
-            let two = b[headers.indexOf(sort)];
-            if (direction === 'ascending') return one > b ? 1 : -1
-            else return one > two ? -1 : 1
-        })}
+        rows={finalRows}
         sortBy={sort}
         sortDirection={direction}
         width={props.p.width}
-        onRowClick={(props.p as any).rowClickable ? i => alert(`Index ${i} is selected`) : undefined}
         stickyHeader={props.p.stickyHeader}
         maxHeight={props.p.stickyHeader ?  "300px" : (props.p as any).withMaxHeight ? "500px" : undefined}
         pagination={(props.p as any).withPagination ? {
@@ -106,6 +106,13 @@ export function TableCreator(props: {p: TablePropsType}) {
             startIndex: 1,                
         } : undefined}
         isDense={props.p.isDense}
+        isCheckable={(props.p as any).checkable}
+        onCheckAll={v => {
+            if (!v) setCheckedList([]);
+            else {
+                setCheckedList(finalRows.map(i => i.id));
+            }
+        }}
     />
 
 }

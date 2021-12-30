@@ -1093,6 +1093,12 @@ body {
 				height: 28px;
 			}
 		}
+
+		&--checked {
+			& {
+				background-color: $tertiary-color-light;
+			}
+		}
 	}
 
 	&__pagination-row {
@@ -1695,7 +1701,7 @@ body {
 
 		&:checked {
 			box-shadow: inset 0 0 0 2px $primary-color-normal;
-			transition-delay: .4s;
+			transition-delay: .2s;
 			& + svg {
 				--a: 16.1 86.12;
 				--o: 102.22;
@@ -1719,6 +1725,6 @@ body {
         transform: scale(1) translateZ(0);
 		stroke-dasharray: 86.12;
         stroke-dashoffset: 86.12;
-        transition: stroke-dasharray .6s, stroke-dashoffset .6s;
+        transition: stroke-dasharray .4s, stroke-dashoffset .4s;
     }    
 }
