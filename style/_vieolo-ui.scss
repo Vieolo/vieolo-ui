@@ -26,6 +26,19 @@ body {
 	min-width: 80px;
 	@include font-header;
 
+	&:focus {
+		outline: auto 5px -webkit-focus-ring-color;
+	}
+
+	&:focus:not(:focus-visible) {
+		outline: 0;
+	}
+
+	&:focus-visible {
+		outline: 0;
+		box-shadow: $box-shadow-dark;
+	}
+
 	svg {
 		height: $base-unit * 2;
 		width: $base-unit * 2;
@@ -1664,67 +1677,67 @@ body {
 }
 
 .vieolo-checkbox {
-    width: 21px;
+	width: 21px;
 	height: 21px;
 	position: relative;
 
 	&:focus {
 		outline: none;
 		input {
-			border: 1px solid $secondary-color-normal;			
+			border: 1px solid $secondary-color-normal;
 		}
 	}
 
-    input,
-    svg {
-        width: 21px;
-        height: 21px;
-        display: block;
-    }
-    input {
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        position: relative;
-        outline: none;
-        background: white;
-        border: none;
-        margin: 0;
-        padding: 0;
-        cursor: pointer;
-        border-radius: 4px;
-        transition: box-shadow .3s;
-        box-shadow: inset 0 0 0 1px $primary-color-light;
-        
+	input,
+	svg {
+		width: 21px;
+		height: 21px;
+		display: block;
+	}
+	input {
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		position: relative;
+		outline: none;
+		background: white;
+		border: none;
+		margin: 0;
+		padding: 0;
+		cursor: pointer;
+		border-radius: 4px;
+		transition: box-shadow 0.3s;
+		box-shadow: inset 0 0 0 1px $primary-color-light;
+
 		&:hover {
 			box-shadow: inset 0 0 0 2px $primary-color-light;
 		}
 
 		&:checked {
 			box-shadow: inset 0 0 0 2px $primary-color-normal;
-			transition-delay: .2s;
+			transition-delay: 0.2s;
 			& + svg {
 				--a: 16.1 86.12;
 				--o: 102.22;
 				stroke-dasharray: 16.1 86.12;
-        		stroke-dashoffset: 102.22;
+				stroke-dashoffset: 102.22;
 			}
-		}		
-    }
-    svg {
-        pointer-events: none;
-        fill: none;
-        stroke-width: 2px;
-        stroke-linecap: round;
-        stroke-linejoin: round;
-        stroke: $primary-color-normal;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 21px;
-        height: 21px;
-        transform: scale(1) translateZ(0);
+		}
+	}
+	svg {
+		pointer-events: none;
+		fill: none;
+		stroke-width: 2px;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		stroke: $primary-color-normal;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 21px;
+		height: 21px;
+		transform: scale(1) translateZ(0);
 		stroke-dasharray: 86.12;
-        stroke-dashoffset: 86.12;
-        transition: stroke-dasharray .4s, stroke-dashoffset .4s;
-    }    
+		stroke-dashoffset: 86.12;
+		transition: stroke-dasharray 0.4s, stroke-dashoffset 0.4s;
+	}
 }
