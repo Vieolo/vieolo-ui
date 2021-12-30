@@ -22,6 +22,7 @@ import { RadioGroupCreator, radioGroupOptions } from '../form/radio_group';
 import { TabSwitchCreator, tabSwitchOptions } from '../layout/tab_switch';
 import { DatePickerCreator, datePickerOptions } from '../date_time/date_picker';
 import { ganttChartOptions, GanttChartCreator } from '../charts/gantt_chart';
+import { checkboxOptions, CheckboxCreator } from '../form/checkbox';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
 
@@ -51,6 +52,7 @@ export default function MainPage(props: {}): JSX.Element {
 
     let items: { [key: string]: { title: string, data: ViewData, creator: any } } = {
         "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator },
+        "Checkbox": { title: "Checkbox", data: checkboxOptions(), creator: CheckboxCreator },
         "Date Picker": { title: "Date Picker", data: datePickerOptions(), creator: DatePickerCreator },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator },
         "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator },
