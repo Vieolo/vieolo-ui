@@ -27,6 +27,7 @@ export function tableOptions(): ViewData {
             stickyHeader: "boolean",
             withPagination: "boolean",
             withMaxHeight: "boolean",
+            checkable: "boolean"
         }
     }    
 }
@@ -36,6 +37,9 @@ export function TableCreator(props: {p: TablePropsType}) {
 
     let [sort, setSort] = useState<string>("id");
     let [direction, setDirection] = useState<TableSortDirection>('ascending');
+    let [checkedList, setCheckedList] = useState<string[]>([]);
+
+    let headers = ['id', 'Date', 'Description', ''];
 
     let normalRows: React.ReactNode[][] = [
         ["1", "2020-10-10", "Some Description", <IconButton size="small" onClick={() => {}} icon={<SampleIcon />} />],
@@ -53,15 +57,31 @@ export function TableCreator(props: {p: TablePropsType}) {
         })
     ]
 
-    let finalRows: TableRow[] = ((props.p as any).rowClickable ? clickableRows : (props.p as any).withMaxHeight ? manyRows : normalRows).map((r, i) => {
+    let semiFinalRows: TableRow[] = ((props.p as any).rowClickable ? clickableRows : (props.p as any).withMaxHeight ? manyRows : normalRows).map((r, i) => {
         return {
             id: i.toString(),
             items: r,
             onClick: (props.p as any).rowClickable ? () => alert(`Index ${i} is selected`) : undefined
         }
+    });
+
+    let finalRows = props.p.disableSort ? semiFinalRows : [...semiFinalRows].sort((a, b) => {
+        let one = a.items[headers.indexOf(sort)];
+        let two = b.items[headers.indexOf(sort)];
+        if (direction === 'ascending') return one > two ? 1 : -1
+        else return one > two ? -1 : 1
+    }).map(i => {
+        return {
+            id: i.id,
+            items: i.items,
+            checked: checkedList.includes(i.id),
+            onCheckChange: () => {
+                if (checkedList.includes(i.id)) setCheckedList(checkedList.filter(z => z !== i.id));
+                else setCheckedList([...checkedList, i.id]);
+            },
+            onClick: i.onClick
+        }
     })
-    ;
-    let headers = ['id', 'Date', 'Description', ''];
 
     return <Table
         columnGrid={props.p.columnGrid}
@@ -71,12 +91,7 @@ export function TableCreator(props: {p: TablePropsType}) {
             setSort(s);
             setDirection(d);
         }}
-        rows={props.p.disableSort ? finalRows : [...finalRows].sort((a, b) => {
-            let one = a.items[headers.indexOf(sort)];
-            let two = b.items[headers.indexOf(sort)];
-            if (direction === 'ascending') return one > two ? 1 : -1
-            else return one > two ? -1 : 1
-        })}
+        rows={finalRows}
         sortBy={sort}
         sortDirection={direction}
         width={props.p.width}
@@ -91,6 +106,13 @@ export function TableCreator(props: {p: TablePropsType}) {
             startIndex: 1,                
         } : undefined}
         isDense={props.p.isDense}
+        isCheckable={(props.p as any).checkable}
+        onCheckAll={v => {
+            if (!v) setCheckedList([]);
+            else {
+                setCheckedList(finalRows.map(i => i.id));
+            }
+        }}
     />
 
 }
