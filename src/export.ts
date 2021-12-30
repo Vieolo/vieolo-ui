@@ -1,6 +1,7 @@
 import Button from './lib/button/button';
 import CalendarStateful from './lib/date_time/calendar_stateful';
 import CalendarStateless from './lib/date_time/calendar_stateless';
+import Checkbox from './lib/form/checkbox';
 import ContextMenu from './lib/menu/context_menu';
 import Chip from './lib/chip';
 import DatePicker from './lib/date_time/date_picker';
@@ -33,6 +34,7 @@ export {
     Button,
     CalendarStateful,
     CalendarStateless,
+    Checkbox,
     ContextMenu,
     Chip,
     ConfirmationDialog,
