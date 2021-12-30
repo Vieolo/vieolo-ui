@@ -149,9 +149,11 @@ export default function Table(props: {
             <div className={(props.maxHeight && props.pagination) && "padding-bottom--40"}>
                 {
                     props.rows.map((row, i) => {
-                        let className = 'vieolo-table__content-row';
-                        if (props.isDense) className += ` ${className}--dense`
-                        if (row.onClick) className += ' clickable'
+                        let baseClass = 'vieolo-table__content-row'
+                        let className = `${baseClass}`;
+                        if (props.isDense) className += ` ${baseClass}--dense`
+                        if (row.checked) className += ` ${baseClass}--checked`
+                        if (row.onClick) className += ' clickable'                        
 
                         return <div
                             key={`table_row_${row.id}`}

@@ -1093,6 +1093,12 @@ body {
 				height: 28px;
 			}
 		}
+
+		&--checked {
+			& {
+				background-color: $tertiary-color-light;
+			}
+		}
 	}
 
 	&__pagination-row {
