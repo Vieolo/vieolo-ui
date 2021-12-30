@@ -1,12 +1,6 @@
 // React
 import React, { useState } from 'react';
 
-// Material UI
-import IconOne from '@mui/icons-material/Assignment';
-import IconTwo from '@mui/icons-material/Backup';
-import IconThree from '@mui/icons-material/Cake';
-import IconFour from '@mui/icons-material/DataUsage';
-
 // Component
 import Checkbox from '../../lib/form/checkbox';
 
