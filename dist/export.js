@@ -1,6 +1,7 @@
 import Button from './lib/button/button';
 import CalendarStateful from './lib/date_time/calendar_stateful';
 import CalendarStateless from './lib/date_time/calendar_stateless';
+import Checkbox from './lib/form/checkbox';
 import ContextMenu from './lib/menu/context_menu';
 import Chip from './lib/chip';
 import DatePicker from './lib/date_time/date_picker';
@@ -27,6 +28,6 @@ import RadioGroup from './lib/form/radio_group';
 import Select from './lib/form/select';
 import Switch from './lib/form/switch';
 import SwitchSet from './lib/form/switch_set';
-export { Button, CalendarStateful, CalendarStateless, ContextMenu, Chip, ConfirmationDialog, DatePicker, DropDownMenu, FileInput, FormDialog, Grid, IconButton, Input, InputSet, ItemRow, ItemRowSearch, List, Modal, PDFViewer, PeriodOptions, PeriodSelector, Table, TabSwitch, Textarea, TextareaSet, TimePicker, RadioGroup, Select, Switch, SwitchSet };
+export { Button, CalendarStateful, CalendarStateless, Checkbox, ContextMenu, Chip, ConfirmationDialog, DatePicker, DropDownMenu, FileInput, FormDialog, Grid, IconButton, Input, InputSet, ItemRow, ItemRowSearch, List, Modal, PDFViewer, PeriodOptions, PeriodSelector, Table, TabSwitch, Textarea, TextareaSet, TimePicker, RadioGroup, Select, Switch, SwitchSet };
 export { TypographyBase, TypographyCaptionLarge, TypographyCaptionMedium, TypographyCaptionSmall, TypographyParagraphLarge, TypographyParagraphMedium, TypographyParagraphSmall, TypographyTitleLarge, TypographyTitleMedium, TypographyTitleSmall } from './lib/typography/index';
 export { BarChart, GanttChart } from './charts/index';

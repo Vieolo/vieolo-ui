@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.14.0 (2021-12-31)
+- Added `Checkbox` Component
+- Added disable to the `Input` ([#72](https://github.com/Vieolo/vieolo-ui/issues/72))
+- Added check functionality to `Table` ([#40](https://github.com/Vieolo/vieolo-ui/issues/40))
+
+#### Breaking Changes
+- Changed the row prop of the `Table` from `React.ReactNode[][]` to `TableRow`
+
 ## 0.13.5 (2021-12-29)
 - Added `ContextMenu` Component
 - Added `GanttChart` Component ([#18](https://github.com/Vieolo/vieolo-ui/issues/18))

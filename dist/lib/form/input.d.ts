@@ -6,4 +6,5 @@ export default function Input(props: {
     error: boolean;
     size?: 'small' | 'medium' | 'large' | 'full';
     type?: 'text' | 'number' | 'password';
+    disabled?: boolean;
 }): JSX.Element;

@@ -9,7 +9,8 @@ export default function Input(props: {
     onChange: (v: string) => void,
     error: boolean,
     size?: 'small' | 'medium' | 'large' | 'full',
-    type?: 'text' | 'number' | 'password'
+    type?: 'text' | 'number' | 'password',
+    disabled?: boolean
 }) {
     let size = props.size || 'medium';
     let width = '180px';
@@ -22,7 +23,7 @@ export default function Input(props: {
         value={props.value}
         placeholder={props.placeholder}
         onChange={e => { props.onChange(e.target.value) }}
-        className={`vieolo-input${props.error ? ' input-error' : ''}`}
+        className={`vieolo-input${props.error ? ' input-error' : ''}${props.disabled ? ' disabled' : ''}`}
         style={{ width: width }}
     />
 }
