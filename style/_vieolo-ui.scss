@@ -660,10 +660,6 @@ body {
 	@include center-by-flex-row;
 	box-sizing: border-box;
 
-	div {
-		@include center-by-flex-row;
-	}
-
 	input {
 		position: absolute;
 		margin: 0;
