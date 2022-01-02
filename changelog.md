@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.14.1 (2022-01-02)
+- `FileInput` now displays the text along with icons ([#56](https://github.com/Vieolo/vieolo-ui/issues/56))
+- `FileInput` now enforces the file type in drag and drop ([#57](https://github.com/Vieolo/vieolo-ui/issues/57))
+
 ## 0.14.0 (2021-12-31)
 - Added `Checkbox` Component
 - Added disable to the `Input` ([#72](https://github.com/Vieolo/vieolo-ui/issues/72))
