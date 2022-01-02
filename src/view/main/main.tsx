@@ -1,5 +1,6 @@
 // React
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
 // Components
 import ItemRow from '../../lib/list/item_row';
@@ -23,6 +24,7 @@ import { TabSwitchCreator, tabSwitchOptions } from '../layout/tab_switch';
 import { DatePickerCreator, datePickerOptions } from '../date_time/date_picker';
 import { ganttChartOptions, GanttChartCreator } from '../charts/gantt_chart';
 import { checkboxOptions, CheckboxCreator } from '../form/checkbox';
+import { fileInputOptions, FileInputCreator } from '../form/file_input';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
 
@@ -43,40 +45,86 @@ export type ViewData = {
     }
 };
 
+type ViewItemData = {
+    title: string,
+    data: ViewData,
+    creator: any
+}
+
 
 export default function MainPage(props: {}): JSX.Element {
 
     let [selectedTitle, setSelectedTitle] = useState<string>("");
     let [selectedDataOptions, setSelectedDataOptions] = useState<ViewData>(null as ViewData);
     let [finalState, setFinalState] = useState<{ [key: string]: any }>(null);
+    let history = useHistory();    
 
-    let items: { [key: string]: { title: string, data: ViewData, creator: any } } = {
+    let items: { [key: string]: ViewItemData } = {
+        "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator },
         "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator },
         "Checkbox": { title: "Checkbox", data: checkboxOptions(), creator: CheckboxCreator },
+        "Confirmation Dialog": { title: "Confirmation Dialog", data: confirmationDialogOptions(), creator: ConfirmationDialogCreator },
         "Date Picker": { title: "Date Picker", data: datePickerOptions(), creator: DatePickerCreator },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator },
+        "File Input": { title: "File Input", data: fileInputOptions(), creator: FileInputCreator },
+        "Form Dialog": { title: "Form Dialog", data: formDialogOptions(), creator: FormDialogCreator },
         "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator },
         "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator },
         "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator },
+        "List": { title: "List", data: listOptions(), creator: ListCreator },
         "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerEmbeddedOptions(), creator: PDFViewerEmbeddedCreator },
         "PDF Viewer Fullscreen": { title: "PDF Viewer Fullscreen", data: pdfViewerFullScreenOptions(), creator: PDFViewerFullScreenCreator },
-        "Select": { title: "Select", data: selectOptions(), creator: SelectCreator },
         "Period Selector": { title: "Period Selector", data: periodSelectorOptions(), creator: PeriodSelectorCreator },
-        "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator },
-        "List": { title: "List", data: listOptions(), creator: ListCreator },
-        "Form Dialog": { title: "Form Dialog", data: formDialogOptions(), creator: FormDialogCreator },
-        "Confirmation Dialog": { title: "Confirmation Dialog", data: confirmationDialogOptions(), creator: ConfirmationDialogCreator },
-        "Table": { title: "Table", data: tableOptions(), creator: TableCreator },
         "Radio Group": { title: "Radio Group", data: radioGroupOptions(), creator: RadioGroupCreator },
+        "Select": { title: "Select", data: selectOptions(), creator: SelectCreator },
+        "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator },
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator },
-        "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator },
+        "Table": { title: "Table", data: tableOptions(), creator: TableCreator },
     }
+
+    useEffect(() => {
+        if (window.location.search.includes("tab")) {
+            handleSelectComponent(
+                Object.values(items).filter(i => i.title === window.location.search.split("tab=")[1].split("&")[0].replace(/__/g, " "))[0]
+            );
+        }
+
+        // eslint-disable-next-line
+    }, [])
 
     let content: React.ReactNode = null;
 
     if (selectedTitle && selectedDataOptions && finalState) {
         let C = items[selectedTitle].creator;
         content = <C p={finalState} />
+    }
+
+
+    function handleSelectComponent(i: ViewItemData) {
+        setSelectedTitle(i.title);
+        setSelectedDataOptions(i.data);
+        let finalState = { ...i.data.constants }
+
+        for (let z = 0; z < Object.keys(i.data.variables).length; z++) {
+            const key = Object.keys(i.data.variables)[z];
+            const variable = i.data.variables[key];
+            let finalVariable: ViewDataVariable;
+            if (variable === 'boolean') {
+                finalVariable = {
+                    options: [false, true],
+                    default: false
+                }
+            } else if (variable === 'colors') {
+                finalVariable = {
+                    options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'],
+                    default: 'primary'
+                }
+            } else {
+                finalVariable = variable;
+            }
+            finalState[key] = finalVariable.default;
+        }
+        setFinalState(finalState);
     }
 
     return <main className="main-page">
@@ -89,31 +137,9 @@ export default function MainPage(props: {}): JSX.Element {
                         title={i.title}
                         selected={selectedTitle === i.title}
                         cardStyle="card-no-shadow"
-                        onClick={() => {
-                            setSelectedTitle(i.title);
-                            setSelectedDataOptions(i.data);
-                            let finalState = { ...i.data.constants }
-
-                            for (let z = 0; z < Object.keys(i.data.variables).length; z++) {
-                                const key = Object.keys(i.data.variables)[z];
-                                const variable = i.data.variables[key];
-                                let finalVariable: ViewDataVariable;
-                                if (variable === 'boolean') {
-                                    finalVariable = {
-                                        options: [false, true],
-                                        default: false
-                                    }
-                                } else if (variable === 'colors') {
-                                    finalVariable = {
-                                        options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'],
-                                        default: 'primary'
-                                    }
-                                } else {
-                                    finalVariable = variable;
-                                }
-                                finalState[key] = finalVariable.default;
-                            }
-                            setFinalState(finalState);
+                        onClick={() => {                            
+                            handleSelectComponent(i);
+                            history.replace({ pathname: window.location.pathname, search: `tab=${i.title.replace(/ /g, "__")}` });
                         }}
                     />
                 })
