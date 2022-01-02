@@ -43,6 +43,14 @@ export default function FileInput(props: {
             title={""}
             accept={props.accept}
             onChange={e => {
+                if (props.accept) {
+                    for (const file of (e.target.files as FileList)) {
+                        if (!props.accept.includes(file.type)) {
+                            return;
+                        }
+                    }
+                }                
+
                 let allFilesValid = true;
                 if (props.validateFileName) {
                     let fileList = e.target.files as FileList;
