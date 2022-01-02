@@ -139,7 +139,6 @@ export default function MainPage(props: {}): JSX.Element {
                         cardStyle="card-no-shadow"
                         onClick={() => {                            
                             handleSelectComponent(i);
-                            console.log(history);
                             history.replace({ pathname: window.location.pathname, search: `tab=${i.title.replace(/ /g, "__")}` });
                         }}
                     />

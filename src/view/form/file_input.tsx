@@ -3,9 +3,6 @@ import React, { useState } from 'react';
 
 // Material UI
 import IconOne from '@mui/icons-material/Assignment';
-import IconTwo from '@mui/icons-material/Backup';
-import IconThree from '@mui/icons-material/Cake';
-import IconFour from '@mui/icons-material/DataUsage';
 
 // Component
 import FileInput from '../../lib/form/file_input';
@@ -23,6 +20,7 @@ export function fileInputOptions(): ViewData {
         } as Partial<FileInputPropsType>,
         variables: {
             withIcon: 'boolean',
+            withBrowseButton: 'boolean',
             multiple: 'boolean'
         }
     }
@@ -47,6 +45,11 @@ export function FileInputCreator(props: { p: FileInputPropsType }) {
             icon={(props.p as any).withIcon ? <IconOne /> : undefined}
             multiple={props.p.multiple}
             text='Please drop your files here'
+            browseButtonConfig={(props.p as any).withBrowseButton ? {
+                color: 'primary',
+                emphasis: 'medium',
+                text: "Browse From Files"
+            } : undefined}
         />
     </div>
 }
