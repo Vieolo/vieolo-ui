@@ -24,6 +24,7 @@ import { TabSwitchCreator, tabSwitchOptions } from '../layout/tab_switch';
 import { DatePickerCreator, datePickerOptions } from '../date_time/date_picker';
 import { ganttChartOptions, GanttChartCreator } from '../charts/gantt_chart';
 import { checkboxOptions, CheckboxCreator } from '../form/checkbox';
+import { fileInputOptions, FileInputCreator } from '../form/file_input';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
 
@@ -65,6 +66,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Confirmation Dialog": { title: "Confirmation Dialog", data: confirmationDialogOptions(), creator: ConfirmationDialogCreator },
         "Date Picker": { title: "Date Picker", data: datePickerOptions(), creator: DatePickerCreator },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator },
+        "File Input": { title: "File Input", data: fileInputOptions(), creator: FileInputCreator },
         "Form Dialog": { title: "Form Dialog", data: formDialogOptions(), creator: FormDialogCreator },
         "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator },
         "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator },
