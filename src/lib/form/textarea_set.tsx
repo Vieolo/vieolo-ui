@@ -48,6 +48,7 @@ export default function TextareaSet(props: {
             onChange={props.onChange}
             placeholder={props.placeholder || ''}
             size={props.size}
+            ariaLabel={props.label}
         />
     </div >
 }

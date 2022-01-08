@@ -9,6 +9,7 @@ export default function Textarea (props: {
     onChange: (v: string) => void,
     error: boolean,
     size?: 'small' | 'medium' | 'large' | 'full',
+    ariaLabel?: string
 }) {
 
     let size = props.size || 'medium';
@@ -23,6 +24,7 @@ export default function Textarea (props: {
         className={`vieolo-textarea${props.error ? ' input-error' : ''}`}
         placeholder={props.placeholder || ''}
         style={{ width: width }}
+        aria-label={props.ariaLabel}
         >
 
     </textarea>
