@@ -449,6 +449,16 @@ body {
 		}
 	}
 
+	&--extra-small {
+		height: calc($row-height-small - $base-unit-half);
+		width: calc($row-height-small - $base-unit-half);
+
+		svg {
+			width: calc($row-height-small - $base-unit-half - $base-unit);
+			height: calc($row-height-small - $base-unit-half - $base-unit);
+		}
+	}
+
 	&--border-radius-full {
 		border-radius: $border-radius-full;
 	}
