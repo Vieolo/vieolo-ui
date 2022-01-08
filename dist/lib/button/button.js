@@ -34,13 +34,13 @@ export default function Button(props) {
         c += " disabled";
     if (props.className)
         c += " " + props.className;
-    let button = _jsxs("button", Object.assign({ className: c, onClick: props.onClick, style: s }, { children: [props.startIcon &&
+    let button = _jsxs("button", Object.assign({ className: c, onClick: props.onClick, style: s, "aria-label": props.ariaLabel }, { children: [props.startIcon &&
                 _jsx("span", Object.assign({ className: "start-icon" }, { children: props.startIcon }), void 0),
             props.text,
             props.endIcon &&
                 _jsx("span", Object.assign({ className: 'end-icon' }, { children: props.endIcon }), void 0)] }), void 0);
     if (props.auxiliary) {
-        let aux = _jsx("button", Object.assign({ className: c, type: props.type, style: {
+        let aux = _jsx("button", Object.assign({ "aria-label": props.auxiliary.ariaLabel, className: c, type: props.type, style: {
                 borderTopLeftRadius: 0,
                 borderBottomLeftRadius: 0,
                 width: 40,

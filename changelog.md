@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.14.2 (2022-01-08)
+- Added extra small size to `IconButton` ([#77](https://github.com/Vieolo/vieolo-ui/issues/77))
+- Added aria label to `IconButton` ([#78](https://github.com/Vieolo/vieolo-ui/issues/78))
+- Added aria label to `Button` ([#79](https://github.com/Vieolo/vieolo-ui/issues/79))
+- Added aria label to `Input` ([#80](https://github.com/Vieolo/vieolo-ui/issues/80))
+- Added aria label to `Textarea` ([#81](https://github.com/Vieolo/vieolo-ui/issues/81))
+- Added aria accessibility attributes to `Select` ([#82](https://github.com/Vieolo/vieolo-ui/issues/82))
+- Fixed the key of the `Select` items ([#83](https://github.com/Vieolo/vieolo-ui/issues/83))
+
 ## 0.14.1 (2022-01-02)
 - `FileInput` now displays the text along with icons ([#56](https://github.com/Vieolo/vieolo-ui/issues/56))
 - `FileInput` now enforces the file type in drag and drop ([#57](https://github.com/Vieolo/vieolo-ui/issues/57))

@@ -23,5 +23,5 @@ export default function InputSet(props) {
     }
     return _jsxs("div", Object.assign({ className: `vieolo-input-set${props.disabled ? ' disabled' : ''}`, style: { width: width } }, { children: [_jsxs("div", Object.assign({ className: "label-container" }, { children: [_jsx("label", { children: props.label }, void 0),
                     actionComponent] }), void 0),
-            _jsx(Input, { value: props.value, error: props.error, onChange: props.onChange, placeholder: props.placeholder || '', size: props.size, type: props.type }, void 0)] }), void 0);
+            _jsx(Input, { value: props.value, error: props.error, onChange: props.onChange, placeholder: props.placeholder || '', size: props.size, type: props.type, ariaLabel: props.label }, void 0)] }), void 0);
 }

@@ -7,4 +7,5 @@ export default function Input(props: {
     size?: 'small' | 'medium' | 'large' | 'full';
     type?: 'text' | 'number' | 'password';
     disabled?: boolean;
+    ariaLabel?: string;
 }): JSX.Element;

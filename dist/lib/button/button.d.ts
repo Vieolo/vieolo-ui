@@ -29,5 +29,7 @@ export default function Button(props: {
         icon: React.ReactNode;
         onClick: (dropDownItemValue?: string) => void;
         dropDownMenuItems?: DropDownMenuItemType[];
+        ariaLabel?: string;
     };
+    ariaLabel?: string;
 }): JSX.Element;
