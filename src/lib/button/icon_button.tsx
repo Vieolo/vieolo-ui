@@ -12,7 +12,7 @@ export default function IconButton(props: {
 	className?: string,
 	disabled?: boolean,
 	/** default: medium */
-	size?: 'small' | 'medium',
+	size?: 'small' | 'medium' | 'extra-small',
 	/** default: none */
 	emphasis?: EmphasisType
 	onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,

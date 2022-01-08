@@ -166,7 +166,7 @@ export default function Select(props: SelectProps) {
             className={`vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${props.height || 'medium'}`}
             onClick={() => handleOpen()}
             tabIndex={0}
-            aria-role="button"
+            role="button"
             aria-label={`Select ${props.title}`}
             onKeyDown={e => {
                 if (e.code === "Enter" || e.code === "Space") {
@@ -239,7 +239,7 @@ export default function Select(props: SelectProps) {
 
         {
             open &&
-            <div className="vieolo-select__select-dropdown" style={style} aria-role="list" >
+            <div className="vieolo-select__select-dropdown" style={style} role="list" >
                 {items}
             </div>
         }
@@ -274,7 +274,7 @@ function SelectItem(props: {
             className={className}
             onClick={() => { props.onSelect(props.item) }}
             ref={props.itemRef}
-            aria-role="listitem"
+            role="listitem"
             aria-label={props.item.title}
         >
             <TypographyParagraphMedium text={props.item.title} />
