@@ -10,7 +10,8 @@ export default function Input(props: {
     error: boolean,
     size?: 'small' | 'medium' | 'large' | 'full',
     type?: 'text' | 'number' | 'password',
-    disabled?: boolean
+    disabled?: boolean,
+    ariaLabel?: string
 }) {
     let size = props.size || 'medium';
     let width = '180px';
@@ -25,5 +26,6 @@ export default function Input(props: {
         onChange={e => { props.onChange(e.target.value) }}
         className={`vieolo-input${props.error ? ' input-error' : ''}${props.disabled ? ' disabled' : ''}`}
         style={{ width: width }}
+        aria-label={props.ariaLabel}
     />
 }

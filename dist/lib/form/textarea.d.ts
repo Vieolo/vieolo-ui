@@ -5,4 +5,5 @@ export default function Textarea(props: {
     onChange: (v: string) => void;
     error: boolean;
     size?: 'small' | 'medium' | 'large' | 'full';
+    ariaLabel?: string;
 }): JSX.Element;

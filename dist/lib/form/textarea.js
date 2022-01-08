@@ -8,5 +8,5 @@ export default function Textarea(props) {
         width = '240px';
     else if (size == 'full')
         width = '100%';
-    return _jsx("textarea", { value: props.value, onChange: e => props.onChange(e.target.value), className: `vieolo-textarea${props.error ? ' input-error' : ''}`, placeholder: props.placeholder || '', style: { width: width } }, void 0);
+    return _jsx("textarea", { value: props.value, onChange: e => props.onChange(e.target.value), className: `vieolo-textarea${props.error ? ' input-error' : ''}`, placeholder: props.placeholder || '', style: { width: width }, "aria-label": props.ariaLabel }, void 0);
 }

@@ -151,7 +151,7 @@ export default function Select(props: SelectProps) {
         const prev = i > 0 ? filtered[i - 1] : undefined
 
         items.push(<SelectItem
-            key={item.title}
+            key={item.value}
             item={item}
             isSelected={props.selectedItems.includes(item.value)}
             previousItem={prev}
@@ -166,6 +166,8 @@ export default function Select(props: SelectProps) {
             className={`vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${props.height || 'medium'}`}
             onClick={() => handleOpen()}
             tabIndex={0}
+            role="button"
+            aria-label={`Select ${props.title}`}
             onKeyDown={e => {
                 if (e.code === "Enter" || e.code === "Space") {
                     if (!open) handleOpen(true);
@@ -216,6 +218,7 @@ export default function Select(props: SelectProps) {
                             value={searchQuery}
                             onChange={e => setSearchQuery(e.target.value)}
                             placeholder="Search..."
+                            aria-label={`Search ${props.title} items`}
                         />
                         : <TypographyTitleSmall text={thisSelectedItems.map(s => s.title).join(", ")} className="vieolo-select__select-button__button-text__button-value" />
                 }
@@ -236,7 +239,7 @@ export default function Select(props: SelectProps) {
 
         {
             open &&
-            <div className="vieolo-select__select-dropdown" style={style}>
+            <div className="vieolo-select__select-dropdown" style={style} role="list" >
                 {items}
             </div>
         }
@@ -271,6 +274,8 @@ function SelectItem(props: {
             className={className}
             onClick={() => { props.onSelect(props.item) }}
             ref={props.itemRef}
+            role="listitem"
+            aria-label={props.item.title}
         >
             <TypographyParagraphMedium text={props.item.title} />
             {

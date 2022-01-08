@@ -115,9 +115,9 @@ export default function Select(props) {
     for (let i = 0; i < filtered.length; i++) {
         const item = filtered[i];
         const prev = i > 0 ? filtered[i - 1] : undefined;
-        items.push(_jsx(SelectItem, { item: item, isSelected: props.selectedItems.includes(item.value), previousItem: prev, onKeyboardFocus: itemKeyboardFocus === item.value, onSelect: (t) => handleSelectItem(t), itemRef: item.value === itemKeyboardFocus ? itemKeyboardRef : undefined }, item.title));
+        items.push(_jsx(SelectItem, { item: item, isSelected: props.selectedItems.includes(item.value), previousItem: prev, onKeyboardFocus: itemKeyboardFocus === item.value, onSelect: (t) => handleSelectItem(t), itemRef: item.value === itemKeyboardFocus ? itemKeyboardRef : undefined }, item.value));
     }
-    return _jsxs("div", Object.assign({ className: "vieolo-select", ref: container }, { children: [_jsxs("div", Object.assign({ className: `vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${props.height || 'medium'}`, onClick: () => handleOpen(), tabIndex: 0, onKeyDown: e => {
+    return _jsxs("div", Object.assign({ className: "vieolo-select", ref: container }, { children: [_jsxs("div", Object.assign({ className: `vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${props.height || 'medium'}`, onClick: () => handleOpen(), tabIndex: 0, role: "button", "aria-label": `Select ${props.title}`, onKeyDown: e => {
                     if (e.code === "Enter" || e.code === "Space") {
                         if (!open)
                             handleOpen(true);
@@ -168,13 +168,13 @@ export default function Select(props) {
                             handleOpen();
                         } }, { children: [_jsx(TypographyParagraphSmall, { text: props.title, className: "vieolo-select__select-button__button-text__button-title" }, void 0),
                             (props.searchable && open)
-                                ? _jsx("input", { autoFocus: true, value: searchQuery, onChange: e => setSearchQuery(e.target.value), placeholder: "Search..." }, void 0)
+                                ? _jsx("input", { autoFocus: true, value: searchQuery, onChange: e => setSearchQuery(e.target.value), placeholder: "Search...", "aria-label": `Search ${props.title} items` }, void 0)
                                 : _jsx(TypographyTitleSmall, { text: thisSelectedItems.map(s => s.title).join(", "), className: "vieolo-select__select-button__button-text__button-value" }, void 0)] }), void 0),
                     (!props.clearable || (props.clearable && (!props.selectedItems || props.selectedItems.length === 0)))
                         ? _jsx(DownIcon, {}, void 0)
                         : _jsx(IconButton, { icon: _jsx(CloseIcon, {}, void 0), onClick: () => props.onSelect([]), color: "error", size: "small" }, void 0)] }), void 0),
             open &&
-                _jsx("div", Object.assign({ className: "vieolo-select__select-dropdown", style: style }, { children: items }), void 0)] }), void 0);
+                _jsx("div", Object.assign({ className: "vieolo-select__select-dropdown", style: style, role: "list" }, { children: items }), void 0)] }), void 0);
 }
 function SelectItem(props) {
     let className = "vieolo-select__select-item";
@@ -188,7 +188,7 @@ function SelectItem(props) {
         className += " vieolo-select__select-item--keyboard-focus";
     return _jsxs(Fragment, { children: [(props.item.category && (!props.previousItem || props.item.category !== props.previousItem.category)) &&
                 _jsx("p", Object.assign({ className: "vieolo-select__select-item__category-name" }, { children: props.item.category }), void 0),
-            _jsxs("div", Object.assign({ className: className, onClick: () => { props.onSelect(props.item); }, ref: props.itemRef }, { children: [_jsx(TypographyParagraphMedium, { text: props.item.title }, void 0),
+            _jsxs("div", Object.assign({ className: className, onClick: () => { props.onSelect(props.item); }, ref: props.itemRef, role: "listitem", "aria-label": props.item.title }, { children: [_jsx(TypographyParagraphMedium, { text: props.item.title }, void 0),
                     props.item.subTitle &&
                         _jsx(TypographyCaptionMedium, { text: props.item.subTitle }, void 0)] }), void 0)] }, void 0);
 }

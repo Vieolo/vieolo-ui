@@ -67,6 +67,7 @@ export default function InputSet(props: {
             placeholder={props.placeholder || ''}
             size={props.size}
             type={props.type}
+            ariaLabel={props.label}
         />
     </div>
 }

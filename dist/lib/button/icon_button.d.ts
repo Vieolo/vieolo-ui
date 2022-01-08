@@ -5,7 +5,7 @@ export default function IconButton(props: {
     className?: string;
     disabled?: boolean;
     /** default: medium */
-    size?: 'small' | 'medium';
+    size?: 'small' | 'medium' | 'extra-small';
     /** default: none */
     emphasis?: EmphasisType;
     onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
@@ -17,4 +17,5 @@ export default function IconButton(props: {
     /** default: 2 */
     borderWidth?: '0' | '1' | '2';
     type?: 'button' | 'submit' | 'reset';
+    ariaLabel?: string;
 }): JSX.Element;

@@ -16,5 +16,5 @@ export default function TextareaSet(props) {
                     props.tip &&
                         _jsxs("div", Object.assign({ className: "tip-div vieolo-tooltip" }, { children: [_jsx(TipIcon, {}, void 0),
                                 _jsx("div", Object.assign({ className: "tooltip-text-small tooltip-text-down-left" }, { children: props.tip }), void 0)] }), void 0)] }), void 0),
-            _jsx(Textarea, { value: props.value, error: props.error, onChange: props.onChange, placeholder: props.placeholder || '', size: props.size }, void 0)] }), void 0);
+            _jsx(Textarea, { value: props.value, error: props.error, onChange: props.onChange, placeholder: props.placeholder || '', size: props.size, ariaLabel: props.label }, void 0)] }), void 0);
 }
