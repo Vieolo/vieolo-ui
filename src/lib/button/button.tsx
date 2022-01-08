@@ -35,8 +35,10 @@ export default function Button(props: {
 	auxiliary?: {
 		icon: React.ReactNode,
 		onClick: (dropDownItemValue?: string) => void,
-		dropDownMenuItems?: DropDownMenuItemType[]
-	}
+		dropDownMenuItems?: DropDownMenuItemType[],
+		ariaLabel?: string
+	},
+	ariaLabel?: string
 }) {
 	let s: React.CSSProperties = {};
 	let h = props.height || 'medium';
@@ -73,7 +75,7 @@ export default function Button(props: {
 
 	if (props.className) c += " " + props.className;
 
-	let button = <button className={c} onClick={props.onClick} style={s}>
+	let button = <button className={c} onClick={props.onClick} style={s} aria-label={props.ariaLabel}>
 		{
 			props.startIcon &&
 			<span className="start-icon">
@@ -91,6 +93,7 @@ export default function Button(props: {
 
 	if (props.auxiliary) {
 		let aux = <button
+			aria-label={props.auxiliary.ariaLabel}
 			className={c}
 			type={props.type}
 			style={{
