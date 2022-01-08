@@ -24,6 +24,7 @@ export default function IconButton(props: {
 	/** default: 2 */
 	borderWidth?: '0' | '1' | '2',
 	type?: 'button' | 'submit' | 'reset',
+	ariaLabel?: string
 }) {	
 	let c = `vieolo-icon-button vieolo-icon-button--${props.size || 'medium'} vieolo-icon-button--border-radius-${props.borderRadius || 'default'}`;
 	let e = props.emphasis || 'none';
@@ -45,7 +46,7 @@ export default function IconButton(props: {
 
 	if (props.className) c += " " + props.className;
 
-	return <button className={c} onClick={props.onClick} style={props.style || {}} type={props.type}>
+	return <button className={c} onClick={props.onClick} style={props.style || {}} type={props.type} aria-label={props.ariaLabel} >
 		{props.icon}
 		{
 			props.tooltip &&
