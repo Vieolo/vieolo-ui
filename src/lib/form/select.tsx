@@ -151,7 +151,7 @@ export default function Select(props: SelectProps) {
         const prev = i > 0 ? filtered[i - 1] : undefined
 
         items.push(<SelectItem
-            key={item.title}
+            key={item.value}
             item={item}
             isSelected={props.selectedItems.includes(item.value)}
             previousItem={prev}
