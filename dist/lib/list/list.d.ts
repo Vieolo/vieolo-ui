@@ -16,6 +16,7 @@ export declare type ListItem = {
 export default function List(props: {
     items: ListItem[];
     enableSearch?: boolean;
+    enableSubtitleSearch?: boolean;
     title: string;
     cardStyle?: "card-light-shadow" | "card-dark-shadow" | "card-no-shadow";
     height: string;
