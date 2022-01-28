@@ -8,5 +8,5 @@ export default function Input(props) {
         width = '240px';
     else if (size === 'full')
         width = '100%';
-    return _jsx("input", { type: props.type || 'text', value: props.value, placeholder: props.placeholder, onChange: e => { props.onChange(e.target.value); }, className: `vieolo-input${props.error ? ' input-error' : ''}${props.disabled ? ' disabled' : ''}`, style: { width: width }, "aria-label": props.ariaLabel }, void 0);
+    return _jsx("input", { autoFocus: props.autoFocus, type: props.type || 'text', value: props.value, placeholder: props.placeholder, onChange: e => { props.onChange(e.target.value); }, className: `vieolo-input${props.error ? ' input-error' : ''}${props.disabled ? ' disabled' : ''}`, style: { width: width }, "aria-label": props.ariaLabel, onKeyDown: props.onKeyDown }, void 0);
 }

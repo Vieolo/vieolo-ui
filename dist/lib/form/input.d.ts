@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from 'react';
 export default function Input(props: {
     value: string;
     placeholder?: string;
@@ -8,4 +8,6 @@ export default function Input(props: {
     type?: 'text' | 'number' | 'password';
     disabled?: boolean;
     ariaLabel?: string;
+    autoFocus?: boolean;
+    onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }): JSX.Element;

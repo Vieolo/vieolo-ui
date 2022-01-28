@@ -1,6 +1,7 @@
 import React from 'react';
 export default function InputSet(props: {
     label: string;
+    ariaLabel?: string;
     placeholder?: string;
     tip?: string;
     error: boolean;
@@ -9,6 +10,8 @@ export default function InputSet(props: {
     disabled?: boolean;
     size?: 'small' | 'medium' | 'large' | 'full';
     type?: 'text' | 'number' | 'password';
+    autoFocus?: boolean;
+    onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
     actionButton?: {
         description: string;
         icon: React.ReactNode;
