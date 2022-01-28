@@ -25,6 +25,7 @@ import { DatePickerCreator, datePickerOptions } from '../date_time/date_picker';
 import { ganttChartOptions, GanttChartCreator } from '../charts/gantt_chart';
 import { checkboxOptions, CheckboxCreator } from '../form/checkbox';
 import { fileInputOptions, FileInputCreator } from '../form/file_input';
+import { timePickerOptions, TimePickerCreator } from '../date_time/time_picker';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
 
@@ -80,6 +81,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator },
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator },
         "Table": { title: "Table", data: tableOptions(), creator: TableCreator },
+        "Time Picker": { title: "Time Picker", data: timePickerOptions(), creator: TimePickerCreator },
     }
 
     useEffect(() => {

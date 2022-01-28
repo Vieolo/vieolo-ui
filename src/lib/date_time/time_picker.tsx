@@ -3,7 +3,7 @@ import React from 'react';
 
 
 // Components
-import InputSet from './input_set';
+import InputSet from '../form/input_set';
 
 
 export default function TimePicker(props: { 
