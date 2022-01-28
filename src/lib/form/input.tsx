@@ -11,7 +11,9 @@ export default function Input(props: {
     size?: 'small' | 'medium' | 'large' | 'full',
     type?: 'text' | 'number' | 'password',
     disabled?: boolean,
-    ariaLabel?: string
+    ariaLabel?: string,
+    autoFocus?: boolean,
+    onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
 }) {
     let size = props.size || 'medium';
     let width = '180px';
@@ -20,6 +22,7 @@ export default function Input(props: {
     else if (size === 'full') width = '100%';
 
     return <input
+        autoFocus={props.autoFocus}
         type={props.type || 'text'}
         value={props.value}
         placeholder={props.placeholder}
@@ -27,5 +30,6 @@ export default function Input(props: {
         className={`vieolo-input${props.error ? ' input-error' : ''}${props.disabled ? ' disabled' : ''}`}
         style={{ width: width }}
         aria-label={props.ariaLabel}
+        onKeyDown={props.onKeyDown}
     />
 }

@@ -8,12 +8,14 @@ import { dateDDMMYYYY } from '@vieolo/regex-library';
 
 export default function DateInput(props: {
     value: string,
-    onChange: (date: VDate | null, text: string | null) => void,
+    onChange: (date: VDate | null, text: string) => void,
     label?: string,
     disabled?: boolean,
     tip?: string,
     ariaLabel?: string,
-    dateFormat: 'YYYY-MM-DD' | 'DD/MM/YYYY' | 'MM/DD/YYYY'
+    autoFocus?: boolean,
+    dateFormat: 'YYYY-MM-DD' | 'DD/MM/YYYY' | 'MM/DD/YYYY',
+    onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void,
 }): JSX.Element {
 
     return <InputSet
@@ -21,7 +23,9 @@ export default function DateInput(props: {
         ariaLabel={props.ariaLabel || props.label}
         disabled={props.disabled}
         tip={props.tip}
+        autoFocus={props.autoFocus}
         error={parseInputDateToVDate(props.value) == null}
+        onKeyDown={props.onKeyDown}
         onChange={v => {
             // Preventing the user to type more than 10 characters
             if (v.length > 10) return;
