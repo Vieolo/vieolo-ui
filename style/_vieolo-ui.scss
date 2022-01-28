@@ -1747,3 +1747,36 @@ body {
 		transition: stroke-dasharray 0.4s, stroke-dashoffset 0.4s;
 	}
 }
+
+
+.vieolo-date-time-picker {
+	
+	&__label-container {
+		margin-bottom: $base-unit-half;
+	}
+
+	&__input-container {
+		display: flex;
+
+
+		&__date-picker-button {
+			display: flex;
+			border-radius: 5px;
+			align-items: center;
+			background-color: #f2f2f2;
+			border: 2px solid #f2f2f2;
+			font-size: 14px;
+			box-sizing: border-box;
+			padding: 2px 2px 2px 5px;
+			cursor: pointer;
+			margin-right: $base-unit-half;
+			height: 30px;
+
+			svg {
+				height: 20px;
+				width: 20px;
+				margin-left: 5px;
+			}
+		}
+	}
+}

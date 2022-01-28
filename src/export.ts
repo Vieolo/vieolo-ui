@@ -23,7 +23,7 @@ import Table, { TableSortDirection as TableSortDirectionType, TableRow as TableR
 import TabSwitch from './lib/layout/tab_switch';
 import Textarea from './lib/form/textarea';
 import TextareaSet from './lib/form/textarea_set';
-import TimePicker from './lib/form/time_picker';
+import TimePicker from './lib/date_time/time_picker';
 import RadioGroup, { RadioButtonType as RadioButtonTempType } from './lib/form/radio_group';
 import Select from './lib/form/select';
 import Switch from './lib/form/switch';

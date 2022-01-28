@@ -3,7 +3,7 @@ import React from 'react';
 
 
 // Components
-import InputSet from './input_set';
+import InputSet from '../form/input_set';
 
 
 export default function TimePicker(props: { 
@@ -24,13 +24,13 @@ export default function TimePicker(props: {
             if (v.length > 5) return;
             
             //  Adding ":" if the user has typed 2 characters
-            if (props.value.length == 1 && v.length == 2) v += ":";
+            if (props.value.length === 1 && v.length === 2) v += ":";
 
             // Adding ":" in between the second and third character if the third character is not ":"
-            if (props.value.length == 2 && v.length == 3 && v[2] != ":") v = `${v[0]}${v[1]}:${v[2]}`
+            if (props.value.length === 2 && v.length === 3 && v[2] !== ":") v = `${v[0]}${v[1]}:${v[2]}`
 
             // Preventing the user to enter more than one ":"
-            if (props.value.length == 3 && v.length == 4 && v[2] == ":" && v[3] == ":") return;
+            if (props.value.length === 3 && v.length === 4 && v[2] === ":" && v[3] === ":") return;
             
             let [h, m] = parseInputTimeToCustomDate(v);
             props.onChange(h, m, v);
@@ -44,14 +44,14 @@ export default function TimePicker(props: {
 
 
 export function parseInputTimeToCustomDate(input: string) : [number | null, number | null] {
-	if (input.length != 5) return [null, null];
+	if (input.length !== 5) return [null, null];
 	else if (!input.includes(':')) return [null, null];
 
 	let splited = input.split(':');
 
     let numberRegex = /[0-9]{2}/u;
 
-	if (splited[0].length != 2 || splited[1].length != 2) return [null, null];
+	if (splited[0].length !== 2 || splited[1].length !== 2) return [null, null];
 	else if (isNaN(parseInt(splited[0])) || isNaN(parseInt(splited[1]))) return [null, null];
     else if (!numberRegex.test(splited[0]) || !numberRegex.test(splited[1])) return [null, null]
 	

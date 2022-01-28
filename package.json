@@ -46,7 +46,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "build-components": "tsc",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!(date_utility|country_data|react_validation|@vieolo|onetruck-pdf-processing|d3*|internmap|robust-predicates))\" --env=jsdom --runInBand",
+    "test-update": "react-scripts test --transformIgnorePatterns \"node_modules/(?!(date_utility|country_data|react_validation|@vieolo|onetruck-pdf-processing|d3*|internmap|robust-predicates))\" --env=jsdom --runInBand --updateSnapshot",
+    "test-coverage": "npm run test -- --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
