@@ -12,8 +12,11 @@ import VDate from '@vieolo/date';
 import CalendarStateless from './calendar_stateless';
 // External Components
 import IconButton from '../button/icon_button';
+import DateInput from './date_input';
 export default function CalendarStateful(props) {
     let [currentDate, setCurrentDate] = useState(new VDate().setToDateStart());
+    let [searchDate, setSearchDate] = useState(null);
+    let [searchText, setSearchText] = useState('');
     useEffect(() => {
         if (props.startDate)
             setCurrentDate(props.startDate);
@@ -21,24 +24,40 @@ export default function CalendarStateful(props) {
             setCurrentDate(props.selectedWeek.startDate);
         // eslint-disable-next-line
     }, []);
-    return _jsxs("div", Object.assign({ className: "vieolo-calendar-statefull-component" }, { children: [_jsxs("div", Object.assign({ className: "vieolo-calendar-statefull-component__calendar-year" }, { children: [_jsx(IconButton, { icon: _jsx(PreviousIcon, {}, void 0), size: "small", onClick: e => {
+    return _jsxs("div", Object.assign({ className: "vieolo-calendar-statefull-component" }, { children: [props.showSearchInput &&
+                _jsx("div", Object.assign({ className: 'padding-vertical--half center-by-flex-row' }, { children: _jsx("form", Object.assign({ onSubmit: e => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            if (searchDate === null)
+                                return null;
+                            props.onDateSelect(searchDate);
+                        } }, { children: _jsx(DateInput, { onChange: (d, t) => {
+                                console.log("Receiving", d);
+                                setSearchDate(d);
+                                setSearchText(t);
+                            }, value: searchText.trim(), onKeyDown: e => {
+                                if ((e.code === "Tab" || e.code === "Escape") && props.onKeyboardExit) {
+                                    props.onKeyboardExit();
+                                }
+                            }, autoFocus: true, dateFormat: 'DD/MM/YYYY', ariaLabel: 'Search Date' }, void 0) }), void 0) }), void 0),
+            _jsxs("div", Object.assign({ className: "vieolo-calendar-statefull-component__calendar-year" }, { children: [_jsx(IconButton, { icon: _jsx(PreviousIcon, {}, void 0), size: "extra-small", borderRadius: 'normal', onClick: e => {
                             e.stopPropagation();
                             let newDate = new VDate(currentDate).setToMonthStart().addYear(-1);
                             setCurrentDate(newDate);
                         } }, void 0),
                     _jsx(TypographyParagraphMedium, { text: `${currentDate.getFullYear()}` }, void 0),
-                    _jsx(IconButton, { icon: _jsx(NextIcon, {}, void 0), size: "small", onClick: e => {
+                    _jsx(IconButton, { icon: _jsx(NextIcon, {}, void 0), size: "extra-small", borderRadius: 'normal', onClick: e => {
                             e.stopPropagation();
                             let newDate = new VDate(currentDate).setToMonthStart().addYear(1);
                             setCurrentDate(newDate);
                         } }, void 0)] }), void 0),
-            _jsxs("div", Object.assign({ className: "vieolo-calendar-statefull-component__calendar-month" }, { children: [_jsx(IconButton, { icon: _jsx(PreviousIcon, {}, void 0), size: "small", onClick: e => {
+            _jsxs("div", Object.assign({ className: "vieolo-calendar-statefull-component__calendar-month" }, { children: [_jsx(IconButton, { icon: _jsx(PreviousIcon, {}, void 0), size: "extra-small", borderRadius: 'normal', onClick: e => {
                             e.stopPropagation();
                             let newDate = new VDate(currentDate).setToMonthStart().addDay(-1).setToMonthStart();
                             setCurrentDate(newDate);
                         } }, void 0),
                     _jsx(TypographyParagraphMedium, { text: `${currentDate.formatMonth().split(' ')[0]}` }, void 0),
-                    _jsx(IconButton, { icon: _jsx(NextIcon, {}, void 0), size: "small", onClick: e => {
+                    _jsx(IconButton, { icon: _jsx(NextIcon, {}, void 0), size: "extra-small", borderRadius: 'normal', onClick: e => {
                             e.stopPropagation();
                             let newDate = new VDate(currentDate).setToMonthStart().addDay(33).setToMonthStart();
                             setCurrentDate(newDate);

@@ -12,4 +12,6 @@ export default function CalendarStateful(props: {
     onWeekSelect?: (selected: VDate) => void;
     minDate?: VDate;
     maxDate?: VDate;
+    showSearchInput?: boolean;
+    onKeyboardExit?: () => void;
 }): JSX.Element;

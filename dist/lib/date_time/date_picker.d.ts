@@ -24,4 +24,5 @@ export default function DatePicker(props: {
     title?: string;
     /** Whether to show the week number of the selected date in the dafault button */
     showSelectedWeek?: boolean;
+    ariaLabel?: string;
 }): JSX.Element;

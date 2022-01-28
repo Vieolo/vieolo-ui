@@ -1346,24 +1346,38 @@ body {
 	position: relative;
 	display: inline-block;
 
-	&__default-button {
-		width: 140px;
-		padding: 2px 10px;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		height: 56px;
-		@include card-light-shadow;
-		@include card-selectable;
-		@include ripple-primary;
+	&__button-container {
+		
+		$this: &;
 
-		&__text-container {
-			height: 56px;
+		&:focus {
+			outline: none;
+
+			#{$this}__default-button {
+				background-color: $hover-color;
+				border: 2px solid $hover-color;
+			}
+		}		
+
+		&__default-button {
+			width: 140px;
+			padding: 2px 10px;
 			display: flex;
-			flex-direction: column;
 			justify-content: space-between;
+			align-items: center;
+			height: 56px;
+			@include card-no-shadow;
+			@include card-selectable;
+			@include ripple-tertiary;
+	
+			&__text-container {
+				height: 56px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+			}
 		}
-	}
+	}	
 
 	.vieolo-calendar-statefull-component {
 		position: absolute;
@@ -1750,9 +1764,40 @@ body {
 
 
 .vieolo-date-time-picker {
+
+	.vieolo-date-picker {
+		&__button-container {
+		
+			$this: &;
+
+			&:focus {
+				outline: none;
+
+				.vieolo-date-time-picker {
+					&__input-container {
+						&__date-picker-button {
+							background-color: $hover-color;
+							border: 2px solid $hover-color;		
+						}
+					}
+				}
+	
+				#{$this}__default-button {
+					background-color: $hover-color;
+					border: 2px solid $hover-color;
+				}
+			}		
+		}
+	}
 	
 	&__label-container {
 		margin-bottom: $base-unit-half;
+
+		label {
+			margin: 0;
+			font-size: 12px;
+			@include font-header;
+		}
 	}
 
 	&__input-container {
