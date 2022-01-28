@@ -1753,6 +1753,12 @@ body {
 	
 	&__label-container {
 		margin-bottom: $base-unit-half;
+
+		label {
+			margin: 0;
+			font-size: 12px;
+			@include font-header;
+		}
 	}
 
 	&__input-container {
