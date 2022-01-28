@@ -37,14 +37,14 @@ export default function InputSet(props: {
     let actionComponent = <span></span>;
 
     if (props.actionButton) {
-        actionComponent = <IconButton 
+        actionComponent = <IconButton
             icon={props.actionButton.icon}
             onClick={props.actionButton.onClick}
             tooltip={props.actionButton.description}
             tooltipPosition={'down-left'}
             size={'small'}
         />
-    }else if (props.tip) {
+    } else if (props.tip) {
         actionComponent = <div className="tip-div vieolo-tooltip">
             <TipIcon />
             <div className="tooltip-text-small tooltip-text-down-left">{props.tip}</div>
@@ -52,13 +52,16 @@ export default function InputSet(props: {
     }
 
     return <div
-        className={`vieolo-input-set${props.disabled ? ' disabled' : ''}`} style={{width: width}}>
-        <div className="label-container">
-            <label>
-                {props.label}
-            </label>
-            {actionComponent}
-        </div>
+        className={`vieolo-input-set${props.disabled ? ' disabled' : ''}`} style={{ width: width }}>
+        {
+            (props.label || props.actionButton) &&
+            <div className="label-container">
+                <label>
+                    {props.label}
+                </label>
+                {actionComponent}
+            </div>
+        }
 
         <Input
             value={props.value}

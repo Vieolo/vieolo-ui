@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.14.3 (2022-01-28)
+- Added `DateTimePicker` component
+- Added subtitle search for `List` ([#84](https://github.com/Vieolo/vieolo-ui/issues/84))
+
 ## 0.14.2 (2022-01-08)
 - Added extra small size to `IconButton` ([#77](https://github.com/Vieolo/vieolo-ui/issues/77))
 - Added aria label to `IconButton` ([#78](https://github.com/Vieolo/vieolo-ui/issues/78))
