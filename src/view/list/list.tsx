@@ -78,10 +78,8 @@ export function listOptions(): ViewData {
             items: items
         } as Partial<ListPropsType>,
         variables: {
-            enableSearch: {
-                options: [false, true],
-                default: false
-            },
+            enableSearch: 'boolean',
+            enableSubtitleSearch: 'boolean',
             cardStyle: {
                 options: ["card-no-shadow", 'card-light-shadow', "card-dark-shadow"],
                 default: 'card-no-shadow'
@@ -99,6 +97,7 @@ export function ListCreator(props: {p: ListPropsType}) {
         title={props.p.title}
         cardStyle={props.p.cardStyle}
         enableSearch={props.p.enableSearch}
+        enableSubtitleSearch={props.p.enableSubtitleSearch}
     />
 
 }

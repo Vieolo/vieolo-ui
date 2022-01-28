@@ -32,6 +32,7 @@ export type ListItem = {
 export default function List(props: {
     items: ListItem[],
     enableSearch?: boolean,
+    enableSubtitleSearch?: boolean,
     title: string,
     cardStyle?: "card-light-shadow" | "card-dark-shadow" | "card-no-shadow",
     height: string,
@@ -52,7 +53,12 @@ export default function List(props: {
         }
 
         {
-            props.items.filter(a => !query.trim() || a.title.toLowerCase().includes(query.toLowerCase())).map(a => {
+            props.items.filter(a => {
+                if (!query.trim()) return true;
+                if (a.title.toLowerCase().includes(query.toLowerCase())) return true;
+                if (a.subTitle && props.enableSubtitleSearch && a.subTitle.toLowerCase().includes(query.toLowerCase())) return true;
+                return false;
+            }).map(a => {
                 return <ItemRow
                     key={a.id}
                     cardStyle={props.cardStyle || 'card-no-shadow'}
