@@ -1,14 +1,11 @@
 // React
 import React, { useState, useRef } from 'react';
 
-
 // Material UI
 import CalendarIcon from '@mui/icons-material/DateRangeRounded';
 
-
 // Installed Packages
 import VDate from '@vieolo/date';
-
 
 // Internal Components
 import CalendarStateful from './calendar_stateful';
@@ -40,17 +37,22 @@ export default function DatePicker(props: {
     /** The title to be shown above the selected date in the default button */
     title?: string,
     /** Whether to show the week number of the selected date in the dafault button */
-    showSelectedWeek?: boolean
+    showSelectedWeek?: boolean,
+    ariaLabel?: string
 }): JSX.Element {
 
     let [open, setOpen] = useState<boolean>(false);
+    let [openedByKeyboard, setOpenedByKeyboard] = useState<boolean>(false);
 
     let container = useRef<HTMLDivElement>(null);
 
     useAppearingContainer(
         container,
         open,
-        setOpen
+        setOpen,
+        () => {
+            setOpenedByKeyboard(false);
+        }
     );
 
     function getStartDate(): VDate {
@@ -59,8 +61,8 @@ export default function DatePicker(props: {
         else return new VDate().setToDateStart();
     }
 
-    let datePickerButton = props.buttonComponent || <div className="vieolo-date-picker__default-button">
-        <div className="default-button__default-button__text-container">
+    let datePickerButton = props.buttonComponent || <div className="vieolo-date-picker__button-container__default-button">
+        <div className="vieolo-date-picker__button-container__default-button__text-container">
             <div>
                 <TypographyCaptionLarge text={props.title || ""} />
             </div>
@@ -75,12 +77,34 @@ export default function DatePicker(props: {
     </div>
 
     return <div className="vieolo-date-picker" ref={container}>
-        <div onClick={() => setOpen(!open)}>
+        <div
+            className='vieolo-date-picker__button-container'
+            onClick={() => setOpen(!open)}
+            tabIndex={0}
+            role="button"
+            onKeyDown={e => {
+                if (e.code === "Enter" || e.code === "Space") {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    setOpen(!open)
+                    setOpenedByKeyboard(!open);
+                } else if (e.code === "Escape" && open) {
+                    setOpen(false);
+                    setOpenedByKeyboard(false);
+                } else if (e.code === "Tab" && open) {
+                    setOpen(false);
+                    setOpenedByKeyboard(false);
+                }
+            }}
+        >
             {datePickerButton}
+
         </div>
         {
             open &&
             <CalendarStateful
+                showSearchInput={openedByKeyboard}
+                onKeyboardExit={() => setOpen(false)}
                 onDateSelect={s => {
                     props.onDateSelect(s);
                     setOpen(false);
@@ -90,7 +114,7 @@ export default function DatePicker(props: {
                         props.onWeekSelect(s);
                         setOpen(false);
                     }
-                    
+
                 }}
                 includeWeek={props.includeWeek}
                 selectedDate={props.selectedDate ? [props.selectedDate.formatDate("yyyy-mm-dd")] : undefined}

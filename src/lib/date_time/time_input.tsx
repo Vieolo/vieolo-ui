@@ -6,16 +6,18 @@ import React from 'react';
 import InputSet from '../form/input_set';
 
 
-export default function TimePicker(props: { 
+export default function TimeInput(props: { 
     value: string,
     onChange: (hour: number | null, minute: number | null, text: string | null) => void,
     label?: string,
     disabled?: boolean,
-    tip?: string
+    tip?: string,
+    ariaLabel?: string
 }): JSX.Element {
 
     return <InputSet
         label={props.label || ''}
+        ariaLabel={props.ariaLabel || props.label}
         disabled={props.disabled}
         tip={props.tip}
         error={parseInputTimeToCustomDate(props.value)[0] == null}

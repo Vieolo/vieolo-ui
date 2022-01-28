@@ -25,8 +25,9 @@ import { DatePickerCreator, datePickerOptions } from '../date_time/date_picker';
 import { ganttChartOptions, GanttChartCreator } from '../charts/gantt_chart';
 import { checkboxOptions, CheckboxCreator } from '../form/checkbox';
 import { fileInputOptions, FileInputCreator } from '../form/file_input';
-import { timePickerOptions, TimePickerCreator } from '../date_time/time_picker';
+import { timeInputOptions, TimeInputCreator } from '../date_time/time_input';
 import { dateTimePickerOptions, DateTimePickerCreator } from '../date_time/date_time_picker';
+import { dateInputOptions, DateInputCreator } from '../date_time/date_input';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
 
@@ -66,6 +67,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator },
         "Checkbox": { title: "Checkbox", data: checkboxOptions(), creator: CheckboxCreator },
         "Confirmation Dialog": { title: "Confirmation Dialog", data: confirmationDialogOptions(), creator: ConfirmationDialogCreator },
+        "Date Input": { title: "Date Input", data: dateInputOptions(), creator: DateInputCreator },
         "Date Picker": { title: "Date Picker", data: datePickerOptions(), creator: DatePickerCreator },
         "Date Time Picker": { title: "Date Time Picker", data: dateTimePickerOptions(), creator: DateTimePickerCreator },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator },
@@ -83,7 +85,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator },
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator },
         "Table": { title: "Table", data: tableOptions(), creator: TableCreator },
-        "Time Picker": { title: "Time Picker", data: timePickerOptions(), creator: TimePickerCreator },
+        "Time Input": { title: "Time Input", data: timeInputOptions(), creator: TimeInputCreator },
     }
 
     useEffect(() => {

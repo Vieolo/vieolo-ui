@@ -13,6 +13,7 @@ import IconButton from '../button/icon_button';
 
 export default function InputSet(props: {
     label: string,
+    ariaLabel?: string,
     placeholder?: string,
     tip?: string,
     error: boolean,
@@ -21,6 +22,8 @@ export default function InputSet(props: {
     disabled?: boolean,
     size?: 'small' | 'medium' | 'large' | 'full',
     type?: 'text' | 'number' | 'password',
+    autoFocus?: boolean,
+    onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void,
     actionButton?: {
         description: string,
         icon: React.ReactNode,
@@ -70,7 +73,9 @@ export default function InputSet(props: {
             placeholder={props.placeholder || ''}
             size={props.size}
             type={props.type}
-            ariaLabel={props.label}
+            ariaLabel={props.ariaLabel || props.label}
+            autoFocus={props.autoFocus}
+            onKeyDown={props.onKeyDown}
         />
     </div>
 }
