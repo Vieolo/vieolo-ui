@@ -2,20 +2,20 @@
 import React, { useState } from 'react';
 
 // Component
-import TimePicker from '../../lib/date_time/time_picker';
+import TimeInput from '../../lib/date_time/time_input';
 
 // Types
 import { ViewData } from '../main/main';
 import { TypographyParagraphMedium } from '../../lib/typography';
 
-type TimePickerPropsType = React.ComponentProps<typeof TimePicker>;
+type TimeInputPropsType = React.ComponentProps<typeof TimeInput>;
 
-export function timePickerOptions(): ViewData {
+export function timeInputOptions(): ViewData {
 
     return {
         constants: {
 
-        } as Partial<TimePickerPropsType>,
+        } as Partial<TimeInputPropsType>,
         variables: {
             disabled: 'boolean'
         }
@@ -23,7 +23,7 @@ export function timePickerOptions(): ViewData {
 }
 
 
-export function TimePickerCreator(props: {p: TimePickerPropsType}) {
+export function TimeInputCreator(props: {p: TimeInputPropsType}) {
 
     let [hour, setHour] = useState<number>(0)
     let [minute, setMinute] = useState<number>(0);
@@ -35,7 +35,7 @@ export function TimePickerCreator(props: {p: TimePickerPropsType}) {
 
         <div className="padding-vertical--one"></div>
 
-        <TimePicker
+        <TimeInput
             value={timeText}
             label="Time"
             disabled={props.p.disabled}

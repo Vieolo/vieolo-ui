@@ -1,5 +1,5 @@
 
-import { parseInputTimeToCustomDate } from '../../lib/date_time/time_picker';
+import { parseInputTimeToCustomDate } from '../../../lib/date_time/time_input';
 
 
 
