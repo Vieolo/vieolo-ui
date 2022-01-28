@@ -1,7 +1,7 @@
 // Vieolo UI
 import { TypographyCaptionMedium, TypographyParagraphMedium } from "../typography";
 import DatePicker from "./date_picker";
-import TimePicker from "./time_picker";
+import TimeInput from "./time_input";
 
 // Installed Packages
 import VDate from "@vieolo/date";
@@ -25,7 +25,7 @@ export default function DateTimePicker(props: {
     return <div className={`vieolo-date-time-picker ${props.disabled ? "disabled" : ''}`}>
 
         <div className="vieolo-date-time-picker__label-container">
-            <label htmlFor="">{props.label}</label>
+            <label>{props.label}</label>
         </div>
 
         <div className="vieolo-date-time-picker__input-container">
@@ -36,6 +36,7 @@ export default function DateTimePicker(props: {
                 selectedDate={props.selectedDate}
                 selectedWeek={props.selectedWeek}
                 showSelectedWeek={props.showSelectedWeek}
+                ariaLabel={`${props.label} Date`}
                 buttonComponent={<div className="vieolo-date-time-picker__input-container__date-picker-button">
                     <div>
                         {
@@ -53,9 +54,10 @@ export default function DateTimePicker(props: {
                 </div>}
             />
 
-            <TimePicker
+            <TimeInput
                 onChange={props.onTimeChange}
                 value={props.timeValue}
+                ariaLabel={`${props.label} Time`}
             />
         </div>
 

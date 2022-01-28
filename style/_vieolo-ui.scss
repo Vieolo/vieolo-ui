@@ -1764,6 +1764,31 @@ body {
 
 
 .vieolo-date-time-picker {
+
+	.vieolo-date-picker {
+		&__button-container {
+		
+			$this: &;
+
+			&:focus {
+				outline: none;
+
+				.vieolo-date-time-picker {
+					&__input-container {
+						&__date-picker-button {
+							background-color: $hover-color;
+							border: 2px solid $hover-color;		
+						}
+					}
+				}
+	
+				#{$this}__default-button {
+					background-color: $hover-color;
+					border: 2px solid $hover-color;
+				}
+			}		
+		}
+	}
 	
 	&__label-container {
 		margin-bottom: $base-unit-half;
