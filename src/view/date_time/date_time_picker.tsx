@@ -1,12 +1,6 @@
 // React
 import React, { useState } from 'react';
 
-// Material UI
-import IconOne from '@mui/icons-material/Assignment';
-import IconTwo from '@mui/icons-material/Backup';
-import IconThree from '@mui/icons-material/Cake';
-import IconFour from '@mui/icons-material/DataUsage';
-
 // Component
 import DateTimePicker from '../../lib/date_time/date_time_picker';
 
@@ -41,8 +35,8 @@ export function dateTimePickerOptions(): ViewData {
 
 export function DateTimePickerCreator(props: {p: DateTimePickerPropsType}) {
 
-    let [hour, setHour] = useState<number>(0)
-    let [minute, setMinute] = useState<number>(0);
+    let [, setHour] = useState<number>(0)
+    let [, setMinute] = useState<number>(0);
     let [timeText, setTimeText] = useState<string>("00:00");
     let [date, setDate] = useState<VDate>(new VDate());
 
