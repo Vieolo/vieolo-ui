@@ -50,10 +50,12 @@ export default function DatePicker(props) {
                 _jsx(CalendarStateful, { showSearchInput: openedByKeyboard, onKeyboardExit: () => setOpen(false), onDateSelect: s => {
                         props.onDateSelect(s);
                         setOpen(false);
+                        setOpenedByKeyboard(false);
                     }, onWeekSelect: s => {
                         if (props.onWeekSelect) {
                             props.onWeekSelect(s);
                             setOpen(false);
+                            setOpenedByKeyboard(false);
                         }
                     }, includeWeek: props.includeWeek, selectedDate: props.selectedDate ? [props.selectedDate.formatDate("yyyy-mm-dd")] : undefined, selectedWeek: props.selectedWeek, startDate: getStartDate() }, void 0)] }), void 0);
 }

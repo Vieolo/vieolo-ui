@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.15.1 (2022-01-29)
+- Uniformed the style of the label of `DateTimePicker` with the rest of components
+- Fixed the persistence of date search input in `DatePicker` ([#87](https://github.com/Vieolo/vieolo-ui/issues/87))
+
 ## 0.15.0 (2022-01-29)
 - Added `DateInput` component
 - Added aria accessibility to the `DateTimeInput` ([#86](https://github.com/Vieolo/vieolo-ui/issues/86))
