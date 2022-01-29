@@ -108,11 +108,13 @@ export default function DatePicker(props: {
                 onDateSelect={s => {
                     props.onDateSelect(s);
                     setOpen(false);
+                    setOpenedByKeyboard(false);
                 }}
                 onWeekSelect={s => {
                     if (props.onWeekSelect) {
                         props.onWeekSelect(s);
                         setOpen(false);
+                        setOpenedByKeyboard(false);
                     }
 
                 }}

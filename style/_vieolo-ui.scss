@@ -1791,7 +1791,9 @@ body {
 	}
 	
 	&__label-container {
-		margin-bottom: $base-unit-half;
+		height: 30px;
+		@include flex-row-space-between;
+		padding: 0 5px;
 
 		label {
 			margin: 0;
