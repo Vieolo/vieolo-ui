@@ -13,7 +13,9 @@ export default function CalendarStateless(props: {
     onDateSelect: (d: VDate) => void,
     onWeekSelect?: (d: VDate) => void,
     minDate?: VDate,
-    maxDate?: VDate
+    maxDate?: VDate,
+    dateCellAriaLabelSuffix?: string,
+    ariaLabel?: string
 }) {
 
     let today = new VDate();
@@ -46,6 +48,7 @@ export default function CalendarStateless(props: {
                         if (props.onWeekSelect) props.onWeekSelect(thisWeek.start) 
                     }}
                     key={`week ${thisWeek.weekNumber} ${thisWeek.start.getFullYear()}`}
+                    aria-label={`week ${thisWeek.weekNumber} ${thisWeek.start.getFullYear()} ${props.dateCellAriaLabelSuffix || ''}`.trim()}
                 >
                     {thisWeek.weekNumber}
                 </div>
@@ -64,7 +67,7 @@ export default function CalendarStateless(props: {
         else if (props.selectedDate && props.selectedDate.includes(thisDate.formatDate('yyyy-mm-dd'))) className += " vieolo-calendar-stateless-component__selected";
 
         (dayCards[`${thisWeek.start.formatDate()}`] = dayCards[`${thisWeek.start.formatDate()}`] || []).push(
-            <div className={className} key={thisDate.formatDate()} onClick={e => {
+            <div className={className} aria-label={`${thisDate.formatDate()} ${props.dateCellAriaLabelSuffix || ''}`.trim()} key={thisDate.formatDate()} onClick={e => {
                 e.stopPropagation()
                 props.onDateSelect(thisDate);
             }}>{thisDate.getMonth() === props.currentDate.getMonth() ? thisDate.getDate() : ''}</div>
@@ -72,7 +75,7 @@ export default function CalendarStateless(props: {
     }
 
 
-    return <div className="vieolo-calendar-stateless-component">
+    return <div className="vieolo-calendar-stateless-component" aria-label={props.ariaLabel}>
         <div className={`vieolo-calendar-stateless-component__calendar-content ${props.includeWeek ? 'vieolo-calendar-stateless-component__calendar-content--with-week' : ''}`}>
             <div className={`vieolo-calendar-stateless-component__row-header vieolo-calendar-stateless-component__row-header--${props.includeWeek ? 'with-week' : 'no-week'}`}>
                 {

@@ -82,6 +82,7 @@ export default function DatePicker(props: {
             onClick={() => setOpen(!open)}
             tabIndex={0}
             role="button"
+            aria-label={`${props.ariaLabel || props.title || "date picker"} button`}
             onKeyDown={e => {
                 if (e.code === "Enter" || e.code === "Space") {
                     e.stopPropagation();
@@ -122,6 +123,8 @@ export default function DatePicker(props: {
                 selectedDate={props.selectedDate ? [props.selectedDate.formatDate("yyyy-mm-dd")] : undefined}
                 selectedWeek={props.selectedWeek}
                 startDate={getStartDate()}
+                ariaLabel={`${props.ariaLabel || props.title || "date picker"}`}
+                dateCellAriaLabelSuffix={`${props.ariaLabel || props.title || "date picker"} date cell`}
             />
         }
     </div>
