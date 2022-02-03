@@ -32,7 +32,9 @@ export default function CalendarStateful(props: {
     minDate?: VDate,
     maxDate?: VDate,
     showSearchInput?: boolean,
-    onKeyboardExit?: () => void
+    onKeyboardExit?: () => void,
+    ariaLabel?: string,
+    dateCellAriaLabelSuffix?: string
 }) {
 
     let [currentDate, setCurrentDate] = useState<VDate>(new VDate().setToDateStart());
@@ -48,7 +50,10 @@ export default function CalendarStateful(props: {
 
 
 
-    return <div className="vieolo-calendar-statefull-component">
+    return <div 
+        className="vieolo-calendar-statefull-component"
+        aria-label={props.ariaLabel + " popup"}
+    >
 
         {
             props.showSearchInput &&
@@ -73,7 +78,7 @@ export default function CalendarStateful(props: {
                         }}
                         autoFocus
                         dateFormat='DD/MM/YYYY'
-                        ariaLabel='Search Date'
+                        ariaLabel={props.ariaLabel + ` Search Date`}
                     />
                 </form>
             </div>
@@ -84,6 +89,7 @@ export default function CalendarStateful(props: {
                 icon={<PreviousIcon />}
                 size="extra-small"
                 borderRadius='normal'
+                ariaLabel={props.ariaLabel + " year decrease button"}
                 onClick={e => {
                     e.stopPropagation()
                     let newDate = new VDate(currentDate).setToMonthStart().addYear(-1);
@@ -95,6 +101,7 @@ export default function CalendarStateful(props: {
                 icon={<NextIcon />}
                 size="extra-small"
                 borderRadius='normal'
+                ariaLabel={props.ariaLabel + " year increase button"}
                 onClick={e => {
                     e.stopPropagation()
                     let newDate = new VDate(currentDate).setToMonthStart().addYear(1);
@@ -109,6 +116,7 @@ export default function CalendarStateful(props: {
                 icon={<PreviousIcon />}
                 size="extra-small"
                 borderRadius='normal'
+                ariaLabel={props.ariaLabel + " month decrease button"}
                 onClick={e => {
                     e.stopPropagation()
                     let newDate = new VDate(currentDate).setToMonthStart().addDay(-1).setToMonthStart();
@@ -120,6 +128,7 @@ export default function CalendarStateful(props: {
                 icon={<NextIcon />}
                 size="extra-small"
                 borderRadius='normal'
+                ariaLabel={props.ariaLabel + " month increase button"}
                 onClick={e => {
                     e.stopPropagation()
                     let newDate = new VDate(currentDate).setToMonthStart().addDay(33).setToMonthStart();
@@ -139,6 +148,8 @@ export default function CalendarStateful(props: {
             selectedWeek={props.selectedWeek ? [props.selectedWeek.weekNumber] : undefined}
             maxDate={props.maxDate}
             minDate={props.minDate}
+            ariaLabel={props.ariaLabel + " day container"}
+            dateCellAriaLabelSuffix={props.dateCellAriaLabelSuffix}
         />
     </div>
 }
