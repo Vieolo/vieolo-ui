@@ -1371,10 +1371,9 @@ body {
 			@include ripple-tertiary;
 	
 			&__text-container {
-				height: 56px;
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
+				height: 50px;
+				display: grid;
+				grid-template-rows: 33% 33% 34%;
 			}
 		}
 	}	

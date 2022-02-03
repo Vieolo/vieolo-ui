@@ -30,7 +30,7 @@ export default function DatePicker(props) {
                     _jsx("div", { children: _jsx(TypographyParagraphMedium, { text: props.selectedDate ? props.selectedDate.formatDate('dd/mm/yyyy') : "" }, void 0) }, void 0),
                     _jsx("div", { children: _jsx(TypographyCaptionLarge, { text: (props.showSelectedWeek && props.selectedDate) ? `Week ${props.selectedDate.getWeek().weekNumber}` : "" }, void 0) }, void 0)] }), void 0),
             _jsx(CalendarIcon, {}, void 0)] }), void 0);
-    return _jsxs("div", Object.assign({ className: "vieolo-date-picker", ref: container }, { children: [_jsx("div", Object.assign({ className: 'vieolo-date-picker__button-container', onClick: () => setOpen(!open), tabIndex: 0, role: "button", onKeyDown: e => {
+    return _jsxs("div", Object.assign({ className: "vieolo-date-picker", ref: container }, { children: [_jsx("div", Object.assign({ className: 'vieolo-date-picker__button-container', onClick: () => setOpen(!open), tabIndex: 0, role: "button", "aria-label": `${props.ariaLabel || props.title || "date picker"} button`, onKeyDown: e => {
                     if (e.code === "Enter" || e.code === "Space") {
                         e.stopPropagation();
                         e.preventDefault();
@@ -57,5 +57,5 @@ export default function DatePicker(props) {
                             setOpen(false);
                             setOpenedByKeyboard(false);
                         }
-                    }, includeWeek: props.includeWeek, selectedDate: props.selectedDate ? [props.selectedDate.formatDate("yyyy-mm-dd")] : undefined, selectedWeek: props.selectedWeek, startDate: getStartDate() }, void 0)] }), void 0);
+                    }, includeWeek: props.includeWeek, selectedDate: props.selectedDate ? [props.selectedDate.formatDate("yyyy-mm-dd")] : undefined, selectedWeek: props.selectedWeek, startDate: getStartDate(), ariaLabel: `${props.ariaLabel || props.title || "date picker"}`, dateCellAriaLabelSuffix: `${props.ariaLabel || props.title || "date picker"} date cell` }, void 0)] }), void 0);
 }

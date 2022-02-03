@@ -9,4 +9,6 @@ export default function CalendarStateless(props: {
     onWeekSelect?: (d: VDate) => void;
     minDate?: VDate;
     maxDate?: VDate;
+    dateCellAriaLabelSuffix?: string;
+    ariaLabel?: string;
 }): JSX.Element;
