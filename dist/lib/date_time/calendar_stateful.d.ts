@@ -14,4 +14,6 @@ export default function CalendarStateful(props: {
     maxDate?: VDate;
     showSearchInput?: boolean;
     onKeyboardExit?: () => void;
+    ariaLabel?: string;
+    dateCellAriaLabelSuffix?: string;
 }): JSX.Element;
