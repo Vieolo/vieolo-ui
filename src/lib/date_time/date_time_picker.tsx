@@ -19,7 +19,8 @@ export default function DateTimePicker(props: {
     selectedDate?: VDate,
     selectedWeek?: { weekNumber: number, startDate: VDate },
     showSelectedWeek?: boolean,
-    disabled?: boolean
+    disabled?: boolean,
+    ariaLabel?: string
 }): JSX.Element {
 
     return <div className={`vieolo-date-time-picker ${props.disabled ? "disabled" : ''}`}>
@@ -36,7 +37,7 @@ export default function DateTimePicker(props: {
                 selectedDate={props.selectedDate}
                 selectedWeek={props.selectedWeek}
                 showSelectedWeek={props.showSelectedWeek}
-                ariaLabel={`${props.label} Date`}
+                ariaLabel={`${props.ariaLabel || props.label} Date`}
                 buttonComponent={<div className="vieolo-date-time-picker__input-container__date-picker-button">
                     <div>
                         {
@@ -57,7 +58,7 @@ export default function DateTimePicker(props: {
             <TimeInput
                 onChange={props.onTimeChange}
                 value={props.timeValue}
-                ariaLabel={`${props.label} Time`}
+                ariaLabel={`${props.ariaLabel || props.label} Time`}
             />
         </div>
 
