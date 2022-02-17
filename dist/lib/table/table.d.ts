@@ -42,6 +42,7 @@ export default function Table(props: {
      * Converts the height of each row from 40px to 28px
      */
     isDense?: boolean;
+    ariaLabel?: string;
     /**
      * If the max height prop is provided, the pagination will appear below the max height,
      * adding to the total height

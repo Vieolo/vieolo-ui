@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.15.3 (2022-02-17)
+- Added dedicated aria accessibility for the `DateTimePicker` ([#89](https://github.com/Vieolo/vieolo-ui/issues/89))
+- Added aria accessibility and data test ID for all `Typography` components ([#90](https://github.com/Vieolo/vieolo-ui/issues/90))
+- Added aria accessibility for the `Table` ([#91](https://github.com/Vieolo/vieolo-ui/issues/91))
+
 ## 0.15.2 (2022-02-03)
 - Added aria accessibility for the `DatePicler`
 - Improved the style of the default button of `DatePicker`
