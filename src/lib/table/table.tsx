@@ -56,6 +56,7 @@ export default function Table(props: {
      * Converts the height of each row from 40px to 28px
      */
     isDense?: boolean,
+    ariaLabel?: string,
     /**
      * If the max height prop is provided, the pagination will appear below the max height,
      * adding to the total height
@@ -123,6 +124,7 @@ export default function Table(props: {
                                 key={`table_header_row_${i}`}
                                 className="vieolo-table__header-row__cell"
                                 style={{ cursor: (props.disableSort || !props.sortBy || !props.onSortChange || !props.sortDirection) ? 'default' : 'pointer' }}
+                                aria-label={`${props.ariaLabel || 'table'} header column ${h}`}
                                 onClick={() => {
                                     if (!props.disableSort && props.onSortChange && props.sortBy && props.sortDirection) {
                                         props.onSortChange(h, props.sortBy === h ? props.sortDirection === 'ascending' ? 'descending' : 'ascending' : (props.defaultDirection || 'ascending'));
@@ -158,6 +160,7 @@ export default function Table(props: {
                         return <div
                             key={`table_row_${row.id}`}
                             className={className} style={{ gridTemplateColumns: columnGrid }}
+                            aria-label={`${props.ariaLabel || 'table'} row ${row.id}`}
                             onClick={() => {
                                 if (row.onClick) row.onClick();
                             }}
@@ -181,6 +184,7 @@ export default function Table(props: {
                                     return <div
                                         className="vieolo-table__content-row__cell"
                                         key={`table_row_${row.id}_${z}_div`}
+                                        aria-label={`${props.ariaLabel || 'table'} cell ${row.id}_${z}`}
                                     >
                                         {
                                             typeof r === 'string'
@@ -206,10 +210,11 @@ export default function Table(props: {
                         color='primary'
                         size='small'
                         disabled={props.pagination!.pageNumber === 1}
+                        ariaLabel={`${props.ariaLabel || 'table'} pagination previous page`}
                     />
 
                     <div className="width--px-100 border-radius--half background-color--primary-normal padding-vertical--5 center-by-flex-row">
-                        <TypographyParagraphMedium text={`${props.pagination.startIndex} - ${props.pagination.endIndex}`} className="color--primary-text" />
+                        <TypographyParagraphMedium text={`${props.pagination.startIndex} - ${props.pagination.endIndex}`} className="color--primary-text" ariaLabel={`${props.ariaLabel || 'table'} page number`} />
                     </div>
 
                     <IconButton
@@ -218,6 +223,7 @@ export default function Table(props: {
                         color='primary'
                         size='small'
                         disabled={!props.pagination!.hasNextPage}
+                        ariaLabel={`${props.ariaLabel || 'table'} pagination next page`}
                     />
                 </div>
             </div>

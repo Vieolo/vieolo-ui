@@ -14,4 +14,5 @@ export default function DateTimePicker(props: {
     };
     showSelectedWeek?: boolean;
     disabled?: boolean;
+    ariaLabel?: string;
 }): JSX.Element;
