@@ -5,6 +5,7 @@ export declare type ConfirmationDialogMainButton = {
     color?: ColorOptionType;
     emphasis?: EmphasisType;
     borderRadius?: BorderRadiusType;
+    ariaLabel?: string;
 };
 export default function FormDialog(props: {
     /** Function to be triggered when the user clicks cancel or closes the modal */

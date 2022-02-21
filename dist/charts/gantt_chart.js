@@ -100,7 +100,7 @@ export default function GanttChart(props) {
                                                     let supRight = (s.to / props.columnTitles.length) * 100;
                                                     return _jsx("div", { className: "vieolo-gantt-chart__content-div__row__bar-column__sup-item-bar", style: { left: `${supLeft}%`, width: `${supWidth}%`, right: `${supRight}%` } }, `${s.from}_${s.to}_${z}`);
                                                 }),
-                                            _jsxs("div", Object.assign({ className: className, style: style, onClick: () => { if (d.onClick)
+                                            _jsxs("div", Object.assign({ "aria-label": `${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + i.toString()}`, className: className, style: style, onClick: () => { if (d.onClick)
                                                     d.onClick(d); }, onContextMenu: e => {
                                                     if (d.contextMenuItems && d.contextMenuItems.length > 0) {
                                                         e.preventDefault();

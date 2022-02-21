@@ -32,7 +32,6 @@ export default function CalendarStateful(props) {
                                 return null;
                             props.onDateSelect(searchDate);
                         } }, { children: _jsx(DateInput, { onChange: (d, t) => {
-                                console.log("Receiving", d);
                                 setSearchDate(d);
                                 setSearchText(t);
                             }, value: searchText.trim(), onKeyDown: e => {

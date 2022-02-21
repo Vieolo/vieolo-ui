@@ -6,6 +6,7 @@ export declare type ContextMenuItem = {
     color?: ColorOptionType;
     onClick: (v: string) => void;
     disabled?: boolean;
+    ariaLabel?: string;
 };
 export default function ContextMenu(props: {
     items: ContextMenuItem[];

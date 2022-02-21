@@ -66,7 +66,6 @@ export default function CalendarStateful(props: {
                 }}>
                     <DateInput
                         onChange={(d, t) => {
-                            console.log("Receiving", d);
                             setSearchDate(d);
                             setSearchText(t);
                         }}
