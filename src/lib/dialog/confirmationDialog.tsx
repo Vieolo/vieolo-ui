@@ -14,7 +14,8 @@ export type ConfirmationDialogMainButton = {
     text?: string,
     color?: ColorOptionType,
     emphasis?: EmphasisType,
-    borderRadius?: BorderRadiusType
+    borderRadius?: BorderRadiusType,
+    ariaLabel?: string
 }
 
 export default function FormDialog(props: {
@@ -32,7 +33,7 @@ export default function FormDialog(props: {
     inline?: boolean
 }) {
 
-    let dialog = <div className="vieolo-confirmation-dialog">
+    let dialog = <div className="vieolo-confirmation-dialog" aria-label="Confirmation Dialog">
 
         <div className="vieolo-form-dialog__message" style={{ width: props.width, padding: props.padding === undefined ? 10 : props.padding }}>
             {
@@ -57,6 +58,7 @@ export default function FormDialog(props: {
                         text={(props.rejectButtonConfig && props.rejectButtonConfig.text) ? props.rejectButtonConfig.text : "Cancel"}
                         borderRadius={(props.rejectButtonConfig && props.rejectButtonConfig.borderRadius) ? props.rejectButtonConfig.borderRadius : undefined}
                         emphasis={(props.rejectButtonConfig && props.rejectButtonConfig.emphasis) ? props.rejectButtonConfig.emphasis : "none"}
+                        ariaLabel={props.rejectButtonConfig ? props.rejectButtonConfig.ariaLabel : undefined}
                     />
                     <div className="vieolo-form-dialog__footer__spacer--middle"></div>
                 </>
@@ -68,6 +70,7 @@ export default function FormDialog(props: {
                 text={(props.acceptButtonConfig && props.acceptButtonConfig.text) ? props.acceptButtonConfig.text : "Ok"}
                 borderRadius={(props.acceptButtonConfig && props.acceptButtonConfig.borderRadius) ? props.acceptButtonConfig.borderRadius : undefined}
                 emphasis={(props.acceptButtonConfig && props.acceptButtonConfig.emphasis) ? props.acceptButtonConfig.emphasis : undefined}
+                ariaLabel={props.acceptButtonConfig ? props.acceptButtonConfig.ariaLabel : undefined}
             />
         </div>
     </div>
