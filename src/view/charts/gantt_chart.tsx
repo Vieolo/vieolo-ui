@@ -64,6 +64,7 @@ export function ganttChartOptions(): ViewData {
             }],
             subtitle: "Has Context Menu",
             title: "Item One",
+            ariaLabel: "Item One",
             supItems: [{from: 5, to: 6}],
             contextMenuItems: [
                 {

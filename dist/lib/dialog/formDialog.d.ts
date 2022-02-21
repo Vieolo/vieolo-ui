@@ -4,12 +4,14 @@ export declare type FormDialogAccessoryButton = {
     text: string;
     color: ColorOptionType;
     onClick: () => void;
+    ariaLabel?: string;
 };
 export declare type FormDialogMainButton = {
     text?: string;
     color?: ColorOptionType;
     emphasis?: EmphasisType;
     borderRadius?: BorderRadiusType;
+    ariaLabel?: string;
 };
 export default function FormDialog(props: {
     /** Function to be triggered when the user clicks cancel or closes the modal */
@@ -32,4 +34,5 @@ export default function FormDialog(props: {
     headerRightComponent?: 'close' | React.ReactNode;
     /** If true, will not display the dialog as a modal */
     inline?: boolean;
+    ariaLabel?: string;
 }): JSX.Element;

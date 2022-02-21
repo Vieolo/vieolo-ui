@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.15.4 (2022-02-21)
+- Added aria accessibility to the `GanttChart`
+- Added aria accessibility to the `ContextMenu`
+- Added aria accessibility to the `ConfirmationDialog`
+- Added aria accessibility to the `FormDialog`
+
 ## 0.15.3 (2022-02-17)
 - Added dedicated aria accessibility for the `DateTimePicker` ([#89](https://github.com/Vieolo/vieolo-ui/issues/89))
 - Added aria accessibility and data test ID for all `Typography` components ([#90](https://github.com/Vieolo/vieolo-ui/issues/90))

@@ -11,6 +11,7 @@ export declare type GanttChartItemType = {
     id?: number;
     from: number;
     to: number;
+    ariaLabel?: string;
     title?: string;
     subtitle?: string;
     icon?: ReactNode;

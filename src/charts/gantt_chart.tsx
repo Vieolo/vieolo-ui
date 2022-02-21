@@ -30,6 +30,7 @@ export type GanttChartItemType = {
     id?: number,
     from: number,
     to: number,
+    ariaLabel?: string,
     title?: string,
     subtitle?: string,
     icon?: ReactNode,
@@ -235,6 +236,7 @@ export default function GanttChart(props: {
 
 
                                         <div
+                                            aria-label={`${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + i.toString()}`}
                                             key={`${i}__${d.title || "no_title"}`}
                                             className={className}
                                             style={style}
