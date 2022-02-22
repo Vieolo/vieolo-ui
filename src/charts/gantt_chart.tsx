@@ -20,7 +20,7 @@ import { ColorOptionType } from '../lib/private/types';
 export type GanttChartContextMenuItem = {
     title: string,
     icon?: ReactNode,
-    onClick: (d: GanttChartItemType) => void,
+    onClick: (r: GanttChartRowType, d?: GanttChartItemType) => void,
     color?: ColorOptionType,
     disabled?: boolean
 }
@@ -35,22 +35,36 @@ export type GanttChartItemType = {
     subtitle?: string,
     icon?: ReactNode,
     disabled?: boolean,
+    /**
+     * Callback function the item is clicked with a mouse or
+     * tapped in a mobile device when no context menu us provided
+     * Please note that if context menu items are provided, the `onClick`
+     * callback is ignored in the case of a touch event.
+     */
     onClick?: (d: GanttChartItemType) => void,
     color?: ColorOptionType | { border: string, background: string, text: string },
+    /** 
+     * The context menu items to appear when the user right clicks on the item or
+     * taps when using a touch device.
+     * Note that if you are providing the context menu items AND the `onClick` function,
+     * the `onClick` functionality should always be included as one of the context menu options
+     */
     contextMenuItems?: GanttChartContextMenuItem[],
     subItems?: { from: number, to: number }[],
     supItems?: { from: number, to: number }[]
 }
 
 
-export type GanttChartDataType = {
+export type GanttChartRowType = {
     /** The value to identify the row on click */
     value: string,
     /** The title of row which is displayed on the left-most column of the chart */
     title: string,
     subtitle?: string,
     /** The Actual data in the chart */
-    items: GanttChartItemType[]
+    items: GanttChartItemType[],
+    /** The menu items that appear when the user clicks on the more button on the row's title cell */
+    contextMenuItems?: GanttChartContextMenuItem[],
 }
 
 
@@ -68,7 +82,7 @@ export type GanttChartColumnGroup = {
 
 
 export default function GanttChart(props: {
-    data: GanttChartDataType[],
+    data: GanttChartRowType[],
     dataTitle: string,
     columnTitles: GanttChartColumnTitle[],
     columnGroups?: GanttChartColumnGroup[],
@@ -77,10 +91,11 @@ export default function GanttChart(props: {
 
     let [filter, setFilter] = useState<"All" | "Full" | "Empty">(props.initialFilter || "All");
 
-    let [contextMenuRow, setContextMenuRow] = useState<GanttChartItemType | null>(null);
+    let [contextMenuItem, setContextMenuItem] = useState<GanttChartItemType | undefined>(undefined);
+    let [contextMenuRow, setContextMenuRow] = useState<GanttChartRowType | undefined>(undefined);
     let [contextMenuPosition, setContextMenuPosition] = useState<{ x: number, y: number } | null>(null);
 
-    let finalData: GanttChartDataType[] = [];
+    let finalData: GanttChartRowType[] = [];
 
     // Checking the overlap of the items
     for (let i = 0; i < props.data.length; i++) {
@@ -107,13 +122,13 @@ export default function GanttChart(props: {
             <div className="vieolo-gantt-chart__base__item-column">
                 <div className="vieolo-gantt-chart__base__item-column__item-title" style={{ height: props.columnGroups ? '65px' : '45px' }}>
                     <TypographyParagraphMedium text={props.dataTitle} />
-                    <RadioGroup 
+                    <RadioGroup
                         horizontalButtonPadding={7}
                         onOptionChange={v => setFilter(v as any)}
                         options={[
-                            {button: <AllIcon />, id: 'All'},
-                            {button: <SelectedIcon />, id: 'Full'},
-                            {button: <UnSelectedIcon />, id: 'Empty'},
+                            { button: <AllIcon />, id: 'All' },
+                            { button: <SelectedIcon />, id: 'Full' },
+                            { button: <UnSelectedIcon />, id: 'Empty' },
                         ]}
                         value={filter}
                     />
@@ -173,7 +188,18 @@ export default function GanttChart(props: {
                     let dataRow = row.items;
 
                     return <div className="vieolo-gantt-chart__content-div__row" key={row.value}>
-                        <div className="vieolo-gantt-chart__content-div__row__item-column">
+                        <div 
+                            className={`vieolo-gantt-chart__content-div__row__item-column ${(row.contextMenuItems && row.contextMenuItems.length > 0) ? " clickable" : ""}`}
+                            onClick={e => {
+                                if (row.contextMenuItems && row.contextMenuItems.length > 0) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    setContextMenuItem(undefined);
+                                    setContextMenuRow(row);
+                                    setContextMenuPosition({ x: e.pageX, y: e.pageY })
+                                }
+                            }}
+                            >
                             <p className="vieolo-gantt-chart__content-div__row__item-column__title" title={row.title}>{row.title}</p>
                             {
                                 row.subtitle &&
@@ -240,12 +266,24 @@ export default function GanttChart(props: {
                                             key={`${i}__${d.title || "no_title"}`}
                                             className={className}
                                             style={style}
-                                            onClick={() => { if (d.onClick) d.onClick(d) }}
+                                            onClick={(e) => {
+                                                if (e.nativeEvent instanceof PointerEvent && e.nativeEvent.pointerType === 'touch' && d.contextMenuItems && d.contextMenuItems.length > 0) {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    setContextMenuItem(d);
+                                                    setContextMenuRow(row)
+                                                    setContextMenuPosition({ x: e.pageX, y: e.pageY })
+                                                } else {
+                                                    if (d.onClick) d.onClick(d)
+                                                }
+                                            }
+                                            }
                                             onContextMenu={e => {
                                                 if (d.contextMenuItems && d.contextMenuItems.length > 0) {
                                                     e.preventDefault();
                                                     e.stopPropagation();
-                                                    setContextMenuRow(d);
+                                                    setContextMenuItem(d);
+                                                    setContextMenuRow(row)
                                                     setContextMenuPosition({ x: e.pageX, y: e.pageY })
                                                 }
                                             }}
@@ -295,18 +333,19 @@ export default function GanttChart(props: {
                 key={`${contextMenuPosition.x}_${contextMenuPosition.y}`}
                 position={contextMenuPosition}
                 items={
-                    contextMenuRow.contextMenuItems!.map(c => {
+                    (contextMenuItem || contextMenuRow)!.contextMenuItems!.map(c => {
                         return {
                             title: c.title,
                             icon: c.icon,
                             color: c.color,
-                            onClick: v => { c.onClick(contextMenuRow!) },
+                            onClick: v => { c.onClick(contextMenuRow!, contextMenuItem) },
                             disabled: c.disabled
                         }
                     })
                 }
                 onClose={() => {
-                    setContextMenuRow(null);
+                    setContextMenuRow(undefined);
+                    setContextMenuItem(undefined);
                     setContextMenuPosition(null)
                 }}
             />
@@ -320,7 +359,7 @@ export default function GanttChart(props: {
  * Checks whether the items of the data overlap each other not. This function only checks the overlap
  * @param data The data containing the items
  */
-function doItemsOverlap(data: GanttChartDataType): boolean {
+function doItemsOverlap(data: GanttChartRowType): boolean {
     let cols: number[] = [];
     let overlap = false;
 
@@ -344,7 +383,7 @@ function doItemsOverlap(data: GanttChartDataType): boolean {
  * @param rangeStart The start index of the item
  * @param rangeEnd The end index of the item
  */
-function doesIntersect(array: number[], rangeStart: number, rangeEnd: number) : boolean {
+function doesIntersect(array: number[], rangeStart: number, rangeEnd: number): boolean {
     let intersects = false;
 
     for (let i = 0; i < array.length; i++) {
@@ -365,26 +404,26 @@ function doesIntersect(array: number[], rangeStart: number, rangeEnd: number) : 
  * @param data The original data
  * @returns An array of the GanttChartDataType, with the items splitted between them
  */
-function splitData(data: GanttChartDataType): GanttChartDataType[] {
-    let d = {...data};
+function splitData(data: GanttChartRowType): GanttChartRowType[] {
+    let d = { ...data };
 
     // The first item is the original row
     let rowsIndices: number[][] = []
-    let rowData: GanttChartDataType[] = [];
+    let rowData: GanttChartRowType[] = [];
 
     for (let i = 0; i < d.items.length; i++) {
         const item = d.items[i];
-        let added = false;        
-        
+        let added = false;
+
         for (let z = 0; z < rowsIndices.length; z++) {
             const rowIndex = rowsIndices[z];
-            
-            if (doesIntersect(rowIndex, item.from, item.to - 1)) continue;            
+
+            if (doesIntersect(rowIndex, item.from, item.to - 1)) continue;
 
             let indices = [];
 
             for (let k = item.from; k < item.to; k++) {
-                indices.push(k);                
+                indices.push(k);
             }
 
             rowIndex.push(...indices);
@@ -399,7 +438,7 @@ function splitData(data: GanttChartDataType): GanttChartDataType[] {
             let indices = [];
 
             for (let k = item.from; k < item.to; k++) {
-                indices.push(k);                
+                indices.push(k);
             }
 
             rowsIndices.push(indices);
@@ -408,10 +447,11 @@ function splitData(data: GanttChartDataType): GanttChartDataType[] {
                 value: data.value + '_' + i,
                 title: i === 0 ? data.title : '',
                 subtitle: i === 0 ? data.subtitle : '',
-                items: [item]
+                items: [item],
+                contextMenuItems: i === 0 ? data.contextMenuItems : undefined,
             })
         }
-        
+
     }
 
     return rowData;

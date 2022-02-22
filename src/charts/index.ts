@@ -3,7 +3,7 @@ import GanttChart, {
     GanttChartColumnGroup as GCCG, 
     GanttChartColumnTitle as GCCT, 
     GanttChartContextMenuItem as GCCMI, 
-    GanttChartDataType as GCDT, 
+    GanttChartRowType as GCRT, 
     GanttChartItemType as GCIT 
 } from './gantt_chart';
 
@@ -15,5 +15,5 @@ export {
 export type GanttChartColumnGroup = GCCG;
 export type GanttChartColumnTitle = GCCT;
 export type GanttChartContextMenuItem = GCCMI;
-export type GanttChartDataType = GCDT;
+export type GanttChartRowType = GCRT;
 export type GanttChartItemType = GCIT;

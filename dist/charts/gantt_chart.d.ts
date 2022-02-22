@@ -3,7 +3,7 @@ import { ColorOptionType } from '../lib/private/types';
 export declare type GanttChartContextMenuItem = {
     title: string;
     icon?: ReactNode;
-    onClick: (d: GanttChartItemType) => void;
+    onClick: (r: GanttChartRowType, d?: GanttChartItemType) => void;
     color?: ColorOptionType;
     disabled?: boolean;
 };
@@ -16,12 +16,24 @@ export declare type GanttChartItemType = {
     subtitle?: string;
     icon?: ReactNode;
     disabled?: boolean;
+    /**
+     * Callback function the item is clicked with a mouse or
+     * tapped in a mobile device when no context menu us provided
+     * Please note that if context menu items are provided, the `onClick`
+     * callback is ignored in the case of a touch event.
+     */
     onClick?: (d: GanttChartItemType) => void;
     color?: ColorOptionType | {
         border: string;
         background: string;
         text: string;
     };
+    /**
+     * The context menu items to appear when the user right clicks on the item or
+     * taps when using a touch device.
+     * Note that if you are providing the context menu items AND the `onClick` function,
+     * the `onClick` functionality should always be included as one of the context menu options
+     */
     contextMenuItems?: GanttChartContextMenuItem[];
     subItems?: {
         from: number;
@@ -32,7 +44,7 @@ export declare type GanttChartItemType = {
         to: number;
     }[];
 };
-export declare type GanttChartDataType = {
+export declare type GanttChartRowType = {
     /** The value to identify the row on click */
     value: string;
     /** The title of row which is displayed on the left-most column of the chart */
@@ -40,6 +52,8 @@ export declare type GanttChartDataType = {
     subtitle?: string;
     /** The Actual data in the chart */
     items: GanttChartItemType[];
+    /** The menu items that appear when the user clicks on the more button on the row's title cell */
+    contextMenuItems?: GanttChartContextMenuItem[];
 };
 export declare type GanttChartColumnTitle = {
     title: string;
@@ -52,7 +66,7 @@ export declare type GanttChartColumnGroup = {
     title: string;
 };
 export default function GanttChart(props: {
-    data: GanttChartDataType[];
+    data: GanttChartRowType[];
     dataTitle: string;
     columnTitles: GanttChartColumnTitle[];
     columnGroups?: GanttChartColumnGroup[];
