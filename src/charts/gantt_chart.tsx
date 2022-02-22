@@ -35,8 +35,20 @@ export type GanttChartItemType = {
     subtitle?: string,
     icon?: ReactNode,
     disabled?: boolean,
+    /**
+     * Callback function the item is clicked with a mouse or
+     * tapped in a mobile device when no context menu us provided
+     * Please note that if context menu items are provided, the `onClick`
+     * callback is ignored in the case of a touch event.
+     */
     onClick?: (d: GanttChartItemType) => void,
     color?: ColorOptionType | { border: string, background: string, text: string },
+    /** 
+     * The context menu items to appear when the user right clicks on the item or
+     * taps when using a touch device.
+     * Note that if you are providing the context menu items AND the `onClick` function,
+     * the `onClick` functionality should always be included as one of the context menu options
+     */
     contextMenuItems?: GanttChartContextMenuItem[],
     subItems?: { from: number, to: number }[],
     supItems?: { from: number, to: number }[]
@@ -50,7 +62,9 @@ export type GanttChartDataType = {
     title: string,
     subtitle?: string,
     /** The Actual data in the chart */
-    items: GanttChartItemType[]
+    items: GanttChartItemType[],
+    /** The context menu items that appear when right clicking on the row's title */
+    contextMenuItems?: GanttChartContextMenuItem[],
 }
 
 
@@ -240,7 +254,16 @@ export default function GanttChart(props: {
                                             key={`${i}__${d.title || "no_title"}`}
                                             className={className}
                                             style={style}
-                                            onClick={() => { if (d.onClick) d.onClick(d) }}
+                                            onClick={(e) => { 
+                                                if (e.nativeEvent instanceof PointerEvent && e.nativeEvent.pointerType === 'touch' && d.contextMenuItems && d.contextMenuItems.length > 0) {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    setContextMenuRow(d);
+                                                    setContextMenuPosition({ x: e.pageX, y: e.pageY })
+                                                } else {
+                                                    if (d.onClick) d.onClick(d) }
+                                                }
+                                            }
                                             onContextMenu={e => {
                                                 if (d.contextMenuItems && d.contextMenuItems.length > 0) {
                                                     e.preventDefault();

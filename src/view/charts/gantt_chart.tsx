@@ -57,7 +57,9 @@ export function ganttChartOptions(): ViewData {
             to: 14,
             color: 'primary',
             id: 1,
-            onClick: () => {},
+            onClick: () => {
+                alert("Selected Item One")
+            },
             subItems: [{
                 from: 2, 
                 to: 3
@@ -134,7 +136,9 @@ export function ganttChartOptions(): ViewData {
             to: 24,
             color: 'primary',
             id: 6,
-            onClick: () => {},
+            onClick: () => {
+                alert("Selected Item With Everything")
+            },
             subItems: [{from: 10,  to: 12 }, {from: 14, to: 15}],
             supItems: [{from: 10,  to: 11 }, {from: 16, to: 18}],
             title: "With Everything",
