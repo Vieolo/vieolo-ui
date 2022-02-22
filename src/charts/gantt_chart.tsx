@@ -194,6 +194,7 @@ export default function GanttChart(props: {
                                 if (row.contextMenuItems && row.contextMenuItems.length > 0) {
                                     e.preventDefault();
                                     e.stopPropagation();
+                                    setContextMenuItem(undefined);
                                     setContextMenuRow(row);
                                     setContextMenuPosition({ x: e.pageX, y: e.pageY })
                                 }
