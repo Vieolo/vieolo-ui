@@ -21,8 +21,8 @@ export default function ContextMenu(props: {
     onClose: () => void
 }) {
 
-    let [top, setTop] = useState<string>('');
-    let [left, setLeft] = useState<string>('');
+    let [top, setTop] = useState<string>(`${props.position.y}px`);
+    let [left, setLeft] = useState<string>(`${props.position.x}px`);    
 
     let container = useRef<HTMLDivElement>(null);
 
@@ -44,22 +44,21 @@ export default function ContextMenu(props: {
         const bottom = !top;
 
         if (right) {
-            setLeft(`${clickX + 5}px`);
+            setLeft(`${clickX}px`);
         }
 
         if (left) {
-            setLeft(`${clickX - rootW - 5}px`);
+            setLeft(`${clickX - rootW}px`);
         }
 
         if (top) {
-            setTop(`${clickY + 5}px`);
+            setTop(`${clickY}px`);
         }
 
         if (bottom) {
-            setTop(`${clickY - rootH - 5}px`)
+            setTop(`${clickY - rootH}px`)
         }
     }, [container, props.position]);
-
 
     return <div ref={container} className="vieolo-context-menu" style={{ top: top, left: left }}>
         {
