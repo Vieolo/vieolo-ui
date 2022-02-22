@@ -4,8 +4,8 @@ import { Fragment, useState, useEffect, useRef } from 'react';
 // Hooks
 import { useAppearingContainer } from '../../hooks/useAppearingContainer';
 export default function ContextMenu(props) {
-    let [top, setTop] = useState('');
-    let [left, setLeft] = useState('');
+    let [top, setTop] = useState(`${props.position.y}px`);
+    let [left, setLeft] = useState(`${props.position.x}px`);
     let container = useRef(null);
     useAppearingContainer(container, true, props.onClose, () => {
         props.onClose();
@@ -22,16 +22,16 @@ export default function ContextMenu(props) {
         const top = (screenH - clickY) > rootH;
         const bottom = !top;
         if (right) {
-            setLeft(`${clickX + 5}px`);
+            setLeft(`${clickX}px`);
         }
         if (left) {
-            setLeft(`${clickX - rootW - 5}px`);
+            setLeft(`${clickX - rootW}px`);
         }
         if (top) {
-            setTop(`${clickY + 5}px`);
+            setTop(`${clickY}px`);
         }
         if (bottom) {
-            setTop(`${clickY - rootH - 5}px`);
+            setTop(`${clickY - rootH}px`);
         }
     }, [container, props.position]);
     return _jsx("div", Object.assign({ ref: container, className: "vieolo-context-menu", style: { top: top, left: left } }, { children: props.items.map(i => {

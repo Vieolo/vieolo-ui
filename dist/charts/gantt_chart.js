@@ -14,7 +14,8 @@ import TypographyParagraphSmall from '../lib/typography/typography_paragraph_sma
 import TypographyCaptionMedium from '../lib/typography/typography_caption_medium';
 export default function GanttChart(props) {
     let [filter, setFilter] = useState(props.initialFilter || "All");
-    let [contextMenuRow, setContextMenuRow] = useState(null);
+    let [contextMenuItem, setContextMenuItem] = useState(undefined);
+    let [contextMenuRow, setContextMenuRow] = useState(undefined);
     let [contextMenuPosition, setContextMenuPosition] = useState(null);
     let finalData = [];
     // Checking the overlap of the items
@@ -60,7 +61,15 @@ export default function GanttChart(props) {
                             }) }), void 0)] }), void 0),
             _jsx("div", Object.assign({ className: "vieolo-gantt-chart__content-div", style: { top: props.columnGroups ? '65px' : '45px', maxHeight: chartHeight - (props.columnGroups ? 65 : 45) } }, { children: finalData.map(row => {
                     let dataRow = row.items;
-                    return _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__content-div__row" }, { children: [_jsxs("div", Object.assign({ className: "vieolo-gantt-chart__content-div__row__item-column" }, { children: [_jsx("p", Object.assign({ className: "vieolo-gantt-chart__content-div__row__item-column__title", title: row.title }, { children: row.title }), void 0),
+                    return _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__content-div__row" }, { children: [_jsxs("div", Object.assign({ className: `vieolo-gantt-chart__content-div__row__item-column ${(row.contextMenuItems && row.contextMenuItems.length > 0) ? " clickable" : ""}`, onClick: e => {
+                                    if (row.contextMenuItems && row.contextMenuItems.length > 0) {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        setContextMenuItem(undefined);
+                                        setContextMenuRow(row);
+                                        setContextMenuPosition({ x: e.pageX, y: e.pageY });
+                                    }
+                                } }, { children: [_jsx("p", Object.assign({ className: "vieolo-gantt-chart__content-div__row__item-column__title", title: row.title }, { children: row.title }), void 0),
                                     row.subtitle &&
                                         _jsx(TypographyParagraphSmall, { text: row.subtitle, showTitle: true }, void 0)] }), void 0),
                             _jsx("div", Object.assign({ className: "vieolo-gantt-chart__content-div__row__bar-column" }, { children: dataRow.map((d, i) => {
@@ -100,12 +109,24 @@ export default function GanttChart(props) {
                                                     let supRight = (s.to / props.columnTitles.length) * 100;
                                                     return _jsx("div", { className: "vieolo-gantt-chart__content-div__row__bar-column__sup-item-bar", style: { left: `${supLeft}%`, width: `${supWidth}%`, right: `${supRight}%` } }, `${s.from}_${s.to}_${z}`);
                                                 }),
-                                            _jsxs("div", Object.assign({ "aria-label": `${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + i.toString()}`, className: className, style: style, onClick: () => { if (d.onClick)
-                                                    d.onClick(d); }, onContextMenu: e => {
+                                            _jsxs("div", Object.assign({ "aria-label": `${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + i.toString()}`, className: className, style: style, onClick: (e) => {
+                                                    if (e.nativeEvent instanceof PointerEvent && e.nativeEvent.pointerType === 'touch' && d.contextMenuItems && d.contextMenuItems.length > 0) {
+                                                        e.preventDefault();
+                                                        e.stopPropagation();
+                                                        setContextMenuItem(d);
+                                                        setContextMenuRow(row);
+                                                        setContextMenuPosition({ x: e.pageX, y: e.pageY });
+                                                    }
+                                                    else {
+                                                        if (d.onClick)
+                                                            d.onClick(d);
+                                                    }
+                                                }, onContextMenu: e => {
                                                     if (d.contextMenuItems && d.contextMenuItems.length > 0) {
                                                         e.preventDefault();
                                                         e.stopPropagation();
-                                                        setContextMenuRow(d);
+                                                        setContextMenuItem(d);
+                                                        setContextMenuRow(row);
                                                         setContextMenuPosition({ x: e.pageX, y: e.pageY });
                                                     }
                                                 } }, { children: [(d.title || d.icon) &&
@@ -124,16 +145,17 @@ export default function GanttChart(props) {
                                 }) }), void 0)] }), row.value);
                 }) }), void 0),
             (contextMenuRow && contextMenuPosition) &&
-                _jsx(ContextMenu, { position: contextMenuPosition, items: contextMenuRow.contextMenuItems.map(c => {
+                _jsx(ContextMenu, { position: contextMenuPosition, items: (contextMenuItem || contextMenuRow).contextMenuItems.map(c => {
                         return {
                             title: c.title,
                             icon: c.icon,
                             color: c.color,
-                            onClick: v => { c.onClick(contextMenuRow); },
+                            onClick: v => { c.onClick(contextMenuRow, contextMenuItem); },
                             disabled: c.disabled
                         };
                     }), onClose: () => {
-                        setContextMenuRow(null);
+                        setContextMenuRow(undefined);
+                        setContextMenuItem(undefined);
                         setContextMenuPosition(null);
                     } }, `${contextMenuPosition.x}_${contextMenuPosition.y}`)] }), void 0);
 }
@@ -213,7 +235,8 @@ function splitData(data) {
                 value: data.value + '_' + i,
                 title: i === 0 ? data.title : '',
                 subtitle: i === 0 ? data.subtitle : '',
-                items: [item]
+                items: [item],
+                contextMenuItems: i === 0 ? data.contextMenuItems : undefined,
             });
         }
     }

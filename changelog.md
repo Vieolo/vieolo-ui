@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.16.0 (2022-02-23)
+- Added touch support for the `GanttChart` items
+- Added context menu for the `GanttChart` row titles ([#92](https://github.com/Vieolo/vieolo-ui/issues/92))
+
+#### Breaking Changes
+- `GanttChartDataType` is renamed to `GanttChartRowType`
+- `GanttChartContextMenuItem`'s `onClick` signature is changed to contain the selected row as well.
+
 ## 0.15.4 (2022-02-21)
 - Added aria accessibility to the `GanttChart`
 - Added aria accessibility to the `ContextMenu`
