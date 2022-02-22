@@ -102,12 +102,12 @@ import {
     GanttChartColumnGroup as GanttChartColumnGroupTemp,
     GanttChartColumnTitle as GanttChartColumnTitleTemp,
     GanttChartContextMenuItem as GanttChartContextMenuItemTemp,
-    GanttChartDataType as GanttChartDataTypeTemp,
+    GanttChartRowType as GanttChartRowTypeTemp,
     GanttChartItemType as GanttChartItemTypeTemp
 } from './charts/index';
 
 export type GanttChartColumnGroup = GanttChartColumnGroupTemp;
 export type GanttChartColumnTitle = GanttChartColumnTitleTemp;
 export type GanttChartContextMenuItem = GanttChartContextMenuItemTemp;
-export type GanttChartDataType = GanttChartDataTypeTemp;
+export type GanttChartRowType = GanttChartRowTypeTemp;
 export type GanttChartItemType = GanttChartItemTypeTemp;

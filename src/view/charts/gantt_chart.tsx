@@ -10,7 +10,7 @@ import IconThree from '@mui/icons-material/Cake';
 import VDate from '@vieolo/date';
 
 // Component
-import GanttChart, { GanttChartColumnGroup, GanttChartColumnTitle, GanttChartDataType, GanttChartItemType } from '../../charts/gantt_chart';
+import GanttChart, { GanttChartColumnGroup, GanttChartColumnTitle, GanttChartRowType, GanttChartItemType } from '../../charts/gantt_chart';
 
 // Types
 import { ViewData } from '../main/main';
@@ -195,7 +195,7 @@ export function ganttChartOptions(): ViewData {
         }
     ]
 
-    let data: GanttChartDataType[] = [
+    let data: GanttChartRowType[] = [
         {
             items: itemsOne,
             title: "Item One",
@@ -212,7 +212,11 @@ export function ganttChartOptions(): ViewData {
             items: itemsThree,
             title: "Item Three",
             value: '3',
-            subtitle: "subtitle Three"
+            subtitle: "subtitle Three",
+            contextMenuItems: [
+                {title: "Something", onClick: (r) => alert(r.title  + " Something")},
+                {title: "Very", onClick: (r) => alert(r.title + " Very")},
+            ],
         },
         {
             items: [],
@@ -224,7 +228,11 @@ export function ganttChartOptions(): ViewData {
             items: itemsOne,
             title: "Item One",
             value: '5',
-            subtitle: "subtitle One"
+            subtitle: "subtitle One",
+            contextMenuItems: [
+                {title: "Something", onClick: (r) => alert(r.title  + " Something")},
+                {title: "Very", onClick: (r) => alert(r.title + " Very")},
+            ],
         }
     ]
 
@@ -244,7 +252,7 @@ export function ganttChartOptions(): ViewData {
 export function GanttChartCreator(props: {p: GanttChartPropsType}) {
 
 
-    function replaceItemColor(color: ColorOptionType, data: GanttChartDataType[]): GanttChartDataType[] {
+    function replaceItemColor(color: ColorOptionType, data: GanttChartRowType[]): GanttChartRowType[] {
         let d = [...data];
 
         d.forEach(row => {
