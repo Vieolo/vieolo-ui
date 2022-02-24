@@ -1604,19 +1604,19 @@ body {
 						background-color: $accessory-orange-transparent;
 						border: 1px solid $accessory-orange-normal;
 					}
-				}
 
-				&__bar-start {
-					border-top-left-radius: 0;
-					border-bottom-left-radius: 0;
-					border-left: none;
-				}
-
-				&__bar-end {
-					border-top-right-radius: 0;
-					border-bottom-right-radius: 0;
-					border-right: none;
-				}
+					&__bar-start {
+						border-top-left-radius: 0;
+						border-bottom-left-radius: 0;
+						border-left: none;
+					}
+	
+					&__bar-end {
+						border-top-right-radius: 0;
+						border-bottom-right-radius: 0;
+						border-right: none;
+					}
+				}				
 
 				&__bar-subtitle {
 					svg {
