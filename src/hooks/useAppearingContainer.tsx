@@ -30,6 +30,11 @@ export function useAppearingContainer(
             if (open) main.style.overflow = 'hidden';
             else main.style.removeProperty("overflow");
         }
+
+        return () => {
+            let main = document.querySelector('main')
+            if (main) main.style.removeProperty("overflow");
+        }
     }, [open]);
 
 }

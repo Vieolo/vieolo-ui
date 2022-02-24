@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.16.2 (2022-02-24)
+- Fixed the overflow style of the main in `useAppearingContainer` hook
+
 ## 0.16.1 (2022-02-24)
 - Fixed the bar start and end style of the `GanttChart`
 
