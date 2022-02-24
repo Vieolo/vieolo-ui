@@ -133,7 +133,7 @@ export default function MainPage(props: {}): JSX.Element {
         setFinalState(finalState);
     }
 
-    return <main className="main-page">
+    return <div className="main-page">
 
         <div className="component-list">
             {
@@ -213,16 +213,16 @@ export default function MainPage(props: {}): JSX.Element {
             }
         </div>
 
-        <div className="component-state-display">
+        <main className="component-state-display">
             {
                 (finalState !== null && content !== null) &&
 
                 <div>{content}</div>
 
             }
-        </div>
+        </main>
 
-    </main>
+    </div>
 
 }
 
