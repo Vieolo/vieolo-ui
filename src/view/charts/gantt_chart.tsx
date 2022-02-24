@@ -192,6 +192,12 @@ export function ganttChartOptions(): ViewData {
             to: 10,
             id: 15,
             color: 'primary'
+        },
+        {
+            from: -1,
+            to: 10,
+            id: 16,
+            color: 'primary'
         }
     ]
 
