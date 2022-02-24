@@ -22,5 +22,10 @@ export function useAppearingContainer(container, open, setOpen, onClose) {
             else
                 main.style.removeProperty("overflow");
         }
+        return () => {
+            let main = document.querySelector('main');
+            if (main)
+                main.style.removeProperty("overflow");
+        };
     }, [open]);
 }
