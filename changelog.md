@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.16.1 (2022-02-24)
+- Fixed the bar start and end style of the `GanttChart`
+
 ## 0.16.0 (2022-02-23)
 - Added touch support for the `GanttChart` items
 - Added context menu for the `GanttChart` row titles ([#92](https://github.com/Vieolo/vieolo-ui/issues/92))
