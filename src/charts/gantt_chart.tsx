@@ -267,7 +267,10 @@ export default function GanttChart(props: {
                                             className={className}
                                             style={style}
                                             onClick={(e) => {
-                                                if (e.nativeEvent instanceof PointerEvent && e.nativeEvent.pointerType === 'touch' && d.contextMenuItems && d.contextMenuItems.length > 0) {
+                                                let hasContextMenu = d.contextMenuItems && d.contextMenuItems.length > 0;
+                                                let isTouchEvent = e.nativeEvent instanceof PointerEvent && e.nativeEvent.pointerType === 'touch';
+                                                let isTouchOnlyDevice = "ontouchstart" in window && window.matchMedia("(pointer: coarse)").matches && !window.matchMedia("(pointer: fine)").matches;
+                                                if (hasContextMenu && (isTouchEvent || isTouchOnlyDevice)) {
                                                     e.preventDefault();
                                                     e.stopPropagation();
                                                     setContextMenuItem(d);
