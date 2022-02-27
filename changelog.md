@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.16.3 (2022-02-28)
+- Added the ability to ignore items while filtering in `GanttChart` ([#93](https://github.com/Vieolo/vieolo-ui/issues/93))
+- Added aria label to sub and sup items in `GanttChart` ([#94](https://github.com/Vieolo/vieolo-ui/issues/94))
+- Fixed the touch events for iPad and iPhones in `GanttChart` ([#95](https://github.com/Vieolo/vieolo-ui/issues/95))
+
 ## 0.16.2 (2022-02-24)
 - Fixed the overflow style of the main in `useAppearingContainer` hook
 

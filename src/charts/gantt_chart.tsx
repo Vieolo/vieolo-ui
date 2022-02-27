@@ -51,7 +51,12 @@ export type GanttChartItemType = {
      */
     contextMenuItems?: GanttChartContextMenuItem[],
     subItems?: { from: number, to: number }[],
-    supItems?: { from: number, to: number }[]
+    supItems?: { from: number, to: number }[],
+    /** 
+     * These items are ignored while filtering rows based on the number of items. 
+     * so, if a row has only items with this property, it is considered an empty row
+     */
+     ignoredInFilter?: boolean
 }
 
 
@@ -100,8 +105,8 @@ export default function GanttChart(props: {
     // Checking the overlap of the items
     for (let i = 0; i < props.data.length; i++) {
         const row = props.data[i];
-        if (filter === 'Full' && row.items.length === 0) continue;
-        if (filter === 'Empty' && row.items.length > 0) continue;
+        if (filter === 'Full' && row.items.filter(r => !r.ignoredInFilter).length === 0) continue;
+        if (filter === 'Empty' && row.items.filter(r => !r.ignoredInFilter).length > 0) continue;
 
         if (doItemsOverlap(row)) {
             finalData.push(...splitData(row));
@@ -255,6 +260,7 @@ export default function GanttChart(props: {
                                                     key={`${s.from}_${s.to}_${z}`}
                                                     className="vieolo-gantt-chart__content-div__row__bar-column__sup-item-bar"
                                                     style={{ left: `${supLeft}%`, width: `${supWidth}%`, right: `${supRight}%` }}
+                                                    aria-label={`${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + z.toString()} sup item`}
                                                 >
                                                 </div>
                                             })
@@ -267,7 +273,10 @@ export default function GanttChart(props: {
                                             className={className}
                                             style={style}
                                             onClick={(e) => {
-                                                if (e.nativeEvent instanceof PointerEvent && e.nativeEvent.pointerType === 'touch' && d.contextMenuItems && d.contextMenuItems.length > 0) {
+                                                let hasContextMenu = d.contextMenuItems && d.contextMenuItems.length > 0;
+                                                let isTouchEvent = e.nativeEvent instanceof PointerEvent && e.nativeEvent.pointerType === 'touch';
+                                                let isTouchOnlyDevice = "ontouchstart" in window && window.matchMedia("(pointer: coarse)").matches && !window.matchMedia("(pointer: fine)").matches;
+                                                if (hasContextMenu && (isTouchEvent || isTouchOnlyDevice)) {
                                                     e.preventDefault();
                                                     e.stopPropagation();
                                                     setContextMenuItem(d);
@@ -314,6 +323,7 @@ export default function GanttChart(props: {
                                                     key={`${s.from}_${s.to}_${z}`}
                                                     className="vieolo-gantt-chart__content-div__row__bar-column__sub-item-bar"
                                                     style={{ left: `${subLeft}%`, width: `${subWidth}%`, right: `${subRight}%` }}
+                                                    aria-label={`${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + z.toString()} sub item`}
                                                 >
                                                 </div>
                                             })
