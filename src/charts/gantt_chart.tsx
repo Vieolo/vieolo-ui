@@ -255,6 +255,7 @@ export default function GanttChart(props: {
                                                     key={`${s.from}_${s.to}_${z}`}
                                                     className="vieolo-gantt-chart__content-div__row__bar-column__sup-item-bar"
                                                     style={{ left: `${supLeft}%`, width: `${supWidth}%`, right: `${supRight}%` }}
+                                                    aria-label={`${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + z.toString()} sup item`}
                                                 >
                                                 </div>
                                             })
@@ -317,6 +318,7 @@ export default function GanttChart(props: {
                                                     key={`${s.from}_${s.to}_${z}`}
                                                     className="vieolo-gantt-chart__content-div__row__bar-column__sub-item-bar"
                                                     style={{ left: `${subLeft}%`, width: `${subWidth}%`, right: `${subRight}%` }}
+                                                    aria-label={`${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + z.toString()} sub item`}
                                                 >
                                                 </div>
                                             })
