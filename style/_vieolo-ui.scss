@@ -1549,11 +1549,13 @@ body {
 						font-size: 12px;
 						font-weight: bold;
 						@include no-text-overflow;
+						@include nonselectable;
 					}
 
 					&__row-subtitle {
 						font-size: 11px;
 						@include no-text-overflow;
+						@include nonselectable;
 					}
 
 					svg {
