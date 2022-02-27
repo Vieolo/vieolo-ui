@@ -201,6 +201,17 @@ export function ganttChartOptions(): ViewData {
         }
     ]
 
+
+    let itemsFour: GanttChartItemType[] = [
+        {
+            from: 2,
+            to: 10,
+            title: "Ignored in filter",
+            ignoredInFilter: true
+        }
+    ]
+
+
     let data: GanttChartRowType[] = [
         {
             items: itemsOne,
@@ -239,6 +250,12 @@ export function ganttChartOptions(): ViewData {
                 {title: "Something", onClick: (r) => alert(r.title  + " Something")},
                 {title: "Very", onClick: (r) => alert(r.title + " Very")},
             ],
+        },
+        {
+            items: itemsFour,
+            title: "Item Four",
+            value: '6',
+            subtitle: "",
         }
     ]
 

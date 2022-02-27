@@ -51,7 +51,12 @@ export type GanttChartItemType = {
      */
     contextMenuItems?: GanttChartContextMenuItem[],
     subItems?: { from: number, to: number }[],
-    supItems?: { from: number, to: number }[]
+    supItems?: { from: number, to: number }[],
+    /** 
+     * These items are ignored while filtering rows based on the number of items. 
+     * so, if a row has only items with this property, it is considered an empty row
+     */
+     ignoredInFilter?: boolean
 }
 
 
@@ -100,8 +105,8 @@ export default function GanttChart(props: {
     // Checking the overlap of the items
     for (let i = 0; i < props.data.length; i++) {
         const row = props.data[i];
-        if (filter === 'Full' && row.items.length === 0) continue;
-        if (filter === 'Empty' && row.items.length > 0) continue;
+        if (filter === 'Full' && row.items.filter(r => !r.ignoredInFilter).length === 0) continue;
+        if (filter === 'Empty' && row.items.filter(r => !r.ignoredInFilter).length > 0) continue;
 
         if (doItemsOverlap(row)) {
             finalData.push(...splitData(row));
