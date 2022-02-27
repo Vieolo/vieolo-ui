@@ -21,9 +21,9 @@ export default function GanttChart(props) {
     // Checking the overlap of the items
     for (let i = 0; i < props.data.length; i++) {
         const row = props.data[i];
-        if (filter === 'Full' && row.items.length === 0)
+        if (filter === 'Full' && row.items.filter(r => !r.ignoredInFilter).length === 0)
             continue;
-        if (filter === 'Empty' && row.items.length > 0)
+        if (filter === 'Empty' && row.items.filter(r => !r.ignoredInFilter).length > 0)
             continue;
         if (doItemsOverlap(row)) {
             finalData.push(...splitData(row));
@@ -107,10 +107,13 @@ export default function GanttChart(props) {
                                                     let supLeft = (s.from / props.columnTitles.length) * 100;
                                                     let supWidth = ((s.to - s.from) / props.columnTitles.length) * 100;
                                                     let supRight = (s.to / props.columnTitles.length) * 100;
-                                                    return _jsx("div", { className: "vieolo-gantt-chart__content-div__row__bar-column__sup-item-bar", style: { left: `${supLeft}%`, width: `${supWidth}%`, right: `${supRight}%` } }, `${s.from}_${s.to}_${z}`);
+                                                    return _jsx("div", { className: "vieolo-gantt-chart__content-div__row__bar-column__sup-item-bar", style: { left: `${supLeft}%`, width: `${supWidth}%`, right: `${supRight}%` }, "aria-label": `${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + z.toString()} sup item` }, `${s.from}_${s.to}_${z}`);
                                                 }),
                                             _jsxs("div", Object.assign({ "aria-label": `${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + i.toString()}`, className: className, style: style, onClick: (e) => {
-                                                    if (e.nativeEvent instanceof PointerEvent && e.nativeEvent.pointerType === 'touch' && d.contextMenuItems && d.contextMenuItems.length > 0) {
+                                                    let hasContextMenu = d.contextMenuItems && d.contextMenuItems.length > 0;
+                                                    let isTouchEvent = e.nativeEvent instanceof PointerEvent && e.nativeEvent.pointerType === 'touch';
+                                                    let isTouchOnlyDevice = "ontouchstart" in window && window.matchMedia("(pointer: coarse)").matches && !window.matchMedia("(pointer: fine)").matches;
+                                                    if (hasContextMenu && (isTouchEvent || isTouchOnlyDevice)) {
                                                         e.preventDefault();
                                                         e.stopPropagation();
                                                         setContextMenuItem(d);
@@ -140,7 +143,7 @@ export default function GanttChart(props) {
                                                     let subLeft = (s.from / props.columnTitles.length) * 100;
                                                     let subWidth = ((s.to - s.from) / props.columnTitles.length) * 100;
                                                     let subRight = (s.to / props.columnTitles.length) * 100;
-                                                    return _jsx("div", { className: "vieolo-gantt-chart__content-div__row__bar-column__sub-item-bar", style: { left: `${subLeft}%`, width: `${subWidth}%`, right: `${subRight}%` } }, `${s.from}_${s.to}_${z}`);
+                                                    return _jsx("div", { className: "vieolo-gantt-chart__content-div__row__bar-column__sub-item-bar", style: { left: `${subLeft}%`, width: `${subWidth}%`, right: `${subRight}%` }, "aria-label": `${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + z.toString()} sub item` }, `${s.from}_${s.to}_${z}`);
                                                 })] }, `${i}__${d.title || "no_title"}_fragment`);
                                 }) }), void 0)] }), row.value);
                 }) }), void 0),

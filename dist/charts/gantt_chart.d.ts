@@ -43,6 +43,11 @@ export declare type GanttChartItemType = {
         from: number;
         to: number;
     }[];
+    /**
+     * These items are ignored while filtering rows based on the number of items.
+     * so, if a row has only items with this property, it is considered an empty row
+     */
+    ignoredInFilter?: boolean;
 };
 export declare type GanttChartRowType = {
     /** The value to identify the row on click */
