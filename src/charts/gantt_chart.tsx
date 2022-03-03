@@ -50,13 +50,18 @@ export type GanttChartItemType = {
      * the `onClick` functionality should always be included as one of the context menu options
      */
     contextMenuItems?: GanttChartContextMenuItem[],
-    subItems?: { from: number, to: number }[],
-    supItems?: { from: number, to: number }[],
     /** 
      * These items are ignored while filtering rows based on the number of items. 
      * so, if a row has only items with this property, it is considered an empty row
      */
-     ignoredInFilter?: boolean
+    ignoredInFilter?: boolean
+}
+
+export type GanttChartAuxiliaryItemType = {
+    id: string,
+    from: number,
+    to: number,
+    ariaLabel?: string
 }
 
 
@@ -70,6 +75,8 @@ export type GanttChartRowType = {
     items: GanttChartItemType[],
     /** The menu items that appear when the user clicks on the more button on the row's title cell */
     contextMenuItems?: GanttChartContextMenuItem[],
+    subItems?: GanttChartAuxiliaryItemType[],
+    supItems?: GanttChartAuxiliaryItemType[],
 }
 
 
@@ -193,7 +200,7 @@ export default function GanttChart(props: {
                     let dataRow = row.items;
 
                     return <div className="vieolo-gantt-chart__content-div__row" key={row.value}>
-                        <div 
+                        <div
                             className={`vieolo-gantt-chart__content-div__row__item-column ${(row.contextMenuItems && row.contextMenuItems.length > 0) ? " clickable" : ""}`}
                             onClick={e => {
                                 if (row.contextMenuItems && row.contextMenuItems.length > 0) {
@@ -204,7 +211,7 @@ export default function GanttChart(props: {
                                     setContextMenuPosition({ x: e.pageX, y: e.pageY })
                                 }
                             }}
-                            >
+                        >
                             <p className="vieolo-gantt-chart__content-div__row__item-column__title" title={row.title}>{row.title}</p>
                             {
                                 row.subtitle &&
@@ -212,6 +219,22 @@ export default function GanttChart(props: {
                             }
                         </div>
                         <div className="vieolo-gantt-chart__content-div__row__bar-column">
+                            {
+                                row.supItems &&
+                                row.supItems.map((s, z) => {
+                                    let supLeft = (s.from / props.columnTitles.length) * 100;
+                                    let supWidth = ((s.to - s.from) / props.columnTitles.length) * 100;
+                                    let supRight = (s.to / props.columnTitles.length) * 100;
+                                    return <div
+                                    key={`${row.value} ${s.id} supitem ${s.from}_${s.to}_${z}`}
+                                        className="vieolo-gantt-chart__content-div__row__bar-column__sup-item-bar"
+                                        style={{ left: `${supLeft}%`, width: `${supWidth}%`, right: `${supRight}%` }}
+                                        aria-label={`${row.title} ${(s.ariaLabel || "sup-item") + ' ' + z.toString()}`}
+                                    >
+                                    </div>
+                                })
+                            }
+
                             {
                                 dataRow.map((d, i) => {
                                     let finalStart = d.from;
@@ -250,22 +273,6 @@ export default function GanttChart(props: {
                                     }
 
                                     return <Fragment key={`${i}__${d.title || "no_title"}_fragment`}>
-                                        {
-                                            d.supItems &&
-                                            d.supItems.map((s, z) => {
-                                                let supLeft = (s.from / props.columnTitles.length) * 100;
-                                                let supWidth = ((s.to - s.from) / props.columnTitles.length) * 100;
-                                                let supRight = (s.to / props.columnTitles.length) * 100;
-                                                return <div
-                                                    key={`${s.from}_${s.to}_${z}`}
-                                                    className="vieolo-gantt-chart__content-div__row__bar-column__sup-item-bar"
-                                                    style={{ left: `${supLeft}%`, width: `${supWidth}%`, right: `${supRight}%` }}
-                                                    aria-label={`${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + z.toString()} sup item`}
-                                                >
-                                                </div>
-                                            })
-                                        }
-
 
                                         <div
                                             aria-label={`${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + i.toString()}`}
@@ -312,23 +319,23 @@ export default function GanttChart(props: {
                                                 <p className="vieolo-gantt-chart__content-div__row__bar-column__bar__row-subtitle" title={d.subtitle}>{d.subtitle}</p>
                                             }
                                         </div>
-
-                                        {
-                                            d.subItems &&
-                                            d.subItems.map((s, z) => {
-                                                let subLeft = (s.from / props.columnTitles.length) * 100;
-                                                let subWidth = ((s.to - s.from) / props.columnTitles.length) * 100;
-                                                let subRight = (s.to / props.columnTitles.length) * 100;
-                                                return <div
-                                                    key={`${s.from}_${s.to}_${z}`}
-                                                    className="vieolo-gantt-chart__content-div__row__bar-column__sub-item-bar"
-                                                    style={{ left: `${subLeft}%`, width: `${subWidth}%`, right: `${subRight}%` }}
-                                                    aria-label={`${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + z.toString()} sub item`}
-                                                >
-                                                </div>
-                                            })
-                                        }
                                     </Fragment>
+                                })
+                            }
+
+                            {
+                                row.subItems &&
+                                row.subItems.map((s, z) => {
+                                    let subLeft = (s.from / props.columnTitles.length) * 100;
+                                    let subWidth = ((s.to - s.from) / props.columnTitles.length) * 100;
+                                    let subRight = (s.to / props.columnTitles.length) * 100;
+                                    return <div
+                                        key={`${row.value} ${s.id} subitem ${s.from}_${s.to}_${z}`}
+                                        className="vieolo-gantt-chart__content-div__row__bar-column__sub-item-bar"
+                                        style={{ left: `${subLeft}%`, width: `${subWidth}%`, right: `${subRight}%` }}
+                                        aria-label={`${row.title} ${(s.ariaLabel || "sub-item") + ' ' + z.toString()}`}
+                                    >
+                                    </div>
                                 })
                             }
                         </div>
@@ -459,6 +466,8 @@ function splitData(data: GanttChartRowType): GanttChartRowType[] {
                 subtitle: i === 0 ? data.subtitle : '',
                 items: [item],
                 contextMenuItems: i === 0 ? data.contextMenuItems : undefined,
+                supItems: i === 0 ? data.supItems : undefined,
+                subItems: i === 0 ? data.subItems : undefined,
             })
         }
 

@@ -60,14 +60,9 @@ export function ganttChartOptions(): ViewData {
             onClick: () => {
                 alert("Selected Item One")
             },
-            subItems: [{
-                from: 2, 
-                to: 3
-            }],
             subtitle: "Has Context Menu",
             title: "Item One",
             ariaLabel: "Item One",
-            supItems: [{from: 5, to: 6}],
             contextMenuItems: [
                 {
                     title: "Edit",
@@ -98,10 +93,6 @@ export function ganttChartOptions(): ViewData {
             color: 'primary',
             id: 3,
             onClick: () => {},
-            subItems: [{
-                from: 5, 
-                to: 7
-            }],
             title: "Item Three",
             disabled: true
         },
@@ -139,8 +130,6 @@ export function ganttChartOptions(): ViewData {
             onClick: () => {
                 alert("Selected Item With Everything")
             },
-            subItems: [{from: 10,  to: 12 }, {from: 14, to: 15}],
-            supItems: [{from: 10,  to: 11 }, {from: 16, to: 18}],
             title: "With Everything",
             icon: <IconThree />,
             subtitle: "This item does not have any context menu",
@@ -217,13 +206,16 @@ export function ganttChartOptions(): ViewData {
             items: itemsOne,
             title: "Item One",
             value: '1',
-            subtitle: "subtitle One"
+            subtitle: "subtitle One",
+            subItems: [{from: 2, to: 3, id: "1"}],
+            supItems: [{from: 5, to: 6, id: "2"}],
         },
         {
             items: itemsTwo,
             title: "Item Two",
             value: '2',
-            subtitle: "subtitle Two"
+            subtitle: "subtitle Two",
+            subItems: [{from: 5, to: 7, id: "1"}],
         },
         {
             items: itemsThree,
@@ -234,6 +226,8 @@ export function ganttChartOptions(): ViewData {
                 {title: "Something", onClick: (r) => alert(r.title  + " Something")},
                 {title: "Very", onClick: (r) => alert(r.title + " Very")},
             ],
+            supItems: [{from: 10,  to: 11, id: "1" }, {from: 16, to: 18, id: "2"}],
+            subItems: [{from: 10,  to: 12, id: "1" }, {from: 14, to: 15, id: "2"}],
         },
         {
             items: [],
