@@ -4,7 +4,8 @@ import GanttChart, {
     GanttChartColumnTitle as GCCT, 
     GanttChartContextMenuItem as GCCMI, 
     GanttChartRowType as GCRT, 
-    GanttChartItemType as GCIT 
+    GanttChartItemType as GCIT,
+    GanttChartAuxiliaryItemType as GCAI
 } from './gantt_chart';
 
 export {
@@ -17,3 +18,4 @@ export type GanttChartColumnTitle = GCCT;
 export type GanttChartContextMenuItem = GCCMI;
 export type GanttChartRowType = GCRT;
 export type GanttChartItemType = GCIT;
+export type GanttChartAuxiliaryItemType = GCAI;

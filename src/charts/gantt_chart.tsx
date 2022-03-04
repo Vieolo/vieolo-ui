@@ -77,6 +77,7 @@ export type GanttChartRowType = {
     contextMenuItems?: GanttChartContextMenuItem[],
     subItems?: GanttChartAuxiliaryItemType[],
     supItems?: GanttChartAuxiliaryItemType[],
+    colorIndicator?: string
 }
 
 
@@ -234,8 +235,15 @@ export default function GanttChart(props: {
 
         <div className="vieolo-gantt-chart__content-div" style={{ top: props.columnGroups ? '65px' : '45px', maxHeight: chartHeight - (props.columnGroups ? 65 : 45) }}>
             {
-                finalData.map(row => {
+                finalData.map((row, rowIndex) => {
                     let dataRow = row.items;
+
+                    let style: React.CSSProperties = {};
+
+                    if (row.colorIndicator) {
+                        style.borderLeft = `2px solid ${row.colorIndicator}`
+                        style.marginLeft = '-2px'
+                    }
 
                     return <div
                         key={row.value}
@@ -243,6 +251,7 @@ export default function GanttChart(props: {
                         draggable={(props.onDragReorder && row.title.trim()) ? true : false}
                         onDragStart={e => setDraggedRow(row.value)}
                         onDragEnd={e => setDraggedRow(null)}
+                        style={style}
                     >
 
                         {
