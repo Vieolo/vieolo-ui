@@ -59,6 +59,7 @@ export declare type GanttChartRowType = {
     contextMenuItems?: GanttChartContextMenuItem[];
     subItems?: GanttChartAuxiliaryItemType[];
     supItems?: GanttChartAuxiliaryItemType[];
+    colorIndicator?: string;
 };
 export declare type GanttChartColumnTitle = {
     title: string;

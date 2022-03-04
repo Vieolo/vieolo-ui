@@ -92,9 +92,14 @@ export default function GanttChart(props) {
                                 let style = { left: `${left}%`, width: `${width}%`, right: `${right}%` };
                                 return _jsx("div", Object.assign({ className: 'vieolo-gantt-chart__group-div__group-column__group-bar', style: style }, { children: _jsx(TypographyParagraphSmall, { text: g.title }, void 0) }), `${g.title}_${i}`);
                             }) }), void 0)] }), void 0),
-            _jsx("div", Object.assign({ className: "vieolo-gantt-chart__content-div", style: { top: props.columnGroups ? '65px' : '45px', maxHeight: chartHeight - (props.columnGroups ? 65 : 45) } }, { children: finalData.map(row => {
+            _jsx("div", Object.assign({ className: "vieolo-gantt-chart__content-div", style: { top: props.columnGroups ? '65px' : '45px', maxHeight: chartHeight - (props.columnGroups ? 65 : 45) } }, { children: finalData.map((row, rowIndex) => {
                     let dataRow = row.items;
-                    return _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__content-div__row", draggable: (props.onDragReorder && row.title.trim()) ? true : false, onDragStart: e => setDraggedRow(row.value), onDragEnd: e => setDraggedRow(null) }, { children: [(row.title.trim() && props.onDragReorder) &&
+                    let style = {};
+                    if (row.colorIndicator) {
+                        style.borderLeft = `2px solid ${row.colorIndicator}`;
+                        style.marginLeft = '-2px';
+                    }
+                    return _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__content-div__row", draggable: (props.onDragReorder && row.title.trim()) ? true : false, onDragStart: e => setDraggedRow(row.value), onDragEnd: e => setDraggedRow(null), style: style }, { children: [(row.title.trim() && props.onDragReorder) &&
                                 _jsx(GanttRowDropZone, { position: 'top', onDrop: e => {
                                         if (draggedRow !== row.value)
                                             handleDrop(row.value, 'top');

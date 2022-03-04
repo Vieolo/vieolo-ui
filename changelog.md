@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.17.1 (2022-03-04)
+- Export the `GanttChartAuxiliaryItemType` ([#99](https://github.com/Vieolo/vieolo-ui/issues/99))
+- Added color indicator for the rows in `GanttChart` ([#100](https://github.com/Vieolo/vieolo-ui/issues/100))
+
 ## 0.17.0 (2022-03-04)
 - Added item reordering in `GanttChart` ([#98](https://github.com/Vieolo/vieolo-ui/issues/98))
 
