@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.17.0 (2022-03-04)
+- Added item reordering in `GanttChart` ([#98](https://github.com/Vieolo/vieolo-ui/issues/98))
+
+#### Breaking Changes
+- Moved the sub and sup items from the items to rows in `GanttChart` ([#96](https://github.com/Vieolo/vieolo-ui/issues/96))
+
 ## 0.16.3 (2022-02-28)
 - Added the ability to ignore items while filtering in `GanttChart` ([#93](https://github.com/Vieolo/vieolo-ui/issues/93))
 - Added aria label to sub and sup items in `GanttChart` ([#94](https://github.com/Vieolo/vieolo-ui/issues/94))

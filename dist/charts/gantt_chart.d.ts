@@ -35,19 +35,17 @@ export declare type GanttChartItemType = {
      * the `onClick` functionality should always be included as one of the context menu options
      */
     contextMenuItems?: GanttChartContextMenuItem[];
-    subItems?: {
-        from: number;
-        to: number;
-    }[];
-    supItems?: {
-        from: number;
-        to: number;
-    }[];
     /**
      * These items are ignored while filtering rows based on the number of items.
      * so, if a row has only items with this property, it is considered an empty row
      */
     ignoredInFilter?: boolean;
+};
+export declare type GanttChartAuxiliaryItemType = {
+    id: string;
+    from: number;
+    to: number;
+    ariaLabel?: string;
 };
 export declare type GanttChartRowType = {
     /** The value to identify the row on click */
@@ -59,6 +57,8 @@ export declare type GanttChartRowType = {
     items: GanttChartItemType[];
     /** The menu items that appear when the user clicks on the more button on the row's title cell */
     contextMenuItems?: GanttChartContextMenuItem[];
+    subItems?: GanttChartAuxiliaryItemType[];
+    supItems?: GanttChartAuxiliaryItemType[];
 };
 export declare type GanttChartColumnTitle = {
     title: string;
@@ -76,4 +76,5 @@ export default function GanttChart(props: {
     columnTitles: GanttChartColumnTitle[];
     columnGroups?: GanttChartColumnGroup[];
     initialFilter?: "All" | "Full" | "Empty";
+    onDragReorder?: (newData: GanttChartRowType[]) => void;
 }): JSX.Element;
