@@ -209,6 +209,7 @@ export function ganttChartOptions(): ViewData {
             subtitle: "subtitle One",
             subItems: [{from: 2, to: 3, id: "1"}],
             supItems: [{from: 5, to: 6, id: "2"}],
+            colorIndicator: 'red'
         },
         {
             items: itemsTwo,
@@ -266,12 +267,14 @@ export function ganttChartOptions(): ViewData {
                 {title: "Something", onClick: (r) => alert(r.title  + " Something")},
                 {title: "Very", onClick: (r) => alert(r.title + " Very")},
             ],
+            colorIndicator: 'red'
         },
         {
             items: itemsFour,
             title: "Item Nine",
             value: '9',
             subtitle: "",
+            colorIndicator: 'blue'
         }
     ]
 
