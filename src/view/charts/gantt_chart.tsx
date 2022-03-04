@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Material UI
 import IconOne from '@mui/icons-material/Assignment';
@@ -250,6 +250,28 @@ export function ganttChartOptions(): ViewData {
             title: "Item Four",
             value: '6',
             subtitle: "",
+        },
+        {
+            items: [],
+            title: "Item Seven",
+            value: '7',
+            subtitle: "No Items"
+        },
+        {
+            items: itemsOne,
+            title: "Item Eight",
+            value: '8',
+            subtitle: "subtitle One",
+            contextMenuItems: [
+                {title: "Something", onClick: (r) => alert(r.title  + " Something")},
+                {title: "Very", onClick: (r) => alert(r.title + " Very")},
+            ],
+        },
+        {
+            items: itemsFour,
+            title: "Item Nine",
+            value: '9',
+            subtitle: "",
         }
     ]
 
@@ -261,6 +283,10 @@ export function ganttChartOptions(): ViewData {
         } as Partial<GanttChartPropsType>,
         variables: {
             itemColor: 'colors',
+            draggable: {
+                default: true,
+                options: [false, true]
+            }
         }
     }
 }
@@ -268,6 +294,11 @@ export function ganttChartOptions(): ViewData {
 
 export function GanttChartCreator(props: {p: GanttChartPropsType}) {
 
+    let [data, setData] = useState<GanttChartRowType[]>([]);
+
+    useEffect(() => {
+        setData(replaceItemColor((props.p as any).itemColor, props.p.data));
+    }, [props.p])
 
     function replaceItemColor(color: ColorOptionType, data: GanttChartRowType[]): GanttChartRowType[] {
         let d = [...data];
@@ -285,8 +316,9 @@ export function GanttChartCreator(props: {p: GanttChartPropsType}) {
     return <GanttChart
         columnTitles={props.p.columnTitles}
         columnGroups={props.p.columnGroups}
-        data={replaceItemColor((props.p as any).itemColor, props.p.data)}
+        data={data}
         dataTitle='Items'
         initialFilter='All'
+        onDragReorder={(props.p as any).draggable ? (nd) => setData(nd) : undefined}
     />
 }

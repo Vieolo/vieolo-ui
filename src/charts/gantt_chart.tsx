@@ -98,10 +98,13 @@ export default function GanttChart(props: {
     dataTitle: string,
     columnTitles: GanttChartColumnTitle[],
     columnGroups?: GanttChartColumnGroup[],
-    initialFilter?: "All" | "Full" | "Empty"
+    initialFilter?: "All" | "Full" | "Empty",
+    onDragReorder?: (newData: GanttChartRowType[]) => void
 }) {
 
     let [filter, setFilter] = useState<"All" | "Full" | "Empty">(props.initialFilter || "All");
+
+    let [draggedRow, setDraggedRow] = useState<string | null>(null);
 
     let [contextMenuItem, setContextMenuItem] = useState<GanttChartItemType | undefined>(undefined);
     let [contextMenuRow, setContextMenuRow] = useState<GanttChartRowType | undefined>(undefined);
@@ -126,6 +129,41 @@ export default function GanttChart(props: {
     let colWidth = `calc(${100 / props.columnTitles.length}% - ${100 / props.columnTitles.length}px)`;
 
     if (props.columnGroups) chartHeight += 20;
+
+
+    function handleDrop(newValue: string, position: 'top' | 'bottom') {
+        // Cancelling the drop if the drop was not meant to happen
+        if (props.onDragReorder === undefined) return;
+        if (draggedRow === null) return;
+
+        // The data is iterated
+        // The row that was dragged is found and simultanously removed the the new data (will be added down below)
+        // The rows that have no title (those that have been splitted because they had overlapping items) are also taken out
+        let draggedRowData: GanttChartRowType | undefined;
+        let newData: GanttChartRowType[] = [];
+
+        for (let i = 0; i < props.data.length; i++) {
+            const d = props.data[i];
+            if (d.value.split("___")[0] === draggedRow.split("___")[0]) {
+                draggedRowData = d;
+            } else if (d.title.trim()) {
+                newData.push(d);
+            }
+        }
+
+        // If the dragged row is not found (for any reason) the drop is cancelled
+        if (draggedRowData === undefined) return;
+
+        // Finding the new index of the dropzone
+        // The new index is different than the old index since the dragged row is removed, changing the index of items
+        let newIndex = newData.findIndex(d => d.value.split("___")[0] === newValue.split("___")[0]);
+        newIndex += position === 'top' ? 0 : 1;
+
+        // Adding back the dragged row at the drop index
+        newData.splice(Math.max(newIndex, 0), 0, draggedRowData);
+        props.onDragReorder(newData);
+        setDraggedRow(null);
+    }
 
 
 
@@ -199,7 +237,24 @@ export default function GanttChart(props: {
                 finalData.map(row => {
                     let dataRow = row.items;
 
-                    return <div className="vieolo-gantt-chart__content-div__row" key={row.value}>
+                    return <div
+                        key={row.value}
+                        className="vieolo-gantt-chart__content-div__row"
+                        draggable={(props.onDragReorder && row.title.trim()) ? true : false}
+                        onDragStart={e => setDraggedRow(row.value)}
+                        onDragEnd={e => setDraggedRow(null)}
+                    >
+
+                        {
+                            (row.title.trim() && props.onDragReorder) &&
+                            <GanttRowDropZone
+                                position='top'
+                                onDrop={e => {
+                                    if (draggedRow !== row.value) handleDrop(row.value, 'top')
+                                }}
+                            />
+                        }
+
                         <div
                             className={`vieolo-gantt-chart__content-div__row__item-column ${(row.contextMenuItems && row.contextMenuItems.length > 0) ? " clickable" : ""}`}
                             onClick={e => {
@@ -226,7 +281,7 @@ export default function GanttChart(props: {
                                     let supWidth = ((s.to - s.from) / props.columnTitles.length) * 100;
                                     let supRight = (s.to / props.columnTitles.length) * 100;
                                     return <div
-                                    key={`${row.value} ${s.id} supitem ${s.from}_${s.to}_${z}`}
+                                        key={`${row.value} ${s.id} supitem ${s.from}_${s.to}_${z}`}
                                         className="vieolo-gantt-chart__content-div__row__bar-column__sup-item-bar"
                                         style={{ left: `${supLeft}%`, width: `${supWidth}%`, right: `${supRight}%` }}
                                         aria-label={`${row.title} ${(s.ariaLabel || "sup-item") + ' ' + z.toString()}`}
@@ -339,6 +394,16 @@ export default function GanttChart(props: {
                                 })
                             }
                         </div>
+
+                        {
+                            (row.title.trim() && props.onDragReorder) &&
+                            <GanttRowDropZone
+                                position='bottom'
+                                onDrop={e => {
+                                    if (draggedRow !== row.value) handleDrop(row.value, 'bottom')
+                                }}
+                            />
+                        }
                     </div>
                 })
             }
@@ -461,7 +526,7 @@ function splitData(data: GanttChartRowType): GanttChartRowType[] {
             rowsIndices.push(indices);
             rowData.push({
                 ...data,
-                value: data.value + '_' + i,
+                value: data.value + '___' + i,
                 title: i === 0 ? data.title : '',
                 subtitle: i === 0 ? data.subtitle : '',
                 items: [item],
@@ -475,4 +540,28 @@ function splitData(data: GanttChartRowType): GanttChartRowType[] {
 
     return rowData;
 
+}
+
+
+
+
+function GanttRowDropZone(props: {
+    position: 'top' | 'bottom',
+    onDrop: (e: React.DragEvent<HTMLDivElement>) => void,
+}) {
+    return <div
+        className={`vieolo-gantt-chart__content-div__drop-zone vieolo-gantt-chart__content-div__drop-zone--${props.position}`}
+        onDrop={e => {
+            props.onDrop(e);
+            e.currentTarget.style.backgroundColor = 'transparent';
+        }}
+        onDragOver={(e) => {
+            e.preventDefault();
+            e.currentTarget.style.backgroundColor = '#777'
+        }}
+        onDragLeave={e => {
+            e.preventDefault();
+            e.currentTarget.style.backgroundColor = 'transparent';
+        }}
+    ></div>
 }
