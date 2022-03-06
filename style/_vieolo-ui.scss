@@ -1401,6 +1401,7 @@ body {
 	border-radius: 5px;
 	position: relative;
 	background-color: white;
+	@include nonselectable;
 
 	&__base {
 		display: flex;

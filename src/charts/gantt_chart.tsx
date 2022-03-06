@@ -248,9 +248,6 @@ export default function GanttChart(props: {
                     return <div
                         key={row.value}
                         className="vieolo-gantt-chart__content-div__row"
-                        draggable={(props.onDragReorder && row.title.trim()) ? true : false}
-                        onDragStart={e => setDraggedRow(row.value)}
-                        onDragEnd={e => setDraggedRow(null)}
                         style={style}
                     >
 
@@ -265,7 +262,17 @@ export default function GanttChart(props: {
                         }
 
                         <div
+                            key={row.value + " col title"}
                             className={`vieolo-gantt-chart__content-div__row__item-column ${(row.contextMenuItems && row.contextMenuItems.length > 0) ? " clickable" : ""}`}
+                            draggable={(props.onDragReorder && row.title.trim()) ? true : false}
+                            onDragStart={e => {
+                                setDraggedRow(row.value);
+                                e.currentTarget.style.backgroundColor = "#f2f2f2";
+                            }}
+                            onDragEnd={e => {
+                                setDraggedRow(null)
+                                e.currentTarget.style.removeProperty('background-color');
+                            }}
                             onClick={e => {
                                 if (row.contextMenuItems && row.contextMenuItems.length > 0) {
                                     e.preventDefault();
