@@ -326,11 +326,14 @@ export function GanttChartCreator(props: {p: GanttChartPropsType}) {
         itemResize={{
             onItemResized: (r, d) => {
                 setData(data.map(z => {
-                    if (z.value === r.value) return z;
-                    return z.items.map(x => {
+                    if (z.value !== r.value.split("___")[0]) return z;
+                    
+                    z.items = z.items.map(x => {
                         if (x.id === d.id) return d;
                         return x
                     })
+
+                    return z;
                 }) as GanttChartRowType[])
             },
             allowOverlap: true
