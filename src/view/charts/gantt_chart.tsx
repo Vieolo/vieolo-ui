@@ -323,5 +323,17 @@ export function GanttChartCreator(props: {p: GanttChartPropsType}) {
         dataTitle='Items'
         initialFilter='All'
         onDragReorder={(props.p as any).draggable ? (nd) => setData(nd) : undefined}
+        itemResize={{
+            onItemResized: (r, d) => {
+                setData(data.map(z => {
+                    if (z.value === r.value) return z;
+                    return z.items.map(x => {
+                        if (x.id === d.id) return d;
+                        return x
+                    })
+                }) as GanttChartRowType[])
+            },
+            allowOverlap: true
+        }}
     />
 }

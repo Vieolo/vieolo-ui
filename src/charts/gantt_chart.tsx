@@ -100,7 +100,11 @@ export default function GanttChart(props: {
     columnTitles: GanttChartColumnTitle[],
     columnGroups?: GanttChartColumnGroup[],
     initialFilter?: "All" | "Full" | "Empty",
-    onDragReorder?: (newData: GanttChartRowType[]) => void
+    onDragReorder?: (newData: GanttChartRowType[]) => void,
+    itemResize?: {
+        allowOverlap?: boolean,
+        onItemResized: (row: GanttChartRowType, item: GanttChartItemType) => void,
+    }
 }) {
 
     let [filter, setFilter] = useState<"All" | "Full" | "Empty">(props.initialFilter || "All");
@@ -252,7 +256,7 @@ export default function GanttChart(props: {
                     >
 
                         {
-                            (row.title.trim() && props.onDragReorder) &&
+                            (row.title.trim() && props.onDragReorder && draggedRow) &&
                             <GanttRowDropZone
                                 position='top'
                                 onDrop={e => {
@@ -376,6 +380,10 @@ export default function GanttChart(props: {
                                             }}
                                         >
                                             {
+                                                props.itemResize &&
+                                                <GanttItemResizeHandle position='left' />
+                                            }
+                                            {
                                                 (d.title || d.icon) &&
                                                 <div className='center-by-flex-row'>
                                                     {d.icon && d.icon}
@@ -388,6 +396,11 @@ export default function GanttChart(props: {
                                             {
                                                 d.subtitle &&
                                                 <p className="vieolo-gantt-chart__content-div__row__bar-column__bar__row-subtitle" title={d.subtitle}>{d.subtitle}</p>
+                                            }
+
+                                            {
+                                                props.itemResize &&
+                                                <GanttItemResizeHandle position='right' />
                                             }
                                         </div>
                                     </Fragment>
@@ -412,7 +425,7 @@ export default function GanttChart(props: {
                         </div>
 
                         {
-                            (row.title.trim() && props.onDragReorder) &&
+                            (row.title.trim() && props.onDragReorder && draggedRow) &&
                             <GanttRowDropZone
                                 position='bottom'
                                 onDrop={e => {
@@ -580,4 +593,60 @@ function GanttRowDropZone(props: {
             e.currentTarget.style.backgroundColor = 'transparent';
         }}
     ></div>
+}
+
+
+function GanttItemResizeHandle(props: {
+    position: 'left' | 'right',
+}) {
+    let [pos, setPos] = useState<{ left: number, right: number, width: number, widthPerc: number, leftPerc: number, rightPerc: number } | null>(null);
+
+    function getInitialPos(e: React.DragEvent<HTMLDivElement>) {
+        return {
+            leftPerc: +e.currentTarget.parentElement!.style.left.replace("%", ""),
+            rightPerc: +e.currentTarget.parentElement!.style.right.replace("%", ""),
+            width: e.currentTarget.parentElement!.offsetWidth,
+            widthPerc: +e.currentTarget.parentElement!.style.width.replace("%", ""),
+            left: props.position === 'right'
+                ? (e.pageX + e.currentTarget.offsetWidth) - e.currentTarget.parentElement!.offsetWidth
+                : e.pageX,
+            right: props.position === 'right'
+                ? (e.pageX + e.currentTarget.offsetWidth)
+                : e.pageX + e.currentTarget.parentElement!.offsetWidth
+        }
+    }
+
+    function handleResize(e: React.DragEvent<HTMLDivElement>) {
+        if (!pos) return;        
+
+        if (props.position === 'right') {
+            let newWidth = pos.width + (e.pageX - pos.right);
+            let changeInWidth = ((newWidth - pos.width) / pos.width);
+            let right = pos.rightPerc + (pos.widthPerc * changeInWidth);
+            e.currentTarget.parentElement!.style.right = `${right}%`;
+            e.currentTarget.parentElement!.style.width = `${pos.widthPerc + (pos.widthPerc * changeInWidth)}%`;
+        } else {
+            let newWidth = pos.width + (pos.left - (e.pageX));
+            let changeInWidth = ((newWidth - pos.width) / pos.width);
+            let left = pos.leftPerc - ((pos.widthPerc * changeInWidth));
+            e.currentTarget.parentElement!.style.width = `${pos.widthPerc + (pos.widthPerc * changeInWidth)}%`;
+            e.currentTarget.parentElement!.style.left = `${left}%`;
+        }
+    }
+
+    return <div
+        className={`vieolo-gantt-chart__content-div__row__bar-column__bar__resize vieolo-gantt-chart__content-div__row__bar-column__bar__resize--${props.position}`}
+        draggable
+        onDragStart={e => {
+            setPos(getInitialPos(e));
+        }}
+        onDragEnd={e => {
+            setPos(null);
+        }}
+        onDrag={e => {
+            if (!pos) return;
+            handleResize(e);
+        }}
+    >
+    </div>
 }

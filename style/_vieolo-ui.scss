@@ -1620,6 +1620,33 @@ body {
 						border-bottom-right-radius: 0;
 						border-right: none;
 					}
+
+					&__resize {
+						position: absolute;
+						width: 3px;
+						
+						height: 100%;
+						cursor: col-resize;											
+
+						&--left {
+							left: -1px;
+							border-radius: inherit;
+							
+							&:hover {
+								width: 6px;
+							}
+						}
+
+						&--right {
+							right: 0px;
+							border-radius: inherit;
+							
+							&:hover {
+								width: 6px;
+
+							}
+						}
+					}
 				}				
 
 				&__bar-subtitle {
