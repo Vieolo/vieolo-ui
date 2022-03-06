@@ -382,7 +382,7 @@ export default function GanttChart(props: {
                                             <GanttItemResizeHandle
                                                 position='left'
                                                 maxValue={props.columnTitles.length}
-                                                onResize={(newPos) => props.itemResize!.onItemResized(row, { ...d, from: newPos.left, to: newPos.right })}
+                                                onResize={(newPos) => props.itemResize!.onItemResized({...row, value: row.value.split("___")[0]}, { ...d, from: newPos.left, to: newPos.right })}
                                             />
                                         }
                                         {
@@ -405,7 +405,7 @@ export default function GanttChart(props: {
                                             <GanttItemResizeHandle
                                                 position='right'
                                                 maxValue={props.columnTitles.length}
-                                                onResize={(newPos) => props.itemResize!.onItemResized(row, { ...d, from: newPos.left, to: newPos.right })}
+                                                onResize={(newPos) => props.itemResize!.onItemResized({...row, value: row.value.split("___")[0]}, { ...d, from: newPos.left, to: newPos.right })}
                                             />
                                         }
                                     </div>
