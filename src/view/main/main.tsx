@@ -35,7 +35,7 @@ import SwitchSet from '../../lib/form/switch_set';
 import { barChartOptions, BarChartCreator } from '../charts/bar_chart';
 
 
-type ViewDataVariable = 'colors' | 'boolean' | {
+type ViewDataVariable = 'colors' | 'boolean' | "booleanTrueDefault" | {
     options: any[],
     default: any,
     type?: 'number' | "string" | "boolean"
@@ -120,6 +120,11 @@ export default function MainPage(props: {}): JSX.Element {
                     options: [false, true],
                     default: false
                 }
+            } else if (variable === 'booleanTrueDefault') {
+                finalVariable = {
+                    options: [false, true],
+                    default: true
+                }
             } else if (variable === 'colors') {
                 finalVariable = {
                     options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'],
@@ -165,6 +170,11 @@ export default function MainPage(props: {}): JSX.Element {
                             options: [false, true],
                             default: false
                         }
+                    } else if (tempVariable === "booleanTrueDefault") {
+                        variable = {
+                            options: [false, true],
+                            default: true
+                        }   
                     } else if (tempVariable === 'colors') {
                         variable = {
                             options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],

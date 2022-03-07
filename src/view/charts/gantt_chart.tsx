@@ -286,11 +286,11 @@ export function ganttChartOptions(): ViewData {
         } as Partial<GanttChartPropsType>,
         variables: {
             itemColor: 'colors',
-            draggable: {
-                default: true,
-                options: [false, true]
-            }
-        }
+            draggable: 'booleanTrueDefault',
+            itemResizable: 'booleanTrueDefault',
+            integerIncrementation: 'booleanTrueDefault',
+            allowResizeOverlap: 'boolean'
+        },        
     }
 }
 
@@ -323,5 +323,21 @@ export function GanttChartCreator(props: {p: GanttChartPropsType}) {
         dataTitle='Items'
         initialFilter='All'
         onDragReorder={(props.p as any).draggable ? (nd) => setData(nd) : undefined}
+        itemResize={!(props.p as any).itemResizable ? undefined : {
+            onItemResized: (r, d) => {
+                setData(data.map(z => {
+                    if (z.value !== r.value) return z;
+                    
+                    z.items = z.items.map(x => {
+                        if (x.id === d.id) return d;
+                        return x
+                    })
+
+                    return z;
+                }) as GanttChartRowType[])
+            },
+            allowOverlap: (props.p as any).allowResizeOverlap,
+            integerIncrementation: (props.p as any).integerIncrementation
+        }}
     />
 }

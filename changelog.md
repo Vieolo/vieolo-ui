@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.17.2 (2022-03-07)
+- Added resizing of the items to the `GanttChart` for
+    - Allowing items to overlap ([#104](https://github.com/Vieolo/vieolo-ui/issues/104))
+    - Preventing items to overlap ([#103](https://github.com/Vieolo/vieolo-ui/issues/103))
+    - Fixed increment of the resize ([#105](https://github.com/Vieolo/vieolo-ui/issues/105))
+- Moved the drag handle from the entire row to the row title cell in `GanttChart`
+- Fixed the position of drop zone in `GanttChart` in Chrome and Firefox
+- Fixed the propagation of dropdown menu button [#102](https://github.com/Vieolo/vieolo-ui/issues/102)
+
 ## 0.17.1 (2022-03-04)
 - Export the `GanttChartAuxiliaryItemType` ([#99](https://github.com/Vieolo/vieolo-ui/issues/99))
 - Added color indicator for the rows in `GanttChart` ([#100](https://github.com/Vieolo/vieolo-ui/issues/100))
