@@ -438,12 +438,8 @@ export default function GanttChart(props: {
                                             props.itemResize &&
                                             <GanttItemResizeHandle
                                                 position='left'
-                                                originalRange={{ left: d.from, right: d.to }}
-                                                integerIncrementation={props.itemResize.integerIncrementation}
-                                                maxValue={props.columnTitles.length}
                                                 onDragStart={(el, cor) => handleItemResizeStart(el, 'left', cor, d, row)}
                                                 onDragEnd={handleItemResizeEnd}
-                                                onResize={(newPos) => props.itemResize!.onItemResized({ ...row, value: row.value.split("___")[0] }, { ...d, from: newPos.left, to: d.to })}
                                             />
                                         }
                                         {
@@ -465,12 +461,8 @@ export default function GanttChart(props: {
                                             props.itemResize &&
                                             <GanttItemResizeHandle
                                                 position='right'
-                                                originalRange={{ left: d.from, right: d.to }}
-                                                integerIncrementation={props.itemResize.integerIncrementation}
-                                                maxValue={props.columnTitles.length}
                                                 onDragStart={(el, cor) => handleItemResizeStart(el, 'right', cor, d, row)}
                                                 onDragEnd={handleItemResizeEnd}
-                                                onResize={(newPos) => props.itemResize!.onItemResized({ ...row, value: row.value.split("___")[0] }, { ...d, from: d.from, to: newPos.right })}
                                             />
                                         }
                                     </div>
@@ -664,14 +656,9 @@ type GanttItemResizeInitialCoordinates = { left: number, right: number, width: n
 
 function GanttItemResizeHandle(props: {
     position: 'left' | 'right',
-    originalRange: { left: number, right: number },
-    maxValue: number,
-    onResize: (newPos: { left: number, right: number, width: number }) => void,
-    integerIncrementation?: boolean,
     onDragStart: (el: HTMLElement, cor: GanttItemResizeInitialCoordinates) => void,
     onDragEnd: () => void,
-}) {
-    let [pos, setPos] = useState<GanttItemResizeInitialCoordinates | null>(null);
+}) {    
 
     function getInitialPos(e: React.DragEvent<HTMLDivElement>): GanttItemResizeInitialCoordinates {
         return {
@@ -687,70 +674,17 @@ function GanttItemResizeHandle(props: {
                 ? (e.pageX + e.currentTarget.offsetWidth)
                 : e.pageX + e.currentTarget.parentElement!.offsetWidth
         }
-    }
-
-    function handleResize(e: React.DragEvent<HTMLDivElement>) {
-        if (!pos) return;
-
-        if (props.position === 'right') {
-            let newWidth = pos.width + (e.pageX - pos.right);
-            let changeInWidth = ((newWidth - pos.width) / pos.width);
-            let right = pos.rightPerc + (pos.widthPerc * changeInWidth);
-            e.currentTarget.parentElement!.style.right = `${right}%`;
-            e.currentTarget.parentElement!.style.width = `${pos.widthPerc + (pos.widthPerc * changeInWidth)}%`;
-        } else {
-            let newWidth = pos.width + (pos.left - (e.pageX));
-            let changeInWidth = ((newWidth - pos.width) / pos.width);
-            let left = pos.leftPerc - ((pos.widthPerc * changeInWidth));
-            e.currentTarget.parentElement!.style.width = `${pos.widthPerc + (pos.widthPerc * changeInWidth)}%`;
-            e.currentTarget.parentElement!.style.left = `${left}%`;
-        }
-    }
+    }    
 
     return <div
         className={`vieolo-gantt-chart__content-div__row__bar-column__bar__resize vieolo-gantt-chart__content-div__row__bar-column__bar__resize--${props.position}`}
         draggable
         onDragStart={e => {
-            if (window.navigator.userAgent.includes("Firefox")) {
-                props.onDragStart(e.currentTarget.parentElement!, getInitialPos(e));
-                return;
-            }
-            setPos(getInitialPos(e));
+            props.onDragStart(e.currentTarget.parentElement!, getInitialPos(e));
         }}
         onDragEnd={e => {
-            if (window.navigator.userAgent.includes("Firefox")) {
-                props.onDragEnd();
-                return;
-            }
-
-            let [l, r, w] = getParentPos(e.currentTarget.parentElement!);
-
-            if (props.integerIncrementation) {
-                let intChange = 1 / props.maxValue;
-
-                if (props.position === 'right') {
-                    w = w + ((intChange - (w % intChange)) / 100)
-                    r = r + (intChange - (r % intChange))
-                } else {
-                    w = w - (((w % intChange)) / 100)
-                    l = l - ((l % intChange))
-                }
-            }
-            props.onResize({
-                left: props.position === 'right' ? props.originalRange.left : +toFixed(props.maxValue * l, props.integerIncrementation ? 0 : 6),
-                right: props.position === 'left' ? props.originalRange.right : +toFixed(props.maxValue * r, props.integerIncrementation ? 0 : 6),
-                width: +toFixed(props.maxValue * w, props.integerIncrementation ? 0 : 6)
-            })
-            setPos(null);
-        }}
-        onDrag={e => {
-            if (!pos) return;
-            // In the last event of Chrome and all of the events of Firefox, the coordinates are zero
-            // This problem does not occur in Safari
-            if (!e.pageX && !e.pageY && !e.clientX && !e.clientY) return;
-
-            handleResize(e);
-        }}
+            props.onDragEnd();
+        }}        
     >
     </div>
 }
