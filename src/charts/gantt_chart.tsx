@@ -1,5 +1,5 @@
 // React
-import React, { ReactNode, Fragment, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 
 // Materail UI
 import SelectedIcon from '@mui/icons-material/RadioButtonChecked';
@@ -16,6 +16,8 @@ import TypographyParagraphSmall from '../lib/typography/typography_paragraph_sma
 import TypographyCaptionMedium from '../lib/typography/typography_caption_medium';
 import { ColorOptionType } from '../lib/private/types';
 
+// Installed Packages
+import { toFixed } from '@vieolo/parsers/number_parsers';
 
 export type GanttChartContextMenuItem = {
     title: string,
@@ -100,7 +102,12 @@ export default function GanttChart(props: {
     columnTitles: GanttChartColumnTitle[],
     columnGroups?: GanttChartColumnGroup[],
     initialFilter?: "All" | "Full" | "Empty",
-    onDragReorder?: (newData: GanttChartRowType[]) => void
+    onDragReorder?: (newData: GanttChartRowType[]) => void,
+    itemResize?: {
+        allowOverlap?: boolean,
+        integerIncrementation?: boolean,
+        onItemResized: (row: GanttChartRowType, item: GanttChartItemType) => void,
+    }
 }) {
 
     let [filter, setFilter] = useState<"All" | "Full" | "Empty">(props.initialFilter || "All");
@@ -110,6 +117,8 @@ export default function GanttChart(props: {
     let [contextMenuItem, setContextMenuItem] = useState<GanttChartItemType | undefined>(undefined);
     let [contextMenuRow, setContextMenuRow] = useState<GanttChartRowType | undefined>(undefined);
     let [contextMenuPosition, setContextMenuPosition] = useState<{ x: number, y: number } | null>(null);
+
+    let [resizeItem, setResizeItem] = useState<{ el: HTMLElement, direction: 'left' | 'right', cor: GanttItemResizeInitialCoordinates, item: GanttChartItemType, row: GanttChartRowType } | null>(null);
 
     let finalData: GanttChartRowType[] = [];
 
@@ -132,7 +141,7 @@ export default function GanttChart(props: {
     if (props.columnGroups) chartHeight += 20;
 
 
-    function handleDrop(newValue: string, position: 'top' | 'bottom') {
+    function handleRowReorderDrop(newValue: string, position: 'top' | 'bottom') {
         // Cancelling the drop if the drop was not meant to happen
         if (props.onDragReorder === undefined) return;
         if (draggedRow === null) return;
@@ -166,6 +175,76 @@ export default function GanttChart(props: {
         setDraggedRow(null);
     }
 
+    function handleItemResizeStart(el: HTMLElement, direction: 'left' | 'right', cor: GanttItemResizeInitialCoordinates, item: GanttChartItemType, row: GanttChartRowType) {
+        setResizeItem({ el: el, direction: direction, cor: cor, item: item, row: row });
+    }
+
+    function handleItemResizeEnd() {
+        if (!resizeItem) return;
+
+        let maxValue = props.columnTitles.length
+        let [l, r, w] = getParentPos(resizeItem.el);
+
+        if (props.itemResize?.integerIncrementation) {
+            let intChange = 1 / maxValue;
+
+            if (resizeItem.direction === 'right') {
+                w = w + ((intChange - (w % intChange)) / 100)
+                r = r + (intChange - (r % intChange))
+            } else {
+                w = w - (((w % intChange)) / 100)
+                l = l - ((l % intChange))
+            }
+        }
+
+        let finalPos = {
+            left: resizeItem.direction === 'right' ? resizeItem.item.from : +toFixed(maxValue * l, props.itemResize?.integerIncrementation ? 0 : 6),
+            right: resizeItem.direction === 'left' ? resizeItem.item.to : +toFixed(maxValue * r, props.itemResize?.integerIncrementation ? 0 : 6),
+            width: +toFixed(maxValue * w, props.itemResize?.integerIncrementation ? 0 : 6)
+        }
+
+        if (!props.itemResize?.allowOverlap) {
+            let hasOverlap = false;
+
+            for (let i = 0; i < resizeItem.row.items.length; i++) {
+                const item = resizeItem.row.items[i];
+                if (item.id === resizeItem.item.id) continue;
+                if (doPeriodsOverlap(item.from, item.to, finalPos.left, finalPos.right)) {
+                    hasOverlap = true;
+                    break;
+                }
+            }
+
+            if (hasOverlap) {
+                resizeItem.el.style.left = `${resizeItem.cor.leftPerc}%`;
+                resizeItem.el.style.right = `${resizeItem.cor.rightPerc}%`;
+                resizeItem.el.style.width = `${resizeItem.cor.widthPerc}%`;
+                setResizeItem(null);
+                return;
+            }
+        }
+
+        props.itemResize?.onItemResized({ ...resizeItem.row, value: resizeItem.row.value.split("___")[0] }, { ...resizeItem.item, from: finalPos.left, to: finalPos.right })
+        setResizeItem(null);
+    }
+
+    function handleItemResize(e: React.DragEvent<HTMLDivElement>) {
+        if (!resizeItem) return;
+
+        if (resizeItem.direction === 'right') {
+            let newWidth = resizeItem.cor.width + (e.pageX - resizeItem.cor.right);
+            let changeInWidth = ((newWidth - resizeItem.cor.width) / resizeItem.cor.width);
+            let right = resizeItem.cor.rightPerc + (resizeItem.cor.widthPerc * changeInWidth);
+            resizeItem.el.style.right = `${right}%`;
+            resizeItem.el.style.width = `${resizeItem.cor.widthPerc + (resizeItem.cor.widthPerc * changeInWidth)}%`;
+        } else {
+            let newWidth = resizeItem.cor.width + (resizeItem.cor.left - (e.pageX));
+            let changeInWidth = ((newWidth - resizeItem.cor.width) / resizeItem.cor.width);
+            let left = resizeItem.cor.leftPerc - ((resizeItem.cor.widthPerc * changeInWidth));
+            resizeItem.el.style.width = `${resizeItem.cor.widthPerc + (resizeItem.cor.widthPerc * changeInWidth)}%`;
+            resizeItem.el.style.left = `${left}%`;
+        }
+    }
 
 
     return <div className="vieolo-gantt-chart" style={{ height: chartHeight + 'px' }}>
@@ -248,24 +327,31 @@ export default function GanttChart(props: {
                     return <div
                         key={row.value}
                         className="vieolo-gantt-chart__content-div__row"
-                        draggable={(props.onDragReorder && row.title.trim()) ? true : false}
-                        onDragStart={e => setDraggedRow(row.value)}
-                        onDragEnd={e => setDraggedRow(null)}
                         style={style}
                     >
 
                         {
-                            (row.title.trim() && props.onDragReorder) &&
+                            (row.title.trim() && props.onDragReorder && draggedRow) &&
                             <GanttRowDropZone
                                 position='top'
                                 onDrop={e => {
-                                    if (draggedRow !== row.value) handleDrop(row.value, 'top')
+                                    if (draggedRow !== row.value) handleRowReorderDrop(row.value, 'top')
                                 }}
                             />
                         }
 
                         <div
+                            key={row.value + " col title"}
                             className={`vieolo-gantt-chart__content-div__row__item-column ${(row.contextMenuItems && row.contextMenuItems.length > 0) ? " clickable" : ""}`}
+                            draggable={(props.onDragReorder && row.title.trim()) ? true : false}
+                            onDragStart={e => {
+                                setDraggedRow(row.value);
+                                e.currentTarget.style.backgroundColor = "#f2f2f2";
+                            }}
+                            onDragEnd={e => {
+                                setDraggedRow(null)
+                                e.currentTarget.style.removeProperty('background-color');
+                            }}
                             onClick={e => {
                                 if (row.contextMenuItems && row.contextMenuItems.length > 0) {
                                     e.preventDefault();
@@ -282,7 +368,10 @@ export default function GanttChart(props: {
                                 <TypographyParagraphSmall text={row.subtitle} showTitle />
                             }
                         </div>
-                        <div className="vieolo-gantt-chart__content-div__row__bar-column">
+                        <div
+                            className="vieolo-gantt-chart__content-div__row__bar-column"
+                            onDragOver={!resizeItem ? undefined : handleItemResize}
+                        >
                             {
                                 row.supItems &&
                                 row.supItems.map((s, z) => {
@@ -336,54 +425,68 @@ export default function GanttChart(props: {
                                         style.color = d.color.text;
                                     }
 
-                                    return <Fragment key={`${i}__${d.title || "no_title"}_fragment`}>
+                                    return <div
+                                        aria-label={`${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + i.toString()}`}
+                                        key={`${i}__${d.title || "no_title"}_${d.from}_${d.to}`}
+                                        className={className}
+                                        style={style}
+                                        onClick={(e) => {
+                                            let hasContextMenu = d.contextMenuItems && d.contextMenuItems.length > 0;
+                                            let isTouchEvent = e.nativeEvent instanceof PointerEvent && e.nativeEvent.pointerType === 'touch';
+                                            let isTouchOnlyDevice = "ontouchstart" in window && window.matchMedia("(pointer: coarse)").matches && !window.matchMedia("(pointer: fine)").matches;
+                                            if (hasContextMenu && (isTouchEvent || isTouchOnlyDevice)) {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                setContextMenuItem(d);
+                                                setContextMenuRow(row)
+                                                setContextMenuPosition({ x: e.pageX, y: e.pageY })
+                                            } else {
+                                                if (d.onClick) d.onClick(d)
+                                            }
+                                        }
+                                        }
+                                        onContextMenu={e => {
+                                            if (d.contextMenuItems && d.contextMenuItems.length > 0) {
+                                                e.preventDefault();
+                                                e.stopPropagation();
+                                                setContextMenuItem(d);
+                                                setContextMenuRow(row)
+                                                setContextMenuPosition({ x: e.pageX, y: e.pageY })
+                                            }
+                                        }}
+                                    >
+                                        {
+                                            props.itemResize &&
+                                            <GanttItemResizeHandle
+                                                position='left'
+                                                onDragStart={(el, cor) => handleItemResizeStart(el, 'left', cor, d, row)}
+                                                onDragEnd={handleItemResizeEnd}
+                                            />
+                                        }
+                                        {
+                                            (d.title || d.icon) &&
+                                            <div className='center-by-flex-row'>
+                                                {d.icon && d.icon}
+                                                {
+                                                    d.title &&
+                                                    <p className="vieolo-gantt-chart__content-div__row__bar-column__bar__row-title" title={d.title}>{d.title}</p>
+                                                }
+                                            </div>
+                                        }
+                                        {
+                                            d.subtitle &&
+                                            <p className="vieolo-gantt-chart__content-div__row__bar-column__bar__row-subtitle" title={d.subtitle}>{d.subtitle}</p>
+                                        }
 
-                                        <div
-                                            aria-label={`${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + i.toString()}`}
-                                            key={`${i}__${d.title || "no_title"}`}
-                                            className={className}
-                                            style={style}
-                                            onClick={(e) => {
-                                                let hasContextMenu = d.contextMenuItems && d.contextMenuItems.length > 0;
-                                                let isTouchEvent = e.nativeEvent instanceof PointerEvent && e.nativeEvent.pointerType === 'touch';
-                                                let isTouchOnlyDevice = "ontouchstart" in window && window.matchMedia("(pointer: coarse)").matches && !window.matchMedia("(pointer: fine)").matches;
-                                                if (hasContextMenu && (isTouchEvent || isTouchOnlyDevice)) {
-                                                    e.preventDefault();
-                                                    e.stopPropagation();
-                                                    setContextMenuItem(d);
-                                                    setContextMenuRow(row)
-                                                    setContextMenuPosition({ x: e.pageX, y: e.pageY })
-                                                } else {
-                                                    if (d.onClick) d.onClick(d)
-                                                }
-                                            }
-                                            }
-                                            onContextMenu={e => {
-                                                if (d.contextMenuItems && d.contextMenuItems.length > 0) {
-                                                    e.preventDefault();
-                                                    e.stopPropagation();
-                                                    setContextMenuItem(d);
-                                                    setContextMenuRow(row)
-                                                    setContextMenuPosition({ x: e.pageX, y: e.pageY })
-                                                }
-                                            }}
-                                        >
-                                            {
-                                                (d.title || d.icon) &&
-                                                <div className='center-by-flex-row'>
-                                                    {d.icon && d.icon}
-                                                    {
-                                                        d.title &&
-                                                        <p className="vieolo-gantt-chart__content-div__row__bar-column__bar__row-title" title={d.title}>{d.title}</p>
-                                                    }
-                                                </div>
-                                            }
-                                            {
-                                                d.subtitle &&
-                                                <p className="vieolo-gantt-chart__content-div__row__bar-column__bar__row-subtitle" title={d.subtitle}>{d.subtitle}</p>
-                                            }
-                                        </div>
-                                    </Fragment>
+                                        {
+                                            props.itemResize &&
+                                            <GanttItemResizeHandle
+                                                position='right'
+                                                onDragStart={(el, cor) => handleItemResizeStart(el, 'right', cor, d, row)}
+                                                onDragEnd={handleItemResizeEnd}
+                                            />
+                                        }
+                                    </div>
                                 })
                             }
 
@@ -405,11 +508,11 @@ export default function GanttChart(props: {
                         </div>
 
                         {
-                            (row.title.trim() && props.onDragReorder) &&
+                            (row.title.trim() && props.onDragReorder && draggedRow) &&
                             <GanttRowDropZone
                                 position='bottom'
                                 onDrop={e => {
-                                    if (draggedRow !== row.value) handleDrop(row.value, 'bottom')
+                                    if (draggedRow !== row.value) handleRowReorderDrop(row.value, 'bottom')
                                 }}
                             />
                         }
@@ -451,35 +554,36 @@ export default function GanttChart(props: {
  * @param data The data containing the items
  */
 function doItemsOverlap(data: GanttChartRowType): boolean {
-    let cols: number[] = [];
+    let occupancies: { from: number, to: number }[] = [];
     let overlap = false;
 
     for (let i = 0; i < data.items.length; i++) {
         const item = data.items[i];
         if (overlap) break;
-        for (let z = item.from; z < item.to; z++) {
-            if (cols.includes(z)) {
+        for (let z = 0; z < Object.values(occupancies).length; z++) {
+            const oc = Object.values(occupancies)[z];
+            if (doPeriodsOverlap(oc.from, oc.to, item.from, item.to)) {
                 overlap = true;
                 break;
             }
-            cols.push(z);
         }
+        occupancies.push({ from: item.from, to: item.to });
     }
     return overlap;
 }
 
 /**
  * Checks whether the start and end indices of the data intersects with the occupied indices. This function only checks the overlap
- * @param array The array of indices of occupied slots
+ * @param array The array of ranges of occupied slots
  * @param rangeStart The start index of the item
  * @param rangeEnd The end index of the item
  */
-function doesIntersect(array: number[], rangeStart: number, rangeEnd: number): boolean {
+function doesIntersect(array: { from: number, to: number }[], rangeStart: number, rangeEnd: number): boolean {
     let intersects = false;
 
     for (let i = 0; i < array.length; i++) {
-        const item = array[i];
-        if (rangeStart === item || rangeEnd === item || (item > rangeStart && item < rangeEnd)) {
+        const oc = array[i];
+        if (doPeriodsOverlap(oc.from, oc.to, rangeStart, rangeEnd)) {
             intersects = true;
             break;
         }
@@ -498,26 +602,25 @@ function doesIntersect(array: number[], rangeStart: number, rangeEnd: number): b
 function splitData(data: GanttChartRowType): GanttChartRowType[] {
     let d = { ...data };
 
+
     // The first item is the original row
-    let rowsIndices: number[][] = []
     let rowData: GanttChartRowType[] = [];
+
+    // The ranges that every row occupy
+    // If the new item overlaps with an existing range, it has to be tried with the new row
+    let rowsRanges: { from: number, to: number }[][] = []
 
     for (let i = 0; i < d.items.length; i++) {
         const item = d.items[i];
         let added = false;
 
-        for (let z = 0; z < rowsIndices.length; z++) {
-            const rowIndex = rowsIndices[z];
+        for (let z = 0; z < Object.values(rowsRanges).length; z++) {
+            // The ranges already occupied in this row
+            const thisRowRange = Object.values(rowsRanges)[z];
 
-            if (doesIntersect(rowIndex, item.from, item.to - 1)) continue;
+            if (doesIntersect(thisRowRange, item.from, item.to)) continue;
 
-            let indices = [];
-
-            for (let k = item.from; k < item.to; k++) {
-                indices.push(k);
-            }
-
-            rowIndex.push(...indices);
+            thisRowRange.push({ from: item.from, to: item.to });
             rowData[z].items.push(item);
 
             added = true;
@@ -526,13 +629,7 @@ function splitData(data: GanttChartRowType): GanttChartRowType[] {
         }
 
         if (!added) {
-            let indices = [];
-
-            for (let k = item.from; k < item.to; k++) {
-                indices.push(k);
-            }
-
-            rowsIndices.push(indices);
+            rowsRanges.push([{ from: item.from, to: item.to }]);
             rowData.push({
                 ...data,
                 value: data.value + '___' + i,
@@ -573,4 +670,61 @@ function GanttRowDropZone(props: {
             e.currentTarget.style.backgroundColor = 'transparent';
         }}
     ></div>
+}
+
+
+type GanttItemResizeInitialCoordinates = { left: number, right: number, width: number, widthPerc: number, leftPerc: number, rightPerc: number, pageX: number };
+
+function GanttItemResizeHandle(props: {
+    position: 'left' | 'right',
+    onDragStart: (el: HTMLElement, cor: GanttItemResizeInitialCoordinates) => void,
+    onDragEnd: () => void,
+}) {
+
+    function getInitialPos(e: React.DragEvent<HTMLDivElement>): GanttItemResizeInitialCoordinates {
+        return {
+            leftPerc: +e.currentTarget.parentElement!.style.left.replace("%", ""),
+            rightPerc: +e.currentTarget.parentElement!.style.right.replace("%", ""),
+            width: e.currentTarget.parentElement!.offsetWidth,
+            widthPerc: +e.currentTarget.parentElement!.style.width.replace("%", ""),
+            pageX: e.pageX,
+            left: props.position === 'right'
+                ? (e.pageX + e.currentTarget.offsetWidth) - e.currentTarget.parentElement!.offsetWidth
+                : e.pageX,
+            right: props.position === 'right'
+                ? (e.pageX + e.currentTarget.offsetWidth)
+                : e.pageX + e.currentTarget.parentElement!.offsetWidth
+        }
+    }
+
+    return <div
+        className={`vieolo-gantt-chart__content-div__row__bar-column__bar__resize vieolo-gantt-chart__content-div__row__bar-column__bar__resize--${props.position}`}
+        draggable
+        onDragStart={e => {
+            props.onDragStart(e.currentTarget.parentElement!, getInitialPos(e));
+        }}
+        onDragEnd={e => {
+            props.onDragEnd();
+        }}
+    >
+    </div>
+}
+
+
+function doPeriodsOverlap(oneStart: number, oneEnd: number, twoStart: number, twoEnd: number): boolean {
+    return (
+        oneStart === twoStart ||
+        oneEnd === twoEnd ||
+        (oneStart > twoStart && oneStart < twoEnd) ||
+        (oneEnd < twoEnd && oneEnd > twoStart) ||
+        (oneStart < twoStart && oneEnd > twoEnd)
+    );
+}
+
+
+
+function getParentPos(parent: HTMLElement): number[] {
+    return [
+        parent.style.left, parent.style.right, parent.style.width
+    ].map(z => +z.replace("%", "") / 100);
 }
