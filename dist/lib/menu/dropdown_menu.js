@@ -31,8 +31,9 @@ export default function DropDownMenu(props) {
                 main.style.removeProperty("overflow");
         }
     }, [open]);
-    function handleButtonClick() {
+    function handleButtonClick(e) {
         if (!props.disabled) {
+            e.stopPropagation();
             if (!open) {
                 let rect = container.current.getBoundingClientRect();
                 let displaySize = { width: window.innerWidth, height: window.innerHeight };
@@ -76,7 +77,7 @@ export default function DropDownMenu(props) {
         style.top = top;
     if (bottom !== 0)
         style.bottom = bottom;
-    return _jsxs("div", Object.assign({ className: className, ref: container }, { children: [_jsx("div", Object.assign({ onClick: () => handleButtonClick() }, { children: props.buttonComponent }), void 0),
+    return _jsxs("div", Object.assign({ className: className, ref: container }, { children: [_jsx("div", Object.assign({ onClick: e => handleButtonClick(e) }, { children: props.buttonComponent }), void 0),
             open &&
                 _jsx("div", Object.assign({ className: `dropdown`, style: style }, { children: props.items.map(item => {
                         return _jsx(DropDownMenuItem, { title: item.title, value: item.value, icon: item.icon, onClick: (v) => {

@@ -78,4 +78,9 @@ export default function GanttChart(props: {
     columnGroups?: GanttChartColumnGroup[];
     initialFilter?: "All" | "Full" | "Empty";
     onDragReorder?: (newData: GanttChartRowType[]) => void;
+    itemResize?: {
+        allowOverlap?: boolean;
+        integerIncrementation?: boolean;
+        onItemResized: (row: GanttChartRowType, item: GanttChartItemType) => void;
+    };
 }): JSX.Element;

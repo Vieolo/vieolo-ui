@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 // React
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 // Materail UI
 import SelectedIcon from '@mui/icons-material/RadioButtonChecked';
 import UnSelectedIcon from '@mui/icons-material/RadioButtonUnchecked';
@@ -12,12 +12,15 @@ import RadioGroup from '../lib/form/radio_group';
 import TypographyParagraphMedium from '../lib/typography/typography_paragraph_medium';
 import TypographyParagraphSmall from '../lib/typography/typography_paragraph_small';
 import TypographyCaptionMedium from '../lib/typography/typography_caption_medium';
+// Installed Packages
+import { toFixed } from '@vieolo/parsers/number_parsers';
 export default function GanttChart(props) {
     let [filter, setFilter] = useState(props.initialFilter || "All");
     let [draggedRow, setDraggedRow] = useState(null);
     let [contextMenuItem, setContextMenuItem] = useState(undefined);
     let [contextMenuRow, setContextMenuRow] = useState(undefined);
     let [contextMenuPosition, setContextMenuPosition] = useState(null);
+    let [resizeItem, setResizeItem] = useState(null);
     let finalData = [];
     // Checking the overlap of the items
     for (let i = 0; i < props.data.length; i++) {
@@ -37,7 +40,7 @@ export default function GanttChart(props) {
     let colWidth = `calc(${100 / props.columnTitles.length}% - ${100 / props.columnTitles.length}px)`;
     if (props.columnGroups)
         chartHeight += 20;
-    function handleDrop(newValue, position) {
+    function handleRowReorderDrop(newValue, position) {
         // Cancelling the drop if the drop was not meant to happen
         if (props.onDragReorder === undefined)
             return;
@@ -69,6 +72,71 @@ export default function GanttChart(props) {
         props.onDragReorder(newData);
         setDraggedRow(null);
     }
+    function handleItemResizeStart(el, direction, cor, item, row) {
+        setResizeItem({ el: el, direction: direction, cor: cor, item: item, row: row });
+    }
+    function handleItemResizeEnd() {
+        var _a, _b, _c, _d, _e, _f;
+        if (!resizeItem)
+            return;
+        let maxValue = props.columnTitles.length;
+        let [l, r, w] = getParentPos(resizeItem.el);
+        if ((_a = props.itemResize) === null || _a === void 0 ? void 0 : _a.integerIncrementation) {
+            let intChange = 1 / maxValue;
+            if (resizeItem.direction === 'right') {
+                w = w + ((intChange - (w % intChange)) / 100);
+                r = r + (intChange - (r % intChange));
+            }
+            else {
+                w = w - (((w % intChange)) / 100);
+                l = l - ((l % intChange));
+            }
+        }
+        let finalPos = {
+            left: resizeItem.direction === 'right' ? resizeItem.item.from : +toFixed(maxValue * l, ((_b = props.itemResize) === null || _b === void 0 ? void 0 : _b.integerIncrementation) ? 0 : 6),
+            right: resizeItem.direction === 'left' ? resizeItem.item.to : +toFixed(maxValue * r, ((_c = props.itemResize) === null || _c === void 0 ? void 0 : _c.integerIncrementation) ? 0 : 6),
+            width: +toFixed(maxValue * w, ((_d = props.itemResize) === null || _d === void 0 ? void 0 : _d.integerIncrementation) ? 0 : 6)
+        };
+        if (!((_e = props.itemResize) === null || _e === void 0 ? void 0 : _e.allowOverlap)) {
+            let hasOverlap = false;
+            for (let i = 0; i < resizeItem.row.items.length; i++) {
+                const item = resizeItem.row.items[i];
+                if (item.id === resizeItem.item.id)
+                    continue;
+                if (doPeriodsOverlap(item.from, item.to, finalPos.left, finalPos.right)) {
+                    hasOverlap = true;
+                    break;
+                }
+            }
+            if (hasOverlap) {
+                resizeItem.el.style.left = `${resizeItem.cor.leftPerc}%`;
+                resizeItem.el.style.right = `${resizeItem.cor.rightPerc}%`;
+                resizeItem.el.style.width = `${resizeItem.cor.widthPerc}%`;
+                setResizeItem(null);
+                return;
+            }
+        }
+        (_f = props.itemResize) === null || _f === void 0 ? void 0 : _f.onItemResized({ ...resizeItem.row, value: resizeItem.row.value.split("___")[0] }, { ...resizeItem.item, from: finalPos.left, to: finalPos.right });
+        setResizeItem(null);
+    }
+    function handleItemResize(e) {
+        if (!resizeItem)
+            return;
+        if (resizeItem.direction === 'right') {
+            let newWidth = resizeItem.cor.width + (e.pageX - resizeItem.cor.right);
+            let changeInWidth = ((newWidth - resizeItem.cor.width) / resizeItem.cor.width);
+            let right = resizeItem.cor.rightPerc + (resizeItem.cor.widthPerc * changeInWidth);
+            resizeItem.el.style.right = `${right}%`;
+            resizeItem.el.style.width = `${resizeItem.cor.widthPerc + (resizeItem.cor.widthPerc * changeInWidth)}%`;
+        }
+        else {
+            let newWidth = resizeItem.cor.width + (resizeItem.cor.left - (e.pageX));
+            let changeInWidth = ((newWidth - resizeItem.cor.width) / resizeItem.cor.width);
+            let left = resizeItem.cor.leftPerc - ((resizeItem.cor.widthPerc * changeInWidth));
+            resizeItem.el.style.width = `${resizeItem.cor.widthPerc + (resizeItem.cor.widthPerc * changeInWidth)}%`;
+            resizeItem.el.style.left = `${left}%`;
+        }
+    }
     return _jsxs("div", Object.assign({ className: "vieolo-gantt-chart", style: { height: chartHeight + 'px' } }, { children: [_jsxs("div", Object.assign({ className: "vieolo-gantt-chart__base" }, { children: [_jsx("div", Object.assign({ className: "vieolo-gantt-chart__base__item-column" }, { children: _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__base__item-column__item-title", style: { height: props.columnGroups ? '65px' : '45px' } }, { children: [_jsx(TypographyParagraphMedium, { text: props.dataTitle }, void 0),
                                 _jsx(RadioGroup, { horizontalButtonPadding: 7, onOptionChange: v => setFilter(v), options: [
                                         { button: _jsx(AllIcon, {}, void 0), id: 'All' },
@@ -99,12 +167,18 @@ export default function GanttChart(props) {
                         style.borderLeft = `2px solid ${row.colorIndicator}`;
                         style.marginLeft = '-2px';
                     }
-                    return _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__content-div__row", draggable: (props.onDragReorder && row.title.trim()) ? true : false, onDragStart: e => setDraggedRow(row.value), onDragEnd: e => setDraggedRow(null), style: style }, { children: [(row.title.trim() && props.onDragReorder) &&
+                    return _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__content-div__row", style: style }, { children: [(row.title.trim() && props.onDragReorder && draggedRow) &&
                                 _jsx(GanttRowDropZone, { position: 'top', onDrop: e => {
                                         if (draggedRow !== row.value)
-                                            handleDrop(row.value, 'top');
+                                            handleRowReorderDrop(row.value, 'top');
                                     } }, void 0),
-                            _jsxs("div", Object.assign({ className: `vieolo-gantt-chart__content-div__row__item-column ${(row.contextMenuItems && row.contextMenuItems.length > 0) ? " clickable" : ""}`, onClick: e => {
+                            _jsxs("div", Object.assign({ className: `vieolo-gantt-chart__content-div__row__item-column ${(row.contextMenuItems && row.contextMenuItems.length > 0) ? " clickable" : ""}`, draggable: (props.onDragReorder && row.title.trim()) ? true : false, onDragStart: e => {
+                                    setDraggedRow(row.value);
+                                    e.currentTarget.style.backgroundColor = "#f2f2f2";
+                                }, onDragEnd: e => {
+                                    setDraggedRow(null);
+                                    e.currentTarget.style.removeProperty('background-color');
+                                }, onClick: e => {
                                     if (row.contextMenuItems && row.contextMenuItems.length > 0) {
                                         e.preventDefault();
                                         e.stopPropagation();
@@ -114,8 +188,8 @@ export default function GanttChart(props) {
                                     }
                                 } }, { children: [_jsx("p", Object.assign({ className: "vieolo-gantt-chart__content-div__row__item-column__title", title: row.title }, { children: row.title }), void 0),
                                     row.subtitle &&
-                                        _jsx(TypographyParagraphSmall, { text: row.subtitle, showTitle: true }, void 0)] }), void 0),
-                            _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__content-div__row__bar-column" }, { children: [row.supItems &&
+                                        _jsx(TypographyParagraphSmall, { text: row.subtitle, showTitle: true }, void 0)] }), row.value + " col title"),
+                            _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__content-div__row__bar-column", onDragOver: !resizeItem ? undefined : handleItemResize }, { children: [row.supItems &&
                                         row.supItems.map((s, z) => {
                                             let supLeft = (s.from / props.columnTitles.length) * 100;
                                             let supWidth = ((s.to - s.from) / props.columnTitles.length) * 100;
@@ -152,35 +226,39 @@ export default function GanttChart(props) {
                                             style.backgroundColor = d.color.background;
                                             style.color = d.color.text;
                                         }
-                                        return _jsx(Fragment, { children: _jsxs("div", Object.assign({ "aria-label": `${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + i.toString()}`, className: className, style: style, onClick: (e) => {
-                                                    let hasContextMenu = d.contextMenuItems && d.contextMenuItems.length > 0;
-                                                    let isTouchEvent = e.nativeEvent instanceof PointerEvent && e.nativeEvent.pointerType === 'touch';
-                                                    let isTouchOnlyDevice = "ontouchstart" in window && window.matchMedia("(pointer: coarse)").matches && !window.matchMedia("(pointer: fine)").matches;
-                                                    if (hasContextMenu && (isTouchEvent || isTouchOnlyDevice)) {
-                                                        e.preventDefault();
-                                                        e.stopPropagation();
-                                                        setContextMenuItem(d);
-                                                        setContextMenuRow(row);
-                                                        setContextMenuPosition({ x: e.pageX, y: e.pageY });
-                                                    }
-                                                    else {
-                                                        if (d.onClick)
-                                                            d.onClick(d);
-                                                    }
-                                                }, onContextMenu: e => {
-                                                    if (d.contextMenuItems && d.contextMenuItems.length > 0) {
-                                                        e.preventDefault();
-                                                        e.stopPropagation();
-                                                        setContextMenuItem(d);
-                                                        setContextMenuRow(row);
-                                                        setContextMenuPosition({ x: e.pageX, y: e.pageY });
-                                                    }
-                                                } }, { children: [(d.title || d.icon) &&
-                                                        _jsxs("div", Object.assign({ className: 'center-by-flex-row' }, { children: [d.icon && d.icon,
-                                                                d.title &&
-                                                                    _jsx("p", Object.assign({ className: "vieolo-gantt-chart__content-div__row__bar-column__bar__row-title", title: d.title }, { children: d.title }), void 0)] }), void 0),
-                                                    d.subtitle &&
-                                                        _jsx("p", Object.assign({ className: "vieolo-gantt-chart__content-div__row__bar-column__bar__row-subtitle", title: d.subtitle }, { children: d.subtitle }), void 0)] }), `${i}__${d.title || "no_title"}`) }, `${i}__${d.title || "no_title"}_fragment`);
+                                        return _jsxs("div", Object.assign({ "aria-label": `${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + i.toString()}`, className: className, style: style, onClick: (e) => {
+                                                let hasContextMenu = d.contextMenuItems && d.contextMenuItems.length > 0;
+                                                let isTouchEvent = e.nativeEvent instanceof PointerEvent && e.nativeEvent.pointerType === 'touch';
+                                                let isTouchOnlyDevice = "ontouchstart" in window && window.matchMedia("(pointer: coarse)").matches && !window.matchMedia("(pointer: fine)").matches;
+                                                if (hasContextMenu && (isTouchEvent || isTouchOnlyDevice)) {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    setContextMenuItem(d);
+                                                    setContextMenuRow(row);
+                                                    setContextMenuPosition({ x: e.pageX, y: e.pageY });
+                                                }
+                                                else {
+                                                    if (d.onClick)
+                                                        d.onClick(d);
+                                                }
+                                            }, onContextMenu: e => {
+                                                if (d.contextMenuItems && d.contextMenuItems.length > 0) {
+                                                    e.preventDefault();
+                                                    e.stopPropagation();
+                                                    setContextMenuItem(d);
+                                                    setContextMenuRow(row);
+                                                    setContextMenuPosition({ x: e.pageX, y: e.pageY });
+                                                }
+                                            } }, { children: [props.itemResize &&
+                                                    _jsx(GanttItemResizeHandle, { position: 'left', onDragStart: (el, cor) => handleItemResizeStart(el, 'left', cor, d, row), onDragEnd: handleItemResizeEnd }, void 0),
+                                                (d.title || d.icon) &&
+                                                    _jsxs("div", Object.assign({ className: 'center-by-flex-row' }, { children: [d.icon && d.icon,
+                                                            d.title &&
+                                                                _jsx("p", Object.assign({ className: "vieolo-gantt-chart__content-div__row__bar-column__bar__row-title", title: d.title }, { children: d.title }), void 0)] }), void 0),
+                                                d.subtitle &&
+                                                    _jsx("p", Object.assign({ className: "vieolo-gantt-chart__content-div__row__bar-column__bar__row-subtitle", title: d.subtitle }, { children: d.subtitle }), void 0),
+                                                props.itemResize &&
+                                                    _jsx(GanttItemResizeHandle, { position: 'right', onDragStart: (el, cor) => handleItemResizeStart(el, 'right', cor, d, row), onDragEnd: handleItemResizeEnd }, void 0)] }), `${i}__${d.title || "no_title"}_${d.from}_${d.to}`);
                                     }),
                                     row.subItems &&
                                         row.subItems.map((s, z) => {
@@ -189,10 +267,10 @@ export default function GanttChart(props) {
                                             let subRight = (s.to / props.columnTitles.length) * 100;
                                             return _jsx("div", { className: "vieolo-gantt-chart__content-div__row__bar-column__sub-item-bar", style: { left: `${subLeft}%`, width: `${subWidth}%`, right: `${subRight}%` }, "aria-label": `${row.title} ${(s.ariaLabel || "sub-item") + ' ' + z.toString()}` }, `${row.value} ${s.id} subitem ${s.from}_${s.to}_${z}`);
                                         })] }), void 0),
-                            (row.title.trim() && props.onDragReorder) &&
+                            (row.title.trim() && props.onDragReorder && draggedRow) &&
                                 _jsx(GanttRowDropZone, { position: 'bottom', onDrop: e => {
                                         if (draggedRow !== row.value)
-                                            handleDrop(row.value, 'bottom');
+                                            handleRowReorderDrop(row.value, 'bottom');
                                     } }, void 0)] }), row.value);
                 }) }), void 0),
             (contextMenuRow && contextMenuPosition) &&
@@ -215,33 +293,34 @@ export default function GanttChart(props) {
  * @param data The data containing the items
  */
 function doItemsOverlap(data) {
-    let cols = [];
+    let occupancies = [];
     let overlap = false;
     for (let i = 0; i < data.items.length; i++) {
         const item = data.items[i];
         if (overlap)
             break;
-        for (let z = item.from; z < item.to; z++) {
-            if (cols.includes(z)) {
+        for (let z = 0; z < Object.values(occupancies).length; z++) {
+            const oc = Object.values(occupancies)[z];
+            if (doPeriodsOverlap(oc.from, oc.to, item.from, item.to)) {
                 overlap = true;
                 break;
             }
-            cols.push(z);
         }
+        occupancies.push({ from: item.from, to: item.to });
     }
     return overlap;
 }
 /**
  * Checks whether the start and end indices of the data intersects with the occupied indices. This function only checks the overlap
- * @param array The array of indices of occupied slots
+ * @param array The array of ranges of occupied slots
  * @param rangeStart The start index of the item
  * @param rangeEnd The end index of the item
  */
 function doesIntersect(array, rangeStart, rangeEnd) {
     let intersects = false;
     for (let i = 0; i < array.length; i++) {
-        const item = array[i];
-        if (rangeStart === item || rangeEnd === item || (item > rangeStart && item < rangeEnd)) {
+        const oc = array[i];
+        if (doPeriodsOverlap(oc.from, oc.to, rangeStart, rangeEnd)) {
             intersects = true;
             break;
         }
@@ -257,30 +336,25 @@ function doesIntersect(array, rangeStart, rangeEnd) {
 function splitData(data) {
     let d = { ...data };
     // The first item is the original row
-    let rowsIndices = [];
     let rowData = [];
+    // The ranges that every row occupy
+    // If the new item overlaps with an existing range, it has to be tried with the new row
+    let rowsRanges = [];
     for (let i = 0; i < d.items.length; i++) {
         const item = d.items[i];
         let added = false;
-        for (let z = 0; z < rowsIndices.length; z++) {
-            const rowIndex = rowsIndices[z];
-            if (doesIntersect(rowIndex, item.from, item.to - 1))
+        for (let z = 0; z < Object.values(rowsRanges).length; z++) {
+            // The ranges already occupied in this row
+            const thisRowRange = Object.values(rowsRanges)[z];
+            if (doesIntersect(thisRowRange, item.from, item.to))
                 continue;
-            let indices = [];
-            for (let k = item.from; k < item.to; k++) {
-                indices.push(k);
-            }
-            rowIndex.push(...indices);
+            thisRowRange.push({ from: item.from, to: item.to });
             rowData[z].items.push(item);
             added = true;
             break;
         }
         if (!added) {
-            let indices = [];
-            for (let k = item.from; k < item.to; k++) {
-                indices.push(k);
-            }
-            rowsIndices.push(indices);
+            rowsRanges.push([{ from: item.from, to: item.to }]);
             rowData.push({
                 ...data,
                 value: data.value + '___' + i,
@@ -306,4 +380,38 @@ function GanttRowDropZone(props) {
             e.preventDefault();
             e.currentTarget.style.backgroundColor = 'transparent';
         } }, void 0);
+}
+function GanttItemResizeHandle(props) {
+    function getInitialPos(e) {
+        return {
+            leftPerc: +e.currentTarget.parentElement.style.left.replace("%", ""),
+            rightPerc: +e.currentTarget.parentElement.style.right.replace("%", ""),
+            width: e.currentTarget.parentElement.offsetWidth,
+            widthPerc: +e.currentTarget.parentElement.style.width.replace("%", ""),
+            pageX: e.pageX,
+            left: props.position === 'right'
+                ? (e.pageX + e.currentTarget.offsetWidth) - e.currentTarget.parentElement.offsetWidth
+                : e.pageX,
+            right: props.position === 'right'
+                ? (e.pageX + e.currentTarget.offsetWidth)
+                : e.pageX + e.currentTarget.parentElement.offsetWidth
+        };
+    }
+    return _jsx("div", { className: `vieolo-gantt-chart__content-div__row__bar-column__bar__resize vieolo-gantt-chart__content-div__row__bar-column__bar__resize--${props.position}`, draggable: true, onDragStart: e => {
+            props.onDragStart(e.currentTarget.parentElement, getInitialPos(e));
+        }, onDragEnd: e => {
+            props.onDragEnd();
+        } }, void 0);
+}
+function doPeriodsOverlap(oneStart, oneEnd, twoStart, twoEnd) {
+    return (oneStart === twoStart ||
+        oneEnd === twoEnd ||
+        (oneStart > twoStart && oneStart < twoEnd) ||
+        (oneEnd < twoEnd && oneEnd > twoStart) ||
+        (oneStart < twoStart && oneEnd > twoEnd));
+}
+function getParentPos(parent) {
+    return [
+        parent.style.left, parent.style.right, parent.style.width
+    ].map(z => +z.replace("%", "") / 100);
 }
