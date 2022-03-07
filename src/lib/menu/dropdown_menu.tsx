@@ -59,8 +59,9 @@ export default function DropDownMenu(props: DropDownMenuProps) {
     }, [open])
 
 
-    function handleButtonClick() {
+    function handleButtonClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
         if (!props.disabled) {
+            e.stopPropagation();
             if (!open) {
                 let rect = container.current!.getBoundingClientRect();
                 let displaySize = {width: window.innerWidth, height: window.innerHeight}
@@ -107,7 +108,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
     
 
     return <div className={className} ref={container as any}>
-        <div onClick={() => handleButtonClick()}>
+        <div onClick={e => handleButtonClick(e)}>
             {props.buttonComponent}
         </div>
 
