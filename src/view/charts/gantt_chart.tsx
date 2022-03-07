@@ -289,8 +289,9 @@ export function ganttChartOptions(): ViewData {
             draggable: {
                 default: true,
                 options: [false, true]
-            }
-        }
+            },
+            integerIncrementation: 'booleanTruDefault'
+        },        
     }
 }
 
@@ -336,7 +337,8 @@ export function GanttChartCreator(props: {p: GanttChartPropsType}) {
                     return z;
                 }) as GanttChartRowType[])
             },
-            allowOverlap: true
+            allowOverlap: true,
+            integerIncrementation: (props.p as any).integerIncrementation
         }}
     />
 }

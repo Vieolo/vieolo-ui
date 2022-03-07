@@ -103,6 +103,7 @@ export default function GanttChart(props: {
     onDragReorder?: (newData: GanttChartRowType[]) => void,
     itemResize?: {
         allowOverlap?: boolean,
+        integerIncrementation?: boolean,
         onItemResized: (row: GanttChartRowType, item: GanttChartItemType) => void,
     }
 }) {
@@ -381,6 +382,7 @@ export default function GanttChart(props: {
                                             props.itemResize &&
                                             <GanttItemResizeHandle
                                                 position='left'
+                                                integerIncrementation={props.itemResize.integerIncrementation}
                                                 maxValue={props.columnTitles.length}
                                                 onResize={(newPos) => props.itemResize!.onItemResized({...row, value: row.value.split("___")[0]}, { ...d, from: newPos.left, to: newPos.right })}
                                             />
@@ -404,6 +406,7 @@ export default function GanttChart(props: {
                                             props.itemResize &&
                                             <GanttItemResizeHandle
                                                 position='right'
+                                                integerIncrementation={props.itemResize.integerIncrementation}
                                                 maxValue={props.columnTitles.length}
                                                 onResize={(newPos) => props.itemResize!.onItemResized({...row, value: row.value.split("___")[0]}, { ...d, from: newPos.left, to: newPos.right })}
                                             />
@@ -599,6 +602,7 @@ function GanttItemResizeHandle(props: {
     position: 'left' | 'right',
     maxValue: number,
     onResize: (newPos: { left: number, right: number, width: number }) => void,
+    integerIncrementation?: boolean
 }) {
     let [pos, setPos] = useState<{ left: number, right: number, width: number, widthPerc: number, leftPerc: number, rightPerc: number } | null>(null);
 
@@ -650,6 +654,18 @@ function GanttItemResizeHandle(props: {
         onDragEnd={e => {
 
             let [l, r, w] = getParentPos(e.currentTarget.parentElement!);
+
+            if (props.integerIncrementation) {
+                let intChange = 1 / props.maxValue;
+                
+                if (props.position === 'right') {
+                    w = w + ((intChange - (w % intChange)) / 100)
+                    r = r + (intChange - (r % intChange))
+                } else {
+                    w = w - (((w % intChange)) / 100)
+                    l = l - ((l % intChange))
+                }
+            }
 
             props.onResize({
                 left: props.maxValue * l,
