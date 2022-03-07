@@ -290,7 +290,7 @@ export function ganttChartOptions(): ViewData {
             itemResizable: 'booleanTrueDefault',
             integerIncrementation: 'booleanTrueDefault',
             allowResizeOverlap: 'boolean',
-            rejectResizeCallback: 'booleanTrueDefault'
+            rejectResizeCallback: 'boolean'
         },        
     }
 }
