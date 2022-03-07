@@ -81,6 +81,6 @@ export default function GanttChart(props: {
     itemResize?: {
         allowOverlap?: boolean;
         integerIncrementation?: boolean;
-        onItemResized: (row: GanttChartRowType, item: GanttChartItemType) => void;
+        onItemResized: (row: GanttChartRowType, item: GanttChartItemType) => void | boolean;
     };
 }): JSX.Element;
