@@ -1681,11 +1681,11 @@ body {
 			width: 100%;
 
 			&--top {
-				margin-top: -22.5px;
+				transform: translateY(-22.5px)
 			}
 
 			&--bottom {
-				margin-top: 22.5px;
+				transform: translateY(22.5px)
 			}
 		}
 	}

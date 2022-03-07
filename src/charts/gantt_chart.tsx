@@ -181,7 +181,7 @@ export default function GanttChart(props: {
 
     function handleItemResizeEnd() {
         if (!resizeItem) return;
-        
+
         let maxValue = props.columnTitles.length
         let [l, r, w] = getParentPos(resizeItem.el);
 
@@ -201,7 +201,7 @@ export default function GanttChart(props: {
             left: resizeItem.direction === 'right' ? resizeItem.item.from : +toFixed(maxValue * l, props.itemResize?.integerIncrementation ? 0 : 6),
             right: resizeItem.direction === 'left' ? resizeItem.item.to : +toFixed(maxValue * r, props.itemResize?.integerIncrementation ? 0 : 6),
             width: +toFixed(maxValue * w, props.itemResize?.integerIncrementation ? 0 : 6)
-        }        
+        }
 
         props.itemResize?.onItemResized({ ...resizeItem.row, value: resizeItem.row.value.split("___")[0] }, { ...resizeItem.item, from: finalPos.left, to: finalPos.right })
         setResizeItem(null);
@@ -658,7 +658,7 @@ function GanttItemResizeHandle(props: {
     position: 'left' | 'right',
     onDragStart: (el: HTMLElement, cor: GanttItemResizeInitialCoordinates) => void,
     onDragEnd: () => void,
-}) {    
+}) {
 
     function getInitialPos(e: React.DragEvent<HTMLDivElement>): GanttItemResizeInitialCoordinates {
         return {
@@ -674,7 +674,7 @@ function GanttItemResizeHandle(props: {
                 ? (e.pageX + e.currentTarget.offsetWidth)
                 : e.pageX + e.currentTarget.parentElement!.offsetWidth
         }
-    }    
+    }
 
     return <div
         className={`vieolo-gantt-chart__content-div__row__bar-column__bar__resize vieolo-gantt-chart__content-div__row__bar-column__bar__resize--${props.position}`}
@@ -684,7 +684,7 @@ function GanttItemResizeHandle(props: {
         }}
         onDragEnd={e => {
             props.onDragEnd();
-        }}        
+        }}
     >
     </div>
 }
