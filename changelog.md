@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.17.3 (2022-03-07)
+- Added accept response to the resize callback of items in `GanttChart` ([#106](https://github.com/Vieolo/vieolo-ui/issues/106))
+
 ## 0.17.2 (2022-03-07)
 - Added resizing of the items to the `GanttChart` for
     - Allowing items to overlap ([#104](https://github.com/Vieolo/vieolo-ui/issues/104))

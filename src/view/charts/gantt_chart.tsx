@@ -289,7 +289,8 @@ export function ganttChartOptions(): ViewData {
             draggable: 'booleanTrueDefault',
             itemResizable: 'booleanTrueDefault',
             integerIncrementation: 'booleanTrueDefault',
-            allowResizeOverlap: 'boolean'
+            allowResizeOverlap: 'boolean',
+            rejectResizeCallback: 'boolean'
         },        
     }
 }
@@ -325,6 +326,8 @@ export function GanttChartCreator(props: {p: GanttChartPropsType}) {
         onDragReorder={(props.p as any).draggable ? (nd) => setData(nd) : undefined}
         itemResize={!(props.p as any).itemResizable ? undefined : {
             onItemResized: (r, d) => {
+                if ((props.p as any).rejectResizeCallback) return false;
+
                 setData(data.map(z => {
                     if (z.value !== r.value) return z;
                     

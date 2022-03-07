@@ -116,8 +116,16 @@ export default function GanttChart(props) {
                 return;
             }
         }
-        (_f = props.itemResize) === null || _f === void 0 ? void 0 : _f.onItemResized({ ...resizeItem.row, value: resizeItem.row.value.split("___")[0] }, { ...resizeItem.item, from: finalPos.left, to: finalPos.right });
-        setResizeItem(null);
+        let response = (_f = props.itemResize) === null || _f === void 0 ? void 0 : _f.onItemResized({ ...resizeItem.row, value: resizeItem.row.value.split("___")[0] }, { ...resizeItem.item, from: finalPos.left, to: finalPos.right });
+        if (response === true || response === undefined) {
+            setResizeItem(null);
+        }
+        else {
+            resizeItem.el.style.left = `${resizeItem.cor.leftPerc}%`;
+            resizeItem.el.style.right = `${resizeItem.cor.rightPerc}%`;
+            resizeItem.el.style.width = `${resizeItem.cor.widthPerc}%`;
+            setResizeItem(null);
+        }
     }
     function handleItemResize(e) {
         if (!resizeItem)

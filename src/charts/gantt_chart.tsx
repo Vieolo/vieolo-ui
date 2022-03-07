@@ -106,7 +106,7 @@ export default function GanttChart(props: {
     itemResize?: {
         allowOverlap?: boolean,
         integerIncrementation?: boolean,
-        onItemResized: (row: GanttChartRowType, item: GanttChartItemType) => void,
+        onItemResized: (row: GanttChartRowType, item: GanttChartItemType) => void | boolean,
     }
 }) {
 
@@ -224,8 +224,16 @@ export default function GanttChart(props: {
             }
         }
 
-        props.itemResize?.onItemResized({ ...resizeItem.row, value: resizeItem.row.value.split("___")[0] }, { ...resizeItem.item, from: finalPos.left, to: finalPos.right })
-        setResizeItem(null);
+        let response = props.itemResize?.onItemResized({ ...resizeItem.row, value: resizeItem.row.value.split("___")[0] }, { ...resizeItem.item, from: finalPos.left, to: finalPos.right })
+        
+        if (response === true || response === undefined) {
+            setResizeItem(null);
+        } else {
+            resizeItem.el.style.left = `${resizeItem.cor.leftPerc}%`;
+            resizeItem.el.style.right = `${resizeItem.cor.rightPerc}%`;
+            resizeItem.el.style.width = `${resizeItem.cor.widthPerc}%`;
+            setResizeItem(null);
+        }
     }
 
     function handleItemResize(e: React.DragEvent<HTMLDivElement>) {
