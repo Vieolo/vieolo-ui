@@ -203,6 +203,27 @@ export default function GanttChart(props: {
             width: +toFixed(maxValue * w, props.itemResize?.integerIncrementation ? 0 : 6)
         }
 
+        if (!props.itemResize?.allowOverlap) {
+            let hasOverlap = false;
+
+            for (let i = 0; i < resizeItem.row.items.length; i++) {
+                const item = resizeItem.row.items[i];
+                if (item.id === resizeItem.item.id) continue;
+                if (doPeriodsOverlap(item.from, item.to, finalPos.left, finalPos.right)) {
+                    hasOverlap = true;
+                    break;
+                }
+            }
+
+            if (hasOverlap) {
+                resizeItem.el.style.left = `${resizeItem.cor.leftPerc}%`;
+                resizeItem.el.style.right = `${resizeItem.cor.rightPerc}%`;
+                resizeItem.el.style.width = `${resizeItem.cor.widthPerc}%`;
+                setResizeItem(null);
+                return;
+            }
+        }
+
         props.itemResize?.onItemResized({ ...resizeItem.row, value: resizeItem.row.value.split("___")[0] }, { ...resizeItem.item, from: finalPos.left, to: finalPos.right })
         setResizeItem(null);
     }

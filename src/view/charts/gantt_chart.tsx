@@ -286,10 +286,10 @@ export function ganttChartOptions(): ViewData {
         } as Partial<GanttChartPropsType>,
         variables: {
             itemColor: 'colors',
-            draggable: 'booleanTruDefault',
-            itemResizable: 'booleanTruDefault',
-            integerIncrementation: 'boolean',
-            allowResizeOverlap: 'booleanTruDefault'
+            draggable: 'booleanTrueDefault',
+            itemResizable: 'booleanTrueDefault',
+            integerIncrementation: 'booleanTrueDefault',
+            allowResizeOverlap: 'boolean'
         },        
     }
 }
