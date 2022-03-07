@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.18.0 (2022-03-07)
+
+#### Breaking Changes
+- The return value of `onItemResize` function of `GanttChart` is converetd into a promise
+
 ## 0.17.3 (2022-03-07)
 - Added accept response to the resize callback of items in `GanttChart` ([#106](https://github.com/Vieolo/vieolo-ui/issues/106))
 

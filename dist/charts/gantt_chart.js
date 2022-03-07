@@ -75,7 +75,7 @@ export default function GanttChart(props) {
     function handleItemResizeStart(el, direction, cor, item, row) {
         setResizeItem({ el: el, direction: direction, cor: cor, item: item, row: row });
     }
-    function handleItemResizeEnd() {
+    async function handleItemResizeEnd() {
         var _a, _b, _c, _d, _e, _f;
         if (!resizeItem)
             return;
@@ -116,7 +116,7 @@ export default function GanttChart(props) {
                 return;
             }
         }
-        let response = (_f = props.itemResize) === null || _f === void 0 ? void 0 : _f.onItemResized({ ...resizeItem.row, value: resizeItem.row.value.split("___")[0] }, { ...resizeItem.item, from: finalPos.left, to: finalPos.right });
+        let response = await ((_f = props.itemResize) === null || _f === void 0 ? void 0 : _f.onItemResized({ ...resizeItem.row, value: resizeItem.row.value.split("___")[0] }, { ...resizeItem.item, from: finalPos.left, to: finalPos.right }));
         if (response === true || response === undefined) {
             setResizeItem(null);
         }
