@@ -106,7 +106,7 @@ export default function GanttChart(props: {
     itemResize?: {
         allowOverlap?: boolean,
         integerIncrementation?: boolean,
-        onItemResized: (row: GanttChartRowType, item: GanttChartItemType) => void | boolean,
+        onItemResized: (row: GanttChartRowType, item: GanttChartItemType) => Promise<void | boolean>,
     }
 }) {
 
@@ -179,7 +179,7 @@ export default function GanttChart(props: {
         setResizeItem({ el: el, direction: direction, cor: cor, item: item, row: row });
     }
 
-    function handleItemResizeEnd() {
+    async function handleItemResizeEnd() {
         if (!resizeItem) return;
 
         let maxValue = props.columnTitles.length
@@ -224,7 +224,7 @@ export default function GanttChart(props: {
             }
         }
 
-        let response = props.itemResize?.onItemResized({ ...resizeItem.row, value: resizeItem.row.value.split("___")[0] }, { ...resizeItem.item, from: finalPos.left, to: finalPos.right })
+        let response = await props.itemResize?.onItemResized({ ...resizeItem.row, value: resizeItem.row.value.split("___")[0] }, { ...resizeItem.item, from: finalPos.left, to: finalPos.right })
         
         if (response === true || response === undefined) {
             setResizeItem(null);

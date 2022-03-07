@@ -325,7 +325,7 @@ export function GanttChartCreator(props: {p: GanttChartPropsType}) {
         initialFilter='All'
         onDragReorder={(props.p as any).draggable ? (nd) => setData(nd) : undefined}
         itemResize={!(props.p as any).itemResizable ? undefined : {
-            onItemResized: (r, d) => {
+            onItemResized: async (r, d) => {
                 if ((props.p as any).rejectResizeCallback) return false;
 
                 setData(data.map(z => {
