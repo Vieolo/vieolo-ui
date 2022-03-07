@@ -16,6 +16,8 @@ import TypographyParagraphSmall from '../lib/typography/typography_paragraph_sma
 import TypographyCaptionMedium from '../lib/typography/typography_caption_medium';
 import { ColorOptionType } from '../lib/private/types';
 
+// Installed Packages
+import { toFixed } from '@vieolo/parsers/number_parsers';
 
 export type GanttChartContextMenuItem = {
     title: string,
@@ -382,9 +384,10 @@ export default function GanttChart(props: {
                                             props.itemResize &&
                                             <GanttItemResizeHandle
                                                 position='left'
+                                                originalRange={{left: d.from, right: d.to}}
                                                 integerIncrementation={props.itemResize.integerIncrementation}
                                                 maxValue={props.columnTitles.length}
-                                                onResize={(newPos) => props.itemResize!.onItemResized({...row, value: row.value.split("___")[0]}, { ...d, from: newPos.left, to: newPos.right })}
+                                                onResize={(newPos) => props.itemResize!.onItemResized({...row, value: row.value.split("___")[0]}, { ...d, from: newPos.left, to: d.to })}
                                             />
                                         }
                                         {
@@ -406,9 +409,10 @@ export default function GanttChart(props: {
                                             props.itemResize &&
                                             <GanttItemResizeHandle
                                                 position='right'
+                                                originalRange={{left: d.from, right: d.to}}
                                                 integerIncrementation={props.itemResize.integerIncrementation}
                                                 maxValue={props.columnTitles.length}
-                                                onResize={(newPos) => props.itemResize!.onItemResized({...row, value: row.value.split("___")[0]}, { ...d, from: newPos.left, to: newPos.right })}
+                                                onResize={(newPos) => props.itemResize!.onItemResized({...row, value: row.value.split("___")[0]}, { ...d, from: d.from, to: newPos.right })}
                                             />
                                         }
                                     </div>
@@ -600,11 +604,12 @@ function GanttRowDropZone(props: {
 
 function GanttItemResizeHandle(props: {
     position: 'left' | 'right',
+    originalRange: {left: number, right: number},
     maxValue: number,
     onResize: (newPos: { left: number, right: number, width: number }) => void,
     integerIncrementation?: boolean
 }) {
-    let [pos, setPos] = useState<{ left: number, right: number, width: number, widthPerc: number, leftPerc: number, rightPerc: number } | null>(null);
+    let [pos, setPos] = useState<{ left: number, right: number, width: number, widthPerc: number, leftPerc: number, rightPerc: number, pageX: number } | null>(null);
 
     function getInitialPos(e: React.DragEvent<HTMLDivElement>) {
         return {
@@ -612,6 +617,7 @@ function GanttItemResizeHandle(props: {
             rightPerc: +e.currentTarget.parentElement!.style.right.replace("%", ""),
             width: e.currentTarget.parentElement!.offsetWidth,
             widthPerc: +e.currentTarget.parentElement!.style.width.replace("%", ""),
+            pageX: e.pageX,
             left: props.position === 'right'
                 ? (e.pageX + e.currentTarget.offsetWidth) - e.currentTarget.parentElement!.offsetWidth
                 : e.pageX,
@@ -666,16 +672,19 @@ function GanttItemResizeHandle(props: {
                     l = l - ((l % intChange))
                 }
             }
-
             props.onResize({
-                left: props.maxValue * l,
-                right: props.maxValue * r,
-                width: props.maxValue * w
+                left: props.position === 'right' ? props.originalRange.left : +toFixed(props.maxValue * l, props.integerIncrementation ? 0 : 6),
+                right: props.position === 'left' ? props.originalRange.right : +toFixed(props.maxValue * r, props.integerIncrementation ? 0 : 6),
+                width: +toFixed(props.maxValue * w, props.integerIncrementation ? 0 : 6)
             })
             setPos(null);
         }}
         onDrag={e => {
             if (!pos) return;
+            // In the last event of Chrome and all of the events of Firefox, the coordinates are zero
+            // This problem does not occur in Safari
+            if (!e.pageX && !e.pageY && !e.clientX && !e.clientY) return;
+
             handleResize(e);
         }}
     >
