@@ -118,6 +118,8 @@ export default function GanttChart(props: {
     let [contextMenuRow, setContextMenuRow] = useState<GanttChartRowType | undefined>(undefined);
     let [contextMenuPosition, setContextMenuPosition] = useState<{ x: number, y: number } | null>(null);
 
+    let [resizeItem, setResizeItem] = useState<{ el: HTMLElement, direction: 'left' | 'right', cor: GanttItemResizeInitialCoordinates, item: GanttChartItemType, row: GanttChartRowType } | null>(null);
+
     let finalData: GanttChartRowType[] = [];
 
     // Checking the overlap of the items
@@ -139,7 +141,7 @@ export default function GanttChart(props: {
     if (props.columnGroups) chartHeight += 20;
 
 
-    function handleDrop(newValue: string, position: 'top' | 'bottom') {
+    function handleRowReorderDrop(newValue: string, position: 'top' | 'bottom') {
         // Cancelling the drop if the drop was not meant to happen
         if (props.onDragReorder === undefined) return;
         if (draggedRow === null) return;
@@ -173,6 +175,55 @@ export default function GanttChart(props: {
         setDraggedRow(null);
     }
 
+    function handleItemResizeStart(el: HTMLElement, direction: 'left' | 'right', cor: GanttItemResizeInitialCoordinates, item: GanttChartItemType, row: GanttChartRowType) {
+        setResizeItem({ el: el, direction: direction, cor: cor, item: item, row: row });
+    }
+
+    function handleItemResizeEnd() {
+        if (!resizeItem) return;
+        
+        let maxValue = props.columnTitles.length
+        let [l, r, w] = getParentPos(resizeItem.el);
+
+        if (props.itemResize?.integerIncrementation) {
+            let intChange = 1 / maxValue;
+
+            if (resizeItem.direction === 'right') {
+                w = w + ((intChange - (w % intChange)) / 100)
+                r = r + (intChange - (r % intChange))
+            } else {
+                w = w - (((w % intChange)) / 100)
+                l = l - ((l % intChange))
+            }
+        }
+
+        let finalPos = {
+            left: resizeItem.direction === 'right' ? resizeItem.item.from : +toFixed(maxValue * l, props.itemResize?.integerIncrementation ? 0 : 6),
+            right: resizeItem.direction === 'left' ? resizeItem.item.to : +toFixed(maxValue * r, props.itemResize?.integerIncrementation ? 0 : 6),
+            width: +toFixed(maxValue * w, props.itemResize?.integerIncrementation ? 0 : 6)
+        }        
+
+        props.itemResize?.onItemResized({ ...resizeItem.row, value: resizeItem.row.value.split("___")[0] }, { ...resizeItem.item, from: finalPos.left, to: finalPos.right })
+        setResizeItem(null);
+    }
+
+    function handleItemResize(e: React.DragEvent<HTMLDivElement>) {
+        if (!resizeItem) return;
+
+        if (resizeItem.direction === 'right') {
+            let newWidth = resizeItem.cor.width + (e.pageX - resizeItem.cor.right);
+            let changeInWidth = ((newWidth - resizeItem.cor.width) / resizeItem.cor.width);
+            let right = resizeItem.cor.rightPerc + (resizeItem.cor.widthPerc * changeInWidth);
+            resizeItem.el.style.right = `${right}%`;
+            resizeItem.el.style.width = `${resizeItem.cor.widthPerc + (resizeItem.cor.widthPerc * changeInWidth)}%`;
+        } else {
+            let newWidth = resizeItem.cor.width + (resizeItem.cor.left - (e.pageX));
+            let changeInWidth = ((newWidth - resizeItem.cor.width) / resizeItem.cor.width);
+            let left = resizeItem.cor.leftPerc - ((resizeItem.cor.widthPerc * changeInWidth));
+            resizeItem.el.style.width = `${resizeItem.cor.widthPerc + (resizeItem.cor.widthPerc * changeInWidth)}%`;
+            resizeItem.el.style.left = `${left}%`;
+        }
+    }
 
 
     return <div className="vieolo-gantt-chart" style={{ height: chartHeight + 'px' }}>
@@ -263,7 +314,7 @@ export default function GanttChart(props: {
                             <GanttRowDropZone
                                 position='top'
                                 onDrop={e => {
-                                    if (draggedRow !== row.value) handleDrop(row.value, 'top')
+                                    if (draggedRow !== row.value) handleRowReorderDrop(row.value, 'top')
                                 }}
                             />
                         }
@@ -296,7 +347,10 @@ export default function GanttChart(props: {
                                 <TypographyParagraphSmall text={row.subtitle} showTitle />
                             }
                         </div>
-                        <div className="vieolo-gantt-chart__content-div__row__bar-column">
+                        <div
+                            className="vieolo-gantt-chart__content-div__row__bar-column"
+                            onDragOver={!resizeItem ? undefined : handleItemResize}
+                        >
                             {
                                 row.supItems &&
                                 row.supItems.map((s, z) => {
@@ -384,10 +438,12 @@ export default function GanttChart(props: {
                                             props.itemResize &&
                                             <GanttItemResizeHandle
                                                 position='left'
-                                                originalRange={{left: d.from, right: d.to}}
+                                                originalRange={{ left: d.from, right: d.to }}
                                                 integerIncrementation={props.itemResize.integerIncrementation}
                                                 maxValue={props.columnTitles.length}
-                                                onResize={(newPos) => props.itemResize!.onItemResized({...row, value: row.value.split("___")[0]}, { ...d, from: newPos.left, to: d.to })}
+                                                onDragStart={(el, cor) => handleItemResizeStart(el, 'left', cor, d, row)}
+                                                onDragEnd={handleItemResizeEnd}
+                                                onResize={(newPos) => props.itemResize!.onItemResized({ ...row, value: row.value.split("___")[0] }, { ...d, from: newPos.left, to: d.to })}
                                             />
                                         }
                                         {
@@ -409,10 +465,12 @@ export default function GanttChart(props: {
                                             props.itemResize &&
                                             <GanttItemResizeHandle
                                                 position='right'
-                                                originalRange={{left: d.from, right: d.to}}
+                                                originalRange={{ left: d.from, right: d.to }}
                                                 integerIncrementation={props.itemResize.integerIncrementation}
                                                 maxValue={props.columnTitles.length}
-                                                onResize={(newPos) => props.itemResize!.onItemResized({...row, value: row.value.split("___")[0]}, { ...d, from: d.from, to: newPos.right })}
+                                                onDragStart={(el, cor) => handleItemResizeStart(el, 'right', cor, d, row)}
+                                                onDragEnd={handleItemResizeEnd}
+                                                onResize={(newPos) => props.itemResize!.onItemResized({ ...row, value: row.value.split("___")[0] }, { ...d, from: d.from, to: newPos.right })}
                                             />
                                         }
                                     </div>
@@ -441,7 +499,7 @@ export default function GanttChart(props: {
                             <GanttRowDropZone
                                 position='bottom'
                                 onDrop={e => {
-                                    if (draggedRow !== row.value) handleDrop(row.value, 'bottom')
+                                    if (draggedRow !== row.value) handleRowReorderDrop(row.value, 'bottom')
                                 }}
                             />
                         }
@@ -483,7 +541,7 @@ export default function GanttChart(props: {
  * @param data The data containing the items
  */
 function doItemsOverlap(data: GanttChartRowType): boolean {
-    let occupancies: {from: number, to: number}[] = [];
+    let occupancies: { from: number, to: number }[] = [];
     let overlap = false;
 
     for (let i = 0; i < data.items.length; i++) {
@@ -494,9 +552,9 @@ function doItemsOverlap(data: GanttChartRowType): boolean {
             if (doPeriodsOverlap(oc.from, oc.to, item.from, item.to)) {
                 overlap = true;
                 break;
-            }            
+            }
         }
-        occupancies.push({from: item.from, to: item.to});
+        occupancies.push({ from: item.from, to: item.to });
     }
     return overlap;
 }
@@ -507,7 +565,7 @@ function doItemsOverlap(data: GanttChartRowType): boolean {
  * @param rangeStart The start index of the item
  * @param rangeEnd The end index of the item
  */
-function doesIntersect(array: {from: number, to: number}[], rangeStart: number, rangeEnd: number): boolean {
+function doesIntersect(array: { from: number, to: number }[], rangeStart: number, rangeEnd: number): boolean {
     let intersects = false;
 
     for (let i = 0; i < array.length; i++) {
@@ -515,7 +573,7 @@ function doesIntersect(array: {from: number, to: number}[], rangeStart: number, 
         if (doPeriodsOverlap(oc.from, oc.to, rangeStart, rangeEnd)) {
             intersects = true;
             break;
-        }  
+        }
     }
 
     return intersects;
@@ -530,15 +588,15 @@ function doesIntersect(array: {from: number, to: number}[], rangeStart: number, 
  */
 function splitData(data: GanttChartRowType): GanttChartRowType[] {
     let d = { ...data };
-    
-    
+
+
     // The first item is the original row
     let rowData: GanttChartRowType[] = [];
-    
+
     // The ranges that every row occupy
     // If the new item overlaps with an existing range, it has to be tried with the new row
-    let rowsRanges: {from: number, to: number}[][] = []
-    
+    let rowsRanges: { from: number, to: number }[][] = []
+
     for (let i = 0; i < d.items.length; i++) {
         const item = d.items[i];
         let added = false;
@@ -549,7 +607,7 @@ function splitData(data: GanttChartRowType): GanttChartRowType[] {
 
             if (doesIntersect(thisRowRange, item.from, item.to)) continue;
 
-            thisRowRange.push({from: item.from, to: item.to});
+            thisRowRange.push({ from: item.from, to: item.to });
             rowData[z].items.push(item);
 
             added = true;
@@ -557,8 +615,8 @@ function splitData(data: GanttChartRowType): GanttChartRowType[] {
             break;
         }
 
-        if (!added) {            
-            rowsRanges.push([{from: item.from, to: item.to}]);
+        if (!added) {
+            rowsRanges.push([{ from: item.from, to: item.to }]);
             rowData.push({
                 ...data,
                 value: data.value + '___' + i,
@@ -602,16 +660,20 @@ function GanttRowDropZone(props: {
 }
 
 
+type GanttItemResizeInitialCoordinates = { left: number, right: number, width: number, widthPerc: number, leftPerc: number, rightPerc: number, pageX: number };
+
 function GanttItemResizeHandle(props: {
     position: 'left' | 'right',
-    originalRange: {left: number, right: number},
+    originalRange: { left: number, right: number },
     maxValue: number,
     onResize: (newPos: { left: number, right: number, width: number }) => void,
-    integerIncrementation?: boolean
+    integerIncrementation?: boolean,
+    onDragStart: (el: HTMLElement, cor: GanttItemResizeInitialCoordinates) => void,
+    onDragEnd: () => void,
 }) {
-    let [pos, setPos] = useState<{ left: number, right: number, width: number, widthPerc: number, leftPerc: number, rightPerc: number, pageX: number } | null>(null);
+    let [pos, setPos] = useState<GanttItemResizeInitialCoordinates | null>(null);
 
-    function getInitialPos(e: React.DragEvent<HTMLDivElement>) {
+    function getInitialPos(e: React.DragEvent<HTMLDivElement>): GanttItemResizeInitialCoordinates {
         return {
             leftPerc: +e.currentTarget.parentElement!.style.left.replace("%", ""),
             rightPerc: +e.currentTarget.parentElement!.style.right.replace("%", ""),
@@ -645,25 +707,27 @@ function GanttItemResizeHandle(props: {
         }
     }
 
-    function getParentPos(parent: HTMLElement): number[] {
-        return [
-            parent.style.left, parent.style.right, parent.style.width
-        ].map(z => +z.replace("%", "") / 100);
-    }
-
     return <div
         className={`vieolo-gantt-chart__content-div__row__bar-column__bar__resize vieolo-gantt-chart__content-div__row__bar-column__bar__resize--${props.position}`}
         draggable
         onDragStart={e => {
+            if (window.navigator.userAgent.includes("Firefox")) {
+                props.onDragStart(e.currentTarget.parentElement!, getInitialPos(e));
+                return;
+            }
             setPos(getInitialPos(e));
         }}
         onDragEnd={e => {
+            if (window.navigator.userAgent.includes("Firefox")) {
+                props.onDragEnd();
+                return;
+            }
 
             let [l, r, w] = getParentPos(e.currentTarget.parentElement!);
 
             if (props.integerIncrementation) {
                 let intChange = 1 / props.maxValue;
-                
+
                 if (props.position === 'right') {
                     w = w + ((intChange - (w % intChange)) / 100)
                     r = r + (intChange - (r % intChange))
@@ -692,12 +756,20 @@ function GanttItemResizeHandle(props: {
 }
 
 
-function doPeriodsOverlap(oneStart: number, oneEnd: number, twoStart: number, twoEnd: number) : boolean {
+function doPeriodsOverlap(oneStart: number, oneEnd: number, twoStart: number, twoEnd: number): boolean {
     return (
         oneStart === twoStart ||
         oneEnd === twoEnd ||
         (oneStart > twoStart && oneStart < twoEnd) ||
-        (oneEnd < twoEnd && oneEnd > twoStart) || 
-        (oneStart < twoStart && oneEnd > twoEnd)        
+        (oneEnd < twoEnd && oneEnd > twoStart) ||
+        (oneStart < twoStart && oneEnd > twoEnd)
     );
+}
+
+
+
+function getParentPos(parent: HTMLElement): number[] {
+    return [
+        parent.style.left, parent.style.right, parent.style.width
+    ].map(z => +z.replace("%", "") / 100);
 }
