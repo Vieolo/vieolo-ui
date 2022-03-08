@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.18.1 (2022-03-08)
+- Added border radius option to `Chip` ([#109](https://github.com/Vieolo/vieolo-ui/issues/109))
+- Added emphasis option to `Chip` ([#108](https://github.com/Vieolo/vieolo-ui/issues/108))
+- Fixed the default border radius of `IconButton` ([#110](https://github.com/Vieolo/vieolo-ui/issues/110))
+
 ## 0.18.0 (2022-03-07)
 
 #### Breaking Changes

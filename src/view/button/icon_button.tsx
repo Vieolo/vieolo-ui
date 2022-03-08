@@ -8,7 +8,6 @@ import IconOne from '@mui/icons-material/Assignment';
 import IconButton from '../../lib/button/icon_button';
 
 // Types
-import { ColorOptionType } from '../../lib/private/types';
 import { ViewData } from '../main/main';
 
 type IconButtonPropsType = React.ComponentProps<typeof IconButton>;
@@ -20,10 +19,7 @@ export function iconButtonOptions(): ViewData {
             onClick: () => alert("Clicked"),
         } as Partial<IconButtonPropsType>,
         variables: {
-            color: {
-                options: ['primary', 'secondary', 'tertiary', 'error', 'success', 'alert', 'accessory-blue', 'accessory-green', 'accessory-orange'] as ColorOptionType[],
-                default: 'primary'
-            },
+            color: 'colors',
             emphasis: {
                 options: ['high', 'medium', 'low', 'none'],
                 default: 'none'
@@ -32,9 +28,11 @@ export function iconButtonOptions(): ViewData {
                 options: ['medium', 'small', 'extra-small'],
                 default: 'medium'
             },
-            borderRadius: {
-                options: ['default', 'full', 'normal', 'half', 'none'],
-                default: 'default'
+            borderRadius: 'borderRadius',
+            borderWidth: {
+                default: '2',
+                options: ['2', '1', '0'],
+                type: 'number'
             }
         }
     }
@@ -54,6 +52,7 @@ export function IconButtonCreator(props: { p: IconButtonPropsType }) {
         emphasis={props.p.emphasis}
         tooltip={props.p.tooltip}
         tooltipPosition={props.p.tooltipPosition}
+        borderWidth={props.p.borderWidth}
     />
 
 }

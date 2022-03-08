@@ -10,6 +10,7 @@ import { SelectCreator, selectOptions } from '../form/select';
 import { PeriodSelectorCreator, periodSelectorOptions } from '../date_time/period_selector';
 import { IconButtonCreator, iconButtonOptions } from '../button/icon_button';
 import { ButtonCreator, buttonOptions } from '../button/button';
+import { ChipCreator, chipOptions } from '../button/chip';
 import { InputSetCreator, inputSetOptions } from '../form/input_set';
 import { ListCreator, listOptions } from '../list/list';
 import { SwitchSetCreator, switchSetOptions } from '../form/switch_set';
@@ -35,7 +36,7 @@ import SwitchSet from '../../lib/form/switch_set';
 import { barChartOptions, BarChartCreator } from '../charts/bar_chart';
 
 
-type ViewDataVariable = 'colors' | 'boolean' | "booleanTrueDefault" | {
+type ViewDataVariable = 'colors' | 'boolean' | "booleanTrueDefault" | "borderRadius" | {
     options: any[],
     default: any,
     type?: 'number' | "string" | "boolean"
@@ -66,6 +67,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator },
         "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator },
         "Checkbox": { title: "Checkbox", data: checkboxOptions(), creator: CheckboxCreator },
+        "Chip": { title: "Chip", data: chipOptions(), creator: ChipCreator },
         "Confirmation Dialog": { title: "Confirmation Dialog", data: confirmationDialogOptions(), creator: ConfirmationDialogCreator },
         "Date Input": { title: "Date Input", data: dateInputOptions(), creator: DateInputCreator },
         "Date Picker": { title: "Date Picker", data: datePickerOptions(), creator: DatePickerCreator },
@@ -125,6 +127,11 @@ export default function MainPage(props: {}): JSX.Element {
                     options: [false, true],
                     default: true
                 }
+            } else if (variable === "borderRadius") {
+                finalVariable = {
+                    options: ['default', 'full', 'normal', 'half', 'none'],
+                    default: 'default'
+                }
             } else if (variable === 'colors') {
                 finalVariable = {
                     options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'],
@@ -175,6 +182,11 @@ export default function MainPage(props: {}): JSX.Element {
                             options: [false, true],
                             default: true
                         }   
+                    } else if (tempVariable === "borderRadius") {
+                        variable = {
+                            options: ['default', 'full', 'normal', 'half', 'none'],
+                            default: 'default'
+                        }
                     } else if (tempVariable === 'colors') {
                         variable = {
                             options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
