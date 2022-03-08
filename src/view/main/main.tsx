@@ -36,7 +36,7 @@ import SwitchSet from '../../lib/form/switch_set';
 import { barChartOptions, BarChartCreator } from '../charts/bar_chart';
 
 
-type ViewDataVariable = 'colors' | 'boolean' | "booleanTrueDefault" | {
+type ViewDataVariable = 'colors' | 'boolean' | "booleanTrueDefault" | "borderRadius" | {
     options: any[],
     default: any,
     type?: 'number' | "string" | "boolean"
@@ -127,6 +127,11 @@ export default function MainPage(props: {}): JSX.Element {
                     options: [false, true],
                     default: true
                 }
+            } else if (variable === "borderRadius") {
+                finalVariable = {
+                    options: ['default', 'full', 'normal', 'half', 'none'],
+                    default: 'default'
+                }
             } else if (variable === 'colors') {
                 finalVariable = {
                     options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'],
@@ -177,6 +182,11 @@ export default function MainPage(props: {}): JSX.Element {
                             options: [false, true],
                             default: true
                         }   
+                    } else if (tempVariable === "borderRadius") {
+                        variable = {
+                            options: ['default', 'full', 'normal', 'half', 'none'],
+                            default: 'default'
+                        }
                     } else if (tempVariable === 'colors') {
                         variable = {
                             options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],

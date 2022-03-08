@@ -4,8 +4,7 @@ import React from 'react';
 // Material UI
 import IconOne from '@mui/icons-material/Assignment';
 import IconTwo from '@mui/icons-material/Backup';
-import IconThree from '@mui/icons-material/Cake';
-import IconFour from '@mui/icons-material/DataUsage';
+import IconThree from '@mui/icons-material/CheckBox';
 
 // Component
 import Chip from '../../lib/button/chip';
@@ -24,7 +23,14 @@ export function chipOptions(): ViewData {
 
         } as Partial<ChipPropsType>,
         variables: {
+            color: 'colors',
+            emphasis: {
+                default: 'low',
+                options: ["low", "medium"]
+            },
+            borderRadius: 'borderRadius',
             disabled: 'boolean',
+            selectable: 'booleanTrueDefault',
             selected: 'boolean',
             withIcon: 'boolean',
             withButton: 'boolean',
@@ -42,7 +48,11 @@ export function ChipCreator(props: {p: ChipPropsType}) {
         selected={props.p.selected}
         icon={(props.p as any).withIcon ? <IconThree /> : undefined}
         buttonIcon={(props.p as any).withButton ? <IconTwo /> : undefined}
-        onButtonClick={(props.p as any).withButton ? () => {} : undefined}        
+        onButtonClick={(props.p as any).withButton ? () => {} : undefined}     
+        color={props.p.color}   
+        onChipSelect={(props.p as any).selectable ? () => {} : undefined}
+        emphasis={props.p.emphasis}
+        borderRadius={props.p.borderRadius}
         buttonComponent={
             !(props.p as any).withDropDown
                 ? undefined
