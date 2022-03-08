@@ -35,9 +35,9 @@ export default function IconButton(props: {
 	} else if (e === 'medium') {
 		c = `${c} background-color--${col}-light ripple ripple--${col}-normal  border--px-0`;
 	} else if (e === 'low') {
-		c = `${c} background-color--white border--${col}-light hover--${col}-light color--${col}-normal  border--px-${props.borderWidth || '2'} border--solid`;
+		c = `${c} background-color--white border--${col}-light hover--${col}-light color--${col}-normal  border--px-${props.borderWidth === undefined ? '2' : props.borderWidth} border--solid`;
 	}else {
-		c = `${c} background-color--white border--white hover-border--${col}-light color--${col}-normal border--px-${props.borderWidth || '2'} border--solid ripple--${col}-light`;
+		c = `${c} background-color--white border--white hover-border--${col}-light color--${col}-normal border--px-${props.borderWidth === undefined ? '2' : props.borderWidth} border--solid ripple--${col}-light`;
 	}
 
 	if (props.tooltip) c += " vieolo-tooltip";	
