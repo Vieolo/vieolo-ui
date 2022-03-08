@@ -682,18 +682,15 @@ body {
 }
 
 .vieolo-chip {
-	height: 28px;
-	border-radius: 12px;
+	height: $row-height-small;
 	display: inline-flex;
 	align-items: center;
 	box-sizing: border-box;
 
-	.chip-content {
-		height: 30px;
-		border-radius: 14px;
+	&__content {
+		height: $row-height-small;
 		padding: 2px 5px;
 		@include center-by-flex-row;
-		border: 1px solid $secondary-color-normal;
 
 		p {
 			font-size: 11px;
@@ -706,9 +703,29 @@ body {
 		}
 	}
 
-	.chip-content-selected {
-		@include secondary-background;
+	&--border-radius-default {
+		border-radius: $border-radius-full;
 	}
+
+	&--border-radius-full {
+		border-radius: $border-radius-full;
+	}
+
+	&--border-radius-normal {
+		border-radius: $border-radius-normal;
+	}
+
+	&--border-radius-half {
+		border-radius: $border-radius-half;
+	}
+
+	&--border-radius-none {
+		border-radius: 0px;
+	}
+
+	//.chip-content-selected {
+	//	@include secondary-background;
+	//}
 }
 
 .vieolo-item-row {

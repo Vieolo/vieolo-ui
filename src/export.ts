@@ -3,7 +3,7 @@ import CalendarStateful from './lib/date_time/calendar_stateful';
 import CalendarStateless from './lib/date_time/calendar_stateless';
 import Checkbox from './lib/form/checkbox';
 import ContextMenu from './lib/menu/context_menu';
-import Chip from './lib/chip';
+import Chip from './lib/button/chip';
 import DateInput from './lib/date_time/date_input';
 import DatePicker from './lib/date_time/date_picker';
 import DateTimePicker from './lib/date_time/date_time_picker';
