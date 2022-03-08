@@ -419,7 +419,6 @@ body {
 }
 
 .vieolo-icon-button {
-	border-radius: $base-unit-half;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -465,6 +464,10 @@ body {
 
 	&--border-radius-normal {
 		border-radius: $border-radius-normal;
+	}
+
+	&--border-radius-default {
+		border-radius: $border-radius-half;
 	}
 
 	&--border-radius-half {
