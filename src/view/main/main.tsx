@@ -29,6 +29,7 @@ import { fileInputOptions, FileInputCreator } from '../form/file_input';
 import { timeInputOptions, TimeInputCreator } from '../date_time/time_input';
 import { dateTimePickerOptions, DateTimePickerCreator } from '../date_time/date_time_picker';
 import { dateInputOptions, DateInputCreator } from '../date_time/date_input';
+import { typographyOptions, TypographyCreator } from '../typography/typography';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
 
@@ -88,6 +89,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator },
         "Table": { title: "Table", data: tableOptions(), creator: TableCreator },
         "Time Input": { title: "Time Input", data: timeInputOptions(), creator: TimeInputCreator },
+        "Typography": { title: "Typography", data: typographyOptions(), creator: TypographyCreator },
     }
 
     useEffect(() => {
