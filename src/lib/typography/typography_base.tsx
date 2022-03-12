@@ -14,7 +14,8 @@ export default function TypographyBase(props: {
     ariaLabel?: string,
     color?: ColorOptionType,
     margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two",
-    fontWeight?: FontWeightType
+    fontWeight?: FontWeightType,
+    style?: React.CSSProperties
 }) {
     let finalClassName = `${props.color || (props.className.includes("caption") ? 'gray-text' : 'default-text')}-color `;
     finalClassName += `margin-vertical--${props.margin || "0"} `;
@@ -27,6 +28,7 @@ export default function TypographyBase(props: {
         title={props.showTitle ? props.text : ""}
         aria-label={props.ariaLabel}
         data-testid={props.dataTestID}
+        style={props.style}
     >
         {props.text}
     </p>

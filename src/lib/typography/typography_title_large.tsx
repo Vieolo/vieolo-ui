@@ -15,7 +15,8 @@ export default function TypographyTitleLarge (props: {
     ariaLabel?: string,
     color?: ColorOptionType,
     margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two",
-    fontWeight?: FontWeightType
+    fontWeight?: FontWeightType,
+    style?: React.CSSProperties
 }) {
     return <TypographyBase 
         text={props.text}
@@ -26,5 +27,6 @@ export default function TypographyTitleLarge (props: {
         color={props.color}
         margin={props.margin}
         fontWeight={props.fontWeight}
+        style={props.style}
     />
 }
