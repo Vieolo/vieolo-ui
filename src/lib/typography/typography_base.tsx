@@ -1,6 +1,9 @@
 // React
 import React from 'react';
 
+// Types
+import { ColorOptionType } from '../private/types';
+
 
 
 export default function TypographyBase(props: {
@@ -8,10 +11,13 @@ export default function TypographyBase(props: {
     text: string,
     showTitle?: boolean,
     dataTestID?: string,
-    ariaLabel?: string
+    ariaLabel?: string,
+    color?: ColorOptionType,
 }) {
+    let finalClassName = `${props.className} ${props.color || (props.className.includes("caption") ? 'gray-text' : 'default-text')}-color`;
+
     return <p
-        className={props.className}
+        className={finalClassName.trim()}
         title={props.showTitle ? props.text : ""}
         aria-label={props.ariaLabel}
         data-testid={props.dataTestID}

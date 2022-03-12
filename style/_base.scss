@@ -182,6 +182,19 @@ $accessory-green-text: black !default;
 
 
 
+@mixin default-text-color {
+	color: $normal-text-color;
+}
+.default-text-color {
+	@include default-text-color;
+}
+
+@mixin gray-text-color {
+	color: $gray-text-color;
+}
+.gray-text-color {
+	@include gray-text-color;
+}
 
 
 @mixin primary-color {

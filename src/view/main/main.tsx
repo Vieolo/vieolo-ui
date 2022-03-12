@@ -37,7 +37,7 @@ import SwitchSet from '../../lib/form/switch_set';
 import { barChartOptions, BarChartCreator } from '../charts/bar_chart';
 
 
-type ViewDataVariable = 'colors' | 'boolean' | "booleanTrueDefault" | "borderRadius" | {
+type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDefault" | "borderRadius" | {
     options: any[],
     default: any,
     type?: 'number' | "string" | "boolean"
@@ -139,6 +139,11 @@ export default function MainPage(props: {}): JSX.Element {
                     options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'],
                     default: 'primary'
                 }
+            } else if (variable === 'colorsOptional') {
+                finalVariable = {
+                    options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'],
+                    default: ''
+                }
             } else {
                 finalVariable = variable;
             }
@@ -193,6 +198,11 @@ export default function MainPage(props: {}): JSX.Element {
                         variable = {
                             options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
                             default: 'primary'
+                        }
+                    } else if (tempVariable === 'colorsOptional') {
+                        variable = {
+                            options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
+                            default: ''
                         }
                     } else {
                         variable = tempVariable;

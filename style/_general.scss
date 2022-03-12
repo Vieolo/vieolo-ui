@@ -36,7 +36,6 @@
 	font-size: 20px;
 	margin: 0;
 	font-weight: 600;
-	color: $normal-text-color;
 }
 .typography-title-large {
 	@include typography-title-large;
@@ -47,7 +46,6 @@
 	font-size: 18px;
 	margin: 0;
 	font-weight: 600;
-	color: $normal-text-color;
 }
 .typography-title-medium {
 	@include typography-title-medium;
@@ -58,7 +56,6 @@
 	font-size: 16px;
 	margin: 0;
 	font-weight: 600;
-	color: $normal-text-color;
 }
 .typography-title-small {
 	@include typography-title-small;
@@ -69,7 +66,6 @@
 	font-size: 16px;
 	margin: 0;
 	font-weight: 400;
-	color: $normal-text-color;
 }
 .typography-paragraph-large {
 	@include typography-paragraph-large;
@@ -80,7 +76,6 @@
 	font-size: 14px;
 	margin: 0;
 	font-weight: 400;
-	color: $normal-text-color;
 }
 .typography-paragraph-medium {
 	@include typography-paragraph-medium;
@@ -91,7 +86,6 @@
 	font-size: 12px;
 	margin: 0;
 	font-weight: 400;
-	color: $normal-text-color;
 }
 .typography-paragraph-small {
 	@include typography-paragraph-small;
@@ -101,7 +95,6 @@
 	@include font-normal;
 	font-size: 12px;
 	margin: 0;
-	color: gray;
 	font-weight: 400;
 }
 .typography-caption-large {
@@ -112,7 +105,6 @@
 	@include font-normal;
 	font-size: 10px;
 	margin: 0;
-	color: gray;
 	font-weight: 400;
 }
 .typography-caption-medium {
@@ -123,7 +115,6 @@
 	@include font-normal;
 	font-size: 8px;
 	margin: 0;
-	color: gray;
 	font-weight: 400;
 }
 .typography-caption-small {

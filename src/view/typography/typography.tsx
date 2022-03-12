@@ -1,12 +1,6 @@
 // React
 import React from 'react';
 
-// Material UI
-import IconOne from '@mui/icons-material/Assignment';
-import IconTwo from '@mui/icons-material/Backup';
-import IconThree from '@mui/icons-material/Cake';
-import IconFour from '@mui/icons-material/DataUsage';
-
 // Component
 import Typography from '../../lib/typography/typography_base';
 
@@ -23,6 +17,7 @@ export function typographyOptions(): ViewData {
         } as Partial<TypographyPropsType>,
         variables: {
             showTitle: 'booleanTrueDefault',
+            color: 'colorsOptional',
             type: {
                 default: 'typography-paragraph-medium',
                 options: [
@@ -48,5 +43,6 @@ export function TypographyCreator(props: {p: TypographyPropsType}) {
         className={(props.p as any).type}
         text='Sample Text'
         showTitle={props.p.showTitle}
+        color={props.p.color}
     />
 }
