@@ -37,7 +37,7 @@ import SwitchSet from '../../lib/form/switch_set';
 import { barChartOptions, BarChartCreator } from '../charts/bar_chart';
 
 
-type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDefault" | "borderRadius" | {
+type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDefault" | "borderRadius" | 'fontWeightOptional' | {
     options: any[],
     default: any,
     type?: 'number' | "string" | "boolean"
@@ -144,6 +144,11 @@ export default function MainPage(props: {}): JSX.Element {
                     options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'],
                     default: ''
                 }
+            } else if (variable === 'fontWeightOptional') {
+                finalVariable = {
+                    options: ['light', 'normal', 'bold', 'extra-bold'],
+                    default: ''
+                }
             } else {
                 finalVariable = variable;
             }
@@ -202,6 +207,11 @@ export default function MainPage(props: {}): JSX.Element {
                     } else if (tempVariable === 'colorsOptional') {
                         variable = {
                             options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
+                            default: ''
+                        }
+                    } else if (tempVariable === 'fontWeightOptional') {
+                        variable = {
+                            options: ['light', 'normal', 'bold', 'extra-bold'],
                             default: ''
                         }
                     } else {

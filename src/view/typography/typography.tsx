@@ -36,6 +36,7 @@ export function typographyOptions(): ViewData {
                 default: '0',
                 options: ["0", "5", "10", "20", "half", "one", "two"]
             },
+            fontWeight: 'fontWeightOptional'
         }
     }
 }
@@ -49,5 +50,6 @@ export function TypographyCreator(props: { p: TypographyPropsType }) {
         showTitle={props.p.showTitle}
         color={props.p.color}
         margin={props.p.margin}
+        fontWeight={props.p.fontWeight}
     />
 }

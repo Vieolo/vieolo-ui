@@ -5,7 +5,7 @@ import React from 'react';
 import TypographyBase from './typography_base';
 
 // Types
-import { ColorOptionType } from '../private/types';
+import { ColorOptionType, FontWeightType } from '../private/types';
 
 export default function TypographyTitleLarge (props: {
     text: string,
@@ -14,7 +14,8 @@ export default function TypographyTitleLarge (props: {
     dataTestID?: string,
     ariaLabel?: string,
     color?: ColorOptionType,
-    margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two"
+    margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two",
+    fontWeight?: FontWeightType
 }) {
     return <TypographyBase 
         text={props.text}
@@ -24,5 +25,6 @@ export default function TypographyTitleLarge (props: {
         ariaLabel={props.ariaLabel}
         color={props.color}
         margin={props.margin}
+        fontWeight={props.fontWeight}
     />
 }

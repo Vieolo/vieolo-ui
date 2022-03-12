@@ -5,8 +5,8 @@
 // Fonts
 
 @mixin font-light {
-	font-family: $paragraph-font-family;
-	font-weight: $paragraph-font-light-weight
+	font-family: $font-family-primary;
+	font-weight: $font-weight-light;
 }
 .font-light {
 	@include font-light;
@@ -14,8 +14,8 @@
 
 
 @mixin font-normal {
-	font-family: $paragraph-font-family;
-	font-weight: $paragraph-font-regular-weight
+	font-family: $font-family-primary;
+	font-weight: $font-weight-normal;
 }
 .font-normal {
 	@include font-normal;
@@ -23,99 +23,99 @@
 
 
 @mixin font-header {
-	font-family: $header-font-family;
-	font-weight: $header-font-bold-weight
+	font-family: $font-family-secondary;
+	font-weight: $font-weight-bold;
 }
 .font-header {
 	@include font-header;
 }
 
+.font-weight {
+	&--light {
+		font-weight: $font-weight-light;
+	}
+
+	&--normal {
+		font-weight: $font-weight-normal;
+	}
+
+	&--bold {
+		font-weight: $font-weight-bold;
+	}
+
+	&--extra-bold {
+		font-weight: $font-weight-extra-bold;
+	}
+}
+
 
 @mixin typography-title-large {
-	@include font-header;
+	font-family: $font-family-secondary;
 	font-size: 20px;
-	margin: 0;
-	font-weight: 600;
 }
 .typography-title-large {
 	@include typography-title-large;
 }
 
 @mixin typography-title-medium {
-	@include font-header;
+	font-family: $font-family-secondary;
 	font-size: 18px;
-	margin: 0;
-	font-weight: 600;
 }
 .typography-title-medium {
 	@include typography-title-medium;
 }
 
 @mixin typography-title-small {
-	@include font-header;
+	font-family: $font-family-secondary;
 	font-size: 16px;
-	margin: 0;
-	font-weight: 600;
 }
 .typography-title-small {
 	@include typography-title-small;
 }
 
 @mixin typography-paragraph-large {
-	@include font-normal;
+	font-family: $font-family-primary;
 	font-size: 16px;
-	margin: 0;
-	font-weight: 400;
 }
 .typography-paragraph-large {
 	@include typography-paragraph-large;
 }
 
 @mixin typography-paragraph-medium {
-	@include font-normal;
+	font-family: $font-family-primary;
 	font-size: 14px;
-	margin: 0;
-	font-weight: 400;
 }
 .typography-paragraph-medium {
 	@include typography-paragraph-medium;
 }
 
 @mixin typography-paragraph-small {
-	@include font-normal;
+	font-family: $font-family-primary;
 	font-size: 12px;
-	margin: 0;
-	font-weight: 400;
 }
 .typography-paragraph-small {
 	@include typography-paragraph-small;
 }
 
 @mixin typography-caption-large {
-	@include font-normal;
+	font-family: $font-family-primary;
 	font-size: 12px;
-	margin: 0;
-	font-weight: 400;
 }
 .typography-caption-large {
 	@include typography-caption-large;
 }
 
 @mixin typography-caption-medium {
-	@include font-normal;
+	font-family: $font-family-primary;
 	font-size: 10px;
-	margin: 0;
-	font-weight: 400;
 }
 .typography-caption-medium {
 	@include typography-caption-medium;
 }
 
 @mixin typography-caption-small {
-	@include font-normal;
+	font-family: $font-family-primary;
 	font-size: 8px;
-	margin: 0;
-	font-weight: 400;
 }
 .typography-caption-small {
 	@include typography-caption-small;

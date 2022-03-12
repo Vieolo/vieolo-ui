@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Types
-import { ColorOptionType } from '../private/types';
+import { ColorOptionType, FontWeightType } from '../private/types';
 
 
 
@@ -13,11 +13,14 @@ export default function TypographyBase(props: {
     dataTestID?: string,
     ariaLabel?: string,
     color?: ColorOptionType,
-    margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two"
+    margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two",
+    fontWeight?: FontWeightType
 }) {
-    let finalClassName = `${props.className} `;
-    finalClassName += `${props.color || (props.className.includes("caption") ? 'gray-text' : 'default-text')}-color `;
+    let finalClassName = `${props.color || (props.className.includes("caption") ? 'gray-text' : 'default-text')}-color `;
     finalClassName += `margin-vertical--${props.margin || "0"} `;
+    finalClassName += `font-weight--${props.fontWeight || (props.className.includes("title") ? 'bold' : 'normal')} `;
+    finalClassName += `${props.className} `;
+
 
     return <p
         className={finalClassName.trim()}

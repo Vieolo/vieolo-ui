@@ -1397,10 +1397,18 @@ $navbar-height: $row-height-large !default;
 
 
 // Fonts
-$paragraph-font-family: 'Roboto Condensed', sans-serif !default;
-$paragraph-font-light-weight: 300 !default;
-$paragraph-font-regular-weight: 400 !default;
+$paragraph-font-family: 'Roboto Condensed', sans-serif !default; // deprecated
+$paragraph-font-light-weight: 300 !default; // deprecated
+$paragraph-font-regular-weight: 400 !default; // deprecated
 
-$header-font-family: 'Montserrat', sans-serif !default;
-$header-font-bold-weight: 600 !default;
+$header-font-family: 'Montserrat', sans-serif !default; // deprecated
+$header-font-bold-weight: 600 !default; // deprecated
+
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-bold: 600 !default;
+$font-weight-extra-bold: 700 !default;
+
+$font-family-primary: 'Roboto Condensed', sans-serif !default;
+$font-family-secondary: 'Montserrat', sans-serif !default;
 
