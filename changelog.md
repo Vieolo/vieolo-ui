@@ -1,5 +1,32 @@
 # Change Log
 
+## 0.18.2 (2022-03-13)
+- The following props are added to all `Typography` components:
+    - `color` ([#114](https://github.com/Vieolo/vieolo-ui/issues/114))
+    - `margin` ([#115](https://github.com/Vieolo/vieolo-ui/issues/115))
+    - `fontWeight` ([#116](https://github.com/Vieolo/vieolo-ui/issues/116))
+    - `style` ([#118](https://github.com/Vieolo/vieolo-ui/issues/118))
+- The following classes are added to the base CSS:
+    - `default-text-color`
+    - `gray-text-color`
+    - `font-weight--*`
+
+#### Deprecation
+- The following SCSS variables are deprecated:
+    - `paragraph-font-family`
+    - `paragraph-font-light-weight`
+    - `paragraph-font-regular-weight`
+    - `header-font-family`
+    - `header-font-bold-weight`
+    - 
+    - Replaced by:
+    - `font-weight-light`
+    - `font-weight-normal`
+    - `font-weight-bold`
+    - `font-weight-extra-bold`
+    - `font-family-primary`
+    - `font-family-secondary`
+
 ## 0.18.1 (2022-03-08)
 - Added border radius option to `Chip` ([#109](https://github.com/Vieolo/vieolo-ui/issues/109))
 - Added emphasis option to `Chip` ([#108](https://github.com/Vieolo/vieolo-ui/issues/108))
