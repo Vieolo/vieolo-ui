@@ -13,8 +13,11 @@ export default function TypographyBase(props: {
     dataTestID?: string,
     ariaLabel?: string,
     color?: ColorOptionType,
+    margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two"
 }) {
-    let finalClassName = `${props.className} ${props.color || (props.className.includes("caption") ? 'gray-text' : 'default-text')}-color`;
+    let finalClassName = `${props.className} `;
+    finalClassName += `${props.color || (props.className.includes("caption") ? 'gray-text' : 'default-text')}-color `;
+    finalClassName += `margin-vertical--${props.margin || "0"} `;
 
     return <p
         className={finalClassName.trim()}

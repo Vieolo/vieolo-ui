@@ -16,8 +16,6 @@ export function typographyOptions(): ViewData {
 
         } as Partial<TypographyPropsType>,
         variables: {
-            showTitle: 'booleanTrueDefault',
-            color: 'colorsOptional',
             type: {
                 default: 'typography-paragraph-medium',
                 options: [
@@ -31,18 +29,25 @@ export function typographyOptions(): ViewData {
                     'typography-title-medium',
                     'typography-title-large'
                 ]
-            }
+            },
+            showTitle: 'booleanTrueDefault',
+            color: 'colorsOptional',
+            margin: {
+                default: '0',
+                options: ["0", "5", "10", "20", "half", "one", "two"]
+            },
         }
     }
 }
 
 
-export function TypographyCreator(props: {p: TypographyPropsType}) {
+export function TypographyCreator(props: { p: TypographyPropsType }) {
 
     return <Typography
         className={(props.p as any).type}
         text='Sample Text'
         showTitle={props.p.showTitle}
         color={props.p.color}
+        margin={props.p.margin}
     />
 }

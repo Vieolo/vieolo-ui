@@ -605,6 +605,11 @@
 		margin-bottom: $base-unit * 2;
 	}
 
+	&--0 {
+		margin-top: 0px;
+		margin-bottom: 0px;
+	}
+
 	&--5 {
 		margin-top: 5px;
 		margin-bottom: 5px;
@@ -634,6 +639,10 @@
 		margin-top: $base-unit * 2;
 	}
 
+	&--0 {
+		margin-top: 0px;		
+	}
+
 	&--5 {
 		margin-top: 5px;		
 	}
@@ -658,6 +667,10 @@
 
 	&--two {
 		margin-bottom: $base-unit * 2;
+	}
+
+	&--0 {
+		margin-bottom: 0px;		
 	}
 
 	&--5 {
@@ -687,6 +700,11 @@
 	&--two {
 		margin-left: $base-unit * 2;
 		margin-right: $base-unit * 2;
+	}
+	
+	&--0 {
+		margin-left: 0px;
+		margin-right: 0px;
 	}
 
 	&--5 {
@@ -718,6 +736,10 @@
 		margin-left: $base-unit * 2;
 	}
 
+	&--0 {
+		margin-left: 0px;
+	}
+
 	&--5 {
 		margin-left: 5px;
 	}
@@ -742,6 +764,10 @@
 
 	&--two {	
 		margin-right: $base-unit * 2;
+	}
+
+	&--0 {
+		margin-right: 0px;
 	}
 
 	&--5 {

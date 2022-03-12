@@ -13,7 +13,8 @@ export default function TypographyParagraphMedium (props: {
     showTitle?: boolean,
     dataTestID?: string,
     ariaLabel?: string,
-    color?: ColorOptionType
+    color?: ColorOptionType,
+    margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two"
 }) {
     return <TypographyBase 
         text={props.text}
@@ -22,5 +23,6 @@ export default function TypographyParagraphMedium (props: {
         dataTestID={props.dataTestID}
         ariaLabel={props.ariaLabel}
         color={props.color}
+        margin={props.margin}
     />
 }
