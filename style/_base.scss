@@ -17,9 +17,9 @@ $border-radius-full: $base-unit * 2;
 $border-radius-none: 0;
 
 
-$box-shadow: 0px 3px 10px rgba(27, 78, 96,0.2) !default;
-$box-shadow-dark: 0px 3px 10px rgba(27, 78, 96,0.5) !default;
-$reverse-box-shadow: -2px -3px 15px rgba(0,0,0,.2) !default;
+$box-shadow: 0px 3px 10px rgba(27, 78, 96,0.2) !default; // deprecated
+$box-shadow-dark: 0px 3px 10px rgba(27, 78, 96,0.5) !default; // deprecated
+$reverse-box-shadow: -2px -3px 15px rgba(0,0,0,.2) !default; // deprecated
 
 $universal-border-radius: 10px !default; // deprecated
 $universal-border-radius-half: 5px !default; // deprecated
@@ -94,6 +94,19 @@ $accessory-green-transparent: rgba(82, 219, 196, 0.3) !default;
 $accessory-green-light: rgb(157, 255, 239) !default;
 $accessory-green-gradient: linear-gradient(to right bottom, #ccf9f2, #bff4eb, #b2eee4, #a5e9dd, #98e3d6) !default;
 $accessory-green-text: black !default;
+
+
+$colorOptions: (
+	"primary", 
+	"secondary", 
+	"tertiary", 
+	"error", 
+	"alert", 
+	"success", 
+	"accessory-green", 
+	"accessory-orange", 
+	"accessory-blue"
+);
 
 
 // Pallet Mixins
@@ -483,234 +496,156 @@ $accessory-green-text: black !default;
 }
 
 
-.background-color {
-	&--primary-normal {
-		background-color: $primary-color-normal;
+@function getColorVariable($colorName, $colorType) {
+	@if $colorName == "primary" and $colorType == "normal" {
+		@return $primary-color-normal;
+	} @else if $colorName == "primary" and $colorType == "light" {
+		@return $primary-color-light;
+	} @else if $colorName == "primary" and $colorType == "text" {
+		@return $primary-color-text;
+	} @else if $colorName == "secondary" and $colorType == "normal" {
+		@return $secondary-color-normal;
+	} @else if $colorName == "secondary" and $colorType == "light" {
+		@return $secondary-color-light;
+	} @else if $colorName == "secondary" and $colorType == "text" {
+		@return $secondary-color-text;
+	} @else if $colorName == "tertiary" and $colorType == "normal" {
+		@return $tertiary-color-normal;
+	} @else if $colorName == "tertiary" and $colorType == "light" {
+		@return $tertiary-color-light;
+	} @else if $colorName == "tertiary" and $colorType == "text" {
+		@return $tertiary-color-text;
+	} @else if $colorName == "alert" and $colorType == "normal" {
+		@return $alert-color-normal;
+	} @else if $colorName == "alert" and $colorType == "light" {
+		@return $alert-color-light;
+	} @else if $colorName == "alert" and $colorType == "text" {
+		@return $alert-color-text;
+	} @else if $colorName == "error" and $colorType == "normal" {
+		@return $error-color-normal;
+	} @else if $colorName == "error" and $colorType == "light" {
+		@return $error-color-light;
+	} @else if $colorName == "error" and $colorType == "text" {
+		@return $error-color-text;
+	} @else if $colorName == "success" and $colorType == "normal" {
+		@return $success-color-normal;
+	} @else if $colorName == "success" and $colorType == "light" {
+		@return $success-color-light;
+	} @else if $colorName == "success" and $colorType == "text" {
+		@return $success-color-text;
+	} @else if $colorName == "accessory-blue" and $colorType == "normal" {
+		@return $accessory-blue-normal;
+	} @else if $colorName == "accessory-blue" and $colorType == "light" {
+		@return $accessory-blue-light;
+	} @else if $colorName == "accessory-blue" and $colorType == "text" {
+		@return $accessory-blue-text;
+	} @else if $colorName == "accessory-green" and $colorType == "normal" {
+		@return $accessory-green-normal;
+	} @else if $colorName == "accessory-green" and $colorType == "light" {
+		@return $accessory-green-light;
+	} @else if $colorName == "accessory-green" and $colorType == "text" {
+		@return $accessory-green-text;
+	} @else if $colorName == "accessory-orange" and $colorType == "normal" {
+		@return $accessory-orange-normal;
+	} @else if $colorName == "accessory-orange" and $colorType == "light" {
+		@return $accessory-orange-light;
+	} @else if $colorName == "accessory-orange" and $colorType == "text" {
+		@return $accessory-orange-text;
 	}
+}
 
-	&--primary-light {
-		background-color: $primary-color-light;
-	}
 
-	&--primary-text {
-		background-color: $primary-color-text;
-	}
-
-	&--secondary-normal {
-		background-color: $secondary-color-normal;
-	}
-
-	&--secondary-light {
-		background-color: $secondary-color-light;
-	}
-
-	&--secondary-text {
-		background-color: $secondary-color-text;
-	}
-
-	&--tertiary-normal {
-		background-color: $tertiary-color-normal;
-	}
-
-	&--tertiary-light {
-		background-color: $tertiary-color-light;
-	}
-
-	&--tertiary-text {
-		background-color: $tertiary-color-text;
-	}
-
-	&--error-normal {
-		background-color: $error-color-normal;
-	}
-
-	&--error-light {
-		background-color: $error-color-light;
-	}
-
-	&--error-text {
-		background-color: $error-color-text;
-	}
-
-	&--success-normal {
-		background-color: $success-color-normal;
-	}
-
-	&--success-light {
-		background-color: $success-color-light;
-	}
-
-	&--success-text {
-		background-color: $success-color-text;
-	}
-
-	&--alert-normal {
-		background-color: $alert-color-normal;
-	}
-
-	&--alert-light {
-		background-color: $alert-color-light;
-	}
-
-	&--alert-text {
-		background-color: $alert-color-text;
-	}
-
-	&--accessory-blue-normal {
-		background-color: $accessory-blue-normal;
-	}
-
-	&--accessory-blue-light {
-		background-color: $accessory-blue-light;
-	}
-
-	&--accessory-blue-text {
-		background-color: $accessory-blue-text;
-	}
-
-	&--accessory-green-normal {
-		background-color: $accessory-green-normal;
-	}
-
-	&--accessory-green-light {
-		background-color: $accessory-green-light;
-	}
-
-	&--accessory-green-text {
-		background-color: $accessory-green-text;
-	}
-
-	&--accessory-orange-normal {
-		background-color: $accessory-orange-normal;
-	}
-
-	&--accessory-orange-light {
-		background-color: $accessory-orange-light;
-	}
-
-	&--accessory-orange-text {
-		background-color: $accessory-orange-text;
-	}
-
-	&--hover {
-		background-color: $hover-color;
-	}
-
-	&--white {
-		background-color: white;
-	}
+@mixin colorMixin($property, $includeSingleValueColors, $optionalSuffix:"") {
 	
+	@each $c in $colorOptions {
+		&--#{$c}-normal {
+			#{$property}: getColorVariable($c, "normal") unquote($optionalSuffix);
+		}
+
+		&--#{$c}-light {
+			#{$property}: getColorVariable($c, "light") unquote($optionalSuffix);
+		}
+
+		&--#{$c}-text {
+			#{$property}: getColorVariable($c, "text") unquote($optionalSuffix);
+		}
+	}
+
+	@if $includeSingleValueColors {
+		&--hover {
+			#{$property}: $hover-color unquote($optionalSuffix);
+		}
+	
+		&--background {
+			#{$property}: $background-color unquote($optionalSuffix);
+		}
+	
+		&--white {
+			#{$property}: white unquote($optionalSuffix);
+		}
+	}
+}
+
+@mixin colorStateMixin($property, $includeSingleValueColors, $optionalSuffix:"", $state:"") {
+	
+	@each $c in $colorOptions {
+		&--#{$c}-normal {
+			#{$state} {
+				#{$property}: getColorVariable($c, "normal") unquote($optionalSuffix);
+			}
+		}
+
+		&--#{$c}-light {
+			#{$state} { 
+				#{$property}: getColorVariable($c, "light") unquote($optionalSuffix);
+			}
+		}
+
+		&--#{$c}-text {
+			#{$state} {
+				#{$property}: getColorVariable($c, "text") unquote($optionalSuffix);
+			}
+		}
+	}
+
+	@if $includeSingleValueColors {
+		&--hover {
+			#{$state} {
+				#{$property}: $hover-color unquote($optionalSuffix);
+			}
+		}
+	
+		&--background {
+			#{$state} {
+				#{$property}: $background-color unquote($optionalSuffix);
+			}
+		}
+	
+		&--white {
+			#{$state} {
+				#{$property}: white unquote($optionalSuffix);
+			}
+		}
+	}
+}
+
+
+.background-color {
+	@include colorMixin(background-color, true);
 }
 
 
 .color {
-	&--primary-normal {
-		color: $primary-color-normal !important;
-	}
+	@include colorMixin(color, false, !important);
+}
 
-	&--primary-light {
-		color: $primary-color-light !important;
-	}
+.hover {
+	@include colorStateMixin(background-color, false, !important, "&:hover");
+}
 
-	&--primary-text {
-		color: $primary-color-text !important;
-	}
 
-	&--secondary-normal {
-		color: $secondary-color-normal !important;
-	}
-
-	&--secondary-light {
-		color: $secondary-color-light !important;
-	}
-
-	&--secondary-text {
-		color: $secondary-color-text !important;
-	}
-
-	&--tertiary-normal {
-		color: $tertiary-color-normal !important;
-	}
-
-	&--tertiary-light {
-		color: $tertiary-color-light !important;
-	}
-
-	&--tertiary-text {
-		color: $tertiary-color-text !important;
-	}
-
-	&--error-normal {
-		color: $error-color-normal !important;
-	}
-
-	&--error-light {
-		color: $error-color-light !important;
-	}
-
-	&--error-text {
-		color: $error-color-text !important;
-	}
-
-	&--success-normal {
-		color: $success-color-normal !important;
-	}
-
-	&--success-light {
-		color: $success-color-light !important;
-	}
-
-	&--success-text {
-		color: $success-color-text !important;
-	}
-
-	&--alert-normal {
-		color: $alert-color-normal !important;
-	}
-
-	&--alert-light {
-		color: $alert-color-light !important;
-	}
-
-	&--alert-text {
-		color: $alert-color-text !important;
-	}
-
-	&--accessory-blue-normal {
-		color: $accessory-blue-normal !important;
-	}
-
-	&--accessory-blue-light {
-		color: $accessory-blue-light !important;
-	}
-
-	&--accessory-blue-text {
-		color: $accessory-blue-text !important;
-	}
-
-	&--accessory-green-normal {
-		color: $accessory-green-normal !important;
-	}
-
-	&--accessory-green-light {
-		color: $accessory-green-light !important;
-	}
-
-	&--accessory-green-text {
-		color: $accessory-green-text !important;
-	}
-
-	&--accessory-orange-normal {
-		color: $accessory-orange-normal !important;
-	}
-
-	&--accessory-orange-light {
-		color: $accessory-orange-light !important;
-	}
-
-	&--accessory-orange-text {
-		color: $accessory-orange-text !important;
-	}
+.hover-border {
+	@include colorStateMixin(border-color, false, !important, "&:hover");
 }
 
 
@@ -739,446 +674,11 @@ $accessory-green-text: black !default;
 		border-style: dashed;
 	}
 
-	&--primary-normal {
-		border-color: $primary-color-normal !important;
-	}
-
-	&--primary-light {
-		border-color: $primary-color-light !important;
-	}
-
-	&--primary-text {
-		border-color: $primary-color-text !important;
-	}
-
-	&--secondary-normal {
-		border-color: $secondary-color-normal !important;
-	}
-
-	&--secondary-light {
-		border-color: $secondary-color-light !important;
-	}
-
-	&--secondary-text {
-		border-color: $secondary-color-text !important;
-	}
-
-	&--tertiary-normal {
-		border-color: $tertiary-color-normal !important;
-	}
-
-	&--tertiary-light {
-		border-color: $tertiary-color-light !important;
-	}
-
-	&--tertiary-text {
-		border-color: $tertiary-color-text !important;
-	}
-
-	&--error-normal {
-		border-color: $error-color-normal !important;
-	}
-
-	&--error-light {
-		border-color: $error-color-light !important;
-	}
-
-	&--error-text {
-		border-color: $error-color-text !important;
-	}
-
-	&--success-normal {
-		border-color: $success-color-normal !important;
-	}
-
-	&--success-light {
-		border-color: $success-color-light !important;
-	}
-
-	&--success-text {
-		border-color: $success-color-text !important;
-	}
-
-	&--alert-normal {
-		border-color: $alert-color-normal !important;
-	}
-
-	&--alert-light {
-		border-color: $alert-color-light !important;
-	}
-
-	&--alert-text {
-		border-color: $alert-color-text !important;
-	}
-
-	&--accessory-blue-normal {
-		border-color: $accessory-blue-normal !important;
-	}
-
-	&--accessory-blue-light {
-		border-color: $accessory-blue-light !important;
-	}
-
-	&--accessory-blue-text {
-		border-color: $accessory-blue-text !important;
-	}
-
-	&--accessory-green-normal {
-		border-color: $accessory-green-normal !important;
-	}
-
-	&--accessory-green-light {
-		border-color: $accessory-green-light !important;
-	}
-
-	&--accessory-green-text {
-		border-color: $accessory-green-text !important;
-	}
-
-	&--accessory-orange-normal {
-		border-color: $accessory-orange-normal !important;
-	}
-
-	&--accessory-orange-light {
-		border-color: $accessory-orange-light !important;
-	}
-
-	&--accessory-orange-text {
-		border-color: $accessory-orange-text !important;
-	}
-
-	&--white {
-		border-color: white !important;
-	}
+	@include colorMixin(border-color, true, !important);
 }
 
-.hover {
-	&--primary-normal {
-		&:hover {
-			background-color: $primary-color-normal;
-		}
-	}
 
-	&--primary-light {
-		&:hover {
-			background-color: $primary-color-light;
-		}
-	}
 
-	&--primary-text {
-		&:hover {
-			background-color: $primary-color-text;
-		}
-	}
-
-	&--secondary-normal {
-		&:hover {
-			background-color: $secondary-color-normal;
-		}
-	}
-
-	&--secondary-light {
-		&:hover {
-			background-color: $secondary-color-light;
-		}
-	}
-
-	&--secondary-text {
-		&:hover {
-			background-color: $secondary-color-text;
-		}
-	}
-
-	&--tertiary-normal {
-		&:hover {
-			background-color: $tertiary-color-normal;
-		}
-	}
-
-	&--tertiary-light {
-		&:hover {
-			background-color: $tertiary-color-light;
-		}
-	}
-
-	&--tertiary-text {
-		&:hover {
-			background-color: $tertiary-color-text;
-		}
-	}
-
-	&--error-normal {
-		&:hover {
-			background-color: $error-color-normal;
-		}
-	}
-
-	&--error-light {
-		&:hover {
-			background-color: $error-color-light;
-		}
-	}
-
-	&--error-text {
-		&:hover {
-			background-color: $error-color-text;
-		}
-	}
-
-	&--success-normal {
-		&:hover {
-			background-color: $success-color-normal;
-		}
-	}
-
-	&--success-light {
-		&:hover {
-			background-color: $success-color-light;
-		}
-	}
-
-	&--success-text {
-		&:hover {
-			background-color: $success-color-text;
-		}
-	}
-
-	&--alert-normal {
-		&:hover {
-			background-color: $alert-color-normal;
-		}
-	}
-
-	&--alert-light {
-		&:hover {
-			background-color: $alert-color-light;
-		}
-	}
-
-	&--alert-text {
-		&:hover {
-			background-color: $alert-color-text;
-		}
-	}
-
-	&--accessory-blue-normal {
-		&:hover {
-			background-color: $accessory-blue-normal;
-		}
-	}
-
-	&--accessory-blue-light {
-		&:hover {
-			background-color: $accessory-blue-light;
-		}	
-	}
-
-	&--accessory-blue-text {
-		&:hover {
-			background-color: $accessory-blue-text;
-		}
-	}
-
-	&--accessory-green-normal {
-		&:hover {
-			background-color: $accessory-green-normal;
-		}
-	}
-
-	&--accessory-green-light {
-		&:hover {
-			background-color: $accessory-green-light;
-		}
-	}
-
-	&--accessory-green-text {
-		&:hover {
-			background-color: $accessory-green-text;
-		}
-	}
-
-	&--accessory-orange-normal {
-		&:hover {
-			background-color: $accessory-orange-normal;
-		}
-	}
-
-	&--accessory-orange-light {
-		&:hover {
-			background-color: $accessory-orange-light;
-		}
-	}
-
-	&--accessory-orange-text {
-		&:hover {
-			background-color: $accessory-orange-text;
-		}
-	}
-}
-
-.hover-border {
-	&--primary-normal {
-		&:hover {
-			border-color: $primary-color-normal !important;
-		}
-	}
-
-	&--primary-light {
-		&:hover {
-			border-color: $primary-color-light !important;
-		}
-	}
-
-	&--primary-text {
-		&:hover {
-			border-color: $primary-color-text !important;
-		}
-	}
-
-	&--secondary-normal {
-		&:hover {
-			border-color: $secondary-color-normal !important;
-		}
-	}
-
-	&--secondary-light {
-		&:hover {
-			border-color: $secondary-color-light !important;
-		}
-	}
-
-	&--secondary-text {
-		&:hover {
-			border-color: $secondary-color-text !important;
-		}
-	}
-
-	&--tertiary-normal {
-		&:hover {
-			border-color: $tertiary-color-normal !important;
-		}
-	}
-
-	&--tertiary-light {
-		&:hover {
-			border-color: $tertiary-color-light !important;
-		}
-	}
-
-	&--tertiary-text {
-		&:hover {
-			border-color: $tertiary-color-text !important;
-		}
-	}
-
-	&--error-normal {
-		&:hover {
-			border-color: $error-color-normal !important;
-		}
-	}
-
-	&--error-light {
-		&:hover {
-			border-color: $error-color-light !important;
-		}
-	}
-
-	&--error-text {
-		&:hover {
-			border-color: $error-color-text !important;
-		}
-	}
-
-	&--success-normal {
-		&:hover {
-			border-color: $success-color-normal !important;
-		}
-	}
-
-	&--success-light {
-		&:hover {
-			border-color: $success-color-light !important;
-		}
-	}
-
-	&--success-text {
-		&:hover {
-			border-color: $success-color-text !important;
-		}
-	}
-
-	&--alert-normal {
-		&:hover {
-			border-color: $alert-color-normal !important;
-		}
-	}
-
-	&--alert-light {
-		&:hover {
-			border-color: $alert-color-light !important;
-		}
-	}
-
-	&--alert-text {
-		&:hover {
-			border-color: $alert-color-text !important;
-		}
-	}
-
-	&--accessory-blue-normal {
-		&:hover {
-			border-color: $accessory-blue-normal !important;
-		}
-	}
-
-	&--accessory-blue-light {
-		&:hover {
-			border-color: $accessory-blue-light !important;
-		}	
-	}
-
-	&--accessory-blue-text {
-		&:hover {
-			border-color: $accessory-blue-text !important;
-		}
-	}
-
-	&--accessory-green-normal {
-		&:hover {
-			border-color: $accessory-green-normal !important;
-		}
-	}
-
-	&--accessory-green-light {
-		&:hover {
-			border-color: $accessory-green-light !important;
-		}
-	}
-
-	&--accessory-green-text {
-		&:hover {
-			border-color: $accessory-green-text !important;
-		}
-	}
-
-	&--accessory-orange-normal {
-		&:hover {
-			border-color: $accessory-orange-normal !important;
-		}
-	}
-
-	&--accessory-orange-light {
-		&:hover {
-			border-color: $accessory-orange-light !important;
-		}
-	}
-
-	&--accessory-orange-text {
-		&:hover {
-			border-color: $accessory-orange-text;
-		}
-	}
-}
 
 .ripple {
 	background-position: center;
@@ -1189,167 +689,7 @@ $accessory-green-text: black !default;
 		transition: background 0s;
 	}
 
-	&--primary-normal {
-		&:active {
-			background-color: $primary-color-normal !important;
-		}
-	}
-
-	&--primary-light {
-		&:active {
-			background-color: $primary-color-light !important;
-		}
-	}
-
-	&--primary-text {
-		&:active {
-			background-color: $primary-color-text !important;
-		}
-	}
-
-	&--secondary-normal {
-		&:active {
-			background-color: $secondary-color-normal !important;
-		}
-	}
-
-	&--secondary-light {
-		&:active {
-			background-color: $secondary-color-light !important;
-		}
-	}
-
-	&--secondary-text {
-		&:active {
-			background-color: $secondary-color-text !important;
-		}
-	}
-
-	&--tertiary-normal {
-		&:active {
-			background-color: $tertiary-color-normal !important;
-		}
-	}
-
-	&--tertiary-light {
-		&:active {
-			background-color: $tertiary-color-light !important;
-		}
-	}
-
-	&--tertiary-text {
-		&:active {
-			background-color: $tertiary-color-text !important;
-		}
-	}
-
-	&--error-normal {
-		&:active {
-			background-color: $error-color-normal !important;
-		}
-	}
-
-	&--error-light {
-		&:active {
-			background-color: $error-color-light !important;
-		}
-	}
-
-	&--error-text {
-		&:active {
-			background-color: $error-color-text !important;
-		}
-	}
-
-	&--success-normal {
-		&:active {
-			background-color: $success-color-normal !important;
-		}
-	}
-
-	&--success-light {
-		&:active {
-			background-color: $success-color-light !important;
-		}
-	}
-
-	&--success-text {
-		&:active {
-			background-color: $success-color-text !important;
-		}
-	}
-
-	&--alert-normal {
-		&:active {
-			background-color: $alert-color-normal !important;
-		}
-	}
-
-	&--alert-light {
-		&:active {
-			background-color: $alert-color-light !important;
-		}
-	}
-
-	&--alert-text {
-		&:active {
-			background-color: $alert-color-text !important;
-		}
-	}
-
-	&--accessory-blue-normal {
-		&:active {
-			background-color: $accessory-blue-normal !important;
-		}
-	}
-
-	&--accessory-blue-light {
-		&:active {
-			background-color: $accessory-blue-light !important;
-		}	
-	}
-
-	&--accessory-blue-text {
-		&:active {
-			background-color: $accessory-blue-text !important;
-		}
-	}
-
-	&--accessory-green-normal {
-		&:active {
-			background-color: $accessory-green-normal !important;
-		}
-	}
-
-	&--accessory-green-light {
-		&:active {
-			background-color: $accessory-green-light !important;
-		}
-	}
-
-	&--accessory-green-text {
-		&:active {
-			background-color: $accessory-green-text !important;
-		}
-	}
-
-	&--accessory-orange-normal {
-		&:active {
-			background-color: $accessory-orange-normal !important;
-		}
-	}
-
-	&--accessory-orange-light {
-		&:active {
-			background-color: $accessory-orange-light !important;
-		}
-	}
-
-	&--accessory-orange-text {
-		&:active {
-			background-color: $accessory-orange-text !important;
-		}
-	}
+	@include colorStateMixin(background-color, false, !important, "&:active");
 }
 
 
@@ -1412,3 +752,9 @@ $font-weight-extra-bold: 700 !default;
 $font-family-primary: 'Roboto Condensed', sans-serif !default;
 $font-family-secondary: 'Montserrat', sans-serif !default;
 
+
+
+// Elevation
+$elevation-shadow-0: none;
+$elevation-shadow-1: 0px 3px 10px rgba(27, 78, 96,0.2) !default;
+$elevation-shadow-2: 0px 3px 10px rgba(27, 78, 96,0.5) !default;
