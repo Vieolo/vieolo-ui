@@ -1,6 +1,7 @@
 import Button from './lib/button/button';
 import CalendarStateful from './lib/date_time/calendar_stateful';
 import CalendarStateless from './lib/date_time/calendar_stateless';
+import Card from './lib/card/card';
 import Checkbox from './lib/form/checkbox';
 import ContextMenu from './lib/menu/context_menu';
 import Chip from './lib/button/chip';
@@ -36,6 +37,7 @@ export {
     Button,
     CalendarStateful,
     CalendarStateless,
+    Card,
     Checkbox,
     ContextMenu,
     Chip,
