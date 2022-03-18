@@ -1,6 +1,7 @@
 // React
 import React from 'react';
 import { BorderRadiusType, ColorOptionType } from '../private/types';
+import { getEmphasisClasses } from '../utility/style_utility';
 
 
 // Components
@@ -35,13 +36,7 @@ export default function Chip(props: {
 
 	if (props.disabled) c += " disabled";
 
-	if (props.selected) {
-		c = `${c} background-color--${color}-normal ripple ripple--${color}-light color--${color}-text border--px-0`;
-	} else if (e === 'medium') {
-		c = `${c} background-color--${color}-light ripple ripple--${color}-normal  border--px-0`;
-	} else if (e === 'low') {
-		c = `${c} background-color--white border--${color}-light hover--${color}-light color--${color}-normal  border--px-2 border--solid`;
-	}
+	c += getEmphasisClasses(props.selected ? 'high' : e, color, true, true);
 
 	let s: { [key: string]: any } = {};
 
