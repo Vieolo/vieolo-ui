@@ -3,6 +3,7 @@ import React from 'react';
 
 // Type
 import { BorderRadiusType, ColorOptionType, EmphasisType } from '../private/types';
+import { getEmphasisClasses } from '../utility/style_utility';
 
 
 
@@ -30,15 +31,11 @@ export default function IconButton(props: {
 	let e = props.emphasis || 'none';
 	let col = props.color || 'primary';
 
-	if (e === 'high') {
-		c = `${c} background-color--${col}-normal ripple ripple--${col}-light color--${col}-text border--px-0`;
-	} else if (e === 'medium') {
-		c = `${c} background-color--${col}-light ripple ripple--${col}-normal  border--px-0`;
-	} else if (e === 'low') {
-		c = `${c} background-color--white border--${col}-light hover--${col}-light color--${col}-normal  border--px-${props.borderWidth === undefined ? '2' : props.borderWidth} border--solid`;
-	}else {
-		c = `${c} background-color--white border--white hover-border--${col}-light color--${col}-normal border--px-${props.borderWidth === undefined ? '2' : props.borderWidth} border--solid ripple--${col}-light`;
-	}
+	c += getEmphasisClasses(e, col, {
+		hasRipple: true,
+		hoverable: true,
+		borderWidth: props.borderWidth
+	});	
 
 	if (props.tooltip) c += " vieolo-tooltip";	
 

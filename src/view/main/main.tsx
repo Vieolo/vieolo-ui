@@ -29,6 +29,7 @@ import { fileInputOptions, FileInputCreator } from '../form/file_input';
 import { timeInputOptions, TimeInputCreator } from '../date_time/time_input';
 import { dateTimePickerOptions, DateTimePickerCreator } from '../date_time/date_time_picker';
 import { dateInputOptions, DateInputCreator } from '../date_time/date_input';
+import { cardOptions, CardCreator } from '../card/card';
 import { typographyOptions, TypographyCreator } from '../typography/typography';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
@@ -37,7 +38,7 @@ import SwitchSet from '../../lib/form/switch_set';
 import { barChartOptions, BarChartCreator } from '../charts/bar_chart';
 
 
-type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDefault" | "borderRadius" | 'fontWeightOptional' | {
+type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDefault" | "borderRadius" | 'fontWeightOptional' | 'emphasis' | {
     options: any[],
     default: any,
     type?: 'number' | "string" | "boolean"
@@ -67,6 +68,7 @@ export default function MainPage(props: {}): JSX.Element {
     let items: { [key: string]: ViewItemData } = {
         "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator },
         "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator },
+        "Card": { title: "Card", data: cardOptions(), creator: CardCreator },
         "Checkbox": { title: "Checkbox", data: checkboxOptions(), creator: CheckboxCreator },
         "Chip": { title: "Chip", data: chipOptions(), creator: ChipCreator },
         "Confirmation Dialog": { title: "Confirmation Dialog", data: confirmationDialogOptions(), creator: ConfirmationDialogCreator },
@@ -149,6 +151,11 @@ export default function MainPage(props: {}): JSX.Element {
                     options: ['light', 'normal', 'bold', 'extra-bold'],
                     default: ''
                 }
+            } else if (variable === 'emphasis') {
+                finalVariable = {
+                    options: ['high', 'medium', 'low', 'none'],
+                    default: 'none'
+                }
             } else {
                 finalVariable = variable;
             }
@@ -213,6 +220,11 @@ export default function MainPage(props: {}): JSX.Element {
                         variable = {
                             options: ['light', 'normal', 'bold', 'extra-bold'],
                             default: ''
+                        }
+                    } else if (tempVariable === 'emphasis') {
+                        variable = {
+                            options: ['high', 'medium', 'low', 'none'],
+                            default: 'none'
                         }
                     } else {
                         variable = tempVariable;
