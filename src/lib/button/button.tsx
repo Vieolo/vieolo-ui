@@ -6,7 +6,7 @@ import DropDownMenu, { DropDownMenuItemType } from '../menu/dropdown_menu';
 
 // Types
 import { EmphasisType, BorderRadiusType, ColorOptionType } from '../private/types';
-import { getEphasisClasses } from '../utility/style_utility';
+import { getEmphasisClasses } from '../utility/style_utility';
 
 
 export default function Button(props: {
@@ -62,7 +62,7 @@ export default function Button(props: {
 		s.marginRight = 2;
 	}
 
-	c += getEphasisClasses(e, props.color, true, true);
+	c += getEmphasisClasses(e, props.color, true, true);
 
 	if (props.disabled) c += " disabled";
 
