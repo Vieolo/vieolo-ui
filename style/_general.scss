@@ -1,7 +1,8 @@
 @import "base";
 
 
-// Pallet Mixins
+// #region Colors and Pallet
+
 
 @mixin primary-background {
 	background-color: $primary-color-normal;
@@ -510,9 +511,28 @@
 	@include colorStateMixin(background-color, false, !important, "&:hover");
 }
 
-.hover-border {
-	@include colorStateMixin(border-color, false, !important, "&:hover");
+
+.ripple {
+	background-position: center;
+	transition: background 0.8s;
+
+	&:active {
+		background-size: 100%;
+		transition: background 0s;
+	}
+
+	@include colorStateMixin(background-color, false, !important, "&:active");
 }
+
+
+// #endregion
+
+
+
+
+
+
+// #region Border
 
 .border {
 	&--px-0 {
@@ -542,17 +562,11 @@
 	@include colorMixin(border-color, true, !important);
 }
 
-.ripple {
-	background-position: center;
-	transition: background 0.8s;
-
-	&:active {
-		background-size: 100%;
-		transition: background 0s;
-	}
-
-	@include colorStateMixin(background-color, false, !important, "&:active");
+.hover-border {
+	@include colorStateMixin(border-color, false, !important, "&:hover");
 }
+
+
 
 
 .border-radius {
@@ -577,9 +591,14 @@
 	}
 }
 
+// #endregion
 
 
-// Fonts
+
+
+
+
+// #region Fonts and Typography
 
 @mixin font-light {
 	font-family: $font-family-primary;
@@ -698,104 +717,15 @@
 	@include typography-caption-small;
 }
 
+// #endregion
 
 
 
-// Mixins -------------------------------
 
-@mixin clickable {
-	cursor: pointer;
-	
-	&:hover {
-		background-color: $hover-color;
-	}
-}
-.clickable {
-	@include clickable;
-}
 
-@mixin transition {
-	transition: all ease 0.5s;
-}
-.transition {
-	@include transition;
-}
 
-@mixin card-light-shadow {
-	border-radius: $universal-border-radius;
-	box-shadow: $box-shadow;
-	background-color: white;
-}
-.card-light-shadow {
-	@include card-light-shadow;
-}
+// #region Behavior
 
-@mixin card-dark-shadow {
-	border-radius: $universal-border-radius;
-	box-shadow: $box-shadow-dark;
-	background-color: white;
-}
-.card-dark-shadow {
-	@include card-dark-shadow;
-}
-
-@mixin card-no-shadow {
-	background-color: white;
-	border-radius: $universal-border-radius;
-	border: 2px solid $border-color;
-}
-.card-no-shadow {
-	@include card-no-shadow;
-}
-
-@mixin card-selectable {
-	cursor: pointer;
-	@include transition;
-
-	&:hover {
-		background-color: $hover-color;
-	}
-}
-.card-selectable {
-	@include card-selectable;
-}
-
-@mixin card-selectable-gradient {
-	cursor: pointer;
-	@include transition;
-
-	&:hover {
-		background: $hover-color;
-		background-image: $hover-color;
-	}
-}
-.card-selectable-gradient {
-	@include card-selectable-gradient;
-}
-
-@mixin card-header {
-	@include primary-background;
-	text-align: center;
-	margin-top: 0;
-	padding: 10px 0;
-	border-radius: 10px 10px 0 0;
-	@include font-header;
-}
-.card-header {
-	@include card-header;
-}
-
-@mixin card-button-footer {
-	border-radius: 0 0 10px 10px;
-	border-top: 1px solid gray;
-	padding: 10px;
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-}
-.card-button-footer {
-	@include card-button-footer;
-}
 
 @mixin nonselectable {
 	-webkit-touch-callout: none;
@@ -810,76 +740,23 @@
 }
 
 
-@mixin grid-two-column {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	column-gap: 10px;
+@mixin clickable {
+	cursor: pointer;
+	
+	&:hover {
+		background-color: $hover-color;
+	}
 }
-.grid-two-column {
-	@include grid-two-column;
-}
-
-
-@mixin grid-three-column {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
-	column-gap: 10px;
-}
-.grid-three-column {
-	@include grid-three-column;
+.clickable {
+	@include clickable;
 }
 
 
-.grid {
-	display: grid;
-
-	&--one-one {
-		grid-template-columns: 1fr 1fr;
-	}
-
-	&--one-one-two {
-		grid-template-columns: 1fr 1fr 2fr;
-	}
-
-	&--two-one-one {
-		grid-template-columns: 2fr 1fr 1fr;
-	}
-
-	&--one-one-one-one {
-		grid-template-columns: 1fr 1fr 1fr 1fr;
-	}
-
-	&--one-three {
-		grid-template-columns: 1fr 3fr;
-	}
-
-	&--three-one {
-		grid-template-columns: 3fr 1fr;
-	}
-
-	&--column-gap-half {
-		column-gap: $base-unit-half;
-	}
-
-	&--column-gap-one {
-		column-gap: $base-unit;
-	}
-
-	&--column-gap-two {
-		column-gap: $base-unit * 2;
-	}
-
-	&--row-gap-half {
-		row-gap: $base-unit-half;
-	}
-
-	&--row-gap-one {
-		row-gap: $base-unit;
-	}
-
-	&--row-gap-two {
-		row-gap: $base-unit * 2;
-	}
+@mixin transition {
+	transition: all ease 0.5s;
+}
+.transition {
+	@include transition;
 }
 
 
@@ -891,108 +768,20 @@
 	@include disabled;
 }
 
-@mixin input-error {
-	border: 2px solid $error-color-normal !important;
-}
-.input-error {
-	@include input-error;
-}
-
-@mixin div-error-border {
-	border: 3px solid $error-color-normal !important;
-}
-.div-error-border {
-	@include div-error-border;
-}
-
-@mixin no-text-overflow {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-.no-text-overflow {
-	@include no-text-overflow;
-}
-
-
-@mixin flex-start {
-	display: flex;
-	align-items: center;
-}
-.flex-start {
-	@include flex-start;
-}
-
-
-@mixin flex-center {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-.flex-center {
-	@include flex-center;
-}
-
-@mixin flex-row-space-around {
-	display: flex;
-	justify-content: space-around;
-	align-items: center;
-}
-.flex-row-space-around {
-	@include flex-row-space-around;
-}
-
-@mixin flex-row-space-between {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-}
-.flex-row-space-between {
-	@include flex-row-space-between;
-}
-
-
-@mixin flex-column {
-	display: flex;
-	flex-flow: column;
-	align-items: center;
-}
-.flex-column {
-	@include flex-column;
-}
-
-
-@mixin center-by-transform {
-	margin-left: 50%;
-	transform: translateX(-50%);
-}
-.center-by-transform {
-	@include center-by-transform;
-}
-
-@mixin center-by-flex-row {
-	display: flex;
-	flex-flow: row;
-	justify-content: center;
-	align-items: center;
-}
-.center-by-flex-row {
-	@include center-by-flex-row;
-}
-
-@mixin center-by-flex-column {
-	display: flex;
-	flex-flow: column;
-	justify-content: center;
-	align-items: center;
-}
-.center-by-flex-column {
-	@include center-by-flex-column;
-}
+// #endregion
 
 
 
-// Utility Classes
+
+
+
+// #region Size, margin, padding, position, overflow
+
+.overflow {
+	&--y-scroll {
+		overflow-y: scroll;
+	}
+}
 
 .max-width,
 .width {
@@ -1360,22 +1149,6 @@
 	}
 }
 
-
-
-
-.overflow {
-	&--y-scroll {
-		overflow-y: scroll;
-	}
-}
-
-.text-style {
-	&--line-through {
-		text-decoration: line-through;
-	}
-}
-
-
 .padding {
 	&--half {
 		padding: $base-unit-half;
@@ -1638,7 +1411,322 @@
 	}
 }
 
+// #endregion
 
+
+
+
+
+
+// #region Text
+
+
+.text-style {
+	&--line-through {
+		text-decoration: line-through;
+	}
+}
+
+
+@mixin no-text-overflow {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.no-text-overflow {
+	@include no-text-overflow;
+}
+
+
+// #endregion
+
+
+
+
+
+
+// #region Card styles
+
+
+.elevation {
+	&--0 {
+		box-shadow: $elevation-shadow-0;
+	}
+
+	&--1 {
+		box-shadow: $elevation-shadow-1;
+	}
+
+	&--2 {
+		box-shadow: $elevation-shadow-2;
+	}
+}
+
+
+// #endregion
+
+
+
+
+
+// #region undecided, deprecated
+
+
+// deprecated in favor of Card component
+@mixin card-light-shadow {
+	border-radius: $universal-border-radius;
+	box-shadow: $box-shadow;
+	background-color: white;
+}
+.card-light-shadow {
+	@include card-light-shadow;
+}
+
+// deprecated in favor of Card component
+@mixin card-dark-shadow {
+	border-radius: $universal-border-radius;
+	box-shadow: $box-shadow-dark;
+	background-color: white;
+}
+.card-dark-shadow {
+	@include card-dark-shadow;
+}
+
+// deprecated in favor of Card component
+@mixin card-no-shadow {
+	background-color: white;
+	border-radius: $universal-border-radius;
+	border: 2px solid $border-color;
+}
+.card-no-shadow {
+	@include card-no-shadow;
+}
+
+// deprecated in favor of Card component
+@mixin card-selectable {
+	cursor: pointer;
+	@include transition;
+
+	&:hover {
+		background-color: $hover-color;
+	}
+}
+.card-selectable {
+	@include card-selectable;
+}
+
+// deprecated in favor of Card component
+@mixin card-selectable-gradient {
+	cursor: pointer;
+	@include transition;
+
+	&:hover {
+		background: $hover-color;
+		background-image: $hover-color;
+	}
+}
+.card-selectable-gradient {
+	@include card-selectable-gradient;
+}
+
+// deprecated in favor of Card component
+@mixin card-header {
+	@include primary-background;
+	text-align: center;
+	margin-top: 0;
+	padding: 10px 0;
+	border-radius: 10px 10px 0 0;
+	@include font-header;
+}
+.card-header {
+	@include card-header;
+}
+
+// deprecated in favor of Card component
+@mixin card-button-footer {
+	border-radius: 0 0 10px 10px;
+	border-top: 1px solid gray;
+	padding: 10px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.card-button-footer {
+	@include card-button-footer;
+}
+
+
+
+
+// deprecated in favor of Grid component
+@mixin grid-two-column {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 10px;
+}
+.grid-two-column {
+	@include grid-two-column;
+}
+
+
+// deprecated in favor of Grid component
+@mixin grid-three-column {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	column-gap: 10px;
+}
+.grid-three-column {
+	@include grid-three-column;
+}
+
+
+// deprecated in favor of Grid component
+.grid {
+	display: grid;
+
+	&--one-one {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	&--one-one-two {
+		grid-template-columns: 1fr 1fr 2fr;
+	}
+
+	&--two-one-one {
+		grid-template-columns: 2fr 1fr 1fr;
+	}
+
+	&--one-one-one-one {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
+
+	&--one-three {
+		grid-template-columns: 1fr 3fr;
+	}
+
+	&--three-one {
+		grid-template-columns: 3fr 1fr;
+	}
+
+	&--column-gap-half {
+		column-gap: $base-unit-half;
+	}
+
+	&--column-gap-one {
+		column-gap: $base-unit;
+	}
+
+	&--column-gap-two {
+		column-gap: $base-unit * 2;
+	}
+
+	&--row-gap-half {
+		row-gap: $base-unit-half;
+	}
+
+	&--row-gap-one {
+		row-gap: $base-unit;
+	}
+
+	&--row-gap-two {
+		row-gap: $base-unit * 2;
+	}
+}
+
+
+
+
+@mixin input-error {
+	border: 2px solid $error-color-normal !important;
+}
+.input-error {
+	@include input-error;
+}
+
+@mixin div-error-border {
+	border: 3px solid $error-color-normal !important;
+}
+.div-error-border {
+	@include div-error-border;
+}
+
+
+
+
+@mixin flex-start {
+	display: flex;
+	align-items: center;
+}
+.flex-start {
+	@include flex-start;
+}
+
+
+@mixin flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.flex-center {
+	@include flex-center;
+}
+
+@mixin flex-row-space-around {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.flex-row-space-around {
+	@include flex-row-space-around;
+}
+
+@mixin flex-row-space-between {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.flex-row-space-between {
+	@include flex-row-space-between;
+}
+
+
+@mixin flex-column {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+}
+.flex-column {
+	@include flex-column;
+}
+
+
+@mixin center-by-transform {
+	margin-left: 50%;
+	transform: translateX(-50%);
+}
+.center-by-transform {
+	@include center-by-transform;
+}
+
+@mixin center-by-flex-row {
+	display: flex;
+	flex-flow: row;
+	justify-content: center;
+	align-items: center;
+}
+.center-by-flex-row {
+	@include center-by-flex-row;
+}
+
+@mixin center-by-flex-column {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+}
+.center-by-flex-column {
+	@include center-by-flex-column;
+}
 
 
 .flex {
@@ -1681,3 +1769,7 @@
 	}
 
 }
+
+
+// #endregion
+
