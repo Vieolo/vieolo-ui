@@ -16,33 +16,43 @@ $border-radius-half: $base-unit-half;
 $border-radius-full: $base-unit * 2;
 $border-radius-none: 0;
 
-
-$box-shadow: 0px 3px 10px rgba(27, 78, 96,0.2) !default; // deprecated
-$box-shadow-dark: 0px 3px 10px rgba(27, 78, 96,0.5) !default; // deprecated
-$reverse-box-shadow: -2px -3px 15px rgba(0,0,0,.2) !default; // deprecated
+$box-shadow: 0px 3px 10px rgba(27, 78, 96, 0.2) !default; // deprecated
+$box-shadow-dark: 0px 3px 10px rgba(27, 78, 96, 0.5) !default; // deprecated
+$reverse-box-shadow: -2px -3px 15px rgba(0, 0, 0, 0.2) !default; // deprecated
 
 $universal-border-radius: 10px !default; // deprecated
 $universal-border-radius-half: 5px !default; // deprecated
 
-
-
 // Pallet Colors
 
-$background-color: #FFFFFB !default;
+$background-color: #fffffb !default;
 $hover-color: rgb(220, 247, 231) !default;
 $border-color: #f2f2f2 !default;
 
 $normal-text-color: #2e2e2e !default;
 $gray-text-color: gray !default;
 
-
 $primary-color-normal: #2e2e2e !default;
 $primary-color-transparent: rgba(46, 46, 46, 0.3) !default;
 $primary-color-light: #bdbdbd !default;
-$primary-color-gradient: linear-gradient(to right bottom, #444444, #404040, #3b3b3b, #373737, #333333, #2f2f2f, #2c2c2c, #282828, #232323, #1f1f1f, #1a1a1a, #161616) !default;
+$primary-color-gradient: linear-gradient(
+	to right bottom,
+	#444444,
+	#404040,
+	#3b3b3b,
+	#373737,
+	#333333,
+	#2f2f2f,
+	#2c2c2c,
+	#282828,
+	#232323,
+	#1f1f1f,
+	#1a1a1a,
+	#161616
+) !default;
 $primary-color-text: #e0e0e0 !default;
 
-$secondary-color-normal: #3E88C2 !default;
+$secondary-color-normal: #3e88c2 !default;
 $secondary-color-transparent: rgba(62, 136, 194, 0.3) !default;
 $secondary-color-light: #b9e1ff !default;
 $secondary-color-gradient: linear-gradient(to right bottom, #71a7d3, #659fcf, #5997cb, #4c90c6, #3e88c2) !default;
@@ -51,31 +61,85 @@ $secondary-color-text: white !default;
 $tertiary-color-normal: #c9dfd2 !default;
 $tertiary-color-transparent: rgba(201, 223, 210, 0.3) !default;
 $tertiary-color-light: rgb(220, 247, 231) !default;
-$tertiary-color-gradient: linear-gradient(to right bottom, #e6f6ec, #e0f2e7, #dbede2, #d5e9dd, #d0e5d8, #cae1d3, #c4dece, #bedac9, #b6d6c3, #aed2bc, #a7cdb6, #9fc9b0) !default;
+$tertiary-color-gradient: linear-gradient(
+	to right bottom,
+	#e6f6ec,
+	#e0f2e7,
+	#dbede2,
+	#d5e9dd,
+	#d0e5d8,
+	#cae1d3,
+	#c4dece,
+	#bedac9,
+	#b6d6c3,
+	#aed2bc,
+	#a7cdb6,
+	#9fc9b0
+) !default;
 $tertiary-color-text: #2e2e2e !default;
 
 $alert-color-normal: rgb(225, 188, 41) !default;
 $alert-color-transparent: rgba(225, 188, 41, 0.3) !default;
 $alert-color-light: rgb(243, 228, 166) !default;
-$alert-color-gradient: linear-gradient(to right bottom, #e9c843, #e7c63e, #e6c43a, #e4c135, #e3bf30, #e3bf2d, #e4be2a, #e4be26, #e6c024, #e9c122, #ebc320, #eec41d) !default;
+$alert-color-gradient: linear-gradient(
+	to right bottom,
+	#e9c843,
+	#e7c63e,
+	#e6c43a,
+	#e4c135,
+	#e3bf30,
+	#e3bf2d,
+	#e4be2a,
+	#e4be26,
+	#e6c024,
+	#e9c122,
+	#ebc320,
+	#eec41d
+) !default;
 $alert-color-text: black !default;
 
 $error-color-normal: rgb(245, 0, 87) !default;
 $error-color-transparent: rgba(252, 232, 239, 1) !default;
 $error-color-light: rgb(255, 168, 198) !default;
-$error-color-gradient: linear-gradient(to right bottom, #f23c7c, #f33576, #f42d6f, #f52468, #f51961, #f3135d, #f20a59, #f00055, #ec0054, #e80053, #e50051, #e10050) !default;
+$error-color-gradient: linear-gradient(
+	to right bottom,
+	#f23c7c,
+	#f33576,
+	#f42d6f,
+	#f52468,
+	#f51961,
+	#f3135d,
+	#f20a59,
+	#f00055,
+	#ec0054,
+	#e80053,
+	#e50051,
+	#e10050
+) !default;
 $error-color-text: white !default;
 
 $success-color-normal: rgb(24, 139, 108) !default;
 $success-color-transparent: rgba(24, 139, 108, 0.3) !default;
 $success-color-light: rgb(163, 224, 208) !default;
-$success-color-gradient: linear-gradient(to right bottom, #209979, #1f9676, #1d9374, #1c9171, #1a8e6f, #198e6f, #188f6f, #178f6f, #169271, #149573, #139874, #119b76) !default;
+$success-color-gradient: linear-gradient(
+	to right bottom,
+	#209979,
+	#1f9676,
+	#1d9374,
+	#1c9171,
+	#1a8e6f,
+	#198e6f,
+	#188f6f,
+	#178f6f,
+	#169271,
+	#149573,
+	#139874,
+	#119b76
+) !default;
 $success-color-text: white !default;
-
 
 $disable-color-normal: #b0bec5 !default;
 $disable-color-gradient: linear-gradient(to right bottom, #c5cdd1, #c0c9ce, #bac5cb, #b5c2c8, #b0bec5) !default;
-
 
 $accessory-orange-normal: rgb(255, 127, 80) !default;
 $accessory-orange-transparent: rgba(255, 127, 80, 0.3) !default;
@@ -95,19 +159,17 @@ $accessory-green-light: rgb(157, 255, 239) !default;
 $accessory-green-gradient: linear-gradient(to right bottom, #ccf9f2, #bff4eb, #b2eee4, #a5e9dd, #98e3d6) !default;
 $accessory-green-text: black !default;
 
-
 $colorOptions: (
-	"primary", 
-	"secondary", 
-	"tertiary", 
-	"error", 
-	"alert", 
-	"success", 
-	"accessory-green", 
-	"accessory-orange", 
+	"primary",
+	"secondary",
+	"tertiary",
+	"error",
+	"alert",
+	"success",
+	"accessory-green",
+	"accessory-orange",
 	"accessory-blue"
 );
-
 
 // Pallet Mixins
 
@@ -119,9 +181,8 @@ $colorOptions: (
 	@include primary-background;
 }
 
-
 @mixin secondary-background {
-	background-color: $secondary-color-normal;	
+	background-color: $secondary-color-normal;
 	color: $secondary-color-text;
 }
 .secondary-background {
@@ -137,7 +198,7 @@ $colorOptions: (
 }
 
 @mixin alert-background {
-	background-color: $alert-color-normal;	
+	background-color: $alert-color-normal;
 	color: $alert-color-text;
 }
 .alert-background {
@@ -192,9 +253,6 @@ $colorOptions: (
 	@include accessory-green-background;
 }
 
-
-
-
 @mixin default-text-color {
 	color: $normal-text-color;
 }
@@ -209,14 +267,12 @@ $colorOptions: (
 	@include gray-text-color;
 }
 
-
 @mixin primary-color {
 	color: $primary-color-normal;
 }
 .primary-color {
 	@include primary-color;
 }
-
 
 @mixin secondary-color {
 	color: $secondary-color-normal;
@@ -281,10 +337,6 @@ $colorOptions: (
 	@include accessory-green-color;
 }
 
-
-
-
-
 // These ripple classes are depreciated in favor of ripple--{color}
 %ripple {
 	background-position: center;
@@ -301,7 +353,7 @@ $colorOptions: (
 	&:active {
 		background-color: rgba($error-color-normal, 0.5) !important;
 		background: rgba($error-color-normal, 0.5) !important;
-	}	
+	}
 }
 .ripple-error {
 	@include ripple-error;
@@ -317,7 +369,6 @@ $colorOptions: (
 .ripple-alert {
 	@include ripple-alert;
 }
-
 
 @mixin ripple-success {
 	@extend %ripple;
@@ -385,7 +436,6 @@ $colorOptions: (
 	@include ripple-secondary;
 }
 
-
 @mixin ripple-tertiary {
 	@extend %ripple;
 	&:active {
@@ -396,10 +446,6 @@ $colorOptions: (
 .ripple-tertiary {
 	@include ripple-tertiary;
 }
-
-
-
-
 
 // These hover classes are depreciated in favor of hover--{color}
 @mixin hover-primary {
@@ -422,8 +468,6 @@ $colorOptions: (
 	@include hover-secondary;
 }
 
-
-
 @mixin hover-tertiary {
 	&:hover {
 		background-color: $tertiary-color-transparent;
@@ -433,7 +477,6 @@ $colorOptions: (
 .hover-tertiary {
 	@include hover-tertiary;
 }
-
 
 @mixin hover-error {
 	&:hover {
@@ -495,7 +538,6 @@ $colorOptions: (
 	@include hover-accessory-green;
 }
 
-
 @function getColorVariable($colorName, $colorType) {
 	@if $colorName == "primary" and $colorType == "normal" {
 		@return $primary-color-normal;
@@ -554,9 +596,7 @@ $colorOptions: (
 	}
 }
 
-
-@mixin colorMixin($property, $includeSingleValueColors, $optionalSuffix:"") {
-	
+@mixin colorMixin($property, $includeSingleValueColors, $optionalSuffix: "") {
 	@each $c in $colorOptions {
 		&--#{$c}-normal {
 			#{$property}: getColorVariable($c, "normal") unquote($optionalSuffix);
@@ -575,19 +615,18 @@ $colorOptions: (
 		&--hover {
 			#{$property}: $hover-color unquote($optionalSuffix);
 		}
-	
+
 		&--background {
 			#{$property}: $background-color unquote($optionalSuffix);
 		}
-	
+
 		&--white {
 			#{$property}: white unquote($optionalSuffix);
 		}
 	}
 }
 
-@mixin colorStateMixin($property, $includeSingleValueColors, $optionalSuffix:"", $state:"") {
-	
+@mixin colorStateMixin($property, $includeSingleValueColors, $optionalSuffix: "", $state: "") {
 	@each $c in $colorOptions {
 		&--#{$c}-normal {
 			#{$state} {
@@ -596,7 +635,7 @@ $colorOptions: (
 		}
 
 		&--#{$c}-light {
-			#{$state} { 
+			#{$state} {
 				#{$property}: getColorVariable($c, "light") unquote($optionalSuffix);
 			}
 		}
@@ -614,13 +653,13 @@ $colorOptions: (
 				#{$property}: $hover-color unquote($optionalSuffix);
 			}
 		}
-	
+
 		&--background {
 			#{$state} {
 				#{$property}: $background-color unquote($optionalSuffix);
 			}
 		}
-	
+
 		&--white {
 			#{$state} {
 				#{$property}: white unquote($optionalSuffix);
@@ -629,11 +668,9 @@ $colorOptions: (
 	}
 }
 
-
 .background-color {
 	@include colorMixin(background-color, true);
 }
-
 
 .color {
 	@include colorMixin(color, false, !important);
@@ -643,11 +680,9 @@ $colorOptions: (
 	@include colorStateMixin(background-color, false, !important, "&:hover");
 }
 
-
 .hover-border {
 	@include colorStateMixin(border-color, false, !important, "&:hover");
 }
-
 
 .border {
 	&--px-0 {
@@ -677,9 +712,6 @@ $colorOptions: (
 	@include colorMixin(border-color, true, !important);
 }
 
-
-
-
 .ripple {
 	background-position: center;
 	transition: background 0.8s;
@@ -691,8 +723,6 @@ $colorOptions: (
 
 	@include colorStateMixin(background-color, false, !important, "&:active");
 }
-
-
 
 // Sizes
 
@@ -709,8 +739,6 @@ $mobileBreakPoint: 700px;
 $drawer-width: 180px !default;
 $drawer-item-width: 160px !default;
 $navbar-height: $row-height-large !default;
-
-
 
 .border-radius {
 	&--zero {
@@ -734,14 +762,12 @@ $navbar-height: $row-height-large !default;
 	}
 }
 
-
-
 // Fonts
-$paragraph-font-family: 'Roboto Condensed', sans-serif !default; // deprecated
+$paragraph-font-family: "Roboto Condensed", sans-serif !default; // deprecated
 $paragraph-font-light-weight: 300 !default; // deprecated
 $paragraph-font-regular-weight: 400 !default; // deprecated
 
-$header-font-family: 'Montserrat', sans-serif !default; // deprecated
+$header-font-family: "Montserrat", sans-serif !default; // deprecated
 $header-font-bold-weight: 600 !default; // deprecated
 
 $font-weight-light: 300 !default;
@@ -749,12 +775,10 @@ $font-weight-normal: 400 !default;
 $font-weight-bold: 600 !default;
 $font-weight-extra-bold: 700 !default;
 
-$font-family-primary: 'Roboto Condensed', sans-serif !default;
-$font-family-secondary: 'Montserrat', sans-serif !default;
-
-
+$font-family-primary: "Roboto Condensed", sans-serif !default;
+$font-family-secondary: "Montserrat", sans-serif !default;
 
 // Elevation
 $elevation-shadow-0: none;
-$elevation-shadow-1: 0px 3px 10px rgba(27, 78, 96,0.2) !default;
-$elevation-shadow-2: 0px 3px 10px rgba(27, 78, 96,0.5) !default;
+$elevation-shadow-1: 0px 3px 10px rgba(27, 78, 96, 0.2) !default;
+$elevation-shadow-2: 0px 3px 10px rgba(27, 78, 96, 0.5) !default;
