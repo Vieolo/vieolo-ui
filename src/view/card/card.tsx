@@ -23,6 +23,10 @@ export function cardOptions(): ViewData {
             borderRadius: 'borderRadius',
             emphasis: 'emphasis',
             color: 'colors',
+            padding: {
+                options: ["none", 'half', 'one'],
+                default: 'none'
+            },
             elevation: {
                 options: ["0", "1", "2"],
                 default: "0"
@@ -43,6 +47,7 @@ export function CardCreator(props: { p: CardPropsType }) {
             emphasis={props.p.emphasis}
             width='200px'
             height='80px'
+            padding={props.p.padding}
         >
             <IconButton 
                 icon={<IconFour />}
