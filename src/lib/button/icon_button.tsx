@@ -31,7 +31,11 @@ export default function IconButton(props: {
 	let e = props.emphasis || 'none';
 	let col = props.color || 'primary';
 
-	c += getEmphasisClasses(e, col, true, true, props.borderWidth);	
+	c += getEmphasisClasses(e, col, {
+		hasRipple: true,
+		hoverable: true,
+		borderWidth: props.borderWidth
+	});	
 
 	if (props.tooltip) c += " vieolo-tooltip";	
 

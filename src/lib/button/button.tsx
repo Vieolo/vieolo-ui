@@ -62,7 +62,10 @@ export default function Button(props: {
 		s.marginRight = 2;
 	}
 
-	c += getEmphasisClasses(e, props.color, true, true);
+	c += getEmphasisClasses(e, props.color, {
+		hasRipple: true,
+		hoverable: true
+	});
 
 	if (props.disabled) c += " disabled";
 
