@@ -1,6 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 // Components
 import DropDownMenu from '../menu/dropdown_menu';
+import { getEmphasisClasses } from '../utility/style_utility';
 export default function Button(props) {
     let s = {};
     let h = props.height || 'medium';
@@ -18,18 +19,10 @@ export default function Button(props) {
         s.borderBottomRightRadius = 0;
         s.marginRight = 2;
     }
-    if (e === 'high') {
-        c = `${c} background-color--${props.color}-normal ripple ripple--${props.color}-light color--${props.color}-text border--px-0`;
-    }
-    else if (e === 'medium') {
-        c = `${c} background-color--${props.color}-light ripple ripple--${props.color}-normal  border--px-0`;
-    }
-    else if (e === 'low') {
-        c = `${c} background-color--white border--${props.color}-light hover--${props.color}-light color--${props.color}-normal  border--px-2 border--solid`;
-    }
-    else {
-        c = `${c} background-color--white border--white hover-border--${props.color}-light color--${props.color}-normal border--px-2 border--solid ripple--${props.color}-light`;
-    }
+    c += getEmphasisClasses(e, props.color, {
+        hasRipple: true,
+        hoverable: true
+    });
     if (props.disabled)
         c += " disabled";
     if (props.className)

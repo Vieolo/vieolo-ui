@@ -1,5 +1,42 @@
 # Change Log
 
+## 0.19.0 (2022-03-19)
+- Added `Card` ([#60](https://github.com/Vieolo/vieolo-ui/issues/60))
+- Added `GridContainer` ([#122](https://github.com/Vieolo/vieolo-ui/issues/122))
+- Added `GridTwo` component ([#124](https://github.com/Vieolo/vieolo-ui/issues/124))
+- Added `GridThree` component ([#125](https://github.com/Vieolo/vieolo-ui/issues/125))
+- Added `!default` to SCSS variables ([#119](https://github.com/Vieolo/vieolo-ui/issues/119))
+- Fixed the default border radius CSS class for `Button`
+- Added `colorType` to `Typography`
+- Made the title of the `List` optional
+- Added `ExpandableCard` ([#16](https://github.com/Vieolo/vieolo-ui/issues/16))
+- Added grouping capability to `List` ([#126](https://github.com/Vieolo/vieolo-ui/issues/126))
+
+#### Deprecation
+- The following SCSS variable are deprecated in favor of `Elevation` class:
+    - `box-shadow`
+    - `box-shadow-dark`
+    - `reverse-box-shadow`
+- The following CSS classes are deprecated in favor of `Grid` component:
+    - `.grid`
+    - `.grid-two-column`
+    - `.grid-three-column`
+- The following CSS classes are deprecated in favor of `Card` component:
+    - `.card-light-shadow`
+    - `.card-dark-shadow`
+    - `.card-no-shadow`
+    - `.card-selectable`
+    - `.card-selectable`
+    - `.card-selectable-gradient`
+    - `.card-header`
+    - `.card-button-footer`
+
+#### Breaking Changes
+- The `Grid` component is rewritten ([#123](https://github.com/Vieolo/vieolo-ui/issues/123))
+- Replaced the card style with `RowStyleType` in `ItemRow` and `List`
+- Removed the `ItemRowSearch` in favor of `ItemRow`
+
+
 ## 0.18.2 (2022-03-13)
 - The following props are added to all `Typography` components:
     - `color` ([#114](https://github.com/Vieolo/vieolo-ui/issues/114))
