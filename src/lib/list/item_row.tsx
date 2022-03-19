@@ -31,6 +31,10 @@ export default function ItemRow(props: {
     buttonColor?: ColorOptionType,
     itemStyle?: RowStyleType,
     disabled?: boolean,
+    /**
+     * Passing this object will convert the row into a search row
+     * The main `title` of the row will act as the placeholder of the search input (default: Search...)
+     */
     searchRow?: {
         query: string,
         onQueryChange: (c: string) => void
