@@ -1,33 +1,22 @@
+type GridSpanType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+
 export default function Grid(props: {
-    className?: string,
-    columnGap?: 'half' | 'one' | 'two',
-    rowGap?: 'half' | 'one' | 'two',
-    /**
-     * Sets the columns of the grid for some of the most used formats
-     * Passing this value will cause the component to ignore `templateColumn`
-     */
-    preDefined?: 'one-one' | 'one-one-two' | 'two-one-one' | 'one-one-one-one' | 'three-one' | 'one-three',
-    templateColumn?: string,
-    templateRow?: string,
-    style?: React.CSSProperties,
-    children?: React.ReactNode[]
-}) {
-    let pd = props.preDefined ? props.preDefined : props.templateColumn ? null : 'one-one';
+    xl: GridSpanType,
+    lg?: GridSpanType,
+    md?: GridSpanType,
+    sm?: GridSpanType,
+    direction?: 'row' | 'column',
+    children?: React.ReactNode
+}) {    
 
-    let style: React.CSSProperties = props.style || {}; 
+    let d = props.direction || 'column';
+    let c = `vieolo-grid grid-${d}--xl--${props.xl}`;
+    
+    if (props.lg) c += ` grid-${d}--ld--${props.lg}`;
+    if (props.md) c += ` grid-${d}--md--${props.md}`;
+    if (props.sm) c += ` grid-${d}--sm--${props.sm}`;
 
-    if (!props.preDefined && props.templateColumn) {
-        style.gridTemplateColumns = props.templateColumn;
-    }
-
-    if (props.templateRow) {
-        style.gridTemplateRows = props.templateRow;
-    }
-
-
-    let c = `grid ${pd ? 'grid--' + pd : ''} ${props.columnGap ? 'grid--column-gap-' + props.columnGap : ''} ${props.rowGap ? 'grid--row-gap-' + props.rowGap : ''} ${props.className || ''}`;
-
-    return <div className={c} style={style}>
+    return <div className={c}>
         {props.children}
     </div>
 }

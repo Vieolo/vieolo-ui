@@ -1447,6 +1447,44 @@
 	}
 }
 
+
+@mixin gridSpan($direction) {
+	$gso: ("xl", "lg", "md", "sm"); // Grid Size Options
+	$gsm: (
+		"xl": $desktopBreakPoint,
+		"lg": $laptop13BreakPoint,
+		"md": $tablet11LandscapeBreakPoint,
+		"sm": $mobileBreakPoint
+	);
+	$gss: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12); // Grid Size Spans
+
+	@each $s in $gso {
+		&--#{$s} {
+			@each $sp in $gss {
+				&--#{$sp} {
+					@if $s == "xl" {
+						grid-#{$direction}: span $sp;
+					} @else {
+						@media all and (max-width: #{map-get($gsm, $s)}) {
+							grid-#{$direction}: span $sp;
+						}
+					}
+				}
+			}
+		}
+	}
+
+}
+
+.grid-column {
+	@include gridSpan("column");
+}
+
+.grid-row {
+	@include gridSpan("row");
+}
+
+
 // #endregion
 
 
