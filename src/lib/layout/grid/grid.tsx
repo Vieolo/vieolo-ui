@@ -1,4 +1,4 @@
-type GridSpanType = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
+type GridSpanType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
 export default function Grid(props: {
     xl: GridSpanType,
@@ -12,7 +12,7 @@ export default function Grid(props: {
     let d = props.direction || 'column';
     let c = `vieolo-grid grid-${d}--xl--${props.xl}`;
     
-    if (props.lg) c += ` grid-${d}--ld--${props.lg}`;
+    if (props.lg) c += ` grid-${d}--lg--${props.lg}`;
     if (props.md) c += ` grid-${d}--md--${props.md}`;
     if (props.sm) c += ` grid-${d}--sm--${props.sm}`;
 

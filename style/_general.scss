@@ -1453,10 +1453,10 @@
 	$gsm: (
 		"xl": $desktopBreakPoint,
 		"lg": $laptop13BreakPoint,
-		"md": $tablet11LandscapeBreakPoint,
+		"md": $tablet10LandscapeBreakPoint,
 		"sm": $mobileBreakPoint
 	);
-	$gss: (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12); // Grid Size Spans
+	$gss: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12); // Grid Size Spans
 
 	@each $s in $gso {
 		&--#{$s} {
@@ -1465,8 +1465,12 @@
 					@if $s == "xl" {
 						grid-#{$direction}: span $sp;
 					} @else {
-						@media all and (max-width: #{map-get($gsm, $s)}) {
-							grid-#{$direction}: span $sp;
+						@media screen and (max-width: #{map-get($gsm, $s)}) {
+							@if $sp > 0 {
+								grid-#{$direction}: span $sp;
+							} @else {
+								display: none;
+							}
 						}
 					}
 				}

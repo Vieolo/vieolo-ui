@@ -1,12 +1,6 @@
 // React
 import React from 'react';
 
-// Material UI
-import IconOne from '@mui/icons-material/Assignment';
-import IconTwo from '@mui/icons-material/Backup';
-import IconThree from '@mui/icons-material/Cake';
-import IconFour from '@mui/icons-material/DataUsage';
-
 // Component
 import GridContainer from '../../../lib/layout/grid/grid_container';
 import Grid from '../../../lib/layout/grid/grid';
@@ -64,6 +58,9 @@ export function GridCreator(props: { p: GridContainerPropsType }) {
 
             <Grid xl={6} direction={(props.p as any).direction} >{child}</Grid>
             <Grid xl={6} direction={(props.p as any).direction} >{child}</Grid>
+
+            <Grid xl={6} direction={(props.p as any).direction} >{child}</Grid>
+            <Grid xl={0} direction={(props.p as any).direction} >{child}</Grid>
         </GridContainer>
     </div>
 }

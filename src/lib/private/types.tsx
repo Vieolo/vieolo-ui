@@ -2,3 +2,4 @@ export type ColorOptionType = 'primary' | 'secondary' | 'tertiary' | 'error' | '
 export type EmphasisType = 'high' | 'medium' | 'low' | 'none';
 export type BorderRadiusType = 'full' | 'normal' | 'half' | 'none' | 'default';
 export type FontWeightType = 'light' | 'normal' | 'bold' | 'extra-bold';
+export type GridGapType = 'none' | 'half' | 'one' | 'two';
