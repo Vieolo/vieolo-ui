@@ -15,6 +15,8 @@ import FormDialog, { FormDialogAccessoryButton as FormDialogAccessoryButtonType,
 import ConfirmationDialog, { ConfirmationDialogMainButton as ConfirmationDialogMainButtonType } from './lib/dialog/confirmationDialog'
 import Grid from './lib/layout/grid/grid';
 import GridContainer from './lib/layout/grid/grid_container';
+import GridThree from './lib/layout/grid/grid_three';
+import GridTwo from './lib/layout/grid/grid_two';
 import IconButton from './lib/button/icon_button';
 import Input from './lib/form/input';
 import InputSet from './lib/form/input_set';
@@ -70,7 +72,9 @@ export {
     Select,
     Switch,
     SwitchSet,
-    ExpandableCard
+    ExpandableCard,
+    GridThree,
+    GridTwo
 }
 
 

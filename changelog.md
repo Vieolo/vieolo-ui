@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.19.1 (2022-03-19)
+- Added `GridTwo` and `GridThree` to the export
+
 ## 0.19.0 (2022-03-19)
 - Added `Card` ([#60](https://github.com/Vieolo/vieolo-ui/issues/60))
 - Added `GridContainer` ([#122](https://github.com/Vieolo/vieolo-ui/issues/122))

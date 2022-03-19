@@ -15,6 +15,8 @@ import FormDialog, { FormDialogAccessoryButton as FormDialogAccessoryButtonType,
 import ConfirmationDialog, { ConfirmationDialogMainButton as ConfirmationDialogMainButtonType } from './lib/dialog/confirmationDialog';
 import Grid from './lib/layout/grid/grid';
 import GridContainer from './lib/layout/grid/grid_container';
+import GridThree from './lib/layout/grid/grid_three';
+import GridTwo from './lib/layout/grid/grid_two';
 import IconButton from './lib/button/icon_button';
 import Input from './lib/form/input';
 import InputSet from './lib/form/input_set';
@@ -33,7 +35,7 @@ import { RowStyleType as RowStyleTypeTemp } from './lib/private/types';
 import Select from './lib/form/select';
 import Switch from './lib/form/switch';
 import SwitchSet from './lib/form/switch_set';
-export { Button, CalendarStateful, CalendarStateless, Card, Checkbox, ContextMenu, Chip, ConfirmationDialog, DateInput, DatePicker, DateTimePicker, DropDownMenu, FileInput, FormDialog, Grid, GridContainer, IconButton, Input, InputSet, ItemRow, List, Modal, PDFViewer, PeriodOptions, PeriodSelector, Table, TabSwitch, Textarea, TextareaSet, TimeInput, RadioGroup, Select, Switch, SwitchSet, ExpandableCard };
+export { Button, CalendarStateful, CalendarStateless, Card, Checkbox, ContextMenu, Chip, ConfirmationDialog, DateInput, DatePicker, DateTimePicker, DropDownMenu, FileInput, FormDialog, Grid, GridContainer, IconButton, Input, InputSet, ItemRow, List, Modal, PDFViewer, PeriodOptions, PeriodSelector, Table, TabSwitch, Textarea, TextareaSet, TimeInput, RadioGroup, Select, Switch, SwitchSet, ExpandableCard, GridThree, GridTwo };
 export declare type ListItem = ListItemType;
 export declare type RowStyleType = RowStyleTypeTemp;
 export declare type FormDialogAccessoryButton = FormDialogAccessoryButtonType;
