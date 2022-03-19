@@ -179,7 +179,7 @@ export default function MainPage(props: {}): JSX.Element {
                         key={i.title}
                         title={i.title}
                         selected={selectedTitle === i.title}
-                        cardStyle="card-no-shadow"
+                        
                         onClick={() => {                            
                             handleSelectComponent(i);
                             history.replace({ pathname: window.location.pathname, search: `tab=${i.title.replace(/ /g, "__")}` });

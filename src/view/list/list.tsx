@@ -80,9 +80,19 @@ export function listOptions(): ViewData {
         variables: {
             enableSearch: 'boolean',
             enableSubtitleSearch: 'boolean',
-            cardStyle: {
-                options: ["card-no-shadow", 'card-light-shadow', "card-dark-shadow"],
-                default: 'card-no-shadow'
+            elevation: {
+                options: ['0', '1', '2'],
+                default: "0"
+            },
+            emphasis: {
+                options: ['low', "none"],
+                default: 'low'
+            },
+            borderRadius: 'borderRadius',
+            color: 'colors',
+            horizontalPadding: {
+                options: ["none", "half", "one"],
+                default: "one"
             }
         }
     }    
@@ -95,9 +105,15 @@ export function ListCreator(props: {p: ListPropsType}) {
         height={props.p.height}
         items={props.p.items}
         title={props.p.title}
-        cardStyle={props.p.cardStyle}
+        itemStyle={{
+            borderRadius: (props.p as any).borderRadius,
+            color: (props.p as any).color,
+            elevation: (props.p as any).elevation,
+            emphasis: (props.p as any).emphasis
+        }}
         enableSearch={props.p.enableSearch}
         enableSubtitleSearch={props.p.enableSubtitleSearch}
+        horizontalPadding={props.p.horizontalPadding}
     />
 
 }

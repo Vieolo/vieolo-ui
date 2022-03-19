@@ -17,8 +17,7 @@ import GridContainer from './lib/layout/grid/grid_container';
 import IconButton from './lib/button/icon_button';
 import Input from './lib/form/input';
 import InputSet from './lib/form/input_set';
-import ItemRow from './lib/list/item_row';
-import ItemRowSearch from './lib/list/item_row_search';
+import ItemRow, { ItemStyleType as ItemStyleTypeTemp} from './lib/list/item_row';
 import List, { ListItem as ListItemType } from './lib/list/list';
 import Modal from './lib/dialog/modal';
 import PDFViewer from './lib/pdf_viewer/pdf_viewer';
@@ -55,7 +54,6 @@ export {
     Input,
     InputSet,
     ItemRow,
-    ItemRowSearch,
     List,
     Modal,
     PDFViewer,
@@ -74,6 +72,7 @@ export {
 
 
 export type ListItem = ListItemType
+export type ItemStyleType = ItemStyleTypeTemp
 export type FormDialogAccessoryButton = FormDialogAccessoryButtonType
 export type FormDialogMainButton = FormDialogMainButtonType
 export type TableSortDirection = TableSortDirectionType

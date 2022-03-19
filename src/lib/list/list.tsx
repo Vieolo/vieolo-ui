@@ -6,8 +6,7 @@ import React, { useState } from 'react';
 import TypographyTitleMedium from '../typography/typography_title_medium';
 
 // Vieolo UI
-import ItemRowSearch from './item_row_search';
-import ItemRow from './item_row';
+import ItemRow, { ItemStyleType } from './item_row';
 
 // Types
 import { ColorOptionType } from '../private/types';
@@ -24,7 +23,7 @@ export type ListItem = {
     buttonIcon?: React.ReactNode,
     buttonSize?: 'small' | 'medium',
     leadingIcon?: React.ReactNode,
-    disabled?: boolean
+    disabled?: boolean,
 }
 
 
@@ -34,21 +33,24 @@ export default function List(props: {
     enableSearch?: boolean,
     enableSubtitleSearch?: boolean,
     title: string,
-    cardStyle?: "card-light-shadow" | "card-dark-shadow" | "card-no-shadow",
+    itemStyle?: ItemStyleType
     height: string,
+    horizontalPadding?: 'none' | 'half' | 'one'
 }) {
 
     let [query, setQuery] = useState<string>("");
 
-    return <div className="vieolo-list" style={{ height: props.height }}>
+    return <div className={`vieolo-list padding-horizontal--${props.horizontalPadding || 'none'}`} style={{ height: props.height }}>
         <div className="center-by-flex-row"><TypographyTitleMedium text={props.title} className="margin-vertical--10" /></div>
 
         {
             props.enableSearch &&
-            <ItemRowSearch
-                query={query}
-                cardStyle={props.cardStyle || 'card-no-shadow'}
-                onChange={q => setQuery(q)}
+            <ItemRow 
+                itemStyle={props.itemStyle}
+                searchRow={{
+                    query: query,
+                    onQueryChange: (c) => setQuery(c)
+                }}
             />
         }
 
@@ -61,7 +63,6 @@ export default function List(props: {
             }).map(a => {
                 return <ItemRow
                     key={a.id}
-                    cardStyle={props.cardStyle || 'card-no-shadow'}
                     selected={a.selected}
                     title={a.title}
                     subTitle={a.subTitle}
@@ -72,6 +73,7 @@ export default function List(props: {
                     buttonSize={a.buttonSize}
                     leadingIcon={a.leadingIcon}
                     disabled={a.disabled}
+                    itemStyle={props.itemStyle}
                 />
             })
         }
