@@ -1,7 +1,7 @@
 import React from 'react';
-import { ColorOptionType } from '../private/types';
+import { ColorOptionType, RowStyleType } from '../private/types';
 export default function ItemRow(props: {
-    title: string;
+    title?: string;
     subTitle?: string;
     onClick?: () => void;
     selected?: boolean;
@@ -10,6 +10,14 @@ export default function ItemRow(props: {
     buttonClick?: () => void;
     buttonSize?: 'small' | 'medium';
     buttonColor?: ColorOptionType;
-    cardStyle?: 'card-light-shadow' | 'card-dark-shadow' | 'card-no-shadow';
+    itemStyle?: RowStyleType;
     disabled?: boolean;
+    /**
+     * Passing this object will convert the row into a search row
+     * The main `title` of the row will act as the placeholder of the search input (default: Search...)
+     */
+    searchRow?: {
+        query: string;
+        onQueryChange: (c: string) => void;
+    };
 }): JSX.Element;

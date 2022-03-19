@@ -1,4 +1,5 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { getEmphasisClasses } from '../utility/style_utility';
 // Components
 import IconButton from './icon_button';
 export default function Chip(props) {
@@ -7,15 +8,10 @@ export default function Chip(props) {
     let e = props.emphasis || 'low';
     if (props.disabled)
         c += " disabled";
-    if (props.selected) {
-        c = `${c} background-color--${color}-normal ripple ripple--${color}-light color--${color}-text border--px-0`;
-    }
-    else if (e === 'medium') {
-        c = `${c} background-color--${color}-light ripple ripple--${color}-normal  border--px-0`;
-    }
-    else if (e === 'low') {
-        c = `${c} background-color--white border--${color}-light hover--${color}-light color--${color}-normal  border--px-2 border--solid`;
-    }
+    c += getEmphasisClasses(props.selected ? 'high' : e, color, {
+        hasRipple: true,
+        hoverable: true
+    });
     let s = {};
     if (props.onChipSelect)
         s['cursor'] = 'pointer';

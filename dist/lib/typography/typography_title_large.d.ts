@@ -10,4 +10,5 @@ export default function TypographyTitleLarge(props: {
     margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two";
     fontWeight?: FontWeightType;
     style?: React.CSSProperties;
+    colorType?: 'normal' | 'text' | 'light';
 }): JSX.Element;
