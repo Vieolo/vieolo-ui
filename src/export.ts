@@ -13,6 +13,7 @@ import FileInput from './lib/form/file_input';
 import FormDialog, { FormDialogAccessoryButton as FormDialogAccessoryButtonType, FormDialogMainButton as FormDialogMainButtonType } from './lib/dialog/formDialog';
 import ConfirmationDialog, { ConfirmationDialogMainButton as ConfirmationDialogMainButtonType } from './lib/dialog/confirmationDialog'
 import Grid from './lib/layout/grid';
+import GridContainer from './lib/layout/grid/grid_container';
 import IconButton from './lib/button/icon_button';
 import Input from './lib/form/input';
 import InputSet from './lib/form/input_set';
@@ -49,6 +50,7 @@ export {
     FileInput,
     FormDialog,
     Grid,
+    GridContainer,
     IconButton,
     Input,
     InputSet,

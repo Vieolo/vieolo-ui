@@ -775,7 +775,7 @@
 
 
 
-// #region Size, margin, padding, position, overflow
+// #region Layout (Size, margin, padding, position, overflow)
 
 .overflow {
 	&--y-scroll {
@@ -1408,6 +1408,42 @@
 
 	&--40 {
 		padding-left: 40px;
+	}
+}
+
+.row-gap {
+	&--none {
+		row-gap: 0px;
+	}
+
+	&--half {
+		row-gap: $base-unit-half;
+	}
+
+	&--one {
+		row-gap: $base-unit;
+	}
+
+	&--two {
+		row-gap: $base-unit * 2;
+	}
+}
+
+.column-gap {
+	&--none {
+		column-gap: 0px;
+	}
+
+	&--half {
+		column-gap: $base-unit-half;
+	}
+
+	&--one {
+		column-gap: $base-unit;
+	}
+
+	&--two {
+		column-gap: $base-unit * 2;
 	}
 }
 
