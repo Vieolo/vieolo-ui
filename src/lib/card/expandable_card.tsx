@@ -40,7 +40,11 @@ export default function ExpandableCard(props: {
                     size={cardStyle.height === 'small' ? 'extra-small' : 'small'}
                     borderRadius={cardStyle.borderRadius || 'default'}
                     emphasis={'none'}
-                    onClick={() => setState(state === 'expanded' ? 'collapsed' : 'expanded')}
+                    onClick={() => {
+                        let newState: 'collapsed' | 'expanded' = state === 'expanded' ? 'collapsed' : 'expanded';
+                        setState(newState);
+                        if (props.onStateChage) props.onStateChage(newState);
+                    }}
                 />
 
                 <div className="padding-horizontal--half"></div>
