@@ -505,6 +505,18 @@
 
 .color {
 	@include colorMixin(color, false, !important);
+
+	&--gray-text,
+	&--gray-normal,
+	&--gray-light {
+		color: $gray-text-color;
+	}
+
+	&--default-text,
+	&--default-normal,
+	&--default-light {
+		color: $normal-text-color;
+	}
 }
 
 .hover {
@@ -766,6 +778,13 @@
 }
 .disabled {
 	@include disabled;
+}
+
+
+.cursor {
+	&--pointer {
+		cursor: pointer;
+	}
 }
 
 // #endregion
@@ -1444,6 +1463,24 @@
 
 	&--two {
 		column-gap: $base-unit * 2;
+	}
+}
+
+.row-height {
+	&--small {
+		height: $row-height-small;
+	}
+	
+	&--medium {
+		height: $row-height-medium;
+	}
+
+	&--large {
+		height: $row-height-large;
+	}
+
+	&--over {
+		height: $row-height-over;
 	}
 }
 

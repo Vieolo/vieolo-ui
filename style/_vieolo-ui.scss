@@ -13,7 +13,6 @@ body {
 	position: relative;
 	overflow: hidden;
 	outline: 0;
-	border-radius: $border-radius-full;
 	padding-right: $base-unit;
 	padding-left: $base-unit;
 	display: flex;
@@ -739,18 +738,8 @@ body {
 	width: 100%;
 	margin: 6px 0;
 
-	&__item-clickable {
-		cursor: pointer;
-	}
-
-	&__item-selected {
-		background-color: $tertiary-color-normal;
-		border-color: $tertiary-color-normal;
-	}
-
 	&__item-content {
-		padding: 0 5px;
-		height: 45px;
+		padding: 0 $base-unit;
 	}
 
 	input {
@@ -793,6 +782,26 @@ body {
 
 	&__leading-icon-div {
 		@include center-by-flex-column;
+	}
+
+	&--border-radius-default {
+		border-radius: $border-radius-normal;
+	}
+
+	&--border-radius-full {
+		border-radius: $border-radius-full;
+	}
+
+	&--border-radius-normal {
+		border-radius: $border-radius-normal;
+	}
+
+	&--border-radius-half {
+		border-radius: $border-radius-half;
+	}
+
+	&--border-radius-none {
+		border-radius: 0px;
 	}
 }
 
@@ -1924,4 +1933,25 @@ body {
 
 .vieolo-grid-container {
 	display: grid;
+}
+
+
+.vieolo-expandable-card {
+	&__header {
+		display: flex;
+		align-items: center;
+		padding: 0 $base-unit-half;
+
+		&--expanded {
+			border-bottom: 1px solid $disable-color-normal;
+		}
+
+		&__actions {
+			margin-left: auto;
+		}
+	}
+
+	&__body {
+		padding: $base-unit-half;
+	}
 }

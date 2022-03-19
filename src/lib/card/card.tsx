@@ -5,12 +5,12 @@ import React from 'react';
 import { getEmphasisClasses } from '../utility/style_utility';
 
 // Types
-import { BorderRadiusType, ColorOptionType, EmphasisType } from '../private/types';
+import { BorderRadiusType, ColorOptionType, ElevationType, EmphasisType } from '../private/types';
 
 
 export default function Card(props: {
     emphasis?: EmphasisType,
-    elevation?: "0" | "1" | "2",
+    elevation?: ElevationType,
     borderRadius?: BorderRadiusType,
     color?: ColorOptionType,
     height?: string,
