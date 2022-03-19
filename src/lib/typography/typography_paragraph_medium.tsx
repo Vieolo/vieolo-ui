@@ -16,7 +16,8 @@ export default function TypographyParagraphMedium (props: {
     color?: ColorOptionType,
     margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two",
     fontWeight?: FontWeightType,
-    style?: React.CSSProperties
+    style?: React.CSSProperties,
+    colorType?: 'normal' | 'text' | 'light',
 }) {
     return <TypographyBase 
         text={props.text}
@@ -28,5 +29,6 @@ export default function TypographyParagraphMedium (props: {
         margin={props.margin}
         fontWeight={props.fontWeight}
         style={props.style}
+        colorType={props.colorType}
     />
 }
