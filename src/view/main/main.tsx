@@ -39,6 +39,7 @@ import SwitchSet from '../../lib/form/switch_set';
 
 // Charts
 import { barChartOptions, BarChartCreator } from '../charts/bar_chart';
+import List from '../../lib/list/list';
 
 
 type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDefault" | "borderRadius" | 'fontWeightOptional' | 'emphasis' | {
@@ -173,20 +174,24 @@ export default function MainPage(props: {}): JSX.Element {
     return <div className="main-page">
 
         <div className="component-list">
-            {
-                Object.values(items).map(i => {
-                    return <ItemRow
-                        key={i.title}
-                        title={i.title}
-                        selected={selectedTitle === i.title}
-                        
-                        onClick={() => {                            
+
+            <List 
+                height='100vh'
+                itemStyle={{
+                    height: 'medium'
+                }}
+                items={Object.values(items).map((i, index) => {
+                    return {
+                        id: index.toString(),
+                        title: i.title,
+                        selected: selectedTitle === i.title,
+                        onClick: () => {                            
                             handleSelectComponent(i);
                             history.replace({ pathname: window.location.pathname, search: `tab=${i.title.replace(/ /g, "__")}` });
-                        }}
-                    />
-                })
-            }
+                        },
+                    }
+                })}
+            />
         </div>
 
         <div className="state-list">

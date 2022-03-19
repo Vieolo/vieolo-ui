@@ -1466,6 +1466,24 @@
 	}
 }
 
+.row-height {
+	&--small {
+		height: $row-height-small;
+	}
+	
+	&--medium {
+		height: $row-height-medium;
+	}
+
+	&--large {
+		height: $row-height-large;
+	}
+
+	&--over {
+		height: $row-height-over;
+	}
+}
+
 
 @mixin gridSpan($direction) {
 	$gso: ("xl", "lg", "md", "sm"); // Grid Size Options

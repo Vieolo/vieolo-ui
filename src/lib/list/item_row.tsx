@@ -12,7 +12,7 @@ import TypographyCaptionLarge from '../typography/typography_caption_large';
 import CloseIcon from '@mui/icons-material/CloseRounded';
 
 // Types
-import { BorderRadiusType, ColorOptionType, ElevationType, EmphasisType } from '../private/types';
+import { BorderRadiusType, ColorOptionType, ElevationType, EmphasisType, RowHeightType } from '../private/types';
 import { getEmphasisClasses } from '../utility/style_utility';
 
 
@@ -21,6 +21,7 @@ export type ItemStyleType = {
     emphasis?: "none" | "low",
     borderRadius?: BorderRadiusType,
     color?: ColorOptionType,
+    height?: RowHeightType
 }
 
 
@@ -39,13 +40,13 @@ export default function ItemRow(props: {
     searchRow?: {
         query: string,
         onQueryChange: (c: string) => void
-    }
+    },
 }) {
 
     let color = (props.itemStyle || {color: undefined}).color || 'secondary';
     let borderRadius = ` vieolo-item-row--border-radius-${(props.itemStyle && props.itemStyle.borderRadius) ? props.itemStyle.borderRadius : 'default'}`;
 
-    let contentClassName: string = "vieolo-item-row__item-content";
+    let contentClassName: string = `vieolo-item-row__item-content row-height--${(props.itemStyle || {height: undefined}).height || 'large'}`;
     contentClassName += borderRadius;
     if (props.onClick) contentClassName += " cursor--pointer";
     

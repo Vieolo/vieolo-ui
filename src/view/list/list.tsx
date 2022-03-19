@@ -93,6 +93,10 @@ export function listOptions(): ViewData {
             horizontalPadding: {
                 options: ["none", "half", "one"],
                 default: "one"
+            },
+            itemHeight: {
+                options: ["small", "medium", "large", "over"],
+                default: "large"
             }
         }
     }    
@@ -109,7 +113,8 @@ export function ListCreator(props: {p: ListPropsType}) {
             borderRadius: (props.p as any).borderRadius,
             color: (props.p as any).color,
             elevation: (props.p as any).elevation,
-            emphasis: (props.p as any).emphasis
+            emphasis: (props.p as any).emphasis,
+            height: (props.p as any).itemHeight
         }}
         enableSearch={props.p.enableSearch}
         enableSubtitleSearch={props.p.enableSubtitleSearch}

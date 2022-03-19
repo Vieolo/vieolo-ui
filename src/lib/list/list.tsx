@@ -29,11 +29,11 @@ export type ListItem = {
 
 
 export default function List(props: {
+    itemStyle?: ItemStyleType
     items: ListItem[],
     enableSearch?: boolean,
     enableSubtitleSearch?: boolean,
-    title: string,
-    itemStyle?: ItemStyleType
+    title?: string,
     height: string,
     horizontalPadding?: 'none' | 'half' | 'one'
 }) {
@@ -41,7 +41,10 @@ export default function List(props: {
     let [query, setQuery] = useState<string>("");
 
     return <div className={`vieolo-list padding-horizontal--${props.horizontalPadding || 'none'}`} style={{ height: props.height }}>
-        <div className="center-by-flex-row"><TypographyTitleMedium text={props.title} className="margin-vertical--10" /></div>
+        {
+            props.title &&
+            <div className="center-by-flex-row"><TypographyTitleMedium text={props.title} className="margin-vertical--10" /></div>
+        }
 
         {
             props.enableSearch &&
