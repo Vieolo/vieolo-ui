@@ -23,11 +23,11 @@ export function gridOptions(): ViewData {
             },
             rowGap: {
                 options: ['none', 'half', 'one', 'two'],
-                default: 'none'
+                default: 'half'
             },
             columnGap: {
                 options: ['none', 'half', 'one', 'two'],
-                default: 'none'
+                default: 'half'
             }
         }
     }
@@ -60,7 +60,7 @@ export function GridCreator(props: { p: GridContainerPropsType }) {
             <Grid xl={6} direction={(props.p as any).direction} >{child}</Grid>
 
             <Grid xl={6} direction={(props.p as any).direction} >{child}</Grid>
-            <Grid xl={0} direction={(props.p as any).direction} >{child}</Grid>
+            <Grid xl={6} lg={0} direction={(props.p as any).direction} >{child}</Grid>
         </GridContainer>
     </div>
 }

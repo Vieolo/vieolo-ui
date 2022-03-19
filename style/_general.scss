@@ -1463,10 +1463,14 @@
 			@each $sp in $gss {
 				&--#{$sp} {
 					@if $s == "xl" {
-						grid-#{$direction}: span $sp;
+						@if $sp != 0 {
+							grid-#{$direction}: span $sp;
+						} @else {
+							display: none;
+						}
 					} @else {
 						@media screen and (max-width: #{map-get($gsm, $s)}) {
-							@if $sp > 0 {
+							@if $sp != 0 {
 								grid-#{$direction}: span $sp;
 							} @else {
 								display: none;
