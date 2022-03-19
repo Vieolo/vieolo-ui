@@ -33,6 +33,7 @@ import { cardOptions, CardCreator } from '../card/card';
 import { typographyOptions, TypographyCreator } from '../typography/typography';
 import { gridOptions, GridCreator } from '../layout/grid/grid';
 import { gridTwoOptions, GridTwoCreator } from '../layout/grid/grid_two';
+import { gridThreeOptions, GridThreeCreator } from '../layout/grid/grid_three';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
 
@@ -83,6 +84,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator },
         "Grid": { title: "Grid", data: gridOptions(), creator: GridCreator },
         "Grid Two": { title: "Grid Two", data: gridTwoOptions(), creator: GridTwoCreator },
+        "Grid Three": { title: "Grid Three", data: gridThreeOptions(), creator: GridThreeCreator },
         "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator },
         "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator },
         "List": { title: "List", data: listOptions(), creator: ListCreator },

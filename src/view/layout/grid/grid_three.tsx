@@ -2,19 +2,19 @@
 import React from 'react';
 
 // Component
-import GridTwo from '../../../lib/layout/grid/grid_two';
+import GridThree from '../../../lib/layout/grid/grid_three';
 
 // Types
 import { ViewData } from '../../main/main';
 
-type GridTwoPropsType = React.ComponentProps<typeof GridTwo>;
+type GridThreePropsType = React.ComponentProps<typeof GridThree>;
 
-export function gridTwoOptions(): ViewData {
+export function gridThreeOptions(): ViewData {
 
     return {
         constants: {
 
-        } as Partial<GridTwoPropsType>,
+        } as Partial<GridThreePropsType>,
         variables: {
             rowGap: {
                 options: ['none', 'half', 'one', 'two'],
@@ -33,12 +33,12 @@ export function gridTwoOptions(): ViewData {
 }
 
 
-export function GridTwoCreator(props: { p: GridTwoPropsType }) {
+export function GridThreeCreator(props: { p: GridThreePropsType }) {
 
     let child = <div className="background-color--secondary-light">col</div>
 
     return <div className="width--pc-100 height--px-500">
-        <GridTwo
+        <GridThree
             columnGap={props.p.columnGap}
             rowGap={props.p.rowGap}
             responsiveBreakpoint={props.p.responsiveBreakpoint}
@@ -49,6 +49,9 @@ export function GridTwoCreator(props: { p: GridTwoPropsType }) {
             {child}
             {child}
             {child}
-        </GridTwo>
+            {child}
+            {child}
+            {child}
+        </GridThree>
     </div>
 }
