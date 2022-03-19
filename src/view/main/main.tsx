@@ -2,9 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-// Components
-import ItemRow from '../../lib/list/item_row';
-
 // Main Creators
 import { SelectCreator, selectOptions } from '../form/select';
 import { PeriodSelectorCreator, periodSelectorOptions } from '../date_time/period_selector';
@@ -58,7 +55,8 @@ export type ViewData = {
 type ViewItemData = {
     title: string,
     data: ViewData,
-    creator: any
+    creator: any,
+    group: string
 }
 
 
@@ -70,35 +68,35 @@ export default function MainPage(props: {}): JSX.Element {
     let history = useHistory();    
 
     let items: { [key: string]: ViewItemData } = {
-        "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator },
-        "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator },
-        "Card": { title: "Card", data: cardOptions(), creator: CardCreator },
-        "Checkbox": { title: "Checkbox", data: checkboxOptions(), creator: CheckboxCreator },
-        "Chip": { title: "Chip", data: chipOptions(), creator: ChipCreator },
-        "Confirmation Dialog": { title: "Confirmation Dialog", data: confirmationDialogOptions(), creator: ConfirmationDialogCreator },
-        "Date Input": { title: "Date Input", data: dateInputOptions(), creator: DateInputCreator },
-        "Date Picker": { title: "Date Picker", data: datePickerOptions(), creator: DatePickerCreator },
-        "Date Time Picker": { title: "Date Time Picker", data: dateTimePickerOptions(), creator: DateTimePickerCreator },
-        "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator },
-        "File Input": { title: "File Input", data: fileInputOptions(), creator: FileInputCreator },
-        "Form Dialog": { title: "Form Dialog", data: formDialogOptions(), creator: FormDialogCreator },
-        "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator },
-        "Grid": { title: "Grid", data: gridOptions(), creator: GridCreator },
-        "Grid Two": { title: "Grid Two", data: gridTwoOptions(), creator: GridTwoCreator },
-        "Grid Three": { title: "Grid Three", data: gridThreeOptions(), creator: GridThreeCreator },
-        "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator },
-        "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator },
-        "List": { title: "List", data: listOptions(), creator: ListCreator },
-        "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerEmbeddedOptions(), creator: PDFViewerEmbeddedCreator },
-        "PDF Viewer Fullscreen": { title: "PDF Viewer Fullscreen", data: pdfViewerFullScreenOptions(), creator: PDFViewerFullScreenCreator },
-        "Period Selector": { title: "Period Selector", data: periodSelectorOptions(), creator: PeriodSelectorCreator },
-        "Radio Group": { title: "Radio Group", data: radioGroupOptions(), creator: RadioGroupCreator },
-        "Select": { title: "Select", data: selectOptions(), creator: SelectCreator },
-        "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator },
-        "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator },
-        "Table": { title: "Table", data: tableOptions(), creator: TableCreator },
-        "Time Input": { title: "Time Input", data: timeInputOptions(), creator: TimeInputCreator },
-        "Typography": { title: "Typography", data: typographyOptions(), creator: TypographyCreator },
+        "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator, group: "Charts"},
+        "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator, group: "Buttons" },
+        "Card": { title: "Card", data: cardOptions(), creator: CardCreator, group: "Cards" },
+        "Checkbox": { title: "Checkbox", data: checkboxOptions(), creator: CheckboxCreator, group: "Form" },
+        "Chip": { title: "Chip", data: chipOptions(), creator: ChipCreator, group: "Buttons" },
+        "Confirmation Dialog": { title: "Confirmation Dialog", data: confirmationDialogOptions(), creator: ConfirmationDialogCreator, group: "Dialogs" },
+        "Date Input": { title: "Date Input", data: dateInputOptions(), creator: DateInputCreator, group: "Date and Time" },
+        "Date Picker": { title: "Date Picker", data: datePickerOptions(), creator: DatePickerCreator, group: "Date and Time" },
+        "Date Time Picker": { title: "Date Time Picker", data: dateTimePickerOptions(), creator: DateTimePickerCreator, group: "Date and Time" },
+        "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
+        "File Input": { title: "File Input", data: fileInputOptions(), creator: FileInputCreator, group: "Form" },
+        "Form Dialog": { title: "Form Dialog", data: formDialogOptions(), creator: FormDialogCreator, group: "Dialogs" },
+        "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator, group: "Charts" },
+        "Grid": { title: "Grid", data: gridOptions(), creator: GridCreator, group: "Layout/Grid" },
+        "Grid Two": { title: "Grid Two", data: gridTwoOptions(), creator: GridTwoCreator, group: "Layout/Grid" },
+        "Grid Three": { title: "Grid Three", data: gridThreeOptions(), creator: GridThreeCreator, group: "Layout/Grid" },
+        "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator, group: "Buttons" },
+        "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator, group: "Form" },
+        "List": { title: "List", data: listOptions(), creator: ListCreator, group: "List" },
+        "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerEmbeddedOptions(), creator: PDFViewerEmbeddedCreator, group: "PDF" },
+        "PDF Viewer Fullscreen": { title: "PDF Viewer Fullscreen", data: pdfViewerFullScreenOptions(), creator: PDFViewerFullScreenCreator, group: "PDF" },
+        "Period Selector": { title: "Period Selector", data: periodSelectorOptions(), creator: PeriodSelectorCreator, group: "Date and Time" },
+        "Radio Group": { title: "Radio Group", data: radioGroupOptions(), creator: RadioGroupCreator, group: "Form" },
+        "Select": { title: "Select", data: selectOptions(), creator: SelectCreator, group: "Form" },
+        "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator, group: "Form" },
+        "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator, group: "Layout" },
+        "Table": { title: "Table", data: tableOptions(), creator: TableCreator, group: "Table" },
+        "Time Input": { title: "Time Input", data: timeInputOptions(), creator: TimeInputCreator, group: "Date and Time" },
+        "Typography": { title: "Typography", data: typographyOptions(), creator: TypographyCreator, group: "Typography" },
     }
 
     useEffect(() => {
@@ -176,15 +174,26 @@ export default function MainPage(props: {}): JSX.Element {
         <div className="component-list">
 
             <List 
-                height='100vh'
+                height='calc(100vh - 20px)'
                 itemStyle={{
                     height: 'medium'
+                }}
+                collapsedGroupStyle={{
+                    height: 'medium',
+                    emphasis: 'none',
+                    color: 'secondary'
+                }}
+                expandedGroupStyle={{
+                    height: 'small',
+                    emphasis: 'low',
+                    color: 'primary'
                 }}
                 items={Object.values(items).map((i, index) => {
                     return {
                         id: index.toString(),
                         title: i.title,
                         selected: selectedTitle === i.title,
+                        group: i.group,
                         onClick: () => {                            
                             handleSelectComponent(i);
                             history.replace({ pathname: window.location.pathname, search: `tab=${i.title.replace(/ /g, "__")}` });
