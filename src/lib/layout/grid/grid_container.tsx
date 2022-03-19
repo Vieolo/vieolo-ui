@@ -4,7 +4,8 @@ import React from 'react';
 
 export default function GridContainer(props: {
     itemDirection?: 'row' | 'column',
-    gap?: 'none' | 'half' | 'one' | 'two',
+    rowGap?: 'none' | 'half' | 'one' | 'two',
+    columnGap?: 'none' | 'half' | 'one' | 'two',
     height?: string,
     children?: React.ReactNode
 }) {    
@@ -17,13 +18,13 @@ export default function GridContainer(props: {
     let gridTemplate = 'repeat(12, 1fr)';
     if (props.itemDirection === 'row') {
         style.gridTemplateRows = gridTemplate
-        className += ` row-gap--${props.gap || 'none'}`;
     } else {
         style.gridTemplateColumns = gridTemplate;
-        className += ` column-gap--${props.gap || 'none'}`;
     }
+    className += ` row-gap--${props.rowGap || 'none'}`;
+    className += ` column-gap--${props.columnGap || 'none'}`;
 
-    return <div className={className}>
+    return <div className={className} style={style} >
         {props.children}
     </div>
 }
