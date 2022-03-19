@@ -12,17 +12,11 @@ import TypographyCaptionLarge from '../typography/typography_caption_large';
 import CloseIcon from '@mui/icons-material/CloseRounded';
 
 // Types
-import { BorderRadiusType, ColorOptionType, ElevationType, EmphasisType, RowHeightType } from '../private/types';
+import { ColorOptionType, EmphasisType, RowStyleType } from '../private/types';
 import { getEmphasisClasses } from '../utility/style_utility';
 
 
-export type ItemStyleType = {
-    elevation?: ElevationType,
-    emphasis?: "none" | "low",
-    borderRadius?: BorderRadiusType,
-    color?: ColorOptionType,
-    height?: RowHeightType
-}
+
 
 
 export default function ItemRow(props: {
@@ -35,7 +29,7 @@ export default function ItemRow(props: {
     buttonClick?: () => void,
     buttonSize?: 'small' | 'medium',
     buttonColor?: ColorOptionType,
-    itemStyle?: ItemStyleType,
+    itemStyle?: RowStyleType,
     disabled?: boolean,
     searchRow?: {
         query: string,

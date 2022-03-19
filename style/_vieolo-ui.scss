@@ -1934,3 +1934,24 @@ body {
 .vieolo-grid-container {
 	display: grid;
 }
+
+
+.vieolo-expandable-card {
+	&__header {
+		display: flex;
+		align-items: center;
+		padding: 0 $base-unit-half;
+
+		&--expanded {
+			border-bottom: 1px solid $disable-color-normal;
+		}
+
+		&__actions {
+			margin-left: auto;
+		}
+	}
+
+	&__body {
+		padding: $base-unit-half;
+	}
+}

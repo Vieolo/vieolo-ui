@@ -5,3 +5,11 @@ export type FontWeightType = 'light' | 'normal' | 'bold' | 'extra-bold';
 export type GridGapType = 'none' | 'half' | 'one' | 'two';
 export type ElevationType = '0' | '1' | '2';
 export type RowHeightType = "small" | "medium" | "large" | "over";
+
+export type RowStyleType = {
+    elevation?: ElevationType,
+    emphasis?: "none" | "low",
+    borderRadius?: BorderRadiusType,
+    color?: ColorOptionType,
+    height?: RowHeightType
+}
