@@ -775,7 +775,7 @@
 
 
 
-// #region Size, margin, padding, position, overflow
+// #region Layout (Size, margin, padding, position, overflow)
 
 .overflow {
 	&--y-scroll {
@@ -1410,6 +1410,88 @@
 		padding-left: 40px;
 	}
 }
+
+.row-gap {
+	&--none {
+		row-gap: 0px;
+	}
+
+	&--half {
+		row-gap: $base-unit-half;
+	}
+
+	&--one {
+		row-gap: $base-unit;
+	}
+
+	&--two {
+		row-gap: $base-unit * 2;
+	}
+}
+
+.column-gap {
+	&--none {
+		column-gap: 0px;
+	}
+
+	&--half {
+		column-gap: $base-unit-half;
+	}
+
+	&--one {
+		column-gap: $base-unit;
+	}
+
+	&--two {
+		column-gap: $base-unit * 2;
+	}
+}
+
+
+@mixin gridSpan($direction) {
+	$gso: ("xl", "lg", "md", "sm"); // Grid Size Options
+	$gsm: (
+		"xl": $desktopBreakPoint,
+		"lg": $laptop13BreakPoint,
+		"md": $tablet10LandscapeBreakPoint,
+		"sm": $mobileBreakPoint
+	);
+	$gss: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12); // Grid Size Spans
+
+	@each $s in $gso {
+		&--#{$s} {
+			@each $sp in $gss {
+				&--#{$sp} {
+					@if $s == "xl" {
+						@if $sp != 0 {
+							grid-#{$direction}: span $sp;
+						} @else {
+							display: none;
+						}
+					} @else {
+						@media screen and (max-width: #{map-get($gsm, $s)}) {
+							@if $sp != 0 {
+								grid-#{$direction}: span $sp;
+							} @else {
+								display: none;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+}
+
+.grid-column {
+	@include gridSpan("column");
+}
+
+.grid-row {
+	@include gridSpan("row");
+}
+
 
 // #endregion
 
