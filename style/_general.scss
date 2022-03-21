@@ -454,6 +454,10 @@
 		&--white {
 			#{$property}: white unquote($optionalSuffix);
 		}
+
+		&--transparent {
+			#{$property}: transparent unquote($optionalSuffix);
+		}
 	}
 }
 
@@ -494,6 +498,12 @@
 		&--white {
 			#{$state} {
 				#{$property}: white unquote($optionalSuffix);
+			}
+		}
+
+		&--transparent {
+			#{$state} {
+				#{$property}: transparent unquote($optionalSuffix);
 			}
 		}
 	}
