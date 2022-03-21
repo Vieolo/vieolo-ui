@@ -34,7 +34,7 @@ export function getEmphasisClasses(emphasis: EmphasisType, color: ColorOptionTyp
 	
     } else if (emphasis === 'low') {
 	
-        c = ` background-color--background border--${color}-light ${getTextColorClass()} ${getBorderClass()} border--solid`;
+        c = ` background-color--transparent border--${color}-light ${getTextColorClass()} ${getBorderClass()} border--solid`;
         
         if (options.hoverable) {
             c += ` hover--${color}-light`
@@ -42,7 +42,7 @@ export function getEmphasisClasses(emphasis: EmphasisType, color: ColorOptionTyp
 	
     } else {
 	
-        c = ` background-color--background border--background ${getTextColorClass()} ${getBorderClass()} border--solid`;
+        c = ` background-color--transparent border--transparent ${getTextColorClass()} ${getBorderClass()} border--solid`;
         if (options.hasRipple) {
             c += ` ripple ripple--${color}-light`;
         }
