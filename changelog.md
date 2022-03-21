@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.19.2 (2022-03-21)
+- Fixed the background and border color of the none and low emphasis
+
 ## 0.19.1 (2022-03-19)
 - Added `GridTwo` and `GridThree` to the export
 
