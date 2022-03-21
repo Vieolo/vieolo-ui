@@ -451,6 +451,10 @@
 			#{$property}: $background-color unquote($optionalSuffix);
 		}
 
+		&--content-background {
+			#{$property}: $content-background-color unquote($optionalSuffix);
+		}
+
 		&--white {
 			#{$property}: white unquote($optionalSuffix);
 		}
@@ -492,6 +496,12 @@
 		&--background {
 			#{$state} {
 				#{$property}: $background-color unquote($optionalSuffix);
+			}
+		}
+
+		&--content-background {
+			#{$state} {
+				#{$property}: $content-background-color unquote($optionalSuffix);
 			}
 		}
 

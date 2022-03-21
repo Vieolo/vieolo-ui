@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.19.3 (2022-03-21)
+- Added `content-background-color` variable to SCSS. This variable is used as background for none and low emphasis
+
 ## 0.19.2 (2022-03-21)
 - Fixed the background and border color of the none and low emphasis
 
