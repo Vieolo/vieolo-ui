@@ -27,13 +27,14 @@ export function tableOptions(): ViewData {
             stickyHeader: "boolean",
             withPagination: "boolean",
             withMaxHeight: "boolean",
-            checkable: "boolean"
+            checkable: "boolean",
+            reorderable: 'boolean'
         }
-    }    
+    }
 }
 
 
-export function TableCreator(props: {p: TablePropsType}) {
+export function TableCreator(props: { p: TablePropsType }) {
 
     let [sort, setSort] = useState<string>("id");
     let [direction, setDirection] = useState<TableSortDirection>('ascending');
@@ -41,21 +42,21 @@ export function TableCreator(props: {p: TablePropsType}) {
 
     let headers = ['id', 'Date', 'Description', ''];
 
-    let normalRows: React.ReactNode[][] = [
-        ["1", "2020-10-10", "Some Description", <IconButton size="small" onClick={() => {}} icon={<SampleIcon />} />],
-        ["2", "2020-10-11", "Some Description 2", <IconButton size="small" onClick={() => {}} icon={<SampleIcon />} />]
-    ];
+    let [normalRows, setNormalRows] = useState<React.ReactNode[][]>([
+        ["1", "2020-10-10", "Some Description", <IconButton size="small" onClick={() => { }} icon={<SampleIcon />} />],
+        ["2", "2020-10-11", "Some Description 2", <IconButton size="small" onClick={() => { }} icon={<SampleIcon />} />]
+    ]);
 
-    let clickableRows: React.ReactNode[][] = [
+    let [clickableRows, setClickableRows] = useState<React.ReactNode[][]>([
         ["1", "2020-10-10", "Some Description", 'Done'],
         ["2", "2020-10-11", "Hello World!", 'N/A']
-    ];
+    ]);
 
-    let manyRows: React.ReactNode[][] = [
+    let [manyRows, setManyRow] = useState<React.ReactNode[][]>([
         ...Array(25).fill("").map((z, i) => {
-            return [25-i, "2020-10-10", "Some Description", 'Done']
+            return [25 - i, "2020-10-10", "Some Description", 'Done']
         })
-    ]
+    ]);
 
     let semiFinalRows: TableRow[] = ((props.p as any).rowClickable ? clickableRows : (props.p as any).withMaxHeight ? manyRows : normalRows).map((r, i) => {
         return {
@@ -96,14 +97,14 @@ export function TableCreator(props: {p: TablePropsType}) {
         sortDirection={direction}
         width={props.p.width}
         stickyHeader={props.p.stickyHeader}
-        maxHeight={props.p.stickyHeader ?  "300px" : (props.p as any).withMaxHeight ? "500px" : undefined}
+        maxHeight={props.p.stickyHeader ? "300px" : (props.p as any).withMaxHeight ? "500px" : undefined}
         pagination={(props.p as any).withPagination ? {
             endIndex: 25,
             hasNextPage: false,
-            onPageChange: () => {},
+            onPageChange: () => { },
             pageItemCount: 25,
             pageNumber: 1,
-            startIndex: 1,                
+            startIndex: 1,
         } : undefined}
         isDense={props.p.isDense}
         isCheckable={(props.p as any).checkable}
@@ -112,6 +113,13 @@ export function TableCreator(props: {p: TablePropsType}) {
             else {
                 setCheckedList(finalRows.map(i => i.id));
             }
+        }}
+        onReorder={!(props.p as any).reorderable ? undefined : nl => {
+            let context = (props.p as any).rowClickable ? "clickableRows" : (props.p as any).withMaxHeight ? "manyRows" : "normalRows";
+
+            if (context === 'clickableRows') setClickableRows(nl.map(z => z.items));
+            else if (context === 'manyRows') setManyRow(nl.map(z => z.items));
+            else if (context === 'normalRows') setNormalRows(nl.map(z => z.items));
         }}
     />
 
