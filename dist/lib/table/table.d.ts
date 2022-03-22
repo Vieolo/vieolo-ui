@@ -35,6 +35,13 @@ export default function Table(props: {
      * `disableSort` should also be falsy
      */
     onSortChange?: (sort: string, direction: TableSortDirection) => void;
+    /**
+     * If this callback is provided, the user is able to drag and reorder the rows of the list
+     * Note that if column sorting is enables, the order does not work
+     * This callback will provide table rows with their new order
+     * The provider of the callback is responsible for updating the underlying data
+     */
+    onReorder?: (newOrder: TableRow[]) => void;
     width?: string;
     stickyHeader?: boolean;
     maxHeight?: string;

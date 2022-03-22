@@ -129,10 +129,6 @@ export default function Table(props: {
                         </div>
                     }
                     {
-                        props.onReorder &&
-                        <div></div>
-                    }
-                    {
                         (props.headers || []).map((h, i) => {
                             return <div
                                 key={`table_header_row_${i}`}

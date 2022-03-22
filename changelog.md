@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.19.4 (2022-03-22)
+- Added the ability to reorder the rows of `Table` ([#131](https://github.com/Vieolo/vieolo-ui/issues/131))
+
 ## 0.19.3 (2022-03-21)
 - Added `content-background-color` variable to SCSS. This variable is used as background for none and low emphasis
 
