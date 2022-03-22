@@ -2,14 +2,15 @@
 import React, { useState } from 'react';
 import IconButton from '../button/icon_button';
 
-// Typography
+// Vieolo UI
 import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
 import TypographyTitleSmall from '../typography/typography_title_small';
+import Checkbox from '../form/checkbox';
 
 // Material UI
 import LeftArrowIcon from '@mui/icons-material/ArrowLeft';
 import RightArrowIcon from '@mui/icons-material/ArrowRight';
-import Checkbox from '../form/checkbox';
+import ReorderIcon from '@mui/icons-material/DragHandleRounded';
 
 export type TableSortDirection = 'ascending' | 'descending';
 
@@ -49,6 +50,13 @@ export default function Table(props: {
      * `disableSort` should also be falsy
      */
     onSortChange?: (sort: string, direction: TableSortDirection) => void,
+    /**
+     * If this callback is provided, the user is able to drag and reorder the rows of the list
+     * Note that if column sorting is enables, the order does not work
+     * This callback will provide table rows with their new order
+     * The provider of the callback is responsible for updating the underlying data
+     */
+    onReorder?: (newOrder: TableRow[]) => void,
     width?: string,
     stickyHeader?: boolean,
     maxHeight?: string,
@@ -85,6 +93,8 @@ export default function Table(props: {
 
     let [allChecked, setAllChecked] = useState<boolean>(false);
 
+    let [draggedRow, setDraggedRow] = useState<{ id: string, index: number } | null>(null);
+
     let style: React.CSSProperties = {}
     let contentStyle: React.CSSProperties = {}
 
@@ -98,7 +108,7 @@ export default function Table(props: {
     }
 
     let columnGrid = props.columnGrid;
-    if (props.isCheckable) columnGrid = `30px ${columnGrid}`;
+    if (props.isCheckable || props.onReorder) columnGrid = `30px ${columnGrid}`;
 
     return <div className={`vieolo-table ${props.removeHeaderRow ? 'vieolo-table--headless' : ''}`} style={style}>
 
@@ -155,7 +165,7 @@ export default function Table(props: {
                         let className = `${baseClass}`;
                         if (props.isDense) className += ` ${baseClass}--dense`
                         if (row.checked) className += ` ${baseClass}--checked`
-                        if (row.onClick) className += ' clickable'                        
+                        if (row.onClick) className += ' clickable'
 
                         return <div
                             key={`table_row_${row.id}`}
@@ -163,6 +173,16 @@ export default function Table(props: {
                             aria-label={`${props.ariaLabel || 'table'} row ${row.id}`}
                             onClick={() => {
                                 if (row.onClick) row.onClick();
+                            }}
+                            draggable={props.onReorder !== undefined}
+                            onDragStart={e => setDraggedRow({ id: row.id, index: i })}
+                            onDragEnd={e => {
+                                setDraggedRow(null)
+                            }}
+                            onDragOver={e => e.preventDefault()}
+                            onDrop={e => {
+                                if (!draggedRow || draggedRow.id === row.id) return;
+                                if (props.onReorder) props.onReorder(moveItem<TableRow>([...props.rows], draggedRow.index, i));
                             }}
                         >
                             {
@@ -177,6 +197,14 @@ export default function Table(props: {
                                         }}
                                         value={row.checked || false}
                                     />
+                                </div>
+                            }
+                            {
+                                props.onReorder &&
+                                <div
+                                    className='center-by-flex-row cursor--move'
+                                >
+                                    <ReorderIcon />
                                 </div>
                             }
                             {
@@ -230,4 +258,14 @@ export default function Table(props: {
         }
     </div>
 
+}
+
+
+function moveItem<T>(data: T[], from: number, to: number): T[] {
+    // remove `from` item and store it
+    var f = data.splice(from, 1)[0];
+    // insert stored item into position `to`
+    data.splice(to, 0, f);
+
+    return data;
 }
