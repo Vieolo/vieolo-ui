@@ -26,7 +26,9 @@ export type WidthAndHeightSize = "none" | "half" | "one" | "two" | "px-600" | "p
 
 
 export type CardExtraActionType = {
-    onClick: () => void,
+    onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
     icon?: React.ReactNode,
-    text?: string
+    text?: string,
+    color?: ColorOptionType,
+    id: string
 }

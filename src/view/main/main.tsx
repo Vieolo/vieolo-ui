@@ -27,6 +27,7 @@ import { timeInputOptions, TimeInputCreator } from '../date_time/time_input';
 import { dateTimePickerOptions, DateTimePickerCreator } from '../date_time/date_time_picker';
 import { dateInputOptions, DateInputCreator } from '../date_time/date_input';
 import { cardOptions, CardCreator } from '../card/card';
+import { titlePeriodCardOptions, TitlePeriodCardCreator } from '../card/title_period_card';
 import { typographyOptions, TypographyCreator } from '../typography/typography';
 import { gridOptions, GridCreator } from '../layout/grid/grid';
 import { gridTwoOptions, GridTwoCreator } from '../layout/grid/grid_two';
@@ -75,6 +76,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator, group: "Buttons" },
         
         "Card": { title: "Card", data: cardOptions(), creator: CardCreator, group: "Cards" },
+        "Title Period Card": { title: "Title Period Card", data: titlePeriodCardOptions(), creator: TitlePeriodCardCreator, group: "Cards" },
         
         "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator, group: "Charts"},
         "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator, group: "Charts" },
