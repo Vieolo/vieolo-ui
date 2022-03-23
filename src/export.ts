@@ -32,12 +32,16 @@ import Textarea from './lib/form/textarea';
 import TextareaSet from './lib/form/textarea_set';
 import TimeInput from './lib/date_time/time_input';
 import RadioGroup, { RadioButtonType as RadioButtonTempType } from './lib/form/radio_group';
-import { RowStyleType as RowStyleTypeTemp, WidthAndHeightSize as WidthAndHeightSizeTemp } from './lib/private/types';
 import Select from './lib/form/select';
 import Spacer from './lib/layout/auxiliary/spacer';
 import Switch from './lib/form/switch';
 import SwitchSet from './lib/form/switch_set';
 
+import { 
+    RowStyleType as RowStyleTypeTemp, 
+    WidthAndHeightSize as WidthAndHeightSizeTemp,
+    CardExtraActionType as CardExtraActionTypeTemp
+} from './lib/private/types';
 
 export { 
     Button,
@@ -85,6 +89,7 @@ export {
 export type ListItem = ListItemType
 export type RowStyleType = RowStyleTypeTemp
 export type WidthAndHeightSize = WidthAndHeightSizeTemp;
+export type CardExtraActionType = CardExtraActionTypeTemp;
 export type FormDialogAccessoryButton = FormDialogAccessoryButtonType
 export type FormDialogMainButton = FormDialogMainButtonType
 export type TableSortDirection = TableSortDirectionType
