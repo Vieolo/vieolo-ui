@@ -1955,3 +1955,58 @@ body {
 		padding: $base-unit-half;
 	}
 }
+
+
+.vieolo-divider {
+	display: flex;
+
+	&--horizontal {
+		width: 100%;		
+	}
+
+	&--vertical {
+		flex-direction: column;
+		height: 100%;
+		width: $base-unit-half;
+	}
+
+	&--start {
+		justify-content: start;
+	}
+
+	&--center {
+		justify-content: center;
+	}
+
+	&--end {
+		justify-content: end;
+	}
+}
+
+
+.vieolo-title-period-card {
+	&__header {
+		height: $row-height-large;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		
+		&__text {
+			display: flex;
+			flex-direction: column;
+			justify-content: space-around;
+			height: 100%;
+			
+			&__date {
+				display: flex;
+				align-items: flex-end;
+				column-gap: $base-unit;
+			}
+		}
+
+		&__action {
+			display: flex;
+			flex-direction: row-reverse;
+		}
+	}
+}

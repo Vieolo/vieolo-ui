@@ -1,12 +1,12 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+// React
+import { useState } from "react";
 // Vieolo UI
 import Card from "./card";
 import IconButton from "../button/icon_button";
-// Meterial UI
-import ExpandIcon from "@mui/icons-material/KeyboardArrowDownRounded";
-import CollapseIcon from "@mui/icons-material/KeyboardArrowUpRounded";
-import { useState } from "react";
 import { TypographyParagraphMedium } from "../typography";
+// Icons
+import { ArrowDown as ExpandIcon, ArrowUp as CollapseIcon } from '../icons/icons';
 export default function ExpandableCard(props) {
     let [state, setState] = useState(props.initialState || 'collapsed');
     let cardStyle = state === 'collapsed' ? (props.collapsedCardStyle || {}) : (props.expandedCardStyle || {});
