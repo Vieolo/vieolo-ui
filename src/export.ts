@@ -37,6 +37,8 @@ import Spacer from './lib/layout/auxiliary/spacer';
 import Switch from './lib/form/switch';
 import SwitchSet from './lib/form/switch_set';
 
+import TitlePeriodCard from './lib/card/title_period_card';
+
 import { 
     RowStyleType as RowStyleTypeTemp, 
     WidthAndHeightSize as WidthAndHeightSizeTemp,
@@ -82,7 +84,8 @@ export {
     GridThree,
     GridTwo,
     Spacer,
-    Divider
+    Divider,
+    TitlePeriodCard
 }
 
 

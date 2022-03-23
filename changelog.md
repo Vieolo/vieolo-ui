@@ -1,5 +1,12 @@
 # Change Log
 
+## 0.19.5 (2022-03-23)
+- Improved the `width` and `height` CSS classes
+- Added `withAndHeightSize` type
+- Added `Divider` Component ([#133](https://github.com/Vieolo/vieolo-ui/issues/133))
+- Added `Spacer` Component ([#134](https://github.com/Vieolo/vieolo-ui/issues/134))
+- Added `TitlePeriodCard` Component ([#135](https://github.com/Vieolo/vieolo-ui/issues/135))
+
 ## 0.19.4 (2022-03-22)
 - Added the ability to reorder the rows of `Table` ([#131](https://github.com/Vieolo/vieolo-ui/issues/131))
 
