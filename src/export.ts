@@ -33,6 +33,7 @@ import TimeInput from './lib/date_time/time_input';
 import RadioGroup, { RadioButtonType as RadioButtonTempType } from './lib/form/radio_group';
 import { RowStyleType as RowStyleTypeTemp } from './lib/private/types';
 import Select from './lib/form/select';
+import Spacer from './lib/layout/auxiliary/spacer';
 import Switch from './lib/form/switch';
 import SwitchSet from './lib/form/switch_set';
 
@@ -74,7 +75,8 @@ export {
     SwitchSet,
     ExpandableCard,
     GridThree,
-    GridTwo
+    GridTwo,
+    Spacer
 }
 
 

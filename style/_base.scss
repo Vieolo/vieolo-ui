@@ -3,6 +3,7 @@
 // Base Unit
 $base-unit: 10px !default;;
 $base-unit-half: math.div($base-unit, 2);
+$base-unit-two: $base-unit * 2;
 
 // Heights
 $row-height-small: $base-unit * 3 !default;;
