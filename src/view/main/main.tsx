@@ -27,10 +27,13 @@ import { timeInputOptions, TimeInputCreator } from '../date_time/time_input';
 import { dateTimePickerOptions, DateTimePickerCreator } from '../date_time/date_time_picker';
 import { dateInputOptions, DateInputCreator } from '../date_time/date_input';
 import { cardOptions, CardCreator } from '../card/card';
+import { titlePeriodCardOptions, TitlePeriodCardCreator } from '../card/title_period_card';
 import { typographyOptions, TypographyCreator } from '../typography/typography';
 import { gridOptions, GridCreator } from '../layout/grid/grid';
 import { gridTwoOptions, GridTwoCreator } from '../layout/grid/grid_two';
 import { gridThreeOptions, GridThreeCreator } from '../layout/grid/grid_three';
+import { spacerOptions, SpacerCreator } from '../layout/auxiliary/spacer';
+import { dividerOptions, DividerCreator } from '../layout/auxiliary/divider';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
 
@@ -68,34 +71,50 @@ export default function MainPage(props: {}): JSX.Element {
     let history = useHistory();    
 
     let items: { [key: string]: ViewItemData } = {
-        "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator, group: "Charts"},
         "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator, group: "Buttons" },
-        "Card": { title: "Card", data: cardOptions(), creator: CardCreator, group: "Cards" },
-        "Checkbox": { title: "Checkbox", data: checkboxOptions(), creator: CheckboxCreator, group: "Form" },
         "Chip": { title: "Chip", data: chipOptions(), creator: ChipCreator, group: "Buttons" },
-        "Confirmation Dialog": { title: "Confirmation Dialog", data: confirmationDialogOptions(), creator: ConfirmationDialogCreator, group: "Dialogs" },
+        "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator, group: "Buttons" },
+        
+        "Card": { title: "Card", data: cardOptions(), creator: CardCreator, group: "Cards" },
+        "Title Period Card": { title: "Title Period Card", data: titlePeriodCardOptions(), creator: TitlePeriodCardCreator, group: "Cards" },
+        
+        "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator, group: "Charts"},
+        "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator, group: "Charts" },
+        
         "Date Input": { title: "Date Input", data: dateInputOptions(), creator: DateInputCreator, group: "Date and Time" },
         "Date Picker": { title: "Date Picker", data: datePickerOptions(), creator: DatePickerCreator, group: "Date and Time" },
         "Date Time Picker": { title: "Date Time Picker", data: dateTimePickerOptions(), creator: DateTimePickerCreator, group: "Date and Time" },
-        "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
-        "File Input": { title: "File Input", data: fileInputOptions(), creator: FileInputCreator, group: "Form" },
-        "Form Dialog": { title: "Form Dialog", data: formDialogOptions(), creator: FormDialogCreator, group: "Dialogs" },
-        "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator, group: "Charts" },
-        "Grid": { title: "Grid", data: gridOptions(), creator: GridCreator, group: "Layout/Grid" },
-        "Grid Two": { title: "Grid Two", data: gridTwoOptions(), creator: GridTwoCreator, group: "Layout/Grid" },
-        "Grid Three": { title: "Grid Three", data: gridThreeOptions(), creator: GridThreeCreator, group: "Layout/Grid" },
-        "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator, group: "Buttons" },
-        "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator, group: "Form" },
-        "List": { title: "List", data: listOptions(), creator: ListCreator, group: "List" },
-        "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerEmbeddedOptions(), creator: PDFViewerEmbeddedCreator, group: "PDF" },
-        "PDF Viewer Fullscreen": { title: "PDF Viewer Fullscreen", data: pdfViewerFullScreenOptions(), creator: PDFViewerFullScreenCreator, group: "PDF" },
         "Period Selector": { title: "Period Selector", data: periodSelectorOptions(), creator: PeriodSelectorCreator, group: "Date and Time" },
+        "Time Input": { title: "Time Input", data: timeInputOptions(), creator: TimeInputCreator, group: "Date and Time" },
+        
+        "Confirmation Dialog": { title: "Confirmation Dialog", data: confirmationDialogOptions(), creator: ConfirmationDialogCreator, group: "Dialogs" },
+        "Form Dialog": { title: "Form Dialog", data: formDialogOptions(), creator: FormDialogCreator, group: "Dialogs" },
+        
+        "Checkbox": { title: "Checkbox", data: checkboxOptions(), creator: CheckboxCreator, group: "Form" },
+        "File Input": { title: "File Input", data: fileInputOptions(), creator: FileInputCreator, group: "Form" },
+        "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator, group: "Form" },
         "Radio Group": { title: "Radio Group", data: radioGroupOptions(), creator: RadioGroupCreator, group: "Form" },
         "Select": { title: "Select", data: selectOptions(), creator: SelectCreator, group: "Form" },
         "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator, group: "Form" },
+        
+        "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
+        
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator, group: "Layout" },
+        
+        "Divider": { title: "Divider", data: dividerOptions(), creator: DividerCreator, group: "Layout/Auxiliary" },
+        "Spacer": { title: "Spacer", data: spacerOptions(), creator: SpacerCreator, group: "Layout/Auxiliary" },
+        
+        "Grid": { title: "Grid", data: gridOptions(), creator: GridCreator, group: "Layout/Grid" },
+        "Grid Two": { title: "Grid Two", data: gridTwoOptions(), creator: GridTwoCreator, group: "Layout/Grid" },
+        "Grid Three": { title: "Grid Three", data: gridThreeOptions(), creator: GridThreeCreator, group: "Layout/Grid" },
+        
+        "List": { title: "List", data: listOptions(), creator: ListCreator, group: "List" },
+        
+        "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerEmbeddedOptions(), creator: PDFViewerEmbeddedCreator, group: "PDF" },
+        "PDF Viewer Fullscreen": { title: "PDF Viewer Fullscreen", data: pdfViewerFullScreenOptions(), creator: PDFViewerFullScreenCreator, group: "PDF" },
+        
         "Table": { title: "Table", data: tableOptions(), creator: TableCreator, group: "Table" },
-        "Time Input": { title: "Time Input", data: timeInputOptions(), creator: TimeInputCreator, group: "Date and Time" },
+        
         "Typography": { title: "Typography", data: typographyOptions(), creator: TypographyCreator, group: "Typography" },
     }
 

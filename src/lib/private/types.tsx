@@ -13,3 +13,22 @@ export type RowStyleType = {
     color?: ColorOptionType,
     height?: RowHeightType
 }
+
+type viewPortHeight = "vh-";
+type viewPortWidth = "vw-";
+type viewPortPercent = "pc-";
+type viewPortSizes = "100" | "90" | "80" | "70" | "60" | "50" | "40" | "30" | "20" | "10";
+type viewPortHeightFinal = `${viewPortHeight}${viewPortSizes}`;
+type viewPortWidthFinal = `${viewPortWidth}${viewPortSizes}`;
+type viewPortPercentFinal = `${viewPortPercent}${viewPortSizes}`;
+
+export type WidthAndHeightSize = "none" | "half" | "one" | "two" | "px-600" | "px-500" | "px-400" | "px-300" | "px-200" | "px-100" | "px-50" | viewPortWidthFinal | viewPortHeightFinal | viewPortPercentFinal;
+
+
+export type CardExtraActionType = {
+    onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+    icon?: React.ReactNode,
+    text?: string,
+    color?: ColorOptionType,
+    id: string
+}
