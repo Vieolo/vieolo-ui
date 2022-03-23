@@ -8,6 +8,7 @@ import Chip from './lib/button/chip';
 import DateInput from './lib/date_time/date_input';
 import DatePicker from './lib/date_time/date_picker';
 import DateTimePicker from './lib/date_time/date_time_picker';
+import Divider from './lib/layout/auxiliary/divider';
 import DropDownMenu, { DropDownMenuItemType as DropDownMenuItemTypeTemp } from './lib/menu/dropdown_menu';
 import ExpandableCard from './lib/card/expandable_card';
 import FileInput from './lib/form/file_input';
@@ -76,7 +77,8 @@ export {
     ExpandableCard,
     GridThree,
     GridTwo,
-    Spacer
+    Spacer,
+    Divider
 }
 
 

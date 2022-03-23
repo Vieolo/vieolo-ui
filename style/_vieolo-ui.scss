@@ -1955,3 +1955,30 @@ body {
 		padding: $base-unit-half;
 	}
 }
+
+
+.vieolo-divider {
+	display: flex;
+
+	&--horizontal {
+		width: 100%;		
+	}
+
+	&--vertical {
+		flex-direction: column;
+		height: 100%;
+		width: $base-unit-half;
+	}
+
+	&--start {
+		justify-content: start;
+	}
+
+	&--center {
+		justify-content: center;
+	}
+
+	&--end {
+		justify-content: end;
+	}
+}

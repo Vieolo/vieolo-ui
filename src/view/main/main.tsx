@@ -32,6 +32,7 @@ import { gridOptions, GridCreator } from '../layout/grid/grid';
 import { gridTwoOptions, GridTwoCreator } from '../layout/grid/grid_two';
 import { gridThreeOptions, GridThreeCreator } from '../layout/grid/grid_three';
 import { spacerOptions, SpacerCreator } from '../layout/auxiliary/spacer';
+import { dividerOptions, DividerCreator } from '../layout/auxiliary/divider';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
 
@@ -98,6 +99,7 @@ export default function MainPage(props: {}): JSX.Element {
         
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator, group: "Layout" },
         
+        "Divider": { title: "Divider", data: dividerOptions(), creator: DividerCreator, group: "Layout/Auxiliary" },
         "Spacer": { title: "Spacer", data: spacerOptions(), creator: SpacerCreator, group: "Layout/Auxiliary" },
         
         "Grid": { title: "Grid", data: gridOptions(), creator: GridCreator, group: "Layout/Grid" },
