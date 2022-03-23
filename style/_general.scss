@@ -872,6 +872,50 @@
 		#{$dim}: 100px;
 	}
 
+	&--px-50 {
+		#{$dim}: 50px;
+	}
+
+	&--vh-100 {
+		#{$dim}: 100vh;
+	}
+
+	&--vh-90 {
+		#{$dim}: 90vh;
+	}
+
+	&--vh-80 {
+		#{$dim}: 80vh;
+	}
+
+	&--vh-70 {
+		#{$dim}: 70vh;
+	}
+
+	&--vh-60 {
+		#{$dim}: 60vh;
+	}
+
+	&--vh-50 {
+		#{$dim}: 50vh;
+	}
+
+	&--vh-40 {
+		#{$dim}: 40vh;
+	}
+
+	&--vh-30 {
+		#{$dim}: 30vh;
+	}
+
+	&--vh-20 {
+		#{$dim}: 20vh;
+	}
+
+	&--vh-10 {
+		#{$dim}: 10vh;
+	}
+
 	&--vw-100 {
 		#{$dim}: 100vw;
 	}
@@ -894,6 +938,22 @@
 
 	&--vw-50 {
 		#{$dim}: 50vw;
+	}
+
+	&--vw-40 {
+		#{$dim}: 40vw;
+	}
+
+	&--vw-30 {
+		#{$dim}: 30vw;
+	}
+
+	&--vw-20 {
+		#{$dim}: 20vw;
+	}
+
+	&--vw-10 {
+		#{$dim}: 10vw;
 	}
 
 	&--pc-100 {
@@ -919,6 +979,22 @@
 	&--pc-50 {
 		#{$dim}: 50%;
 	}
+
+	&--pc-40 {
+		#{$dim}: 40%;
+	}
+
+	&--pc-30 {
+		#{$dim}: 30%;
+	}
+
+	&--pc-20 {
+		#{$dim}: 20%;
+	}
+
+	&--pc-10 {
+		#{$dim}: 10%;
+	}	
 }
 
 
@@ -932,11 +1008,11 @@
 
 
 .max-height {
-	@include widthAndHeightSizes(("max-height"))
+	@include widthAndHeightSizes("max-height")
 }
 
 .height {
-	@include widthAndHeightSizes(("height"))
+	@include widthAndHeightSizes("height")
 }
 
 
