@@ -13,7 +13,7 @@ export function getEmphasisClasses(emphasis: EmphasisType, color: ColorOptionTyp
     }
 
     function getTextColorClass() {
-        return options.removeTextColorClasses ? "" : `color--${color}-${emphasis === "high" ? "text" : "normal"}`;
+        return options.removeTextColorClasses ? "" : `color--${color}-${emphasis === "high" ? "text" : emphasis === 'medium' ? 'text-light' : "normal"}`;
     }
 
 
@@ -27,7 +27,7 @@ export function getEmphasisClasses(emphasis: EmphasisType, color: ColorOptionTyp
 	
     } else if (emphasis === 'medium') {
 	
-        c = ` background-color--${color}-light border--px-0`;
+        c = ` background-color--${color}-light border--px-0 ${getTextColorClass()}`;
         if (options.hasRipple) {
             c += ` ripple ripple--${color}-normal`
         }
