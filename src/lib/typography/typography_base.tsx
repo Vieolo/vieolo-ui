@@ -13,14 +13,16 @@ export default function TypographyBase(props: {
     dataTestID?: string,
     ariaLabel?: string,
     color?: ColorOptionType,
-    colorType?: 'normal' | 'text' | 'light',
+    colorType?: 'normal' | 'text' | 'light' | 'text-light',
     margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two",
     fontWeight?: FontWeightType,
-    style?: React.CSSProperties
+    style?: React.CSSProperties,
+    fontFamily?: "primary" | "secondary"
 }) {
     let finalClassName = `color--${props.color || (props.className.includes("caption") ? 'gray' : 'default')}-${props.colorType || 'normal'} `;
     finalClassName += `margin-vertical--${props.margin || "0"} `;
     finalClassName += `font-weight--${props.fontWeight || (props.className.includes("title") ? 'bold' : 'normal')} `;
+    finalClassName += `font-family--${props.fontFamily || 'primary'} `;
     finalClassName += `${props.className} `;
 
 

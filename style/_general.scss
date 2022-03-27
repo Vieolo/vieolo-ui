@@ -698,9 +698,18 @@
 	}
 }
 
+.font-family {
+	&--primary {
+		font-family: $font-family-primary;
+	}
+
+	&--secondary {
+		font-family: $font-family-secondary;
+	}
+}
+
 
 @mixin typography-title-large {
-	font-family: $font-family-primary;
 	font-size: 20px;
 }
 .typography-title-large {
@@ -708,7 +717,6 @@
 }
 
 @mixin typography-title-medium {
-	font-family: $font-family-primary;
 	font-size: 18px;
 }
 .typography-title-medium {
@@ -716,7 +724,6 @@
 }
 
 @mixin typography-title-small {
-	font-family: $font-family-primary;
 	font-size: 16px;
 }
 .typography-title-small {
@@ -724,7 +731,6 @@
 }
 
 @mixin typography-paragraph-large {
-	font-family: $font-family-primary;
 	font-size: 16px;
 }
 .typography-paragraph-large {
@@ -732,7 +738,6 @@
 }
 
 @mixin typography-paragraph-medium {
-	font-family: $font-family-primary;
 	font-size: 14px;
 }
 .typography-paragraph-medium {
@@ -740,7 +745,6 @@
 }
 
 @mixin typography-paragraph-small {
-	font-family: $font-family-primary;
 	font-size: 12px;
 }
 .typography-paragraph-small {
@@ -748,7 +752,6 @@
 }
 
 @mixin typography-caption-large {
-	font-family: $font-family-primary;
 	font-size: 12px;
 }
 .typography-caption-large {
@@ -756,7 +759,6 @@
 }
 
 @mixin typography-caption-medium {
-	font-family: $font-family-primary;
 	font-size: 10px;
 }
 .typography-caption-medium {
@@ -764,7 +766,6 @@
 }
 
 @mixin typography-caption-small {
-	font-family: $font-family-primary;
 	font-size: 8px;
 }
 .typography-caption-small {

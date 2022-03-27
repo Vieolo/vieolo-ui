@@ -15,9 +15,10 @@ export default function TypographyCaptionLarge (props: {
     ariaLabel?: string,
     color?: ColorOptionType,
     margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two",
-    colorType?: 'normal' | 'text' | 'light',
+    colorType?: 'normal' | 'text' | 'light' | 'text-light',
     fontWeight?: FontWeightType,
-    style?: React.CSSProperties
+    style?: React.CSSProperties,
+    fontFamily?: "primary" | "secondary"
 }) {
     return <TypographyBase 
         text={props.text}
@@ -30,5 +31,6 @@ export default function TypographyCaptionLarge (props: {
         fontWeight={props.fontWeight}
         style={props.style}
         colorType={props.colorType}
+        fontFamily={props.fontFamily}
     />
 }

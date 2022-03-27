@@ -17,7 +17,8 @@ export default function TypographyCaptionMedium (props: {
     margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two",
     fontWeight?: FontWeightType,
     style?: React.CSSProperties,
-    colorType?: 'normal' | 'text' | 'light',
+    colorType?: 'normal' | 'text' | 'light' | 'text-light',
+    fontFamily?: "primary" | "secondary"
 }) {
     return <TypographyBase 
         text={props.text}
@@ -30,5 +31,6 @@ export default function TypographyCaptionMedium (props: {
         fontWeight={props.fontWeight}
         style={props.style}
         colorType={props.colorType}
+        fontFamily={props.fontFamily}
     />
 }
