@@ -700,7 +700,7 @@
 
 
 @mixin typography-title-large {
-	font-family: $font-family-secondary;
+	font-family: $font-family-primary;
 	font-size: 20px;
 }
 .typography-title-large {
@@ -708,7 +708,7 @@
 }
 
 @mixin typography-title-medium {
-	font-family: $font-family-secondary;
+	font-family: $font-family-primary;
 	font-size: 18px;
 }
 .typography-title-medium {
@@ -716,7 +716,7 @@
 }
 
 @mixin typography-title-small {
-	font-family: $font-family-secondary;
+	font-family: $font-family-primary;
 	font-size: 16px;
 }
 .typography-title-small {
