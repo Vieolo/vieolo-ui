@@ -33,133 +33,61 @@ $border-color: #f2f2f2 !default;
 
 $normal-text-color: #2e2e2e !default;
 $gray-text-color: gray !default;
+$disable-color-normal: #b0bec5 !default;
 
-$primary-color-normal: #2e2e2e !default;
-$primary-color-transparent: rgba(46, 46, 46, 0.3) !default;
-$primary-color-light: #bdbdbd !default;
-$primary-color-gradient: linear-gradient(
-	to right bottom,
-	#444444,
-	#404040,
-	#3b3b3b,
-	#373737,
-	#333333,
-	#2f2f2f,
-	#2c2c2c,
-	#282828,
-	#232323,
-	#1f1f1f,
-	#1a1a1a,
-	#161616
-) !default;
-$primary-color-text: #e0e0e0 !default;
+$primary-color-normal: #2D4DA5 !default;
+$primary-color-transparent: rgba(45, 77, 165, 0.2) !default;
+$primary-color-light: #B8E6FF !default;
+$primary-color-text: #ececec !default;
+$primary-color-text-light: $primary-color-normal;
 
-$secondary-color-normal: #3e88c2 !default;
-$secondary-color-transparent: rgba(62, 136, 194, 0.3) !default;
-$secondary-color-light: #b9e1ff !default;
-$secondary-color-gradient: linear-gradient(to right bottom, #71a7d3, #659fcf, #5997cb, #4c90c6, #3e88c2) !default;
+$secondary-color-normal: #034727 !default;
+$secondary-color-transparent: rgba(3, 71, 39, 0.2) !default;
+$secondary-color-light: #71ECB3 !default;
 $secondary-color-text: white !default;
+$secondary-color-text-light: $secondary-color-normal;
 
 $tertiary-color-normal: #c9dfd2 !default;
 $tertiary-color-transparent: rgba(201, 223, 210, 0.3) !default;
 $tertiary-color-light: rgb(220, 247, 231) !default;
-$tertiary-color-gradient: linear-gradient(
-	to right bottom,
-	#e6f6ec,
-	#e0f2e7,
-	#dbede2,
-	#d5e9dd,
-	#d0e5d8,
-	#cae1d3,
-	#c4dece,
-	#bedac9,
-	#b6d6c3,
-	#aed2bc,
-	#a7cdb6,
-	#9fc9b0
-) !default;
-$tertiary-color-text: #2e2e2e !default;
+$tertiary-color-text: white !default;
+$tertiary-color-text-light: $tertiary-color-normal;
 
-$alert-color-normal: rgb(225, 188, 41) !default;
-$alert-color-transparent: rgba(225, 188, 41, 0.3) !default;
-$alert-color-light: rgb(243, 228, 166) !default;
-$alert-color-gradient: linear-gradient(
-	to right bottom,
-	#e9c843,
-	#e7c63e,
-	#e6c43a,
-	#e4c135,
-	#e3bf30,
-	#e3bf2d,
-	#e4be2a,
-	#e4be26,
-	#e6c024,
-	#e9c122,
-	#ebc320,
-	#eec41d
-) !default;
-$alert-color-text: black !default;
+$alert-color-normal: #91832A !default;
+$alert-color-transparent: rgba(145, 131, 42, 0.2) !default;
+$alert-color-light: #F8F8AC !default;
+$alert-color-text: white !default;
+$alert-color-text-light: $alert-color-normal;
 
-$error-color-normal: rgb(245, 0, 87) !default;
-$error-color-transparent: rgba(252, 232, 239, 1) !default;
-$error-color-light: rgb(255, 168, 198) !default;
-$error-color-gradient: linear-gradient(
-	to right bottom,
-	#f23c7c,
-	#f33576,
-	#f42d6f,
-	#f52468,
-	#f51961,
-	#f3135d,
-	#f20a59,
-	#f00055,
-	#ec0054,
-	#e80053,
-	#e50051,
-	#e10050
-) !default;
+$error-color-normal: #E74420 !default;
+$error-color-transparent: rgba(231, 68, 32, 0.2) !default;
+$error-color-light: #FFE8E3 !default;
 $error-color-text: white !default;
+$error-color-text-light: $error-color-normal;
 
-$success-color-normal: rgb(24, 139, 108) !default;
-$success-color-transparent: rgba(24, 139, 108, 0.3) !default;
-$success-color-light: rgb(163, 224, 208) !default;
-$success-color-gradient: linear-gradient(
-	to right bottom,
-	#209979,
-	#1f9676,
-	#1d9374,
-	#1c9171,
-	#1a8e6f,
-	#198e6f,
-	#188f6f,
-	#178f6f,
-	#169271,
-	#149573,
-	#139874,
-	#119b76
-) !default;
+$success-color-normal: #13AE2D !default;
+$success-color-transparent: rgba(19, 174, 45, 0.2) !default;
+$success-color-light: #EDFFE1 !default;
 $success-color-text: white !default;
+$success-color-text-light: $success-color-normal;
 
-$disable-color-normal: #b0bec5 !default;
-$disable-color-gradient: linear-gradient(to right bottom, #c5cdd1, #c0c9ce, #bac5cb, #b5c2c8, #b0bec5) !default;
-
-$accessory-orange-normal: rgb(255, 127, 80) !default;
-$accessory-orange-transparent: rgba(255, 127, 80, 0.3) !default;
-$accessory-orange-light: rgb(255, 216, 202) !default;
-$accessory-orange-gradient: linear-gradient(to right bottom, #f4e5c9, #f4e3c3, #f5e2be, #f5e0b8, #f5deb3) !default;
+$accessory-orange-normal: #FF9029 !default;
+$accessory-orange-transparent: rgba(255, 144, 41, 0.2) !default;
+$accessory-orange-light: #FFF1E5 !default;
 $accessory-orange-text: black !default;
+$accessory-orange-text-light: $accessory-orange-normal;
 
-$accessory-blue-normal: rgb(25, 118, 210) !default;
-$accessory-blue-transparent: rgba(25, 118, 210, 0.3) !default;
-$accessory-blue-light: rgb(65, 160, 255) !default;
-$accessory-blue-gradient: linear-gradient(to right bottom, #4795e3, #3d8ddf, #3285db, #267ed6, #1976d2) !default;
+$accessory-blue-normal: #2085BB !default;
+$accessory-blue-transparent: rgba(32, 133, 187, 0.2) !default;
+$accessory-blue-light: #E3FCFF !default;
 $accessory-blue-text: white !default;
+$accessory-blue-text-light: $accessory-blue-normal;
 
-$accessory-green-normal: rgb(82, 219, 196) !default;
-$accessory-green-transparent: rgba(82, 219, 196, 0.3) !default;
-$accessory-green-light: rgb(157, 255, 239) !default;
-$accessory-green-gradient: linear-gradient(to right bottom, #ccf9f2, #bff4eb, #b2eee4, #a5e9dd, #98e3d6) !default;
+$accessory-green-normal: #00958D !default;
+$accessory-green-transparent: rgba(0, 149, 141, 0.2) !default;
+$accessory-green-light: #DCFFF7 !default;
 $accessory-green-text: black !default;
+$accessory-green-text-light: $accessory-green-normal;
 
 $colorOptions: (
 	"primary",
@@ -201,10 +129,10 @@ $header-font-bold-weight: 600 !default; // deprecated
 
 $font-weight-light: 300 !default;
 $font-weight-normal: 400 !default;
-$font-weight-bold: 600 !default;
-$font-weight-extra-bold: 700 !default;
+$font-weight-bold: 700 !default;
+$font-weight-extra-bold: 900 !default;
 
-$font-family-primary: "Roboto Condensed", sans-serif !default;
+$font-family-primary: 'Roboto', sans-serif !default;
 $font-family-secondary: "Montserrat", sans-serif !default;
 
 // Elevation
