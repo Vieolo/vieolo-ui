@@ -1951,41 +1951,59 @@
 .flex {
 	display: flex;
 
-	&--column {
-		flex-direction: column;
-	}
-
-	&--column-reverse {
-		flex-direction: column-reverse;
-	}
-
-	&--row {
-		flex-direction: row;
-	}
+	&--direction {
+		&--column {		
+			flex-direction: column;
+		}
+		
+		&--column-reverse {
+			flex-direction: column-reverse;
+		}
 	
-	&--row-reverse {
-		flex-direction: row-reverse;
+		&--row {
+			flex-direction: row;
+		}
+		
+		&--row-reverse {
+			flex-direction: row-reverse;
+		}		
+	}	
+
+	&--justify-content {
+		&--start {
+			justify-content: start;
+		}
+
+		&--end {
+			justify-content: end;
+		}
+	
+		&--space-around {
+			justify-content: space-around;
+		}
+	
+		&--space-between {
+			justify-content: space-between;
+		}
+
+		&--center {
+			justify-content: center;
+		}
 	}
 
-	&--start {
-		justify-content: start;
-	}
+	&--align-items {
+		&--center {
+			align-items: center;
+		}
 
-	&--space-around {
-		justify-content: space-around;
-	}
+		&--start {
+			align-items: flex-start;
+		}
 
-	&--space-between {
-		justify-content: space-between;
-	}
-
-	&--center {
-		justify-content: center;
-	}
-
-	&--align-items-center {
-		align-items: center;
-	}
+		&--end {
+			align-items: flex-end;
+		}
+	}	
 
 }
 
