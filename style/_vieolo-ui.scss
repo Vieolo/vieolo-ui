@@ -325,7 +325,7 @@ body {
 		font-weight: 500;
 		text-align: left;
 		margin: 0;
-		padding: 16px 0 16px 44px;
+		padding: 0 0 0 44px;
 
 		&:before,
 		&:after {
@@ -403,6 +403,10 @@ body {
 		border: 2px solid $hover-color;
 		border-radius: $base-unit-half;
 		outline: none;
+	}
+
+	&--height-default {
+		height: $row-height-large;
 	}
 
 	p {

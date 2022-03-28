@@ -8,6 +8,9 @@ import Switch from './switch';
 import TypographyParagraphLarge from '../typography/typography_paragraph_large';
 import TypographyCaptionLarge from '../typography/typography_caption_large';
 
+// Types
+import { RowHeightType } from '../private/types';
+
 
 
 export default function SwitchSet (props: {
@@ -17,11 +20,20 @@ export default function SwitchSet (props: {
     onChange: (v: boolean) => void,
     disabled?: boolean,
     switchID: string,
+    height?: RowHeightType | "default"
 }) {    
 
+    let c = `vieolo-switch-set`
+    if (props.height && props.height !== 'default') {
+        c += ` row-height--${props.height}`
+    } else {
+        c += " vieolo-switch-set--height-default"
+    }    
+    
+    if (props.disabled) c += " disabled"; 
 
     return <div 
-        className={`vieolo-switch-set${props.disabled ? ' disabled' : ''}`} 
+        className={c} 
         tabIndex={0}
         onKeyDown={e => {
             if (["Enter", "Space"].includes(e.code) && !props.disabled) {
