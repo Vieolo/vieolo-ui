@@ -5,6 +5,11 @@ import React from 'react';
 import { ColorOptionType, FontWeightType } from '../private/types';
 
 
+export type TypographyTextAlign = "left" | "center" | "right" | "justify";
+export type TypographyFontFamily = "primary" | "secondary";
+export type TypographyMargin = "0" | "5" | "10" | "20" | "half" | "one" | "two";
+export type TypographyColorType = 'normal' | 'text' | 'light' | 'text-light';
+
 
 export default function TypographyBase(props: {
     className: string,
@@ -13,16 +18,18 @@ export default function TypographyBase(props: {
     dataTestID?: string,
     ariaLabel?: string,
     color?: ColorOptionType,
-    colorType?: 'normal' | 'text' | 'light' | 'text-light',
-    margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two",
+    colorType?: TypographyColorType,
+    margin?: TypographyMargin,
     fontWeight?: FontWeightType,
     style?: React.CSSProperties,
-    fontFamily?: "primary" | "secondary"
+    fontFamily?: TypographyFontFamily,
+    textAlign?: TypographyTextAlign
 }) {
     let finalClassName = `color--${props.color || (props.className.includes("caption") ? 'gray' : 'default')}-${props.colorType || 'normal'} `;
     finalClassName += `margin-vertical--${props.margin || "0"} `;
     finalClassName += `font-weight--${props.fontWeight || (props.className.includes("title") ? 'bold' : 'normal')} `;
     finalClassName += `font-family--${props.fontFamily || 'primary'} `;
+    if (props.textAlign) finalClassName += `text-align--${props.textAlign} `;
     finalClassName += `${props.className} `;
 
 

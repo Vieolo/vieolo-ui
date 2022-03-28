@@ -45,6 +45,10 @@ export function typographyOptions(): ViewData {
                 options: ["primary", "secondary"],
                 default: "primary"
             },
+            textAlign: {
+                options: ["left", "center", "right", "justify"],
+                default: "left"
+            },
             italic: 'boolean'
         }
     }
@@ -63,5 +67,6 @@ export function TypographyCreator(props: { p: TypographyPropsType }) {
         fontWeight={props.p.fontWeight}
         fontFamily={props.p.fontFamily}
         style={{fontStyle: (props.p as any).italic ? "italic" : "normal"}}
+        textAlign={props.p.textAlign}
     />
 }

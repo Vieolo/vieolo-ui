@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Internal Components
-import TypographyBase from './typography_base';
+import TypographyBase, { TypographyColorType, TypographyFontFamily, TypographyMargin, TypographyTextAlign } from './typography_base';
 
 // Types
 import { ColorOptionType, FontWeightType } from '../private/types';
@@ -14,11 +14,12 @@ export default function TypographyTitleMedium (props: {
     dataTestID?: string,
     ariaLabel?: string,
     color?: ColorOptionType,
-    margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two",
+    margin?: TypographyMargin,
     fontWeight?: FontWeightType,
     style?: React.CSSProperties,
-    colorType?: 'normal' | 'text' | 'light' | 'text-light',
-    fontFamily?: "primary" | "secondary"
+    colorType?: TypographyColorType,
+    fontFamily?: TypographyFontFamily,
+    textAlign?: TypographyTextAlign
 }) {
     return <TypographyBase 
         text={props.text}
@@ -32,5 +33,6 @@ export default function TypographyTitleMedium (props: {
         style={props.style}
         colorType={props.colorType}
         fontFamily={props.fontFamily}
+        textAlign={props.textAlign}
     />
 }
