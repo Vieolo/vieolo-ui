@@ -1582,6 +1582,7 @@
 					@if $s == "xl" {
 						@if $sp != 0 {
 							grid-#{$direction}: span $sp;
+							display: block;
 						} @else {
 							display: none;
 						}
@@ -1589,6 +1590,7 @@
 						@media screen and (max-width: #{map-get($gsm, $s)}) {
 							@if $sp != 0 {
 								grid-#{$direction}: span $sp;
+								display: block;
 							} @else {
 								display: none;
 							}

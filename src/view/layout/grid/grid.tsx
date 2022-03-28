@@ -7,6 +7,7 @@ import Grid from '../../../lib/layout/grid/grid';
 
 // Types
 import { ViewData } from '../../main/main';
+import Spacer from '../../../lib/layout/auxiliary/spacer';
 
 type GridContainerPropsType = React.ComponentProps<typeof GridContainer>;
 
@@ -61,6 +62,9 @@ export function GridCreator(props: { p: GridContainerPropsType }) {
 
             <Grid xl={6} direction={(props.p as any).direction} >{child}</Grid>
             <Grid xl={6} lg={0} direction={(props.p as any).direction} >{child}</Grid>
-        </GridContainer>
+
+            <Grid xl={0} lg={6} direction={(props.p as any).direction} >hidden in XL</Grid>
+            <Grid xl={12} lg={6} direction={(props.p as any).direction} >{child}</Grid>
+        </GridContainer>        
     </div>
 }
