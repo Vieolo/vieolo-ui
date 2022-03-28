@@ -28,7 +28,8 @@ export function gridOptions(): ViewData {
             columnGap: {
                 options: ['none', 'half', 'one', 'two'],
                 default: 'half'
-            }
+            },
+            withFlex: 'boolean'
         }
     }
 }
@@ -61,6 +62,19 @@ export function GridCreator(props: { p: GridContainerPropsType }) {
 
             <Grid xl={6} direction={(props.p as any).direction} >{child}</Grid>
             <Grid xl={6} lg={0} direction={(props.p as any).direction} >{child}</Grid>
+
+            <Grid xl={0} lg={6} direction={(props.p as any).direction} >hidden in XL</Grid>
+            <Grid xl={12} lg={6} direction={(props.p as any).direction} >{child}</Grid>
+
+            <Grid
+                xl={12}
+                flex={!(props.p as any).withFlex ? undefined : {
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}
+            >
+                <div className="width--px-100">{(props.p as any).withFlex ? "Aligned" : "No Alignment"}</div>
+            </Grid>
         </GridContainer>
     </div>
 }
