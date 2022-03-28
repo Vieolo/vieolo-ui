@@ -30,5 +30,7 @@ export type CardExtraActionType = {
     icon?: React.ReactNode,
     text?: string,
     color?: ColorOptionType,
-    id: string
+    id: string,
+    ariaLabel?: string,
+    dataTestID?: string
 }
