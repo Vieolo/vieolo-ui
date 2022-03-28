@@ -3,7 +3,7 @@ export function getEmphasisClasses(emphasis, color, options) {
         return `border--px-${options.borderWidth === undefined ? '2' : options.borderWidth}`;
     }
     function getTextColorClass() {
-        return options.removeTextColorClasses ? "" : `color--${color}-${emphasis === "high" ? "text" : "normal"}`;
+        return options.removeTextColorClasses ? "" : `color--${color}-${emphasis === "high" ? "text" : emphasis === 'medium' ? 'text-light' : "normal"}`;
     }
     let c = "";
     if (emphasis === 'high') {
@@ -13,7 +13,7 @@ export function getEmphasisClasses(emphasis, color, options) {
         }
     }
     else if (emphasis === 'medium') {
-        c = ` background-color--${color}-light border--px-0`;
+        c = ` background-color--${color}-light border--px-0 ${getTextColorClass()}`;
         if (options.hasRipple) {
             c += ` ripple ripple--${color}-normal`;
         }

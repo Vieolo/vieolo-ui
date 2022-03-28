@@ -1,4 +1,5 @@
 import React from 'react';
+import { TypographyColorType, TypographyFontFamily, TypographyMargin, TypographyTextAlign } from './typography_base';
 import { ColorOptionType, FontWeightType } from '../private/types';
 export default function TypographyParagraphMedium(props: {
     text: string;
@@ -7,8 +8,10 @@ export default function TypographyParagraphMedium(props: {
     dataTestID?: string;
     ariaLabel?: string;
     color?: ColorOptionType;
-    margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two";
+    margin?: TypographyMargin;
     fontWeight?: FontWeightType;
     style?: React.CSSProperties;
-    colorType?: 'normal' | 'text' | 'light';
+    colorType?: TypographyColorType;
+    fontFamily?: TypographyFontFamily;
+    textAlign?: TypographyTextAlign;
 }): JSX.Element;
