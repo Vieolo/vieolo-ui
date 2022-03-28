@@ -1,5 +1,26 @@
 # Change Log
 
+## 0.20.0 (2022-03-28)
+- Added `text-light` variations to the color palette
+- Added row height to `SwitchSet` ([#130](https://github.com/Vieolo/vieolo-ui/issues/130))
+- Added font family option to `Typography`
+- Added text align option to `Typography` ([#142](https://github.com/Vieolo/vieolo-ui/issues/142))
+- Fixed display of `Grid`s with 0 XL size ([#143](https://github.com/Vieolo/vieolo-ui/issues/143))
+- Added `Flex` component
+- Added item positioning to the `Grid` ([#136](https://github.com/Vieolo/vieolo-ui/issues/136))
+- Improved the accessibility of the `TitlePeriodCard` ([#139](https://github.com/Vieolo/vieolo-ui/issues/139))
+- Improved the accessibility of the `ExpandableCard`
+
+#### Deprecation
+- `tertiary` group of colors are deprecated. They should be replaced by `primary` and `secondary` colors
+
+#### Breaking Changes
+- Removed the `gradient` variations of the colors in the Color palette
+- Changed the default fonts
+- Changed the default values of `bold` and `extra-bold` to 700 and 900 respectively
+- Changed the font family of the `title` group of `Typography`
+- Rewrote the CSS flex class ([#88](https://github.com/Vieolo/vieolo-ui/issues/88))
+
 ## 0.19.5 (2022-03-23)
 - Improved the `width` and `height` CSS classes
 - Added `withAndHeightSize` type

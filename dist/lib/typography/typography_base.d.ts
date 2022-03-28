@@ -1,5 +1,9 @@
 import React from 'react';
 import { ColorOptionType, FontWeightType } from '../private/types';
+export declare type TypographyTextAlign = "left" | "center" | "right" | "justify";
+export declare type TypographyFontFamily = "primary" | "secondary";
+export declare type TypographyMargin = "0" | "5" | "10" | "20" | "half" | "one" | "two";
+export declare type TypographyColorType = 'normal' | 'text' | 'light' | 'text-light';
 export default function TypographyBase(props: {
     className: string;
     text: string;
@@ -7,8 +11,10 @@ export default function TypographyBase(props: {
     dataTestID?: string;
     ariaLabel?: string;
     color?: ColorOptionType;
-    colorType?: 'normal' | 'text' | 'light';
-    margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two";
+    colorType?: TypographyColorType;
+    margin?: TypographyMargin;
     fontWeight?: FontWeightType;
     style?: React.CSSProperties;
+    fontFamily?: TypographyFontFamily;
+    textAlign?: TypographyTextAlign;
 }): JSX.Element;

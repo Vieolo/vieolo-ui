@@ -23,4 +23,5 @@ export default function TitlePeriodCard(props: {
     actions?: CardExtraActionType[];
     excludeLastDay?: boolean;
     color?: ColorOptionType;
+    ariaLabel?: string;
 }): JSX.Element;

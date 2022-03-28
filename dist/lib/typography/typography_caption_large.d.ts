@@ -1,4 +1,5 @@
 import React from 'react';
+import { TypographyColorType, TypographyFontFamily, TypographyMargin, TypographyTextAlign } from './typography_base';
 import { FontWeightType, ColorOptionType } from '../private/types';
 export default function TypographyCaptionLarge(props: {
     text: string;
@@ -7,8 +8,10 @@ export default function TypographyCaptionLarge(props: {
     dataTestID?: string;
     ariaLabel?: string;
     color?: ColorOptionType;
-    margin?: "0" | "5" | "10" | "20" | "half" | "one" | "two";
-    colorType?: 'normal' | 'text' | 'light';
+    margin?: TypographyMargin;
+    colorType?: TypographyColorType;
     fontWeight?: FontWeightType;
     style?: React.CSSProperties;
+    fontFamily?: TypographyFontFamily;
+    textAlign?: TypographyTextAlign;
 }): JSX.Element;

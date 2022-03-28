@@ -16,5 +16,5 @@ export default function Card(props) {
         style.height = props.height;
     if (props.width)
         style.width = props.width;
-    return _jsx("div", Object.assign({ className: className, style: style }, { children: props.children }), void 0);
+    return _jsx("div", Object.assign({ className: className, style: style, "aria-label": props.ariaLabel }, { children: props.children }), void 0);
 }

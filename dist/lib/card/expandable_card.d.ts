@@ -22,4 +22,5 @@ export default function ExpandableCard(props: {
      */
     actions?: React.ReactNode;
     children?: React.ReactNode;
+    ariaLabel?: string;
 }): JSX.Element;

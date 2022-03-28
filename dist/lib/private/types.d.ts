@@ -27,5 +27,7 @@ export declare type CardExtraActionType = {
     text?: string;
     color?: ColorOptionType;
     id: string;
+    ariaLabel?: string;
+    dataTestID?: string;
 };
 export {};

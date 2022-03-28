@@ -36,7 +36,8 @@ export default function ExpandableCard(props: {
      * The components appearing on the right side of the card when collapsed
      */
     actions?: React.ReactNode,
-    children?: React.ReactNode
+    children?: React.ReactNode,
+    ariaLabel?: string
 }) {
 
     let [state, setState] = useState<"expanded" | 'collapsed'>(props.initialState || 'collapsed');
@@ -49,6 +50,7 @@ export default function ExpandableCard(props: {
         elevation={cardStyle.elevation}
         emphasis={cardStyle.emphasis}
         padding="none"
+        ariaLabel={props.ariaLabel}
     >
         <div className="vieolo-expandable-card">
 
@@ -58,6 +60,7 @@ export default function ExpandableCard(props: {
                     size={cardStyle.height === 'small' ? 'extra-small' : 'small'}
                     borderRadius={cardStyle.borderRadius || 'default'}
                     emphasis={'none'}
+                    ariaLabel={`${props.ariaLabel || props.title} expand button`}
                     onClick={() => {
                         let newState: 'collapsed' | 'expanded' = state === 'expanded' ? 'collapsed' : 'expanded';
                         setState(newState);
@@ -67,7 +70,7 @@ export default function ExpandableCard(props: {
 
                 <div className="padding-horizontal--half"></div>
 
-                <TypographyParagraphMedium text={props.title} fontWeight={'bold'} />
+                <TypographyParagraphMedium text={props.title} fontWeight={'bold'} ariaLabel={`${props.ariaLabel || props.title} title`} />
 
                 {
                     props.actions &&

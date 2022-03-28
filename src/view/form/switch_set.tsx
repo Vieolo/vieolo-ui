@@ -33,6 +33,10 @@ export function switchSetOptions(): ViewData {
                 options: ['string', 'component'],
                 default: 'string'
             },
+            height: {
+                options: ["small", "medium", "large", "over", "default"],
+                default: "default"
+            }
         }
     }
 
@@ -47,6 +51,7 @@ export function SwitchSetCreator(props: { p: SwitchSetPropsType }) {
         onChange={v => setOn(v)}
         switchID={props.p.switchID}
         disabled={props.p.disabled}
+        height={props.p.height}
         title={
             (props.p as any).titleType === 'string'
                 ? "Switch Title"

@@ -376,54 +376,72 @@
 		@return $primary-color-light;
 	} @else if $colorName == "primary" and $colorType == "text" {
 		@return $primary-color-text;
+	} @else if $colorName == "primary" and $colorType == "text-light" {
+		@return $primary-color-text-light;
 	} @else if $colorName == "secondary" and $colorType == "normal" {
 		@return $secondary-color-normal;
 	} @else if $colorName == "secondary" and $colorType == "light" {
 		@return $secondary-color-light;
 	} @else if $colorName == "secondary" and $colorType == "text" {
 		@return $secondary-color-text;
+	} @else if $colorName == "secondary" and $colorType == "text-light" {
+		@return $secondary-color-text-light;
 	} @else if $colorName == "tertiary" and $colorType == "normal" {
 		@return $tertiary-color-normal;
 	} @else if $colorName == "tertiary" and $colorType == "light" {
 		@return $tertiary-color-light;
 	} @else if $colorName == "tertiary" and $colorType == "text" {
 		@return $tertiary-color-text;
+	} @else if $colorName == "tertiary" and $colorType == "text-light" {
+		@return $tertiary-color-text-light;
 	} @else if $colorName == "alert" and $colorType == "normal" {
 		@return $alert-color-normal;
 	} @else if $colorName == "alert" and $colorType == "light" {
 		@return $alert-color-light;
 	} @else if $colorName == "alert" and $colorType == "text" {
 		@return $alert-color-text;
+	} @else if $colorName == "alert" and $colorType == "text-light" {
+		@return $alert-color-text-light;
 	} @else if $colorName == "error" and $colorType == "normal" {
 		@return $error-color-normal;
 	} @else if $colorName == "error" and $colorType == "light" {
 		@return $error-color-light;
 	} @else if $colorName == "error" and $colorType == "text" {
 		@return $error-color-text;
+	} @else if $colorName == "error" and $colorType == "text-light" {
+		@return $error-color-text-light;
 	} @else if $colorName == "success" and $colorType == "normal" {
 		@return $success-color-normal;
 	} @else if $colorName == "success" and $colorType == "light" {
 		@return $success-color-light;
 	} @else if $colorName == "success" and $colorType == "text" {
 		@return $success-color-text;
+	} @else if $colorName == "success" and $colorType == "text-light" {
+		@return $success-color-text-light;
 	} @else if $colorName == "accessory-blue" and $colorType == "normal" {
 		@return $accessory-blue-normal;
 	} @else if $colorName == "accessory-blue" and $colorType == "light" {
 		@return $accessory-blue-light;
 	} @else if $colorName == "accessory-blue" and $colorType == "text" {
 		@return $accessory-blue-text;
+	} @else if $colorName == "accessory-blue" and $colorType == "text-light" {
+		@return $accessory-blue-text-light;
 	} @else if $colorName == "accessory-green" and $colorType == "normal" {
 		@return $accessory-green-normal;
 	} @else if $colorName == "accessory-green" and $colorType == "light" {
 		@return $accessory-green-light;
 	} @else if $colorName == "accessory-green" and $colorType == "text" {
 		@return $accessory-green-text;
+	} @else if $colorName == "accessory-green" and $colorType == "text-light" {
+		@return $accessory-green-text-light;
 	} @else if $colorName == "accessory-orange" and $colorType == "normal" {
 		@return $accessory-orange-normal;
 	} @else if $colorName == "accessory-orange" and $colorType == "light" {
 		@return $accessory-orange-light;
 	} @else if $colorName == "accessory-orange" and $colorType == "text" {
 		@return $accessory-orange-text;
+	} @else if $colorName == "accessory-orange" and $colorType == "text-light" {
+		@return $accessory-orange-text-light;
 	}
 }
 
@@ -439,6 +457,10 @@
 
 		&--#{$c}-text {
 			#{$property}: getColorVariable($c, "text") unquote($optionalSuffix);
+		}
+
+		&--#{$c}-text-light {
+			#{$property}: getColorVariable($c, "text-light") unquote($optionalSuffix);
 		}
 	}
 
@@ -676,9 +698,18 @@
 	}
 }
 
+.font-family {
+	&--primary {
+		font-family: $font-family-primary;
+	}
+
+	&--secondary {
+		font-family: $font-family-secondary;
+	}
+}
+
 
 @mixin typography-title-large {
-	font-family: $font-family-secondary;
 	font-size: 20px;
 }
 .typography-title-large {
@@ -686,7 +717,6 @@
 }
 
 @mixin typography-title-medium {
-	font-family: $font-family-secondary;
 	font-size: 18px;
 }
 .typography-title-medium {
@@ -694,7 +724,6 @@
 }
 
 @mixin typography-title-small {
-	font-family: $font-family-secondary;
 	font-size: 16px;
 }
 .typography-title-small {
@@ -702,7 +731,6 @@
 }
 
 @mixin typography-paragraph-large {
-	font-family: $font-family-primary;
 	font-size: 16px;
 }
 .typography-paragraph-large {
@@ -710,7 +738,6 @@
 }
 
 @mixin typography-paragraph-medium {
-	font-family: $font-family-primary;
 	font-size: 14px;
 }
 .typography-paragraph-medium {
@@ -718,7 +745,6 @@
 }
 
 @mixin typography-paragraph-small {
-	font-family: $font-family-primary;
 	font-size: 12px;
 }
 .typography-paragraph-small {
@@ -726,7 +752,6 @@
 }
 
 @mixin typography-caption-large {
-	font-family: $font-family-primary;
 	font-size: 12px;
 }
 .typography-caption-large {
@@ -734,7 +759,6 @@
 }
 
 @mixin typography-caption-medium {
-	font-family: $font-family-primary;
 	font-size: 10px;
 }
 .typography-caption-medium {
@@ -742,7 +766,6 @@
 }
 
 @mixin typography-caption-small {
-	font-family: $font-family-primary;
 	font-size: 8px;
 }
 .typography-caption-small {
@@ -1559,6 +1582,7 @@
 					@if $s == "xl" {
 						@if $sp != 0 {
 							grid-#{$direction}: span $sp;
+							display: block;
 						} @else {
 							display: none;
 						}
@@ -1566,6 +1590,7 @@
 						@media screen and (max-width: #{map-get($gsm, $s)}) {
 							@if $sp != 0 {
 								grid-#{$direction}: span $sp;
+								display: block;
 							} @else {
 								display: none;
 							}
@@ -1600,6 +1625,24 @@
 .text-style {
 	&--line-through {
 		text-decoration: line-through;
+	}
+}
+
+.text-align {
+	&--left {
+		text-align: left;
+	}
+
+	&--center {
+		text-align: center;
+	}
+
+	&--right {
+		text-align: right;
+	}
+
+	&--justify {
+		text-align: justify;
 	}
 }
 
@@ -1908,41 +1951,59 @@
 .flex {
 	display: flex;
 
-	&--column {
-		flex-direction: column;
-	}
-
-	&--column-reverse {
-		flex-direction: column-reverse;
-	}
-
-	&--row {
-		flex-direction: row;
-	}
+	&--direction {
+		&--column {		
+			flex-direction: column;
+		}
+		
+		&--column-reverse {
+			flex-direction: column-reverse;
+		}
 	
-	&--row-reverse {
-		flex-direction: row-reverse;
+		&--row {
+			flex-direction: row;
+		}
+		
+		&--row-reverse {
+			flex-direction: row-reverse;
+		}		
+	}	
+
+	&--justify-content {
+		&--start {
+			justify-content: start;
+		}
+
+		&--end {
+			justify-content: end;
+		}
+	
+		&--space-around {
+			justify-content: space-around;
+		}
+	
+		&--space-between {
+			justify-content: space-between;
+		}
+
+		&--center {
+			justify-content: center;
+		}
 	}
 
-	&--start {
-		justify-content: start;
-	}
+	&--align-items {
+		&--center {
+			align-items: center;
+		}
 
-	&--space-around {
-		justify-content: space-around;
-	}
+		&--start {
+			align-items: flex-start;
+		}
 
-	&--space-between {
-		justify-content: space-between;
-	}
-
-	&--center {
-		justify-content: center;
-	}
-
-	&--align-items-center {
-		align-items: center;
-	}
+		&--end {
+			align-items: flex-end;
+		}
+	}	
 
 }
 

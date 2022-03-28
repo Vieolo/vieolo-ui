@@ -36,7 +36,8 @@ export default function TitlePeriodCard(props: {
     emphasis?: "none" | "low",
     actions?: CardExtraActionType[],
     excludeLastDay?: boolean,
-    color?: ColorOptionType
+    color?: ColorOptionType,
+    ariaLabel?: string
 }) {
 
     let [state, setState] = useState<"collapsed" | "expanded" | undefined>(props.initialState);
@@ -47,15 +48,15 @@ export default function TitlePeriodCard(props: {
     let difference = Math.floor((new VDate(finalEnd.getTime()).setToDateStart().getTime() - new VDate(finalStart.getTime()).setToDateStart().getTime()) / 86_400_000) + (props.excludeLastDay ? 0 : 1);
     let differenceText = difference === 1 ? props.singleDayText || "Day" : props.multipleDayText || "Days";
 
-    return <Card borderRadius={props.borderRadius} elevation={props.elevation} padding='half' emphasis={props.emphasis} color={props.color} >
+    return <Card borderRadius={props.borderRadius} elevation={props.elevation} padding='half' emphasis={props.emphasis} color={props.color} ariaLabel={props.ariaLabel}>
         <div className="vieolo-title-period-card">
             <div className="vieolo-title-period-card__header">
                 <div className="vieolo-title-period-card__header__text">
-                    <TypographyParagraphMedium text={props.title} />
+                    <TypographyParagraphMedium text={props.title} ariaLabel={`${props.ariaLabel || props.title} title`} />
 
                     <div className="vieolo-title-period-card__header__text__date">
-                        <TypographyParagraphMedium text={`${difference} ${differenceText}`} fontWeight="bold" />
-                        <TypographyParagraphSmall text={`${finalStart.formatDate(props.dateDisplayFormat)} - ${finalEnd.formatDate(props.dateDisplayFormat)}`} />
+                        <TypographyParagraphMedium text={`${difference} ${differenceText}`} fontWeight="bold" ariaLabel={`${props.ariaLabel || props.title} day difference`} />
+                        <TypographyParagraphSmall text={`${finalStart.formatDate(props.dateDisplayFormat)} - ${finalEnd.formatDate(props.dateDisplayFormat)}`} ariaLabel={`${props.ariaLabel || props.title} dates`} />
                     </div>
                 </div>
 
@@ -67,6 +68,7 @@ export default function TitlePeriodCard(props: {
                             icon={state === 'expanded' ? <ArrowUp /> : <ArrowDown />}
                             size="extra-small"
                             emphasis="none"
+                            ariaLabel={`${props.ariaLabel || props.title} expand button`}
                         />
                     }
 
@@ -80,6 +82,7 @@ export default function TitlePeriodCard(props: {
                                 color={a.color}
                                 size='extra-small'
                                 emphasis="none"
+                                ariaLabel={a.ariaLabel}
                             />
                         })
                     }
@@ -92,7 +95,7 @@ export default function TitlePeriodCard(props: {
                     <Spacer height="half" />
                     <Divider direction="horizontal" length="pc-50" position="center" />
                     <Spacer height="half" />
-                    <TypographyParagraphMedium text={props.description} />
+                    <TypographyParagraphMedium text={props.description} ariaLabel={`${props.ariaLabel || props.title} description`} />
                 </div>
             }
         </div>

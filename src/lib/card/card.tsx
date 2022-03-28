@@ -16,7 +16,8 @@ export default function Card(props: {
     height?: string,
     width?: string,
     children?: React.ReactNode,
-    padding?: 'none' | 'half' | 'one'
+    padding?: 'none' | 'half' | 'one',
+    ariaLabel?: string
 }) {
 
     let em = props.emphasis || 'none';
@@ -37,7 +38,7 @@ export default function Card(props: {
     if (props.height) style.height = props.height;
     if (props.width) style.width = props.width;
 
-    return <div className={className} style={style}>
+    return <div className={className} style={style} aria-label={props.ariaLabel}>
         {props.children}
     </div>
 }
