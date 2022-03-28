@@ -12,6 +12,7 @@ import Divider from './lib/layout/auxiliary/divider';
 import DropDownMenu, { DropDownMenuItemType as DropDownMenuItemTypeTemp } from './lib/menu/dropdown_menu';
 import ExpandableCard from './lib/card/expandable_card';
 import FileInput from './lib/form/file_input';
+import Flex from './lib/layout/flex/flex';
 import FormDialog, { FormDialogAccessoryButton as FormDialogAccessoryButtonType, FormDialogMainButton as FormDialogMainButtonType } from './lib/dialog/formDialog';
 import ConfirmationDialog, { ConfirmationDialogMainButton as ConfirmationDialogMainButtonType } from './lib/dialog/confirmationDialog'
 import Grid from './lib/layout/grid/grid';
@@ -85,7 +86,8 @@ export {
     GridTwo,
     Spacer,
     Divider,
-    TitlePeriodCard
+    TitlePeriodCard,
+    Flex
 }
 
 
