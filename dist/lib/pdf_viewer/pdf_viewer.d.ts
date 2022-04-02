@@ -1,6 +1,7 @@
 /// <reference types="react" />
 export default function PDFViewer(props: {
     filePath: string | File;
+    fileName?: string;
     context: 'full screen' | 'embedded';
     pageInFocus?: number;
     /**

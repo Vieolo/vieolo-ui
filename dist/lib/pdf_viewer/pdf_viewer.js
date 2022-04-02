@@ -27,7 +27,7 @@ export default function PDFViewer(props) {
     let [pageHeight, setPageHeight] = useState(100);
     let [documentLoadError, setDocumentLoadError] = useState(false);
     let focusRef = useRef(null);
-    let fileName = typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name;
+    let fileName = props.fileName || (typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name);
     useEffect(() => {
         if (props.pageInFocus) {
             setPageInFocus(props.pageInFocus);
@@ -83,7 +83,7 @@ export default function PDFViewer(props) {
                                     _jsx(IconButton, { size: "extra-small", icon: _jsx(ZoomInIcon, {}, void 0), onClick: () => { setZoomMultiple(zoomMultiple + 0.1); } }, void 0)] }), void 0),
                             _jsxs("div", Object.assign({ className: "flex-start column-gap--half" }, { children: [_jsx(IconButton, { size: "extra-small", icon: _jsx(DownloadIcon, {}, void 0), onClick: () => {
                                             var link = document.createElement("a");
-                                            link.download = fileName.split('___')[1];
+                                            link.download = fileName.split('___').slice(-1)[0];
                                             link.href = props.filePath;
                                             document.body.appendChild(link);
                                             link.click();
