@@ -11,7 +11,6 @@ export default function GridThree(props: {
 }) {
     function getFlex(b: 'lg' | 'md' | 'sm') {
         if (b === 'lg') {
-            console.log("lg", ['lg'].includes(props.responsiveBreakpoint || '') ? 12 : 4)
             return ['lg'].includes(props.responsiveBreakpoint || '') ? 12 : 4;
         } else if (b === 'md') {
             return ['lg', 'md'].includes(props.responsiveBreakpoint || '') ? 12 : 4;

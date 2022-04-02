@@ -81,7 +81,7 @@ export default function PDFViewer(props: {
 				setPageInFocus(props.pageInFocus);
 			}
 		}).catch((error: any) => {
-			console.log(error);
+			console.error(error);
 			setDocumentLoadError(true);
 		});
 		// eslint-disable-next-line
