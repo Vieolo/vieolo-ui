@@ -58,6 +58,7 @@ export function PDFViewerEmbeddedCreator(props: { p: ViewerPropsType }) {
             heightDeduction={props.p.heightDeduction}
             onClose={props.p.onClose}
             expandable={props.p.expandable}
+            fileName={(props.p.filePath as string).split("/")[1]}
         />
     </div>
 

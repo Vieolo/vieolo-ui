@@ -31,6 +31,7 @@ import { TypographyParagraphMedium } from '../typography';
 
 export default function PDFViewer(props: {
 	filePath: string | File,
+	fileName?: string,
 	context: 'full screen' | 'embedded',
 	pageInFocus?: number,
 	/** 
@@ -56,7 +57,7 @@ export default function PDFViewer(props: {
 
 	let focusRef = useRef<HTMLImageElement>(null);
 
-	let fileName = typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name;
+	let fileName = props.fileName || (typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name);
 
 	useEffect(() => {
 		if (props.pageInFocus) {
@@ -167,7 +168,7 @@ export default function PDFViewer(props: {
 							icon={<DownloadIcon />}
 							onClick={() => {
 								var link = document.createElement("a");
-								link.download = fileName.split('___')[1];
+								link.download = fileName.split('___').slice(-1)[0];
 								link.href = props.filePath as string;
 								document.body.appendChild(link);
 								link.click();
