@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.20.2 (2022-04-02)
+- Added explicit file name to the `PDFViewer`
+
 ## 0.20.1 (2022-04-02)
 - Fixed the rotation of the `PDFViewer` ([#145](https://github.com/Vieolo/vieolo-ui/issues/145))
 
