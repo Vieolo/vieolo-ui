@@ -22,6 +22,7 @@ import { PDFDocumentProxy } from 'pdfjs-dist/types/display/api';
 
 // Internal
 import { getPDFDocument, renderPDFPageAsCanvas } from './pdf_renderer';
+import { TypographyParagraphMedium } from '../typography';
 
 
 
@@ -127,7 +128,7 @@ export default function PDFViewer(props: {
 						{
 							(props.onClose || mode === 'full screen') &&
 							<IconButton
-								size="small"
+								size="extra-small"
 								icon={<CloseIcon />}
 								color="error"
 								disabled={!props.onClose}
@@ -143,26 +144,26 @@ export default function PDFViewer(props: {
 					</div>
 
 					<div>
-						<p>{`${currentPage} / ${totalPage}`}</p>
+						<TypographyParagraphMedium text={`${currentPage} / ${totalPage}`} />
 					</div>
 
-					<div className="flex-start">
+					<div className="flex-start column-gap--half">
 						<IconButton
-							size="small"
+							size="extra-small"
 							icon={<ZoomOutIcon />}
 							onClick={() => { setZoomMultiple(zoomMultiple - 0.1) }}
 						/>
 
 						<IconButton
-							size="small"
+							size="extra-small"
 							icon={<ZoomInIcon />}
 							onClick={() => { setZoomMultiple(zoomMultiple + 0.1) }}
 						/>
 					</div>
 
-					<div className="flex-start">
+					<div className="flex-start column-gap--half">
 						<IconButton
-							size="small"
+							size="extra-small"
 							icon={<DownloadIcon />}
 							onClick={() => {
 								var link = document.createElement("a");
@@ -175,13 +176,13 @@ export default function PDFViewer(props: {
 						/>
 
 						<IconButton
-							size="small"
+							size="extra-small"
 							icon={<RotateLeft />}
 							onClick={() => setRotation(rotation - 90)}
 						/>
 
 						<IconButton
-							size="small"
+							size="extra-small"
 							icon={<RotateRight />}
 							onClick={() => setRotation(rotation + 90)}
 						/>
@@ -189,7 +190,7 @@ export default function PDFViewer(props: {
 						{
 							(props.expandable && props.context === 'embedded') &&
 							<IconButton
-								size="small"
+								size="extra-small"
 								icon={<ExpandIcon />}
 								onClick={() => {
 									if (mode === 'embedded') setMode('full screen');
