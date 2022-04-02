@@ -23,9 +23,22 @@ export async function getPDFDocument(url) {
     return rawPDF;
 }
 export async function renderPDFPageAsCanvas(doc, pageNumber, pageID, canvasID, textLayerID, maximumWidth, zoom, rotation) {
+    /**
+     * Some PDF files come with an existing rotation
+     * This function adjusts the rotation of the pages with the existing rotation in mind.
+     * The `rotation` is the rotation given by the user, clicking on the rotate button
+     * @param pg The PDF page
+     * @returns The final adjusted rotation
+     */
+    function getFinalRotation(pg) {
+        if (pg.rotate === 0)
+            return rotation;
+        else
+            return rotation - (360 - page.rotate);
+    }
     let page = await doc.getPage(pageNumber);
     // Prepare canvas using PDF page dimensions
-    let canvas = document.getElementById(canvasID); // document.createElement('canvas'); //document.getElementById(canvasID) as HTMLCanvasElement;
+    let canvas = document.getElementById(canvasID);
     let canvasContext = canvas.getContext('2d');
     let scalingFactor = 1;
     let orgWidth = page.getViewport({ scale: 1 }).width;
@@ -34,7 +47,7 @@ export async function renderPDFPageAsCanvas(doc, pageNumber, pageID, canvasID, t
     }
     let viewport = page.getViewport({
         scale: scalingFactor + zoom,
-        rotation: page.rotate === 0 ? rotation : rotation - page.rotate,
+        rotation: getFinalRotation(page),
     });
     canvas.height = viewport.height;
     canvas.width = viewport.width;

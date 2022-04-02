@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.20.1 (2022-04-02)
+- Fixed the rotation of the `PDFViewer` ([#145](https://github.com/Vieolo/vieolo-ui/issues/145))
+
 ## 0.20.0 (2022-03-28)
 - Added `text-light` variations to the color palette
 - Added row height to `SwitchSet` ([#130](https://github.com/Vieolo/vieolo-ui/issues/130))

@@ -14,6 +14,7 @@ import IconButton from '../button/icon_button';
 import Modal from '../dialog/modal';
 // Internal
 import { getPDFDocument, renderPDFPageAsCanvas } from './pdf_renderer';
+import { TypographyParagraphMedium } from '../typography';
 export default function PDFViewer(props) {
     let [doc, setDoc] = useState(null);
     let [totalPage, setTotalPage] = useState(0);
@@ -48,7 +49,7 @@ export default function PDFViewer(props) {
                 setPageInFocus(props.pageInFocus);
             }
         }).catch((error) => {
-            console.log(error);
+            console.error(error);
             setDocumentLoadError(true);
         });
         // eslint-disable-next-line
@@ -68,7 +69,7 @@ export default function PDFViewer(props) {
                     }, pageHeight: pageHeight }, `pdf_page_${i}`));
             }
             let viewer = _jsxs("div", Object.assign({ className: props.context === "full screen" ? "vieolo-pdf-viewer-component" : "vieolo-pdf-viewer-component", style: { height: `calc(100vh - ${mode === 'embedded' ? props.heightDeduction : 0}px)` } }, { children: [_jsxs("div", Object.assign({ className: "vieolo-pdf-viewer-component__toolbar" }, { children: [_jsx("div", Object.assign({ className: 'flex-start' }, { children: (props.onClose || mode === 'full screen') &&
-                                    _jsx(IconButton, { size: "small", icon: _jsx(CloseIcon, {}, void 0), color: "error", disabled: !props.onClose, onClick: () => {
+                                    _jsx(IconButton, { size: "extra-small", icon: _jsx(CloseIcon, {}, void 0), color: "error", disabled: !props.onClose, onClick: () => {
                                             if (props.context === 'embedded' && mode === 'full screen') {
                                                 setMode('embedded');
                                             }
@@ -77,10 +78,10 @@ export default function PDFViewer(props) {
                                                     props.onClose();
                                             }
                                         } }, void 0) }), void 0),
-                            _jsx("div", { children: _jsx("p", { children: `${currentPage} / ${totalPage}` }, void 0) }, void 0),
-                            _jsxs("div", Object.assign({ className: "flex-start" }, { children: [_jsx(IconButton, { size: "small", icon: _jsx(ZoomOutIcon, {}, void 0), onClick: () => { setZoomMultiple(zoomMultiple - 0.1); } }, void 0),
-                                    _jsx(IconButton, { size: "small", icon: _jsx(ZoomInIcon, {}, void 0), onClick: () => { setZoomMultiple(zoomMultiple + 0.1); } }, void 0)] }), void 0),
-                            _jsxs("div", Object.assign({ className: "flex-start" }, { children: [_jsx(IconButton, { size: "small", icon: _jsx(DownloadIcon, {}, void 0), onClick: () => {
+                            _jsx("div", { children: _jsx(TypographyParagraphMedium, { text: `${currentPage} / ${totalPage}` }, void 0) }, void 0),
+                            _jsxs("div", Object.assign({ className: "flex-start column-gap--half" }, { children: [_jsx(IconButton, { size: "extra-small", icon: _jsx(ZoomOutIcon, {}, void 0), onClick: () => { setZoomMultiple(zoomMultiple - 0.1); } }, void 0),
+                                    _jsx(IconButton, { size: "extra-small", icon: _jsx(ZoomInIcon, {}, void 0), onClick: () => { setZoomMultiple(zoomMultiple + 0.1); } }, void 0)] }), void 0),
+                            _jsxs("div", Object.assign({ className: "flex-start column-gap--half" }, { children: [_jsx(IconButton, { size: "extra-small", icon: _jsx(DownloadIcon, {}, void 0), onClick: () => {
                                             var link = document.createElement("a");
                                             link.download = fileName.split('___')[1];
                                             link.href = props.filePath;
@@ -88,10 +89,10 @@ export default function PDFViewer(props) {
                                             link.click();
                                             document.body.removeChild(link);
                                         } }, void 0),
-                                    _jsx(IconButton, { size: "small", icon: _jsx(RotateLeft, {}, void 0), onClick: () => setRotation(rotation - 90) }, void 0),
-                                    _jsx(IconButton, { size: "small", icon: _jsx(RotateRight, {}, void 0), onClick: () => setRotation(rotation + 90) }, void 0),
+                                    _jsx(IconButton, { size: "extra-small", icon: _jsx(RotateLeft, {}, void 0), onClick: () => setRotation(rotation - 90) }, void 0),
+                                    _jsx(IconButton, { size: "extra-small", icon: _jsx(RotateRight, {}, void 0), onClick: () => setRotation(rotation + 90) }, void 0),
                                     (props.expandable && props.context === 'embedded') &&
-                                        _jsx(IconButton, { size: "small", icon: _jsx(ExpandIcon, {}, void 0), onClick: () => {
+                                        _jsx(IconButton, { size: "extra-small", icon: _jsx(ExpandIcon, {}, void 0), onClick: () => {
                                                 if (mode === 'embedded')
                                                     setMode('full screen');
                                                 else
