@@ -23,7 +23,8 @@ export function pdfViewerEmbeddedOptions(): ViewData {
                     '/simple.pdf',
                     '/simple_2.pdf',
                     '/odd_shaped.pdf',
-                    '/many_pages.pdf'
+                    '/many_pages.pdf',
+                    '/rotated.pdf'
                 ],
                 default: '/simple.pdf'
             },

@@ -1,6 +1,6 @@
 // Installed Packages
 import * as pdfjsLib from 'pdfjs-dist/legacy/build/pdf';
-import { PDFDocumentProxy, RenderParameters, TypedArray } from 'pdfjs-dist/types/display/api';
+import { PDFDocumentProxy, PDFPageProxy, RenderParameters, TypedArray } from 'pdfjs-dist/types/display/api';
 import PDFJSWorker from 'pdfjs-dist/legacy/build/pdf.worker.entry'
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJSWorker
@@ -41,11 +41,23 @@ export async function renderPDFPageAsCanvas(
 	zoom: number,
 	rotation: number,	
 ) : Promise<[number, number]> {
+
+	/**
+	 * Some PDF files come with an existing rotation
+	 * This function adjusts the rotation of the pages with the existing rotation in mind.
+	 * The `rotation` is the rotation given by the user, clicking on the rotate button
+	 * @param pg The PDF page
+	 * @returns The final adjusted rotation
+	 */
+	function getFinalRotation(pg: PDFPageProxy) : number {
+		if (pg.rotate === 0) return rotation;
+		else return rotation - (360 - page.rotate);
+	}
 	
 	let page = await doc.getPage(pageNumber);
 	
 	// Prepare canvas using PDF page dimensions
-	let canvas = document.getElementById(canvasID) as HTMLCanvasElement; // document.createElement('canvas'); //document.getElementById(canvasID) as HTMLCanvasElement;
+	let canvas = document.getElementById(canvasID) as HTMLCanvasElement;
 	let canvasContext = canvas.getContext('2d')!;
 
 	let scalingFactor = 1;
@@ -56,7 +68,7 @@ export async function renderPDFPageAsCanvas(
 	}	
 	let viewport = page.getViewport({
 		scale: scalingFactor + zoom, 
-		rotation: page.rotate === 0 ? rotation : rotation - page.rotate,
+		rotation: getFinalRotation(page),
 	});	
 	canvas.height = viewport.height;
 	canvas.width = viewport.width;

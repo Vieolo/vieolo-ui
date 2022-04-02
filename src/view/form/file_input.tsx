@@ -48,7 +48,7 @@ export function FileInputCreator(props: { p: FileInputPropsType }) {
                             setFiles(fs)
                         }}
                         onError={(e) => {
-                            console.log(e);
+                            console.error(e);
                         }}
                         accept='application/pdf'
                         icon={(props.p as any).withIcon ? <IconOne /> : undefined}
