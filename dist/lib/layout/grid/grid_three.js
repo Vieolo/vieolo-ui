@@ -5,7 +5,6 @@ import Grid from "./grid";
 export default function GridThree(props) {
     function getFlex(b) {
         if (b === 'lg') {
-            console.log("lg", ['lg'].includes(props.responsiveBreakpoint || '') ? 12 : 4);
             return ['lg'].includes(props.responsiveBreakpoint || '') ? 12 : 4;
         }
         else if (b === 'md') {
