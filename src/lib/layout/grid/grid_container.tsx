@@ -7,12 +7,15 @@ export default function GridContainer(props: {
     rowGap?: 'none' | 'half' | 'one' | 'two',
     columnGap?: 'none' | 'half' | 'one' | 'two',
     height?: string,
-    children?: React.ReactNode
+    children?: React.ReactNode,
+    className?: string,
+    style?: React.CSSProperties
 }) {    
 
-    let style: React.CSSProperties = {};
+    let style: React.CSSProperties = props.style || {};
     let className: string = 'vieolo-grid-container';
 
+    if (props.className) className += ` ${props.className}`;
     if (props.height) style.height= props.height;
 
     let gridTemplate = 'repeat(12, 1fr)';
