@@ -1,7 +1,9 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 export default function GridContainer(props) {
-    let style = {};
+    let style = props.style || {};
     let className = 'vieolo-grid-container';
+    if (props.className)
+        className += ` ${props.className}`;
     if (props.height)
         style.height = props.height;
     let gridTemplate = 'repeat(12, 1fr)';

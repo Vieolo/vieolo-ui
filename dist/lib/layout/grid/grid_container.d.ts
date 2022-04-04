@@ -5,4 +5,6 @@ export default function GridContainer(props: {
     columnGap?: 'none' | 'half' | 'one' | 'two';
     height?: string;
     children?: React.ReactNode;
+    className?: string;
+    style?: React.CSSProperties;
 }): JSX.Element;

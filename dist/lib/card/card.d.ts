@@ -10,4 +10,6 @@ export default function Card(props: {
     children?: React.ReactNode;
     padding?: 'none' | 'half' | 'one';
     ariaLabel?: string;
+    style?: React.CSSProperties;
+    className?: string;
 }): JSX.Element;
