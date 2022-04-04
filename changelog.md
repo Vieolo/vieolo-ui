@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.20.3 (2022-04-04)
+- Added class name and style to the `Card`
+- Added class name to the `GridContainer`
+
 ## 0.20.2 (2022-04-02)
 - Added explicit file name to the `PDFViewer`
 

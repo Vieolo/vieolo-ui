@@ -7,11 +7,13 @@ export default function Card(props) {
     let br = props.borderRadius || 'default';
     let co = props.color || 'primary';
     let className = `vieolo-card`;
+    if (props.className)
+        className += ` ${props.className}`;
     className += getEmphasisClasses(em, co, { removeTextColorClasses: true });
     className += ` vieolo-card--border-radius-${br}`;
     className += ` elevation--${el}`;
     className += ` padding--${props.padding || 'one'}`;
-    let style = {};
+    let style = props.style || {};
     if (props.height)
         style.height = props.height;
     if (props.width)
