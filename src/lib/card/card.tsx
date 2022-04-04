@@ -17,7 +17,9 @@ export default function Card(props: {
     width?: string,
     children?: React.ReactNode,
     padding?: 'none' | 'half' | 'one',
-    ariaLabel?: string
+    ariaLabel?: string,
+    style?: React.CSSProperties,
+    className?: string
 }) {
 
     let em = props.emphasis || 'none';
@@ -27,13 +29,14 @@ export default function Card(props: {
 
     let className = `vieolo-card`;
 
+    if (props.className) className += ` ${props.className}`;
     className += getEmphasisClasses(em, co, {removeTextColorClasses: true});
 
     className += ` vieolo-card--border-radius-${br}`;
     className += ` elevation--${el}`;
     className += ` padding--${props.padding || 'one'}`
 
-    let style: React.CSSProperties = {};
+    let style: React.CSSProperties = props.style || {};
 
     if (props.height) style.height = props.height;
     if (props.width) style.width = props.width;
