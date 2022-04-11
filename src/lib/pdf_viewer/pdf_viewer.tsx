@@ -11,6 +11,8 @@ import RotateRight from '@mui/icons-material/RotateRightRounded';
 import CloseIcon from '@mui/icons-material/CloseRounded';
 import ExpandIcon from '@mui/icons-material/FullscreenRounded';
 
+// Icons
+import { ShareIcon } from '../icons/icons';
 
 // Components
 import IconButton from '../button/icon_button';
@@ -136,9 +138,9 @@ export default function PDFViewer(props: {
 								onClick={() => {
 									if (props.context === 'embedded' && mode === 'full screen') {
 										setMode('embedded');
-									}else {
+									} else {
 										if (props.onClose) props.onClose();
-									}									
+									}
 								}}
 							/>
 						}
@@ -163,6 +165,25 @@ export default function PDFViewer(props: {
 					</div>
 
 					<div className="flex-start column-gap--half">
+						{
+							("share" in navigator) &&
+							<IconButton
+								size="extra-small"
+								icon={<ShareIcon />}
+								onClick={async () => {
+									try {
+										await navigator.share({
+											files: typeof props.filePath === 'string'
+												? [new File([await (await fetch(props.filePath)).blob()], fileName)]
+												: [props.filePath],
+										} as any);
+									} catch (error) {
+										
+									}
+								}}
+							/>
+						}
+
 						<IconButton
 							size="extra-small"
 							icon={<DownloadIcon />}
@@ -214,7 +235,7 @@ export default function PDFViewer(props: {
 
 			if (mode === 'embedded') return viewer;
 			else return <Modal
-				onClose={() => {}}
+				onClose={() => { }}
 			>
 				<div className="width--vw-100 height--vh-100">
 					{viewer}
