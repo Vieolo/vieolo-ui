@@ -91,21 +91,41 @@ export default function PDFViewer(props: {
 		// eslint-disable-next-line
 	}, [props.filePath]);
 
-
-	useEffect(() => {
-		let u = new URL(window.location as any);
-		let f = (props.fileName || (typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name)).trim();
-		u.searchParams.set('pdf_file_in_view', f);
-		window.history.pushState({}, '', u.toString());
-		
-		window.addEventListener("popstate", e => {
+	function handlePopState(e: PopStateEvent) {
+		if (props.context === 'full screen') {
 			if (props.onClose) {
 				e.preventDefault()
 				props.onClose();
 			}
-		});		
+		} else {
+			e.preventDefault()
+			setMode("embedded");
+		}
+		window.removeEventListener('popstate', handlePopState);
+	}
+
+
+	function handleBrowserBack() {
+		let u = new URL(window.location as any);
+		let f = (props.fileName || (typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name)).trim();
+		u.searchParams.set('pdf_file_in_view', f);
+		window.history.pushState({}, '', u.toString());
+		window.addEventListener("popstate", handlePopState);
+	}
+
+
+	useEffect(() => {
+		if (props.context === 'full screen') {
+			handleBrowserBack();
+		}
+
+		return () => {
+			if (window.location.search.includes("pdf_file_in_view")) {
+				window.history.back();
+			}
+		}
 		// eslint-disable-next-line
-	}, [props.fileName, props.filePath, props.onClose])
+	}, [props.fileName, props.filePath, props.onClose, props.context])
 
 
 
@@ -155,7 +175,11 @@ export default function PDFViewer(props: {
 									if (props.context === 'embedded' && mode === 'full screen') {
 										setMode('embedded');
 									} else {
-										if (props.onClose) props.onClose();
+										if (window.location.search.includes("pdf_file_in_view")) {
+											window.history.back();
+										}else {
+											if (props.onClose) props.onClose();
+										}
 									}
 								}}
 							/>
@@ -194,7 +218,7 @@ export default function PDFViewer(props: {
 												: [props.filePath],
 										} as any);
 									} catch (error) {
-										
+
 									}
 								}}
 							/>
@@ -231,8 +255,16 @@ export default function PDFViewer(props: {
 								size="extra-small"
 								icon={<ExpandIcon />}
 								onClick={() => {
-									if (mode === 'embedded') setMode('full screen');
-									else setMode('embedded');
+									if (mode === 'embedded') {
+										setMode('full screen');
+										handleBrowserBack();
+									}
+									else {
+										if (window.location.search.includes("pdf_file_in_view")) {
+											window.history.back();
+										}
+										setMode('embedded');
+									}
 								}}
 							/>
 						}
