@@ -59,7 +59,7 @@ export default function PDFViewer(props: {
 
 	let focusRef = useRef<HTMLImageElement>(null);
 
-	let fileName = props.fileName || (typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name);
+	let fileName = (props.fileName || (typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name)).trim();
 
 	useEffect(() => {
 		if (props.pageInFocus) {
@@ -90,6 +90,22 @@ export default function PDFViewer(props: {
 		});
 		// eslint-disable-next-line
 	}, [props.filePath]);
+
+
+	useEffect(() => {
+		let u = new URL(window.location as any);
+		let f = (props.fileName || (typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name)).trim();
+		u.searchParams.set('pdf_file_in_view', f);
+		window.history.pushState({}, '', u.toString());
+		
+		window.addEventListener("popstate", e => {
+			if (props.onClose) {
+				e.preventDefault()
+				props.onClose();
+			}
+		});		
+		// eslint-disable-next-line
+	}, [props.fileName, props.filePath, props.onClose])
 
 
 
