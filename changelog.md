@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.20.4 (2022-04-11)
+- Added share functionality to the `PDFViewer` ([#146](https://github.com/Vieolo/vieolo-ui/issues/146))
+- Added custom browser back button functionality for `PDFViewer` ([#147](https://github.com/Vieolo/vieolo-ui/issues/147))
+
 ## 0.20.3 (2022-04-04)
 - Added class name and style to the `Card`
 - Added class name to the `GridContainer`
