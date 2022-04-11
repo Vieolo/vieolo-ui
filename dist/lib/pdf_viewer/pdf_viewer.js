@@ -9,6 +9,8 @@ import RotateLeft from '@mui/icons-material/RotateLeftRounded';
 import RotateRight from '@mui/icons-material/RotateRightRounded';
 import CloseIcon from '@mui/icons-material/CloseRounded';
 import ExpandIcon from '@mui/icons-material/FullscreenRounded';
+// Icons
+import { ShareIcon } from '../icons/icons';
 // Components
 import IconButton from '../button/icon_button';
 import Modal from '../dialog/modal';
@@ -27,7 +29,7 @@ export default function PDFViewer(props) {
     let [pageHeight, setPageHeight] = useState(100);
     let [documentLoadError, setDocumentLoadError] = useState(false);
     let focusRef = useRef(null);
-    let fileName = props.fileName || (typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name);
+    let fileName = (props.fileName || (typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name)).trim();
     useEffect(() => {
         if (props.pageInFocus) {
             setPageInFocus(props.pageInFocus);
@@ -54,6 +56,37 @@ export default function PDFViewer(props) {
         });
         // eslint-disable-next-line
     }, [props.filePath]);
+    function handlePopState(e) {
+        if (props.context === 'full screen') {
+            if (props.onClose) {
+                e.preventDefault();
+                props.onClose();
+            }
+        }
+        else {
+            e.preventDefault();
+            setMode("embedded");
+        }
+        window.removeEventListener('popstate', handlePopState);
+    }
+    function handleBrowserBack() {
+        let u = new URL(window.location);
+        let f = (props.fileName || (typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name)).trim();
+        u.searchParams.set('pdf_file_in_view', f);
+        window.history.pushState({}, '', u.toString());
+        window.addEventListener("popstate", handlePopState);
+    }
+    useEffect(() => {
+        if (props.context === 'full screen') {
+            handleBrowserBack();
+        }
+        return () => {
+            if (window.location.search.includes("pdf_file_in_view")) {
+                window.history.back();
+            }
+        };
+        // eslint-disable-next-line
+    }, [props.fileName, props.filePath, props.onClose, props.context]);
     if (documentLoadError) {
         return _jsx("div", Object.assign({ className: "load-error" }, { children: "There was a problem loading the PDF file!" }), void 0);
     }
@@ -74,14 +107,31 @@ export default function PDFViewer(props) {
                                                 setMode('embedded');
                                             }
                                             else {
-                                                if (props.onClose)
-                                                    props.onClose();
+                                                if (window.location.search.includes("pdf_file_in_view")) {
+                                                    window.history.back();
+                                                }
+                                                else {
+                                                    if (props.onClose)
+                                                        props.onClose();
+                                                }
                                             }
                                         } }, void 0) }), void 0),
                             _jsx("div", { children: _jsx(TypographyParagraphMedium, { text: `${currentPage} / ${totalPage}` }, void 0) }, void 0),
                             _jsxs("div", Object.assign({ className: "flex-start column-gap--half" }, { children: [_jsx(IconButton, { size: "extra-small", icon: _jsx(ZoomOutIcon, {}, void 0), onClick: () => { setZoomMultiple(zoomMultiple - 0.1); } }, void 0),
                                     _jsx(IconButton, { size: "extra-small", icon: _jsx(ZoomInIcon, {}, void 0), onClick: () => { setZoomMultiple(zoomMultiple + 0.1); } }, void 0)] }), void 0),
-                            _jsxs("div", Object.assign({ className: "flex-start column-gap--half" }, { children: [_jsx(IconButton, { size: "extra-small", icon: _jsx(DownloadIcon, {}, void 0), onClick: () => {
+                            _jsxs("div", Object.assign({ className: "flex-start column-gap--half" }, { children: [("share" in navigator) &&
+                                        _jsx(IconButton, { size: "extra-small", icon: _jsx(ShareIcon, {}, void 0), onClick: async () => {
+                                                try {
+                                                    await navigator.share({
+                                                        files: typeof props.filePath === 'string'
+                                                            ? [new File([await (await fetch(props.filePath)).blob()], fileName)]
+                                                            : [props.filePath],
+                                                    });
+                                                }
+                                                catch (error) {
+                                                }
+                                            } }, void 0),
+                                    _jsx(IconButton, { size: "extra-small", icon: _jsx(DownloadIcon, {}, void 0), onClick: () => {
                                             var link = document.createElement("a");
                                             link.download = fileName.split('___').slice(-1)[0];
                                             link.href = props.filePath;
@@ -93,10 +143,16 @@ export default function PDFViewer(props) {
                                     _jsx(IconButton, { size: "extra-small", icon: _jsx(RotateRight, {}, void 0), onClick: () => setRotation(rotation + 90) }, void 0),
                                     (props.expandable && props.context === 'embedded') &&
                                         _jsx(IconButton, { size: "extra-small", icon: _jsx(ExpandIcon, {}, void 0), onClick: () => {
-                                                if (mode === 'embedded')
+                                                if (mode === 'embedded') {
                                                     setMode('full screen');
-                                                else
+                                                    handleBrowserBack();
+                                                }
+                                                else {
+                                                    if (window.location.search.includes("pdf_file_in_view")) {
+                                                        window.history.back();
+                                                    }
                                                     setMode('embedded');
+                                                }
                                             } }, void 0)] }), void 0)] }), void 0),
                     _jsx("div", Object.assign({ className: "vieolo-pdf-viewer-component__canvas-container", ref: focusRef, style: { height: `calc(100vh - ${mode === 'embedded' ? props.heightDeduction + 30 : 10}px)` } }, { children: pages }), void 0)] }), void 0);
             if (mode === 'embedded')

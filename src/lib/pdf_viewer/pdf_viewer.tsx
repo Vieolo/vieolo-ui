@@ -11,6 +11,8 @@ import RotateRight from '@mui/icons-material/RotateRightRounded';
 import CloseIcon from '@mui/icons-material/CloseRounded';
 import ExpandIcon from '@mui/icons-material/FullscreenRounded';
 
+// Icons
+import { ShareIcon } from '../icons/icons';
 
 // Components
 import IconButton from '../button/icon_button';
@@ -57,7 +59,7 @@ export default function PDFViewer(props: {
 
 	let focusRef = useRef<HTMLImageElement>(null);
 
-	let fileName = props.fileName || (typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name);
+	let fileName = (props.fileName || (typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name)).trim();
 
 	useEffect(() => {
 		if (props.pageInFocus) {
@@ -88,6 +90,42 @@ export default function PDFViewer(props: {
 		});
 		// eslint-disable-next-line
 	}, [props.filePath]);
+
+	function handlePopState(e: PopStateEvent) {
+		if (props.context === 'full screen') {
+			if (props.onClose) {
+				e.preventDefault()
+				props.onClose();
+			}
+		} else {
+			e.preventDefault()
+			setMode("embedded");
+		}
+		window.removeEventListener('popstate', handlePopState);
+	}
+
+
+	function handleBrowserBack() {
+		let u = new URL(window.location as any);
+		let f = (props.fileName || (typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name)).trim();
+		u.searchParams.set('pdf_file_in_view', f);
+		window.history.pushState({}, '', u.toString());
+		window.addEventListener("popstate", handlePopState);
+	}
+
+
+	useEffect(() => {
+		if (props.context === 'full screen') {
+			handleBrowserBack();
+		}
+
+		return () => {
+			if (window.location.search.includes("pdf_file_in_view")) {
+				window.history.back();
+			}
+		}
+		// eslint-disable-next-line
+	}, [props.fileName, props.filePath, props.onClose, props.context])
 
 
 
@@ -136,9 +174,13 @@ export default function PDFViewer(props: {
 								onClick={() => {
 									if (props.context === 'embedded' && mode === 'full screen') {
 										setMode('embedded');
-									}else {
-										if (props.onClose) props.onClose();
-									}									
+									} else {
+										if (window.location.search.includes("pdf_file_in_view")) {
+											window.history.back();
+										}else {
+											if (props.onClose) props.onClose();
+										}
+									}
 								}}
 							/>
 						}
@@ -163,6 +205,25 @@ export default function PDFViewer(props: {
 					</div>
 
 					<div className="flex-start column-gap--half">
+						{
+							("share" in navigator) &&
+							<IconButton
+								size="extra-small"
+								icon={<ShareIcon />}
+								onClick={async () => {
+									try {
+										await navigator.share({
+											files: typeof props.filePath === 'string'
+												? [new File([await (await fetch(props.filePath)).blob()], fileName)]
+												: [props.filePath],
+										} as any);
+									} catch (error) {
+
+									}
+								}}
+							/>
+						}
+
 						<IconButton
 							size="extra-small"
 							icon={<DownloadIcon />}
@@ -194,8 +255,16 @@ export default function PDFViewer(props: {
 								size="extra-small"
 								icon={<ExpandIcon />}
 								onClick={() => {
-									if (mode === 'embedded') setMode('full screen');
-									else setMode('embedded');
+									if (mode === 'embedded') {
+										setMode('full screen');
+										handleBrowserBack();
+									}
+									else {
+										if (window.location.search.includes("pdf_file_in_view")) {
+											window.history.back();
+										}
+										setMode('embedded');
+									}
 								}}
 							/>
 						}
@@ -214,7 +283,7 @@ export default function PDFViewer(props: {
 
 			if (mode === 'embedded') return viewer;
 			else return <Modal
-				onClose={() => {}}
+				onClose={() => { }}
 			>
 				<div className="width--vw-100 height--vh-100">
 					{viewer}
