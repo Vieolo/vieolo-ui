@@ -42,7 +42,11 @@ export default function PDFViewer(props: {
 	 */
 	heightDeduction: number,
 	onClose?: () => void,
-	expandable?: boolean
+	expandable?: boolean,
+	/**
+	 * This callback function informs the parent that the view mode of the viewer is changed
+	 */
+	onExpandToggle?: (mode: 'full screen' | 'embedded') => void
 }) {
 	let [doc, setDoc] = useState<PDFDocumentProxy | null>(null);
 	let [totalPage, setTotalPage] = useState<number>(0);
@@ -100,6 +104,7 @@ export default function PDFViewer(props: {
 		} else {
 			e.preventDefault()
 			setMode("embedded");
+			if (props.onExpandToggle) props.onExpandToggle("embedded");
 		}
 		window.removeEventListener('popstate', handlePopState);
 	}
@@ -174,6 +179,7 @@ export default function PDFViewer(props: {
 								onClick={() => {
 									if (props.context === 'embedded' && mode === 'full screen') {
 										setMode('embedded');
+										if (props.onExpandToggle) props.onExpandToggle("embedded");
 									} else {
 										if (window.location.search.includes("pdf_file_in_view")) {
 											window.history.back();
@@ -257,6 +263,7 @@ export default function PDFViewer(props: {
 								onClick={() => {
 									if (mode === 'embedded') {
 										setMode('full screen');
+										if (props.onExpandToggle) props.onExpandToggle("full screen");
 										handleBrowserBack();
 									}
 									else {
@@ -264,6 +271,7 @@ export default function PDFViewer(props: {
 											window.history.back();
 										}
 										setMode('embedded');
+										if (props.onExpandToggle) props.onExpandToggle("embedded");
 									}
 								}}
 							/>
