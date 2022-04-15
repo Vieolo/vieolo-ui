@@ -24,6 +24,7 @@
     "@types/react": "^17.0.8",
     "@types/react-dom": "^17.0.5",
     "@types/react-router-dom": "^5.3.2",
+    "@vieolo/device-js": "github:Vieolo/device-js#0.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "sass": "^1.43.4",
