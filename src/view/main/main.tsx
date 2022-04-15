@@ -10,6 +10,7 @@ import ArrowRight from '@mui/icons-material/ArrowRight';
 import ArrowLeft from '@mui/icons-material/ArrowLeft';
 
 // Main Creators
+import { spinnerOptions, SpinnerCreator } from '../auxiliary/spinner';
 import { SelectCreator, selectOptions } from '../form/select';
 import { PeriodSelectorCreator, periodSelectorOptions } from '../date_time/period_selector';
 import { IconButtonCreator, iconButtonOptions } from '../button/icon_button';
@@ -79,6 +80,8 @@ export default function MainPage(props: {}): JSX.Element {
     let history = useHistory();
 
     let items: { [key: string]: ViewItemData } = {
+        "Spinner": { title: "Spinner", data: spinnerOptions(), creator: SpinnerCreator, group: "Auxiliary" },
+
         "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator, group: "Buttons" },
         "Chip": { title: "Chip", data: chipOptions(), creator: ChipCreator, group: "Buttons" },
         "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator, group: "Buttons" },
