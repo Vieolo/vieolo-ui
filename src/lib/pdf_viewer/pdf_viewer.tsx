@@ -158,8 +158,8 @@ export default function PDFViewer(props: {
 			}
 
 			let viewer = <div
-				className={props.context === "full screen" ? "vieolo-pdf-viewer-component" : "vieolo-pdf-viewer-component"}
-				style={{ height: `calc(100vh - ${mode === 'embedded' ? props.heightDeduction : 0}px)` }}
+				className={mode === "full screen" ? "vieolo-pdf-viewer-component vieolo-pdf-viewer-component--full" : "vieolo-pdf-viewer-component"}
+				style={mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction}px)` } : undefined}
 			>
 				<div className="vieolo-pdf-viewer-component__toolbar">
 
@@ -273,9 +273,9 @@ export default function PDFViewer(props: {
 
 				</div>
 				<div
-					className="vieolo-pdf-viewer-component__canvas-container"
+					className={`vieolo-pdf-viewer-component__canvas-container ${mode === 'full screen' ? 'vieolo-pdf-viewer-component__canvas-container--full' : ''}`}
 					ref={focusRef}
-					style={{ height: `calc(100vh - ${mode === 'embedded' ? props.heightDeduction + 30 : 10}px)` }}
+					style={mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction + 30}px)` } : undefined}
 				>
 					{pages}
 				</div>

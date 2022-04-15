@@ -30,7 +30,7 @@ export function pdfViewerEmbeddedOptions(): ViewData {
             },
             expandable: {
                 options: [false, true],
-                default: false
+                default: true
             }
         }
     }
