@@ -138,7 +138,7 @@ export default function MainPage(props: {}): JSX.Element {
 
     let content: React.ReactNode = null;
 
-    if (selectedTitle && selectedDataOptions && finalState) {
+    if (selectedTitle && selectedDataOptions && finalState && showComponent) {
         let C = items[selectedTitle].creator;
         content = <C p={finalState} />
     }
