@@ -35,6 +35,7 @@ import TimeInput from './lib/date_time/time_input';
 import RadioGroup, { RadioButtonType as RadioButtonTempType } from './lib/form/radio_group';
 import Select from './lib/form/select';
 import Spacer from './lib/layout/auxiliary/spacer';
+import Spinner from './lib/auxiliary/spinner';
 import Switch from './lib/form/switch';
 import SwitchSet from './lib/form/switch_set';
 
@@ -45,6 +46,15 @@ import {
     WidthAndHeightSize as WidthAndHeightSizeTemp,
     CardExtraActionType as CardExtraActionTypeTemp
 } from './lib/private/types';
+
+import {
+    GanttChartColumnGroup as GanttChartColumnGroupTemp,
+    GanttChartColumnTitle as GanttChartColumnTitleTemp,
+    GanttChartContextMenuItem as GanttChartContextMenuItemTemp,
+    GanttChartRowType as GanttChartRowTypeTemp,
+    GanttChartItemType as GanttChartItemTypeTemp,
+    GanttChartAuxiliaryItemType as GanttChartAuxiliaryItemTypeTemp
+} from './charts/index';
 
 export { 
     Button,
@@ -87,7 +97,8 @@ export {
     Spacer,
     Divider,
     TitlePeriodCard,
-    Flex
+    Flex,
+    Spinner
 }
 
 
@@ -122,15 +133,6 @@ export {
     BarChart,
     GanttChart    
 } from './charts/index'
-
-import {
-    GanttChartColumnGroup as GanttChartColumnGroupTemp,
-    GanttChartColumnTitle as GanttChartColumnTitleTemp,
-    GanttChartContextMenuItem as GanttChartContextMenuItemTemp,
-    GanttChartRowType as GanttChartRowTypeTemp,
-    GanttChartItemType as GanttChartItemTypeTemp,
-    GanttChartAuxiliaryItemType as GanttChartAuxiliaryItemTypeTemp
-} from './charts/index';
 
 export type GanttChartColumnGroup = GanttChartColumnGroupTemp;
 export type GanttChartColumnTitle = GanttChartColumnTitleTemp;

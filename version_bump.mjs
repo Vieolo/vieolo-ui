@@ -1,21 +1,21 @@
 import { execSync } from 'child_process';
 import * as fs from 'fs';
 
-if (process.argv.length == 2) throw 'Please select add the bump level. The accepted options are "build", "minor", and "major"';
+if (process.argv.length === 2) throw new Error('Please select add the bump level. The accepted options are "build", "minor", and "major"');
 
 /**
  * @type {'build' | 'minor' | 'major'}
  */
-let level = process.argv.slice(2);
+let level = process.argv.slice(2).toString();
 
 let packageJSON = JSON.parse(fs.readFileSync('./package.json').toString());
 
 /** @type {number[]} */
 let cv = packageJSON.version.split('.').map(a => parseInt(a));
 
-if (level == 'build') {
+if (level === 'build') {
     cv[2] += 1;
-} else if (level == 'minor') {
+} else if (level === 'minor') {
     cv[2] = 0;
     cv[1] += 1;
 } else {
@@ -89,6 +89,7 @@ execSync('npm run build-components');
 tsConfig.compilerOptions.noEmit = true;
 fs.writeFileSync('./tsconfig.json', JSON.stringify(tsConfig, null, 2));
 
+console.log('\x1b[32m', 'The package is successfully built' ,'\x1b[0m');
 
 /**
  * @returns {string}

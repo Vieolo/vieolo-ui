@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.20.5 (2022-04-15)
+- Added loading state to `PDFViewer` ([#27](https://github.com/Vieolo/vieolo-ui/issues/27))
+- Improved the error state of `PDFViewer` ([#28](https://github.com/Vieolo/vieolo-ui/issues/28))
+- Added `Spinner` component ([#111](https://github.com/Vieolo/vieolo-ui/issues/111))
+- Added small mobile break point ([#149](https://github.com/Vieolo/vieolo-ui/issues/149))
+- Adjusted size of the toolbar of `PDFViewer` in mobile layout ([#150](https://github.com/Vieolo/vieolo-ui/issues/150))
+- Added `onExpandToggle` callback to `PDFViewer` ([#151](https://github.com/Vieolo/vieolo-ui/issues/151))
+
 ## 0.20.4 (2022-04-11)
 - Added share functionality to the `PDFViewer` ([#146](https://github.com/Vieolo/vieolo-ui/issues/146))
 - Added custom browser back button functionality for `PDFViewer` ([#147](https://github.com/Vieolo/vieolo-ui/issues/147))
