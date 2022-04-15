@@ -824,11 +824,17 @@ body {
 		@include height--100vh;
 	}
 
-	&--loading {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
+	$self: &;
+
+	&--loading,
+	&--error {
+		#{$self}__content {
+			height: 90%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-direction: column;
+		}
 	}
 
 	&__toolbar {
