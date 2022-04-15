@@ -47,6 +47,7 @@ export function PDFViewerFullScreenCreator(props: { p: ViewerPropsType }) {
         {
             showViewer &&
             <PDFViewer
+                key={props.p.filePath.toString()}
                 filePath={props.p.filePath}
                 context={props.p.context}
                 heightDeduction={props.p.heightDeduction}

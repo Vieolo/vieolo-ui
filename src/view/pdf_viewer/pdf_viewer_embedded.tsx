@@ -53,6 +53,7 @@ export function PDFViewerEmbeddedCreator(props: { p: ViewerPropsType }) {
             
         </div>
         <PDFViewer
+            key={props.p.filePath.toString()}
             filePath={props.p.filePath}
             pageInFocus={parseInt(pageNumber) || null}
             context={props.p.context}
