@@ -7,6 +7,27 @@
     column-gap: 10px;
     padding: 10px;
 
+    &--no-content {
+        @media all and (max-width: $mobileBreakPoint) {
+            grid-template-columns: 50% 1fr;
+    
+            .component-state-display {
+                display: none;
+            }
+        }
+    }    
+
+    &--content {
+        @media all and (max-width: $mobileBreakPoint) {
+            display: block;
+
+            .component-list,
+            .state-list {
+                display: none;
+            }            
+        }    
+    }
+
     .component-list,
     .state-list,
     .component-state-display {
@@ -14,8 +35,33 @@
         overflow-y: scroll;
     }
 
+    
+
     .component-state-display {
         padding: 20px;
         @include card-no-shadow;                
+    }
+
+    .floating-action-button {
+        background-color: $primary-color-normal;
+        color: $primary-color-text;
+        height: $row-height-medium;
+        width: $row-height-medium;
+        position: fixed;
+        bottom: $base-unit;
+        right: $base-unit;
+        z-index: 10;
+        border-radius: $border-radius-full;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        @media all and (min-width: $mobileBreakPoint) {
+            display: none;
+        }
+
+        svg {
+            height: $row-height-small;
+        }
     }
 }

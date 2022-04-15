@@ -20,7 +20,7 @@ export default function List(props) {
         if (!a.group && !b.group)
             return 1;
         if (a.group === b.group)
-            return 1;
+            return a.title > b.title ? 1 : -1;
         return (a.group || 'zzzzzzzz') > (b.group || 'zzzzzzzz') ? 1 : -1;
     });
     let grouped = {};

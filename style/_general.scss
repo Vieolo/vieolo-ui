@@ -843,6 +843,10 @@
 
 // #region Layout (Size, margin, padding, position, overflow)
 
+html {
+	height: -webkit-fill-available;
+}
+
 .overflow {
 	&--y-scroll {
 		overflow-y: scroll;
@@ -901,6 +905,11 @@
 
 	&--vh-100 {
 		#{$dim}: 100vh;
+		
+		@media (pointer: coarse) {
+			#{$dim}: -webkit-fill-available;
+			#{$dim}: -moz-available;
+		}
 	}
 
 	&--vh-90 {
@@ -1036,6 +1045,24 @@
 
 .height {
 	@include widthAndHeightSizes("height")
+}
+
+@mixin height--100vh {
+	height: 100vh;
+	
+	@media (pointer: coarse) {
+		height: -webkit-fill-available;
+		height: -moz-available;
+	}
+}
+
+@mixin max-height--100vh {
+	max-height: 100vh;
+	
+	@media (pointer: coarse) {
+		max-height: -webkit-fill-available;
+		max-height: -moz-available;
+	}
 }
 
 

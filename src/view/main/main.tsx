@@ -2,7 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
+// Installed Packages
+import Device, { DeviceSizeCategory } from '@vieolo/device-js';
+
+// Icons
+import ArrowRight from '@mui/icons-material/ArrowRight';
+import ArrowLeft from '@mui/icons-material/ArrowLeft';
+
 // Main Creators
+import { spinnerOptions, SpinnerCreator } from '../auxiliary/spinner';
 import { SelectCreator, selectOptions } from '../form/select';
 import { PeriodSelectorCreator, periodSelectorOptions } from '../date_time/period_selector';
 import { IconButtonCreator, iconButtonOptions } from '../button/icon_button';
@@ -67,54 +75,57 @@ export default function MainPage(props: {}): JSX.Element {
 
     let [selectedTitle, setSelectedTitle] = useState<string>("");
     let [selectedDataOptions, setSelectedDataOptions] = useState<ViewData>(null as ViewData);
+    let [showComponent, setShowComponent] = useState<boolean>(false);
     let [finalState, setFinalState] = useState<{ [key: string]: any }>(null);
-    let history = useHistory();    
+    let history = useHistory();
 
     let items: { [key: string]: ViewItemData } = {
+        "Spinner": { title: "Spinner", data: spinnerOptions(), creator: SpinnerCreator, group: "Auxiliary" },
+
         "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator, group: "Buttons" },
         "Chip": { title: "Chip", data: chipOptions(), creator: ChipCreator, group: "Buttons" },
         "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator, group: "Buttons" },
-        
+
         "Card": { title: "Card", data: cardOptions(), creator: CardCreator, group: "Cards" },
         "Title Period Card": { title: "Title Period Card", data: titlePeriodCardOptions(), creator: TitlePeriodCardCreator, group: "Cards" },
-        
-        "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator, group: "Charts"},
+
+        "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator, group: "Charts" },
         "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator, group: "Charts" },
-        
+
         "Date Input": { title: "Date Input", data: dateInputOptions(), creator: DateInputCreator, group: "Date and Time" },
         "Date Picker": { title: "Date Picker", data: datePickerOptions(), creator: DatePickerCreator, group: "Date and Time" },
         "Date Time Picker": { title: "Date Time Picker", data: dateTimePickerOptions(), creator: DateTimePickerCreator, group: "Date and Time" },
         "Period Selector": { title: "Period Selector", data: periodSelectorOptions(), creator: PeriodSelectorCreator, group: "Date and Time" },
         "Time Input": { title: "Time Input", data: timeInputOptions(), creator: TimeInputCreator, group: "Date and Time" },
-        
+
         "Confirmation Dialog": { title: "Confirmation Dialog", data: confirmationDialogOptions(), creator: ConfirmationDialogCreator, group: "Dialogs" },
         "Form Dialog": { title: "Form Dialog", data: formDialogOptions(), creator: FormDialogCreator, group: "Dialogs" },
-        
+
         "Checkbox": { title: "Checkbox", data: checkboxOptions(), creator: CheckboxCreator, group: "Form" },
         "File Input": { title: "File Input", data: fileInputOptions(), creator: FileInputCreator, group: "Form" },
         "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator, group: "Form" },
         "Radio Group": { title: "Radio Group", data: radioGroupOptions(), creator: RadioGroupCreator, group: "Form" },
         "Select": { title: "Select", data: selectOptions(), creator: SelectCreator, group: "Form" },
         "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator, group: "Form" },
-        
+
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
-        
+
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator, group: "Layout" },
-        
+
         "Divider": { title: "Divider", data: dividerOptions(), creator: DividerCreator, group: "Layout/Auxiliary" },
         "Spacer": { title: "Spacer", data: spacerOptions(), creator: SpacerCreator, group: "Layout/Auxiliary" },
-        
+
         "Grid": { title: "Grid", data: gridOptions(), creator: GridCreator, group: "Layout/Grid" },
         "Grid Two": { title: "Grid Two", data: gridTwoOptions(), creator: GridTwoCreator, group: "Layout/Grid" },
         "Grid Three": { title: "Grid Three", data: gridThreeOptions(), creator: GridThreeCreator, group: "Layout/Grid" },
-        
+
         "List": { title: "List", data: listOptions(), creator: ListCreator, group: "List" },
-        
+
         "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerEmbeddedOptions(), creator: PDFViewerEmbeddedCreator, group: "PDF" },
         "PDF Viewer Fullscreen": { title: "PDF Viewer Fullscreen", data: pdfViewerFullScreenOptions(), creator: PDFViewerFullScreenCreator, group: "PDF" },
-        
+
         "Table": { title: "Table", data: tableOptions(), creator: TableCreator, group: "Table" },
-        
+
         "Typography": { title: "Typography", data: typographyOptions(), creator: TypographyCreator, group: "Typography" },
     }
 
@@ -130,7 +141,7 @@ export default function MainPage(props: {}): JSX.Element {
 
     let content: React.ReactNode = null;
 
-    if (selectedTitle && selectedDataOptions && finalState) {
+    if (selectedTitle && selectedDataOptions && finalState && showComponent) {
         let C = items[selectedTitle].creator;
         content = <C p={finalState} />
     }
@@ -139,6 +150,9 @@ export default function MainPage(props: {}): JSX.Element {
     function handleSelectComponent(i: ViewItemData) {
         setSelectedTitle(i.title);
         setSelectedDataOptions(i.data);
+        if (Device.sizeCategory() !== DeviceSizeCategory.mobile) {
+            setShowComponent(true);
+        }
         let finalState = { ...i.data.constants }
 
         for (let z = 0; z < Object.keys(i.data.variables).length; z++) {
@@ -188,11 +202,11 @@ export default function MainPage(props: {}): JSX.Element {
         setFinalState(finalState);
     }
 
-    return <div className="main-page">
+    return <div className={`main-page ${showComponent ? "main-page--content" : "main-page--no-content"}`}>
 
         <div className="component-list">
 
-            <List 
+            <List
                 height='calc(100vh - 20px)'
                 itemStyle={{
                     height: 'medium'
@@ -213,7 +227,7 @@ export default function MainPage(props: {}): JSX.Element {
                         title: i.title,
                         selected: selectedTitle === i.title,
                         group: i.group,
-                        onClick: () => {                            
+                        onClick: () => {
                             handleSelectComponent(i);
                             history.replace({ pathname: window.location.pathname, search: `tab=${i.title.replace(/ /g, "__")}` });
                         },
@@ -239,7 +253,7 @@ export default function MainPage(props: {}): JSX.Element {
                         variable = {
                             options: [false, true],
                             default: true
-                        }   
+                        }
                     } else if (tempVariable === "borderRadius") {
                         variable = {
                             options: ['default', 'full', 'normal', 'half', 'none'],
@@ -317,6 +331,22 @@ export default function MainPage(props: {}): JSX.Element {
             }
         </main>
 
+        {
+            selectedDataOptions &&
+            <div className="floating-action-button" onClick={() => {
+                if (showComponent) {
+                    setShowComponent(false);
+                } else {
+                    setShowComponent(true);
+                }
+            }}>
+                {
+                    showComponent
+                        ? <ArrowLeft />
+                        : <ArrowRight />
+                }
+            </div>
+        }
     </div>
 
 }

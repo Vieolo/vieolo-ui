@@ -11,4 +11,13 @@ export default function PDFViewer(props: {
     heightDeduction: number;
     onClose?: () => void;
     expandable?: boolean;
+    /**
+     * This callback function informs the parent that the view mode of the viewer is changed
+     */
+    onExpandToggle?: (mode: 'full screen' | 'embedded') => void;
+    /**
+     * This error message apears when there is an issue with loading the file.
+     * If nothing provided, the default message is displayed
+     */
+    errorMessage?: string;
 }): JSX.Element;
