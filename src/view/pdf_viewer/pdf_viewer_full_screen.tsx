@@ -23,7 +23,8 @@ export function pdfViewerFullScreenOptions(): ViewData {
                     '/simple.pdf',
                     '/simple_2.pdf',
                     '/odd_shaped.pdf',
-                    '/many_pages.pdf'
+                    '/many_pages.pdf',
+                    'non-existend file'
                 ],
                 default: '/simple.pdf'
             }
@@ -50,6 +51,7 @@ export function PDFViewerFullScreenCreator(props: { p: ViewerPropsType }) {
                 context={props.p.context}
                 heightDeduction={props.p.heightDeduction}
                 onClose={() => setShowViewer(false)}
+                fileName={(props.p.filePath as string).split("/")[1]}
             />
         }
 

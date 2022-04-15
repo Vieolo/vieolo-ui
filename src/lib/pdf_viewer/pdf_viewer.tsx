@@ -26,6 +26,8 @@ import Device, { DeviceSizeCategory } from '@vieolo/device-js';
 // Internal
 import { getPDFDocument, renderPDFPageAsCanvas } from './pdf_renderer';
 import { TypographyParagraphMedium } from '../typography';
+import Spinner from '../auxiliary/spinner';
+import Spacer from '../layout/auxiliary/spacer';
 
 
 
@@ -47,7 +49,12 @@ export default function PDFViewer(props: {
 	/**
 	 * This callback function informs the parent that the view mode of the viewer is changed
 	 */
-	onExpandToggle?: (mode: 'full screen' | 'embedded') => void
+	onExpandToggle?: (mode: 'full screen' | 'embedded') => void,
+	/**
+	 * This error message apears when there is an issue with loading the file.
+	 * If nothing provided, the default message is displayed
+	 */
+	errorMessage?: string
 }) {
 	let [doc, setDoc] = useState<PDFDocumentProxy | null>(null);
 	let [totalPage, setTotalPage] = useState<number>(0);
@@ -133,12 +140,16 @@ export default function PDFViewer(props: {
 		// eslint-disable-next-line
 	}, [props.fileName, props.filePath, props.onClose, props.context])
 
-
+	let content;
 
 	if (documentLoadError) {
-		return <div className="load-error">There was a problem loading the PDF file!</div>
+		content = <div className="load-error">There was a problem loading the PDF file!</div>
 	} else {
-		if (doc === null) return <span></span>
+		if (doc === null) content = <>
+			<Spinner />
+			<Spacer height='one' />
+			<TypographyParagraphMedium text={fileName} />
+		</>
 		else {
 			let pages = [];
 
@@ -163,10 +174,7 @@ export default function PDFViewer(props: {
 				)
 			}
 
-			let viewer = <div
-				className={mode === "full screen" ? "vieolo-pdf-viewer-component vieolo-pdf-viewer-component--full" : "vieolo-pdf-viewer-component"}
-				style={mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction}px)` } : undefined}
-			>
+			content = <>
 				<div className="vieolo-pdf-viewer-component__toolbar">
 
 					<div className='flex-start'>
@@ -184,7 +192,7 @@ export default function PDFViewer(props: {
 									} else {
 										if (window.location.search.includes("pdf_file_in_view")) {
 											window.history.back();
-										}else {
+										} else {
 											if (props.onClose) props.onClose();
 										}
 									}
@@ -288,18 +296,34 @@ export default function PDFViewer(props: {
 				>
 					{pages}
 				</div>
-			</div>
-
-			if (mode === 'embedded') return viewer;
-			else return <Modal
-				onClose={() => { }}
-			>
-				<div className="width--vw-100 height--vh-100">
-					{viewer}
-				</div>
-			</Modal>
+			</>
 		}
 	}
+
+	let viewerClass = "vieolo-pdf-viewer-component";
+
+	if (mode === 'full screen') viewerClass += " vieolo-pdf-viewer-component--full"
+	
+	if (documentLoadError) viewerClass += " vieolo-pdf-viewer-component--error";
+	else if (!doc) viewerClass += " vieolo-pdf-viewer-component--loading";
+	else viewerClass += " vieolo-pdf-viewer-component--done";
+
+	let viewer = <div
+		className={viewerClass}
+		style={mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction}px)` } : undefined}
+	>
+		{content}
+	</div>
+
+	if (mode === 'embedded') return viewer;
+	else return <Modal
+		onClose={() => { }}
+	>
+		<div className="width--vw-100 height--vh-100">
+			{viewer}
+		</div>
+	</Modal>
+
 
 
 }

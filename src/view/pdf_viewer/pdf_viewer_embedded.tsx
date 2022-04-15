@@ -24,7 +24,8 @@ export function pdfViewerEmbeddedOptions(): ViewData {
                     '/simple_2.pdf',
                     '/odd_shaped.pdf',
                     '/many_pages.pdf',
-                    '/rotated.pdf'
+                    '/rotated.pdf',
+                    'non-existend file'
                 ],
                 default: '/simple.pdf'
             },

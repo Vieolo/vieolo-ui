@@ -824,6 +824,13 @@ body {
 		@include height--100vh;
 	}
 
+	&--loading {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+	}
+
 	&__toolbar {
 		background-color: $content-background-color;
 		height: $row-height-small;
