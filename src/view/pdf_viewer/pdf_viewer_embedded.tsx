@@ -24,7 +24,8 @@ export function pdfViewerEmbeddedOptions(): ViewData {
                     '/simple_2.pdf',
                     '/odd_shaped.pdf',
                     '/many_pages.pdf',
-                    '/rotated.pdf'
+                    '/rotated.pdf',
+                    'non-existend file'
                 ],
                 default: '/simple.pdf'
             },
@@ -52,6 +53,7 @@ export function PDFViewerEmbeddedCreator(props: { p: ViewerPropsType }) {
             
         </div>
         <PDFViewer
+            key={props.p.filePath.toString()}
             filePath={props.p.filePath}
             pageInFocus={parseInt(pageNumber) || null}
             context={props.p.context}

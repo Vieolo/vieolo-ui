@@ -20,11 +20,14 @@ import Modal from '../dialog/modal';
 
 // Installed Packages
 import { PDFDocumentProxy } from 'pdfjs-dist/types/display/api';
+import Device, { DeviceSizeCategory } from '@vieolo/device-js';
 
 
 // Internal
 import { getPDFDocument, renderPDFPageAsCanvas } from './pdf_renderer';
 import { TypographyParagraphMedium } from '../typography';
+import Spinner from '../auxiliary/spinner';
+import Spacer from '../layout/auxiliary/spacer';
 
 
 
@@ -42,7 +45,16 @@ export default function PDFViewer(props: {
 	 */
 	heightDeduction: number,
 	onClose?: () => void,
-	expandable?: boolean
+	expandable?: boolean,
+	/**
+	 * This callback function informs the parent that the view mode of the viewer is changed
+	 */
+	onExpandToggle?: (mode: 'full screen' | 'embedded') => void,
+	/**
+	 * This error message apears when there is an issue with loading the file.
+	 * If nothing provided, the default message is displayed
+	 */
+	errorMessage?: string
 }) {
 	let [doc, setDoc] = useState<PDFDocumentProxy | null>(null);
 	let [totalPage, setTotalPage] = useState<number>(0);
@@ -100,6 +112,7 @@ export default function PDFViewer(props: {
 		} else {
 			e.preventDefault()
 			setMode("embedded");
+			if (props.onExpandToggle) props.onExpandToggle("embedded");
 		}
 		window.removeEventListener('popstate', handlePopState);
 	}
@@ -127,12 +140,20 @@ export default function PDFViewer(props: {
 		// eslint-disable-next-line
 	}, [props.fileName, props.filePath, props.onClose, props.context])
 
+	let content;
 
+	let state: 'error' | 'loading' | 'done' = documentLoadError ? 'error' : !doc ? 'loading' : 'done';
 
-	if (documentLoadError) {
-		return <div className="load-error">There was a problem loading the PDF file!</div>
+	if (state === 'error') {
+		content = <span className='vieolo-pdf-viewer-component__content'>
+			<TypographyParagraphMedium text={props.errorMessage || "There was a problem loading the PDF file!"} color={'error'} />
+		</span>
 	} else {
-		if (doc === null) return <span></span>
+		if (state === 'loading') content = <span className='vieolo-pdf-viewer-component__content'>
+			<Spinner />
+			<Spacer height='one' />
+			<TypographyParagraphMedium text={fileName} />
+		</span>
 		else {
 			let pages = [];
 
@@ -141,7 +162,7 @@ export default function PDFViewer(props: {
 					<PDFPage
 						key={`pdf_page_${i}`}
 						pageNumber={i}
-						pdf={doc}
+						pdf={doc!}
 						fileName={fileName}
 						context={props.context}
 						zoomMultiple={zoomMultiple}
@@ -157,140 +178,161 @@ export default function PDFViewer(props: {
 				)
 			}
 
-			let viewer = <div
-				className={mode === "full screen" ? "vieolo-pdf-viewer-component vieolo-pdf-viewer-component--full" : "vieolo-pdf-viewer-component"}
-				style={mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction}px)` } : undefined}
-			>
-				<div className="vieolo-pdf-viewer-component__toolbar">
-
-					<div className='flex-start'>
-						{
-							(props.onClose || mode === 'full screen') &&
-							<IconButton
-								size="extra-small"
-								icon={<CloseIcon />}
-								color="error"
-								disabled={!props.onClose}
-								onClick={() => {
-									if (props.context === 'embedded' && mode === 'full screen') {
-										setMode('embedded');
-									} else {
-										if (window.location.search.includes("pdf_file_in_view")) {
-											window.history.back();
-										}else {
-											if (props.onClose) props.onClose();
-										}
-									}
-								}}
-							/>
-						}
-					</div>
-
-					<div>
-						<TypographyParagraphMedium text={`${currentPage} / ${totalPage}`} />
-					</div>
-
-					<div className="flex-start column-gap--half">
-						<IconButton
-							size="extra-small"
-							icon={<ZoomOutIcon />}
-							onClick={() => { setZoomMultiple(zoomMultiple - 0.1) }}
-						/>
-
-						<IconButton
-							size="extra-small"
-							icon={<ZoomInIcon />}
-							onClick={() => { setZoomMultiple(zoomMultiple + 0.1) }}
-						/>
-					</div>
-
-					<div className="flex-start column-gap--half">
-						{
-							("share" in navigator) &&
-							<IconButton
-								size="extra-small"
-								icon={<ShareIcon />}
-								onClick={async () => {
-									try {
-										await navigator.share({
-											files: typeof props.filePath === 'string'
-												? [new File([await (await fetch(props.filePath)).blob()], fileName)]
-												: [props.filePath],
-										} as any);
-									} catch (error) {
-
-									}
-								}}
-							/>
-						}
-
-						<IconButton
-							size="extra-small"
-							icon={<DownloadIcon />}
-							onClick={() => {
-								var link = document.createElement("a");
-								link.download = fileName.split('___').slice(-1)[0];
-								link.href = props.filePath as string;
-								document.body.appendChild(link);
-								link.click();
-								document.body.removeChild(link);
-							}}
-						/>
-
-						<IconButton
-							size="extra-small"
-							icon={<RotateLeft />}
-							onClick={() => setRotation(rotation - 90)}
-						/>
-
-						<IconButton
-							size="extra-small"
-							icon={<RotateRight />}
-							onClick={() => setRotation(rotation + 90)}
-						/>
-
-						{
-							(props.expandable && props.context === 'embedded') &&
-							<IconButton
-								size="extra-small"
-								icon={<ExpandIcon />}
-								onClick={() => {
-									if (mode === 'embedded') {
-										setMode('full screen');
-										handleBrowserBack();
-									}
-									else {
-										if (window.location.search.includes("pdf_file_in_view")) {
-											window.history.back();
-										}
-										setMode('embedded');
-									}
-								}}
-							/>
-						}
-					</div>
-
-
-				</div>
+			content = <>
 				<div
 					className={`vieolo-pdf-viewer-component__canvas-container ${mode === 'full screen' ? 'vieolo-pdf-viewer-component__canvas-container--full' : ''}`}
 					ref={focusRef}
-					style={mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction + 30}px)` } : undefined}
+					style={mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction + (Device.sizeCategory() === DeviceSizeCategory.mobile ? 40 : 30)}px)` } : undefined}
 				>
 					{pages}
 				</div>
-			</div>
-
-			if (mode === 'embedded') return viewer;
-			else return <Modal
-				onClose={() => { }}
-			>
-				<div className="width--vw-100 height--vh-100">
-					{viewer}
-				</div>
-			</Modal>
+			</>
 		}
 	}
+
+	let viewerClass = `vieolo-pdf-viewer-component vieolo-pdf-viewer-component--${state}`;
+
+	if (mode === 'full screen') viewerClass += " vieolo-pdf-viewer-component--full"	
+
+	let viewer = <div
+		className={viewerClass}
+		style={mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction}px)` } : undefined}
+	>
+		<div className="vieolo-pdf-viewer-component__toolbar">
+
+			<div className='flex-start'>
+				{
+					(props.onClose || mode === 'full screen') &&
+					<IconButton
+						size="extra-small"
+						icon={<CloseIcon />}
+						color="error"
+						disabled={!props.onClose}
+						onClick={() => {
+							if (props.context === 'embedded' && mode === 'full screen') {
+								setMode('embedded');
+								if (props.onExpandToggle) props.onExpandToggle("embedded");
+							} else {
+								if (window.location.search.includes("pdf_file_in_view")) {
+									window.history.back();
+								} else {
+									if (props.onClose) props.onClose();
+								}
+							}
+						}}
+					/>
+				}
+			</div>
+
+			<div>
+				<TypographyParagraphMedium text={state === 'done' ? `${currentPage} / ${totalPage}` : ""} />
+			</div>
+
+			<div className="flex-start column-gap--half">
+				<IconButton
+					size="extra-small"
+					icon={<ZoomOutIcon />}
+					onClick={() => { setZoomMultiple(zoomMultiple - 0.1) }}
+					disabled={state !== 'done'}
+				/>
+
+				<IconButton
+					size="extra-small"
+					icon={<ZoomInIcon />}
+					onClick={() => { setZoomMultiple(zoomMultiple + 0.1) }}
+					disabled={state !== 'done'}
+				/>
+			</div>
+
+			<div className="flex-start column-gap--half">
+				{
+					("share" in navigator) &&
+					<IconButton
+						size="extra-small"
+						icon={<ShareIcon />}
+						disabled={state !== 'done'}
+						onClick={async () => {
+							try {
+								await navigator.share({
+									files: typeof props.filePath === 'string'
+										? [new File([await (await fetch(props.filePath)).blob()], fileName)]
+										: [props.filePath],
+								} as any);
+							} catch (error) {
+
+							}
+						}}
+					/>
+				}
+
+				<IconButton
+					size="extra-small"
+					icon={<DownloadIcon />}
+					disabled={state !== 'done'}
+					onClick={() => {
+						var link = document.createElement("a");
+						link.download = fileName.split('___').slice(-1)[0];
+						link.href = props.filePath as string;
+						document.body.appendChild(link);
+						link.click();
+						document.body.removeChild(link);
+					}}
+				/>
+
+				<IconButton
+					size="extra-small"
+					icon={<RotateLeft />}
+					disabled={state !== 'done'}
+					onClick={() => setRotation(rotation - 90)}
+				/>
+
+				<IconButton
+					size="extra-small"
+					icon={<RotateRight />}
+					disabled={state !== 'done'}
+					onClick={() => setRotation(rotation + 90)}
+				/>
+
+				{
+					(props.expandable && props.context === 'embedded') &&
+					<IconButton
+						size="extra-small"
+						icon={<ExpandIcon />}
+						onClick={() => {
+							if (mode === 'embedded') {
+								setMode('full screen');
+								if (props.onExpandToggle) props.onExpandToggle("full screen");
+								handleBrowserBack();
+							}
+							else {
+								if (window.location.search.includes("pdf_file_in_view")) {
+									window.history.back();
+								}
+								setMode('embedded');
+								if (props.onExpandToggle) props.onExpandToggle("embedded");
+							}
+						}}
+					/>
+				}
+			</div>
+
+
+		</div>
+
+
+		{content}
+
+	</div>
+
+	if (mode === 'embedded') return viewer;
+	else return <Modal
+		onClose={() => { }}
+	>
+		<div className="width--vw-100 height--vh-100">
+			{viewer}
+		</div>
+	</Modal>
+
 
 
 }
