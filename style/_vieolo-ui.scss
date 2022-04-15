@@ -813,6 +813,10 @@ body {
 	width: 100%;
 	text-align: center;
 
+	&--full {
+		@include height--100vh;
+	}
+
 	&__toolbar {
 		background-color: $content-background-color;
 		height: 30px;
@@ -827,6 +831,11 @@ body {
 		overflow: auto;
 		width: 100%;
 		padding: 10px;
+
+		&--full {
+			@include height--100vh;
+			overflow-y: scroll;
+		}
 	}
 
 	&__page {
