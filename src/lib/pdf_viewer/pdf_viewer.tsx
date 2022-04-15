@@ -20,6 +20,7 @@ import Modal from '../dialog/modal';
 
 // Installed Packages
 import { PDFDocumentProxy } from 'pdfjs-dist/types/display/api';
+import Device, { DeviceSizeCategory } from '@vieolo/device-js';
 
 
 // Internal
@@ -283,7 +284,7 @@ export default function PDFViewer(props: {
 				<div
 					className={`vieolo-pdf-viewer-component__canvas-container ${mode === 'full screen' ? 'vieolo-pdf-viewer-component__canvas-container--full' : ''}`}
 					ref={focusRef}
-					style={mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction + 30}px)` } : undefined}
+					style={mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction + (Device.sizeCategory() === DeviceSizeCategory.mobile ? 40 : 30)}px)` } : undefined}
 				>
 					{pages}
 				</div>

@@ -819,12 +819,21 @@ body {
 
 	&__toolbar {
 		background-color: $content-background-color;
-		height: 30px;
+		height: $row-height-small;
 		padding: 1px;
 		border-radius: inherit;
 		width: 100%;
 		border: 1px solid $primary-color-normal;
 		@include flex-row-space-between;
+
+		@media (pointer: coarse) {
+			height: $row-height-medium;
+
+			.vieolo-icon-button {
+				height: $row-height-small;
+				width: $row-height-small;
+			}	
+		}		
 	}
 
 	&__canvas-container {
