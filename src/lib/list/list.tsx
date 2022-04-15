@@ -65,7 +65,7 @@ export default function List(props: {
         return false;
     }).sort((a, b) => {
         if (!a.group && !b.group) return 1;
-        if (a.group === b.group) return 1;
+        if (a.group === b.group) return a.title > b.title ? 1 : -1;
         return (a.group || 'zzzzzzzz') > (b.group || 'zzzzzzzz') ? 1 : -1
     })    
 
