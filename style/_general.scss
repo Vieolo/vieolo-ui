@@ -905,6 +905,10 @@ html {
 
 	&--vh-100 {
 		#{$dim}: 100vh;
+	}
+
+	&--vh-100-fill {
+		#{$dim}: 100vh;
 		
 		@media (pointer: coarse) {
 			#{$dim}: -webkit-fill-available;
@@ -1038,6 +1042,9 @@ html {
 	@include widthAndHeightSizes("width");
 }
 
+.min-height {
+	@include widthAndHeightSizes("min-height")
+}
 
 .max-height {
 	@include widthAndHeightSizes("max-height")
@@ -1047,7 +1054,7 @@ html {
 	@include widthAndHeightSizes("height")
 }
 
-@mixin height--100vh {
+@mixin height--100vh-fill {
 	height: 100vh;
 	
 	@media (pointer: coarse) {
@@ -1056,7 +1063,7 @@ html {
 	}
 }
 
-@mixin max-height--100vh {
+@mixin max-height--100vh-fill {
 	max-height: 100vh;
 	
 	@media (pointer: coarse) {
