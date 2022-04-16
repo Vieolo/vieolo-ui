@@ -819,12 +819,19 @@ body {
 	background-color: #e4e4e4;
 	width: 100%;
 	text-align: center;
-
-	&--full {
-		@include height--100vh;
-	}
+	position: relative;
 
 	$self: &;
+
+	&--full {
+		height: 100vh;
+
+		#{$self}__toolbar {
+			position: fixed;
+			z-index: 999;
+		}
+	}
+
 
 	&--loading,
 	&--error {
@@ -845,6 +852,9 @@ body {
 		width: 100%;
 		border: 1px solid $primary-color-normal;
 		@include flex-row-space-between;
+		position: absolute;
+		top: 0;
+		z-index: 2;
 
 		@media (pointer: coarse) {
 			height: $row-height-medium;
@@ -860,9 +870,18 @@ body {
 		overflow: auto;
 		width: 100%;
 		padding: 10px;
+		position: absolute;
+		top: 30px;
+
+		@media (pointer: coarse) {
+			top: 41px;
+		}
 
 		&--full {
-			@include height--100vh;
+			height: 100vh;
+			top: 0;
+			padding-top: 15vh;
+			padding-bottom: 10vh;
 			overflow-y: scroll;
 		}
 	}

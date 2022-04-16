@@ -246,18 +246,18 @@ export default function PDFViewer(props: {
 
 			<div className="flex-start column-gap--half">
 				{
-					("share" in navigator) &&
+					("share" in window.navigator) &&
 					<IconButton
 						size="extra-small"
 						icon={<ShareIcon />}
 						disabled={state !== 'done'}
 						onClick={async () => {
 							try {
-								await navigator.share({
+								await window.navigator.share({
 									files: typeof props.filePath === 'string'
 										? [new File([await (await fetch(props.filePath)).blob()], fileName)]
 										: [props.filePath],
-								} as any);
+								} as ShareData);
 							} catch (error) {
 
 							}
