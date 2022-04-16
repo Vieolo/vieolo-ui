@@ -207,7 +207,7 @@ export default function MainPage(props: {}): JSX.Element {
         <div className="component-list">
 
             <List
-                height='calc(100vh - 20px)'
+                height={Device.isTouchOnlyDevice ? '80vh' : 'calc(100vh - 20px)'}
                 itemStyle={{
                     height: 'medium'
                 }}

@@ -32,14 +32,25 @@
     .state-list,
     .component-state-display {
         height: calc(100vh - 20px);
-        overflow-y: scroll;
+        overflow-y: scroll;        
+    }
+
+    .component-list,
+    .state-list {
+        @media (pointer: coarse) {
+            height: 80vh;
+        }
     }
 
     
 
     .component-state-display {
         padding: 20px;
-        @include card-no-shadow;                
+        @include card-no-shadow;            
+        
+        @media (pointer: coarse) {
+            @include height--100vh-fill;
+        }
     }
 
     .floating-action-button {

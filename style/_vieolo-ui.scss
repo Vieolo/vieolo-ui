@@ -821,11 +821,17 @@ body {
 	text-align: center;
 	position: relative;
 
+	$self: &;
+
 	&--full {
 		height: 100vh;
+
+		#{$self}__toolbar {
+			position: fixed;
+			z-index: 999;
+		}
 	}
 
-	$self: &;
 
 	&--loading,
 	&--error {
@@ -874,7 +880,8 @@ body {
 		&--full {
 			height: 100vh;
 			top: 0;
-			padding-top: 50px;
+			padding-top: 15vh;
+			padding-bottom: 10vh;
 			overflow-y: scroll;
 		}
 	}
