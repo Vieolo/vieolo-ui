@@ -909,6 +909,7 @@ html {
 		@media (pointer: coarse) {
 			#{$dim}: -webkit-fill-available;
 			#{$dim}: -moz-available;
+			#{$dim}: max-content;
 		}
 	}
 
@@ -1053,6 +1054,7 @@ html {
 	@media (pointer: coarse) {
 		height: -webkit-fill-available;
 		height: -moz-available;
+		height: max-content;
 	}
 }
 
@@ -1062,6 +1064,7 @@ html {
 	@media (pointer: coarse) {
 		max-height: -webkit-fill-available;
 		max-height: -moz-available;
+		height: max-content;
 	}
 }
 
