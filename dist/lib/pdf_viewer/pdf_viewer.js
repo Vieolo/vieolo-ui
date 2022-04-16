@@ -136,10 +136,10 @@ export default function PDFViewer(props) {
                     _jsx("div", { children: _jsx(TypographyParagraphMedium, { text: state === 'done' ? `${currentPage} / ${totalPage}` : "" }, void 0) }, void 0),
                     _jsxs("div", Object.assign({ className: "flex-start column-gap--half" }, { children: [_jsx(IconButton, { size: "extra-small", icon: _jsx(ZoomOutIcon, {}, void 0), onClick: () => { setZoomMultiple(zoomMultiple - 0.1); }, disabled: state !== 'done' }, void 0),
                             _jsx(IconButton, { size: "extra-small", icon: _jsx(ZoomInIcon, {}, void 0), onClick: () => { setZoomMultiple(zoomMultiple + 0.1); }, disabled: state !== 'done' }, void 0)] }), void 0),
-                    _jsxs("div", Object.assign({ className: "flex-start column-gap--half" }, { children: [("share" in navigator) &&
+                    _jsxs("div", Object.assign({ className: "flex-start column-gap--half" }, { children: [("share" in window.navigator) &&
                                 _jsx(IconButton, { size: "extra-small", icon: _jsx(ShareIcon, {}, void 0), disabled: state !== 'done', onClick: async () => {
                                         try {
-                                            await navigator.share({
+                                            await window.navigator.share({
                                                 files: typeof props.filePath === 'string'
                                                     ? [new File([await (await fetch(props.filePath)).blob()], fileName)]
                                                     : [props.filePath],

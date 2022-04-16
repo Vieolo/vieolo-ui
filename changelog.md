@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.20.6 (2022-04-16)
+- Improved the display of `PDFViewer` in mobile devices
+- Added dedicated `100vh-fill` CSS class which uses `-webkit-fill-available`
+
 ## 0.20.5 (2022-04-15)
 - Added loading state to `PDFViewer` ([#27](https://github.com/Vieolo/vieolo-ui/issues/27))
 - Improved the error state of `PDFViewer` ([#28](https://github.com/Vieolo/vieolo-ui/issues/28))
