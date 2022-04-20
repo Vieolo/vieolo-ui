@@ -2131,3 +2131,37 @@ body {
 	}
 
 }
+
+
+.vieolo-table-interactive {	
+	background-color: white;
+
+	&__cell {
+		height: $row-height-medium;
+		display: flex;
+		padding: 0px $base-unit-half;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		border: solid 0.1px #ddd;
+		@include nonselectable;
+	}
+
+	&__header-row {
+		border: 1px solid #f2f2f2;
+		display: grid;
+		background-color: white;
+	}
+
+	&__content-row {
+		display: grid;
+	}
+
+	&__bottom-row {
+		position: sticky;
+		bottom: 0px;
+		background-color: white;
+		height: $row-height-medium;
+	}
+}
+
