@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
 import TypographyParagraphSmall from '../typography/typography_paragraph_small';
 import TypographyBase from '../typography/typography_base';
+import { ColorOptionType } from '../private/types';
 
 
 export type TableInteractiveCell = {
@@ -17,7 +18,7 @@ export type TableInteractiveCell = {
         span: number
     },
     numericalValue?: number,
-    background?: 'white' | 'error-light',    
+    background?: ColorOptionType,    
 }
 
 
@@ -86,7 +87,9 @@ export default function TableInteractive(props: {
                             }
 
                             if (r.background) {
-                                className += ' background--' + r.background
+                                className += ` background-color--${r.background}-light`;
+                            } else {
+                                className += ` background-color--content-background`
                             }
 
                             if (selectedCells.includes(k)) {

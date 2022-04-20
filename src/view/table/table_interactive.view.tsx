@@ -8,7 +8,7 @@ import IconThree from '@mui/icons-material/Cake';
 import IconFour from '@mui/icons-material/DataUsage';
 
 // Component
-import TableInteractive from '../../lib/table/table_interactive';
+import TableInteractive, { TableInteractiveCell } from '../../lib/table/table_interactive';
 
 // Types
 import { ViewData } from '../main/main';
@@ -31,21 +31,37 @@ export function tableInteractiveOptions(): ViewData {
 
 export function TableInteractiveCreator(props: {p: TableInteractivePropsType}) {
 
+    let data: {id: number, date: string, price: number, item: string}[] = [];
+
+    for (let i = 0; i < 20; i++) {
+        data.push({
+            id: i,
+            date: new VDate().addDay(i).formatDate(),
+            item: `item ${i}`,
+            price: (i * 12) || 5
+        })
+    }
+
     return <TableInteractive
-        columnGrid='100px 100px 1fr'
-        headers={['ID', "Date", "Description"]}
-        rows={[
-            [
+        columnGrid='100px 100px 1fr 100px'
+        headers={['ID', "Date", "Item", "Price"]}
+        rows={data.map(d => {
+            return [
                 {
-                    value: "12",                
+                    value: d.id
                 },
                 {
-                    value: new VDate().formatDate(),
+                    value: d.date,
+                    background: d.date === new VDate().formatDate() ? 'success' : undefined
                 },
                 {
-                    value: "items added"
+                    value: d.item,
+                },
+                {
+                    value: d.price,
+                    background: d.price > 200 ? 'error' : undefined
                 }
-            ]
-        ]}
+            ] as TableInteractiveCell[]
+        })}
     />
 }
