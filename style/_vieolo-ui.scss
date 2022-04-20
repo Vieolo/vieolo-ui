@@ -2142,8 +2142,15 @@ body {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		border: solid 0.1px #ddd;
-		@include nonselectable;
+		border: solid 0.1px #ddd;		
+
+		&--hover {
+			@include nonselectable;
+			
+			&:hover {
+				border: solid 0.2px $secondary-color-normal;
+			}
+		}
 	}
 
 	&__header-row {

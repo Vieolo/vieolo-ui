@@ -82,8 +82,9 @@ export default function TableInteractive(props: {
                         row.map((r, ri) => {
                             let k = `${i}_${ri}`;
                             let className = 'vieolo-table-interactive__cell';
+                            
                             if (r.onClick || r.selectable) {
-                                className += ' cursor--pointer nonselectable';
+                                className += ' cursor--pointer nonselectable vieolo-table-interactive__cell--hover';
                             }
 
                             if (r.background) {

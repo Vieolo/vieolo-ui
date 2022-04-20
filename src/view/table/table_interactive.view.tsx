@@ -56,6 +56,7 @@ export function TableInteractiveCreator(props: {p: TableInteractivePropsType}) {
                 },
                 {
                     value: d.item,
+                    onClick: () => alert(d.item)
                 },
                 {
                     value: d.price,
