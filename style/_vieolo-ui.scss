@@ -2143,10 +2143,11 @@ body {
 		flex-direction: column;
 		justify-content: center;
 		border: solid 0.1px #ddd;		
+		position: relative;	
 
 		&--hover {
 			@include nonselectable;
-			
+
 			&:hover {
 				border: solid 0.2px $secondary-color-normal;
 			}

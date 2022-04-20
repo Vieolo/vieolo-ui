@@ -9,7 +9,10 @@ import { ColorOptionType } from '../private/types';
 
 
 export type TableInteractiveCell = {
-    /** A string or a react node */
+    /** 
+     * A string or a react node 
+     * In order to make an overlay, pass a react node and give it a span
+     */
     value: React.ReactNode | string,
     onClick?: () => void,
     selectable?: boolean,
@@ -107,6 +110,7 @@ export default function TableInteractive(props: {
                                 style.top = '0';
                                 style.left = '0';
                                 style.right = '0';
+                                style.zIndex = 2;
                             }
                             
                             let finalNode = r.value;
