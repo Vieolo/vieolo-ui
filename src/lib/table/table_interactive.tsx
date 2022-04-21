@@ -4,7 +4,9 @@ import React, { useState } from 'react';
 // Typography
 import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
 import TypographyParagraphSmall from '../typography/typography_paragraph_small';
-import TypographyBase from '../typography/typography_base';
+import TypographyTitleSmall from '../typography/typography_title_small';
+
+// Types
 import { ColorOptionType } from '../private/types';
 
 
@@ -29,7 +31,6 @@ export type TableInteractiveCell = {
 export default function TableInteractive(props: {
     headers: (string | {name: string, formatter: (s: string | number) => string})[],
     headerSticky?: boolean,
-    headerSize?: 'large' | 'medium'
     rows: TableInteractiveCell[][],
     columnGrid: string,
     width?: string,
@@ -77,7 +78,7 @@ export default function TableInteractive(props: {
                 props.headers.map(h => {
                     let s = typeof h === 'string' ? h : h.name;
                     return <div className={cellClass} key={s}>
-                        <TypographyBase className={`typography-${(!props.headerSize || props.headerSize === 'large') ? 'title-small' : 'paragraph-medium'}`} text={s} />
+                        <TypographyTitleSmall text={s} />
                     </div>
                 })
             }
