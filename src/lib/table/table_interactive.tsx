@@ -105,7 +105,7 @@ export default function TableInteractive(props: {
                             if (r.span) {
                                 className += ' position--relative';
 
-                                style.height = (r.span.span + 1) * 40;
+                                style.height = `calc(${r.span.span + 1}00% + ${r.span.span + 1}px)`;
                                 style.position = 'absolute';
                                 style.top = '0';
                                 style.left = '0';
