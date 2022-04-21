@@ -42,6 +42,7 @@ import { gridTwoOptions, GridTwoCreator } from '../layout/grid/grid_two';
 import { gridThreeOptions, GridThreeCreator } from '../layout/grid/grid_three';
 import { spacerOptions, SpacerCreator } from '../layout/auxiliary/spacer';
 import { dividerOptions, DividerCreator } from '../layout/auxiliary/divider';
+import { TableInteractiveCreator, tableInteractiveOptions } from '../table/table_interactive.view';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
 
@@ -125,6 +126,7 @@ export default function MainPage(props: {}): JSX.Element {
         "PDF Viewer Fullscreen": { title: "PDF Viewer Fullscreen", data: pdfViewerFullScreenOptions(), creator: PDFViewerFullScreenCreator, group: "PDF" },
 
         "Table": { title: "Table", data: tableOptions(), creator: TableCreator, group: "Table" },
+        "Table Interactive": { title: "Table Interactive", data: tableInteractiveOptions(), creator: TableInteractiveCreator, group: "Table" },
 
         "Typography": { title: "Typography", data: typographyOptions(), creator: TypographyCreator, group: "Typography" },
     }
