@@ -18,7 +18,8 @@ export function tableInteractiveOptions(): ViewData {
 
         } as Partial<TableInteractivePropsType>,
         variables: {
-            isDense: 'boolean'
+            isDense: 'boolean',
+            headerSticky: 'boolean'
         }
     }
 }
@@ -40,8 +41,9 @@ export function TableInteractiveCreator(props: {p: TableInteractivePropsType}) {
 
     return <TableInteractive
         isDense={props.p.isDense}
+        headerSticky={props.p.headerSticky}
         columnGrid='100px 100px 1fr 150px 100px'
-        headers={['ID', "Date", "Item", "group", "Price"]}
+        headers={['ID', "Date", "Item", "group", {name: 'Price', formatter: (s) => `€ ${s}`}]}
         rows={data.map(d => {
             return [
                 {
@@ -52,8 +54,9 @@ export function TableInteractiveCreator(props: {p: TableInteractivePropsType}) {
                     background: d.date === new VDate().formatDate() ? 'success' : undefined
                 },
                 {
+                    id: `id: ${d.id}`,
                     value: d.item,
-                    onClick: () => alert(d.item)
+                    onClick: (id) => alert(`${d.item} - ${id}`)
                 },
                 {
                     value: !d.group 
@@ -70,8 +73,9 @@ export function TableInteractiveCreator(props: {p: TableInteractivePropsType}) {
                     }
                 },
                 {
-                    value: d.price,
-                    background: d.price > 200 ? 'error' : undefined
+                    value: d.price.toString(),
+                    background: d.price > 200 ? 'error' : undefined,
+                    numericalValue: d.price
                 }
             ] as TableInteractiveCell[]
         })}

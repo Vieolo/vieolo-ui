@@ -9,12 +9,13 @@ import { ColorOptionType } from '../private/types';
 
 
 export type TableInteractiveCell = {
+    id?: string,
     /** 
      * A string or a react node 
      * In order to make an overlay, pass a react node and give it a span
      */
     value: React.ReactNode | string,
-    onClick?: () => void,
+    onClick?: (id?: string) => void,
     selectable?: boolean,
     span?: {
         direction: 'top' | 'bottom' | 'left' | 'right',
@@ -26,8 +27,8 @@ export type TableInteractiveCell = {
 
 
 export default function TableInteractive(props: {
-    headers: string[],
-    headerRemainInView?: boolean,
+    headers: (string | {name: string, formatter: (s: string | number) => string})[],
+    headerSticky?: boolean,
     headerSize?: 'large' | 'medium'
     rows: TableInteractiveCell[][],
     columnGrid: string,
@@ -71,11 +72,12 @@ export default function TableInteractive(props: {
     let cellClass = `vieolo-table-interactive__cell vieolo-table-interactive__cell--height-${props.isDense ? 'small' : 'medium'}`
 
     return <div className="vieolo-table-interactive" style={style}>
-        <div className={`vieolo-table-interactive__header-row ${props.headerRemainInView ? "position--sticky-0" : ""}`} style={{gridTemplateColumns: props.columnGrid}}>
+        <div className={`vieolo-table-interactive__header-row ${props.headerSticky ? "position--sticky--top-0" : ""}`} style={{gridTemplateColumns: props.columnGrid}}>
             {
                 props.headers.map(h => {
-                    return <div className={cellClass} key={h}>
-                        <TypographyBase className={`typography-${(!props.headerSize || props.headerSize === 'large') ? 'title-small' : 'paragraph-medium'}`} text={h} />
+                    let s = typeof h === 'string' ? h : h.name;
+                    return <div className={cellClass} key={s}>
+                        <TypographyBase className={`typography-${(!props.headerSize || props.headerSize === 'large') ? 'title-small' : 'paragraph-medium'}`} text={s} />
                     </div>
                 })
             }
@@ -118,13 +120,20 @@ export default function TableInteractive(props: {
                             
                             let finalNode = r.value;
 
-                            if (typeof r.value === 'string') finalNode = <TypographyParagraphMedium text={r.value} />;
+                            // Getting the header
+                            // If the header is a string, the value is diplayed unchanged.
+                            // If the header contains the `formatter` function, the value of formatter function is displayed
+                            let header = props.headers[ri];
+
+                            if (typeof r.value === 'string' || typeof r.value === 'number') finalNode = <TypographyParagraphMedium text={typeof header === 'string' ? r.value.toString() : header.formatter( r.numericalValue || r.value)} />;
                             
 
                             return <div 
                                 className={className}
                                 key={k}
-                                onClick={r.onClick}
+                                onClick={() => {
+                                    if (r.onClick) r.onClick(r.id);
+                                }}
                                 onMouseDown={e => {
                                     if (r.selectable && r.numericalValue) {
                                         if (selectedCells.length === 0) toggleSelectCell(k, r.numericalValue, 'only-entry')
