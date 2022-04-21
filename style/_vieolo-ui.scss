@@ -2143,6 +2143,7 @@ body {
 		justify-content: center;
 		border: solid 0.1px #ddd;		
 		position: relative;	
+		@include nonselectable;
 		
 		&--height-medium {
 			height: $row-height-medium;
@@ -2153,8 +2154,6 @@ body {
 		}
 		
 		&--hover {
-			@include nonselectable;
-
 			&:hover {
 				border: solid 0.2px $secondary-color-normal;
 			}

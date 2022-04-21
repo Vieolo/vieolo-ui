@@ -75,7 +75,8 @@ export function TableInteractiveCreator(props: {p: TableInteractivePropsType}) {
                 {
                     value: d.price.toString(),
                     background: d.price > 200 ? 'error' : undefined,
-                    numericalValue: d.price
+                    numericalValue: d.price,
+                    selectable: true
                 }
             ] as TableInteractiveCell[]
         })}
