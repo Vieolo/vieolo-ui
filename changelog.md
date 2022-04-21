@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.20.7 (2022-04-21)
+- Added `TableInteractive` component ([#30](https://github.com/Vieolo/vieolo-ui/issues/30))
+
 ## 0.20.6 (2022-04-16)
 - Improved the display of `PDFViewer` in mobile devices
 - Added dedicated `100vh-fill` CSS class which uses `-webkit-fill-available`
