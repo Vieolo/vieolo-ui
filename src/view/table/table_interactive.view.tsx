@@ -18,6 +18,7 @@ export function tableInteractiveOptions(): ViewData {
 
         } as Partial<TableInteractivePropsType>,
         variables: {
+            selectedColor: 'colors',
             isDense: 'boolean',
             headerSticky: 'boolean'
         }
@@ -42,6 +43,7 @@ export function TableInteractiveCreator(props: {p: TableInteractivePropsType}) {
     return <TableInteractive
         isDense={props.p.isDense}
         headerSticky={props.p.headerSticky}
+        selectedColor={props.p.selectedColor}
         columnGrid='100px 100px 1fr 150px 100px'
         headers={['ID', "Date", "Item", "group", {name: 'Price', formatter: (s) => `€ ${s}`}]}
         rows={data.map(d => {

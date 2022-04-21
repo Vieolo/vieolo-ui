@@ -32,6 +32,7 @@ export default function TableInteractive(props: {
     headers: (string | {name: string, formatter: (s: string | number) => string})[],
     headerSticky?: boolean,
     rows: TableInteractiveCell[][],
+    selectedColor?: ColorOptionType
     columnGrid: string,
     width?: string,
     showBottomRow?: boolean,
@@ -96,15 +97,16 @@ export default function TableInteractive(props: {
                                 className += ' cursor--pointer nonselectable vieolo-table-interactive__cell--hover';
                             }
 
-                            if (r.background) {
-                                className += ` background-color--${r.background}-light`;
+                            if (selectedCells.includes(k)) {
+                                className += ` background-color--${props.selectedColor || 'secondary'}-light`;
                             } else {
-                                className += ` background-color--content-background`
+                                if (r.background) {
+                                    className += ` background-color--${r.background}-light`;
+                                } else {
+                                    className += ` background-color--content-background`
+                                }
                             }
 
-                            if (selectedCells.includes(k)) {
-                                className += ' background--hover';
-                            }
 
                             let style: React.CSSProperties = {};
 
