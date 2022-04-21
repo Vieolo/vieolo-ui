@@ -33,6 +33,7 @@ export default function TableInteractive(props: {
     columnGrid: string,
     width?: string,
     showBottomRow?: boolean,
+    isDense?: boolean,
     columnSelectedTotalFormat?: {[column: number]: (total: number) => string}
 }): JSX.Element {
 
@@ -67,11 +68,13 @@ export default function TableInteractive(props: {
         }
     }
 
+    let cellClass = `vieolo-table-interactive__cell vieolo-table-interactive__cell--height-${props.isDense ? 'small' : 'medium'}`
+
     return <div className="vieolo-table-interactive" style={style}>
         <div className={`vieolo-table-interactive__header-row ${props.headerRemainInView ? "position--sticky-0" : ""}`} style={{gridTemplateColumns: props.columnGrid}}>
             {
                 props.headers.map(h => {
-                    return <div className="vieolo-table-interactive__cell" key={h}>
+                    return <div className={cellClass} key={h}>
                         <TypographyBase className={`typography-${(!props.headerSize || props.headerSize === 'large') ? 'title-small' : 'paragraph-medium'}`} text={h} />
                     </div>
                 })
@@ -84,7 +87,7 @@ export default function TableInteractive(props: {
                     {
                         row.map((r, ri) => {
                             let k = `${i}_${ri}`;
-                            let className = 'vieolo-table-interactive__cell';
+                            let className = cellClass;
                             
                             if (r.onClick || r.selectable) {
                                 className += ' cursor--pointer nonselectable vieolo-table-interactive__cell--hover';

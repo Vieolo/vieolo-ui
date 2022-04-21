@@ -2136,7 +2136,6 @@ body {
 .vieolo-table-interactive {
 
 	&__cell {
-		height: $row-height-medium;
 		display: flex;
 		padding: 0px $base-unit-half;
 		display: flex;
@@ -2144,7 +2143,15 @@ body {
 		justify-content: center;
 		border: solid 0.1px #ddd;		
 		position: relative;	
+		
+		&--height-medium {
+			height: $row-height-medium;
+		}
 
+		&--height-small {
+			height: $row-height-small;
+		}
+		
 		&--hover {
 			@include nonselectable;
 
