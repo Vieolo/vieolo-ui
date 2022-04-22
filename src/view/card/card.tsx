@@ -20,6 +20,7 @@ export function cardOptions(): ViewData {
 
         } as Partial<CardPropsType>,
         variables: {
+            isClickable: 'boolean',
             borderRadius: 'borderRadius',
             emphasis: 'emphasis',
             color: 'colors',
@@ -48,10 +49,11 @@ export function CardCreator(props: { p: CardPropsType }) {
             width='200px'
             height='80px'
             padding={props.p.padding}
+            onClick={(props.p as any).isClickable ? () => {} : undefined}
         >
             <IconButton 
                 icon={<IconFour />}
-                onClick={() => {}}
+                onClick={e => e.stopPropagation()}
             />
         </Card>
     </div>
