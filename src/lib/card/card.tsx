@@ -20,7 +20,8 @@ export default function Card(props: {
     ariaLabel?: string,
     style?: React.CSSProperties,
     className?: string,
-    onClick?: () => void,
+    onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void,
+    keepEmphasisTextColorClasses?: boolean
 }) {
 
     let em = props.emphasis || 'none';
@@ -32,7 +33,7 @@ export default function Card(props: {
 
     if (props.className) className += ` ${props.className}`;
     className += getEmphasisClasses(em, co, {
-        removeTextColorClasses: true, 
+        removeTextColorClasses: props.keepEmphasisTextColorClasses ? false : true,
         hasRipple: props.onClick !== undefined,
         hoverable: props.onClick !== undefined,
     });
@@ -41,7 +42,7 @@ export default function Card(props: {
     className += ` elevation--${el}`;
     className += ` padding--${props.padding || 'one'}`
 
-    if (props.onClick) className += ` cursor--pointer` 
+    if (props.onClick) className += ` cursor--pointer`
 
     let style: React.CSSProperties = props.style || {};
 

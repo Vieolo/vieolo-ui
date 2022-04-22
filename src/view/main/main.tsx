@@ -43,6 +43,7 @@ import { gridThreeOptions, GridThreeCreator } from '../layout/grid/grid_three';
 import { spacerOptions, SpacerCreator } from '../layout/auxiliary/spacer';
 import { dividerOptions, DividerCreator } from '../layout/auxiliary/divider';
 import { TableInteractiveCreator, tableInteractiveOptions } from '../table/table_interactive.view';
+import { ClickableCardCreator, clickableCardOptions } from '../card/clickable_card.view';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
 
@@ -51,7 +52,7 @@ import { barChartOptions, BarChartCreator } from '../charts/bar_chart';
 import List from '../../lib/list/list';
 
 
-type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDefault" | "borderRadius" | 'fontWeightOptional' | 'emphasis' | {
+type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDefault" | "borderRadius" | 'fontWeightOptional' | 'emphasis' | 'typographyOptions' | {
     options: any[],
     default: any,
     type?: 'number' | "string" | "boolean"
@@ -88,6 +89,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator, group: "Buttons" },
 
         "Card": { title: "Card", data: cardOptions(), creator: CardCreator, group: "Cards" },
+        "Clickable Card": { title: "Clickable Card", data: clickableCardOptions(), creator: ClickableCardCreator, group: "Cards" },
         "Title Period Card": { title: "Title Period Card", data: titlePeriodCardOptions(), creator: TitlePeriodCardCreator, group: "Cards" },
 
         "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator, group: "Charts" },
@@ -176,6 +178,11 @@ export default function MainPage(props: {}): JSX.Element {
                     options: ['default', 'full', 'normal', 'half', 'none'],
                     default: 'default'
                 }
+            } else if (variable === "typographyOptions") {
+                finalVariable = {
+                    options: ['title-large', 'title-medium', 'title-small', 'paragraph-large', 'paragraph-medium', 'paragraph-small', 'caption-large', 'caption-medium', 'caption-small'],
+                    default: 'paragraph-medium'
+                }
             } else if (variable === 'colors') {
                 finalVariable = {
                     options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'],
@@ -260,6 +267,11 @@ export default function MainPage(props: {}): JSX.Element {
                         variable = {
                             options: ['default', 'full', 'normal', 'half', 'none'],
                             default: 'default'
+                        }
+                    } else if (tempVariable === "typographyOptions") {
+                        variable = {
+                            options: ['title-large', 'title-medium', 'title-small', 'paragraph-large', 'paragraph-medium', 'paragraph-small', 'caption-large', 'caption-medium', 'caption-small'],
+                            default: 'paragraph-medium'
                         }
                     } else if (tempVariable === 'colors') {
                         variable = {
