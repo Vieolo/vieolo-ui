@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.20.8 (2022-04-23)
+- Added onClick callback to `Card`
+- Added `ClickableCard` component
+
 ## 0.20.7 (2022-04-21)
 - Added `TableInteractive` component ([#30](https://github.com/Vieolo/vieolo-ui/issues/30))
 
