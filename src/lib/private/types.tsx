@@ -34,3 +34,8 @@ export type CardExtraActionType = {
     ariaLabel?: string,
     dataTestID?: string
 }
+
+type TypographyMainType = 'title' | 'paragraph' | 'caption';
+type TypographySecondaryType = 'large' | 'medium' | 'small';
+
+export type TypographyOptionTypes = `${TypographyMainType}-${TypographySecondaryType}`
