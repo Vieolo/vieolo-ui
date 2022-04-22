@@ -12,4 +12,6 @@ export default function Card(props: {
     ariaLabel?: string;
     style?: React.CSSProperties;
     className?: string;
+    onClick?: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+    keepEmphasisTextColorClasses?: boolean;
 }): JSX.Element;

@@ -30,4 +30,7 @@ export declare type CardExtraActionType = {
     ariaLabel?: string;
     dataTestID?: string;
 };
+declare type TypographyMainType = 'title' | 'paragraph' | 'caption';
+declare type TypographySecondaryType = 'large' | 'medium' | 'small';
+export declare type TypographyOptionTypes = `${TypographyMainType}-${TypographySecondaryType}`;
 export {};
