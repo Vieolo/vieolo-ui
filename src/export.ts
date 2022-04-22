@@ -3,8 +3,9 @@ import CalendarStateful from './lib/date_time/calendar_stateful';
 import CalendarStateless from './lib/date_time/calendar_stateless';
 import Card from './lib/card/card';
 import Checkbox from './lib/form/checkbox';
-import ContextMenu from './lib/menu/context_menu';
 import Chip from './lib/button/chip';
+import ClickableCard from './lib/card/clickable_card';
+import ContextMenu from './lib/menu/context_menu';
 import DateInput from './lib/date_time/date_input';
 import DatePicker from './lib/date_time/date_picker';
 import DateTimePicker from './lib/date_time/date_time_picker';
@@ -45,7 +46,8 @@ import TitlePeriodCard from './lib/card/title_period_card';
 import { 
     RowStyleType as RowStyleTypeTemp, 
     WidthAndHeightSize as WidthAndHeightSizeTemp,
-    CardExtraActionType as CardExtraActionTypeTemp
+    CardExtraActionType as CardExtraActionTypeTemp,
+    TypographyOptionTypes as TypographyOptionTypesTemp
 } from './lib/private/types';
 
 import {
@@ -100,7 +102,8 @@ export {
     TitlePeriodCard,
     Flex,
     Spinner,
-    TableInteractive
+    TableInteractive,
+    ClickableCard
 }
 
 
@@ -108,6 +111,7 @@ export type ListItem = ListItemType
 export type RowStyleType = RowStyleTypeTemp
 export type WidthAndHeightSize = WidthAndHeightSizeTemp;
 export type CardExtraActionType = CardExtraActionTypeTemp;
+export type TypographyOptionTypes = TypographyOptionTypesTemp;
 export type FormDialogAccessoryButton = FormDialogAccessoryButtonType
 export type FormDialogMainButton = FormDialogMainButtonType
 export type TableSortDirection = TableSortDirectionType
