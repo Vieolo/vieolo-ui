@@ -30,7 +30,7 @@ export function TableInteractiveCreator(props: {p: TableInteractivePropsType}) {
 
     let data: {id: number, date: string, price: number, item: string, group?: number}[] = [];
 
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 40; i++) {
         data.push({
             id: i,
             date: new VDate().addDay(i).formatDate(),

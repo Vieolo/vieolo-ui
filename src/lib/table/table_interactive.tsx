@@ -74,7 +74,7 @@ export default function TableInteractive(props: {
     let cellClass = `vieolo-table-interactive__cell vieolo-table-interactive__cell--height-${props.isDense ? 'small' : 'medium'}`
 
     return <div className="vieolo-table-interactive" style={style}>
-        <div className={`vieolo-table-interactive__header-row ${props.headerSticky ? "position--sticky--top-0" : ""}`} style={{gridTemplateColumns: props.columnGrid}}>
+        <div className={`vieolo-table-interactive__header-row ${props.headerSticky ? "position--sticky--top-0 z-index--3" : ""}`} style={{gridTemplateColumns: props.columnGrid}}>
             {
                 props.headers.map(h => {
                     let s = typeof h === 'string' ? h : h.name;
