@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Component
 import TableInteractive, { TableInteractiveCell } from '../../lib/table/table_interactive';
@@ -20,7 +20,8 @@ export function tableInteractiveOptions(): ViewData {
         variables: {
             selectedColor: 'colors',
             isDense: 'boolean',
-            headerSticky: 'boolean'
+            headerSticky: 'boolean',
+            showBottomRow: 'booleanTrueDefault'
         }
     }
 }
@@ -28,37 +29,55 @@ export function tableInteractiveOptions(): ViewData {
 
 export function TableInteractiveCreator(props: {p: TableInteractivePropsType}) {
 
-    let data: {id: number, date: string, price: number, item: string, group?: number}[] = [];
+    let [data, setData] = useState<{id: number, date: string, price: number, item: string, group?: number}[]>([]);
 
-    for (let i = 0; i < 20; i++) {
-        data.push({
-            id: i,
-            date: new VDate().addDay(i).formatDate(),
-            item: `item ${i}`,
-            price: (i * 12) || 5,
-            group: i === 5 ? 4 : undefined
-        })
-    }
+
+    useEffect(() => {
+        let x = [];
+        for (let i = 0; i < 40; i++) {
+            x.push({
+                id: i,
+                date: new VDate().addDay(i).formatDate(),
+                item: `item ${i}`,
+                price: (i * 12) || 5,
+                group: i === 5 ? 4 : undefined
+            })
+        }
+        setData(x);
+    }, [])
+
+    
 
     return <TableInteractive
         isDense={props.p.isDense}
         headerSticky={props.p.headerSticky}
         selectedColor={props.p.selectedColor}
+        showBottomRow={props.p.showBottomRow}
         columnGrid='100px 100px 1fr 150px 100px'
         headers={['ID', "Date", "Item", "group", {name: 'Price', formatter: (s) => `€ ${s}`}]}
         rows={data.map(d => {
             return [
                 {
-                    value: d.id
+                    value: d.id,
+                    selectable: true,
+                    numericalValue: d.id
                 },
                 {
                     value: d.date,
-                    background: d.date === new VDate().formatDate() ? 'success' : undefined
+                    background: d.date === new VDate().formatDate() ? 'success' : undefined,
+                    onClick: (id) => alert(`${d.item} - ${d.id}`)
                 },
                 {
                     id: `id: ${d.id}`,
                     value: d.item,
-                    onClick: (id) => alert(`${d.item} - ${id}`)
+                    onTextEdit: v => {
+                        setData(data.map(z => {
+                            if (z.id === d.id) {
+                                z.item = v;
+                            }
+                            return z;
+                        }))
+                    }
                 },
                 {
                     value: !d.group 
