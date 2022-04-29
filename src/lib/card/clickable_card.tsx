@@ -42,7 +42,7 @@ export default function ClickableCard(props: {
         padding={props.padding}
         style={props.style}
         width={props.width}
-        keepEmphasisTextColorClasses
+        keepEmphasisTextColorClasses={props.keepEmphasisTextColorClasses}
     >
 
         <Flex justifyContent="space-between" alignItems="center">
