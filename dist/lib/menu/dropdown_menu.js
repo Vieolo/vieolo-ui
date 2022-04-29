@@ -1,16 +1,15 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 // React
 import { useState, useRef, useEffect } from 'react';
-// Typography
-import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
+// Vieolo UI
+import { TypographyParagraphSmall } from '../typography';
 export default function DropDownMenu(props) {
     let [open, setOpen] = useState(false);
     let [top, setTop] = useState(0);
     let [left, setLeft] = useState(0);
     let [bottom, setBottom] = useState(0);
     let [right, setRight] = useState(0);
-    // eslint-disable-next-line
-    let [container, setContainer] = useState(useRef(null));
+    let [container,] = useState(useRef(null));
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (container.current && !container.current.contains(event.target)) {
@@ -79,15 +78,15 @@ export default function DropDownMenu(props) {
         style.bottom = bottom;
     return _jsxs("div", Object.assign({ className: className, ref: container }, { children: [_jsx("div", Object.assign({ onClick: e => handleButtonClick(e) }, { children: props.buttonComponent }), void 0),
             open &&
-                _jsx("div", Object.assign({ className: `dropdown`, style: style }, { children: props.items.map(item => {
-                        return _jsx(DropDownMenuItem, { title: item.title, value: item.value, icon: item.icon, onClick: (v) => {
+                _jsx("div", Object.assign({ className: `dropdown`, style: style }, { children: props.items.map((item, i) => {
+                        return _jsx(DropDownMenuItem, { title: item.title, value: item.value, icon: item.icon, color: item.color, onClick: (v) => {
                                 setOpen(!open);
                                 props.onItemSelect(v);
-                            } }, item.value);
+                            } }, `${item.value}_${i}`);
                     }) }), void 0)] }), void 0);
 }
 function DropDownMenuItem(props) {
-    return _jsxs("div", Object.assign({ className: "dropdown-item", onClick: () => { props.onClick(props.value); } }, { children: [props.icon &&
+    return _jsxs("div", Object.assign({ className: `vieolo-dropdown-menu__dropdown-item color--${props.color || 'primary'}-normal`, onClick: () => { props.onClick(props.value); } }, { children: [props.icon &&
                 props.icon,
-            _jsx(TypographyParagraphMedium, { text: props.title }, void 0)] }), void 0);
+            _jsx(TypographyParagraphSmall, { text: props.title, fontWeight: 'bold' }, void 0)] }), void 0);
 }

@@ -15,11 +15,13 @@ export declare type TableInteractiveCell = {
     };
     numericalValue?: number;
     background?: ColorOptionType;
+    onTextEdit?: (newValue: string) => void;
 };
+declare type HeaderFormatter = (s: string | number) => string;
 export default function TableInteractive(props: {
     headers: (string | {
         name: string;
-        formatter: (s: string | number) => string;
+        formatter: HeaderFormatter;
     })[];
     headerSticky?: boolean;
     rows: TableInteractiveCell[][];
@@ -28,7 +30,9 @@ export default function TableInteractive(props: {
     width?: string;
     showBottomRow?: boolean;
     isDense?: boolean;
+    /** @deprecated */
     columnSelectedTotalFormat?: {
         [column: number]: (total: number) => string;
     };
 }): JSX.Element;
+export {};
