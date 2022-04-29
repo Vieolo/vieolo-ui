@@ -658,13 +658,11 @@ body {
 		overflow: scroll;
 	}
 
-	.dropdown-item {
-		padding: 5px;
-		//height: 20px;
+	&__dropdown-item {
+		padding: $base-unit-half;
 		cursor: pointer;
 		border-radius: $universal-border-radius-half;
 		@include transition;
-		color: $primary-color-normal;
 		display: flex;
 		align-items: center;
 
@@ -674,6 +672,10 @@ body {
 
 		p {
 			padding: 0px 3px;
+		} 
+
+		svg {
+			height: $base-unit-two;
 		}
 	}
 }
