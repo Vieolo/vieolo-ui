@@ -1,15 +1,17 @@
 // React
 import React, { useState, useRef, useEffect, CSSProperties } from 'react';
+import { ColorOptionType } from '../private/types';
 
-// Typography
-import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
+// Vieolo UI
+import { TypographyParagraphSmall } from '../typography';
 
 
 export type DropDownMenuItemType = {
     title: string,
     /** The unique value of each item which is used to reference this item */
     value: string,
-    icon?: React.ReactNode
+    icon?: React.ReactNode,
+    color?: ColorOptionType
 }
 
 
@@ -31,8 +33,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
     let [left, setLeft] = useState<number>(0);
     let [bottom, setBottom] = useState<number>(0);
     let [right, setRight] = useState<number>(0);
-    // eslint-disable-next-line
-    let [container, setContainer] = useState(useRef<HTMLDivElement>(null));
+    let [container, ] = useState(useRef<HTMLDivElement>(null));
 
     useEffect(() => {
 
@@ -43,10 +44,10 @@ export default function DropDownMenu(props: DropDownMenuProps) {
         }
 
         document.addEventListener("click", handleClickOutside);
-        
+
 
         return () => {
-            document.removeEventListener("click", handleClickOutside);            
+            document.removeEventListener("click", handleClickOutside);
         }
     }, [container])
 
@@ -64,16 +65,16 @@ export default function DropDownMenu(props: DropDownMenuProps) {
             e.stopPropagation();
             if (!open) {
                 let rect = container.current!.getBoundingClientRect();
-                let displaySize = {width: window.innerWidth, height: window.innerHeight}
+                let displaySize = { width: window.innerWidth, height: window.innerHeight }
                 let r = 0,
                     l = 0,
                     t = 0,
                     b = 0;
-                
+
                 if ((rect.y + 240 + rect.height) > displaySize.height) {
                     b = displaySize.height - rect.y;
                     t = 0;
-                }else {
+                } else {
                     t = rect.top + rect.height;
                     b = 0;
                 }
@@ -81,11 +82,11 @@ export default function DropDownMenu(props: DropDownMenuProps) {
                 if (props.position === 'right' || (rect.x - (190 - rect.width)) < 190) {
                     l = rect.left;
                     r = 0;
-                }else {
+                } else {
                     l = 0;
                     r = displaySize.width - rect.x - rect.width;
                 }
-                
+
                 setRight(r);
                 setLeft(l);
                 setTop(t);
@@ -105,7 +106,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
     if (left !== 0) style.left = left;
     if (top !== 0) style.top = top;
     if (bottom !== 0) style.bottom = bottom;
-    
+
 
     return <div className={className} ref={container as any}>
         <div onClick={e => handleButtonClick(e)}>
@@ -116,11 +117,18 @@ export default function DropDownMenu(props: DropDownMenuProps) {
             open &&
             <div className={`dropdown`} style={style} >
                 {
-                    props.items.map(item => {
-                        return <DropDownMenuItem key={item.value} title={item.title} value={item.value} icon={item.icon} onClick={(v: string) => {
-                            setOpen(!open);
-                            props.onItemSelect(v);
-                        }} />
+                    props.items.map((item, i) => {
+                        return <DropDownMenuItem
+                            key={`${item.value}_${i}`}
+                            title={item.title}
+                            value={item.value}
+                            icon={item.icon}
+                            color={item.color}
+                            onClick={(v: string) => {
+                                setOpen(!open);
+                                props.onItemSelect(v);
+                            }}
+                        />
                     })
                 }
             </div>
@@ -130,13 +138,22 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 
 }
 
-function DropDownMenuItem(props: { title: string, value: string, onClick: (selectedValue: string) => void, icon?: React.ReactNode }) {
+function DropDownMenuItem(props: { 
+    title: string, 
+    value: string, 
+    onClick: (selectedValue: string) => void, 
+    icon?: React.ReactNode,
+    color?: ColorOptionType
+}) {
 
-    return <div className="dropdown-item" onClick={() => { props.onClick(props.value) }}>
+    return <div 
+        className={`vieolo-dropdown-menu__dropdown-item color--${props.color || 'primary'}-normal`} 
+        onClick={() => { props.onClick(props.value) }}
+    >
         {
             props.icon &&
             props.icon
         }
-        <TypographyParagraphMedium  text={props.title} />
+        <TypographyParagraphSmall text={props.title} fontWeight='bold' />
     </div>
 }
