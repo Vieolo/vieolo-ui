@@ -2175,6 +2175,8 @@ body {
 		bottom: 0px;
 		background-color: white;
 		height: $row-height-medium;
+		z-index: 3;
+		border: solid 0.1px #ddd;		
 	}
 }
 
