@@ -10,6 +10,9 @@ import TypographyTitleSmall from '../typography/typography_title_small';
 // Types
 import { ColorOptionType } from '../private/types';
 import { toFixedFloat } from '@vieolo/parsers';
+import Input from '../form/input';
+import IconButton from '../button/icon_button';
+import { CloseIcon } from '../icons/icons';
 
 
 export type TableInteractiveCell = {
@@ -27,10 +30,18 @@ export type TableInteractiveCell = {
     },
     numericalValue?: number,
     background?: ColorOptionType,
+    onTextEdit?: (newValue: string) => void
 }
 
 
 type HeaderFormatter = (s: string | number) => string;
+
+type EditCellData = {
+    rowIndex: number,
+    cellIndex: number,
+    initialText: string,
+    newText: string
+}
 
 
 export default function TableInteractive(props: {
@@ -49,6 +60,7 @@ export default function TableInteractive(props: {
     let [selectedCells, setSelectedCells] = useState<string[]>([]);
     let [selectedCellColumn, setSelectedCellColumn] = useState<number>(-1);
     let [numericTotal, setNumericTotal] = useState<number>(0);
+    let [editCellData, setEditCellData] = useState<EditCellData | null>(null)
 
     let style: React.CSSProperties = {}
 
@@ -101,9 +113,26 @@ export default function TableInteractive(props: {
                     {
                         row.map((r, ri) => {
                             let k = `${i}_${ri}`;
+
+                            if (editCellData && editCellData.cellIndex === ri && editCellData.rowIndex === i) {
+                                return <InputCell
+                                    cellClass={cellClass}
+                                    onChange={v => setEditCellData({ ...editCellData as any, newText: v })}
+                                    onSubmit={() => {
+                                        if (r.onTextEdit) {
+                                            r.onTextEdit(editCellData!.newText)
+                                            setEditCellData(null)
+                                        }
+                                    }}
+                                    value={editCellData.newText}
+                                    key={k + "_input_cell"}
+                                    onCancel={() => setEditCellData(null)}
+                                />
+                            }
+
                             let className = cellClass;
 
-                            if (r.onClick || r.selectable) {
+                            if (r.onClick || r.selectable || r.onTextEdit) {
                                 className += ' cursor--pointer nonselectable vieolo-table-interactive__cell--hover';
                             }
 
@@ -146,6 +175,14 @@ export default function TableInteractive(props: {
                                 key={k}
                                 onClick={() => {
                                     if (r.onClick) r.onClick(r.id);
+                                    else if (r.onTextEdit && typeof r.value === 'string') {
+                                        setEditCellData({
+                                            cellIndex: ri,
+                                            rowIndex: i,
+                                            initialText: r.value,
+                                            newText: r.value
+                                        })
+                                    }
                                 }}
                                 onMouseDown={e => {
                                     if (r.selectable && r.numericalValue) {
@@ -200,7 +237,7 @@ function BottomRow(props: {
     function format(v: string | number) {
         return typeof props.header === 'string' ? v.toString() : props.header.formatter(v)
     }
-    
+
     let average = toFixedFloat(props.numericTotal / props.selectedCells.length, 2);
 
     return <div className={`vieolo-table-interactive__bottom-row`}>
@@ -214,5 +251,45 @@ function BottomRow(props: {
 
         }
 
+    </div>
+}
+
+
+function InputCell(props: {
+    value: string,
+    onChange: (v: string) => void,
+    onSubmit: () => void,
+    cellClass: string,
+    onCancel: () => void
+}) {
+    return <div className={`${props.cellClass} ${props.cellClass.split(" ")[0] + "--input"}`}>
+        <form onSubmit={e => {
+            e.preventDefault();
+            e.stopPropagation();
+            props.onSubmit();
+        }}>
+            <Flex alignItems='center' columnGap='half' justifyContent='space-between'>
+                <Input
+                    value={props.value}
+                    error={false}
+                    onChange={v => props.onChange(v)}
+                    size='full'
+                    autoFocus
+                    onKeyDown={e => {
+                        if (e.key === 'Escape') {
+                            props.onCancel()
+                        }
+                    }}
+                />
+                <IconButton
+                    icon={<CloseIcon />}
+                    size={'extra-small'}
+                    color={'error'}
+                    emphasis={'none'}
+                    onClick={props.onCancel}
+                    type='button'
+                />
+            </Flex>
+        </form>
     </div>
 }
