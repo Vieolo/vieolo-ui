@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.20.9 (2022-04-29)
+- Added color to items of `DropDownMenu` ([#154](https://github.com/Vieolo/vieolo-ui/issues/154))
+- Added selectability to `TableInteractive` ([#158](https://github.com/Vieolo/vieolo-ui/issues/158))
+- Added insights for selected cells in `TableInteractive` ([#159](https://github.com/Vieolo/vieolo-ui/issues/159))
+- Added ability to edit text of cells in `TableInteractive` ([#160](https://github.com/Vieolo/vieolo-ui/issues/160))
+- Fixed the emphasis of texts in `ClickableCard` ([#168](https://github.com/Vieolo/vieolo-ui/issues/168))
+- Improved the key of `DropDownMenu` ([#169](https://github.com/Vieolo/vieolo-ui/issues/169))
+- Fixed the position of overlay on fixed header in `TableInteractive` ([#170](https://github.com/Vieolo/vieolo-ui/issues/170))
+
 ## 0.20.8 (2022-04-23)
 - Added onClick callback to `Card`
 - Added `ClickableCard` component

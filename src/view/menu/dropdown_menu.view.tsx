@@ -22,9 +22,9 @@ export function dropDownMenuOptions(): ViewData {
         constants: {
             items: [
                 {title: "One", icon: <IconOne />, value: "One"},
-                {title: "Two", icon: <IconTwo />, value: "Two"}, 
-                {title: "Three", icon: <IconThree />, value: "Three"},
-                {title: "One Two Three Four Five", icon: <IconFour />, value: "Four"}
+                {title: "Two", icon: <IconTwo />, value: "Two", color: 'secondary'}, 
+                {title: "Three", icon: <IconThree />, value: "Three", color: 'success'},
+                {title: "One Two Three Four Five", icon: <IconFour />, value: "Four", color: 'error'}
             ]
         } as Partial<DropDownMenuPropsType>,
         variables: {
