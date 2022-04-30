@@ -7,12 +7,11 @@ import CalendarIcon from '@mui/icons-material/DateRangeRounded';
 // Installed Packages
 import VDate from '@vieolo/date';
 
-// Internal Components
+// Vieolo UI
 import CalendarStateful from './calendar_stateful';
+import Typography from '../typography/typography';
 
-// TypoGraphy
-import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
-import TypographyCaptionLarge from '../typography/typography_caption_large';
+// Hooks
 import { useAppearingContainer } from '../../hooks/useAppearingContainer';
 
 
@@ -64,13 +63,13 @@ export default function DatePicker(props: {
     let datePickerButton = props.buttonComponent || <div className="vieolo-date-picker__button-container__default-button">
         <div className="vieolo-date-picker__button-container__default-button__text-container">
             <div>
-                <TypographyCaptionLarge text={props.title || ""} />
+                <Typography type='caption-large' text={props.title || ""} />
             </div>
             <div>
-                <TypographyParagraphMedium text={props.selectedDate ? props.selectedDate.formatDate('dd/mm/yyyy') : ""} />
+                <Typography text={props.selectedDate ? props.selectedDate.formatDate('dd/mm/yyyy') : ""} />
             </div>
             <div>
-                <TypographyCaptionLarge text={(props.showSelectedWeek && props.selectedDate) ? `Week ${props.selectedDate.getWeek().weekNumber}` : ""} />
+                <Typography type='caption-large' text={(props.showSelectedWeek && props.selectedDate) ? `Week ${props.selectedDate.getWeek().weekNumber}` : ""} />
             </div>
         </div>
         <CalendarIcon />

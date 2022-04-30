@@ -11,13 +11,14 @@ import ContextMenu from '../lib/menu/context_menu';
 import RadioGroup from '../lib/form/radio_group';
 
 // Typography
-import TypographyParagraphMedium from '../lib/typography/typography_paragraph_medium';
-import TypographyParagraphSmall from '../lib/typography/typography_paragraph_small';
-import TypographyCaptionMedium from '../lib/typography/typography_caption_medium';
-import { ColorOptionType } from '../lib/private/types';
+import Typography from '../lib/typography/typography';
 
 // Installed Packages
 import { toFixed } from '@vieolo/parsers/number_parsers';
+
+// Types
+import { ColorOptionType } from '../lib/private/types';
+
 
 export type GanttChartContextMenuItem = {
     title: string,
@@ -259,7 +260,7 @@ export default function GanttChart(props: {
         <div className="vieolo-gantt-chart__base" >
             <div className="vieolo-gantt-chart__base__item-column">
                 <div className="vieolo-gantt-chart__base__item-column__item-title" style={{ height: props.columnGroups ? '65px' : '45px' }}>
-                    <TypographyParagraphMedium text={props.dataTitle} />
+                    <Typography text={props.dataTitle} />
                     <RadioGroup
                         horizontalButtonPadding={7}
                         onOptionChange={v => setFilter(v as any)}
@@ -282,10 +283,10 @@ export default function GanttChart(props: {
                                 if (t.onClick) t.onClick();
                             }}
                         >
-                            <TypographyParagraphMedium text={t.title} />
+                            <Typography text={t.title} />
                             {
                                 t.subtitle &&
-                                <TypographyCaptionMedium text={t.subtitle} />
+                                <Typography type='caption-medium' text={t.subtitle} />
                             }
                         </div>
                     </div>
@@ -312,7 +313,7 @@ export default function GanttChart(props: {
                                 className={'vieolo-gantt-chart__group-div__group-column__group-bar'}
                                 style={style}
                             >
-                                <TypographyParagraphSmall text={g.title} />
+                                <Typography text={g.title} />
                             </div>
                         })
                     }
@@ -373,7 +374,7 @@ export default function GanttChart(props: {
                             <p className="vieolo-gantt-chart__content-div__row__item-column__title" title={row.title}>{row.title}</p>
                             {
                                 row.subtitle &&
-                                <TypographyParagraphSmall text={row.subtitle} showTitle />
+                                <Typography type='paragraph-small' text={row.subtitle} showTitle />
                             }
                         </div>
                         <div

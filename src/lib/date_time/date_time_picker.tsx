@@ -1,5 +1,5 @@
 // Vieolo UI
-import { TypographyCaptionMedium, TypographyParagraphMedium } from "../typography";
+import Typography from "../typography/typography";
 import DatePicker from "./date_picker";
 import TimeInput from "./time_input";
 
@@ -42,12 +42,12 @@ export default function DateTimePicker(props: {
                     <div>
                         {
                             props.selectedDate &&
-                            <TypographyParagraphMedium text={props.selectedDate.formatDate('dd/mm/yyyy')} />
+                            <Typography text={props.selectedDate.formatDate('dd/mm/yyyy')} />
                         }
 
                         {
                             (props.showSelectedWeek && (props.selectedDate || props.selectedWeek)) &&
-                            <TypographyCaptionMedium text={`Week ${props.selectedDate ? props.selectedDate.getWeek().weekNumber : props.selectedWeek?.weekNumber}`} />
+                            <Typography type="caption-medium" text={`Week ${props.selectedDate ? props.selectedDate.getWeek().weekNumber : props.selectedWeek?.weekNumber}`} />
                         }
                     </div>
 

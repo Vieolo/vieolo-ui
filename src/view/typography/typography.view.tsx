@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Component
-import Typography from '../../lib/typography/typography_base';
+import Typography from '../../lib/typography/typography';
 
 // Types
 import { ViewData } from '../main/main';
@@ -17,20 +17,21 @@ export function typographyOptions(): ViewData {
         } as Partial<TypographyPropsType>,
         variables: {
             type: {
-                default: 'typography-paragraph-medium',
+                default: 'paragraph-medium',
                 options: [
-                    'typography-caption-small',
-                    'typography-caption-medium',
-                    'typography-caption-large',
-                    'typography-paragraph-small',
-                    'typography-paragraph-medium',
-                    'typography-paragraph-large',
-                    'typography-title-small',
-                    'typography-title-medium',
-                    'typography-title-large'
+                    'caption-small',
+                    'caption-medium',
+                    'caption-large',
+                    'paragraph-small',
+                    'paragraph-medium',
+                    'paragraph-large',
+                    'title-small',
+                    'title-medium',
+                    'title-large'
                 ]
             },
             showTitle: 'booleanTrueDefault',
+            customHoverTitle: 'boolean',
             color: 'colorsOptional',
             colorType: {
                 options: ["normal", 'text', "light", "text-light"],
@@ -49,7 +50,8 @@ export function typographyOptions(): ViewData {
                 options: ["left", "center", "right", "justify"],
                 default: "left"
             },
-            italic: 'boolean'
+            italic: 'boolean',
+            nonselectable: 'boolean'
         }
     }
 }
@@ -58,7 +60,7 @@ export function typographyOptions(): ViewData {
 export function TypographyCreator(props: { p: TypographyPropsType }) {
 
     return <Typography
-        className={(props.p as any).type}
+        type={props.p.type}
         text='Sample Text'
         showTitle={props.p.showTitle}
         color={props.p.color}
@@ -68,5 +70,7 @@ export function TypographyCreator(props: { p: TypographyPropsType }) {
         fontFamily={props.p.fontFamily}
         style={{fontStyle: (props.p as any).italic ? "italic" : "normal"}}
         textAlign={props.p.textAlign}
+        nonselectable={props.p.nonselectable}
+        hoverTitle={(props.p as any).customHoverTitle ? "This is a different text from the main one" : undefined}
     />
 }

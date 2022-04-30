@@ -1,8 +1,8 @@
 // React
 import React, { useState, useEffect } from 'react';
 
-// Typography
-import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
+// Vieolo UI
+import Typography from '../typography/typography';
 
 // Material UI
 import PreviousIcon from '@mui/icons-material/ArrowBackIosRounded';
@@ -95,7 +95,7 @@ export default function CalendarStateful(props: {
                     setCurrentDate(newDate);
                 }}
             />
-            <TypographyParagraphMedium text={`${currentDate.getFullYear()}`} />
+            <Typography text={`${currentDate.getFullYear()}`} />
             <IconButton
                 icon={<NextIcon />}
                 size="extra-small"
@@ -122,7 +122,7 @@ export default function CalendarStateful(props: {
                     setCurrentDate(newDate);
                 }}
             />
-            <TypographyParagraphMedium text={`${currentDate.formatMonth().split(' ')[0]}`} />
+            <Typography text={`${currentDate.formatMonth().split(' ')[0]}`} />
             <IconButton
                 icon={<NextIcon />}
                 size="extra-small"

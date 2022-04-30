@@ -7,7 +7,7 @@ import { Fragment } from "react"
 import { ColorOptionType, EmphasisType, BorderRadiusType } from "../private/types"
 import Modal from "./modal"
 import Button from '../button/button';
-import { TypographyParagraphLarge } from "../typography";
+import Typography from "../typography/typography";
 
 
 export type ConfirmationDialogMainButton = {
@@ -38,7 +38,7 @@ export default function FormDialog(props: {
         <div className="vieolo-form-dialog__message" style={{ width: props.width, padding: props.padding === undefined ? 10 : props.padding }}>
             {
                 typeof props.message === 'string'
-                    ? <TypographyParagraphLarge text={props.message} />
+                    ? <Typography type="paragraph-large" text={props.message} />
                     : <>
                         {props.message}
                     </>

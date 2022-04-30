@@ -1,12 +1,9 @@
 // React
 import React from 'react';
 
-// Typography
-import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
-
-// Components
+// Vieolo UI
 import IconButton from '../button/icon_button';
-import TypographyCaptionLarge from '../typography/typography_caption_large';
+import Typography from '../typography/typography';
 
 // Material UI
 import CloseIcon from '@mui/icons-material/CloseRounded';
@@ -85,10 +82,10 @@ export default function ItemRow(props: {
                         placeholder={props.title || "Search..."}
                     />
                     : <div className="vieolo-item-row__title-col">
-                        <TypographyParagraphMedium text={props.title || ''} fontWeight={'bold'} color={props.selected ? color : undefined } colorType={props.selected ? 'text' : undefined} />
+                        <Typography text={props.title || ''} fontWeight={'bold'} color={props.selected ? color : undefined } colorType={props.selected ? 'text' : undefined} />
                         {
                             props.subTitle &&
-                            <TypographyCaptionLarge text={props.subTitle} showTitle color={props.selected ? color : undefined } colorType={props.selected ? 'text' : undefined} />
+                            <Typography type='caption-large' text={props.subTitle} showTitle color={props.selected ? color : undefined } colorType={props.selected ? 'text' : undefined} />
                         }
                     </div>
 

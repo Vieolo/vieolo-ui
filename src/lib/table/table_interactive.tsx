@@ -3,16 +3,18 @@ import React, { useState } from 'react';
 
 // Vieolo UI
 import Flex from '../layout/flex/flex';
-import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
-import TypographyParagraphSmall from '../typography/typography_paragraph_small';
-import TypographyTitleSmall from '../typography/typography_title_small';
+import Typography from '../typography/typography';
+import Input from '../form/input';
+import IconButton from '../button/icon_button';
+
+// Icons
+import { CloseIcon } from '../icons/icons';
 
 // Types
 import { ColorOptionType } from '../private/types';
+
+// Installed Packages
 import { toFixedFloat } from '@vieolo/parsers';
-import Input from '../form/input';
-import IconButton from '../button/icon_button';
-import { CloseIcon } from '../icons/icons';
 
 
 export type TableInteractiveCell = {
@@ -99,7 +101,7 @@ export default function TableInteractive(props: {
                 props.headers.map(h => {
                     let s = typeof h === 'string' ? h : h.name;
                     return <div className={cellClass} key={s}>
-                        <TypographyTitleSmall text={s} />
+                        <Typography type='title-small' text={s} />
                     </div>
                 })
             }
@@ -165,7 +167,7 @@ export default function TableInteractive(props: {
                             // If the header contains the `formatter` function, the value of formatter function is displayed
                             let header = props.headers[ri];
 
-                            if (typeof r.value === 'string' || typeof r.value === 'number') finalNode = <TypographyParagraphMedium text={typeof header === 'string' ? r.value.toString() : header.formatter(r.numericalValue || r.value)} />;
+                            if (typeof r.value === 'string' || typeof r.value === 'number') finalNode = <Typography text={typeof header === 'string' ? r.value.toString() : header.formatter(r.numericalValue || r.value)} />;
 
 
                             return <div
@@ -242,9 +244,9 @@ function BottomRow(props: {
         {
             (props.selectedCells.length > 0 && !isNaN(props.numericTotal) && props.header) &&
             <Flex direction='row' alignItems='center' className='height--pc-100 padding-horizontal--one' justifyContent='space-between'>
-                <TypographyParagraphSmall text={`Count: ${props.selectedCells.length}`} fontWeight='bold' />
-                <TypographyParagraphSmall text={`Average: ${format(average)}`} fontWeight='bold' />
-                <TypographyParagraphSmall text={`Total: ${format(props.numericTotal)}`} fontWeight='bold' />
+                <Typography type='paragraph-small' text={`Count: ${props.selectedCells.length}`} fontWeight='bold' />
+                <Typography type='paragraph-small' text={`Average: ${format(average)}`} fontWeight='bold' />
+                <Typography type='paragraph-small' text={`Total: ${format(props.numericTotal)}`} fontWeight='bold' />
             </Flex>
 
         }

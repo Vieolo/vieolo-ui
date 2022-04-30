@@ -4,7 +4,7 @@ import { useState } from "react";
 // Vieolo UI
 import Card from "./card";
 import IconButton from "../button/icon_button";
-import { TypographyParagraphMedium } from "../typography";
+import Typography from "../typography/typography";
 
 // Types
 import { RowStyleType } from "../private/types";
@@ -70,7 +70,7 @@ export default function ExpandableCard(props: {
 
                 <div className="padding-horizontal--half"></div>
 
-                <TypographyParagraphMedium text={props.title} fontWeight={'bold'} ariaLabel={`${props.ariaLabel || props.title} title`} />
+                <Typography type='paragraph-medium' text={props.title} fontWeight={'bold'} ariaLabel={`${props.ariaLabel || props.title} title`} />
 
                 {
                     props.actions &&
