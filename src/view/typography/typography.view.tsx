@@ -49,7 +49,8 @@ export function typographyOptions(): ViewData {
                 options: ["left", "center", "right", "justify"],
                 default: "left"
             },
-            italic: 'boolean'
+            italic: 'boolean',
+            nonselectable: 'boolean'
         }
     }
 }
@@ -68,5 +69,6 @@ export function TypographyCreator(props: { p: TypographyPropsType }) {
         fontFamily={props.p.fontFamily}
         style={{fontStyle: (props.p as any).italic ? "italic" : "normal"}}
         textAlign={props.p.textAlign}
+        nonselectable={props.p.nonselectable}
     />
 }

@@ -25,7 +25,8 @@ export default function Typography(props: {
     fontWeight?: FontWeightType,
     style?: React.CSSProperties,
     fontFamily?: TypographyFontFamily,
-    textAlign?: TypographyTextAlign
+    textAlign?: TypographyTextAlign,
+    nonselectable?: boolean
 }) {
     let finalType = props.type || 'paragraph-medium';
     
@@ -35,7 +36,9 @@ export default function Typography(props: {
     finalClassName += `font-family--${props.fontFamily || 'primary'} `;
     if (props.textAlign) finalClassName += `text-align--${props.textAlign} `;
     if (props.className) finalClassName += `${props.className} `;
-    finalClassName += `typography-${finalType}`
+    finalClassName += `typography-${finalType} `;
+    
+    if (props.nonselectable) finalClassName += "nonselectable "
 
 
     return <p
