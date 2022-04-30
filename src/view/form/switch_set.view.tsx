@@ -1,9 +1,9 @@
 // React
 import React, { useState } from 'react';
 
-// Component
+// Vieolo UI
 import SwitchSet from '../../lib/form/switch_set';
-import { TypographyCaptionLarge, TypographyParagraphMedium } from '../../lib/typography';
+import Typography from '../../lib/typography/typography';
 
 // Types
 import { ViewData } from '../main/main';
@@ -56,7 +56,7 @@ export function SwitchSetCreator(props: { p: SwitchSetPropsType }) {
             (props.p as any).titleType === 'string'
                 ? "Switch Title"
                 : <div className='flex'>
-                    <TypographyParagraphMedium text='Switch Title' />
+                    <Typography text='Switch Title' />
                     <div className="padding-left--half"></div>
                     <a href="/">Know More</a>
                 </div>
@@ -66,7 +66,7 @@ export function SwitchSetCreator(props: { p: SwitchSetPropsType }) {
                 ? (props.p as any).subtitleType === 'string'
                     ? "Switching this switch results in a change that no one expects"
                     : <div className='flex'>
-                        <TypographyCaptionLarge text='This action is not allowed' />
+                        <Typography type='caption-large' text='This action is not allowed' />
                         <div className="padding-left--half"></div>
                         <a href="/">Know More</a>
                     </div>

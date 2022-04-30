@@ -1,18 +1,13 @@
 // React
 import React, { Fragment, useEffect, useRef, useState, CSSProperties } from 'react';
 
-// Typography
-import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
-import TypographyParagraphSmall from '../typography/typography_paragraph_small';
-import TypographyTitleSmall from '../typography/typography_title_small';
-
 // Material UI
 import DownIcon from '@mui/icons-material/ArrowDropDownRounded';
 import CloseIcon from '@mui/icons-material/CloseRounded';
 
-// Components
+// Vieolo UI
 import IconButton from '../button/icon_button';
-import { TypographyCaptionMedium } from '../typography';
+import Typography from '../typography/typography';
 
 
 type SelectItemType = {
@@ -210,7 +205,7 @@ export default function Select(props: SelectProps) {
                 e.stopPropagation();
                 handleOpen();
             }}>
-                <TypographyParagraphSmall text={props.title} className="vieolo-select__select-button__button-text__button-title" />
+                <Typography type='paragraph-small' text={props.title} className="vieolo-select__select-button__button-text__button-title" />
                 {
                     (props.searchable && open)
                         ? <input
@@ -220,7 +215,7 @@ export default function Select(props: SelectProps) {
                             placeholder="Search..."
                             aria-label={`Search ${props.title} items`}
                         />
-                        : <TypographyTitleSmall text={thisSelectedItems.map(s => s.title).join(", ")} className="vieolo-select__select-button__button-text__button-value" />
+                        : <Typography type='title-small' text={thisSelectedItems.map(s => s.title).join(", ")} className="vieolo-select__select-button__button-text__button-value" />
                 }
             </div>
 
@@ -277,10 +272,10 @@ function SelectItem(props: {
             role="listitem"
             aria-label={props.item.title}
         >
-            <TypographyParagraphMedium text={props.item.title} />
+            <Typography text={props.item.title} />
             {
                 props.item.subTitle &&
-                <TypographyCaptionMedium text={props.item.subTitle} />
+                <Typography type='caption-medium' text={props.item.subTitle} />
             }
         </div>
     </Fragment>

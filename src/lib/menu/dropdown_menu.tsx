@@ -1,10 +1,11 @@
 // React
 import React, { useState, useRef, useEffect, CSSProperties } from 'react';
-import { ColorOptionType } from '../private/types';
 
 // Vieolo UI
-import { TypographyParagraphSmall } from '../typography';
+import Typography from '../typography/typography';
 
+// Types
+import { ColorOptionType } from '../private/types';
 
 export type DropDownMenuItemType = {
     title: string,
@@ -154,6 +155,6 @@ function DropDownMenuItem(props: {
             props.icon &&
             props.icon
         }
-        <TypographyParagraphSmall text={props.title} fontWeight='bold' />
+        <Typography type='paragraph-small' text={props.title} fontWeight='bold' />
     </div>
 }

@@ -1,12 +1,12 @@
 // React
 import React, { useState } from 'react';
 
-// Component
+// Vieolo UI
 import TimeInput from '../../lib/date_time/time_input';
+import Typography from '../../lib/typography/typography';
 
 // Types
 import { ViewData } from '../main/main';
-import { TypographyParagraphMedium } from '../../lib/typography';
 
 type TimeInputPropsType = React.ComponentProps<typeof TimeInput>;
 
@@ -31,7 +31,7 @@ export function TimeInputCreator(props: {p: TimeInputPropsType}) {
 
     return <div>
 
-        <TypographyParagraphMedium text={`Hour: ${hour} -- Minute: ${minute}`} />
+        <Typography text={`Hour: ${hour} -- Minute: ${minute}`} />
 
         <div className="padding-vertical--one"></div>
 

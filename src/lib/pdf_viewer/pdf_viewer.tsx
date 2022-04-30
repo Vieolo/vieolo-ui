@@ -23,9 +23,9 @@ import { PDFDocumentProxy } from 'pdfjs-dist/types/display/api';
 import Device, { DeviceSizeCategory } from '@vieolo/device-js';
 
 
-// Internal
+// Vieolo UI
 import { getPDFDocument, renderPDFPageAsCanvas } from './pdf_renderer';
-import { TypographyParagraphMedium } from '../typography';
+import Typography from '../typography/typography';
 import Spinner from '../auxiliary/spinner';
 import Spacer from '../layout/auxiliary/spacer';
 
@@ -146,13 +146,13 @@ export default function PDFViewer(props: {
 
 	if (state === 'error') {
 		content = <span className='vieolo-pdf-viewer-component__content'>
-			<TypographyParagraphMedium text={props.errorMessage || "There was a problem loading the PDF file!"} color={'error'} />
+			<Typography text={props.errorMessage || "There was a problem loading the PDF file!"} color={'error'} />
 		</span>
 	} else {
 		if (state === 'loading') content = <span className='vieolo-pdf-viewer-component__content'>
 			<Spinner />
 			<Spacer height='one' />
-			<TypographyParagraphMedium text={fileName} />
+			<Typography text={fileName} />
 		</span>
 		else {
 			let pages = [];
@@ -225,7 +225,7 @@ export default function PDFViewer(props: {
 			</div>
 
 			<div>
-				<TypographyParagraphMedium text={state === 'done' ? `${currentPage} / ${totalPage}` : ""} />
+				<Typography text={state === 'done' ? `${currentPage} / ${totalPage}` : ""} />
 			</div>
 
 			<div className="flex-start column-gap--half">

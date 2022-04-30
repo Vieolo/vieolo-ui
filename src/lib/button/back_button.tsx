@@ -8,7 +8,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBackIosRounded';
 import IconButton from './icon_button';
 
 // Typography
-import TypographyTitleMedium from '../typography/typography_title_medium';
+import Typography from '../typography/typography';
 
 
 export default function BackButton(props: {
@@ -27,6 +27,6 @@ export default function BackButton(props: {
             color={'primary'}
             onClick={() => {onBack();}}
             />
-        <TypographyTitleMedium text={backButtonText} />
+        <Typography type='title-medium' text={backButtonText} />
     </div>
 }

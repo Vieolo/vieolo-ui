@@ -1,5 +1,5 @@
 // Vieolo UI
-import { TypographyBase, TypographyParagraphMedium, TypographyParagraphSmall } from "../typography";
+import Typography from "../typography/typography";
 import Card from "./card";
 import Flex from '../layout/flex/flex';
 import Spacer from '../layout/auxiliary/spacer';
@@ -52,7 +52,8 @@ export default function ClickableCard(props: {
                     props.icon
                 }
 
-                <TypographyParagraphMedium
+                <Typography
+                    type="paragraph-medium"
                     text={props.title}
                     fontWeight='bold'
                     fontFamily="secondary"
@@ -75,14 +76,15 @@ export default function ClickableCard(props: {
                 <Spacer height="one" />
                 {
                     typeof props.description === 'string'
-                        ? <TypographyParagraphSmall
+                        ? <Typography
+                            type="paragraph-small"
                             text={props.description}
                             color={props.emphasis === 'high' ? props.color || 'primary' : undefined}
                             colorType={props.emphasis === 'high' ? 'text' : undefined}
                         />
-                        : <TypographyBase
+                        : <Typography
+                            type={props.description.typographyType || 'paragraph-small'}
                             text={props.description.text}
-                            className={`typography-${props.description.typographyType || 'paragraph-small'}`}
                             textAlign={props.description.textAlign}
                             color={props.emphasis === 'high' ? props.color || 'primary' : undefined}
                             colorType={props.emphasis === 'high' ? 'text' : undefined}

@@ -3,7 +3,7 @@ import React from 'react';
 
 // Vieolo UI
 import Button from '../button/button';
-import { TypographyParagraphMedium, TypographyParagraphSmall } from '../typography';
+import Typography from '../typography/typography';
 
 // Installed Packges
 import { fileNameValidation } from '@vieolo/validation-js';
@@ -77,13 +77,13 @@ export default function FileInput(props: {
             }
             {
                 props.text &&
-                <TypographyParagraphMedium text={props.text} />
+                <Typography text={props.text} />
             }
 
             {
                 (props.text && props.browseButtonConfig) &&
                 <div className="padding--one">
-                    <TypographyParagraphSmall text={'or'} />
+                    <Typography type='paragraph-small' text={'or'} />
                 </div>
             }
 

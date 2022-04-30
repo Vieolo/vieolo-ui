@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Types
-import { ColorOptionType, FontWeightType } from '../private/types';
+import { ColorOptionType, FontWeightType, TypographyOptionTypes } from '../private/types';
 
 
 export type TypographyTextAlign = "left" | "center" | "right" | "justify";
@@ -11,8 +11,10 @@ export type TypographyMargin = "0" | "5" | "10" | "20" | "half" | "one" | "two";
 export type TypographyColorType = 'normal' | 'text' | 'light' | 'text-light';
 
 
-export default function TypographyBase(props: {
-    className: string,
+export default function Typography(props: {
+    /** default: paragraph-medium */
+    type?: TypographyOptionTypes,
+    className?: string,
     text: string,
     showTitle?: boolean,
     dataTestID?: string,
@@ -25,12 +27,15 @@ export default function TypographyBase(props: {
     fontFamily?: TypographyFontFamily,
     textAlign?: TypographyTextAlign
 }) {
-    let finalClassName = `color--${props.color || (props.className.includes("caption") ? 'gray' : 'default')}-${props.colorType || 'normal'} `;
+    let finalType = props.type || 'paragraph-medium';
+    
+    let finalClassName = `color--${props.color || (finalType.includes("caption") ? 'gray' : 'default')}-${props.colorType || 'normal'} `;
     finalClassName += `margin-vertical--${props.margin || "0"} `;
-    finalClassName += `font-weight--${props.fontWeight || (props.className.includes("title") ? 'bold' : 'normal')} `;
+    finalClassName += `font-weight--${props.fontWeight || (finalType.includes("title") ? 'bold' : 'normal')} `;
     finalClassName += `font-family--${props.fontFamily || 'primary'} `;
     if (props.textAlign) finalClassName += `text-align--${props.textAlign} `;
-    finalClassName += `${props.className} `;
+    if (props.className) finalClassName += `${props.className} `;
+    finalClassName += `typography-${finalType}`
 
 
     return <p

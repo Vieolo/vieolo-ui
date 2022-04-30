@@ -4,7 +4,7 @@ import React from 'react';
 // Component
 import ConfirmationDialog from '../../lib/dialog/confirmationDialog';
 import Button from '../../lib/button/button';
-import { TypographyCaptionLarge, TypographyParagraphMedium } from '../../lib/typography';
+import Typography from '../../lib/typography/typography';
 
 
 // Types
@@ -59,9 +59,9 @@ export function ConfirmationDialogCreator(props: { p: ConfirmationDialogPropsTyp
                 (props.p as any).messageType === 'string'
                     ? "Are you sure you want to continue?"
                     : <div>
-                        <TypographyParagraphMedium text='Are you sure you want to continue?' />
+                        <Typography text='Are you sure you want to continue?' />
                         <div className="padding--half"></div>
-                        <TypographyCaptionLarge text='This action is not reversible' />
+                        <Typography type='caption-large' text='This action is not reversible' />
                         <div className="padding--half"></div>
                         <Button 
                             color='secondary'

@@ -14,9 +14,9 @@ export default function Textarea (props: {
 
     let size = props.size || 'medium';
     let width = '180px';
-    if (size == 'small') width = '100px';
-    else if (size == 'large') width = '240px';
-    else if (size == 'full') width = '100%';
+    if (size === 'small') width = '100px';
+    else if (size === 'large') width = '240px';
+    else if (size === 'full') width = '100%';
 
     return <textarea
         value={props.value} 

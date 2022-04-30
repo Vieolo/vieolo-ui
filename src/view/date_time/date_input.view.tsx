@@ -1,15 +1,15 @@
 // React
 import React, { useState } from 'react';
 
-// Component
+// Vieolo UI
 import DateInput from '../../lib/date_time/date_input';
+import Typography from '../../lib/typography/typography';
 
 // Types
 import { ViewData } from '../main/main';
 
 // Installed Packages
 import VDate from '@vieolo/date';
-import { TypographyParagraphMedium } from '../../lib/typography';
 
 type DateInputPropsType = React.ComponentProps<typeof DateInput>;
 
@@ -33,7 +33,7 @@ export function DateInputCreator(props: { p: DateInputPropsType }) {
 
     return <div>
 
-        <TypographyParagraphMedium text={`Date: ${!date ? 'null' : date.formatDate('dd/mm/yyyy')}`} />
+        <Typography text={`Date: ${!date ? 'null' : date.formatDate('dd/mm/yyyy')}`} />
 
         <div className="padding--one"></div>
 

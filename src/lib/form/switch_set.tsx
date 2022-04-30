@@ -3,10 +3,7 @@ import React from 'react';
 
 // Vieolo UI
 import Switch from './switch';
-
-// Typography
-import TypographyParagraphLarge from '../typography/typography_paragraph_large';
-import TypographyCaptionLarge from '../typography/typography_caption_large';
+import Typography from '../typography/typography';
 
 // Types
 import { RowHeightType } from '../private/types';
@@ -48,7 +45,7 @@ export default function SwitchSet (props: {
         <div className="vieolo-switch-set__title-container" onClick={() => props.onChange(!props.on)}>
             {
                 typeof props.title === 'string'
-                    ? <TypographyParagraphLarge text={props.title} />
+                    ? <Typography type='paragraph-large' text={props.title} />
                     : <>
                         {props.title}
                     </>                
@@ -58,7 +55,7 @@ export default function SwitchSet (props: {
                 <>
                     {
                         typeof props.subtitle === 'string'
-                            ? <TypographyCaptionLarge text={props.subtitle} />
+                            ? <Typography type='caption-large' text={props.subtitle} />
                             : <>
                                 {props.subtitle}
                             </>
