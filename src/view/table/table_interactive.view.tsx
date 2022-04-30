@@ -40,7 +40,7 @@ export function TableInteractiveCreator(props: {p: TableInteractivePropsType}) {
                 date: new VDate().addDay(i).formatDate(),
                 item: `item ${i}`,
                 price: (i * 12) || 5,
-                group: i === 5 ? 4 : undefined
+                group: i === 5 ? 14 : undefined
             })
         }
         setData(x);

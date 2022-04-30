@@ -53,8 +53,6 @@ export default function TableInteractive(props: {
     width?: string,
     showBottomRow?: boolean,
     isDense?: boolean,
-    /** @deprecated */
-    columnSelectedTotalFormat?: { [column: number]: (total: number) => string }
 }): JSX.Element {
 
     let [selectedCells, setSelectedCells] = useState<string[]>([]);
@@ -152,7 +150,7 @@ export default function TableInteractive(props: {
                             if (r.span) {
                                 className += ' position--relative';
 
-                                style.height = `calc(${r.span.span + 1}00% + ${r.span.span + 1}px)`;
+                                style.height = r.span.span * (props.isDense ? 30 : 40 ) // `calc(${r.span.span + 1}00% + ${r.span.span + 1}px)`;
                                 style.position = 'absolute';
                                 style.top = '0';
                                 style.left = '0';
@@ -185,13 +183,13 @@ export default function TableInteractive(props: {
                                     }
                                 }}
                                 onMouseDown={e => {
-                                    if (r.selectable && r.numericalValue) {
+                                    if (r.selectable && r.numericalValue !== undefined) {
                                         if (selectedCells.length === 0) toggleSelectCell(k, r.numericalValue, 'only-entry', ri)
                                         else toggleSelectCell(k, r.numericalValue, 'reset', ri)
                                     }
                                 }}
                                 onMouseEnter={e => {
-                                    if (r.selectable && e.buttons && r.numericalValue) {
+                                    if (r.selectable && e.buttons && r.numericalValue !== undefined) {
                                         if (selectedCells.includes(k)) toggleSelectCell(k, r.numericalValue, 'remove-last', ri)
                                         else toggleSelectCell(k, r.numericalValue, 'add', ri)
                                     }
