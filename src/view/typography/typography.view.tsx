@@ -31,6 +31,7 @@ export function typographyOptions(): ViewData {
                 ]
             },
             showTitle: 'booleanTrueDefault',
+            customHoverTitle: 'boolean',
             color: 'colorsOptional',
             colorType: {
                 options: ["normal", 'text', "light", "text-light"],
@@ -70,5 +71,6 @@ export function TypographyCreator(props: { p: TypographyPropsType }) {
         style={{fontStyle: (props.p as any).italic ? "italic" : "normal"}}
         textAlign={props.p.textAlign}
         nonselectable={props.p.nonselectable}
+        hoverTitle={(props.p as any).customHoverTitle ? "This is a different text from the main one" : undefined}
     />
 }

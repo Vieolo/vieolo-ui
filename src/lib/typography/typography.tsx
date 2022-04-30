@@ -26,7 +26,9 @@ export default function Typography(props: {
     style?: React.CSSProperties,
     fontFamily?: TypographyFontFamily,
     textAlign?: TypographyTextAlign,
-    nonselectable?: boolean
+    nonselectable?: boolean,
+    /** This is the title that appears natively by the browser when the user hovers over the text */
+    hoverTitle?: string
 }) {
     let finalType = props.type || 'paragraph-medium';
     
@@ -43,7 +45,7 @@ export default function Typography(props: {
 
     return <p
         className={finalClassName.trim()}
-        title={props.showTitle ? props.text : ""}
+        title={props.showTitle ? (props.hoverTitle || props.text) : ""}
         aria-label={props.ariaLabel}
         data-testid={props.dataTestID}
         style={props.style}
