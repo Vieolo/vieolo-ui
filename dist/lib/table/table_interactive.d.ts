@@ -30,9 +30,5 @@ export default function TableInteractive(props: {
     width?: string;
     showBottomRow?: boolean;
     isDense?: boolean;
-    /** @deprecated */
-    columnSelectedTotalFormat?: {
-        [column: number]: (total: number) => string;
-    };
 }): JSX.Element;
 export {};

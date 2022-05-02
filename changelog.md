@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.21.0 (2022-05-02)
+- Added custom hover title for `Typography` ([#166](https://github.com/Vieolo/vieolo-ui/issues/166))
+- Add the ability to disable selectability of text for `Typography` ([#167](https://github.com/Vieolo/vieolo-ui/issues/167))
+- Fixed the selection of cells with numeric value of 0 in `TableInteractive` ([#171](https://github.com/Vieolo/vieolo-ui/issues/171))
+- Fixed the hight of overlay in `TableInteractive` ([#172](https://github.com/Vieolo/vieolo-ui/issues/172))
+
+#### Breaking Changes
+- Unified all of the typography components into a single `Typography` component
+
 ## 0.20.9 (2022-04-29)
 - Added color to items of `DropDownMenu` ([#154](https://github.com/Vieolo/vieolo-ui/issues/154))
 - Added selectability to `TableInteractive` ([#158](https://github.com/Vieolo/vieolo-ui/issues/158))

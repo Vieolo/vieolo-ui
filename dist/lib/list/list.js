@@ -1,10 +1,9 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 // React
 import { useState } from 'react';
-// Typography
-import TypographyTitleMedium from '../typography/typography_title_medium';
 // Vieolo UI
 import ItemRow from './item_row';
+import Typography from '../typography/typography';
 import ExpandableCard from '../card/expandable_card';
 export default function List(props) {
     let [query, setQuery] = useState("");
@@ -38,7 +37,7 @@ export default function List(props) {
         }
     }
     return _jsxs("div", Object.assign({ className: `vieolo-list padding-horizontal--${props.horizontalPadding || 'none'}`, style: { height: props.height } }, { children: [props.title &&
-                _jsx("div", Object.assign({ className: "center-by-flex-row" }, { children: _jsx(TypographyTitleMedium, { text: props.title, className: "margin-vertical--10" }, void 0) }), void 0),
+                _jsx("div", Object.assign({ className: "center-by-flex-row" }, { children: _jsx(Typography, { type: 'title-medium', text: props.title, className: "margin-vertical--10" }, void 0) }), void 0),
             props.enableSearch &&
                 _jsx(ItemRow, { itemStyle: props.itemStyle, searchRow: {
                         query: query,

@@ -1,10 +1,10 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import Modal from "./modal";
 import Button from '../button/button';
-import { TypographyParagraphLarge } from "../typography";
+import Typography from "../typography/typography";
 export default function FormDialog(props) {
     let dialog = _jsxs("div", Object.assign({ className: "vieolo-confirmation-dialog", "aria-label": "Confirmation Dialog" }, { children: [_jsx("div", Object.assign({ className: "vieolo-form-dialog__message", style: { width: props.width, padding: props.padding === undefined ? 10 : props.padding } }, { children: typeof props.message === 'string'
-                    ? _jsx(TypographyParagraphLarge, { text: props.message }, void 0)
+                    ? _jsx(Typography, { type: "paragraph-large", text: props.message }, void 0)
                     : _jsx(_Fragment, { children: props.message }, void 0) }), void 0),
             _jsxs("div", Object.assign({ className: "vieolo-confirmation-dialog__footer" }, { children: [_jsx("div", { className: "vieolo-confirmation-dialog__footer__spacer--left" }, void 0),
                     !props.removeRejectButton &&

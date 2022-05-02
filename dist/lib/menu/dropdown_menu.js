@@ -2,7 +2,7 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 // React
 import { useState, useRef, useEffect } from 'react';
 // Vieolo UI
-import { TypographyParagraphSmall } from '../typography';
+import Typography from '../typography/typography';
 export default function DropDownMenu(props) {
     let [open, setOpen] = useState(false);
     let [top, setTop] = useState(0);
@@ -88,5 +88,5 @@ export default function DropDownMenu(props) {
 function DropDownMenuItem(props) {
     return _jsxs("div", Object.assign({ className: `vieolo-dropdown-menu__dropdown-item color--${props.color || 'primary'}-normal`, onClick: () => { props.onClick(props.value); } }, { children: [props.icon &&
                 props.icon,
-            _jsx(TypographyParagraphSmall, { text: props.title, fontWeight: 'bold' }, void 0)] }), void 0);
+            _jsx(Typography, { type: 'paragraph-small', text: props.title, fontWeight: 'bold' }, void 0)] }), void 0);
 }

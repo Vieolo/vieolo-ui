@@ -3,8 +3,7 @@ import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-run
 import { useState } from 'react';
 import IconButton from '../button/icon_button';
 // Vieolo UI
-import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
-import TypographyTitleSmall from '../typography/typography_title_small';
+import Typography from '../typography/typography';
 import Checkbox from '../form/checkbox';
 // Material UI
 import LeftArrowIcon from '@mui/icons-material/ArrowLeft';
@@ -37,7 +36,7 @@ export default function Table(props) {
                                             if (!props.disableSort && props.onSortChange && props.sortBy && props.sortDirection) {
                                                 props.onSortChange(h, props.sortBy === h ? props.sortDirection === 'ascending' ? 'descending' : 'ascending' : (props.defaultDirection || 'ascending'));
                                             }
-                                        } }, { children: [_jsx(TypographyTitleSmall, { text: h }, void 0),
+                                        } }, { children: [_jsx(Typography, { type: 'title-small', text: h }, void 0),
                                             (props.sortBy === h && !props.disableSort) &&
                                                 _jsx(_Fragment, { children: props.sortDirection === 'ascending'
                                                         ? _jsx("p", { children: "\u2193" }, void 0)
@@ -73,13 +72,13 @@ export default function Table(props) {
                                         _jsx("div", Object.assign({ className: 'center-by-flex-row cursor--move' }, { children: _jsx(ReorderIcon, {}, void 0) }), void 0),
                                     row.items.map((r, z) => {
                                         return _jsx("div", Object.assign({ className: "vieolo-table__content-row__cell", "aria-label": `${props.ariaLabel || 'table'} cell ${row.id}_${z}` }, { children: typeof r === 'string'
-                                                ? _jsx(TypographyParagraphMedium, { text: r }, void 0)
+                                                ? _jsx(Typography, { text: r }, void 0)
                                                 : r }), `table_row_${row.id}_${z}_div`);
                                     })] }), `table_row_${row.id}`);
                         }) }), void 0)] }), void 0),
             props.pagination &&
                 _jsx("div", Object.assign({ className: `vieolo-table__pagination-row ${props.maxHeight && 'position--sticky--bottom-0'}` }, { children: _jsxs("div", Object.assign({ className: "width--px-150 flex flex--space-around flex--align-items-center" }, { children: [_jsx(IconButton, { icon: _jsx(LeftArrowIcon, {}, void 0), onClick: () => props.pagination.onPageChange(props.pagination.pageNumber - 1), color: 'primary', size: 'small', disabled: props.pagination.pageNumber === 1, ariaLabel: `${props.ariaLabel || 'table'} pagination previous page` }, void 0),
-                            _jsx("div", Object.assign({ className: "width--px-100 border-radius--half background-color--primary-normal padding-vertical--5 center-by-flex-row" }, { children: _jsx(TypographyParagraphMedium, { text: `${props.pagination.startIndex} - ${props.pagination.endIndex}`, className: "color--primary-text", ariaLabel: `${props.ariaLabel || 'table'} page number` }, void 0) }), void 0),
+                            _jsx("div", Object.assign({ className: "width--px-100 border-radius--half background-color--primary-normal padding-vertical--5 center-by-flex-row" }, { children: _jsx(Typography, { text: `${props.pagination.startIndex} - ${props.pagination.endIndex}`, className: "color--primary-text", ariaLabel: `${props.ariaLabel || 'table'} page number` }, void 0) }), void 0),
                             _jsx(IconButton, { icon: _jsx(RightArrowIcon, {}, void 0), onClick: () => props.pagination.onPageChange(props.pagination.pageNumber + 1), color: 'primary', size: 'small', disabled: !props.pagination.hasNextPage, ariaLabel: `${props.ariaLabel || 'table'} pagination next page` }, void 0)] }), void 0) }), void 0)] }), void 0);
 }
 function moveItem(data, from, to) {

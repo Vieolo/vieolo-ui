@@ -15,9 +15,9 @@ import { ShareIcon } from '../icons/icons';
 import IconButton from '../button/icon_button';
 import Modal from '../dialog/modal';
 import Device, { DeviceSizeCategory } from '@vieolo/device-js';
-// Internal
+// Vieolo UI
 import { getPDFDocument, renderPDFPageAsCanvas } from './pdf_renderer';
-import { TypographyParagraphMedium } from '../typography';
+import Typography from '../typography/typography';
 import Spinner from '../auxiliary/spinner';
 import Spacer from '../layout/auxiliary/spacer';
 export default function PDFViewer(props) {
@@ -95,13 +95,13 @@ export default function PDFViewer(props) {
     let content;
     let state = documentLoadError ? 'error' : !doc ? 'loading' : 'done';
     if (state === 'error') {
-        content = _jsx("span", Object.assign({ className: 'vieolo-pdf-viewer-component__content' }, { children: _jsx(TypographyParagraphMedium, { text: props.errorMessage || "There was a problem loading the PDF file!", color: 'error' }, void 0) }), void 0);
+        content = _jsx("span", Object.assign({ className: 'vieolo-pdf-viewer-component__content' }, { children: _jsx(Typography, { text: props.errorMessage || "There was a problem loading the PDF file!", color: 'error' }, void 0) }), void 0);
     }
     else {
         if (state === 'loading')
             content = _jsxs("span", Object.assign({ className: 'vieolo-pdf-viewer-component__content' }, { children: [_jsx(Spinner, {}, void 0),
                     _jsx(Spacer, { height: 'one' }, void 0),
-                    _jsx(TypographyParagraphMedium, { text: fileName }, void 0)] }), void 0);
+                    _jsx(Typography, { text: fileName }, void 0)] }), void 0);
         else {
             let pages = [];
             for (let i = 1; i <= totalPage; i++) {
@@ -133,7 +133,7 @@ export default function PDFViewer(props) {
                                         }
                                     }
                                 } }, void 0) }), void 0),
-                    _jsx("div", { children: _jsx(TypographyParagraphMedium, { text: state === 'done' ? `${currentPage} / ${totalPage}` : "" }, void 0) }, void 0),
+                    _jsx("div", { children: _jsx(Typography, { text: state === 'done' ? `${currentPage} / ${totalPage}` : "" }, void 0) }, void 0),
                     _jsxs("div", Object.assign({ className: "flex-start column-gap--half" }, { children: [_jsx(IconButton, { size: "extra-small", icon: _jsx(ZoomOutIcon, {}, void 0), onClick: () => { setZoomMultiple(zoomMultiple - 0.1); }, disabled: state !== 'done' }, void 0),
                             _jsx(IconButton, { size: "extra-small", icon: _jsx(ZoomInIcon, {}, void 0), onClick: () => { setZoomMultiple(zoomMultiple + 0.1); }, disabled: state !== 'done' }, void 0)] }), void 0),
                     _jsxs("div", Object.assign({ className: "flex-start column-gap--half" }, { children: [("share" in window.navigator) &&
