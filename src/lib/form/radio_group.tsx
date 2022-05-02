@@ -1,4 +1,5 @@
-import TypographyParagraphMedium from "../typography/typography_paragraph_medium";
+// Vieolo UI
+import Typography from "../typography/typography";
 
 export type RadioButtonType = {
     id: string,
@@ -35,7 +36,7 @@ export default function RadioGroup(props: {
                     >
                         {
                             typeof o.button === 'string'
-                                ? <TypographyParagraphMedium text={o.button} />
+                                ? <Typography text={o.button} />
                                 : <>
                                     {o.button}
                                 </>

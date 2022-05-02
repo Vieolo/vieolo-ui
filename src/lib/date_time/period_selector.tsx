@@ -1,7 +1,3 @@
-// Typography
-import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
-
-
 // Material UI
 import LeftArrow from '@mui/icons-material/KeyboardArrowLeft';
 import RightArrow from '@mui/icons-material/KeyboardArrowRight';
@@ -9,6 +5,7 @@ import DownArrow from '@mui/icons-material/KeyboardArrowDown';
 
 
 // Vieolo UI
+import Typography from '../typography/typography';
 import IconButton from '../button/icon_button';
 import DropDownMenu from '../menu/dropdown_menu';
 
@@ -84,7 +81,7 @@ export default function PeriodSelector (props: {
                 borderWidth={'0'}
             />
 
-            <TypographyParagraphMedium text={getSelectedDateRepresentation()} />
+            <Typography text={getSelectedDateRepresentation()} />
 
             <IconButton 
                 icon={<RightArrow />}
@@ -95,7 +92,7 @@ export default function PeriodSelector (props: {
         </div>
 
         <div className="vieolo-period-selector__year-div">
-            <TypographyParagraphMedium text={props.selectedDate.getFullYear().toString()} />
+            <Typography text={props.selectedDate.getFullYear().toString()} />
         </div>
 
         {  

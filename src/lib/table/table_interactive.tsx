@@ -3,16 +3,18 @@ import React, { useState } from 'react';
 
 // Vieolo UI
 import Flex from '../layout/flex/flex';
-import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
-import TypographyParagraphSmall from '../typography/typography_paragraph_small';
-import TypographyTitleSmall from '../typography/typography_title_small';
+import Typography from '../typography/typography';
+import Input from '../form/input';
+import IconButton from '../button/icon_button';
+
+// Icons
+import { CloseIcon } from '../icons/icons';
 
 // Types
 import { ColorOptionType } from '../private/types';
+
+// Installed Packages
 import { toFixedFloat } from '@vieolo/parsers';
-import Input from '../form/input';
-import IconButton from '../button/icon_button';
-import { CloseIcon } from '../icons/icons';
 
 
 export type TableInteractiveCell = {
@@ -53,8 +55,6 @@ export default function TableInteractive(props: {
     width?: string,
     showBottomRow?: boolean,
     isDense?: boolean,
-    /** @deprecated */
-    columnSelectedTotalFormat?: { [column: number]: (total: number) => string }
 }): JSX.Element {
 
     let [selectedCells, setSelectedCells] = useState<string[]>([]);
@@ -101,7 +101,7 @@ export default function TableInteractive(props: {
                 props.headers.map(h => {
                     let s = typeof h === 'string' ? h : h.name;
                     return <div className={cellClass} key={s}>
-                        <TypographyTitleSmall text={s} />
+                        <Typography type='title-small' text={s} />
                     </div>
                 })
             }
@@ -152,7 +152,7 @@ export default function TableInteractive(props: {
                             if (r.span) {
                                 className += ' position--relative';
 
-                                style.height = `calc(${r.span.span + 1}00% + ${r.span.span + 1}px)`;
+                                style.height = r.span.span * (props.isDense ? 30 : 40 ) // `calc(${r.span.span + 1}00% + ${r.span.span + 1}px)`;
                                 style.position = 'absolute';
                                 style.top = '0';
                                 style.left = '0';
@@ -167,7 +167,7 @@ export default function TableInteractive(props: {
                             // If the header contains the `formatter` function, the value of formatter function is displayed
                             let header = props.headers[ri];
 
-                            if (typeof r.value === 'string' || typeof r.value === 'number') finalNode = <TypographyParagraphMedium text={typeof header === 'string' ? r.value.toString() : header.formatter(r.numericalValue || r.value)} />;
+                            if (typeof r.value === 'string' || typeof r.value === 'number') finalNode = <Typography text={typeof header === 'string' ? r.value.toString() : header.formatter(r.numericalValue || r.value)} />;
 
 
                             return <div
@@ -185,13 +185,13 @@ export default function TableInteractive(props: {
                                     }
                                 }}
                                 onMouseDown={e => {
-                                    if (r.selectable && r.numericalValue) {
+                                    if (r.selectable && r.numericalValue !== undefined) {
                                         if (selectedCells.length === 0) toggleSelectCell(k, r.numericalValue, 'only-entry', ri)
                                         else toggleSelectCell(k, r.numericalValue, 'reset', ri)
                                     }
                                 }}
                                 onMouseEnter={e => {
-                                    if (r.selectable && e.buttons && r.numericalValue) {
+                                    if (r.selectable && e.buttons && r.numericalValue !== undefined) {
                                         if (selectedCells.includes(k)) toggleSelectCell(k, r.numericalValue, 'remove-last', ri)
                                         else toggleSelectCell(k, r.numericalValue, 'add', ri)
                                     }
@@ -244,9 +244,9 @@ function BottomRow(props: {
         {
             (props.selectedCells.length > 0 && !isNaN(props.numericTotal) && props.header) &&
             <Flex direction='row' alignItems='center' className='height--pc-100 padding-horizontal--one' justifyContent='space-between'>
-                <TypographyParagraphSmall text={`Count: ${props.selectedCells.length}`} fontWeight='bold' />
-                <TypographyParagraphSmall text={`Average: ${format(average)}`} fontWeight='bold' />
-                <TypographyParagraphSmall text={`Total: ${format(props.numericTotal)}`} fontWeight='bold' />
+                <Typography type='paragraph-small' text={`Count: ${props.selectedCells.length}`} fontWeight='bold' />
+                <Typography type='paragraph-small' text={`Average: ${format(average)}`} fontWeight='bold' />
+                <Typography type='paragraph-small' text={`Total: ${format(props.numericTotal)}`} fontWeight='bold' />
             </Flex>
 
         }

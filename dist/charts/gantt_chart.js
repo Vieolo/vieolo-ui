@@ -9,9 +9,7 @@ import AllIcon from '@mui/icons-material/TonalityRounded';
 import ContextMenu from '../lib/menu/context_menu';
 import RadioGroup from '../lib/form/radio_group';
 // Typography
-import TypographyParagraphMedium from '../lib/typography/typography_paragraph_medium';
-import TypographyParagraphSmall from '../lib/typography/typography_paragraph_small';
-import TypographyCaptionMedium from '../lib/typography/typography_caption_medium';
+import Typography from '../lib/typography/typography';
 // Installed Packages
 import { toFixed } from '@vieolo/parsers/number_parsers';
 export default function GanttChart(props) {
@@ -145,7 +143,7 @@ export default function GanttChart(props) {
             resizeItem.el.style.left = `${left}%`;
         }
     }
-    return _jsxs("div", Object.assign({ className: "vieolo-gantt-chart", style: { height: chartHeight + 'px' } }, { children: [_jsxs("div", Object.assign({ className: "vieolo-gantt-chart__base" }, { children: [_jsx("div", Object.assign({ className: "vieolo-gantt-chart__base__item-column" }, { children: _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__base__item-column__item-title", style: { height: props.columnGroups ? '65px' : '45px' } }, { children: [_jsx(TypographyParagraphMedium, { text: props.dataTitle }, void 0),
+    return _jsxs("div", Object.assign({ className: "vieolo-gantt-chart", style: { height: chartHeight + 'px' } }, { children: [_jsxs("div", Object.assign({ className: "vieolo-gantt-chart__base" }, { children: [_jsx("div", Object.assign({ className: "vieolo-gantt-chart__base__item-column" }, { children: _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__base__item-column__item-title", style: { height: props.columnGroups ? '65px' : '45px' } }, { children: [_jsx(Typography, { text: props.dataTitle }, void 0),
                                 _jsx(RadioGroup, { horizontalButtonPadding: 7, onOptionChange: v => setFilter(v), options: [
                                         { button: _jsx(AllIcon, {}, void 0), id: 'All' },
                                         { button: _jsx(SelectedIcon, {}, void 0), id: 'Full' },
@@ -155,9 +153,9 @@ export default function GanttChart(props) {
                         return _jsx("div", Object.assign({ className: "vieolo-gantt-chart__base__data-column", style: { width: colWidth } }, { children: _jsxs("div", Object.assign({ className: `vieolo-gantt-chart__base__data-column__title-container${t.onClick ? ' clickable' : ''}`, style: { paddingBottom: props.columnGroups ? '0px' : '0', height: props.columnGroups ? '45px' : '45px', width: "100%" }, onClick: () => {
                                     if (t.onClick)
                                         t.onClick();
-                                } }, { children: [_jsx(TypographyParagraphMedium, { text: t.title }, void 0),
+                                } }, { children: [_jsx(Typography, { text: t.title }, void 0),
                                     t.subtitle &&
-                                        _jsx(TypographyCaptionMedium, { text: t.subtitle }, void 0)] }), void 0) }), `${t}_${i}`);
+                                        _jsx(Typography, { type: 'caption-medium', text: t.subtitle }, void 0)] }), void 0) }), `${t}_${i}`);
                     })] }), void 0),
             props.columnGroups &&
                 _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__group-div" }, { children: [_jsx("div", { className: "vieolo-gantt-chart__group-div__item-column" }, void 0),
@@ -166,7 +164,7 @@ export default function GanttChart(props) {
                                 let width = ((g.end - g.start) / props.columnTitles.length) * 100;
                                 let right = (g.end / props.columnTitles.length) * 100;
                                 let style = { left: `${left}%`, width: `${width}%`, right: `${right}%` };
-                                return _jsx("div", Object.assign({ className: 'vieolo-gantt-chart__group-div__group-column__group-bar', style: style }, { children: _jsx(TypographyParagraphSmall, { text: g.title }, void 0) }), `${g.title}_${i}`);
+                                return _jsx("div", Object.assign({ className: 'vieolo-gantt-chart__group-div__group-column__group-bar', style: style }, { children: _jsx(Typography, { text: g.title }, void 0) }), `${g.title}_${i}`);
                             }) }), void 0)] }), void 0),
             _jsx("div", Object.assign({ className: "vieolo-gantt-chart__content-div", style: { top: props.columnGroups ? '65px' : '45px', maxHeight: chartHeight - (props.columnGroups ? 65 : 45) } }, { children: finalData.map((row, rowIndex) => {
                     let dataRow = row.items;
@@ -196,7 +194,7 @@ export default function GanttChart(props) {
                                     }
                                 } }, { children: [_jsx("p", Object.assign({ className: "vieolo-gantt-chart__content-div__row__item-column__title", title: row.title }, { children: row.title }), void 0),
                                     row.subtitle &&
-                                        _jsx(TypographyParagraphSmall, { text: row.subtitle, showTitle: true }, void 0)] }), row.value + " col title"),
+                                        _jsx(Typography, { type: 'paragraph-small', text: row.subtitle, showTitle: true }, void 0)] }), row.value + " col title"),
                             _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__content-div__row__bar-column", onDragOver: !resizeItem ? undefined : handleItemResize }, { children: [row.supItems &&
                                         row.supItems.map((s, z) => {
                                             let supLeft = (s.from / props.columnTitles.length) * 100;

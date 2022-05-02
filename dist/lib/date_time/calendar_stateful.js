@@ -1,8 +1,8 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 // React
 import { useState, useEffect } from 'react';
-// Typography
-import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
+// Vieolo UI
+import Typography from '../typography/typography';
 // Material UI
 import PreviousIcon from '@mui/icons-material/ArrowBackIosRounded';
 import NextIcon from '@mui/icons-material/ArrowForwardIosRounded';
@@ -44,7 +44,7 @@ export default function CalendarStateful(props) {
                             let newDate = new VDate(currentDate).setToMonthStart().addYear(-1);
                             setCurrentDate(newDate);
                         } }, void 0),
-                    _jsx(TypographyParagraphMedium, { text: `${currentDate.getFullYear()}` }, void 0),
+                    _jsx(Typography, { text: `${currentDate.getFullYear()}` }, void 0),
                     _jsx(IconButton, { icon: _jsx(NextIcon, {}, void 0), size: "extra-small", borderRadius: 'normal', ariaLabel: props.ariaLabel + " year increase button", onClick: e => {
                             e.stopPropagation();
                             let newDate = new VDate(currentDate).setToMonthStart().addYear(1);
@@ -55,7 +55,7 @@ export default function CalendarStateful(props) {
                             let newDate = new VDate(currentDate).setToMonthStart().addDay(-1).setToMonthStart();
                             setCurrentDate(newDate);
                         } }, void 0),
-                    _jsx(TypographyParagraphMedium, { text: `${currentDate.formatMonth().split(' ')[0]}` }, void 0),
+                    _jsx(Typography, { text: `${currentDate.formatMonth().split(' ')[0]}` }, void 0),
                     _jsx(IconButton, { icon: _jsx(NextIcon, {}, void 0), size: "extra-small", borderRadius: 'normal', ariaLabel: props.ariaLabel + " month increase button", onClick: e => {
                             e.stopPropagation();
                             let newDate = new VDate(currentDate).setToMonthStart().addDay(33).setToMonthStart();

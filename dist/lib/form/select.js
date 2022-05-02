@@ -1,16 +1,12 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 // React
 import { Fragment, useEffect, useRef, useState } from 'react';
-// Typography
-import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
-import TypographyParagraphSmall from '../typography/typography_paragraph_small';
-import TypographyTitleSmall from '../typography/typography_title_small';
 // Material UI
 import DownIcon from '@mui/icons-material/ArrowDropDownRounded';
 import CloseIcon from '@mui/icons-material/CloseRounded';
-// Components
+// Vieolo UI
 import IconButton from '../button/icon_button';
-import { TypographyCaptionMedium } from '../typography';
+import Typography from '../typography/typography';
 export default function Select(props) {
     let [open, setOpen] = useState(false);
     let [top, setTop] = useState(0);
@@ -166,10 +162,10 @@ export default function Select(props) {
                 } }, { children: [_jsxs("div", Object.assign({ className: "vieolo-select__select-button__button-text", onClick: e => {
                             e.stopPropagation();
                             handleOpen();
-                        } }, { children: [_jsx(TypographyParagraphSmall, { text: props.title, className: "vieolo-select__select-button__button-text__button-title" }, void 0),
+                        } }, { children: [_jsx(Typography, { type: 'paragraph-small', text: props.title, className: "vieolo-select__select-button__button-text__button-title" }, void 0),
                             (props.searchable && open)
                                 ? _jsx("input", { autoFocus: true, value: searchQuery, onChange: e => setSearchQuery(e.target.value), placeholder: "Search...", "aria-label": `Search ${props.title} items` }, void 0)
-                                : _jsx(TypographyTitleSmall, { text: thisSelectedItems.map(s => s.title).join(", "), className: "vieolo-select__select-button__button-text__button-value" }, void 0)] }), void 0),
+                                : _jsx(Typography, { type: 'title-small', text: thisSelectedItems.map(s => s.title).join(", "), className: "vieolo-select__select-button__button-text__button-value" }, void 0)] }), void 0),
                     (!props.clearable || (props.clearable && (!props.selectedItems || props.selectedItems.length === 0)))
                         ? _jsx(DownIcon, {}, void 0)
                         : _jsx(IconButton, { icon: _jsx(CloseIcon, {}, void 0), onClick: () => props.onSelect([]), color: "error", size: "small" }, void 0)] }), void 0),
@@ -188,7 +184,7 @@ function SelectItem(props) {
         className += " vieolo-select__select-item--keyboard-focus";
     return _jsxs(Fragment, { children: [(props.item.category && (!props.previousItem || props.item.category !== props.previousItem.category)) &&
                 _jsx("p", Object.assign({ className: "vieolo-select__select-item__category-name" }, { children: props.item.category }), void 0),
-            _jsxs("div", Object.assign({ className: className, onClick: () => { props.onSelect(props.item); }, ref: props.itemRef, role: "listitem", "aria-label": props.item.title }, { children: [_jsx(TypographyParagraphMedium, { text: props.item.title }, void 0),
+            _jsxs("div", Object.assign({ className: className, onClick: () => { props.onSelect(props.item); }, ref: props.itemRef, role: "listitem", "aria-label": props.item.title }, { children: [_jsx(Typography, { text: props.item.title }, void 0),
                     props.item.subTitle &&
-                        _jsx(TypographyCaptionMedium, { text: props.item.subTitle }, void 0)] }), void 0)] }, void 0);
+                        _jsx(Typography, { type: 'caption-medium', text: props.item.subTitle }, void 0)] }), void 0)] }, void 0);
 }

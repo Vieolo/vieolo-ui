@@ -34,6 +34,7 @@ import TabSwitch from './lib/layout/tab_switch';
 import Textarea from './lib/form/textarea';
 import TextareaSet from './lib/form/textarea_set';
 import TimeInput from './lib/date_time/time_input';
+import Typography from './lib/typography/typography';
 import RadioGroup, { RadioButtonType as RadioButtonTempType } from './lib/form/radio_group';
 import Select from './lib/form/select';
 import Spacer from './lib/layout/auxiliary/spacer';
@@ -103,7 +104,8 @@ export {
     Flex,
     Spinner,
     TableInteractive,
-    ClickableCard
+    ClickableCard,
+    Typography
 }
 
 
@@ -120,20 +122,6 @@ export type RadioButtonType = RadioButtonTempType
 export type DropDownMenuItemType = DropDownMenuItemTypeTemp
 export type ConfirmationDialogMainButton = ConfirmationDialogMainButtonType
 export type TableInteractiveCell = TableInteractiveCellTemp
-
-
-export {
-    TypographyBase,
-    TypographyCaptionLarge,
-    TypographyCaptionMedium,
-    TypographyCaptionSmall,
-    TypographyParagraphLarge,
-    TypographyParagraphMedium,
-    TypographyParagraphSmall,
-    TypographyTitleLarge,
-    TypographyTitleMedium,
-    TypographyTitleSmall
-} from './lib/typography/index'
 
 
 export {

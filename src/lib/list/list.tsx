@@ -1,12 +1,9 @@
 // React
 import React, { ReactNode, useState } from 'react';
 
-
-// Typography
-import TypographyTitleMedium from '../typography/typography_title_medium';
-
 // Vieolo UI
 import ItemRow from './item_row';
+import Typography from '../typography/typography';
 
 // Types
 import { ColorOptionType, RowStyleType } from '../private/types';
@@ -108,7 +105,7 @@ export default function List(props: {
     return <div className={`vieolo-list padding-horizontal--${props.horizontalPadding || 'none'}`} style={{ height: props.height }}>
         {
             props.title &&
-            <div className="center-by-flex-row"><TypographyTitleMedium text={props.title} className="margin-vertical--10" /></div>
+            <div className="center-by-flex-row"><Typography type='title-medium' text={props.title} className="margin-vertical--10" /></div>
         }
 
         {

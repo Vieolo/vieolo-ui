@@ -1,11 +1,9 @@
 // React
 import { Fragment } from "react"
 
-// Typography
-import TypographyTitleSmall from "../typography/typography_title_small"
-
 // Vieolo UI
 import { ColorOptionType, EmphasisType, BorderRadiusType } from "../private/types"
+import Typography from "../typography/typography"
 import Modal from "./modal"
 import IconButton from "../button/icon_button"
 import Button from '../button/button';
@@ -54,7 +52,7 @@ export default function FormDialog(props: {
 
     let dialog = <div className="vieolo-form-dialog" aria-label={props.ariaLabel}>
         <div className="vieolo-form-dialog__header flex-row-space-between">
-            <TypographyTitleSmall text={props.headerTitle} />
+            <Typography type="title-small" text={props.headerTitle} />
             {
                 props.headerRightComponent === 'close' &&
                 <IconButton

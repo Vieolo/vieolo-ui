@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 // Vieolo UI
 import Button from '../button/button';
-import { TypographyParagraphMedium, TypographyParagraphSmall } from '../typography';
+import Typography from '../typography/typography';
 // Installed Packges
 import { fileNameValidation } from '@vieolo/validation-js';
 export default function FileInput(props) {
@@ -31,9 +31,9 @@ export default function FileInput(props) {
             _jsxs("div", Object.assign({ className: 'center-by-flex-column width--pc-100 height--pc-100' }, { children: [props.icon &&
                         _jsx("div", { children: props.icon }, void 0),
                     props.text &&
-                        _jsx(TypographyParagraphMedium, { text: props.text }, void 0),
+                        _jsx(Typography, { text: props.text }, void 0),
                     (props.text && props.browseButtonConfig) &&
-                        _jsx("div", Object.assign({ className: "padding--one" }, { children: _jsx(TypographyParagraphSmall, { text: 'or' }, void 0) }), void 0),
+                        _jsx("div", Object.assign({ className: "padding--one" }, { children: _jsx(Typography, { type: 'paragraph-small', text: 'or' }, void 0) }), void 0),
                     props.browseButtonConfig &&
                         _jsx(Button, { color: props.browseButtonConfig.color, text: props.browseButtonConfig.text, emphasis: props.browseButtonConfig.emphasis, fontSize: 12, height: 'small', type: 'button', onClick: e => {
                                 var _a;

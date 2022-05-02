@@ -1,6 +1,6 @@
 // Vieolo UI
 import Card from "./card";
-import { TypographyParagraphMedium, TypographyParagraphSmall } from "../typography";
+import Typography from "../typography/typography";
 import Divider from "../layout/auxiliary/divider";
 import Spacer from "../layout/auxiliary/spacer";
 import IconButton from "../button/icon_button";
@@ -52,11 +52,11 @@ export default function TitlePeriodCard(props: {
         <div className="vieolo-title-period-card">
             <div className="vieolo-title-period-card__header">
                 <div className="vieolo-title-period-card__header__text">
-                    <TypographyParagraphMedium text={props.title} ariaLabel={`${props.ariaLabel || props.title} title`} />
+                    <Typography type='paragraph-medium' text={props.title} ariaLabel={`${props.ariaLabel || props.title} title`} />
 
                     <div className="vieolo-title-period-card__header__text__date">
-                        <TypographyParagraphMedium text={`${difference} ${differenceText}`} fontWeight="bold" ariaLabel={`${props.ariaLabel || props.title} day difference`} />
-                        <TypographyParagraphSmall text={`${finalStart.formatDate(props.dateDisplayFormat)} - ${finalEnd.formatDate(props.dateDisplayFormat)}`} ariaLabel={`${props.ariaLabel || props.title} dates`} />
+                        <Typography type="paragraph-medium" text={`${difference} ${differenceText}`} fontWeight="bold" ariaLabel={`${props.ariaLabel || props.title} day difference`} />
+                        <Typography type="paragraph-small" text={`${finalStart.formatDate(props.dateDisplayFormat)} - ${finalEnd.formatDate(props.dateDisplayFormat)}`} ariaLabel={`${props.ariaLabel || props.title} dates`} />
                     </div>
                 </div>
 
@@ -95,7 +95,7 @@ export default function TitlePeriodCard(props: {
                     <Spacer height="half" />
                     <Divider direction="horizontal" length="pc-50" position="center" />
                     <Spacer height="half" />
-                    <TypographyParagraphMedium text={props.description} ariaLabel={`${props.ariaLabel || props.title} description`} />
+                    <Typography type="paragraph-medium" text={props.description} ariaLabel={`${props.ariaLabel || props.title} description`} />
                 </div>
             }
         </div>

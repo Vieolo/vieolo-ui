@@ -1,11 +1,10 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-// Typography
-import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
 // Material UI
 import LeftArrow from '@mui/icons-material/KeyboardArrowLeft';
 import RightArrow from '@mui/icons-material/KeyboardArrowRight';
 import DownArrow from '@mui/icons-material/KeyboardArrowDown';
 // Vieolo UI
+import Typography from '../typography/typography';
 import IconButton from '../button/icon_button';
 import DropDownMenu from '../menu/dropdown_menu';
 // Installed Packages
@@ -63,9 +62,9 @@ export default function PeriodSelector(props) {
         props.onDateChange(finalDate);
     }
     return _jsxs("div", Object.assign({ className: "vieolo-period-selector" }, { children: [_jsxs("div", Object.assign({ className: "vieolo-period-selector__carousel-div" }, { children: [_jsx(IconButton, { icon: _jsx(LeftArrow, {}, void 0), onClick: () => handleDateChange(-1), size: "small", borderWidth: '0' }, void 0),
-                    _jsx(TypographyParagraphMedium, { text: getSelectedDateRepresentation() }, void 0),
+                    _jsx(Typography, { text: getSelectedDateRepresentation() }, void 0),
                     _jsx(IconButton, { icon: _jsx(RightArrow, {}, void 0), onClick: () => handleDateChange(1), size: "small", borderWidth: '0' }, void 0)] }), void 0),
-            _jsx("div", Object.assign({ className: "vieolo-period-selector__year-div" }, { children: _jsx(TypographyParagraphMedium, { text: props.selectedDate.getFullYear().toString() }, void 0) }), void 0),
+            _jsx("div", Object.assign({ className: "vieolo-period-selector__year-div" }, { children: _jsx(Typography, { text: props.selectedDate.getFullYear().toString() }, void 0) }), void 0),
             props.periodOptions &&
                 _jsx("div", Object.assign({ className: "vieolo-period-selector__dropdown-div" }, { children: _jsx(DropDownMenu, { buttonComponent: _jsx("div", Object.assign({ className: "vieolo-period-selector__dropdown-button" }, { children: _jsx(DownArrow, {}, void 0) }), void 0), items: props.periodOptions.map(o => {
                             return {

@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import IconButton from '../button/icon_button';
 
 // Vieolo UI
-import TypographyParagraphMedium from '../typography/typography_paragraph_medium';
-import TypographyTitleSmall from '../typography/typography_title_small';
+import Typography from '../typography/typography';
 import Checkbox from '../form/checkbox';
 
 // Material UI
@@ -141,7 +140,7 @@ export default function Table(props: {
                                     }
                                 }}
                             >
-                                <TypographyTitleSmall text={h} />
+                                <Typography type='title-small' text={h} />
                                 {
                                     (props.sortBy === h && !props.disableSort) &&
                                     <>
@@ -216,7 +215,7 @@ export default function Table(props: {
                                     >
                                         {
                                             typeof r === 'string'
-                                                ? <TypographyParagraphMedium text={r} />
+                                                ? <Typography text={r} />
                                                 : r
                                         }
                                     </div>
@@ -242,7 +241,7 @@ export default function Table(props: {
                     />
 
                     <div className="width--px-100 border-radius--half background-color--primary-normal padding-vertical--5 center-by-flex-row">
-                        <TypographyParagraphMedium text={`${props.pagination.startIndex} - ${props.pagination.endIndex}`} className="color--primary-text" ariaLabel={`${props.ariaLabel || 'table'} page number`} />
+                        <Typography text={`${props.pagination.startIndex} - ${props.pagination.endIndex}`} className="color--primary-text" ariaLabel={`${props.ariaLabel || 'table'} page number`} />
                     </div>
 
                     <IconButton

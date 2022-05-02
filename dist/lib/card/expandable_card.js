@@ -4,7 +4,7 @@ import { useState } from "react";
 // Vieolo UI
 import Card from "./card";
 import IconButton from "../button/icon_button";
-import { TypographyParagraphMedium } from "../typography";
+import Typography from "../typography/typography";
 // Icons
 import { ArrowDown as ExpandIcon, ArrowUp as CollapseIcon } from '../icons/icons';
 export default function ExpandableCard(props) {
@@ -17,7 +17,7 @@ export default function ExpandableCard(props) {
                                     props.onStateChage(newState);
                             } }, void 0),
                         _jsx("div", { className: "padding-horizontal--half" }, void 0),
-                        _jsx(TypographyParagraphMedium, { text: props.title, fontWeight: 'bold', ariaLabel: `${props.ariaLabel || props.title} title` }, void 0),
+                        _jsx(Typography, { type: 'paragraph-medium', text: props.title, fontWeight: 'bold', ariaLabel: `${props.ariaLabel || props.title} title` }, void 0),
                         props.actions &&
                             _jsx("div", Object.assign({ className: "vieolo-expandable-card__header__actions" }, { children: props.actions }), void 0)] }), void 0),
                 state === 'expanded' &&

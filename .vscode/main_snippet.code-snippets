@@ -28,7 +28,7 @@
 			"import IconThree from '@mui/icons-material/Cake';",
 			"import IconFour from '@mui/icons-material/DataUsage';",
 			"",
-			"// Component",
+			"// Vieolo UI",
 			"import ${1} from '../../lib/${2}';",
 			"",
 			"// Types",

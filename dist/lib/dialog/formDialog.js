@@ -1,15 +1,14 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 // React
 import { Fragment } from "react";
-// Typography
-import TypographyTitleSmall from "../typography/typography_title_small";
+import Typography from "../typography/typography";
 import Modal from "./modal";
 import IconButton from "../button/icon_button";
 import Button from '../button/button';
 // Material UI
 import CloseIcon from '@mui/icons-material/CloseRounded';
 export default function FormDialog(props) {
-    let dialog = _jsxs("div", Object.assign({ className: "vieolo-form-dialog", "aria-label": props.ariaLabel }, { children: [_jsxs("div", Object.assign({ className: "vieolo-form-dialog__header flex-row-space-between" }, { children: [_jsx(TypographyTitleSmall, { text: props.headerTitle }, void 0),
+    let dialog = _jsxs("div", Object.assign({ className: "vieolo-form-dialog", "aria-label": props.ariaLabel }, { children: [_jsxs("div", Object.assign({ className: "vieolo-form-dialog__header flex-row-space-between" }, { children: [_jsx(Typography, { type: "title-small", text: props.headerTitle }, void 0),
                     props.headerRightComponent === 'close' &&
                         _jsx(IconButton, { icon: _jsx(CloseIcon, {}, void 0), onClick: props.onCancel, color: 'primary', size: 'small', "aria-label": props.ariaLabel ? `${props.ariaLabel} close button` : undefined }, void 0),
                     (props.headerRightComponent && props.headerRightComponent !== 'close') &&
