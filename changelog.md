@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.21.1 (2022-05-07)
+- Removed react from dependecies
+
 ## 0.21.0 (2022-05-02)
 - Added custom hover title for `Typography` ([#166](https://github.com/Vieolo/vieolo-ui/issues/166))
 - Add the ability to disable selectability of text for `Typography` ([#167](https://github.com/Vieolo/vieolo-ui/issues/167))
