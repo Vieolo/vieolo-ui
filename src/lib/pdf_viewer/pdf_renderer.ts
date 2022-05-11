@@ -56,7 +56,6 @@ export async function renderPDFPageAsCanvas(
 	}
 	
 	let page = await doc.getPage(pageNumber);
-	let annotations = await page.getAnnotations();
 	
 	// Prepare canvas using PDF page dimensions
 	let canvas = document.getElementById(canvasID) as HTMLCanvasElement;
@@ -91,10 +90,9 @@ export async function renderPDFPageAsCanvas(
 	//let renderTask = await page.render(renderOptions).promise;
 	await page.render(renderOptions).promise;	
 
+	// Texts are separately rendered on the top of the canvas
 	let textDivs: HTMLElement[] = [];
-	let textLayer = document.getElementById(textLayerID) as HTMLDivElement;
-	let annotationLayer = document.getElementById(annotationLayerID) as HTMLDivElement;
-
+	let textLayer = document.getElementById(textLayerID) as HTMLDivElement;	
 	textLayer.innerHTML = "";
 
 	pdfjsLib.renderTextLayer({
@@ -104,6 +102,11 @@ export async function renderPDFPageAsCanvas(
 		textDivs: textDivs,
 		textContent: await page.getTextContent(),		
 	})
+
+	// Annotations are separately rendered on the top of the canvas
+	let annotations = await page.getAnnotations();
+	let annotationLayer = document.getElementById(annotationLayerID) as HTMLDivElement;
+	annotationLayer.innerHTML = "";
 
 	pdfjsLib.AnnotationLayer.render({
 		annotations: annotations,
