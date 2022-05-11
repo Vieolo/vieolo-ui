@@ -22,7 +22,7 @@ export async function getPDFDocument(url) {
     let rawPDF = await pdfjsLib.getDocument(finalURL).promise;
     return rawPDF;
 }
-export async function renderPDFPageAsCanvas(doc, pageNumber, pageID, canvasID, textLayerID, maximumWidth, zoom, rotation) {
+export async function renderPDFPageAsCanvas(doc, pageNumber, pageID, canvasID, textLayerID, annotationLayerID, maximumWidth, zoom, rotation) {
     /**
      * Some PDF files come with an existing rotation
      * This function adjusts the rotation of the pages with the existing rotation in mind.
@@ -59,10 +59,12 @@ export async function renderPDFPageAsCanvas(doc, pageNumber, pageID, canvasID, t
         canvasContext: canvasContext,
         viewport: viewport,
         intent: 'display',
-        renderInteractiveForms: true,
+        renderInteractiveForms: false,
+        includeAnnotationStorage: true,
     };
     //let renderTask = await page.render(renderOptions).promise;
     await page.render(renderOptions).promise;
+    // Texts are separately rendered on the top of the canvas
     let textDivs = [];
     let textLayer = document.getElementById(textLayerID);
     textLayer.innerHTML = "";
@@ -72,6 +74,19 @@ export async function renderPDFPageAsCanvas(doc, pageNumber, pageID, canvasID, t
         enhanceTextSelection: true,
         textDivs: textDivs,
         textContent: await page.getTextContent(),
+    });
+    // Annotations are separately rendered on the top of the canvas
+    let annotations = await page.getAnnotations();
+    let annotationLayer = document.getElementById(annotationLayerID);
+    annotationLayer.innerHTML = "";
+    pdfjsLib.AnnotationLayer.render({
+        annotations: annotations,
+        div: annotationLayer,
+        downloadManager: null,
+        linkService: null,
+        page: page,
+        renderInteractiveForms: false,
+        viewport: viewport,
     });
     return [viewport.height, viewport.width];
 }

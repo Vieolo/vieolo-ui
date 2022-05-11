@@ -184,6 +184,7 @@ export default function PDFViewer(props) {
 function PDFPage(props) {
     let canvasID = `${props.fileName.replace(".", "")}_canvas_${props.pageNumber}`;
     let textLayerID = canvasID.replace("canvas", 'text');
+    let annotationLayerID = canvasID.replace("canvas", 'annotation');
     let pageID = canvasID.replace("canvas", 'page');
     //let [width, setWidth] = useState<number>(100);
     let [height, setHeight] = useState(100);
@@ -203,7 +204,7 @@ function PDFPage(props) {
     useEffect(() => {
         if (isVisible && !rendered) {
             setRendered(true);
-            renderPDFPageAsCanvas(props.pdf, props.pageNumber, pageID, canvasID, textLayerID, props.containerWidth, currentZoomMultiple, currentRotation).then(([newHeight, newWidth]) => {
+            renderPDFPageAsCanvas(props.pdf, props.pageNumber, pageID, canvasID, textLayerID, annotationLayerID, props.containerWidth, currentZoomMultiple, currentRotation).then(([newHeight, newWidth]) => {
                 //dispatch(clearLoading());
                 props.onSizeChange(newWidth, newHeight);
                 //setCanvas(canvasURL);
@@ -227,7 +228,8 @@ function PDFPage(props) {
         // eslint-disable-next-line
     }, [props.zoomMultiple, props.rotation, setRendered]);
     return _jsxs("div", Object.assign({ className: "vieolo-pdf-viewer-component__page", id: pageID, style: { height: rendered ? undefined : props.pageHeight } }, { children: [_jsx("canvas", { id: canvasID, height: rendered ? undefined : props.pageHeight }, canvasID),
-            _jsx("div", { className: "vieolo-pdf-viewer-component__page__text-layer", id: textLayerID }, textLayerID)] }), void 0);
+            _jsx("div", { className: "vieolo-pdf-viewer-component__page__text-layer", id: textLayerID }, textLayerID),
+            _jsx("div", { className: "vieolo-pdf-viewer-component__page__annotation-layer", id: annotationLayerID }, annotationLayerID)] }), void 0);
     //return <img src={canvas} width={width * props.zoomMultiple} height={height * props.zoomMultiple} key={canvasID} style={{ transform: `rotateZ(${currentRotation}deg)` }} alt="pdf page" />
 }
 function useOnScreen(elementID, threshold = 0) {
