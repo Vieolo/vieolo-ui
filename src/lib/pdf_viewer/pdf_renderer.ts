@@ -37,6 +37,7 @@ export async function renderPDFPageAsCanvas(
 	pageID: string,
 	canvasID: string,
 	textLayerID: string,
+	annotationLayerID: string,
 	maximumWidth: number, 
 	zoom: number,
 	rotation: number,	
@@ -55,6 +56,7 @@ export async function renderPDFPageAsCanvas(
 	}
 	
 	let page = await doc.getPage(pageNumber);
+	let annotations = await page.getAnnotations();
 	
 	// Prepare canvas using PDF page dimensions
 	let canvas = document.getElementById(canvasID) as HTMLCanvasElement;
@@ -82,7 +84,8 @@ export async function renderPDFPageAsCanvas(
 		canvasContext: canvasContext,
 		viewport: viewport,
 		intent: 'display',
-		renderInteractiveForms: true,
+		renderInteractiveForms: false,
+		includeAnnotationStorage: true,
 	};
 		
 	//let renderTask = await page.render(renderOptions).promise;
@@ -90,6 +93,7 @@ export async function renderPDFPageAsCanvas(
 
 	let textDivs: HTMLElement[] = [];
 	let textLayer = document.getElementById(textLayerID) as HTMLDivElement;
+	let annotationLayer = document.getElementById(annotationLayerID) as HTMLDivElement;
 
 	textLayer.innerHTML = "";
 
@@ -99,6 +103,16 @@ export async function renderPDFPageAsCanvas(
 		enhanceTextSelection: true,
 		textDivs: textDivs,
 		textContent: await page.getTextContent(),		
+	})
+
+	pdfjsLib.AnnotationLayer.render({
+		annotations: annotations,
+		div: annotationLayer,
+		downloadManager: null,
+		linkService: null,
+		page: page,
+		renderInteractiveForms: false,
+		viewport: viewport,
 	})
 	
 	return [viewport.height, viewport.width];
