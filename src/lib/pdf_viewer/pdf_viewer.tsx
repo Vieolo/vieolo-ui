@@ -354,6 +354,7 @@ function PDFPage(props: {
 
 	let canvasID = `${props.fileName.replace(".", "")}_canvas_${props.pageNumber}`;
 	let textLayerID = canvasID.replace("canvas", 'text');
+	let annotationLayerID = canvasID.replace("canvas", 'annotation');
 	let pageID = canvasID.replace("canvas", 'page');
 	//let [width, setWidth] = useState<number>(100);
 	let [height, setHeight] = useState<number>(100);
@@ -383,6 +384,7 @@ function PDFPage(props: {
 				pageID,
 				canvasID,
 				textLayerID,
+				annotationLayerID,
 				props.containerWidth,
 				currentZoomMultiple,
 				currentRotation,
@@ -419,6 +421,7 @@ function PDFPage(props: {
 	>
 		<canvas id={canvasID} key={canvasID} height={rendered ? undefined : props.pageHeight}></canvas>
 		<div className="vieolo-pdf-viewer-component__page__text-layer" id={textLayerID} key={textLayerID}></div>
+		<div className="vieolo-pdf-viewer-component__page__annotation-layer" id={annotationLayerID} key={annotationLayerID}></div>
 	</div>
 	//return <img src={canvas} width={width * props.zoomMultiple} height={height * props.zoomMultiple} key={canvasID} style={{ transform: `rotateZ(${currentRotation}deg)` }} alt="pdf page" />
 }

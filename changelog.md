@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.21.2 (2022-05-12)
+- Added annotation layer for the `PDFViewer`
+
 ## 0.21.1 (2022-05-07)
 - Removed react from dependecies
 
