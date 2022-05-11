@@ -37,6 +37,7 @@ export async function renderPDFPageAsCanvas(
 	pageID: string,
 	canvasID: string,
 	textLayerID: string,
+	annotationLayerID: string,
 	maximumWidth: number, 
 	zoom: number,
 	rotation: number,	
@@ -82,15 +83,16 @@ export async function renderPDFPageAsCanvas(
 		canvasContext: canvasContext,
 		viewport: viewport,
 		intent: 'display',
-		renderInteractiveForms: true,
+		renderInteractiveForms: false,
+		includeAnnotationStorage: true,
 	};
 		
 	//let renderTask = await page.render(renderOptions).promise;
 	await page.render(renderOptions).promise;	
 
+	// Texts are separately rendered on the top of the canvas
 	let textDivs: HTMLElement[] = [];
-	let textLayer = document.getElementById(textLayerID) as HTMLDivElement;
-
+	let textLayer = document.getElementById(textLayerID) as HTMLDivElement;	
 	textLayer.innerHTML = "";
 
 	pdfjsLib.renderTextLayer({
@@ -99,6 +101,21 @@ export async function renderPDFPageAsCanvas(
 		enhanceTextSelection: true,
 		textDivs: textDivs,
 		textContent: await page.getTextContent(),		
+	})
+
+	// Annotations are separately rendered on the top of the canvas
+	let annotations = await page.getAnnotations();
+	let annotationLayer = document.getElementById(annotationLayerID) as HTMLDivElement;
+	annotationLayer.innerHTML = "";
+
+	pdfjsLib.AnnotationLayer.render({
+		annotations: annotations,
+		div: annotationLayer,
+		downloadManager: null,
+		linkService: null,
+		page: page,
+		renderInteractiveForms: false,
+		viewport: viewport,
 	})
 	
 	return [viewport.height, viewport.width];
