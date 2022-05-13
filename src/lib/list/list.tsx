@@ -61,9 +61,9 @@ export default function List(props: {
         if (a.subTitle && props.enableSubtitleSearch && a.subTitle.toLowerCase().includes(query.toLowerCase())) return true;
         return false;
     }).sort((a, b) => {
-        if (!a.group && !b.group) return 1;
+        if (!a.group && !b.group) return a.title > b.title ? 1 : -1;
         if (a.group === b.group) return a.title > b.title ? 1 : -1;
-        return (a.group || 'zzzzzzzz') > (b.group || 'zzzzzzzz') ? 1 : -1
+        return (a.group || 'zzzzzzzzzzzzz') > (b.group || 'zzzzzzzzzzzzzzz') ? 1 : -1
     })    
 
     let grouped: {
