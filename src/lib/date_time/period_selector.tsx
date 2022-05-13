@@ -29,7 +29,8 @@ export default function PeriodSelector (props: {
     selectedDate: VDate,
     onDateChange: (d: VDate) => void,
     periodOptions?: PeriodOptions[],
-    onPeriodChange: (p: PeriodOptions) => void
+    onPeriodChange: (p: PeriodOptions) => void,
+    ariaLabel?: string
 }) {
 
     function getSelectedDateRepresentation() : string {
@@ -72,13 +73,14 @@ export default function PeriodSelector (props: {
         props.onDateChange(finalDate);
     }
 
-    return <div className="vieolo-period-selector">
+    return <div className="vieolo-period-selector" aria-label={props.ariaLabel}>
         <div className="vieolo-period-selector__carousel-div">
             <IconButton 
                 icon={<LeftArrow />}
                 onClick={() => handleDateChange(-1)}
                 size="small"
                 borderWidth={'0'}
+                ariaLabel={props.ariaLabel ? `${props.ariaLabel} left button` : undefined}
             />
 
             <Typography text={getSelectedDateRepresentation()} />
@@ -88,6 +90,7 @@ export default function PeriodSelector (props: {
                 onClick={() => handleDateChange(1)}
                 size="small"
                 borderWidth={'0'}
+                ariaLabel={props.ariaLabel ? `${props.ariaLabel} right button` : undefined}
             />
         </div>
 
