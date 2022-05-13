@@ -47,6 +47,7 @@ export default function List(props: {
     expandedGroupStyle?: RowStyleType,
     items: ListItem[],
     enableSearch?: boolean,
+    disableSorting?: boolean,
     enableSubtitleSearch?: boolean,
     title?: string,
     height: string,
@@ -62,11 +63,15 @@ export default function List(props: {
         if (a.title.toLowerCase().includes(query.toLowerCase())) return true;
         if (a.subTitle && props.enableSubtitleSearch && a.subTitle.toLowerCase().includes(query.toLowerCase())) return true;
         return false;
-    }).sort((a, b) => {
-        if (!a.group && !b.group) return a.title > b.title ? 1 : -1;
-        if (a.group === b.group) return a.title > b.title ? 1 : -1;
-        return (a.group || 'zzzzzzzzzzzzz') > (b.group || 'zzzzzzzzzzzzzzz') ? 1 : -1
-    })    
+    })
+    
+    if (!props.disableSorting) {
+        sortedItems.sort((a, b) => {
+            if (!a.group && !b.group) return a.title > b.title ? 1 : -1;
+            if (a.group === b.group) return a.title > b.title ? 1 : -1;
+            return (a.group || 'zzzzzzzzzzzzz') > (b.group || 'zzzzzzzzzzzzzzz') ? 1 : -1
+        })
+    }
 
     let grouped: {
         [group: string]: {
