@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.21.3 (2022-05-14)
+- Added aria accessibility to `List` ([#173](https://github.com/Vieolo/vieolo-ui/issues/173))
+- Added aria accessibility to `PeriodSelector` ([#174](https://github.com/Vieolo/vieolo-ui/issues/174))
+- Fixed the sorting of items in Firefox in `List` ([#176](https://github.com/Vieolo/vieolo-ui/issues/176))
+
 ## 0.21.2 (2022-05-12)
 - Added annotation layer for the `PDFViewer`
 

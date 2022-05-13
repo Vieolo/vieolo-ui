@@ -13,4 +13,5 @@ export default function PeriodSelector(props: {
     onDateChange: (d: VDate) => void;
     periodOptions?: PeriodOptions[];
     onPeriodChange: (p: PeriodOptions) => void;
+    ariaLabel?: string;
 }): JSX.Element;

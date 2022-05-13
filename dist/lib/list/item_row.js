@@ -26,7 +26,7 @@ export default function ItemRow(props) {
     mainClassName += borderRadius;
     if (props.disabled)
         mainClassName += ` disabled`;
-    return _jsx("div", Object.assign({ className: mainClassName }, { children: _jsxs("div", Object.assign({ className: contentClassName, onClick: () => {
+    return _jsx("div", Object.assign({ className: mainClassName, "aria-label": props.ariaLabel || props.title }, { children: _jsxs("div", Object.assign({ className: contentClassName, onClick: () => {
                 if (props.onClick)
                     props.onClick();
             } }, { children: [props.leadingIcon &&

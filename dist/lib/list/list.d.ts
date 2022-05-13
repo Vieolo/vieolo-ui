@@ -12,6 +12,7 @@ export declare type ListItem = {
     buttonSize?: 'small' | 'medium';
     leadingIcon?: React.ReactNode;
     disabled?: boolean;
+    ariaLabel?: string;
     /**
      * The group that the item belongs to
      * If the item does not belong to a group, it will appear after all of the groups
@@ -37,4 +38,5 @@ export default function List(props: {
     title?: string;
     height: string;
     horizontalPadding?: 'none' | 'half' | 'one';
+    ariaLabel?: string;
 }): JSX.Element;
