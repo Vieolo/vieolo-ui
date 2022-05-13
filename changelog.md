@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.21.4 (2022-05-14)
+- Added ability to disable sorting in `List`
+
 ## 0.21.3 (2022-05-14)
 - Added aria accessibility to `List` ([#173](https://github.com/Vieolo/vieolo-ui/issues/173))
 - Added aria accessibility to `PeriodSelector` ([#174](https://github.com/Vieolo/vieolo-ui/issues/174))
