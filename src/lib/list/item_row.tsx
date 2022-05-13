@@ -28,6 +28,7 @@ export default function ItemRow(props: {
     buttonColor?: ColorOptionType,
     itemStyle?: RowStyleType,
     disabled?: boolean,
+    ariaLabel?: string,
     /**
      * Passing this object will convert the row into a search row
      * The main `title` of the row will act as the placeholder of the search input (default: Search...)
@@ -38,30 +39,30 @@ export default function ItemRow(props: {
     },
 }) {
 
-    let color = (props.itemStyle || {color: undefined}).color || 'secondary';
+    let color = (props.itemStyle || { color: undefined }).color || 'secondary';
     let borderRadius = ` vieolo-item-row--border-radius-${(props.itemStyle && props.itemStyle.borderRadius) ? props.itemStyle.borderRadius : 'default'}`;
 
-    let contentClassName: string = `vieolo-item-row__item-content row-height--${(props.itemStyle || {height: undefined}).height || 'large'}`;
+    let contentClassName: string = `vieolo-item-row__item-content row-height--${(props.itemStyle || { height: undefined }).height || 'large'}`;
     contentClassName += borderRadius;
     if (props.onClick) contentClassName += " cursor--pointer";
-    
+
     if (props.leadingIcon) contentClassName += " vieolo-item-row__item-with-icon";
     else contentClassName += " vieolo-item-row__item-without-icon";
-    
-    let e: EmphasisType = props.selected ? "high" : (props.itemStyle || {emphasis: undefined}).emphasis || "low";
-    
+
+    let e: EmphasisType = props.selected ? "high" : (props.itemStyle || { emphasis: undefined }).emphasis || "low";
+
     contentClassName += getEmphasisClasses(e, color, {
         hasRipple: props.onClick !== undefined,
         hoverable: props.onClick !== undefined,
         removeTextColorClasses: true
     })
-    
-    let mainClassName = `vieolo-item-row elevation--${(props.itemStyle || {elevation: undefined}).elevation || '0'}`;
+
+    let mainClassName = `vieolo-item-row elevation--${(props.itemStyle || { elevation: undefined }).elevation || '0'}`;
     mainClassName += borderRadius;
 
     if (props.disabled) mainClassName += ` disabled`;
 
-    return <div className={mainClassName}>
+    return <div className={mainClassName} aria-label={props.ariaLabel || props.title} >
 
         <div className={contentClassName} onClick={() => {
             if (props.onClick) props.onClick();
@@ -82,10 +83,10 @@ export default function ItemRow(props: {
                         placeholder={props.title || "Search..."}
                     />
                     : <div className="vieolo-item-row__title-col">
-                        <Typography text={props.title || ''} fontWeight={'bold'} color={props.selected ? color : undefined } colorType={props.selected ? 'text' : undefined} />
+                        <Typography text={props.title || ''} fontWeight={'bold'} color={props.selected ? color : undefined} colorType={props.selected ? 'text' : undefined} />
                         {
                             props.subTitle &&
-                            <Typography type='caption-large' text={props.subTitle} showTitle color={props.selected ? color : undefined } colorType={props.selected ? 'text' : undefined} />
+                            <Typography type='caption-large' text={props.subTitle} showTitle color={props.selected ? color : undefined} colorType={props.selected ? 'text' : undefined} />
                         }
                     </div>
 

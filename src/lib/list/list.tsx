@@ -22,6 +22,7 @@ export type ListItem = {
     buttonSize?: 'small' | 'medium',
     leadingIcon?: React.ReactNode,
     disabled?: boolean,
+    ariaLabel?: string,
     /** 
      * The group that the item belongs to
      * If the item does not belong to a group, it will appear after all of the groups
@@ -49,7 +50,8 @@ export default function List(props: {
     enableSubtitleSearch?: boolean,
     title?: string,
     height: string,
-    horizontalPadding?: 'none' | 'half' | 'one'
+    horizontalPadding?: 'none' | 'half' | 'one',
+    ariaLabel?: string
 }) {
 
     let [query, setQuery] = useState<string>("");
@@ -90,6 +92,7 @@ export default function List(props: {
             leadingIcon={a.leadingIcon}
             disabled={a.disabled}
             itemStyle={props.itemStyle}
+            ariaLabel={a.ariaLabel}
         />
 
         if (a.group) {
@@ -102,7 +105,11 @@ export default function List(props: {
 
 
 
-    return <div className={`vieolo-list padding-horizontal--${props.horizontalPadding || 'none'}`} style={{ height: props.height }}>
+    return <div 
+        className={`vieolo-list padding-horizontal--${props.horizontalPadding || 'none'}`} 
+        style={{ height: props.height }}
+        aria-label={props.ariaLabel || props.title}
+    >
         {
             props.title &&
             <div className="center-by-flex-row"><Typography type='title-medium' text={props.title} className="margin-vertical--10" /></div>
@@ -125,6 +132,7 @@ export default function List(props: {
                     <ExpandableCard                        
                         title={g.group}
                         initialState='collapsed'
+                        ariaLabel={g.group}
                         collapsedCardStyle={props.collapsedGroupStyle}
                         expandedCardStyle={props.expandedGroupStyle || props.collapsedGroupStyle}
                     >
