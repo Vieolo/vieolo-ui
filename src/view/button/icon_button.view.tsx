@@ -29,6 +29,7 @@ export function iconButtonOptions(): ViewData {
                 default: 'medium'
             },
             borderRadius: 'borderRadius',
+            isLoading: 'boolean',
             borderWidth: {
                 default: '2',
                 options: ['2', '1', '0'],
@@ -53,6 +54,7 @@ export function IconButtonCreator(props: { p: IconButtonPropsType }) {
         tooltip={props.p.tooltip}
         tooltipPosition={props.p.tooltipPosition}
         borderWidth={props.p.borderWidth}
+        isLoading={props.p.isLoading}
     />
 
 }

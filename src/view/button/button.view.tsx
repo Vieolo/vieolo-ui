@@ -49,7 +49,9 @@ export function buttonOptions(): ViewData {
             auxiliaryButton: {
                 options: ['None', 'Plain', 'With DropDown'],
                 default: 'None'
-            }
+            },
+            isLoading: 'boolean',
+            isAuxiliaryLoading: 'boolean'
         }
     }
 }
@@ -73,17 +75,20 @@ export function ButtonCreator(props: { p: ButtonPropsType }) {
         toLowerCase={props.p.toLowerCase}
         type={props.p.type}
         width={props.p.width as any}
+        isLoading={props.p.isLoading}
         auxiliary={
             (props.p as any).auxiliaryButton === "None"
                 ? null
                 : (props.p as any).auxiliaryButton === "Plain"
                     ? {
-                        icon: <IconOne />, onClick: () => { }
+                        icon: <IconOne />, onClick: () => { },
+                        isLoading: (props.p as any).isAuxiliaryLoading
                     } : {
                         icon: <IconOne />, onClick: v => alert(v), dropDownMenuItems: [
                             { title: "One", value: "One" },
                             { title: "Two", value: "Two" },
-                        ]
+                        ],
+                        isLoading: (props.p as any).isAuxiliaryLoading
                     }
         }
     />
