@@ -3,6 +3,7 @@ import React from 'react';
 
 // Components
 import DropDownMenu, { DropDownMenuItemType } from '../menu/dropdown_menu';
+import Spinner from '../auxiliary/spinner';
 
 // Types
 import { EmphasisType, BorderRadiusType, ColorOptionType } from '../private/types';
@@ -37,9 +38,11 @@ export default function Button(props: {
 		icon: React.ReactNode,
 		onClick: (dropDownItemValue?: string) => void,
 		dropDownMenuItems?: DropDownMenuItemType[],
-		ariaLabel?: string
+		ariaLabel?: string,
+		isLoading?: boolean
 	},
-	ariaLabel?: string
+	ariaLabel?: string,
+	isLoading?: boolean
 }) {
 	let s: React.CSSProperties = {};
 	let h = props.height || 'medium';
@@ -73,10 +76,16 @@ export default function Button(props: {
 
 	let button = <button className={c} onClick={props.onClick} style={s} aria-label={props.ariaLabel}>
 		{
-			props.startIcon &&
-			<span className="start-icon">
-				{props.startIcon}
-			</span>
+			props.isLoading
+				? <Spinner size={props.height} color={props.color} colorType='text'  />
+				: <>
+					{
+						props.startIcon &&
+						<span className="start-icon">
+							{props.startIcon}
+						</span>
+					}
+				</>
 		}
 		{props.text}
 		{
@@ -102,7 +111,7 @@ export default function Button(props: {
 				if (!props.auxiliary!.dropDownMenuItems || props.auxiliary!.dropDownMenuItems.length === 0) props.auxiliary!.onClick();
 			}}
 		>
-			{props.auxiliary.icon}
+			{props.auxiliary.isLoading ? <Spinner size={props.height} color={props.color} colorType='text' /> : props.auxiliary.icon}
 		</button>
 
 		return <div className="flex">
@@ -115,7 +124,7 @@ export default function Button(props: {
 						items={props.auxiliary.dropDownMenuItems}
 						onItemSelect={v => props.auxiliary!.onClick(v)}
 					/>
-					: aux 
+					: aux
 			}
 		</div>
 	}
