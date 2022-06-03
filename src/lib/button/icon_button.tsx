@@ -1,5 +1,6 @@
 // React
 import React from 'react';
+import Spinner from '../auxiliary/spinner';
 
 // Type
 import { BorderRadiusType, ColorOptionType, EmphasisType } from '../private/types';
@@ -25,7 +26,8 @@ export default function IconButton(props: {
 	/** default: 2 */
 	borderWidth?: '0' | '1' | '2',
 	type?: 'button' | 'submit' | 'reset',
-	ariaLabel?: string
+	ariaLabel?: string,
+	isLoading?: boolean
 }) {	
 	let c = `vieolo-icon-button vieolo-icon-button--${props.size || 'medium'} vieolo-icon-button--border-radius-${props.borderRadius || 'default'}`;
 	let e = props.emphasis || 'none';
@@ -44,7 +46,7 @@ export default function IconButton(props: {
 	if (props.className) c += " " + props.className;
 
 	return <button className={c} onClick={props.onClick} style={props.style || {}} type={props.type} aria-label={props.ariaLabel} >
-		{props.icon}
+		{props.isLoading ? <Spinner size={props.size} color={col} colorType={e === 'high' ? 'text' : 'normal'} /> : props.icon}
 		{
 			props.tooltip &&
 			<div className={`tooltip-text-${props.tooltipPosition || 'up'}`}>{props.tooltip}</div>

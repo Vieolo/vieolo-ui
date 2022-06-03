@@ -77,7 +77,7 @@ export default function Button(props: {
 	let button = <button className={c} onClick={props.onClick} style={s} aria-label={props.ariaLabel}>
 		{
 			props.isLoading
-				? <Spinner size={props.height} color={props.color} colorType='text'  />
+				? <Spinner size={props.height} color={props.color} colorType={e === 'high' ? 'text' : 'normal'}  />
 				: <>
 					{
 						props.startIcon &&
@@ -111,7 +111,7 @@ export default function Button(props: {
 				if (!props.auxiliary!.dropDownMenuItems || props.auxiliary!.dropDownMenuItems.length === 0) props.auxiliary!.onClick();
 			}}
 		>
-			{props.auxiliary.isLoading ? <Spinner size={props.height} color={props.color} colorType='text' /> : props.auxiliary.icon}
+			{props.auxiliary.isLoading ? <Spinner size={props.height} color={props.color} colorType={e === 'high' ? 'text' : 'normal'} /> : props.auxiliary.icon}
 		</button>
 
 		return <div className="flex">
