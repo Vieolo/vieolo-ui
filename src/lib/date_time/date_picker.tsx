@@ -37,7 +37,8 @@ export default function DatePicker(props: {
     title?: string,
     /** Whether to show the week number of the selected date in the dafault button */
     showSelectedWeek?: boolean,
-    ariaLabel?: string
+    ariaLabel?: string,
+    disabled?: boolean
 }): JSX.Element {
 
     let [open, setOpen] = useState<boolean>(false);
@@ -75,7 +76,7 @@ export default function DatePicker(props: {
         <CalendarIcon />
     </div>
 
-    return <div className="vieolo-date-picker" ref={container}>
+    return <div className={`vieolo-date-picker ${props.disabled ? 'disabled' : ''}`} ref={container}>
         <div
             className='vieolo-date-picker__button-container'
             onClick={() => setOpen(!open)}
@@ -83,6 +84,7 @@ export default function DatePicker(props: {
             role="button"
             aria-label={`${props.ariaLabel || props.title || "date picker"} button`}
             onKeyDown={e => {
+                if (props.disabled) return;
                 if (e.code === "Enter" || e.code === "Space") {
                     e.stopPropagation();
                     e.preventDefault();
