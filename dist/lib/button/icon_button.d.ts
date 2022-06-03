@@ -18,4 +18,5 @@ export default function IconButton(props: {
     borderWidth?: '0' | '1' | '2';
     type?: 'button' | 'submit' | 'reset';
     ariaLabel?: string;
+    isLoading?: boolean;
 }): JSX.Element;

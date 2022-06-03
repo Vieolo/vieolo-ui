@@ -1,6 +1,7 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 // Components
 import DropDownMenu from '../menu/dropdown_menu';
+import Spinner from '../auxiliary/spinner';
 import { getEmphasisClasses } from '../utility/style_utility';
 export default function Button(props) {
     let s = {};
@@ -27,8 +28,10 @@ export default function Button(props) {
         c += " disabled";
     if (props.className)
         c += " " + props.className;
-    let button = _jsxs("button", Object.assign({ className: c, onClick: props.onClick, style: s, "aria-label": props.ariaLabel }, { children: [props.startIcon &&
-                _jsx("span", Object.assign({ className: "start-icon" }, { children: props.startIcon }), void 0),
+    let button = _jsxs("button", Object.assign({ className: c, onClick: props.onClick, style: s, "aria-label": props.ariaLabel }, { children: [props.isLoading
+                ? _jsx(Spinner, { size: props.height, color: props.color, colorType: e === 'high' ? 'text' : 'normal' }, void 0)
+                : _jsx(_Fragment, { children: props.startIcon &&
+                        _jsx("span", Object.assign({ className: "start-icon" }, { children: props.startIcon }), void 0) }, void 0),
             props.text,
             props.endIcon &&
                 _jsx("span", Object.assign({ className: 'end-icon' }, { children: props.endIcon }), void 0)] }), void 0);
@@ -41,7 +44,7 @@ export default function Button(props) {
             }, onClick: () => {
                 if (!props.auxiliary.dropDownMenuItems || props.auxiliary.dropDownMenuItems.length === 0)
                     props.auxiliary.onClick();
-            } }, { children: props.auxiliary.icon }), void 0);
+            } }, { children: props.auxiliary.isLoading ? _jsx(Spinner, { size: props.height, color: props.color, colorType: e === 'high' ? 'text' : 'normal' }, void 0) : props.auxiliary.icon }), void 0);
         return _jsxs("div", Object.assign({ className: "flex" }, { children: [button,
                 (props.auxiliary.dropDownMenuItems && props.auxiliary.dropDownMenuItems.length > 0)
                     ? _jsx(DropDownMenu, { buttonComponent: aux, items: props.auxiliary.dropDownMenuItems, onItemSelect: v => props.auxiliary.onClick(v) }, void 0)
