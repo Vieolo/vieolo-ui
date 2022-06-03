@@ -44,6 +44,7 @@ import { spacerOptions, SpacerCreator } from '../layout/auxiliary/spacer.view';
 import { dividerOptions, DividerCreator } from '../layout/auxiliary/divider.view';
 import { TableInteractiveCreator, tableInteractiveOptions } from '../table/table_interactive.view';
 import { ClickableCardCreator, clickableCardOptions } from '../card/clickable_card.view';
+import { ModalCreator, modalOptions } from '../dialog/modal.view';
 import Select from '../../lib/form/select';
 import SwitchSet from '../../lib/form/switch_set';
 
@@ -103,6 +104,7 @@ export default function MainPage(props: {}): JSX.Element {
 
         "Confirmation Dialog": { title: "Confirmation Dialog", data: confirmationDialogOptions(), creator: ConfirmationDialogCreator, group: "Dialogs" },
         "Form Dialog": { title: "Form Dialog", data: formDialogOptions(), creator: FormDialogCreator, group: "Dialogs" },
+        "Modal": { title: "Modal", data: modalOptions(), creator: ModalCreator, group: "Dialogs" },
 
         "Checkbox": { title: "Checkbox", data: checkboxOptions(), creator: CheckboxCreator, group: "Form" },
         "File Input": { title: "File Input", data: fileInputOptions(), creator: FileInputCreator, group: "Form" },

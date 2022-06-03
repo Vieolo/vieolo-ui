@@ -1,41 +1,49 @@
 // React
-import React from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 
 
-export default class Modal extends React.Component<{onClose: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void}, {}> {
+type onCloseEvent = MouseEvent | React.MouseEvent<HTMLDivElement, MouseEvent>;
 
-    container: React.RefObject<unknown>;
+export default function Modal({ onClose, children }: {
+    onClose: (event: onCloseEvent) => void,
+    children: React.ReactNode
+}) {
 
-    constructor(props: {onClose: () => void}) {
-        super(props as any);
-        this.container = React.createRef();
-    }
+    let [container,] = useState(useRef<HTMLDivElement>(null));
 
-
-    handleClickOutside = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        if (this.container.current && !(this.container.current as any).contains(event.target)) {
-            this.props.onClose(event);
+    let handleClickOutside = useCallback((event: onCloseEvent) => {
+        if (container.current && !(container.current as any).contains(event.target)) {
+            onCloseRef.current(event);
         }
-    };
+    }, [container]);
+
+    const onCloseRef = React.useRef(onClose);
+    React.useEffect(
+        () => {
+            onCloseRef.current = onClose;
+        }
+    );
+
+    useEffect(() => {
 
 
-    componentDidMount() {                
+        document.addEventListener("click", handleClickOutside);
         let main = document.querySelector('main');
-        if (main) main.style.overflow = 'hidden';        
-    }
-
-    componentWillUnmount() {
-        let main = document.querySelector('main');
-        if (main) main.style.overflow = 'auto';
-    }
+        if (main) main.style.overflow = 'hidden';
 
 
-    render(): JSX.Element {
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+            let main = document.querySelector('main');
+            if (main) main.style.removeProperty("overflow");
+        }
+    }, [container, handleClickOutside]);
 
-        return (
-            <div className={`vieolo-modal`} onClick={this.handleClickOutside}>
-                <div className="modal-content" ref={this.container as any}>{this.props.children}</div>
-            </div>
-        )
-    }
+
+    return <div className={`vieolo-modal`} onClick={e => handleClickOutside(e)}>
+        <div className="modal-content" ref={container as any}>
+            {children}
+        </div>
+    </div>
+
 }

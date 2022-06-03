@@ -33,7 +33,7 @@ export default function FormDialog(props: {
     saveButtonConfig?: FormDialogMainButton,
     /** defaults to 10 */
     padding?: number,
-    width: number | string,
+    width?: number | string,
     onSave: () => void,
     /** Passing true will cause the save button to be disabled. Usefull when preventing the user from submitting invalid form */
     saveButtonDisabled?: boolean,
@@ -47,7 +47,8 @@ export default function FormDialog(props: {
     headerRightComponent?: 'close' | React.ReactNode,
     /** If true, will not display the dialog as a modal */
     inline?: boolean,
-    ariaLabel?: string
+    ariaLabel?: string,
+    className?: string
 }) {
 
     let dialog = <div className="vieolo-form-dialog" aria-label={props.ariaLabel}>
@@ -69,7 +70,7 @@ export default function FormDialog(props: {
             }
         </div>
 
-        <div className="vieolo-form-dialog__content" style={{ width: props.width, padding: props.padding === undefined ? 10 : props.padding }}>
+        <div className={`vieolo-form-dialog__content ${props.className || ''}`} style={{ width: props.width, padding: props.padding === undefined ? 10 : props.padding }}>
             {props.children}
         </div>
 
