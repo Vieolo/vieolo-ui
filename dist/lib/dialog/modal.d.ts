@@ -1,13 +1,7 @@
 import React from 'react';
-export default class Modal extends React.Component<{
-    onClose: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-}, {}> {
-    container: React.RefObject<unknown>;
-    constructor(props: {
-        onClose: () => void;
-    });
-    handleClickOutside: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-    componentDidMount(): void;
-    componentWillUnmount(): void;
-    render(): JSX.Element;
-}
+declare type onCloseEvent = MouseEvent | React.MouseEvent<HTMLDivElement, MouseEvent>;
+export default function Modal({ onClose, children }: {
+    onClose: (event: onCloseEvent) => void;
+    children: React.ReactNode;
+}): JSX.Element;
+export {};

@@ -31,6 +31,7 @@ export function datePickerOptions(): ViewData {
                 options: [false, true],
                 default: false
             },
+            disabled: 'boolean'
         }
     }
 }
@@ -47,6 +48,7 @@ export function DatePickerCreator(props: {p: DatePickerPropsType}) {
         selectedDate={date}
         title={(props.p as any).showTitle ? "Date" : undefined}
         showSelectedWeek={props.p.showSelectedWeek}
+        disabled={props.p.disabled}
         selectedWeek={{
             startDate: date.getWeek().start,
             weekNumber: date.getWeek().weekNumber

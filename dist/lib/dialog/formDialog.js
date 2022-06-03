@@ -13,7 +13,7 @@ export default function FormDialog(props) {
                         _jsx(IconButton, { icon: _jsx(CloseIcon, {}, void 0), onClick: props.onCancel, color: 'primary', size: 'small', "aria-label": props.ariaLabel ? `${props.ariaLabel} close button` : undefined }, void 0),
                     (props.headerRightComponent && props.headerRightComponent !== 'close') &&
                         props.headerRightComponent] }), void 0),
-            _jsx("div", Object.assign({ className: "vieolo-form-dialog__content", style: { width: props.width, padding: props.padding === undefined ? 10 : props.padding } }, { children: props.children }), void 0),
+            _jsx("div", Object.assign({ className: `vieolo-form-dialog__content ${props.className || ''}`, style: { width: props.width, padding: props.padding === undefined ? 10 : props.padding } }, { children: props.children }), void 0),
             (!props.removeCancelButton || !props.removeSaveButton || props.extraButtons || (props.extraButtons || []).length > 0) &&
                 _jsxs("div", Object.assign({ className: "vieolo-form-dialog__footer" }, { children: [_jsx("div", { className: "vieolo-form-dialog__footer__spacer--left" }, void 0),
                         !props.removeCancelButton &&

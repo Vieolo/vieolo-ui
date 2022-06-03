@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.21.5 (2022-06-03)
+- Added color type to `Spinner`
+- Added loading state to `Button` ([#112](https://github.com/Vieolo/vieolo-ui/issues/112))
+- Added loading state to `IconButton` ([#113](https://github.com/Vieolo/vieolo-ui/issues/113))
+- Added disabled option to `DatePicker` ([#138](https://github.com/Vieolo/vieolo-ui/issues/138))
+- Added class name to `FormDialog` ([#179](https://github.com/Vieolo/vieolo-ui/issues/179))
+
+
 ## 0.21.4 (2022-05-14)
 - Added ability to disable sorting in `List`
 

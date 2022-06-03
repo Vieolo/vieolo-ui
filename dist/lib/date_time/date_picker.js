@@ -29,7 +29,9 @@ export default function DatePicker(props) {
                     _jsx("div", { children: _jsx(Typography, { text: props.selectedDate ? props.selectedDate.formatDate('dd/mm/yyyy') : "" }, void 0) }, void 0),
                     _jsx("div", { children: _jsx(Typography, { type: 'caption-large', text: (props.showSelectedWeek && props.selectedDate) ? `Week ${props.selectedDate.getWeek().weekNumber}` : "" }, void 0) }, void 0)] }), void 0),
             _jsx(CalendarIcon, {}, void 0)] }), void 0);
-    return _jsxs("div", Object.assign({ className: "vieolo-date-picker", ref: container }, { children: [_jsx("div", Object.assign({ className: 'vieolo-date-picker__button-container', onClick: () => setOpen(!open), tabIndex: 0, role: "button", "aria-label": `${props.ariaLabel || props.title || "date picker"} button`, onKeyDown: e => {
+    return _jsxs("div", Object.assign({ className: `vieolo-date-picker ${props.disabled ? 'disabled' : ''}`, ref: container }, { children: [_jsx("div", Object.assign({ className: 'vieolo-date-picker__button-container', onClick: () => setOpen(!open), tabIndex: 0, role: "button", "aria-label": `${props.ariaLabel || props.title || "date picker"} button`, onKeyDown: e => {
+                    if (props.disabled)
+                        return;
                     if (e.code === "Enter" || e.code === "Space") {
                         e.stopPropagation();
                         e.preventDefault();

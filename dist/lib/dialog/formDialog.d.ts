@@ -20,7 +20,7 @@ export default function FormDialog(props: {
     saveButtonConfig?: FormDialogMainButton;
     /** defaults to 10 */
     padding?: number;
-    width: number | string;
+    width?: number | string;
     onSave: () => void;
     /** Passing true will cause the save button to be disabled. Usefull when preventing the user from submitting invalid form */
     saveButtonDisabled?: boolean;
@@ -35,4 +35,5 @@ export default function FormDialog(props: {
     /** If true, will not display the dialog as a modal */
     inline?: boolean;
     ariaLabel?: string;
+    className?: string;
 }): JSX.Element;

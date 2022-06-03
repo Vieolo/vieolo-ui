@@ -39,6 +39,10 @@ body {
 		box-shadow: $box-shadow-dark;
 	}
 
+	.vieolo-spinner {
+		margin-right: $base-unit-half;
+	}
+
 	svg {
 		height: $base-unit * 2;
 		width: $base-unit * 2;

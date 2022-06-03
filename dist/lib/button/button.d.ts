@@ -30,6 +30,8 @@ export default function Button(props: {
         onClick: (dropDownItemValue?: string) => void;
         dropDownMenuItems?: DropDownMenuItemType[];
         ariaLabel?: string;
+        isLoading?: boolean;
     };
     ariaLabel?: string;
+    isLoading?: boolean;
 }): JSX.Element;
