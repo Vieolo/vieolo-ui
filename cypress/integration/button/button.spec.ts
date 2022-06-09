@@ -1,3 +1,5 @@
+import TestColors from '../../support/constants';
+
 describe("Button", () => {
 
 
@@ -8,7 +10,7 @@ describe("Button", () => {
 
         cy.getByAriaLabel("Button").click();
 
-        cy.get("main").find(".vieolo-button");
+        cy.get("main").find(".vieolo-button").hasBackgroundColor(TestColors.PRIMARY_NORMAL)
     })
 
 })
