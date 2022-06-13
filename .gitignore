@@ -4,6 +4,7 @@
 __pycache__/
 .idea/
 .cache/
+.nyc_output/
 venv/
 node_modules/
 migrations/

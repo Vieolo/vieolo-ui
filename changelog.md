@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.21.6 (2022-06-13)
+- Fixed the propagation of selecting week in `DatePicker`
+
 ## 0.21.5 (2022-06-03)
 - Added color type to `Spinner`
 - Added loading state to `Button` ([#112](https://github.com/Vieolo/vieolo-ui/issues/112))
