@@ -19,7 +19,8 @@ export default function CalendarStateless(props) {
             if (new VDate().getWeek().start.formatDate() === thisWeek.start.formatDate()) {
                 weekClass += " vieolo-calendar-stateless-component__today";
             }
-            (dayCards[`${thisWeek.start.formatDate()}`] = dayCards[`${thisWeek.start.formatDate()}`] || []).push(_jsx("div", Object.assign({ className: weekClass, onClick: () => {
+            (dayCards[`${thisWeek.start.formatDate()}`] = dayCards[`${thisWeek.start.formatDate()}`] || []).push(_jsx("div", Object.assign({ className: weekClass, onClick: e => {
+                    e.stopPropagation();
                     if (props.onWeekSelect)
                         props.onWeekSelect(thisWeek.start);
                 }, "aria-label": `week ${thisWeek.weekNumber} ${thisWeek.start.getFullYear()} ${props.dateCellAriaLabelSuffix || ''}`.trim() }, { children: thisWeek.weekNumber }), `week ${thisWeek.weekNumber} ${thisWeek.start.getFullYear()}`));
