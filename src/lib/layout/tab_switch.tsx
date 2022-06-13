@@ -24,7 +24,7 @@ export default function TabSwitch(props: {
                     props.onSelect(o.value);        
                 }}
                 style={{width: props.tabWidth || 140}}
-                aria-label={o.title}
+                aria-label={`${o.title}` tab}
                 >
                 {o.title}
             </a>
