@@ -44,7 +44,8 @@ export default function CalendarStateless(props: {
             (dayCards[`${thisWeek.start.formatDate()}`] = dayCards[`${thisWeek.start.formatDate()}`] || []).push(
                 <div
                     className={weekClass}
-                    onClick={() => { 
+                    onClick={e => { 
+                        e.stopPropagation();
                         if (props.onWeekSelect) props.onWeekSelect(thisWeek.start) 
                     }}
                     key={`week ${thisWeek.weekNumber} ${thisWeek.start.getFullYear()}`}
