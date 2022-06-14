@@ -27,8 +27,8 @@ export type ListItem = {
      * The group that the item belongs to
      * If the item does not belong to a group, it will appear after all of the groups
      */
-    group?: string
-}
+    group?: string;
+};
 
 
 
@@ -52,10 +52,12 @@ export default function List(props: {
     title?: string,
     height: string,
     horizontalPadding?: 'none' | 'half' | 'one',
-    ariaLabel?: string
+    ariaLabel?: string,
+    onlyAllowOneGroupToExpand?: boolean;
 }) {
 
     let [query, setQuery] = useState<string>("");
+    let [openedGroup, setOpenedGroup] = useState<string>("");
 
 
     let sortedItems = props.items.filter(a => {
@@ -63,21 +65,21 @@ export default function List(props: {
         if (a.title.toLowerCase().includes(query.toLowerCase())) return true;
         if (a.subTitle && props.enableSubtitleSearch && a.subTitle.toLowerCase().includes(query.toLowerCase())) return true;
         return false;
-    })
-    
+    });
+
     if (!props.disableSorting) {
         sortedItems.sort((a, b) => {
             if (!a.group && !b.group) return a.title > b.title ? 1 : -1;
             if (a.group === b.group) return a.title > b.title ? 1 : -1;
-            return (a.group || 'zzzzzzzzzzzzz') > (b.group || 'zzzzzzzzzzzzzzz') ? 1 : -1
-        })
+            return (a.group || 'zzzzzzzzzzzzz') > (b.group || 'zzzzzzzzzzzzzzz') ? 1 : -1;
+        });
     }
 
     let grouped: {
         [group: string]: {
             items: ReactNode[],
-            group: string
-        }
+            group: string;
+        };
     } = {};
     let ungrouped: ReactNode[] = [];
 
@@ -98,20 +100,20 @@ export default function List(props: {
             disabled={a.disabled}
             itemStyle={props.itemStyle}
             ariaLabel={a.ariaLabel}
-        />
+        />;
 
         if (a.group) {
-            if (!grouped[a.group]) grouped[a.group] = { group: a.group, items: [] }
-            grouped[a.group].items.push(row)
+            if (!grouped[a.group]) grouped[a.group] = { group: a.group, items: [] };
+            grouped[a.group].items.push(row);
         } else {
-            ungrouped.push(row)
+            ungrouped.push(row);
         }
     }
 
 
 
-    return <div 
-        className={`vieolo-list padding-horizontal--${props.horizontalPadding || 'none'}`} 
+    return <div
+        className={`vieolo-list padding-horizontal--${props.horizontalPadding || 'none'}`}
         style={{ height: props.height }}
         aria-label={props.ariaLabel || props.title}
     >
@@ -134,19 +136,26 @@ export default function List(props: {
         {
             Object.values(grouped).map(g => {
                 return <div className="margin-vertical--half" key={g.group}>
-                    <ExpandableCard                        
+                    <ExpandableCard
                         title={g.group}
                         initialState='collapsed'
                         ariaLabel={g.group}
                         collapsedCardStyle={props.collapsedGroupStyle}
                         expandedCardStyle={props.expandedGroupStyle || props.collapsedGroupStyle}
+                        state={props.onlyAllowOneGroupToExpand ? openedGroup === g.group ? "expanded" : "collapsed" : undefined}
+                        onStateChange={v => {
+                            if (v === "expanded") setOpenedGroup(g.group);
+                            else {
+                                if (openedGroup === g.group) setOpenedGroup('');
+                            }
+                        }}
                     >
                         {g.items}
                     </ExpandableCard>
-                </div>
+                </div>;
             })
         }
 
         {ungrouped}
-    </div>
+    </div>;
 }

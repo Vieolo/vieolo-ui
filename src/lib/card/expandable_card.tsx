@@ -25,7 +25,8 @@ export default function ExpandableCard(props: {
      * The optional callback when the card is expanded.
      * Implementing this callback is not necessary for the actual expansion of the card
      */
-    onStateChage?: (s: 'expanded' | 'collapsed') => void,
+    onStateChange?: (s: 'expanded' | 'collapsed') => void,
+    state?: "expanded" | "collapsed",
     /** The title displayed in the header of the card */
     title: string,
     /** The style of the card when collapsed */
@@ -37,12 +38,14 @@ export default function ExpandableCard(props: {
      */
     actions?: React.ReactNode,
     children?: React.ReactNode,
-    ariaLabel?: string
+    ariaLabel?: string;
 }) {
 
-    let [state, setState] = useState<"expanded" | 'collapsed'>(props.initialState || 'collapsed');
+    let [internalState, setInternalState] = useState<"expanded" | 'collapsed' | undefined>(props.state ? undefined : props.initialState || 'collapsed');
 
-    let cardStyle = state === 'collapsed' ? (props.collapsedCardStyle || {}) : (props.expandedCardStyle || {});
+    let state = props.state || internalState;
+
+    let cardStyle = (props.state || state) === 'collapsed' ? (props.collapsedCardStyle || {}) : (props.expandedCardStyle || {});
 
     return <Card
         borderRadius={cardStyle.borderRadius}
@@ -63,8 +66,13 @@ export default function ExpandableCard(props: {
                     ariaLabel={`${props.ariaLabel || props.title} expand button`}
                     onClick={() => {
                         let newState: 'collapsed' | 'expanded' = state === 'expanded' ? 'collapsed' : 'expanded';
-                        setState(newState);
-                        if (props.onStateChage) props.onStateChage(newState);
+
+                        if (props.state && props.onStateChange) {
+                            props.onStateChange(newState);
+                        } else {
+                            setInternalState(newState);
+                            if (props.onStateChange) props.onStateChange(newState);
+                        }
                     }}
                 />
 
@@ -88,6 +96,6 @@ export default function ExpandableCard(props: {
             }
 
         </div>
-    </Card>
+    </Card>;
 
 }

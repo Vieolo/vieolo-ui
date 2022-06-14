@@ -56,22 +56,22 @@ import List from '../../lib/list/list';
 type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDefault" | "borderRadius" | 'fontWeightOptional' | 'emphasis' | 'typographyOptions' | {
     options: any[],
     default: any,
-    type?: 'number' | "string" | "boolean"
-}
+    type?: 'number' | "string" | "boolean";
+};
 
 export type ViewData = {
-    constants: { [key: string]: any },
+    constants: { [key: string]: any; },
     variables: {
-        [key: string]: ViewDataVariable
-    }
+        [key: string]: ViewDataVariable;
+    };
 };
 
 type ViewItemData = {
     title: string,
     data: ViewData,
     creator: any,
-    group: string
-}
+    group: string;
+};
 
 
 export default function MainPage(props: {}): JSX.Element {
@@ -79,10 +79,10 @@ export default function MainPage(props: {}): JSX.Element {
     let [selectedTitle, setSelectedTitle] = useState<string>("");
     let [selectedDataOptions, setSelectedDataOptions] = useState<ViewData>(null as ViewData);
     let [showComponent, setShowComponent] = useState<boolean>(false);
-    let [finalState, setFinalState] = useState<{ [key: string]: any }>(null);
+    let [finalState, setFinalState] = useState<{ [key: string]: any; }>(null);
     let history = useHistory();
 
-    let items: { [key: string]: ViewItemData } = {
+    let items: { [key: string]: ViewItemData; } = {
         "Spinner": { title: "Spinner", data: spinnerOptions(), creator: SpinnerCreator, group: "Auxiliary" },
 
         "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator, group: "Buttons" },
@@ -133,7 +133,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Table Interactive": { title: "Table Interactive", data: tableInteractiveOptions(), creator: TableInteractiveCreator, group: "Table" },
 
         "Typography": { title: "Typography", data: typographyOptions(), creator: TypographyCreator, group: "Typography" },
-    }
+    };
 
     useEffect(() => {
         if (window.location.search.includes("tab")) {
@@ -143,13 +143,13 @@ export default function MainPage(props: {}): JSX.Element {
         }
 
         // eslint-disable-next-line
-    }, [])
+    }, []);
 
     let content: React.ReactNode = null;
 
     if (selectedTitle && selectedDataOptions && finalState && showComponent) {
         let C = items[selectedTitle].creator;
-        content = <C p={finalState} />
+        content = <C p={finalState} />;
     }
 
 
@@ -159,7 +159,7 @@ export default function MainPage(props: {}): JSX.Element {
         if (Device.sizeCategory() !== DeviceSizeCategory.mobile) {
             setShowComponent(true);
         }
-        let finalState = { ...i.data.constants }
+        let finalState = { ...i.data.constants };
 
         for (let z = 0; z < Object.keys(i.data.variables).length; z++) {
             const key = Object.keys(i.data.variables)[z];
@@ -169,42 +169,42 @@ export default function MainPage(props: {}): JSX.Element {
                 finalVariable = {
                     options: [false, true],
                     default: false
-                }
+                };
             } else if (variable === 'booleanTrueDefault') {
                 finalVariable = {
                     options: [false, true],
                     default: true
-                }
+                };
             } else if (variable === "borderRadius") {
                 finalVariable = {
                     options: ['default', 'full', 'normal', 'half', 'none'],
                     default: 'default'
-                }
+                };
             } else if (variable === "typographyOptions") {
                 finalVariable = {
                     options: ['title-large', 'title-medium', 'title-small', 'paragraph-large', 'paragraph-medium', 'paragraph-small', 'caption-large', 'caption-medium', 'caption-small'],
                     default: 'paragraph-medium'
-                }
+                };
             } else if (variable === 'colors') {
                 finalVariable = {
                     options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'],
                     default: 'primary'
-                }
+                };
             } else if (variable === 'colorsOptional') {
                 finalVariable = {
                     options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'],
                     default: ''
-                }
+                };
             } else if (variable === 'fontWeightOptional') {
                 finalVariable = {
                     options: ['light', 'normal', 'bold', 'extra-bold'],
                     default: ''
-                }
+                };
             } else if (variable === 'emphasis') {
                 finalVariable = {
                     options: ['high', 'medium', 'low', 'none'],
                     default: 'none'
-                }
+                };
             } else {
                 finalVariable = variable;
             }
@@ -242,8 +242,9 @@ export default function MainPage(props: {}): JSX.Element {
                             handleSelectComponent(i);
                             history.replace({ pathname: window.location.pathname, search: `tab=${i.title.replace(/ /g, "__")}` });
                         },
-                    }
+                    };
                 })}
+                onlyAllowOneGroupToExpand={true}
             />
         </div>
 
@@ -259,42 +260,42 @@ export default function MainPage(props: {}): JSX.Element {
                         variable = {
                             options: [false, true],
                             default: false
-                        }
+                        };
                     } else if (tempVariable === "booleanTrueDefault") {
                         variable = {
                             options: [false, true],
                             default: true
-                        }
+                        };
                     } else if (tempVariable === "borderRadius") {
                         variable = {
                             options: ['default', 'full', 'normal', 'half', 'none'],
                             default: 'default'
-                        }
+                        };
                     } else if (tempVariable === "typographyOptions") {
                         variable = {
                             options: ['title-large', 'title-medium', 'title-small', 'paragraph-large', 'paragraph-medium', 'paragraph-small', 'caption-large', 'caption-medium', 'caption-small'],
                             default: 'paragraph-medium'
-                        }
+                        };
                     } else if (tempVariable === 'colors') {
                         variable = {
                             options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
                             default: 'primary'
-                        }
+                        };
                     } else if (tempVariable === 'colorsOptional') {
                         variable = {
                             options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
                             default: ''
-                        }
+                        };
                     } else if (tempVariable === 'fontWeightOptional') {
                         variable = {
                             options: ['light', 'normal', 'bold', 'extra-bold'],
                             default: ''
-                        }
+                        };
                     } else if (tempVariable === 'emphasis') {
                         variable = {
                             options: ['high', 'medium', 'low', 'none'],
                             default: 'none'
-                        }
+                        };
                     } else {
                         variable = tempVariable;
                     }
@@ -307,10 +308,10 @@ export default function MainPage(props: {}): JSX.Element {
                                     return {
                                         title: o,
                                         value: o
-                                    }
+                                    };
                                 })}
                                 onSelect={v => {
-                                    let temp = { ...finalState }
+                                    let temp = { ...finalState };
                                     if (typeof variable !== 'string') {
                                         temp[k] = variable.type && variable.type === 'number' ? +v[0] : v[0];
                                     }
@@ -319,20 +320,20 @@ export default function MainPage(props: {}): JSX.Element {
                                 selectedItems={[finalState[k].toString()]}
                                 title={camelCaseToWords(k)}
                             />
-                        </div>
+                        </div>;
                     } else {
                         return <div key={k} className="margin-bottom--one">
                             <SwitchSet
                                 on={finalState[k]}
                                 onChange={v => {
-                                    let temp = { ...finalState }
+                                    let temp = { ...finalState };
                                     temp[k] = v;
                                     setFinalState(temp);
                                 }}
                                 switchID={`${k}_switch`}
                                 title={camelCaseToWords(k)}
                             />
-                        </div>
+                        </div>;
                     }
                 })
             }
@@ -363,7 +364,7 @@ export default function MainPage(props: {}): JSX.Element {
                 }
             </div>
         }
-    </div>
+    </div>;
 
 }
 

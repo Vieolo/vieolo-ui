@@ -74,12 +74,13 @@ export function listOptions(): ViewData {
     return {
         constants: {
             height: '500px',
-            title: "List with Items", 
+            title: "List with Items",
             items: items
         } as Partial<ListPropsType>,
         variables: {
             enableSearch: 'boolean',
             enableSubtitleSearch: 'boolean',
+            onlyAllowOneGroupToExpand: 'boolean',
             elevation: {
                 options: ['0', '1', '2'],
                 default: "0"
@@ -99,11 +100,11 @@ export function listOptions(): ViewData {
                 default: "large"
             }
         }
-    }    
+    };
 }
 
 
-export function ListCreator(props: {p: ListPropsType}) {
+export function ListCreator(props: { p: ListPropsType; }) {
 
     return <List
         height={props.p.height}
@@ -119,7 +120,8 @@ export function ListCreator(props: {p: ListPropsType}) {
         enableSearch={props.p.enableSearch}
         enableSubtitleSearch={props.p.enableSubtitleSearch}
         horizontalPadding={props.p.horizontalPadding}
-    />
+        onlyAllowOneGroupToExpand={props.p.onlyAllowOneGroupToExpand}
+    />;
 
 }
 
