@@ -1,1 +1,6 @@
 public/
+cypress/
+.nyc_output/
+.vscode/
+cypress.json
+version_bump.mjs
