@@ -524,7 +524,7 @@ body {
 		}
 
 		&--medium {
-			height: $row-height-medium;
+			height: $row-height-large;
 		}
 
 		&--small {
@@ -1554,10 +1554,10 @@ body {
 	&__calendar-month,
 	&__calendar-year {
 		@include center-by-flex-row;
-
+		margin: 3px;
 		p {
 			width: 130px;
-			text-align: center;
+			text-align: center;;
 			margin: 0 8px;
 		}
 	}
@@ -1565,11 +1565,11 @@ body {
 
 .vieolo-calendar-stateless-component {
 	&__calendar-content {
-		width: 210px;
+		width: 270px;
 		border-top: 1px solid #f2f2f2;
 
 		&--with-week {
-			width: 240px;
+			width: 300px;
 		}
 	}
 
@@ -1579,10 +1579,10 @@ body {
 		justify-items: center;
 
 		div {
-			width: 20px;
-			height: 20px;
+			width: 30px;
+			height: 30px;
 			border-radius: 50%;
-			font-size: 10px;
+			font-size: 15px;
 			font-weight: 500;
 			color: gray;
 			@include center-by-flex-row;
@@ -1602,7 +1602,7 @@ body {
 	}
 
 	&__row {
-		margin: 3px 0;
+		margin: 5px 0;
 
 		&--no-week {
 			grid-template-columns: repeat(7, 1fr);
@@ -1613,10 +1613,10 @@ body {
 		}
 
 		div {
-			width: 20px;
-			height: 20px;
+			width: 30px;
+			height: 30px;
 			border-radius: 50%;
-			font-size: 10px;
+			font-size: 15px;
 			@include center-by-flex-row;
 			cursor: pointer;
 
@@ -1695,8 +1695,12 @@ body {
 	}
 
 	.vieolo-calendar-statefull-component {
-		position: absolute;
+		// position: absolute;
 		z-index: 11;
+	// @media (pointer: coarse) {
+	// 	justify-content: center;
+	// }
+
 	}
 }
 
@@ -2386,6 +2390,7 @@ body {
 		border: 1px solid #f2f2f2;
 		display: grid;
 		background-color: white;
+		top: -20px;
 	}
 
 	&__content-row {
@@ -2399,5 +2404,6 @@ body {
 		height: $row-height-medium;
 		z-index: 3;
 		border: solid 0.1px #ddd;
+		bottom: -20px;
 	}
 }

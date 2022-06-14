@@ -6,6 +6,7 @@ import CalendarIcon from '@mui/icons-material/DateRangeRounded';
 
 // Installed Packages
 import VDate from '@vieolo/date';
+import Device from '@vieolo/device-js';
 
 // Vieolo UI
 import CalendarStateful from './calendar_stateful';
@@ -13,6 +14,7 @@ import Typography from '../typography/typography';
 
 // Hooks
 import { useAppearingContainer } from '../../hooks/useAppearingContainer';
+import Modal from '../dialog/modal';
 
 
 
@@ -32,13 +34,13 @@ export default function DatePicker(props: {
     /** Whether to show week number in the date picker modal */
     includeWeek?: boolean,
     selectedDate?: VDate,
-    selectedWeek?: { weekNumber: number, startDate: VDate },
+    selectedWeek?: { weekNumber: number, startDate: VDate; },
     /** The title to be shown above the selected date in the default button */
     title?: string,
     /** Whether to show the week number of the selected date in the dafault button */
     showSelectedWeek?: boolean,
     ariaLabel?: string,
-    disabled?: boolean
+    disabled?: boolean;
 }): JSX.Element {
 
     let [open, setOpen] = useState<boolean>(false);
@@ -74,9 +76,9 @@ export default function DatePicker(props: {
             </div>
         </div>
         <CalendarIcon />
-    </div>
+    </div>;
 
-    return <div className={`vieolo-date-picker ${props.disabled ? 'disabled' : ''}`} ref={container}>
+    return <div className={`vieolo-date-picker ${props.disabled ? 'disabled' : ''}`}>
         <div
             className='vieolo-date-picker__button-container'
             onClick={() => setOpen(!open)}
@@ -88,7 +90,7 @@ export default function DatePicker(props: {
                 if (e.code === "Enter" || e.code === "Space") {
                     e.stopPropagation();
                     e.preventDefault();
-                    setOpen(!open)
+                    setOpen(!open);
                     setOpenedByKeyboard(!open);
                 } else if (e.code === "Escape" && open) {
                     setOpen(false);
@@ -103,32 +105,59 @@ export default function DatePicker(props: {
 
         </div>
         {
-            open &&
-            <CalendarStateful
-                showSearchInput={openedByKeyboard}
-                onKeyboardExit={() => setOpen(false)}
-                onDateSelect={s => {
-                    props.onDateSelect(s);
-                    setOpen(false);
-                    setOpenedByKeyboard(false);
-                }}
-                onWeekSelect={s => {
-                    if (props.onWeekSelect) {
-                        props.onWeekSelect(s);
+            open ? Device.isTouchOnlyDevice ?
+                <Modal onClose={() => setOpen(false)}>
+                    <CalendarStateful
+                        showSearchInput={openedByKeyboard}
+                        onKeyboardExit={() => setOpen(false)}
+                        onDateSelect={s => {
+                            props.onDateSelect(s);
+                            setOpen(false);
+                            setOpenedByKeyboard(false);
+                        }}
+                        onWeekSelect={s => {
+                            if (props.onWeekSelect) {
+                                props.onWeekSelect(s);
+                                setOpen(false);
+                                setOpenedByKeyboard(false);
+                            }
+
+                        }}
+                        includeWeek={props.includeWeek}
+                        selectedDate={props.selectedDate ? [props.selectedDate.formatDate("yyyy-mm-dd")] : undefined}
+                        selectedWeek={props.selectedWeek}
+                        startDate={getStartDate()}
+                        ariaLabel={`${props.ariaLabel || props.title || "date picker"}`}
+                        dateCellAriaLabelSuffix={`${props.ariaLabel || props.title || "date picker"} date cell`}
+                    />
+                </Modal>
+                :
+                <CalendarStateful
+                    showSearchInput={openedByKeyboard}
+                    onKeyboardExit={() => setOpen(false)}
+                    onDateSelect={s => {
+                        props.onDateSelect(s);
                         setOpen(false);
                         setOpenedByKeyboard(false);
-                    }
+                    }}
+                    onWeekSelect={s => {
+                        if (props.onWeekSelect) {
+                            props.onWeekSelect(s);
+                            setOpen(false);
+                            setOpenedByKeyboard(false);
+                        }
 
-                }}
-                includeWeek={props.includeWeek}
-                selectedDate={props.selectedDate ? [props.selectedDate.formatDate("yyyy-mm-dd")] : undefined}
-                selectedWeek={props.selectedWeek}
-                startDate={getStartDate()}
-                ariaLabel={`${props.ariaLabel || props.title || "date picker"}`}
-                dateCellAriaLabelSuffix={`${props.ariaLabel || props.title || "date picker"} date cell`}
-            />
+                    }}
+                    includeWeek={props.includeWeek}
+                    selectedDate={props.selectedDate ? [props.selectedDate.formatDate("yyyy-mm-dd")] : undefined}
+                    selectedWeek={props.selectedWeek}
+                    startDate={getStartDate()}
+                    ariaLabel={`${props.ariaLabel || props.title || "date picker"}`}
+                    dateCellAriaLabelSuffix={`${props.ariaLabel || props.title || "date picker"} date cell`}
+                />
+                : null
         }
-    </div>
+    </div>;
 
 
 }
