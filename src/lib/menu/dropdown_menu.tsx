@@ -150,6 +150,7 @@ function DropDownMenuItem(props: {
     return <div 
         className={`vieolo-dropdown-menu__dropdown-item color--${props.color || 'primary'}-normal`} 
         onClick={() => { props.onClick(props.value) }}
+        aria-label={`${props.title} select item`}
     >
         {
             props.icon &&

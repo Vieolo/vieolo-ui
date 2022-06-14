@@ -116,7 +116,7 @@ export default function FormDialog(props: {
                         text={(props.saveButtonConfig && props.saveButtonConfig.text) ? props.saveButtonConfig.text : "Save"}
                         borderRadius={(props.saveButtonConfig && props.saveButtonConfig.borderRadius) ? props.saveButtonConfig.borderRadius : undefined}
                         emphasis={(props.saveButtonConfig && props.saveButtonConfig.emphasis) ? props.saveButtonConfig.emphasis : undefined}
-                        ariaLabel={props.saveButtonConfig ? props.saveButtonConfig.ariaLabel : undefined}
+                        ariaLabel={(props.saveButtonConfig || {ariaLabel: ""}).ariaLabel || props.ariaLabel ? `${props.ariaLabel} save button` : undefined}
                         disabled={props.saveButtonDisabled}
                     />
                 }
