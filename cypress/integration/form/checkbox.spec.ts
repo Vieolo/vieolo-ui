@@ -2,7 +2,7 @@ import { LocalServer } from "../../support/utils";
 
 describe("Form", () => {
 
-  it.only("Checkbox", () => {
+  it("Checkbox", () => {
 
     LocalServer.start("Form", "Checkbox");
 
