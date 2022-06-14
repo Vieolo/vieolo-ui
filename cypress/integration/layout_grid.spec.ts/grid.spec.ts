@@ -18,8 +18,8 @@ describe("Layout/Grid", () => {
 
     cy.get(".vieolo-grid").within(() => {
       const data = {};
-      cy.get("div").each(($el, index, $list) => {
-        data[index] = $el.text();
+      cy.get("div").each((item, index) => {
+        data[index] = item.text();
       });
       cy.log(data.toString());
     });

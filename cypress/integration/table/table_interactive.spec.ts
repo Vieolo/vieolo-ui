@@ -6,7 +6,7 @@ describe("Table", () => {
 
     LocalServer.start("Table", "Table Interactive");
 
-    cy.getByAriaLabel('cell_0_2').click();
+    cy.getByAriaLabel('row 1 cell 3').click();
 
     cy.get('main').find('input').clear().type('new item 0{enter}');
 
