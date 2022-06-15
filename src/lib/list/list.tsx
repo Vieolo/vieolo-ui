@@ -71,7 +71,7 @@ export default function List(props: {
         sortedItems.sort((a, b) => {
             if (!a.group && !b.group) return a.title > b.title ? 1 : -1;
             if (a.group === b.group) return a.title > b.title ? 1 : -1;
-            return (a.group || 'zzzzzzzzzzzzz') > (b.group || 'zzzzzzzzzzzzzzz') ? 1 : -1;
+            return (a.group || 'zzzzzzzzzzzzz') > (b.group || 'zzzzzzzzzzzzzzz') ? 1 : -1
         })
     }
 
@@ -103,7 +103,7 @@ export default function List(props: {
         />;
 
         if (a.group) {
-            if (!grouped[a.group]) grouped[a.group] = { group: a.group, items: [] };
+            if (!grouped[a.group]) grouped[a.group] = { group: a.group, items: [] }
             grouped[a.group].items.push(row)
         } else {
             ungrouped.push(row)
@@ -112,8 +112,8 @@ export default function List(props: {
 
 
 
-    return <div
-        className={`vieolo-list padding-horizontal--${props.horizontalPadding || 'none'}`}
+    return <div 
+        className={`vieolo-list padding-horizontal--${props.horizontalPadding || 'none'}`} 
         style={{ height: props.height }}
         aria-label={props.ariaLabel || props.title}
     >
