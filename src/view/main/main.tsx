@@ -60,7 +60,7 @@ type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDe
 }
 
 export type ViewData = {
-    constants: { [key: string]: any; },
+    constants: { [key: string]: any },
     variables: {
         [key: string]: ViewDataVariable
     }

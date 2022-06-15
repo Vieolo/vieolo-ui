@@ -116,7 +116,7 @@ export default function DatePicker(props: {
                 if (e.code === "Enter" || e.code === "Space") {
                     e.stopPropagation();
                     e.preventDefault();
-                    setOpen(!open);
+                    setOpen(!open)
                     setOpenedByKeyboard(!open);
                 } else if (e.code === "Escape" && open) {
                     setOpen(false);

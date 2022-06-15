@@ -100,7 +100,7 @@ export default function List(props: {
             disabled={a.disabled}
             itemStyle={props.itemStyle}
             ariaLabel={a.ariaLabel}
-        />;
+        />
 
         if (a.group) {
             if (!grouped[a.group]) grouped[a.group] = { group: a.group, items: [] }
