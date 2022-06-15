@@ -56,13 +56,13 @@ import List from '../../lib/list/list';
 type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDefault" | "borderRadius" | 'fontWeightOptional' | 'emphasis' | 'typographyOptions' | {
     options: any[],
     default: any,
-    type?: 'number' | "string" | "boolean";
+    type?: 'number' | "string" | "boolean"
 };
 
 export type ViewData = {
     constants: { [key: string]: any; },
     variables: {
-        [key: string]: ViewDataVariable;
+        [key: string]: ViewDataVariable
     };
 };
 
@@ -70,7 +70,7 @@ type ViewItemData = {
     title: string,
     data: ViewData,
     creator: any,
-    group: string;
+    group: string
 };
 
 
@@ -82,7 +82,7 @@ export default function MainPage(props: {}): JSX.Element {
     let [finalState, setFinalState] = useState<{ [key: string]: any; }>(null);
     let history = useHistory();
 
-    let items: { [key: string]: ViewItemData; } = {
+    let items: { [key: string]: ViewItemData } = {
         "Spinner": { title: "Spinner", data: spinnerOptions(), creator: SpinnerCreator, group: "Auxiliary" },
 
         "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator, group: "Buttons" },

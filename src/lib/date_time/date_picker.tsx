@@ -40,7 +40,7 @@ export default function DatePicker(props: {
     /** Whether to show the week number of the selected date in the dafault button */
     showSelectedWeek?: boolean,
     ariaLabel?: string,
-    disabled?: boolean;
+    disabled?: boolean
 }): JSX.Element {
 
     let [open, setOpen] = useState<boolean>(false);

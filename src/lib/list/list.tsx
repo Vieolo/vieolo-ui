@@ -53,7 +53,7 @@ export default function List(props: {
     height: string,
     horizontalPadding?: 'none' | 'half' | 'one',
     ariaLabel?: string,
-    onlyAllowOneGroupToExpand?: boolean;
+    onlyAllowOneGroupToExpand?: boolean
 }) {
 
     let [query, setQuery] = useState<string>("");
@@ -78,7 +78,7 @@ export default function List(props: {
     let grouped: {
         [group: string]: {
             items: ReactNode[],
-            group: string;
+            group: string
         };
     } = {};
     let ungrouped: ReactNode[] = [];

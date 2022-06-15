@@ -38,7 +38,7 @@ export default function ExpandableCard(props: {
      */
     actions?: React.ReactNode,
     children?: React.ReactNode,
-    ariaLabel?: string;
+    ariaLabel?: string
 }) {
 
     let [internalState, setInternalState] = useState<"expanded" | 'collapsed' | undefined>(props.state ? undefined : props.initialState || 'collapsed');
@@ -96,6 +96,6 @@ export default function ExpandableCard(props: {
             }
 
         </div>
-    </Card>;
+    </Card>
 
 }
