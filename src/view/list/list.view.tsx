@@ -100,7 +100,7 @@ export function listOptions(): ViewData {
                 default: "large"
             }
         }
-    };
+    }
 }
 
 
@@ -121,7 +121,7 @@ export function ListCreator(props: { p: ListPropsType; }) {
         enableSubtitleSearch={props.p.enableSubtitleSearch}
         horizontalPadding={props.p.horizontalPadding}
         onlyAllowOneGroupToExpand={props.p.onlyAllowOneGroupToExpand}
-    />;
+    />
 
 }
 

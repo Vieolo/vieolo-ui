@@ -13,10 +13,10 @@ import CalendarStateful from './calendar_stateful';
 import Typography from '../typography/typography';
 import Modal from '../dialog/modal';
 import Card from '../card/card';
+import IconButton from '../button/icon_button';
 
 // Hooks
 import { useAppearingContainer } from '../../hooks/useAppearingContainer';
-import IconButton from '../button/icon_button';
 
 
 export default function DatePicker(props: {
@@ -35,7 +35,7 @@ export default function DatePicker(props: {
     /** Whether to show week number in the date picker modal */
     includeWeek?: boolean,
     selectedDate?: VDate,
-    selectedWeek?: { weekNumber: number, startDate: VDate; },
+    selectedWeek?: { weekNumber: number, startDate: VDate },
     /** The title to be shown above the selected date in the default button */
     title?: string,
     /** Whether to show the week number of the selected date in the dafault button */
@@ -77,7 +77,7 @@ export default function DatePicker(props: {
             </div>
         </div>
         <CalendarIcon />
-    </div>;
+    </div>
 
 
     const CalendarStatefulCompoment = <CalendarStateful

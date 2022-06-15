@@ -27,8 +27,8 @@ export type ListItem = {
      * The group that the item belongs to
      * If the item does not belong to a group, it will appear after all of the groups
      */
-    group?: string;
-};
+    group?: string
+}
 
 
 
@@ -65,21 +65,21 @@ export default function List(props: {
         if (a.title.toLowerCase().includes(query.toLowerCase())) return true;
         if (a.subTitle && props.enableSubtitleSearch && a.subTitle.toLowerCase().includes(query.toLowerCase())) return true;
         return false;
-    });
+    })
 
     if (!props.disableSorting) {
         sortedItems.sort((a, b) => {
             if (!a.group && !b.group) return a.title > b.title ? 1 : -1;
             if (a.group === b.group) return a.title > b.title ? 1 : -1;
             return (a.group || 'zzzzzzzzzzzzz') > (b.group || 'zzzzzzzzzzzzzzz') ? 1 : -1;
-        });
+        })
     }
 
     let grouped: {
         [group: string]: {
             items: ReactNode[],
             group: string
-        };
+        }
     } = {};
     let ungrouped: ReactNode[] = [];
 
@@ -104,9 +104,9 @@ export default function List(props: {
 
         if (a.group) {
             if (!grouped[a.group]) grouped[a.group] = { group: a.group, items: [] };
-            grouped[a.group].items.push(row);
+            grouped[a.group].items.push(row)
         } else {
-            ungrouped.push(row);
+            ungrouped.push(row)
         }
     }
 
@@ -152,10 +152,10 @@ export default function List(props: {
                     >
                         {g.items}
                     </ExpandableCard>
-                </div>;
+                </div>
             })
         }
 
         {ungrouped}
-    </div>;
+    </div>
 }
