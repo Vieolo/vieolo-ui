@@ -80,7 +80,7 @@ export default function DatePicker(props: {
     </div>
 
 
-    const CalendarStatefulCompoment = <CalendarStateful
+    const calendarStatefulCompoment = <CalendarStateful
         showSearchInput={openedByKeyboard}
         onKeyboardExit={() => setOpen(false)}
         onDateSelect={s => {
@@ -138,11 +138,11 @@ export default function DatePicker(props: {
                             <div>Date Picker</div>
                             <IconButton icon={"X"} onClick={() => setOpen(false)} />
                         </div>
-                        {CalendarStatefulCompoment}
+                        {calendarStatefulCompoment}
                     </Card>
                 </Modal>
                 :
-                CalendarStatefulCompoment
+                calendarStatefulCompoment
                 : null
         }
     </div>

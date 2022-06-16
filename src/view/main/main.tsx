@@ -244,7 +244,6 @@ export default function MainPage(props: {}): JSX.Element {
                         },
                     }
                 })}
-                onlyAllowOneGroupToExpand={true}
             />
         </div>
 
