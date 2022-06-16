@@ -1521,6 +1521,8 @@ body {
 
 		&--active {
 			color: #fff !important;
+			background-color: $primary-color-normal;
+			border-radius: 5px;
 		}
 
 		a {
@@ -1544,7 +1546,6 @@ body {
 	&__selector {
 		height: 100%;
 		display: inline-block;
-		position: absolute;
 		left: 0px;
 		top: 0px;
 		z-index: 1;
