@@ -568,10 +568,11 @@ body {
 		background-color: white;
 		box-shadow: $box-shadow-dark;
 		border-radius: $base-unit-half;
-		max-height: 240px;
+		height: 240px;
 		overflow-y: auto;
 		@media(pointer: coarse){
-			width: 200px;
+			width: 240px;
+			height: 300px;
 		}
 	}
 
@@ -587,6 +588,10 @@ body {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		@media (pointer: coarse){
+			height: $row-height-medium;
+			font-size: 14px;
+		}
 
 		&:hover {
 			background-color: $hover-color;
