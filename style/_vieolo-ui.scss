@@ -563,7 +563,6 @@ body {
 	}
 
 	&__select-dropdown {
-		position: fixed;
 		width: 160px;
 		z-index: 99;
 		background-color: white;
@@ -571,6 +570,9 @@ body {
 		border-radius: $base-unit-half;
 		max-height: 240px;
 		overflow-y: auto;
+		@media(pointer: coarse){
+			width: 200px;
+		}
 	}
 
 	&__select-item {
@@ -1728,19 +1730,7 @@ body {
 		}
 	}
 
-	&__card-container {
-		width: auto;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-
-		div {
-			display: inline;
-		}
-	}
-
 	.vieolo-calendar-statefull-component {
-		position: absolute;
 		@media(pointer: coarse) {
 			margin-top: 10px;
 		}
@@ -2450,5 +2440,17 @@ body {
 		z-index: 3;
 		border: solid 0.1px #ddd;
 		bottom: -20px;
+	}
+}
+
+.vieolo-modal-card-container {
+	margin-bottom: 3px;
+	width: auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	div {
+		display: inline;
 	}
 }

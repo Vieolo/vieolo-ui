@@ -134,7 +134,7 @@ export default function DatePicker(props: {
             open ? Device.isTouchOnlyDevice ?
                 <Modal onClose={() => setOpen(false)}>
                     <Card>
-                        <div className="vieolo-date-picker__card-container">
+                        <div className="vieolo-modal-card-container">
                             <div>Date Picker</div>
                             <IconButton icon={"X"} onClick={() => setOpen(false)} />
                         </div>

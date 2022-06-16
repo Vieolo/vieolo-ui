@@ -1,6 +1,9 @@
 // React
 import React, { Fragment, useEffect, useRef, useState, CSSProperties } from 'react';
 
+//Installed Packages
+import Device from '@vieolo/device-js';
+
 // Material UI
 import DownIcon from '@mui/icons-material/ArrowDropDownRounded';
 import CloseIcon from '@mui/icons-material/CloseRounded';
@@ -8,6 +11,8 @@ import CloseIcon from '@mui/icons-material/CloseRounded';
 // Vieolo UI
 import IconButton from '../button/icon_button';
 import Typography from '../typography/typography';
+import Modal from '../dialog/modal';
+import Card from '../card/card';
 
 
 type SelectItemType = {
@@ -156,6 +161,10 @@ export default function Select(props: SelectProps) {
         />)
     }
 
+    const selectItemsComponent = <div className="vieolo-select__select-dropdown" style={style} role="list" >
+        {items}
+    </div>
+
     return <div className="vieolo-select" ref={container as any}>
         <div
             className={`vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${props.height || 'medium'}`}
@@ -173,7 +182,7 @@ export default function Select(props: SelectProps) {
                     e.stopPropagation();
                     e.preventDefault();
                     handleOpen(true);
-                }else if (e.code === "ArrowDown" && open) {
+                } else if (e.code === "ArrowDown" && open) {
                     if (!itemKeyboardFocus) setItemKeyboardFocus(filtered[0].value)
                     else {
                         let lastIndex = filtered.map(f => f.value).indexOf(itemKeyboardFocus);
@@ -231,12 +240,20 @@ export default function Select(props: SelectProps) {
             }
 
         </div>
-
         {
-            open &&
-            <div className="vieolo-select__select-dropdown" style={style} role="list" >
-                {items}
-            </div>
+            open ? Device.isTouchOnlyDevice ?
+                <Modal onClose={() => setOpen(false)}>
+                    <Card>
+                        <div className="vieolo-modal-card-container">
+                            <div>Select</div>
+                            <IconButton icon={"X"} onClick={() => setOpen(false)} />
+                        </div>
+                        {selectItemsComponent}
+                    </Card>
+                </Modal>
+                :
+                selectItemsComponent
+                : null
         }
     </div>
 
