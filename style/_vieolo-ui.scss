@@ -673,6 +673,10 @@ body {
 		&:hover {
 			background-color: $hover-color;
 		}
+		
+		&--keyboard-focus {
+			background-color: $primary-color-light;
+		}
 
 		p {
 			padding: 0px 3px;
