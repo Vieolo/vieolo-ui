@@ -104,7 +104,7 @@ export default function DatePicker(props: {
         dateCellAriaLabelSuffix={`${props.ariaLabel || props.title || "date picker"} date cell`}
     />
 
-    return <div className={`vieolo-date-picker ${props.disabled ? 'disabled' : ''}`}>
+    return <div className={`vieolo-date-picker ${props.disabled ? 'disabled' : ''}`} ref={container}>
         <div
             className='vieolo-date-picker__button-container'
             onClick={() => setOpen(!open)}
