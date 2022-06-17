@@ -17,6 +17,9 @@ import Card from '../card/card';
 // Hooks
 import { useAppearingContainer } from '../../hooks/useAppearingContainer';
 
+// Utility
+import { handleOnKeyDown } from '../utility/onkeydown_utility';
+
 
 export default function DatePicker(props: {
     /**
@@ -112,18 +115,26 @@ export default function DatePicker(props: {
             aria-label={`${props.ariaLabel || props.title || "date picker"} button`}
             onKeyDown={e => {
                 if (props.disabled) return;
-                if (e.code === "Enter" || e.code === "Space") {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    setOpen(!open)
-                    setOpenedByKeyboard(!open);
-                } else if (e.code === "Escape" && open) {
-                    setOpen(false);
-                    setOpenedByKeyboard(false);
-                } else if (e.code === "Tab" && open) {
-                    setOpen(false);
-                    setOpenedByKeyboard(false);
-                }
+                handleOnKeyDown(e, {
+                    onEnter: () => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        setOpen(!open)
+                        setOpenedByKeyboard(!open);
+                    },
+                    onEscape: () => {
+                        if(open) {
+                            setOpen(false);
+                            setOpenedByKeyboard(false);
+                        }
+                    },
+                    onTab: () => {
+                        if(open) {
+                            setOpen(false);
+                            setOpenedByKeyboard(false);
+                        }
+                    }
+                })
             }}
         >
             {datePickerButton}

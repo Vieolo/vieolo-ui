@@ -1,3 +1,6 @@
+// Utility
+import { handleOnKeyDown } from '../utility/onkeydown_utility';
+
 export default function Checkbox(props: {
     value: boolean,
     onChange: (v: boolean) => void,
@@ -7,10 +10,14 @@ export default function Checkbox(props: {
         className={`vieolo-checkbox ${props.disabled ? 'disabled' : ''}`} 
         tabIndex={0}
         onKeyDown={e => {
-            if ((e.code === "Enter" || e.code === "Space") && !props.disabled) {
-                e.preventDefault();
-                props.onChange(!props.value);
-            }
+            handleOnKeyDown(e, {
+                onEnter: () => {
+                    if (!props.disabled) {
+                        e.preventDefault();
+                        props.onChange(!props.value);
+                    }
+                }
+            })
         }}
         >
         

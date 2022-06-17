@@ -21,6 +21,9 @@ import CalendarStateless from './calendar_stateless';
 import IconButton from '../button/icon_button';
 import DateInput from './date_input';
 
+// Utility
+import { handleOnKeyDown } from '../utility/onkeydown_utility';
+
 
 export default function CalendarStateful(props: {
     startDate?: VDate,
@@ -71,9 +74,14 @@ export default function CalendarStateful(props: {
                         }}
                         value={searchText.trim()}
                         onKeyDown={e => {
-                            if ((e.code === "Tab" || e.code === "Escape") && props.onKeyboardExit) {
-                                props.onKeyboardExit();
-                            }
+                            handleOnKeyDown(e, {
+                                onTab: () => {
+                                    if (props.onKeyboardExit) props.onKeyboardExit();
+                                },
+                                onEscape: () => {
+                                    if (props.onKeyboardExit) props.onKeyboardExit();
+                                }
+                            })
                         }}
                         autoFocus
                         dateFormat='DD/MM/YYYY'
