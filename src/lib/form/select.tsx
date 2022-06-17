@@ -14,6 +14,9 @@ import Typography from '../typography/typography';
 import Modal from '../dialog/modal';
 import Card from '../card/card';
 
+// Utility
+import { handleOnKeyDown } from '../utility/onkeydown_utility';
+
 
 type SelectItemType = {
     title: string,
@@ -85,7 +88,8 @@ export default function Select(props: SelectProps) {
         return props.items.filter(i => values.includes(i.value))
     }
 
-    function handleOpen(openedByKeyboard?: boolean) {
+    function handleOpen(e?: React.MouseEvent<HTMLDivElement, MouseEvent>, openedByKeyboard?: boolean) {
+        if (e) e.stopPropagation();
         if (!open) {
             let rect = container.current!.getBoundingClientRect();
             let displaySize = { width: window.innerWidth, height: window.innerHeight }
@@ -168,51 +172,67 @@ export default function Select(props: SelectProps) {
     return <div className="vieolo-select" ref={container as any}>
         <div
             className={`vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${props.height || 'medium'}`}
-            onClick={() => handleOpen()}
+            onClick={e => handleOpen(e)}
             tabIndex={0}
             role="button"
             aria-label={`Select ${props.title}`}
             onKeyDown={e => {
-                if (e.code === "Enter" || e.code === "Space") {
-                    if (!open) handleOpen(true);
-                    else if (itemKeyboardFocus) {
-                        handleSelectItem(filtered.find(f => f.value === itemKeyboardFocus))
-                    }
-                } else if (e.code === "ArrowDown" && !open) {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    handleOpen(true);
-                } else if (e.code === "ArrowDown" && open) {
-                    if (!itemKeyboardFocus) setItemKeyboardFocus(filtered[0].value)
-                    else {
-                        let lastIndex = filtered.map(f => f.value).indexOf(itemKeyboardFocus);
-                        if ((lastIndex + 1) < filtered.length) setItemKeyboardFocus(filtered[lastIndex + 1].value)
-                    }
-                    e.stopPropagation()
-                    e.preventDefault();
-                } else if (e.code === "ArrowUp" && open) {
-                    if (itemKeyboardFocus) {
+                handleOnKeyDown(e, {
+                    onEnter: () => {
+                        if (!open) handleOpen(undefined, true);
+                        else if (itemKeyboardFocus) {
+                            handleSelectItem(filtered.find(f => f.value === itemKeyboardFocus))
+                        }
+                    },
+                    onArrowDown: () => {
                         e.stopPropagation();
                         e.preventDefault();
-                        let lastIndex = filtered.map(f => f.value).indexOf(itemKeyboardFocus);
-                        if (lastIndex > 0) setItemKeyboardFocus(filtered[lastIndex - 1].value)
+                        if (open) {
+                            if (itemKeyboardFocus) {
+                                let lastIndex = filtered.map(f => f.value).indexOf(itemKeyboardFocus);
+                                if (lastIndex < filtered.length - 1) setItemKeyboardFocus(filtered[lastIndex + 1].value);
+                            }
+                            else {
+                                setItemKeyboardFocus(filtered[0].value);
+                            }
+                        }
+                        else {
+                            handleOpen(undefined, true);
+                        }
+                    },
+                    onArrowUp: () => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        if (open) {
+                            if (itemKeyboardFocus) {
+                                let lastIndex = filtered.map(f => f.value).indexOf(itemKeyboardFocus);
+                                if (lastIndex > 0) setItemKeyboardFocus(filtered[lastIndex - 1].value);
+                            }
+                        }
+                    },
+                    onEscape: () => {
+                        setOpen(false);
+                        setSearchQuery("");
+                        setItemKeyboardFocus("");
+                    },
+                    onBackspace: () => {
+                        if (!open && props.clearable) {
+                            props.onSelect([])
+                        }
+                    },
+                    onTab: () => {
+                        if (open) {
+                            setOpen(false);
+                            setSearchQuery("");
+                            setItemKeyboardFocus("");
+                        }
                     }
-                } else if (e.code === "Escape" && open) {
-                    setOpen(false);
-                    setSearchQuery("");
-                    setItemKeyboardFocus("");
-                } else if (e.code === "Backspace" && !open && props.clearable) {
-                    props.onSelect([]);
-                } else if (e.code === "Tab" && open) {
-                    setOpen(false);
-                    setSearchQuery("");
-                    setItemKeyboardFocus("");
-                }
+                })
             }}
         >
             <div className="vieolo-select__select-button__button-text" onClick={e => {
                 e.stopPropagation();
-                handleOpen();
+                handleOpen(e);
             }}>
                 <Typography type='paragraph-small' text={props.title} className="vieolo-select__select-button__button-text__button-title" />
                 {

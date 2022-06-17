@@ -7,6 +7,9 @@ import Typography from '../typography/typography';
 // Types
 import { ColorOptionType } from '../private/types';
 
+// Utility
+import { handleOnKeyDown } from '../utility/onkeydown_utility';
+
 export type DropDownMenuItemType = {
     title: string,
     /** The unique value of each item which is used to reference this item */
@@ -34,7 +37,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
     let [left, setLeft] = useState<number>(0);
     let [bottom, setBottom] = useState<number>(0);
     let [right, setRight] = useState<number>(0);
-    let [container, ] = useState(useRef<HTMLDivElement>(null));
+    let [container,] = useState(useRef<HTMLDivElement>(null));
     let [itemKeyboardFocus, setItemKeyboardFocus] = useState<string>("");
     let itemKeyboardRef = useRef<HTMLDivElement>(null);
 
@@ -70,8 +73,9 @@ export default function DropDownMenu(props: DropDownMenuProps) {
     }, [itemKeyboardFocus, itemKeyboardRef])
 
 
-    function handleOpen(openedByKeyboard?: boolean) {
+    function handleOpen(e?: React.MouseEvent<HTMLDivElement, MouseEvent>, openedByKeyboard?: boolean) {
         if (!props.disabled) {
+            if (e) e.stopPropagation();
             if (!open) {
                 let rect = container.current!.getBoundingClientRect();
                 let displaySize = { width: window.innerWidth, height: window.innerHeight }
@@ -125,43 +129,55 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 
 
     return <div className={className} ref={container as any}>
-        <div 
-            onClick={() => handleOpen()}
+        <div
+            onClick={e => handleOpen(e)}
             tabIndex={0}
             onKeyDown={e => {
-                if(e.code === "Enter" || e.code === "Space") {
-                    if(!open) handleOpen(true);
-                    else if (itemKeyboardFocus) {
-                        handleSelectItem(props.items.find(i => i.value === itemKeyboardFocus));
-                        setOpen(false);
-                    }
-                } else if (e.code === "ArrowDown" && !open) {
-                    e.stopPropagation();
-                    e.preventDefault();
-                    handleOpen(true);
-                } else if (e.code === "ArrowDown" && open) {
-
-                    if(!itemKeyboardFocus) setItemKeyboardFocus(props.items[0].value);
-                    else {
-                        let lastIndex = props.items.map(f => f.value).indexOf(itemKeyboardFocus);
-                        if ((lastIndex + 1) < props.items.length) setItemKeyboardFocus(props.items[lastIndex + 1].value);
-                    }
-                    e.stopPropagation();
-                    e.preventDefault();
-                } else if (e.code === "ArrowUp" && open) {
-                    if(itemKeyboardFocus) {
+                handleOnKeyDown(e, {
+                    onEnter: () => {
+                        if (!open) handleOpen(undefined, true);
+                        else if (itemKeyboardFocus) {
+                            handleSelectItem(props.items.find(i => i.value === itemKeyboardFocus));
+                            setOpen(false);
+                        }
+                    },
+                    onArrowDown: () => {
                         e.stopPropagation();
                         e.preventDefault();
-                        let lastIndex = props.items.map(f => f.value).indexOf(itemKeyboardFocus);
-                        if (lastIndex > 0) setItemKeyboardFocus(props.items[lastIndex - 1].value);
+                        if (open) {
+                            let lastIndex = props.items.findIndex(i => i.value === itemKeyboardFocus);
+                            if (lastIndex < props.items.length - 1) {
+                                setItemKeyboardFocus(props.items[lastIndex + 1].value);
+                            }
+                        } else {
+                            handleOpen(undefined, true);
+                        }
+                    },
+                    onArrowUp: () => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        if (open) {
+                            let lastIndex = props.items.findIndex(i => i.value === itemKeyboardFocus);
+                            if (lastIndex > 0) {
+                                setItemKeyboardFocus(props.items[lastIndex - 1].value);
+                            }
+                        } else {
+                            handleOpen(undefined, true);
+                        }
+                    },
+                    onEscape: () => {
+                        if (open) {
+                            setOpen(false);
+                            setItemKeyboardFocus("");
+                        }
+                    },
+                    onTab: () => {
+                        if (open) {
+                            setOpen(false);
+                            setItemKeyboardFocus("");
+                        }
                     }
-                } else if (e.code === "Escape" && open) {
-                    setOpen(false);
-                    setItemKeyboardFocus("");
-                } else if (e.code === "Tab" && open) {
-                    setOpen(false);
-                    setItemKeyboardFocus("");
-                }
+                })
             }}
         >
             {props.buttonComponent}
