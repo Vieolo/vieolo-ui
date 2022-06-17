@@ -161,7 +161,7 @@ export default function Select(props: SelectProps) {
         />)
     }
 
-    const selectItemsComponent = <div className="vieolo-select__select-dropdown" style={style} role="list" >
+    const itemsComponent = <div className="vieolo-select__select-dropdown" style={style} role="list" >
         {items}
     </div>
 
@@ -241,19 +241,15 @@ export default function Select(props: SelectProps) {
 
         </div>
         {
-            open ? Device.isTouchOnlyDevice ?
+            open && (Device.isTouchOnlyDevice ?
                 <Modal onClose={() => setOpen(false)}>
-                    <Card>
-                        <div className="vieolo-modal-card-container">
-                            <div>Select</div>
-                            <IconButton icon={"X"} onClick={() => setOpen(false)} />
-                        </div>
-                        {selectItemsComponent}
+                    <Card >
+                        <Typography type='title-small' text={props.title || ''} className='vieolo-select__modal-title' />
+                        {itemsComponent}
                     </Card>
                 </Modal>
-                :
-                selectItemsComponent
-                : null
+                : itemsComponent
+            )
         }
     </div>
 

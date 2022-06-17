@@ -13,7 +13,6 @@ import CalendarStateful from './calendar_stateful';
 import Typography from '../typography/typography';
 import Modal from '../dialog/modal';
 import Card from '../card/card';
-import IconButton from '../button/icon_button';
 
 // Hooks
 import { useAppearingContainer } from '../../hooks/useAppearingContainer';
@@ -131,19 +130,15 @@ export default function DatePicker(props: {
 
         </div>
         {
-            open ? Device.isTouchOnlyDevice ?
+            open && (Device.isTouchOnlyDevice ?
                 <Modal onClose={() => setOpen(false)}>
-                    <Card>
-                        <div className="vieolo-modal-card-container">
-                            <div>Date Picker</div>
-                            <IconButton icon={"X"} onClick={() => setOpen(false)} />
-                        </div>
+                    <Card >
+                        <Typography type='title-small' text={props.title || ''} className='vieolo-date-picker__modal-title' />
                         {calendarStatefulCompoment}
                     </Card>
                 </Modal>
-                :
-                calendarStatefulCompoment
-                : null
+                : calendarStatefulCompoment
+            )
         }
     </div>
 

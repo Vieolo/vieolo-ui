@@ -562,17 +562,24 @@ body {
 		}
 	}
 
+	&__modal-title {
+		margin-bottom: $base-unit-half;
+		text-align: center;
+	}
+
 	&__select-dropdown {
+		position: fixed;
 		width: 160px;
 		z-index: 99;
 		background-color: white;
 		box-shadow: $box-shadow-dark;
 		border-radius: $base-unit-half;
-		height: 240px;
+		max-height: 240px;
 		overflow-y: auto;
 		@media(pointer: coarse){
+			position: static;
 			width: 240px;
-			height: 300px;
+			max-height: 300px;
 		}
 	}
 
@@ -1736,9 +1743,16 @@ body {
 		}
 	}
 
+	&__modal-title {
+		margin-top: $base-unit-half;
+		text-align: center;
+	}
+
 	.vieolo-calendar-statefull-component {
+		position: absolute;
 		@media(pointer: coarse) {
-			margin-top: 10px;
+			position: static;
+			margin-top: $base-unit;
 		}
 
 		z-index: 11;
@@ -2446,17 +2460,5 @@ body {
 		z-index: 3;
 		border: solid 0.1px #ddd;
 		bottom: -20px;
-	}
-}
-
-.vieolo-modal-card-container {
-	margin-bottom: 3px;
-	width: auto;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-
-	div {
-		display: inline;
 	}
 }
