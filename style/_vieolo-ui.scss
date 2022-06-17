@@ -27,7 +27,7 @@ body {
 	font-weight: $font-weight-bold;
 
 	&:focus {
-		outline: auto 5px -webkit-focus-ring-color;
+		outline: auto $base-unit-half -webkit-focus-ring-color;
 	}
 
 	&:focus:not(:focus-visible) {
@@ -111,12 +111,12 @@ body {
 .vieolo-input {
 	height: 30px;
 	line-height: 30px;
-	border-radius: 5px;
+	border-radius: $base-unit-half;
 	background-color: #f2f2f2;
 	border: 2px solid #f2f2f2;
 	font-size: 14px;
 	box-sizing: border-box;
-	padding: 2px 5px;
+	padding: 2px $base-unit-half;
 
 	&:focus,
 	&:active {
@@ -129,7 +129,7 @@ body {
 	width: 98%;
 	resize: vertical;
 	font-size: 13px;
-	border-radius: 5px;
+	border-radius: $base-unit-half;
 	height: 100px;
 	background-color: #f2f2f2;
 	border: 2px solid #f2f2f2;
@@ -144,7 +144,7 @@ body {
 	.label-container {
 		height: 30px;
 		@include flex-row-space-between;
-		padding: 0 5px;
+		padding: 0 $base-unit-half;
 
 		label {
 			margin: 0;
@@ -172,8 +172,8 @@ body {
 			z-index: 999;
 
 			p {
-				margin-top: 3px;
-				margin-bottom: 3px;
+				margin-top: $base-unit-half;
+				margin-bottom: $base-unit-half;
 				font-size: 10px;
 			}
 
@@ -201,7 +201,7 @@ body {
 		@include primary-background;
 		text-align: center;
 		border-radius: 6px;
-		padding: 5px;
+		padding: $base-unit-half;
 		display: block;
 
 		/* Position the tooltip */
@@ -227,8 +227,8 @@ body {
 			top: 100%;
 			/* At the bottom of the tooltip */
 			left: 50%;
-			margin-left: -5px;
-			border-width: 5px;
+			margin-left: -$base-unit-half;
+			border-width: $base-unit-half;
 			border-style: solid;
 			border-color: black transparent transparent transparent;
 		}
@@ -245,8 +245,8 @@ body {
 			bottom: 100%;
 			/* At the top of the tooltip */
 			left: 50%;
-			margin-left: -5px;
-			border-width: 5px;
+			margin-left: -$base-unit-half;
+			border-width: $base-unit-half;
 			border-style: solid;
 			border-color: transparent transparent black transparent;
 		}
@@ -262,8 +262,8 @@ body {
 			top: 50%;
 			right: 100%;
 			/* To the left of the tooltip */
-			margin-top: -5px;
-			border-width: 5px;
+			margin-top: -$base-unit-half;
+			border-width: $base-unit-half;
 			border-style: solid;
 			border-color: transparent black transparent transparent;
 		}
@@ -279,8 +279,8 @@ body {
 			top: 50%;
 			left: 100%;
 			/* To the right of the tooltip */
-			margin-top: -5px;
-			border-width: 5px;
+			margin-top: -$base-unit-half;
+			border-width: $base-unit-half;
 			border-style: solid;
 			border-color: transparent transparent transparent black;
 		}
@@ -365,8 +365,8 @@ body {
 			height: 20px;
 			background-color: #fafafa;
 			border-radius: 50%;
-			box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.14), 0 2px 2px 0 rgba(0, 0, 0, 0.098),
-				0 1px 5px 0 rgba(0, 0, 0, 0.084);
+			box-shadow: 0 $base-unit-half 1px -2px rgba(0, 0, 0, 0.14), 0 2px 2px 0 rgba(0, 0, 0, 0.098),
+				0 1px $base-unit-half 0 rgba(0, 0, 0, 0.084);
 		}
 
 		.switch-on {
@@ -510,7 +510,7 @@ body {
 		@include flex-row-space-between;
 		@include no-text-overflow;
 		width: 160px;
-		padding: 0 5px;
+		padding: 0 $base-unit-half;
 
 		&:focus {
 			border: 2px solid $secondary-color-normal;
@@ -619,7 +619,7 @@ body {
 		&__category-name {
 			font-size: 12px;
 			margin: 0;
-			padding: 10px 0px 3px 10px;
+			padding: $base-unit 0px $base-unit-half $base-unit;
 			font-weight: $font-weight-bold;
 			border-bottom: 1px solid $primary-color-normal;
 			position: sticky;
@@ -645,18 +645,18 @@ body {
 	@include center-by-flex-row;
 	text-align: center;
 	margin-top: 0;
-	padding: 10px 0;
-	border-radius: 10px 10px 0 0;
+	padding: $base-unit 0;
+	border-radius: $base-unit $base-unit 0 0;
 
 	&>p {
-		margin: 5px 0;
+		margin: $base-unit-half 0;
 	}
 }
 
 .vieolo-modal-button-footer {
-	border-radius: 0 0 10px 10px;
+	border-radius: 0 0 $base-unit $base-unit;
 	border-top: 1px solid gray;
-	padding: 10px;
+	padding: $base-unit;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
@@ -670,7 +670,7 @@ body {
 		position: fixed;
 		z-index: 99;
 		width: 190px;
-		padding: 5px;
+		padding: $base-unit-half;
 		@include card-dark-shadow;
 		max-height: 240px;
 		overflow: scroll;
@@ -693,7 +693,7 @@ body {
 		}
 
 		p {
-			padding: 0px 3px;
+			padding: 0px $base-unit-half;
 		}
 
 		svg {
@@ -729,7 +729,7 @@ body {
 
 	&__content {
 		height: $row-height-small;
-		padding: 2px 5px;
+		padding: 2px $base-unit-half;
 		@include center-by-flex-row;
 
 		p {
@@ -739,7 +739,7 @@ body {
 		}
 
 		&>span {
-			margin-left: 5px;
+			margin-left: $base-unit-half;
 		}
 	}
 
@@ -893,7 +893,7 @@ body {
 	&__canvas-container {
 		overflow: auto;
 		width: 100%;
-		padding: 10px;
+		padding: $base-unit;
 		position: absolute;
 		top: 30px;
 
@@ -1036,7 +1036,7 @@ body {
 			.buttonWidgetAnnotation.pushButton>a:hover {
 				opacity: 0.2;
 				background: rgba(255, 255, 0, 1);
-				box-shadow: 0 2px 10px rgba(255, 255, 0, 1);
+				box-shadow: 0 2px $base-unit rgba(255, 255, 0, 1);
 			}
 
 			.textAnnotation img {
@@ -1055,7 +1055,7 @@ body {
 				font-size: 9px;
 				height: 100%;
 				margin: 0;
-				padding: 0 3px;
+				padding: 0 $base-unit-half;
 				vertical-align: top;
 				width: 100%;
 			}
@@ -1173,10 +1173,10 @@ body {
 				z-index: 200;
 				max-width: 20em;
 				background-color: rgba(255, 255, 153, 1);
-				box-shadow: 0 2px 5px rgba(136, 136, 136, 1);
+				box-shadow: 0 2px $base-unit-half rgba(136, 136, 136, 1);
 				border-radius: 2px;
 				padding: 6px;
-				margin-left: 5px;
+				margin-left: $base-unit-half;
 				cursor: pointer;
 				font: message-box;
 				font-size: 9px;
@@ -1194,7 +1194,7 @@ body {
 
 			.popupDate {
 				display: inline-block;
-				margin-left: 5px;
+				margin-left: $base-unit-half;
 			}
 
 			.popupContent {
@@ -1229,7 +1229,7 @@ body {
 
 .vieolo-back-button-row {
 	height: 50px;
-	margin: 10px 0;
+	margin: $base-unit 0;
 	display: grid;
 	grid-template-columns: 40% 20% 40%;
 	@include card-light-shadow;
@@ -1239,7 +1239,7 @@ body {
 	.back-button-container {
 		display: flex;
 		align-items: center;
-		margin-left: 5px;
+		margin-left: $base-unit-half;
 	}
 
 	.center-component {
@@ -1250,7 +1250,7 @@ body {
 		display: flex;
 		flex-flow: row-reverse;
 		align-items: center;
-		margin-right: 10px;
+		margin-right: $base-unit;
 	}
 }
 
@@ -1271,7 +1271,7 @@ body {
 	align-items: center;
 
 	p {
-		margin-left: 10px;
+		margin-left: $base-unit;
 	}
 }
 
@@ -1284,7 +1284,7 @@ body {
 	&__year-div,
 	&__dropdown-div {
 		height: 30px;
-		border-radius: 5px;
+		border-radius: $base-unit-half;
 		@include primary-background;
 
 		svg {
@@ -1332,12 +1332,12 @@ body {
 
 .vieolo-form-dialog {
 	background-color: white;
-	border-radius: 5px;
+	border-radius: $base-unit-half;
 
 	&__header {
 		border-bottom: 1px solid #f2f2f2;
 		height: 40px;
-		padding: 0 10px;
+		padding: 0 $base-unit;
 	}
 
 	&__footer {
@@ -1346,7 +1346,7 @@ body {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		padding: 0 10px;
+		padding: 0 $base-unit;
 
 		&__spacer {
 			&--left {
@@ -1354,7 +1354,7 @@ body {
 			}
 
 			&--middle {
-				width: 5px;
+				width: $base-unit-half;
 			}
 		}
 	}
@@ -1362,12 +1362,12 @@ body {
 
 .vieolo-confirmation-dialog {
 	background-color: white;
-	border-radius: 5px;
+	border-radius: $base-unit-half;
 
 	&__header {
 		border-bottom: 1px solid #f2f2f2;
 		height: 40px;
-		padding: 0 10px;
+		padding: 0 $base-unit;
 	}
 
 	&__footer {
@@ -1376,7 +1376,7 @@ body {
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		padding: 0 10px;
+		padding: 0 $base-unit;
 		margin-top: 20px;
 
 		&__spacer {
@@ -1385,7 +1385,7 @@ body {
 			}
 
 			&--middle {
-				width: 5px;
+				width: $base-unit-half;
 			}
 		}
 	}
@@ -1398,8 +1398,8 @@ body {
 
 .vieolo-table {
 	background-color: white;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
+	border-top-left-radius: $base-unit-half;
+	border-top-right-radius: $base-unit-half;
 
 	&--headless {
 		border-radius: 0px;
@@ -1409,8 +1409,8 @@ body {
 	&__header-row {
 		background-color: #f2f2f2;
 		display: grid;
-		border-top-left-radius: 5px;
-		border-top-right-radius: 5px;
+		border-top-left-radius: $base-unit-half;
+		border-top-right-radius: $base-unit-half;
 
 		&__cell {
 			height: 40px;
@@ -1457,7 +1457,7 @@ body {
 	&__pagination-row {
 		display: flex;
 		flex-direction: row-reverse;
-		padding: 5px;
+		padding: $base-unit-half;
 	}
 }
 
@@ -1524,10 +1524,10 @@ body {
 		list-style: none;
 		background: #fff;
 		display: inline-block;
-		border-radius: 5px;
+		border-radius: $base-unit-half;
 		position: relative;
 
-		@media all and (max-width: 500px) {
+		@media all and (max-width: $mobileBreakPoint) {
 			font-size: 10px;
 		}
 
@@ -1550,7 +1550,7 @@ body {
 			font-weight: 400;
 
 			i {
-				margin-right: 5px;
+				margin-right: $base-unit-half;
 			}
 		}
 	}
@@ -1575,7 +1575,7 @@ body {
 		@include center-by-flex-row;
 
 		@media(pointer: coarse) {
-			margin: 3px;
+			margin: $base-unit-half;
 		}
 
 		p {
@@ -1641,10 +1641,10 @@ body {
 	}
 
 	&__row {
-		margin: 3px 0;
+		margin: $base-unit-half 0;
 
 		@media(pointer: coarse) {
-			margin: 5px 0;
+			margin: $base-unit-half 0;
 		}
 
 		&--no-week {
@@ -1726,7 +1726,7 @@ body {
 
 		&__default-button {
 			width: 140px;
-			padding: 2px 10px;
+			padding: 2px $base-unit;
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
@@ -1773,7 +1773,7 @@ body {
 
 .vieolo-gantt-chart {
 	border: 2px solid #ddd;
-	border-radius: 5px;
+	border-radius: $base-unit-half;
 	position: relative;
 	background-color: white;
 	@include nonselectable;
@@ -1834,8 +1834,8 @@ body {
 
 		&__item-column {
 			width: 100px;
-			padding-left: 5px;
-			padding-right: 5px;
+			padding-left: $base-unit-half;
+			padding-right: $base-unit-half;
 			display: flex;
 			flex-flow: column;
 			justify-content: center;
@@ -1852,7 +1852,7 @@ body {
 				top: 0px;
 				border-radius: 0 0 2px 2px;
 				box-sizing: border-box;
-				padding: 0 5px;
+				padding: 0 $base-unit-half;
 				text-align: center;
 				display: flex;
 				flex-flow: column;
@@ -1884,8 +1884,8 @@ body {
 
 			&__item-column {
 				width: 100px;
-				padding-left: 5px;
-				padding-right: 5px;
+				padding-left: $base-unit-half;
+				padding-right: $base-unit-half;
 				display: flex;
 				flex-flow: column;
 				justify-content: center;
@@ -1907,10 +1907,10 @@ body {
 				&__bar {
 					position: absolute;
 					height: 35px;
-					top: 5px;
-					border-radius: 5px;
+					top: $base-unit-half;
+					border-radius: $base-unit-half;
 					box-sizing: border-box;
-					padding: 0 5px;
+					padding: 0 $base-unit-half;
 					text-align: center;
 					display: flex;
 					flex-flow: column;
@@ -1999,7 +1999,7 @@ body {
 
 					&__resize {
 						position: absolute;
-						width: 3px;
+						width: $base-unit-half;
 
 						height: 100%;
 						cursor: col-resize;
@@ -2035,7 +2035,7 @@ body {
 				&__sup-item-bar {
 					position: absolute;
 					background-color: $success-color-normal;
-					height: 3px;
+					height: $base-unit-half;
 					bottom: 36px;
 					z-index: 5;
 				}
@@ -2043,7 +2043,7 @@ body {
 				&__sub-item-bar {
 					position: absolute;
 					background-color: $accessory-blue-normal;
-					height: 3px;
+					height: $base-unit-half;
 					top: 36px;
 					z-index: 5;
 				}
@@ -2052,7 +2052,7 @@ body {
 
 		&__drop-zone {
 			position: absolute;
-			height: 6px;
+			height: $base-unit-half;
 			width: 100%;
 
 			&--top {
@@ -2077,16 +2077,16 @@ body {
 	box-sizing: border-box;
 	position: fixed;
 	@include card-dark-shadow;
-	border-radius: 5px;
+	border-radius: $base-unit-half;
 	z-index: 99;
 
 	&__menu-row {
-		border-radius: 5px;
+		border-radius: $base-unit-half;
 		width: 130px;
 		cursor: pointer;
 		display: flex;
 		align-items: center;
-		padding: 5px;
+		padding: $base-unit-half;
 
 		&:hover {
 			background-color: #f2f2f2;
@@ -2097,7 +2097,7 @@ body {
 		}
 
 		p {
-			margin: 5px;
+			margin: $base-unit-half;
 			font-size: 12px;
 			font-weight: $font-weight-bold;
 		}
@@ -2217,7 +2217,7 @@ body {
 	&__label-container {
 		height: 30px;
 		@include flex-row-space-between;
-		padding: 0 5px;
+		padding: 0 $base-unit-half;
 
 		label {
 			margin: 0;
@@ -2232,13 +2232,13 @@ body {
 
 		&__date-picker-button {
 			display: flex;
-			border-radius: 5px;
+			border-radius: $base-unit-half;
 			align-items: center;
 			background-color: #f2f2f2;
 			border: 2px solid #f2f2f2;
 			font-size: 14px;
 			box-sizing: border-box;
-			padding: 2px 2px 2px 5px;
+			padding: 2px 2px 2px $base-unit-half;
 			cursor: pointer;
 			margin-right: $base-unit-half;
 			height: 30px;
@@ -2246,7 +2246,7 @@ body {
 			svg {
 				height: 20px;
 				width: 20px;
-				margin-left: 5px;
+				margin-left: $base-unit-half;
 			}
 		}
 	}
