@@ -1534,7 +1534,7 @@ body {
 		&--active {
 			color: #fff !important;
 			background-color: $primary-color-normal;
-			border-radius: 5px;
+			border-radius: $base-unit-half;
 		}
 
 		a {
@@ -1558,11 +1558,11 @@ body {
 	&__selector {
 		height: 100%;
 		display: inline-block;
+		position: absolute;
 		left: 0px;
 		top: 0px;
 		z-index: 1;
 		transition-duration: 0.6s;
-		background-color: $primary-color-normal;
 	}
 }
 
