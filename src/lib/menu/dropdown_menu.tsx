@@ -7,6 +7,9 @@ import Typography from '../typography/typography';
 // Types
 import { ColorOptionType } from '../private/types';
 
+// Utility
+import { handleOnKeyDown } from '../utility/onkeydown_utility';
+
 export type DropDownMenuItemType = {
     title: string,
     /** The unique value of each item which is used to reference this item */
@@ -34,13 +37,16 @@ export default function DropDownMenu(props: DropDownMenuProps) {
     let [left, setLeft] = useState<number>(0);
     let [bottom, setBottom] = useState<number>(0);
     let [right, setRight] = useState<number>(0);
-    let [container, ] = useState(useRef<HTMLDivElement>(null));
+    let [container,] = useState(useRef<HTMLDivElement>(null));
+    let [itemKeyboardFocus, setItemKeyboardFocus] = useState<string>("");
+    let itemKeyboardRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
 
         const handleClickOutside = (event: MouseEvent) => {
             if (container.current && !(container.current as any).contains(event.target)) {
                 setOpen(false);
+                setItemKeyboardFocus("");
             }
         }
 
@@ -60,10 +66,16 @@ export default function DropDownMenu(props: DropDownMenuProps) {
         }
     }, [open])
 
+    useEffect(() => {
+        if (itemKeyboardFocus && itemKeyboardRef.current) {            
+            itemKeyboardRef.current.scrollIntoView({block: 'center'});
+        }
+    }, [itemKeyboardFocus, itemKeyboardRef])
 
-    function handleButtonClick(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+
+    function handleOpen(e?: React.MouseEvent<HTMLDivElement, MouseEvent>, openedByKeyboard?: boolean) {
         if (!props.disabled) {
-            e.stopPropagation();
+            if (e) e.stopPropagation();
             if (!open) {
                 let rect = container.current!.getBoundingClientRect();
                 let displaySize = { width: window.innerWidth, height: window.innerHeight }
@@ -94,8 +106,15 @@ export default function DropDownMenu(props: DropDownMenuProps) {
                 setBottom(b);
             }
             setOpen(!open);
+            if(openedByKeyboard) setItemKeyboardFocus(props.items[0].value);
         }
     };
+
+    function handleSelectItem(item: DropDownMenuItemType | undefined) {
+        if (!item) return;
+        setOpen(false);
+        props.onItemSelect(item.value);
+    }
 
     let className = "vieolo-dropdown-menu";
     if (props.className) className += ` ${props.className}`;
@@ -110,7 +129,57 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 
 
     return <div className={className} ref={container as any}>
-        <div onClick={e => handleButtonClick(e)}>
+        <div
+            onClick={e => handleOpen(e)}
+            tabIndex={0}
+            onKeyDown={e => {
+                handleOnKeyDown(e, {
+                    onEnter: () => {
+                        if (!open) handleOpen(undefined, true);
+                        else if (itemKeyboardFocus) {
+                            handleSelectItem(props.items.find(i => i.value === itemKeyboardFocus));
+                            setOpen(false);
+                        }
+                    },
+                    onArrowDown: () => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        if (open) {
+                            let lastIndex = props.items.findIndex(i => i.value === itemKeyboardFocus);
+                            if (lastIndex < props.items.length - 1) {
+                                setItemKeyboardFocus(props.items[lastIndex + 1].value);
+                            }
+                        } else {
+                            handleOpen(undefined, true);
+                        }
+                    },
+                    onArrowUp: () => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        if (open) {
+                            let lastIndex = props.items.findIndex(i => i.value === itemKeyboardFocus);
+                            if (lastIndex > 0) {
+                                setItemKeyboardFocus(props.items[lastIndex - 1].value);
+                            }
+                        } else {
+                            handleOpen(undefined, true);
+                        }
+                    },
+                    onEscape: () => {
+                        if (open) {
+                            setOpen(false);
+                            setItemKeyboardFocus("");
+                        }
+                    },
+                    onTab: () => {
+                        if (open) {
+                            setOpen(false);
+                            setItemKeyboardFocus("");
+                        }
+                    }
+                })
+            }}
+        >
             {props.buttonComponent}
         </div>
 
@@ -129,6 +198,9 @@ export default function DropDownMenu(props: DropDownMenuProps) {
                                 setOpen(!open);
                                 props.onItemSelect(v);
                             }}
+                            onItemSelect={(t: DropDownMenuItemType) => { handleSelectItem(t) }}
+                            onKeyboardFocus={itemKeyboardFocus === item.value}
+                            itemRef={item.value === itemKeyboardFocus ? itemKeyboardRef : undefined}
                         />
                     })
                 }
@@ -142,13 +214,18 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 function DropDownMenuItem(props: { 
     title: string, 
     value: string, 
-    onClick: (selectedValue: string) => void, 
+    onClick: (selectedValue: string) => void,
+    onItemSelect: (item: DropDownMenuItemType) => void,
     icon?: React.ReactNode,
     color?: ColorOptionType
+    onKeyboardFocus?: boolean
+    itemRef?: React.RefObject<HTMLDivElement>
 }) {
-
+    let className = ` vieolo-dropdown-menu__dropdown-item color--${props.color || 'primary'}-normal`;
+    if (props.onKeyboardFocus) className += ` vieolo-dropdown-menu__dropdown-item--keyboard-focus`;
+    
     return <div 
-        className={`vieolo-dropdown-menu__dropdown-item color--${props.color || 'primary'}-normal`} 
+        className={className} 
         onClick={() => { props.onClick(props.value) }}
         aria-label={`${props.title} select item`}
     >
