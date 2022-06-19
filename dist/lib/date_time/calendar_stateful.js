@@ -13,6 +13,8 @@ import CalendarStateless from './calendar_stateless';
 // External Components
 import IconButton from '../button/icon_button';
 import DateInput from './date_input';
+// Utility
+import { handleOnKeyDown } from '../utility/onkeydown_utility';
 export default function CalendarStateful(props) {
     let [currentDate, setCurrentDate] = useState(new VDate().setToDateStart());
     let [searchDate, setSearchDate] = useState(null);
@@ -35,9 +37,16 @@ export default function CalendarStateful(props) {
                                 setSearchDate(d);
                                 setSearchText(t);
                             }, value: searchText.trim(), onKeyDown: e => {
-                                if ((e.code === "Tab" || e.code === "Escape") && props.onKeyboardExit) {
-                                    props.onKeyboardExit();
-                                }
+                                handleOnKeyDown(e, {
+                                    onTab: () => {
+                                        if (props.onKeyboardExit)
+                                            props.onKeyboardExit();
+                                    },
+                                    onEscape: () => {
+                                        if (props.onKeyboardExit)
+                                            props.onKeyboardExit();
+                                    }
+                                });
                             }, autoFocus: true, dateFormat: 'DD/MM/YYYY', ariaLabel: props.ariaLabel + ` Search Date` }, void 0) }), void 0) }), void 0),
             _jsxs("div", Object.assign({ className: "vieolo-calendar-statefull-component__calendar-year" }, { children: [_jsx(IconButton, { icon: _jsx(PreviousIcon, {}, void 0), size: "extra-small", borderRadius: 'normal', ariaLabel: props.ariaLabel + " year decrease button", onClick: e => {
                             e.stopPropagation();

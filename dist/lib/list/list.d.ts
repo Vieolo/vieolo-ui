@@ -40,4 +40,5 @@ export default function List(props: {
     height: string;
     horizontalPadding?: 'none' | 'half' | 'one';
     ariaLabel?: string;
+    onlyAllowOneGroupToExpand?: boolean;
 }): JSX.Element;

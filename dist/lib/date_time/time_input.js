@@ -2,7 +2,7 @@ import { jsx as _jsx } from "react/jsx-runtime";
 // Components
 import InputSet from '../form/input_set';
 export default function TimeInput(props) {
-    return _jsx(InputSet, { label: props.label || '', ariaLabel: props.ariaLabel || props.label, disabled: props.disabled, tip: props.tip, error: parseInputTimeToCustomDate(props.value)[0] == null, onChange: v => {
+    return _jsx(InputSet, { label: props.label || '', ariaLabel: props.ariaLabel || props.label, disabled: props.disabled, tip: props.tip, error: parseInputTimeToCustomDate(props.value)[0] === null, onChange: v => {
             // Preventing the user to type more than 5 characters
             if (v.length > 5)
                 return;

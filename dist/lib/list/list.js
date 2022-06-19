@@ -7,6 +7,7 @@ import Typography from '../typography/typography';
 import ExpandableCard from '../card/expandable_card';
 export default function List(props) {
     let [query, setQuery] = useState("");
+    let [openedGroup, setOpenedGroup] = useState("");
     let sortedItems = props.items.filter(a => {
         if (!query.trim())
             return true;
@@ -47,7 +48,14 @@ export default function List(props) {
                         onQueryChange: (c) => setQuery(c)
                     } }, void 0),
             Object.values(grouped).map(g => {
-                return _jsx("div", Object.assign({ className: "margin-vertical--half" }, { children: _jsx(ExpandableCard, Object.assign({ title: g.group, initialState: 'collapsed', ariaLabel: g.group, collapsedCardStyle: props.collapsedGroupStyle, expandedCardStyle: props.expandedGroupStyle || props.collapsedGroupStyle }, { children: g.items }), void 0) }), g.group);
+                return _jsx("div", Object.assign({ className: "margin-vertical--half" }, { children: _jsx(ExpandableCard, Object.assign({ title: g.group, initialState: 'collapsed', ariaLabel: g.group, collapsedCardStyle: props.collapsedGroupStyle, expandedCardStyle: props.expandedGroupStyle || props.collapsedGroupStyle, state: props.onlyAllowOneGroupToExpand ? openedGroup === g.group ? "expanded" : "collapsed" : undefined, onStateChange: v => {
+                            if (v === "expanded")
+                                setOpenedGroup(g.group);
+                            else {
+                                if (openedGroup === g.group)
+                                    setOpenedGroup('');
+                            }
+                        } }, { children: g.items }), void 0) }), g.group);
             }),
             ungrouped] }), void 0);
 }

@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.21.7 (2022-06-19)
+- Added keyboard interaction for `DropdownMenu` ([#39](https://github.com/Vieolo/vieolo-ui/issues/39))
+- Added keyboard interaction for `RadioGroupSet` ([#52](https://github.com/Vieolo/vieolo-ui/issues/52))
+- Added mobile layout for `DatePicker` ([#74](https://github.com/Vieolo/vieolo-ui/issues/74))
+- Added mobile layout for `Select` ([#75](https://github.com/Vieolo/vieolo-ui/issues/75))
+- Made `TabSwitch` responsive ([#140](https://github.com/Vieolo/vieolo-ui/issues/140))
+- Added ability to open only one group in `List` ([#153](https://github.com/Vieolo/vieolo-ui/issues/153))
+
 ## 0.21.6 (2022-06-13)
 - Fixed the propagation of selecting week in `DatePicker`
 
