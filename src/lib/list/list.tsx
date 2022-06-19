@@ -52,10 +52,12 @@ export default function List(props: {
     title?: string,
     height: string,
     horizontalPadding?: 'none' | 'half' | 'one',
-    ariaLabel?: string
+    ariaLabel?: string,
+    onlyAllowOneGroupToExpand?: boolean
 }) {
 
     let [query, setQuery] = useState<string>("");
+    let [openedGroup, setOpenedGroup] = useState<string>("");
 
 
     let sortedItems = props.items.filter(a => {
@@ -64,7 +66,7 @@ export default function List(props: {
         if (a.subTitle && props.enableSubtitleSearch && a.subTitle.toLowerCase().includes(query.toLowerCase())) return true;
         return false;
     })
-    
+
     if (!props.disableSorting) {
         sortedItems.sort((a, b) => {
             if (!a.group && !b.group) return a.title > b.title ? 1 : -1;
@@ -134,12 +136,19 @@ export default function List(props: {
         {
             Object.values(grouped).map(g => {
                 return <div className="margin-vertical--half" key={g.group}>
-                    <ExpandableCard                        
+                    <ExpandableCard
                         title={g.group}
                         initialState='collapsed'
                         ariaLabel={g.group}
                         collapsedCardStyle={props.collapsedGroupStyle}
                         expandedCardStyle={props.expandedGroupStyle || props.collapsedGroupStyle}
+                        state={props.onlyAllowOneGroupToExpand ? openedGroup === g.group ? "expanded" : "collapsed" : undefined}
+                        onStateChange={v => {
+                            if (v === "expanded") setOpenedGroup(g.group);
+                            else {
+                                if (openedGroup === g.group) setOpenedGroup('');
+                            }
+                        }}
                     >
                         {g.items}
                     </ExpandableCard>
