@@ -24,7 +24,7 @@ export default function DateInput(props: {
         disabled={props.disabled}
         tip={props.tip}
         autoFocus={props.autoFocus}
-        error={parseInputDateToVDate(props.value) == null}
+        error={parseInputDateToVDate(props.value) === null}
         onKeyDown={props.onKeyDown}
         onChange={v => {
             // Preventing the user to type more than 10 characters
