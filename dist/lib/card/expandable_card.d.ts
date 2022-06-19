@@ -10,7 +10,8 @@ export default function ExpandableCard(props: {
      * The optional callback when the card is expanded.
      * Implementing this callback is not necessary for the actual expansion of the card
      */
-    onStateChage?: (s: 'expanded' | 'collapsed') => void;
+    onStateChange?: (s: 'expanded' | 'collapsed') => void;
+    state?: "expanded" | "collapsed";
     /** The title displayed in the header of the card */
     title: string;
     /** The style of the card when collapsed */

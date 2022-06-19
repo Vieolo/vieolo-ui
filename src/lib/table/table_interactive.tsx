@@ -109,7 +109,7 @@ export default function TableInteractive(props: {
 
         {
             props.rows.map((row, i) => {
-                return <div className="vieolo-table-interactive__content-row" style={{ gridTemplateColumns: props.columnGrid }} key={`row_${i}`}>
+                return <div className="vieolo-table-interactive__content-row" style={{ gridTemplateColumns: props.columnGrid }} key={`row_${i}`} aria-label={`row ${i + 1}`}>
                     {
                         row.map((r, ri) => {
                             let k = `${i}_${ri}`;
@@ -196,6 +196,7 @@ export default function TableInteractive(props: {
                                         else toggleSelectCell(k, r.numericalValue, 'add', ri)
                                     }
                                 }}
+                                aria-label={`row ${i + 1} cell ${ri + 1}`}
                             >
                                 {
                                     !r.span &&

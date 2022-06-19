@@ -5,7 +5,7 @@ import InputSet from "../form/input_set";
 import VDate from "@vieolo/date";
 import { dateDDMMYYYY } from '@vieolo/regex-library';
 export default function DateInput(props) {
-    return _jsx(InputSet, { label: props.label || '', ariaLabel: props.ariaLabel || props.label, disabled: props.disabled, tip: props.tip, autoFocus: props.autoFocus, error: parseInputDateToVDate(props.value) == null, onKeyDown: props.onKeyDown, onChange: v => {
+    return _jsx(InputSet, { label: props.label || '', ariaLabel: props.ariaLabel || props.label, disabled: props.disabled, tip: props.tip, autoFocus: props.autoFocus, error: parseInputDateToVDate(props.value) === null, onKeyDown: props.onKeyDown, onChange: v => {
             // Preventing the user to type more than 10 characters
             if (v.length > 10)
                 return;

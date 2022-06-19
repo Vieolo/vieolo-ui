@@ -49,7 +49,7 @@ export default function TableInteractive(props) {
                     return _jsx("div", Object.assign({ className: cellClass }, { children: _jsx(Typography, { type: 'title-small', text: s }, void 0) }), s);
                 }) }), void 0),
             props.rows.map((row, i) => {
-                return _jsx("div", Object.assign({ className: "vieolo-table-interactive__content-row", style: { gridTemplateColumns: props.columnGrid } }, { children: row.map((r, ri) => {
+                return _jsx("div", Object.assign({ className: "vieolo-table-interactive__content-row", style: { gridTemplateColumns: props.columnGrid }, "aria-label": `row ${i + 1}` }, { children: row.map((r, ri) => {
                         let k = `${i}_${ri}`;
                         if (editCellData && editCellData.cellIndex === ri && editCellData.rowIndex === i) {
                             return _jsx(InputCell, { cellClass: cellClass, onChange: v => setEditCellData({ ...editCellData, newText: v }), onSubmit: () => {
@@ -116,7 +116,7 @@ export default function TableInteractive(props) {
                                     else
                                         toggleSelectCell(k, r.numericalValue, 'add', ri);
                                 }
-                            } }, { children: [!r.span &&
+                            }, "aria-label": `row ${i + 1} cell ${ri + 1}` }, { children: [!r.span &&
                                     finalNode,
                                 r.span &&
                                     _jsx("div", Object.assign({ style: style }, { children: finalNode }), void 0)] }), k);

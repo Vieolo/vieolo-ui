@@ -6,11 +6,11 @@ import Textarea from './textarea';
 export default function TextareaSet(props) {
     let size = props.size || 'medium';
     let width = '180px';
-    if (size == 'small')
+    if (size === 'small')
         width = '100px';
-    else if (size == 'large')
+    else if (size === 'large')
         width = '240px';
-    else if (size == 'full')
+    else if (size === 'full')
         width = '100%';
     return _jsxs("div", Object.assign({ className: `vieolo-textarea-set${props.disabled ? ' disabled' : ''}`, style: { width: width } }, { children: [_jsxs("div", Object.assign({ className: "label-container" }, { children: [_jsx("label", { children: props.label }, void 0),
                     props.tip &&

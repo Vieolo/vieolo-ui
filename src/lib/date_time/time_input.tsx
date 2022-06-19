@@ -20,7 +20,7 @@ export default function TimeInput(props: {
         ariaLabel={props.ariaLabel || props.label}
         disabled={props.disabled}
         tip={props.tip}
-        error={parseInputTimeToCustomDate(props.value)[0] == null}
+        error={parseInputTimeToCustomDate(props.value)[0] === null}
         onChange={v => {
             // Preventing the user to type more than 5 characters
             if (v.length > 5) return;
