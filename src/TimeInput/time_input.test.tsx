@@ -1,5 +1,5 @@
 
-import { parseInputTimeToCustomDate } from '../../../TimeInput';
+import { parseInputTimeToCustomDate } from '.';
 
 
 
