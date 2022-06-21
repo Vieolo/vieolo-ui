@@ -61,38 +61,39 @@ function getFileExports(folderName, fileName) {
  * @param {FileExport} ex 
  * @return {string}
  */
-function prepareIndexExports(ex) {
-    let s = [];
+function prepareIndexExports(ex) {    
+    let i = [];
+    let e = []
 
     if (ex.default) {
-        s.push(`import ${ex.default} from './${ex.fileName.split(".")[0]}';`);
-        s.push(`export default ${ex.default};`);
+        i.push(`import ${ex.default} from './${ex.fileName.split(".")[0]}';`);
+        e.push(`export default ${ex.default};`);
     }
 
     if (ex.nonDefault.length > 0) {
-        s.push("export {");
+        e.push("export {");
         for (let i = 0; i < ex.nonDefault.length; i++) {
             const nd = ex.nonDefault[i];
-            s.push(`\t${nd},`)
+            e.push(`\t${nd},`)
         }
-        s.push("}");
+        e.push("}");
     }
 
     if (ex.types.length > 0) {
-        s.push('import {')
+        i.push('import {')
         for (let i = 0; i < ex.types.length; i++) {
             const t = ex.types[i];
-            s.push(`\t${t} as ${t}Temp,`)
+            i.push(`\t${t} as ${t}Temp,`)
         }
-        s.push(`} from './${ex.fileName.split(".")[0]}';`);
-        s.push(" ");
+        i.push(`} from './${ex.fileName.split(".")[0]}';`);
+        
         for (let i = 0; i < ex.types.length; i++) {
             const t = ex.types[i];
-            s.push(`export type ${t} = ${t}Temp;`)
+            e.push(`export type ${t} = ${t}Temp;`)
         }
     }
 
-    return s.join("\n");
+    return [...i, "\n", ...e].join("\n");
 }
 
 /**
