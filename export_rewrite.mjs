@@ -115,6 +115,7 @@ function prepareMainExport(exs) {
         if (!hasDefault && !hasNonDefault) continue;
         let importObj = `${!hasDefault ? "" : d.default + " "}${hasBoth ? ", " : ""}${hasNonDefault ? "{ " + d.nonDefault.join(", ") + " }" : ""}`.trim().replace(/  +/g, " ");
         s.push(`import ${importObj} from './${d.folderName}';`);
+        toBeExported.push(d.default, ...d.nonDefault)
     }
 
     s.push("\n\n");
@@ -136,7 +137,7 @@ function prepareMainExport(exs) {
         s.push("import {");
         for (let k = 0; k < d.types.length; k++) {
             const t = d.types[k];
-            s.push(`\t${t} as ${t}Temp`)
+            s.push(`\t${t} as ${t}Temp,`)
         }
         s.push(`} from './${d.folderName}';`);
         
