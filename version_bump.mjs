@@ -83,6 +83,9 @@ let tsConfig = JSON.parse(fs.readFileSync('./tsconfig.json').toString());
 tsConfig.compilerOptions.noEmit = false;
 fs.writeFileSync('./tsconfig.json', JSON.stringify(tsConfig, null, 2));
 
+// Rewriting the export files
+execSync('node ./export_rewrite');
+
 // Removing the existing dist folder
 fs.rmSync("./dist", { recursive: true, force: true });
 
