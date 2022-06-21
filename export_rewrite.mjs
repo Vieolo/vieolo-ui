@@ -112,6 +112,7 @@ function prepareMainExport(exs) {
         let hasDefault = d.default.length > 0;
         let hasNonDefault = d.nonDefault.length > 0;
         let hasBoth = hasDefault && hasNonDefault;        
+        if (!hasDefault && !hasNonDefault) continue;
         let importObj = `${!hasDefault ? "" : d.default + " "}${hasBoth ? ", " : ""}${hasNonDefault ? "{ " + d.nonDefault.join(", ") + " }" : ""}`.trim().replace(/  +/g, " ");
         s.push(`import ${importObj} from './${d.folderName}';`);
     }
