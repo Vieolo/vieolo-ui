@@ -1,3 +1,4 @@
-import FileInput from "./file_input";
+import FileInput from './file_input';
 
-export default FileInput
+
+export default FileInput;

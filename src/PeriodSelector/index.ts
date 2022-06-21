@@ -1,5 +1,7 @@
-import PeriodSelector, { PeriodOptions }  from "./period_selector"
+import PeriodSelector from './period_selector';
+
 
 export default PeriodSelector;
-
-export { PeriodOptions };
+export {
+	PeriodOptions,
+} from './period_selector'

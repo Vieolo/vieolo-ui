@@ -1,3 +1,4 @@
-import InputSet from "./input_set";
+import InputSet from './input_set';
 
-export default InputSet
+
+export default InputSet;

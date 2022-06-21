@@ -1,17 +1,18 @@
-import GanttChart, { 
-    GanttChartColumnGroup as GCCG, 
-    GanttChartColumnTitle as GCCT, 
-    GanttChartContextMenuItem as GCCMI, 
-    GanttChartRowType as GCRT, 
-    GanttChartItemType as GCIT,
-    GanttChartAuxiliaryItemType as GCAI
+import GanttChart from './gantt_chart';
+import {
+	GanttChartContextMenuItem as GanttChartContextMenuItemTemp,
+	GanttChartItemType as GanttChartItemTypeTemp,
+	GanttChartAuxiliaryItemType as GanttChartAuxiliaryItemTypeTemp,
+	GanttChartRowType as GanttChartRowTypeTemp,
+	GanttChartColumnTitle as GanttChartColumnTitleTemp,
+	GanttChartColumnGroup as GanttChartColumnGroupTemp,
 } from './gantt_chart';
 
-export default GanttChart;
 
-export type GanttChartColumnGroup = GCCG;
-export type GanttChartColumnTitle = GCCT;
-export type GanttChartContextMenuItem = GCCMI;
-export type GanttChartRowType = GCRT;
-export type GanttChartItemType = GCIT;
-export type GanttChartAuxiliaryItemType = GCAI;
+export default GanttChart;
+export type GanttChartContextMenuItem = GanttChartContextMenuItemTemp;
+export type GanttChartItemType = GanttChartItemTypeTemp;
+export type GanttChartAuxiliaryItemType = GanttChartAuxiliaryItemTypeTemp;
+export type GanttChartRowType = GanttChartRowTypeTemp;
+export type GanttChartColumnTitle = GanttChartColumnTitleTemp;
+export type GanttChartColumnGroup = GanttChartColumnGroupTemp;

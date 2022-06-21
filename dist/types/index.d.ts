@@ -1,0 +1,12 @@
+import { ColorOptionType as ColorOptionTypeTemp, EmphasisType as EmphasisTypeTemp, BorderRadiusType as BorderRadiusTypeTemp, FontWeightType as FontWeightTypeTemp, GridGapType as GridGapTypeTemp, ElevationType as ElevationTypeTemp, RowHeightType as RowHeightTypeTemp, RowStyleType as RowStyleTypeTemp, WidthAndHeightSize as WidthAndHeightSizeTemp, CardExtraActionType as CardExtraActionTypeTemp, TypographyOptionTypes as TypographyOptionTypesTemp } from './types';
+export declare type ColorOptionType = ColorOptionTypeTemp;
+export declare type EmphasisType = EmphasisTypeTemp;
+export declare type BorderRadiusType = BorderRadiusTypeTemp;
+export declare type FontWeightType = FontWeightTypeTemp;
+export declare type GridGapType = GridGapTypeTemp;
+export declare type ElevationType = ElevationTypeTemp;
+export declare type RowHeightType = RowHeightTypeTemp;
+export declare type RowStyleType = RowStyleTypeTemp;
+export declare type WidthAndHeightSize = WidthAndHeightSizeTemp;
+export declare type CardExtraActionType = CardExtraActionTypeTemp;
+export declare type TypographyOptionTypes = TypographyOptionTypesTemp;

@@ -1,3 +1,4 @@
-import BackButton from "../BackButton/back_button"
+import BackButton from './back_button';
+
 
 export default BackButton;

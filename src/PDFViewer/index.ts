@@ -1,3 +1,4 @@
-import PDFViewer from "./pdf_viewer"
+import PDFViewer from './pdf_viewer';
 
-export default PDFViewer
+
+export default PDFViewer;

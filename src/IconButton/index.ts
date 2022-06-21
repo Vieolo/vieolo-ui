@@ -1,4 +1,4 @@
+import IconButton from './icon_button';
 
-import IconButton from "./icon_button"
 
 export default IconButton;

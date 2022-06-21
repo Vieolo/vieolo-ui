@@ -1,6 +1,10 @@
-import FormDialog, { FormDialogAccessoryButton as FormDialogAccessoryButtonType, FormDialogMainButton as FormDialogMainButtonType } from "./formDialog"
+import FormDialog from './formDialog';
+import {
+	FormDialogAccessoryButton as FormDialogAccessoryButtonTemp,
+	FormDialogMainButton as FormDialogMainButtonTemp,
+} from './formDialog';
 
-export default FormDialog
 
-export type FormDialogAccessoryButton = FormDialogAccessoryButtonType
-export type FormDialogMainButton = FormDialogMainButtonType
+export default FormDialog;
+export type FormDialogAccessoryButton = FormDialogAccessoryButtonTemp;
+export type FormDialogMainButton = FormDialogMainButtonTemp;

@@ -1,6 +1,10 @@
-import Table, { TableSortDirection as TableSortDirectionType, TableRow as TableRowType } from "./table" 
+import Table from './table';
+import {
+	TableSortDirection as TableSortDirectionTemp,
+	TableRow as TableRowTemp,
+} from './table';
 
-export default Table
 
-export type TableSortDirection = TableSortDirectionType
-export type TableRow = TableRowType
+export default Table;
+export type TableSortDirection = TableSortDirectionTemp;
+export type TableRow = TableRowTemp;

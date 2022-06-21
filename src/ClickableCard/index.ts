@@ -1,3 +1,4 @@
-import ClickableCard from './clickable_card'
+import ClickableCard from './clickable_card';
 
-export default ClickableCard
+
+export default ClickableCard;

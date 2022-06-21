@@ -1,5 +1,8 @@
-import TableInteractive, { TableInteractiveCell as TableInteractiveCellType } from "./table_interactive"
+import TableInteractive from './table_interactive';
+import {
+	TableInteractiveCell as TableInteractiveCellTemp,
+} from './table_interactive';
 
-export default TableInteractive
 
-export type TableInteractiveCell = TableInteractiveCellType
+export default TableInteractive;
+export type TableInteractiveCell = TableInteractiveCellTemp;
