@@ -101,11 +101,12 @@ function prepareIndexExports(ex) {
  * @return {string}
  */
 function prepareMainExport(exs) {
-    let s = [];
+    let im = [];
+    let ex = [];
 
     let toBeExported = []
 
-    s.push("// Imports")
+    im.push("// Imports")
     
     for (let i = 0; i < exs.length; i++) {
         const d = exs[i];
@@ -114,40 +115,37 @@ function prepareMainExport(exs) {
         let hasBoth = hasDefault && hasNonDefault;        
         if (!hasDefault && !hasNonDefault) continue;
         let importObj = `${!hasDefault ? "" : d.default + " "}${hasBoth ? ", " : ""}${hasNonDefault ? "{ " + d.nonDefault.join(", ") + " }" : ""}`.trim().replace(/  +/g, " ");
-        s.push(`import ${importObj} from './${d.folderName}';`);
+        im.push(`import ${importObj} from './${d.folderName}';`);
         toBeExported.push(d.default, ...d.nonDefault)
-    }
+    }    
 
-    s.push("\n\n");
-
-    s.push("export {");
+    ex.push("export {");
     for (let i = 0; i < toBeExported.length; i++) {
         const d = toBeExported[i];
-        s.push(`\t${d},`);
+        ex.push(`\t${d},`);
     }
-    s.push("}");
+    ex.push("}");
     
-    s.push("\n\n");
-
-    s.push("// Types")
+    ex.push("\n\n");
+    
     for (let i = 0; i < exs.length; i++) {
         const d = exs[i];
         if (d.types.length === 0) continue;
 
-        s.push("import {");
+        im.push("import {");
         for (let k = 0; k < d.types.length; k++) {
             const t = d.types[k];
-            s.push(`\t${t} as ${t}Temp,`)
+            im.push(`\t${t} as ${t}Temp,`)
         }
-        s.push(`} from './${d.folderName}';`);
+        im.push(`} from './${d.folderName}';`);
         
         for (let k = 0; k < d.types.length; k++) {
             const t = d.types[k];
-            s.push(`export type ${t} = ${t}Temp;`)
+            ex.push(`export type ${t} = ${t}Temp;`)
         }
     }
     
-    return s.join("\n");
+    return [...im, "\n", ...ex].join("\n");
 }
 
 
