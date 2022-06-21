@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 
 // Component
-import Select from '../../lib/form/select';
+import Select from '../../Select';
 
 // Types
 import { ViewData } from '../main/main';

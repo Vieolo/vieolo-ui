@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 
 // Vieolo UI
-import TimeInput from '../../lib/date_time/time_input';
-import Typography from '../../lib/typography/typography';
+import TimeInput from '../../TimeInput';
+import Typography from '../../Typography';
 
 // Types
 import { ViewData } from '../main/main';

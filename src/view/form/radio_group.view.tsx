@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 // Component
-import RadioGroup from '../../lib/form/radio_group';
+import RadioGroup from '../../RadioGroup';
 
 // Material UI
 import SampleIcon1 from '@mui/icons-material/AccessibleForwardTwoTone';

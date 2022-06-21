@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Component
-import BarChart from '../../charts/bar_chart';
+import BarChart from '../../BarChart';
 
 // Types
 import { ViewData } from '../main/main';

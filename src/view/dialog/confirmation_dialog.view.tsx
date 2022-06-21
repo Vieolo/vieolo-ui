@@ -2,9 +2,9 @@
 import React from 'react';
 
 // Component
-import ConfirmationDialog from '../../lib/dialog/confirmationDialog';
-import Button from '../../lib/button/button';
-import Typography from '../../lib/typography/typography';
+import ConfirmationDialog from '../../ConfirmationDialog';
+import Button from '../../Button';
+import Typography from '../../Typography';
 
 
 // Types

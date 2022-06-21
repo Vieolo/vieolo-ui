@@ -5,7 +5,7 @@ import React from 'react';
 import IconOne from '@mui/icons-material/Assignment';
 
 // Component
-import IconButton from '../../lib/button/icon_button';
+import IconButton from '../../IconButton';
 
 // Types
 import { ViewData } from '../main/main';

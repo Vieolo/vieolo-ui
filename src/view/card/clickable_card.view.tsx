@@ -6,7 +6,7 @@ import IconOne from '@mui/icons-material/Assignment';
 import IconTwo from '@mui/icons-material/ArrowRight';
 
 // Component
-import ClickableCard from '../../lib/card/clickable_card';
+import ClickableCard from '../../ClickableCard';
 
 // Types
 import { ViewData } from '../main/main';
