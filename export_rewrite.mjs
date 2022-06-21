@@ -191,5 +191,3 @@ export function rewriteExports() {
         
     fs.writeFileSync(`./src/export.ts`, prepareMainExport(allEx));
 }
-
-rewriteExports();

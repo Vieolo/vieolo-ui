@@ -1,5 +1,6 @@
 import { execSync } from 'child_process';
 import * as fs from 'fs';
+import { rewriteExports } from './export_rewrite.mjs';
 
 if (process.argv.length === 2) throw new Error('Please select add the bump level. The accepted options are "build", "minor", and "major"');
 
@@ -84,7 +85,8 @@ tsConfig.compilerOptions.noEmit = false;
 fs.writeFileSync('./tsconfig.json', JSON.stringify(tsConfig, null, 2));
 
 // Rewriting the export files
-execSync('node ./export_rewrite');
+console.log("Rewriting the export files")
+rewriteExports();
 
 // Removing the existing dist folder
 fs.rmSync("./dist", { recursive: true, force: true });
