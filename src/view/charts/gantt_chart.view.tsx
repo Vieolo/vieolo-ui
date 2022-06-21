@@ -10,11 +10,11 @@ import IconThree from '@mui/icons-material/Cake';
 import VDate from '@vieolo/date';
 
 // Component
-import GanttChart, { GanttChartColumnGroup, GanttChartColumnTitle, GanttChartRowType, GanttChartItemType } from '../../charts/gantt_chart';
+import GanttChart, { GanttChartColumnGroup, GanttChartColumnTitle, GanttChartRowType, GanttChartItemType } from '../../GanttChart';
 
 // Types
 import { ViewData } from '../main/main';
-import { ColorOptionType } from '../../lib/private/types';
+import { ColorOptionType } from '../../types/types';
 
 type GanttChartPropsType = React.ComponentProps<typeof GanttChart>;
 

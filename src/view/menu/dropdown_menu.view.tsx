@@ -8,8 +8,8 @@ import IconThree from '@mui/icons-material/Cake';
 import IconFour from '@mui/icons-material/DataUsage';
 
 // Component
-import DropDownMenu from '../../lib/menu/dropdown_menu';
-import Button from '../../lib/button/button';
+import DropDownMenu from '../../DropDownMenu';
+import Button from '../../Button';
 
 // Types
 import { ViewData } from '../main/main';

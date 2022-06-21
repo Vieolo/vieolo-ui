@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Component
-import GridTwo from '../../../lib/layout/grid/grid_two';
+import GridTwo from '../../../GridTwo';
 
 // Types
 import { ViewData } from '../../main/main';

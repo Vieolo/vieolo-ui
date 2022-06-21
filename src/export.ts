@@ -1,55 +1,70 @@
-import Button from './lib/button/button';
-import CalendarStateful from './lib/date_time/calendar_stateful';
-import CalendarStateless from './lib/date_time/calendar_stateless';
-import Card from './lib/card/card';
-import Checkbox from './lib/form/checkbox';
-import Chip from './lib/button/chip';
-import ClickableCard from './lib/card/clickable_card';
-import ContextMenu from './lib/menu/context_menu';
-import DateInput from './lib/date_time/date_input';
-import DatePicker from './lib/date_time/date_picker';
-import DateTimePicker from './lib/date_time/date_time_picker';
-import Divider from './lib/layout/auxiliary/divider';
-import DropDownMenu, { DropDownMenuItemType as DropDownMenuItemTypeTemp } from './lib/menu/dropdown_menu';
-import ExpandableCard from './lib/card/expandable_card';
-import FileInput from './lib/form/file_input';
-import Flex from './lib/layout/flex/flex';
-import FormDialog, { FormDialogAccessoryButton as FormDialogAccessoryButtonType, FormDialogMainButton as FormDialogMainButtonType } from './lib/dialog/formDialog';
-import ConfirmationDialog, { ConfirmationDialogMainButton as ConfirmationDialogMainButtonType } from './lib/dialog/confirmationDialog'
-import Grid from './lib/layout/grid/grid';
-import GridContainer from './lib/layout/grid/grid_container';
-import GridThree from './lib/layout/grid/grid_three';
-import GridTwo from './lib/layout/grid/grid_two';
-import IconButton from './lib/button/icon_button';
-import Input from './lib/form/input';
-import InputSet from './lib/form/input_set';
-import ItemRow from './lib/list/item_row';
-import List, { ListItem as ListItemType } from './lib/list/list';
-import Modal from './lib/dialog/modal';
-import PDFViewer from './lib/pdf_viewer/pdf_viewer';
-import PeriodSelector, { PeriodOptions } from './lib/date_time/period_selector';
-import Table, { TableSortDirection as TableSortDirectionType, TableRow as TableRowType } from './lib/table/table';
-import TableInteractive, { TableInteractiveCell as TableInteractiveCellTemp } from './lib/table/table_interactive';
-import TabSwitch from './lib/layout/tab_switch';
-import Textarea from './lib/form/textarea';
-import TextareaSet from './lib/form/textarea_set';
-import TimeInput from './lib/date_time/time_input';
-import Typography from './lib/typography/typography';
-import RadioGroup, { RadioButtonType as RadioButtonTempType } from './lib/form/radio_group';
-import Select from './lib/form/select';
-import Spacer from './lib/layout/auxiliary/spacer';
-import Spinner from './lib/auxiliary/spinner';
-import Switch from './lib/form/switch';
-import SwitchSet from './lib/form/switch_set';
+// Imports
+import Spinner from './Spinner';
+import Typography from './Typography';
+import Button from './Button';
+import Chip from './Chip';
+import IconButton from './IconButton';
+import BackButton from './BackButton';
+import Card from './Card';
+import ClickableCard from './ClickableCard';
+import ExpandableCard from './ExpandableCard';
+import TitlePeriodCard from './TitlePeriodCard';
+import Divider from './Divider';
+import Spacer from './Spacer';
+import Flex from './Flex';
+import Grid from './Grid';
+import GridContainer from './GridContainer';
+import GridTwo from './GridTwo';
+import GridThree from './GridThree';
+import TabSwitch from './TabSwitch';
+import BarChart from './BarChart';
+import GanttChart from './GanttChart';
+import BackButtonRow from './BackButtonRow';
+import List from './List';
+import ItemRow from './ItemRow';
+import ContextMenu from './ContextMenu';
+import DropDownMenu from './DropDownMenu';
+import Table from './Table';
+import TableInteractive from './TableInteractive';
+import Modal from './Modal';
+import FormDialog from './FormDialog';
+import ConfirmationDialog from './ConfirmationDialog';
+import PDFViewer from './PDFViewer';
+import Checkbox from './CheckBox';
+import FileInput from './FileInput';
+import InputSet from './InputSet';
+import Input from './Input';
+import RadioGroup from './RadioGroup';
+import Select from './Select';
+import SwitchSet from './SwitchSet';
+import Switch from './Switch';
+import TextareaSet from './TextareaSet';
+import Textarea from './Textarea';
+import CalendarStateful from './CalendarStateful';
+import CalendarStateless from './CalendarStateless';
+import DateInput from './DateInput';
+import DatePicker from './DatePicker';
+import DateTimePicker from './DateTimePicker';
+import TimeInput from './TimeInput';
+import PeriodSelector from './PeriodSelector';
+import { PeriodOptions } from './PeriodSelector';
 
-import TitlePeriodCard from './lib/card/title_period_card';
+
+// Types Imports
+import { ListItem as ListItemType } from './List';
+import { FormDialogAccessoryButton as FormDialogAccessoryButtonType, FormDialogMainButton as FormDialogMainButtonType } from './FormDialog';
+import { ConfirmationDialogMainButton as ConfirmationDialogMainButtonType } from './ConfirmationDialog';
+import { RadioButtonType as RadioButtonTempType } from './RadioGroup';
+import { DropDownMenuItemType as DropDownMenuItemTypeTemp } from './DropDownMenu';
+import { TableRow as TableRowType, TableSortDirection as TableSortDirectionType } from './Table';
+import {  TableInteractiveCell as TableInteractiveCellTemp } from './TableInteractive';
 
 import { 
     RowStyleType as RowStyleTypeTemp, 
     WidthAndHeightSize as WidthAndHeightSizeTemp,
     CardExtraActionType as CardExtraActionTypeTemp,
     TypographyOptionTypes as TypographyOptionTypesTemp
-} from './lib/private/types';
+} from './types';
 
 import {
     GanttChartColumnGroup as GanttChartColumnGroupTemp,
@@ -58,9 +73,12 @@ import {
     GanttChartRowType as GanttChartRowTypeTemp,
     GanttChartItemType as GanttChartItemTypeTemp,
     GanttChartAuxiliaryItemType as GanttChartAuxiliaryItemTypeTemp
-} from './charts/index';
+} from './GanttChart';
 
+// Exports
 export { 
+    BackButton,
+    BackButtonRow,
     Button,
     CalendarStateful,
     CalendarStateless,
@@ -105,7 +123,9 @@ export {
     Spinner,
     TableInteractive,
     ClickableCard,
-    Typography
+    Typography,
+    BarChart,
+    GanttChart,
 }
 
 
@@ -123,11 +143,6 @@ export type DropDownMenuItemType = DropDownMenuItemTypeTemp
 export type ConfirmationDialogMainButton = ConfirmationDialogMainButtonType
 export type TableInteractiveCell = TableInteractiveCellTemp
 
-
-export {
-    BarChart,
-    GanttChart    
-} from './charts/index'
 
 export type GanttChartColumnGroup = GanttChartColumnGroupTemp;
 export type GanttChartColumnTitle = GanttChartColumnTitleTemp;

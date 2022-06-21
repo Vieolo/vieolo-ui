@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Component
-import GridThree from '../../../lib/layout/grid/grid_three';
+import GridThree from '../../../GridThree';
 
 // Types
 import { ViewData } from '../../main/main';

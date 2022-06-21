@@ -45,12 +45,12 @@ import { dividerOptions, DividerCreator } from '../layout/auxiliary/divider.view
 import { TableInteractiveCreator, tableInteractiveOptions } from '../table/table_interactive.view';
 import { ClickableCardCreator, clickableCardOptions } from '../card/clickable_card.view';
 import { ModalCreator, modalOptions } from '../dialog/modal.view';
-import Select from '../../lib/form/select';
-import SwitchSet from '../../lib/form/switch_set';
+import Select from '../../Select';
+import SwitchSet from '../../SwitchSet';
 
 // Charts
 import { barChartOptions, BarChartCreator } from '../charts/bar_chart.view';
-import List from '../../lib/list/list';
+import List from '../../List';
 
 
 type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDefault" | "borderRadius" | 'fontWeightOptional' | 'emphasis' | 'typographyOptions' | {

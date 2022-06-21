@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 // Component
-import TabSwitch from '../../lib/layout/tab_switch';
+import TabSwitch from '../../TabSwitch';
 
 // Types
 import { ViewData } from '../main/main';

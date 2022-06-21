@@ -5,11 +5,11 @@ import React from 'react';
 import IconFour from '@mui/icons-material/DataUsage';
 
 // Component
-import Card from '../../lib/card/card';
+import Card from '../../Card';
 
 // Types
 import { ViewData } from '../main/main';
-import IconButton from '../../lib/button/icon_button';
+import IconButton from '../../IconButton';
 
 type CardPropsType = React.ComponentProps<typeof Card>;
 

@@ -1,5 +1,5 @@
 // Components
-import { parseInputDateToVDate } from '../../../lib/date_time/date_input';
+import { parseInputDateToVDate } from '../../../date_time/date_input';
 
 // Installed Package
 import VDate from '@vieolo/date';

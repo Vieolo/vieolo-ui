@@ -7,12 +7,12 @@ import IconTwo from '@mui/icons-material/Backup';
 import IconThree from '@mui/icons-material/CheckBox';
 
 // Component
-import Chip from '../../lib/button/chip';
-import DropDownMenu from '../../lib/menu/dropdown_menu';
+import Chip from '../../Chip';
+import DropDownMenu from '../../DropDownMenu';
 
 // Types
 import { ViewData } from '../main/main';
-import IconButton from '../../lib/button/icon_button';
+import IconButton from '../../IconButton';
 
 type ChipPropsType = React.ComponentProps<typeof Chip>;
 
