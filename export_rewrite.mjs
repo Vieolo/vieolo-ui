@@ -136,7 +136,7 @@ function prepareMainExport(exs) {
             const t = d.types[k];
             s.push(`\t${t} as ${t}Temp`)
         }
-        s.push(`} from './${d.folderName};`);
+        s.push(`} from './${d.folderName}';`);
         
         for (let k = 0; k < d.types.length; k++) {
             const t = d.types[k];
