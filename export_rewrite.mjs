@@ -76,14 +76,14 @@ function prepareIndexExports(ex) {
             const nd = ex.nonDefault[i];
             e.push(`\t${nd},`)
         }
-        e.push("}");
+        e.push(`} from './${ex.folderName}'`);
     }
 
     if (ex.types.length > 0) {
         im.push('import {')
         for (let i = 0; i < ex.types.length; i++) {
             const t = ex.types[i];
-            i.push(`\t${t} as ${t}Temp,`)
+            im.push(`\t${t} as ${t}Temp,`)
         }
         im.push(`} from './${ex.fileName.split(".")[0]}';`);
         
