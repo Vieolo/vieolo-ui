@@ -18,7 +18,7 @@ export type ConfirmationDialogMainButton = {
     ariaLabel?: string
 }
 
-export default function FormDialog(props: {
+export default function ConfirmationDialog(props: {
     /** Function to be triggered when the user clicks cancel or closes the modal */
     onReject?: () => void,
     rejectButtonConfig?: ConfirmationDialogMainButton,
