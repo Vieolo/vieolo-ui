@@ -2,8 +2,8 @@
 import React from 'react';
 
 // Component
-import FormDialog from '../../lib/dialog/formDialog';
-import IconButton from '../../lib/button/icon_button';
+import FormDialog from '../../FormDialog';
+import IconButton from '../../IconButton';
 
 // Material UI
 import SampleIcon from '@mui/icons-material/RefreshRounded';

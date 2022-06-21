@@ -2,13 +2,13 @@
 import React, { useState } from 'react';
 
 // Vieolo UI
-import Modal from '../../lib/dialog/modal';
+import Modal from '../../Modal';
 
 // Types
 import { ViewData } from '../main/main';
-import Button from '../../lib/button/button';
-import Card from '../../lib/card/card';
-import IconButton from '../../lib/button/icon_button';
+import Button from '../../Button';
+import Card from '../../Card';
+import IconButton from '../../IconButton';
 
 type ModalPropsType = React.ComponentProps<typeof Modal>;
 

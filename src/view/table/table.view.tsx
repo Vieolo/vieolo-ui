@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 
 // Component
-import Table, { TableSortDirection, TableRow } from '../../lib/table/table';
-import IconButton from '../../lib/button/icon_button';
+import Table, { TableSortDirection, TableRow } from '../../Table';
+import IconButton from '../../IconButton';
 
 // Material UI
 import SampleIcon from '@mui/icons-material/RefreshRounded';

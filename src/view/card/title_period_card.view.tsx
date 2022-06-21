@@ -6,7 +6,7 @@ import IconOne from '@mui/icons-material/Assignment';
 import IconTwo from '@mui/icons-material/Backup';
 
 // Component
-import TitlePeriodCard from '../../lib/card/title_period_card';
+import TitlePeriodCard from '../../TitlePeriodCard';
 
 // Types
 import { ViewData } from '../main/main';

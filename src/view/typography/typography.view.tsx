@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Component
-import Typography from '../../lib/typography/typography';
+import Typography from '../../Typography';
 
 // Types
 import { ViewData } from '../main/main';

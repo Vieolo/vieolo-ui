@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import LoopIcon from '@mui/icons-material/LoopRounded'
 
 // Component
-import InputSet from '../../lib/form/input_set';
+import InputSet from '../../InputSet';
 
 // Types
 import { ViewData } from '../main/main';

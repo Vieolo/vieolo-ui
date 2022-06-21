@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 
 // Vieolo UI
-import SwitchSet from '../../lib/form/switch_set';
-import Typography from '../../lib/typography/typography';
+import SwitchSet from '../../SwitchSet';
+import Typography from '../../Typography';
 
 // Types
 import { ViewData } from '../main/main';

@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 // Component
-import Checkbox from '../../lib/form/checkbox';
+import Checkbox from '../../CheckBox';
 
 // Types
 import { ViewData } from '../main/main';

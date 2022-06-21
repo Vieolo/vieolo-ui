@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Component
-import Divider from '../../../lib/layout/auxiliary/divider';
+import Divider from '../../../Divider'
 
 // Types
 import { ViewData } from '../../main/main';

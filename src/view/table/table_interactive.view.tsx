@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from 'react';
 
 // Component
-import TableInteractive, { TableInteractiveCell } from '../../lib/table/table_interactive';
+import TableInteractive, { TableInteractiveCell } from '../../TableInteractive';
 
 // Types
 import { ViewData } from '../main/main';
 import VDate from '@vieolo/date';
-import Card from '../../lib/card/card';
+import Card from '../../Card';
 
 type TableInteractivePropsType = React.ComponentProps<typeof TableInteractive>;
 

@@ -6,10 +6,10 @@ import IconOne from '@mui/icons-material/Assignment';
 import IconTwo from '@mui/icons-material/Restore';
 
 // Component
-import Button from '../../lib/button/button';
+import Button from '../../Button';
 
 // Types
-import { ColorOptionType } from '../../lib/private/types';
+import { ColorOptionType } from '../../types/types';
 import { ViewData } from '../main/main';
 
 type ButtonPropsType = React.ComponentProps<typeof Button>;

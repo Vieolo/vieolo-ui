@@ -5,13 +5,14 @@ import React, { useState } from 'react';
 import IconOne from '@mui/icons-material/Assignment';
 
 // Vieolo UI
-import FileInput from '../../lib/form/file_input';
-import Grid from '../../lib/layout/grid/grid';
+import FileInput from '../../FileInput';
+import Grid from '../../Grid';
 
 // Types
 import { ViewData } from '../main/main';
-import List from '../../lib/list/list';
-import GridContainer from '../../lib/layout/grid/grid_container';
+
+import List from '../../List';
+import GridContainer from '../../GridContainer';
 
 type FileInputPropsType = React.ComponentProps<typeof FileInput>;
 
