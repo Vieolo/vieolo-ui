@@ -45,7 +45,7 @@ export default function TimeInput(props: {
 }
 
 
-export function parseInputTimeToCustomDate(input: string) : [number | null, number | null] {
+export function parseInputTimeToCustomDate(input: string) : [number | null, number | null] { // internal
 	if (input.length !== 5) return [null, null];
 	else if (!input.includes(':')) return [null, null];
 

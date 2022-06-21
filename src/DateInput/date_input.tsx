@@ -64,7 +64,7 @@ export default function DateInput(props: {
 
 // TODO: Add support for different types of date format
 
-export function parseInputDateToVDate(input: string) : VDate | null {    
+export function parseInputDateToVDate(input: string) : VDate | null { // internal
 
     if (!dateDDMMYYYY.test(input)) return null;
 
