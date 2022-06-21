@@ -76,7 +76,7 @@ function prepareIndexExports(ex) {
             const nd = ex.nonDefault[i];
             e.push(`\t${nd},`)
         }
-        e.push(`} from './${ex.folderName}'`);
+        e.push(`} from './${ex.fileName}'`);
     }
 
     if (ex.types.length > 0) {
