@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Component
-import Spacer from '../../../lib/layout/auxiliary/spacer';
+import Spacer from '../../../Spacer'
 
 // Types
 import { ViewData } from '../../main/main';

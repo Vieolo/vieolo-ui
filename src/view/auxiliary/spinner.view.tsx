@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Component
-import Spinner from '../../lib/auxiliary/spinner';
+import Spinner from '../../Spinner/spinner';
 
 // Types
 import { ViewData } from '../main/main';

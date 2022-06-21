@@ -3,7 +3,7 @@ import VDate from '@vieolo/date';
 import React, { useState } from 'react';
 
 // Component
-import PeriodSelector, { PeriodOptions } from '../../lib/date_time/period_selector';
+import PeriodSelector, { PeriodOptions } from '../../PeriodSelector';
 
 // Types
 import { ViewData } from '../main/main';

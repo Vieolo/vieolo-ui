@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 
 // Component
-import DateTimePicker from '../../lib/date_time/date_time_picker';
+import DateTimePicker from '../../DateTimePicker';
 
 // Installed Packages
 import VDate from '@vieolo/date';

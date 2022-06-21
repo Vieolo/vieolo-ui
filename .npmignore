@@ -4,3 +4,4 @@ cypress/
 .vscode/
 cypress.json
 version_bump.mjs
+export_rewrite.mjs

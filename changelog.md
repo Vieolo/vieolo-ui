@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.22.0 (2022-06-21)
+
+#### Breaking Changes
+- The individual import path for Components is changed to `import D from '@vieolo/vieolo-ui/dist/D` ([#180](https://github.com/Vieolo/vieolo-ui/issues/180));
+- The default name of `ConfirmationDialog` is fixed
+
 ## 0.21.7 (2022-06-19)
 - Added keyboard interaction for `DropdownMenu` ([#39](https://github.com/Vieolo/vieolo-ui/issues/39))
 - Added keyboard interaction for `RadioGroupSet` ([#52](https://github.com/Vieolo/vieolo-ui/issues/52))

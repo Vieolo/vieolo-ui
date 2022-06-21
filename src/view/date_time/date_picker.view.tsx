@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import VDate from '@vieolo/date';
 
 // Component
-import DatePicker from '../../lib/date_time/date_picker';
+import DatePicker from '../../DatePicker';
 
 // Types
 import { ViewData } from '../main/main';

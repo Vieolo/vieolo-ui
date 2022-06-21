@@ -2,8 +2,8 @@
 import React, { useState } from 'react';
 
 // Component
-import PDFViewer from '../../lib/pdf_viewer/pdf_viewer';
-import Button from '../../lib/button/button';
+import PDFViewer from '../../PDFViewer';
+import Button from '../../Button';
 
 // Types
 import { ViewData } from '../main/main';

@@ -2,8 +2,8 @@
 import React from 'react';
 
 // Component
-import GridContainer from '../../../lib/layout/grid/grid_container';
-import Grid from '../../../lib/layout/grid/grid';
+import GridContainer from '../../../GridContainer';
+import Grid from '../../../Grid';
 
 // Types
 import { ViewData } from '../../main/main';

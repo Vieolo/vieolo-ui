@@ -6,8 +6,7 @@ import SampleIcon1 from '@mui/icons-material/FaceRounded';
 import SampleIcon2 from '@mui/icons-material/FlipCameraAndroid';
 
 // Component
-import List, { ListItem } from '../../lib/list/list';
-
+import List, { ListItem } from '../../List';
 // Types
 import { ViewData } from '../main/main';
 
