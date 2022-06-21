@@ -62,11 +62,11 @@ function getFileExports(folderName, fileName) {
  * @return {string}
  */
 function prepareIndexExports(ex) {    
-    let i = [];
-    let e = []
+    let im = [];
+    let e = [];
 
     if (ex.default) {
-        i.push(`import ${ex.default} from './${ex.fileName.split(".")[0]}';`);
+        im.push(`import ${ex.default} from './${ex.fileName.split(".")[0]}';`);
         e.push(`export default ${ex.default};`);
     }
 
@@ -80,12 +80,12 @@ function prepareIndexExports(ex) {
     }
 
     if (ex.types.length > 0) {
-        i.push('import {')
+        im.push('import {')
         for (let i = 0; i < ex.types.length; i++) {
             const t = ex.types[i];
             i.push(`\t${t} as ${t}Temp,`)
         }
-        i.push(`} from './${ex.fileName.split(".")[0]}';`);
+        im.push(`} from './${ex.fileName.split(".")[0]}';`);
         
         for (let i = 0; i < ex.types.length; i++) {
             const t = ex.types[i];
@@ -93,7 +93,7 @@ function prepareIndexExports(ex) {
         }
     }
 
-    return [...i, "\n", ...e].join("\n");
+    return [...im, "\n", ...e].join("\n");
 }
 
 /**
