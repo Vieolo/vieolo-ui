@@ -123,7 +123,7 @@ function prepareMainExport(exs) {
     s.push("export {");
     for (let i = 0; i < toBeExported.length; i++) {
         const d = toBeExported[i];
-        s.push(`\t${d}`);
+        s.push(`\t${d},`);
     }
     s.push("}");
     
