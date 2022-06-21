@@ -105,7 +105,7 @@ export function rewriteExports() {
 
     let unwanted = ["private", "hooks", "icons", "utility", "view"];
 
-    /** @type FileExport[] */
+    /** @type string[] */
     let allEx = []
     
     for (let i = 0; i < s.length; i++) {
@@ -128,14 +128,18 @@ export function rewriteExports() {
 
                 }
 
-                fs.writeFileSync(`./src/${o}.index.ts`, prepareIndexExports(folderEx))
+                let prepared = prepareIndexExports(folderEx);
+                fs.writeFileSync(`./src/${o}.index.ts`, prepared)
 
-                allEx.push(folderEx);
+                allEx.push(
+                    `// ${o}/${folderEx.fileName}`,
+                    prepared
+                );
             }
         }
     }
         
-    // console.log(allEx);
+    fs.writeFileSync(`./src/export.ts`, allEx.join("\n"));
 }
 
 rewriteExports();
