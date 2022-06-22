@@ -11,6 +11,9 @@ import LeftArrowIcon from '@mui/icons-material/ArrowLeft';
 import RightArrowIcon from '@mui/icons-material/ArrowRight';
 import ReorderIcon from '@mui/icons-material/DragHandleRounded';
 
+// Types
+import { TypographyOptionTypes } from '../types';
+
 export type TableSortDirection = 'ascending' | 'descending';
 
 export type TableRow = {
@@ -87,7 +90,8 @@ export default function Table(props: {
      * The on change function of the checkbox in the header
      * User can check or uncheck all of the items at once
      */
-    onCheckAll?: (allAreChecked: boolean) => void
+    onCheckAll?: (allAreChecked: boolean) => void,
+    type?: TypographyOptionTypes
 }): JSX.Element {
 
     let [allChecked, setAllChecked] = useState<boolean>(false);
@@ -140,7 +144,7 @@ export default function Table(props: {
                                     }
                                 }}
                             >
-                                <Typography type='title-small' text={h} />
+                                <Typography type={props.type} text={h} />
                                 {
                                     (props.sortBy === h && !props.disableSort) &&
                                     <>

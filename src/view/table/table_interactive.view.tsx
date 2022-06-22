@@ -21,7 +21,21 @@ export function tableInteractiveOptions(): ViewData {
             selectedColor: 'colors',
             isDense: 'boolean',
             headerSticky: 'boolean',
-            showBottomRow: 'booleanTrueDefault'
+            showBottomRow: 'booleanTrueDefault',
+            type: {
+                default: 'title-small',
+                options: [
+                    'caption-small',
+                    'caption-medium',
+                    'caption-large',
+                    'paragraph-small',
+                    'paragraph-medium',
+                    'paragraph-large',
+                    'title-small',
+                    'title-medium',
+                    'title-large'
+                ]
+            },
         }
     }
 }
@@ -55,6 +69,7 @@ export function TableInteractiveCreator(props: {p: TableInteractivePropsType}) {
         showBottomRow={props.p.showBottomRow}
         columnGrid='100px 100px 1fr 150px 100px'
         headers={['ID', "Date", "Item", "group", {name: 'Price', formatter: (s) => `€ ${s}`}]}
+        type={props.p.type}
         rows={data.map(d => {
             return [
                 {
