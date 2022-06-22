@@ -48,6 +48,7 @@ import { dividerOptions, DividerCreator } from '../layout/auxiliary/divider.view
 import { TableInteractiveCreator, tableInteractiveOptions } from '../table/table_interactive.view';
 import { ClickableCardCreator, clickableCardOptions } from '../card/clickable_card.view';
 import { ModalCreator, modalOptions } from '../dialog/modal.view';
+import { DonutChartCreator, donutChartOptions } from '../charts/donut_chart.view';
 import Select from '../../Select';
 import SwitchSet from '../../SwitchSet';
 
@@ -99,7 +100,7 @@ export default function MainPage(props: {}): JSX.Element {
 
         "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator, group: "Charts" },
         "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator, group: "Charts" },
-
+        "Donut Chart": { title: "Donut Chart", data: donutChartOptions(), creator: DonutChartCreator, group: "Charts" },
         "Date Input": { title: "Date Input", data: dateInputOptions(), creator: DateInputCreator, group: "Date and Time" },
         "Date Picker": { title: "Date Picker", data: datePickerOptions(), creator: DatePickerCreator, group: "Date and Time" },
         "Date Time Picker": { title: "Date Time Picker", data: dateTimePickerOptions(), creator: DateTimePickerCreator, group: "Date and Time" },
