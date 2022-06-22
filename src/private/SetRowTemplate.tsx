@@ -6,6 +6,7 @@ import { RowHeightType } from '../types/types';
 
 // Vieolo UI
 import Typography from '../Typography';
+import { handleOnKeyDown } from '../utility/onkeydown_utility';
 
 export default function SetRowTemplate(props: { // internal
     title: string | React.ReactNode,
@@ -14,7 +15,8 @@ export default function SetRowTemplate(props: { // internal
     height?: RowHeightType | "default",
     className?: string,
     handleKeyboardNav: boolean,
-    rightSideComponent: React.ReactNode
+    rightSideComponent: React.ReactNode,
+    onRowClick?: () => void
 }) {
 
     let c = `vieolo-set-row-template`
@@ -29,9 +31,23 @@ export default function SetRowTemplate(props: { // internal
 
     if (props.disabled) c += " disabled"; 
 
-    return <div className={c} tabIndex={props.handleKeyboardNav ? 0 : undefined}>
+    return <div 
+        className={c} 
+        tabIndex={props.handleKeyboardNav ? 0 : undefined}
+        onKeyDown={e => {
+            if (!props.handleKeyboardNav || !props.onRowClick) return;
+            handleOnKeyDown(e, {
+                onEnter: () => {
+                    if (props.onRowClick) props.onRowClick();
+                }
+            })
+        }}
+    >
         <div 
             className={"vieolo-set-row-template__title-container"}
+            onClick={() => {
+                if (props.onRowClick) props.onRowClick();
+            }}
             >
             {
                 typeof props.title === 'string'

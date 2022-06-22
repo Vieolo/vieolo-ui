@@ -24,18 +24,25 @@ export default function SwitchSet(props: {
     height?: RowHeightType | "default"
 }) {
 
+    function handleChange() {
+        props.onChange(!props.on);
+    }
+
     return <SetRowTemplate
         title={props.title}
         subtitle={props.subtitle}
         disabled={props.disabled}
         height={props.height}
         className={"vieolo-switch-set"}
-        handleKeyboardNav={false}
-        rightSideComponent={<Switch
-            on={props.on}
-            onChange={v => { props.onChange(!props.on) }}
-            switchID={props.switchID}
-            disabled={props.disabled}
-        />}
+        handleKeyboardNav={true}
+        onRowClick={handleChange}
+        rightSideComponent={
+            <Switch
+                on={props.on}
+                onChange={handleChange}
+                switchID={props.switchID}
+                disabled={props.disabled}
+            />
+        }
     />
 }
