@@ -1373,6 +1373,7 @@ body {
 		display: grid;
 		border-top-left-radius: $base-unit-half;
 		border-top-right-radius: $base-unit-half;
+		z-index: 1;
 
 		&__cell {
 			height: 40px;
