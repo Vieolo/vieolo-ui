@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.22.1 (2022-06-22)
+- Added the `RadioGroupSet` component ([#51](https://github.com/Vieolo/vieolo-ui/issues/51))
+- Fixed the position of checkbox in `Table` header ([#76](https://github.com/Vieolo/vieolo-ui/issues/76))
+- Added the `SelectSet` component ([#129](https://github.com/Vieolo/vieolo-ui/issues/129))
+
 ## 0.22.0 (2022-06-21)
 
 #### Breaking Changes

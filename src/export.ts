@@ -34,7 +34,9 @@ import Modal from './Modal';
 import PDFViewer from './PDFViewer';
 import PeriodSelector , { PeriodOptions } from './PeriodSelector';
 import RadioGroup from './RadioGroup';
+import RadioGroupSet from './RadioGroupSet';
 import Select from './Select';
+import SelectSet from './SelectSet';
 import Spacer from './Spacer';
 import Spinner from './Spinner';
 import Switch from './Switch';
@@ -79,6 +81,9 @@ import {
 import {
 	RadioButtonType as RadioButtonTypeTemp,
 } from './RadioGroup';
+import {
+	SelectItemType as SelectItemTypeTemp,
+} from './Select';
 import {
 	SpacerSizeType as SpacerSizeTypeTemp,
 } from './Spacer';
@@ -147,7 +152,9 @@ export {
 	PeriodSelector,
 	PeriodOptions,
 	RadioGroup,
+	RadioGroupSet,
 	Select,
+	SelectSet,
 	Spacer,
 	Spinner,
 	Switch,
@@ -180,6 +187,7 @@ export type GanttChartColumnTitle = GanttChartColumnTitleTemp;
 export type GanttChartColumnGroup = GanttChartColumnGroupTemp;
 export type ListItem = ListItemTemp;
 export type RadioButtonType = RadioButtonTypeTemp;
+export type SelectItemType = SelectItemTypeTemp;
 export type SpacerSizeType = SpacerSizeTypeTemp;
 export type TableSortDirection = TableSortDirectionTemp;
 export type TableRow = TableRowTemp;

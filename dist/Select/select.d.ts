@@ -1,5 +1,5 @@
 /// <reference types="react" />
-declare type SelectItemType = {
+export declare type SelectItemType = {
     title: string;
     value: string;
     category?: string;
@@ -15,6 +15,7 @@ declare type SelectProps = {
     searchable?: boolean;
     multipleChoice?: boolean;
     height?: 'medium' | 'small';
+    disabled?: boolean;
 };
 export default function Select(props: SelectProps): JSX.Element;
 export {};
