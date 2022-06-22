@@ -18,7 +18,7 @@ import Card from '../Card/card';
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
 
 
-type SelectItemType = {
+export type SelectItemType = {
     title: string,
     value: string,
     category?: string,
@@ -34,7 +34,8 @@ type SelectProps = {
     clearable?: boolean,
     searchable?: boolean,
     multipleChoice?: boolean,
-    height?: 'medium' | 'small'
+    height?: 'medium' | 'small',
+    disabled?: boolean,
 }
 
 
@@ -169,7 +170,7 @@ export default function Select(props: SelectProps) {
         {items}
     </div>
 
-    return <div className="vieolo-select" ref={container as any}>
+    return <div className={`vieolo-select${props.disabled ? ' disabled' : ''}`} ref={container as any}>
         <div
             className={`vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${props.height || 'medium'}`}
             onClick={e => handleOpen(e)}

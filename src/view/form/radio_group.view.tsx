@@ -33,6 +33,10 @@ export function radioGroupOptions(): ViewData {
             withIcon: {
                 options: [false, true],
                 default: false
+            },
+            disabled: {
+                options: [false, true],
+                default: false,
             }
         }
     }
@@ -57,6 +61,7 @@ export function RadioGroupCreator(props: { p: RadioGroupPropsType }) {
     return <RadioGroup
         direction={props.p.direction}
         onOptionChange={o => setSelected(o)}
+        disabled = {props.p.disabled}
         options={(props.p as any).withIcon ? iconOptions : textOptions}
         value={selected}
         horizontalButtonPadding={props.p.horizontalButtonPadding}

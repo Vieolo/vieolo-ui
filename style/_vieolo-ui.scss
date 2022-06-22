@@ -398,44 +398,6 @@ body {
 	}
 }
 
-.vieolo-switch-set {
-	padding: $base-unit-half;
-	cursor: pointer;
-	display: grid;
-	grid-template-columns: 1fr 50px;
-	border: 2px solid transparent;
-
-	&:hover {
-		border: 2px solid $hover-color;
-		border-radius: $base-unit-half;
-	}
-
-	&:focus {
-		border: 2px solid $hover-color;
-		border-radius: $base-unit-half;
-		outline: none;
-	}
-
-	&--height-default {
-		height: $row-height-large;
-	}
-
-	p {
-		margin: 0;
-		@include nonselectable;
-	}
-
-	&__title-container {
-		display: flex;
-		flex-flow: column;
-		justify-content: center;
-	}
-
-	&__switch-container {
-		@include center-by-flex-row;
-	}
-}
-
 .vieolo-icon-button {
 	display: flex;
 	justify-content: center;
@@ -2460,5 +2422,45 @@ body {
 		z-index: 3;
 		border: solid 0.1px #ddd;
 		bottom: -20px;
+	}
+}
+
+.vieolo-set-row-template {
+
+	padding: $base-unit-half;
+	cursor: pointer;
+	grid-template-columns: 1fr 50px;
+	border: 2px solid transparent;
+	display: flex;
+	justify-content: space-between;
+
+	&:hover {
+		border: 2px solid $hover-color;
+		border-radius: $base-unit-half;
+	}
+
+	&:focus {
+		border: 2px solid $hover-color;
+		border-radius: $base-unit-half;
+		outline: none;
+	}
+
+	&--height-default {
+		height: $row-height-large;
+	}
+
+	p {
+		margin: 0;
+		@include nonselectable;
+	}
+
+	&__title-container {
+		display: flex;
+		flex-flow: column;
+		justify-content: center;
+	}
+
+	&__right-container {
+		@include center-by-flex-row;
 	}
 }
