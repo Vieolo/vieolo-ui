@@ -28,6 +28,7 @@ import { TableCreator, tableOptions } from '../table/table.view';
 import { RadioGroupCreator, radioGroupOptions } from '../form/radio_group.view';
 import { RadioGroupSetCreator, radioGroupSetOptions } from '../form/radio_group_set.view';
 import { SelectSetCreator, selectSetOptions } from '../form/select_set.view';
+import { FormCreator, formOptions } from '../form/form.view';
 import { TabSwitchCreator, tabSwitchOptions } from '../layout/tab_switch.view';
 import { DatePickerCreator, datePickerOptions } from '../date_time/date_picker.view';
 import { ganttChartOptions, GanttChartCreator } from '../charts/gantt_chart.view';
@@ -118,7 +119,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator, group: "Form" },
         "Radio Group Set": { title: "Radio Group Set", data: radioGroupSetOptions(), creator: RadioGroupSetCreator, group: "Form" },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
-
+        "Form": { title: "Form", data: formOptions(), creator: FormCreator, group: "Form"},
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator, group: "Layout" },
 
         "Divider": { title: "Divider", data: dividerOptions(), creator: DividerCreator, group: "Layout/Auxiliary" },
