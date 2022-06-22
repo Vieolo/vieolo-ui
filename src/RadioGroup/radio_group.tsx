@@ -15,6 +15,7 @@ export default function RadioGroup(props: {
     options: RadioButtonType[],
     onOptionChange: (o: string) => void,
     direction?: 'vertical' | 'horizontal',
+    disabled?: boolean,
     /** Defaults to 10px */
     horizontalButtonPadding?: number
 }) {
@@ -23,7 +24,7 @@ export default function RadioGroup(props: {
 
     let buttonClass = 'vieolo-radio-group__radio-button';
 
-    return <div className="vieolo-radio-group">
+    return <div className={`vieolo-radio-group${props.disabled ? ' disabled' : ''}`}>
         <div
             className={className}
         >
