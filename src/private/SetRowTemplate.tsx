@@ -26,6 +26,8 @@ export default function SetRowTemplate(props: { // internal
         c += " vieolo-set-row-template--height-default"
     }
 
+    if (props.onRowClick) c += " vieolo-set-row-template--clickable"
+
 
     if (props.className) c += ` ${props.className}`;
 

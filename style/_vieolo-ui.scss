@@ -2427,18 +2427,19 @@ body {
 }
 
 .vieolo-set-row-template {
-
 	padding: $base-unit-half;
-	cursor: pointer;
 	grid-template-columns: 1fr 50px;
 	border: 2px solid transparent;
 	display: flex;
 	justify-content: space-between;
 
-	&:hover {
-		border: 2px solid $hover-color;
-		border-radius: $base-unit-half;
-	}
+	&--clickable {
+		cursor: pointer;
+		&:hover {
+			border: 2px solid $hover-color;
+			border-radius: $base-unit-half;
+		}
+	}	
 
 	&:focus {
 		border: 2px solid $hover-color;
