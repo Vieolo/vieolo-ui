@@ -6,10 +6,12 @@ import { handleOnKeyDown } from "../utility/onkeydown_utility";
 export default function RadioGroup(props) {
     let className = `vieolo-radio-group__radio-contents vieolo-radio-group__radio-contents--${props.direction || 'horizontal'}`;
     let buttonClass = 'vieolo-radio-group__radio-button';
-    return _jsx("div", Object.assign({ className: "vieolo-radio-group" }, { children: _jsx("div", Object.assign({ className: className }, { children: props.options.map((o) => {
-                return _jsx("div", Object.assign({ tabIndex: 0, className: `${buttonClass} ${props.value === o.id ? buttonClass + "--selected" : ""} ${buttonClass}--${props.direction || 'horizontal'}`, onClick: () => {
+    return _jsx("div", Object.assign({ className: `vieolo-radio-group${props.disabled ? ' disabled' : ''}` }, { children: _jsx("div", Object.assign({ className: className }, { children: props.options.map((o) => {
+                return _jsx("div", Object.assign({ tabIndex: props.disabled ? undefined : 0, className: `${buttonClass} ${props.value === o.id ? buttonClass + "--selected" : ""} ${buttonClass}--${props.direction || 'horizontal'}`, onClick: () => {
                         props.onOptionChange(o.id);
                     }, onKeyDown: (e) => {
+                        if (props.disabled)
+                            return;
                         handleOnKeyDown(e, {
                             onEnter: () => {
                                 props.onOptionChange(o.id);

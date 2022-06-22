@@ -51,6 +51,10 @@ export function selectOptions(): ViewData {
             multipleChoice: {
                 options: [false, true],
                 default: false
+            },
+            disabled: {
+                options: [false, true],
+                default: false,
             }
         }
     }
@@ -74,6 +78,7 @@ export function SelectCreator(props: {p: SelectPropsType}) {
         searchable={props.p.searchable}
         multipleChoice={props.p.multipleChoice}
         height={props.p.height}
+        disabled={props.p.disabled}
     />
 
 }

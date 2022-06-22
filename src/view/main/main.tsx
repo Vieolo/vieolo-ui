@@ -26,6 +26,8 @@ import { FormDialogCreator, formDialogOptions } from '../dialog/form_dialog.view
 import { ConfirmationDialogCreator, confirmationDialogOptions } from '../dialog/confirmation_dialog.view';
 import { TableCreator, tableOptions } from '../table/table.view';
 import { RadioGroupCreator, radioGroupOptions } from '../form/radio_group.view';
+import { RadioGroupSetCreator, radioGroupSetOptions } from '../form/radio_group_set.view';
+import { SelectSetCreator, selectSetOptions } from '../form/select_set.view';
 import { TabSwitchCreator, tabSwitchOptions } from '../layout/tab_switch.view';
 import { DatePickerCreator, datePickerOptions } from '../date_time/date_picker.view';
 import { ganttChartOptions, GanttChartCreator } from '../charts/gantt_chart.view';
@@ -47,6 +49,7 @@ import { ClickableCardCreator, clickableCardOptions } from '../card/clickable_ca
 import { ModalCreator, modalOptions } from '../dialog/modal.view';
 import Select from '../../Select';
 import SwitchSet from '../../SwitchSet';
+
 
 // Charts
 import { barChartOptions, BarChartCreator } from '../charts/bar_chart.view';
@@ -111,8 +114,9 @@ export default function MainPage(props: {}): JSX.Element {
         "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator, group: "Form" },
         "Radio Group": { title: "Radio Group", data: radioGroupOptions(), creator: RadioGroupCreator, group: "Form" },
         "Select": { title: "Select", data: selectOptions(), creator: SelectCreator, group: "Form" },
+        "Select Set": { title: "Select Set", data: selectSetOptions(), creator: SelectSetCreator, group: "Form" },
         "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator, group: "Form" },
-
+        "Radio Group Set": { title: "Radio Group Set", data: radioGroupSetOptions(), creator: RadioGroupSetCreator, group: "Form" },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
 
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator, group: "Layout" },

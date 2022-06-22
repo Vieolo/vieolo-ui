@@ -15,6 +15,7 @@ export default function RadioGroup(props: {
     options: RadioButtonType[],
     onOptionChange: (o: string) => void,
     direction?: 'vertical' | 'horizontal',
+    disabled?: boolean,
     /** Defaults to 10px */
     horizontalButtonPadding?: number
 }) {
@@ -23,7 +24,7 @@ export default function RadioGroup(props: {
 
     let buttonClass = 'vieolo-radio-group__radio-button';
 
-    return <div className="vieolo-radio-group">
+    return <div className={`vieolo-radio-group${props.disabled ? ' disabled' : ''}`}>
         <div
             className={className}
         >
@@ -31,12 +32,13 @@ export default function RadioGroup(props: {
                 props.options.map((o: RadioButtonType) => {
                     return <div
                         key={o.id}
-                        tabIndex={0}
+                        tabIndex={props.disabled ? undefined : 0}
                         className={`${buttonClass} ${props.value === o.id ? buttonClass + "--selected" : ""} ${buttonClass}--${props.direction || 'horizontal'}`}
                         onClick={() => {
                             props.onOptionChange(o.id);
                         }}
                         onKeyDown={(e) => {
+                            if (props.disabled) return;
                             handleOnKeyDown(e, {
                                 onEnter: () => {
                                     props.onOptionChange(o.id);

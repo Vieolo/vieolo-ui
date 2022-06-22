@@ -9,6 +9,7 @@ export default function RadioGroup(props: {
     options: RadioButtonType[];
     onOptionChange: (o: string) => void;
     direction?: 'vertical' | 'horizontal';
+    disabled?: boolean;
     /** Defaults to 10px */
     horizontalButtonPadding?: number;
 }): JSX.Element;
