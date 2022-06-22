@@ -32,12 +32,13 @@ export default function RadioGroup(props: {
                 props.options.map((o: RadioButtonType) => {
                     return <div
                         key={o.id}
-                        tabIndex={0}
+                        tabIndex={props.disabled ? undefined : 0}
                         className={`${buttonClass} ${props.value === o.id ? buttonClass + "--selected" : ""} ${buttonClass}--${props.direction || 'horizontal'}`}
                         onClick={() => {
                             props.onOptionChange(o.id);
                         }}
                         onKeyDown={(e) => {
+                            if (props.disabled) return;
                             handleOnKeyDown(e, {
                                 onEnter: () => {
                                     props.onOptionChange(o.id);
