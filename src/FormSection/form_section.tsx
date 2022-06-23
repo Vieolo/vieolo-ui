@@ -1,13 +1,13 @@
 // React
 import React from 'react';
-import Card from '../Card';
 
 // Vieolo UI
 import Flex from '../Flex';
+import Card from '../Card';
 import Typography from '../Typography';
 
 
-export default function Form (props: {
+export default function FormSection (props: {
     title: string,
     /** This string is displayed on the right side of the form section header */
     secondaryValue?: string,
@@ -15,15 +15,15 @@ export default function Form (props: {
     disabled?: boolean
 }) {    
 
-    return <Card className={`global-form-section${props.disabled ? ' disabled' : ''}`}>
-        <Flex className="form-section-header">
+    return <Card className={`vieolo-form-section${props.disabled ? ' disabled' : ''}`}>
+        <Flex className="vieolo-form-section__header-container">
             <Typography text={props.title} fontWeight={'bold'}/>
             {
                 props.secondaryValue &&
                 <Typography text={props.secondaryValue} />
             }
         </Flex>
-        <Flex className="form-section-content">
+        <Flex className="vieolo-form-section__content-container">
             {props.children}
         </Flex>
     </Card> 

@@ -11,7 +11,7 @@ import IconButton from '../IconButton';
 import { CloseIcon } from '../icons/icons';
 
 // Types
-import { ColorOptionType, TypographyOptionTypes } from '../types';
+import { ColorOptionType } from '../types/types';
 
 // Installed Packages
 import { toFixedFloat } from '@vieolo/parsers';
@@ -55,7 +55,6 @@ export default function TableInteractive(props: {
     width?: string,
     showBottomRow?: boolean,
     isDense?: boolean,
-    type?: TypographyOptionTypes
 }): JSX.Element {
 
     let [selectedCells, setSelectedCells] = useState<string[]>([]);
@@ -102,7 +101,7 @@ export default function TableInteractive(props: {
                 props.headers.map(h => {
                     let s = typeof h === 'string' ? h : h.name;
                     return <div className={cellClass} key={s}>
-                        <Typography type={props.type} text={s} />
+                        <Typography type='title-small' text={s} />
                     </div>
                 })
             }

@@ -15,24 +15,24 @@ export function donutChartOptions(): ViewData {
     constants: {      
       innerText: "Donut Chart",
       data : [{
-        title: 'Donut1',
-        percent: 0.40,
-        displayValue: 'Default'
+        title: 'Donut 1',
+        percent: 0.30,
+        displayValue: '4,000'
       },
       {
-        title: 'Donut2',
+        title: 'Donut 2',
         percent: 0.25,
-        displayValue: 'Default'
+        displayValue: '2,500'
       },
       {
-        title: 'Donut3',
+        title: 'Donut 3',
         percent: 0.20,
-        displayValue: 'Default'
+        displayValue: '2,000'
       },
       {
-        title: 'Donut4',
+        title: 'Donut 4',
         percent: 0.15,
-        displayValue: 'Default'
+        displayValue: '1,500'
       }
     ],
     includeLegend: true,
