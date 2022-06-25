@@ -78,8 +78,8 @@ export default function Select(props: SelectProps) {
     }, [open]);
 
     useEffect(() => {
-        if (itemKeyboardFocus && itemKeyboardRef.current) {            
-            itemKeyboardRef.current.scrollIntoView({block: 'center'});
+        if (itemKeyboardFocus && itemKeyboardRef.current) {
+            itemKeyboardRef.current.scrollIntoView({ block: 'center' });
         }
     }, [itemKeyboardFocus, itemKeyboardRef])
 
@@ -301,7 +301,10 @@ function SelectItem(props: {
         }
         <div
             className={className}
-            onClick={() => { props.onSelect(props.item) }}
+            onClick={e => {
+                e.stopPropagation();
+                props.onSelect(props.item)
+            }}
             ref={props.itemRef}
             role="listitem"
             aria-label={props.item.title}
