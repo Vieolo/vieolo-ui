@@ -9,6 +9,8 @@ import { ViewData } from '../main/main';
 import Button from '../../Button';
 import Card from '../../Card';
 import IconButton from '../../IconButton';
+import Spacer from '../../Spacer';
+import Select from '../../Select';
 
 type ModalPropsType = React.ComponentProps<typeof Modal>;
 
@@ -25,7 +27,7 @@ export function modalOptions(): ViewData {
 }
 
 
-export function ModalCreator(props: {p: ModalPropsType}) {
+export function ModalCreator(props: { p: ModalPropsType }) {
 
     let [open, setOpen] = useState<boolean>(false);
 
@@ -33,7 +35,7 @@ export function ModalCreator(props: {p: ModalPropsType}) {
 
     return <div>
 
-        <Button 
+        <Button
             text='Show Modal'
             color='primary'
             onClick={() => setOpen(true)}
@@ -42,9 +44,27 @@ export function ModalCreator(props: {p: ModalPropsType}) {
         {
             open &&
             <Modal onClose={() => setOpen(false)}>
-                <IconButton icon={"X"} onClick={() => setOpen(false)} />
-                <Card onClick={() => setCount(count + 1)}>
-                    <p>{count}</p>
+                <Card className="width--vw-70 max-width--px-500">
+                    <IconButton icon={"X"} onClick={() => setOpen(false)} />
+
+                    <Spacer height='one' />
+
+                    <Card onClick={() => setCount(count + 1)}>
+                        <p>{count}</p>
+                    </Card>
+
+                    <Spacer height='one' />
+
+                    <Select
+                        error={false}
+                        items={[
+                            { title: "One", value: "one" },
+                            { title: "Two", value: "two" },
+                        ]}
+                        onSelect={() => { }}
+                        selectedItems={["One"]}
+                        title="Select"
+                    />
                 </Card>
             </Modal>
         }
