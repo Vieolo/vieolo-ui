@@ -28,11 +28,9 @@ export default function DonutChart(props: {
     const colors = [
         "primary",
         "secondary",
-        "tertiary",
         "alert",
         "error",
         "success",
-        "disable",
         "accessoryOrange",
         "accessoryBlue",
         "accessoryGreen",
