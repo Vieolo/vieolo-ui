@@ -15,11 +15,13 @@ import DateInput from './DateInput';
 import DatePicker from './DatePicker';
 import DateTimePicker from './DateTimePicker';
 import Divider from './Divider';
+import DonutChart from './DonutChart';
 import DropDownMenu from './DropDownMenu';
 import ExpandableCard from './ExpandableCard';
 import FileInput from './FileInput';
 import Flex from './Flex';
 import FormDialog from './FormDialog';
+import FormSection from './FormSection';
 import GanttChart from './GanttChart';
 import Grid from './Grid';
 import GridContainer from './GridContainer';
@@ -132,11 +134,13 @@ export {
 	DatePicker,
 	DateTimePicker,
 	Divider,
+	DonutChart,
 	DropDownMenu,
 	ExpandableCard,
 	FileInput,
 	Flex,
 	FormDialog,
+	FormSection,
 	GanttChart,
 	Grid,
 	GridContainer,

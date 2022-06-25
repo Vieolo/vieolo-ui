@@ -10,6 +10,7 @@ import SampleIcon from '@mui/icons-material/RefreshRounded';
 
 // Types
 import { ViewData } from '../main/main';
+import Spinner from '../../Spinner/spinner';
 
 type TablePropsType = React.ComponentProps<typeof Table>;
 
@@ -28,7 +29,22 @@ export function tableOptions(): ViewData {
             withPagination: "boolean",
             withMaxHeight: "boolean",
             checkable: "boolean",
-            reorderable: 'boolean'
+            reorderable: 'boolean',
+            useCustomHeader: 'boolean',
+            headerTypographyType: {
+                default: 'title-small',
+                options: [
+                    'caption-small',
+                    'caption-medium',
+                    'caption-large',
+                    'paragraph-small',
+                    'paragraph-medium',
+                    'paragraph-large',
+                    'title-small',
+                    'title-medium',
+                    'title-large'
+                ]
+            },
         }
     }
 }
@@ -67,8 +83,8 @@ export function TableCreator(props: { p: TablePropsType }) {
     });
 
     let finalRows = props.p.disableSort ? semiFinalRows : [...semiFinalRows].sort((a, b) => {
-        let one = a.items[headers.indexOf(sort)];
-        let two = b.items[headers.indexOf(sort)];
+        let one = a.items[headers.indexOf(sort)]!;
+        let two = b.items[headers.indexOf(sort)]!;
         if (direction === 'ascending') return one > two ? 1 : -1
         else return one > two ? -1 : 1
     }).map(i => {
@@ -87,7 +103,7 @@ export function TableCreator(props: { p: TablePropsType }) {
     return <Table
         columnGrid={props.p.columnGrid}
         disableSort={props.p.disableSort}
-        headers={(props.p as any).removeHeaders ? null : ['id', 'Date', 'Description', '']}
+        headers={(props.p as any).removeHeaders ? undefined : ['id', 'Date', 'Description', (props.p as any).useCustomHeader ? <Spinner size='small' /> : ""]}
         onSortChange={(s, d) => {
             setSort(s);
             setDirection(d);
@@ -121,6 +137,7 @@ export function TableCreator(props: { p: TablePropsType }) {
             else if (context === 'manyRows') setManyRow(nl.map(z => z.items));
             else if (context === 'normalRows') setNormalRows(nl.map(z => z.items));
         }}
+        headerTypographyType={props.p.headerTypographyType}
     />
 
 }

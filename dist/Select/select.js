@@ -204,7 +204,10 @@ function SelectItem(props) {
         className += " vieolo-select__select-item--keyboard-focus";
     return _jsxs(Fragment, { children: [(props.item.category && (!props.previousItem || props.item.category !== props.previousItem.category)) &&
                 _jsx("p", Object.assign({ className: "vieolo-select__select-item__category-name" }, { children: props.item.category }), void 0),
-            _jsxs("div", Object.assign({ className: className, onClick: () => { props.onSelect(props.item); }, ref: props.itemRef, role: "listitem", "aria-label": props.item.title }, { children: [_jsx(Typography, { text: props.item.title }, void 0),
+            _jsxs("div", Object.assign({ className: className, onClick: e => {
+                    e.stopPropagation();
+                    props.onSelect(props.item);
+                }, ref: props.itemRef, role: "listitem", "aria-label": props.item.title }, { children: [_jsx(Typography, { text: props.item.title }, void 0),
                     props.item.subTitle &&
                         _jsx(Typography, { type: 'caption-medium', text: props.item.subTitle }, void 0)] }), void 0)] }, void 0);
 }

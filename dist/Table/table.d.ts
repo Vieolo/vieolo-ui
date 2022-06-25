@@ -1,4 +1,5 @@
 import React from 'react';
+import { TypographyOptionTypes } from '../types';
 export declare type TableSortDirection = 'ascending' | 'descending';
 export declare type TableRow = {
     id: string;
@@ -18,11 +19,12 @@ export declare type TableRow = {
     onCheckChange?: () => void;
 };
 export default function Table(props: {
-    headers?: string[];
+    headers?: string[] | React.ReactNode[];
     /**
      * @deprecated The headers row is now optional, leaving which will result in absense of header row
      */
     removeHeaderRow?: boolean;
+    headerTypographyType?: TypographyOptionTypes;
     rows: TableRow[];
     columnGrid: string;
     disableSort?: boolean;

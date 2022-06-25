@@ -11,6 +11,9 @@ import LeftArrowIcon from '@mui/icons-material/ArrowLeft';
 import RightArrowIcon from '@mui/icons-material/ArrowRight';
 import ReorderIcon from '@mui/icons-material/DragHandleRounded';
 
+// Types
+import { TypographyOptionTypes } from '../types';
+
 export type TableSortDirection = 'ascending' | 'descending';
 
 export type TableRow = {
@@ -32,11 +35,12 @@ export type TableRow = {
 }
 
 export default function Table(props: {
-    headers?: string[],
+    headers?: string[] | React.ReactNode[],
     /**
      * @deprecated The headers row is now optional, leaving which will result in absense of header row
      */
     removeHeaderRow?: boolean,
+    headerTypographyType?: TypographyOptionTypes
     rows: TableRow[],
     columnGrid: string,
     disableSort?: boolean,
@@ -87,7 +91,7 @@ export default function Table(props: {
      * The on change function of the checkbox in the header
      * User can check or uncheck all of the items at once
      */
-    onCheckAll?: (allAreChecked: boolean) => void
+    onCheckAll?: (allAreChecked: boolean) => void,
 }): JSX.Element {
 
     let [allChecked, setAllChecked] = useState<boolean>(false);
@@ -128,21 +132,27 @@ export default function Table(props: {
                         </div>
                     }
                     {
-                        (props.headers || []).map((h, i) => {
+                        (props.headers || []).map((h: string | React.ReactNode, i) => {
                             return <div
                                 key={`table_header_row_${i}`}
                                 className="vieolo-table__header-row__cell"
                                 style={{ cursor: (props.disableSort || !props.sortBy || !props.onSortChange || !props.sortDirection) ? 'default' : 'pointer' }}
                                 aria-label={`${props.ariaLabel || 'table'} header column ${h}`}
                                 onClick={() => {
-                                    if (!props.disableSort && props.onSortChange && props.sortBy && props.sortDirection) {
+                                    if (!props.disableSort && props.onSortChange && props.sortBy && props.sortDirection && typeof h === 'string') {
                                         props.onSortChange(h, props.sortBy === h ? props.sortDirection === 'ascending' ? 'descending' : 'ascending' : (props.defaultDirection || 'ascending'));
                                     }
                                 }}
                             >
-                                <Typography type='title-small' text={h} />
                                 {
-                                    (props.sortBy === h && !props.disableSort) &&
+                                    typeof h === 'string'
+                                        ? <Typography type={props.headerTypographyType || "title-small"} text={h} />
+                                        : <>
+                                            {h}
+                                        </>                
+                                }
+                                {
+                                    (props.sortBy === h && !props.disableSort && typeof h === 'string') &&
                                     <>
                                         {
                                             props.sortDirection === 'ascending'
