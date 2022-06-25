@@ -33,11 +33,13 @@ export default function Table(props) {
                                             }, value: allChecked }, void 0) }), void 0),
                                 (props.headers || []).map((h, i) => {
                                     return _jsxs("div", Object.assign({ className: "vieolo-table__header-row__cell", style: { cursor: (props.disableSort || !props.sortBy || !props.onSortChange || !props.sortDirection) ? 'default' : 'pointer' }, "aria-label": `${props.ariaLabel || 'table'} header column ${h}`, onClick: () => {
-                                            if (!props.disableSort && props.onSortChange && props.sortBy && props.sortDirection) {
+                                            if (!props.disableSort && props.onSortChange && props.sortBy && props.sortDirection && typeof h === 'string') {
                                                 props.onSortChange(h, props.sortBy === h ? props.sortDirection === 'ascending' ? 'descending' : 'ascending' : (props.defaultDirection || 'ascending'));
                                             }
-                                        } }, { children: [_jsx(Typography, { type: 'title-small', text: h }, void 0),
-                                            (props.sortBy === h && !props.disableSort) &&
+                                        } }, { children: [typeof h === 'string'
+                                                ? _jsx(Typography, { type: props.headerTypographyType || "title-small", text: h }, void 0)
+                                                : _jsx(_Fragment, { children: h }, void 0),
+                                            (props.sortBy === h && !props.disableSort && typeof h === 'string') &&
                                                 _jsx(_Fragment, { children: props.sortDirection === 'ascending'
                                                         ? _jsx("p", { children: "\u2193" }, void 0)
                                                         : _jsx("p", { children: "\u2191" }, void 0) }, void 0)] }), `table_header_row_${i}`);

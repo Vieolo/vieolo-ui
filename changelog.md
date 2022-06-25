@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.22.2 (2022-06-26)
+- Added `FormSection` ([#17](https://github.com/Vieolo/vieolo-ui/issues/17))
+- Added `DonutChart` ([#20](https://github.com/Vieolo/vieolo-ui/issues/20))
+- Added typography type to `Table` header ([#187](https://github.com/Vieolo/vieolo-ui/issues/187))
+- Added support for custom component in `Table` header ([#188](https://github.com/Vieolo/vieolo-ui/issues/188))
+
 ## 0.22.1 (2022-06-22)
 - Added the `RadioGroupSet` component ([#51](https://github.com/Vieolo/vieolo-ui/issues/51))
 - Fixed the position of checkbox in `Table` header ([#76](https://github.com/Vieolo/vieolo-ui/issues/76))
