@@ -12,7 +12,7 @@ import RightArrowIcon from '@mui/icons-material/ArrowRight';
 import ReorderIcon from '@mui/icons-material/DragHandleRounded';
 
 // Types
-import { TypographyOptionTypes as defaultTypographyType } from '../types';
+import { TypographyOptionTypes } from '../types';
 
 export type TableSortDirection = 'ascending' | 'descending';
 
@@ -40,6 +40,7 @@ export default function Table(props: {
      * @deprecated The headers row is now optional, leaving which will result in absense of header row
      */
     removeHeaderRow?: boolean,
+    headerTypographyType?: TypographyOptionTypes
     rows: TableRow[],
     columnGrid: string,
     disableSort?: boolean,
@@ -91,7 +92,6 @@ export default function Table(props: {
      * User can check or uncheck all of the items at once
      */
     onCheckAll?: (allAreChecked: boolean) => void,
-    type?: defaultTypographyType
 }): JSX.Element {
 
     let [allChecked, setAllChecked] = useState<boolean>(false);
@@ -146,13 +146,13 @@ export default function Table(props: {
                             >
                                 {
                                     typeof h === 'string'
-                                        ? <Typography type={props.type ? props.type : "title-small"} text={h} />
+                                        ? <Typography type={props.headerTypographyType || "title-small"} text={h} />
                                         : <>
                                             {h}
                                         </>                
                                 }
                                 {
-                                    (props.sortBy === h && !props.disableSort) &&
+                                    (props.sortBy === h && !props.disableSort && typeof h === 'string') &&
                                     <>
                                         {
                                             props.sortDirection === 'ascending'
