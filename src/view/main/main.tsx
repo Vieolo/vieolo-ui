@@ -28,6 +28,7 @@ import { TableCreator, tableOptions } from '../table/table.view';
 import { RadioGroupCreator, radioGroupOptions } from '../form/radio_group.view';
 import { RadioGroupSetCreator, radioGroupSetOptions } from '../form/radio_group_set.view';
 import { SelectSetCreator, selectSetOptions } from '../form/select_set.view';
+import { FormSectionCreator, formSectionOptions } from '../form/form_section.view';
 import { TabSwitchCreator, tabSwitchOptions } from '../layout/tab_switch.view';
 import { DatePickerCreator, datePickerOptions } from '../date_time/date_picker.view';
 import { ganttChartOptions, GanttChartCreator } from '../charts/gantt_chart.view';
@@ -47,6 +48,7 @@ import { dividerOptions, DividerCreator } from '../layout/auxiliary/divider.view
 import { TableInteractiveCreator, tableInteractiveOptions } from '../table/table_interactive.view';
 import { ClickableCardCreator, clickableCardOptions } from '../card/clickable_card.view';
 import { ModalCreator, modalOptions } from '../dialog/modal.view';
+import { DonutChartCreator, donutChartOptions } from '../charts/donut_chart.view';
 import Select from '../../Select';
 import SwitchSet from '../../SwitchSet';
 
@@ -98,7 +100,7 @@ export default function MainPage(props: {}): JSX.Element {
 
         "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator, group: "Charts" },
         "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator, group: "Charts" },
-
+        "Donut Chart": { title: "Donut Chart", data: donutChartOptions(), creator: DonutChartCreator, group: "Charts" },
         "Date Input": { title: "Date Input", data: dateInputOptions(), creator: DateInputCreator, group: "Date and Time" },
         "Date Picker": { title: "Date Picker", data: datePickerOptions(), creator: DatePickerCreator, group: "Date and Time" },
         "Date Time Picker": { title: "Date Time Picker", data: dateTimePickerOptions(), creator: DateTimePickerCreator, group: "Date and Time" },
@@ -118,7 +120,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator, group: "Form" },
         "Radio Group Set": { title: "Radio Group Set", data: radioGroupSetOptions(), creator: RadioGroupSetCreator, group: "Form" },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
-
+        "Form Section": { title: "Form Section", data: formSectionOptions(), creator: FormSectionCreator, group: "Form"},
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator, group: "Layout" },
 
         "Divider": { title: "Divider", data: dividerOptions(), creator: DividerCreator, group: "Layout/Auxiliary" },

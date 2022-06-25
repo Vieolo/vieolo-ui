@@ -28,7 +28,21 @@ export function tableOptions(): ViewData {
             withPagination: "boolean",
             withMaxHeight: "boolean",
             checkable: "boolean",
-            reorderable: 'boolean'
+            reorderable: 'boolean',
+            type: {
+                default: 'title-small',
+                options: [
+                    'caption-small',
+                    'caption-medium',
+                    'caption-large',
+                    'paragraph-small',
+                    'paragraph-medium',
+                    'paragraph-large',
+                    'title-small',
+                    'title-medium',
+                    'title-large'
+                ]
+            },
         }
     }
 }
@@ -121,6 +135,7 @@ export function TableCreator(props: { p: TablePropsType }) {
             else if (context === 'manyRows') setManyRow(nl.map(z => z.items));
             else if (context === 'normalRows') setNormalRows(nl.map(z => z.items));
         }}
+        type={props.p.type}
     />
 
 }

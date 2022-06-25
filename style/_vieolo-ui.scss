@@ -2466,3 +2466,91 @@ body {
 		@include center-by-flex-row;
 	}
 }
+
+.vieolo-form-section {
+
+	&__header-container {
+		padding: $base-unit-half $base-unit;
+		border-bottom: 1px solid $primary-color-transparent;
+		@include flex-row-space-between;
+	}
+
+	&__content-container {
+		padding: $base-unit-half $base-unit;
+		flex-direction: column;
+	}
+}
+
+.vieolo-donut-chart {
+	display: flex;
+	align-items: center;
+
+	&__chart-container {
+		position: relative;
+		display: inline-block;
+
+		h2 {
+			text-align: center;
+			position: absolute;
+			line-height: 135px;
+			width: 100%;
+			font-size: 15px;
+		}
+
+		svg {
+			transform: rotate(-90deg);
+		}
+
+		&__donut {
+			stroke-dasharray: 440;
+			-webkit-animation: donut 1s ease-out forwards;
+			animation: donut 1s ease-out forwards;
+			@include colorMixin(stroke, false);
+		}
+	}
+
+	&__legend-container {
+		height: 170px;
+		display: flex;
+		flex-flow: column;
+		padding-left: $base-unit-two;
+		flex-wrap: wrap;
+
+		&__legend-item {
+			display: flex;
+			width: 80px;
+			margin-top: $base-unit-half;
+			align-items: center;
+			cursor: pointer;
+
+			div:nth-child(1) {
+				height: $base-unit;
+				width: $base-unit;
+				border-radius: 50%;
+				margin-right: $base-unit-half;
+			}
+
+			div:nth-child(2) {
+				width: 65px;
+				p {
+					@include no-text-overflow;
+					margin: 0;
+				}
+
+				.title {
+					font-size: 12px;
+				}
+
+				.subtitle {
+					font-size: 10px;
+					@include font-light;
+				}
+			}
+		}
+
+		&__legend-item:nth-child(odd) {
+			background-color: #f2f2f2;
+			border-radius: $base-unit-half;
+		}
+	}
+}
