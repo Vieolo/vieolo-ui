@@ -51,7 +51,7 @@ import { ModalCreator, modalOptions } from '../dialog/modal.view';
 import { DonutChartCreator, donutChartOptions } from '../charts/donut_chart.view';
 import Select from '../../Select';
 import SwitchSet from '../../SwitchSet';
-import Navbar from '../../NavBar';
+import PageFrame from '../../PageFrame';
 
 // Charts
 import { barChartOptions, BarChartCreator } from '../charts/bar_chart.view';
@@ -120,7 +120,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator, group: "Form" },
         "Radio Group Set": { title: "Radio Group Set", data: radioGroupSetOptions(), creator: RadioGroupSetCreator, group: "Form" },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
-        "Form Section": { title: "Form Section", data: formSectionOptions(), creator: FormSectionCreator, group: "Form"},
+        "Form Section": { title: "Form Section", data: formSectionOptions(), creator: FormSectionCreator, group: "Form" },
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator, group: "Layout" },
 
         "Divider": { title: "Divider", data: dividerOptions(), creator: DividerCreator, group: "Layout/Auxiliary" },
@@ -221,142 +221,144 @@ export default function MainPage(props: {}): JSX.Element {
 
     return <div className={`main-page ${showComponent ? "main-page--content" : "main-page--no-content"}`}>
 
-        <Navbar 
-            title='Vieolo UI'
-            logo={<img src='https://vieolo.com/static/logo-nav.svg' height={30} width={30} alt={"logo"} />}
-        />
+        <PageFrame
+            navbar={{
+                title: 'Vieolo UI',
+                logo: <img src='https://vieolo.com/static/logo-nav.svg' height={30} width={30} alt={"logo"} />                
+            }}
+        >
+            <div className="component-list">
 
-        <div className="component-list">
-
-            <List
-                height={Device.isTouchOnlyDevice ? '80vh' : 'calc(100vh - 70px)'}
-                itemStyle={{
-                    height: 'medium'
-                }}
-                collapsedGroupStyle={{
-                    height: 'medium',
-                    emphasis: 'none',
-                    color: 'secondary'
-                }}
-                expandedGroupStyle={{
-                    height: 'small',
-                    emphasis: 'low',
-                    color: 'primary'
-                }}
-                items={Object.values(items).map((i, index) => {
-                    return {
-                        id: index.toString(),
-                        title: i.title,
-                        selected: selectedTitle === i.title,
-                        group: i.group,
-                        onClick: () => {
-                            handleSelectComponent(i);
-                            history.replace({ pathname: window.location.pathname, search: `tab=${i.title.replace(/ /g, "__")}` });
-                        },
-                    }
-                })}
-            />
-        </div>
-
-        <div className="state-list">
-            {
-                selectedDataOptions !== undefined && selectedDataOptions.variables &&
-                Object.keys(selectedDataOptions.variables).map(k => {
-
-                    let tempVariable = selectedDataOptions!.variables[k];
-                    let variable: ViewDataVariable;
-
-                    if (tempVariable === 'boolean') {
-                        variable = {
-                            options: [false, true],
-                            default: false
+                <List
+                    height={Device.isTouchOnlyDevice ? '80vh' : 'calc(100vh - 70px)'}
+                    itemStyle={{
+                        height: 'medium'
+                    }}
+                    collapsedGroupStyle={{
+                        height: 'medium',
+                        emphasis: 'none',
+                        color: 'secondary'
+                    }}
+                    expandedGroupStyle={{
+                        height: 'small',
+                        emphasis: 'low',
+                        color: 'primary'
+                    }}
+                    items={Object.values(items).map((i, index) => {
+                        return {
+                            id: index.toString(),
+                            title: i.title,
+                            selected: selectedTitle === i.title,
+                            group: i.group,
+                            onClick: () => {
+                                handleSelectComponent(i);
+                                history.replace({ pathname: window.location.pathname, search: `tab=${i.title.replace(/ /g, "__")}` });
+                            },
                         }
-                    } else if (tempVariable === "booleanTrueDefault") {
-                        variable = {
-                            options: [false, true],
-                            default: true
-                        }
-                    } else if (tempVariable === "borderRadius") {
-                        variable = {
-                            options: ['default', 'full', 'normal', 'half', 'none'],
-                            default: 'default'
-                        }
-                    } else if (tempVariable === "typographyOptions") {
-                        variable = {
-                            options: ['title-large', 'title-medium', 'title-small', 'paragraph-large', 'paragraph-medium', 'paragraph-small', 'caption-large', 'caption-medium', 'caption-small'],
-                            default: 'paragraph-medium'
-                        }
-                    } else if (tempVariable === 'colors') {
-                        variable = {
-                            options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
-                            default: 'primary'
-                        }
-                    } else if (tempVariable === 'colorsOptional') {
-                        variable = {
-                            options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
-                            default: ''
-                        }
-                    } else if (tempVariable === 'fontWeightOptional') {
-                        variable = {
-                            options: ['light', 'normal', 'bold', 'extra-bold'],
-                            default: ''
-                        }
-                    } else if (tempVariable === 'emphasis') {
-                        variable = {
-                            options: ['high', 'medium', 'low', 'none'],
-                            default: 'none'
-                        }
-                    } else {
-                        variable = tempVariable;
-                    }
+                    })}
+                />
+            </div>
 
-                    if (typeof variable.options[0] === 'string') {
-                        return <div key={k} className="margin-bottom--one">
-                            <Select
-                                error={false}
-                                items={variable.options.map(o => {
-                                    return {
-                                        title: o,
-                                        value: o
-                                    }
-                                })}
-                                onSelect={v => {
-                                    let temp = { ...finalState }
-                                    if (typeof variable !== 'string') {
-                                        temp[k] = variable.type && variable.type === 'number' ? +v[0] : v[0];
-                                    }
-                                    setFinalState(temp);
-                                }}
-                                selectedItems={[finalState![k].toString()]}
-                                title={camelCaseToWords(k)}
-                            />
-                        </div>
-                    } else {
-                        return <div key={k} className="margin-bottom--one">
-                            <SwitchSet
-                                on={finalState![k]}
-                                onChange={v => {
-                                    let temp = { ...finalState }
-                                    temp[k] = v;
-                                    setFinalState(temp);
-                                }}
-                                switchID={`${k}_switch`}
-                                title={camelCaseToWords(k)}
-                            />
-                        </div>
-                    }
-                })
-            }
-        </div>
+            <div className="state-list">
+                {
+                    selectedDataOptions !== undefined && selectedDataOptions.variables &&
+                    Object.keys(selectedDataOptions.variables).map(k => {
 
-        <main className="component-state-display">
-            {
-                (finalState !== null && content !== null) &&
+                        let tempVariable = selectedDataOptions!.variables[k];
+                        let variable: ViewDataVariable;
 
-                <div>{content}</div>
+                        if (tempVariable === 'boolean') {
+                            variable = {
+                                options: [false, true],
+                                default: false
+                            }
+                        } else if (tempVariable === "booleanTrueDefault") {
+                            variable = {
+                                options: [false, true],
+                                default: true
+                            }
+                        } else if (tempVariable === "borderRadius") {
+                            variable = {
+                                options: ['default', 'full', 'normal', 'half', 'none'],
+                                default: 'default'
+                            }
+                        } else if (tempVariable === "typographyOptions") {
+                            variable = {
+                                options: ['title-large', 'title-medium', 'title-small', 'paragraph-large', 'paragraph-medium', 'paragraph-small', 'caption-large', 'caption-medium', 'caption-small'],
+                                default: 'paragraph-medium'
+                            }
+                        } else if (tempVariable === 'colors') {
+                            variable = {
+                                options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
+                                default: 'primary'
+                            }
+                        } else if (tempVariable === 'colorsOptional') {
+                            variable = {
+                                options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
+                                default: ''
+                            }
+                        } else if (tempVariable === 'fontWeightOptional') {
+                            variable = {
+                                options: ['light', 'normal', 'bold', 'extra-bold'],
+                                default: ''
+                            }
+                        } else if (tempVariable === 'emphasis') {
+                            variable = {
+                                options: ['high', 'medium', 'low', 'none'],
+                                default: 'none'
+                            }
+                        } else {
+                            variable = tempVariable;
+                        }
 
-            }
-        </main>
+                        if (typeof variable.options[0] === 'string') {
+                            return <div key={k} className="margin-bottom--one">
+                                <Select
+                                    error={false}
+                                    items={variable.options.map(o => {
+                                        return {
+                                            title: o,
+                                            value: o
+                                        }
+                                    })}
+                                    onSelect={v => {
+                                        let temp = { ...finalState }
+                                        if (typeof variable !== 'string') {
+                                            temp[k] = variable.type && variable.type === 'number' ? +v[0] : v[0];
+                                        }
+                                        setFinalState(temp);
+                                    }}
+                                    selectedItems={[finalState![k].toString()]}
+                                    title={camelCaseToWords(k)}
+                                />
+                            </div>
+                        } else {
+                            return <div key={k} className="margin-bottom--one">
+                                <SwitchSet
+                                    on={finalState![k]}
+                                    onChange={v => {
+                                        let temp = { ...finalState }
+                                        temp[k] = v;
+                                        setFinalState(temp);
+                                    }}
+                                    switchID={`${k}_switch`}
+                                    title={camelCaseToWords(k)}
+                                />
+                            </div>
+                        }
+                    })
+                }
+            </div>
+
+            <main className="component-state-display">
+                {
+                    (finalState !== null && content !== null) &&
+
+                    <div>{content}</div>
+
+                }
+            </main>
+        </PageFrame>
 
         {
             selectedDataOptions &&
