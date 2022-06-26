@@ -51,7 +51,7 @@ import { ModalCreator, modalOptions } from '../dialog/modal.view';
 import { DonutChartCreator, donutChartOptions } from '../charts/donut_chart.view';
 import Select from '../../Select';
 import SwitchSet from '../../SwitchSet';
-
+import Navbar from '../../NavBar';
 
 // Charts
 import { barChartOptions, BarChartCreator } from '../charts/bar_chart.view';
@@ -82,9 +82,9 @@ type ViewItemData = {
 export default function MainPage(props: {}): JSX.Element {
 
     let [selectedTitle, setSelectedTitle] = useState<string>("");
-    let [selectedDataOptions, setSelectedDataOptions] = useState<ViewData>(null as ViewData);
+    let [selectedDataOptions, setSelectedDataOptions] = useState<ViewData | undefined>(undefined);
     let [showComponent, setShowComponent] = useState<boolean>(false);
-    let [finalState, setFinalState] = useState<{ [key: string]: any }>(null);
+    let [finalState, setFinalState] = useState<{ [key: string]: any } | undefined>(undefined);
     let history = useHistory();
 
     let items: { [key: string]: ViewItemData } = {
@@ -221,10 +221,15 @@ export default function MainPage(props: {}): JSX.Element {
 
     return <div className={`main-page ${showComponent ? "main-page--content" : "main-page--no-content"}`}>
 
+        <Navbar 
+            title='Vieolo UI'
+            logo={<img src='https://vieolo.com/static/logo-nav.svg' height={30} width={30} alt={"logo"} />}
+        />
+
         <div className="component-list">
 
             <List
-                height={Device.isTouchOnlyDevice ? '80vh' : 'calc(100vh - 20px)'}
+                height={Device.isTouchOnlyDevice ? '80vh' : 'calc(100vh - 70px)'}
                 itemStyle={{
                     height: 'medium'
                 }}
@@ -255,10 +260,10 @@ export default function MainPage(props: {}): JSX.Element {
 
         <div className="state-list">
             {
-                selectedDataOptions != null && selectedDataOptions.variables &&
+                selectedDataOptions !== undefined && selectedDataOptions.variables &&
                 Object.keys(selectedDataOptions.variables).map(k => {
 
-                    let tempVariable = selectedDataOptions.variables[k];
+                    let tempVariable = selectedDataOptions!.variables[k];
                     let variable: ViewDataVariable;
 
                     if (tempVariable === 'boolean') {
@@ -322,14 +327,14 @@ export default function MainPage(props: {}): JSX.Element {
                                     }
                                     setFinalState(temp);
                                 }}
-                                selectedItems={[finalState[k].toString()]}
+                                selectedItems={[finalState![k].toString()]}
                                 title={camelCaseToWords(k)}
                             />
                         </div>
                     } else {
                         return <div key={k} className="margin-bottom--one">
                             <SwitchSet
-                                on={finalState[k]}
+                                on={finalState![k]}
                                 onChange={v => {
                                     let temp = { ...finalState }
                                     temp[k] = v;

@@ -6,6 +6,7 @@
     grid-template-columns: 200px 280px 1fr;
     column-gap: 10px;
     padding: 10px;
+    padding-top: $navbar-height;
 
     &--no-content {
         @media all and (max-width: $mobileBreakPoint) {
@@ -31,7 +32,7 @@
     .component-list,
     .state-list,
     .component-state-display {
-        height: calc(100vh - 20px);
+        height: calc(100vh - 20px - $navbar-height);
         overflow-y: scroll;        
     }
 
