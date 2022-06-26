@@ -538,7 +538,8 @@ body {
 		border-radius: $base-unit-half;
 		max-height: 240px;
 		overflow-y: auto;
-		@media(pointer: coarse){
+
+		@media(pointer: coarse) {
 			position: static;
 			width: 240px;
 			max-height: 300px;
@@ -557,7 +558,8 @@ body {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		@media (pointer: coarse){
+
+		@media (pointer: coarse) {
 			height: $row-height-medium;
 			font-size: 14px;
 		}
@@ -649,7 +651,7 @@ body {
 		&:hover {
 			background-color: $hover-color;
 		}
-		
+
 		&--keyboard-focus {
 			background-color: $primary-color-light;
 		}
@@ -1713,6 +1715,7 @@ body {
 
 	.vieolo-calendar-statefull-component {
 		position: absolute;
+
 		@media(pointer: coarse) {
 			position: static;
 			margin-top: $base-unit;
@@ -2435,11 +2438,12 @@ body {
 
 	&--clickable {
 		cursor: pointer;
+
 		&:hover {
 			border: 2px solid $hover-color;
 			border-radius: $base-unit-half;
 		}
-	}	
+	}
 
 	&:focus {
 		border: 2px solid $hover-color;
@@ -2532,6 +2536,7 @@ body {
 
 			div:nth-child(2) {
 				width: 65px;
+
 				p {
 					@include no-text-overflow;
 					margin: 0;
@@ -2562,4 +2567,79 @@ body {
 	top: 0;
 	left: 0;
 	right: 0;
+}
+
+
+.vieolo-nav-drawer {
+
+	&__drawer {
+		position: fixed;
+		top: $navbar-height;
+		width: $drawer-width;
+		left: -$drawer-width;;
+		bottom: 0px;
+		background-color: $content-background-color;
+		padding: 0px;
+		z-index: 999;
+		@include transition;
+
+		&--open {
+			left: 0;
+			padding: 10px 0px;
+			overflow-y: auto;			
+		}
+	}	
+
+	&__outer-area {
+
+		&__open {
+			position: fixed;
+			top: $navbar-height;
+			right: 0;
+			left: 0;
+			bottom: 0;
+			z-index: 998;
+			background-color: rgba(0, 0, 0, 0.4);
+			transition: all 0.5s ease;
+		}
+
+		&__close {
+			display: none;
+		}
+	}
+
+	&__item {
+		width: $drawer-item-width;
+		border-radius: 0 20px 20px 0;
+		height: 40px;
+		margin-bottom: 5px;
+		display: flex;
+		align-items: center;
+		margin-left: 0px;
+		text-decoration: none;
+		padding-left: $base-unit-two;
+		cursor: pointer;
+		@include transition;
+
+		&:hover {
+			background-color: $secondary-color-light;
+		}
+
+		svg {
+			margin-left: 10px;
+		}
+
+		p {
+			margin-left: 15px;	
+		}		
+
+		&--selected {
+			background-color: $secondary-color-normal;
+
+			svg,
+			p {
+				color: $secondary-color-text;
+			}
+		}
+	}
 }

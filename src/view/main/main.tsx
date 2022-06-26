@@ -56,6 +56,8 @@ import PageFrame from '../../PageFrame';
 // Charts
 import { barChartOptions, BarChartCreator } from '../charts/bar_chart.view';
 import List from '../../List';
+import Typography from '../../Typography';
+import Spacer from '../../Spacer';
 
 
 type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDefault" | "borderRadius" | 'fontWeightOptional' | 'emphasis' | 'typographyOptions' | {
@@ -219,14 +221,30 @@ export default function MainPage(props: {}): JSX.Element {
         setFinalState(finalState);
     }
 
-    return <div className={`main-page ${showComponent ? "main-page--content" : "main-page--no-content"}`}>
-
-        <PageFrame
-            navbar={{
-                title: 'Vieolo UI',
-                logo: <img src='https://vieolo.com/static/logo-nav.svg' height={30} width={30} alt={"logo"} />                
-            }}
-        >
+    return <PageFrame
+        navbar={{
+            title: 'Vieolo UI',
+            logo: <img src='https://vieolo.com/static/logo-nav.svg' height={30} width={30} alt={"logo"} />
+        }}
+        drawer={{
+            topContent: <div className='padding--one'>
+                <Typography text='Vieolo UI' type='title-large' textAlign='center' />
+                <Spacer height='one' />
+                <Typography text='This is a reusable component package for React applications' />
+            </div>,
+            mainItems: [
+                { title: "Item One", icon: "+", href: "/" },
+                { title: "Item Two", icon: "X" },
+                { title: "Item Three" },
+                { title: "Item Four", icon: "€", selected: true },
+            ],
+            bottomItems: [
+                { title: "Bottom 1" },
+                { title: "Bottom 2" },
+            ]
+        }}
+    >
+        <div className={`main-page ${showComponent ? "main-page--content" : "main-page--no-content"}`}>
             <div className="component-list">
 
                 <List
@@ -358,25 +376,27 @@ export default function MainPage(props: {}): JSX.Element {
 
                 }
             </main>
-        </PageFrame>
 
-        {
-            selectedDataOptions &&
-            <div className="floating-action-button" onClick={() => {
-                if (showComponent) {
-                    setShowComponent(false);
-                } else {
-                    setShowComponent(true);
-                }
-            }}>
-                {
-                    showComponent
-                        ? <ArrowLeft />
-                        : <ArrowRight />
-                }
-            </div>
-        }
-    </div>
+            {
+                selectedDataOptions &&
+                <div className="floating-action-button" onClick={() => {
+                    if (showComponent) {
+                        setShowComponent(false);
+                    } else {
+                        setShowComponent(true);
+                    }
+                }}>
+                    {
+                        showComponent
+                            ? <ArrowLeft />
+                            : <ArrowRight />
+                    }
+                </div>
+            }
+        </div>
+    </PageFrame>
+
+
 
 }
 

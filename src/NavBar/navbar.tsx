@@ -1,16 +1,19 @@
+// React
+import { useState } from "react";
+
 // Vieolo UI
 import Card from "../Card"
 import Flex from "../Flex"
 import IconButton from "../IconButton"
+import Typography from "../Typography";
+import Input from "../Input";
 
 // Material UI
 import MenuIcon from '@mui/icons-material/MenuRounded';
+import CloseIcon from '@mui/icons-material/CloseRounded';
 
 // Types
 import { ElevationType } from "../types"
-import Typography from "../Typography";
-import Input from "../Input";
-import { useState } from "react";
 
 export default function Navbar(props: {
     elevation?: ElevationType,
@@ -21,7 +24,8 @@ export default function Navbar(props: {
     onDrawerButtonClicked?: () => void,
     onSearchSubmit?: (query: string) => void,
     rightComponents?: React.ReactNode[],
-    searchPlaceholder?: string
+    searchPlaceholder?: string,
+    drawerState?: 'open' | 'close'
 }) {
 
     let [query, setQuery] = useState<string>("");
@@ -35,7 +39,7 @@ export default function Navbar(props: {
                         {
                             props.drawerButton ||
                             <IconButton
-                                icon={<MenuIcon />}
+                                icon={props.drawerState === 'open' ? <CloseIcon /> : <MenuIcon />}
                                 color='primary'
                                 emphasis="none"
                                 onClick={() => {
