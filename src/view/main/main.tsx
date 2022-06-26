@@ -49,6 +49,7 @@ import { TableInteractiveCreator, tableInteractiveOptions } from '../table/table
 import { ClickableCardCreator, clickableCardOptions } from '../card/clickable_card.view';
 import { ModalCreator, modalOptions } from '../dialog/modal.view';
 import { DonutChartCreator, donutChartOptions } from '../charts/donut_chart.view';
+import { SubNavbarRowCreator, subNavbarRowOptions } from '../layout/page/sub_navbar_row.view';
 import Select from '../../Select';
 import SwitchSet from '../../SwitchSet';
 import PageFrame from '../../PageFrame';
@@ -131,6 +132,8 @@ export default function MainPage(props: {}): JSX.Element {
         "Grid": { title: "Grid", data: gridOptions(), creator: GridCreator, group: "Layout/Grid" },
         "Grid Two": { title: "Grid Two", data: gridTwoOptions(), creator: GridTwoCreator, group: "Layout/Grid" },
         "Grid Three": { title: "Grid Three", data: gridThreeOptions(), creator: GridThreeCreator, group: "Layout/Grid" },
+        
+        "SubNavbar Row": { title: "SubNavbar Row", data: subNavbarRowOptions(), creator: SubNavbarRowCreator, group: "Layout/Page" },
 
         "List": { title: "List", data: listOptions(), creator: ListCreator, group: "List" },
 
