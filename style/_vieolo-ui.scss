@@ -2648,3 +2648,11 @@ body {
 	height: $subnavbar-height;
 	background-color: $content-background-color;
 }
+
+
+.vieolo-page {
+	
+	&__content {	
+		padding: $base-unit;
+	}
+}
