@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.22.4 (2022-06-27)
+- Fixed the back functionality of `SubNavbarRow`
+
 ## 0.22.3 (2022-06-27)
 - Added `Navbar` Component
 - Added `NavDrawer` Component
