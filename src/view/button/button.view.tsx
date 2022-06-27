@@ -26,10 +26,7 @@ export function buttonOptions(): ViewData {
                 options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'] as ColorOptionType[],
                 default: 'primary'
             },
-            emphasis: {
-                options: ['high', 'medium', 'low', 'none'],
-                default: 'high'
-            },
+            emphasis: 'emphasis',
             height: {
                 options: ['large', 'medium', 'small'],
                 default: 'medium'
