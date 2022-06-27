@@ -30,7 +30,6 @@
     "@cypress/instrument-cra": "^1.4.0",
     "@cypress/react": "^5.12.5",
     "@cypress/webpack-dev-server": "^1.8.1",
-    "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "sass": "^1.43.4",
     "typescript": "^4.3.2",
@@ -49,7 +48,8 @@
     "@vieolo/regex-library": "github:Vieolo/regex-library-js#0.1.3",
     "@vieolo/validation-js": "github:Vieolo/validation-js#0.1.2",
     "d3": "^7.2.1",
-    "pdfjs-dist": "^2.9.359"
+    "pdfjs-dist": "^2.9.359",
+    "react-router-dom": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
