@@ -32,9 +32,9 @@ export function getEmphasisClasses(emphasis: EmphasisType, color: ColorOptionTyp
             c += ` ripple ripple--${color}-normal`
         }
 	
-    } else if (emphasis === 'low') {
+    } else if (emphasis === 'low' || emphasis === 'low-normal') {
 	
-        c = ` background-color--content-background border--${color}-light ${getTextColorClass()} ${getBorderClass()} border--solid`;
+        c = ` background-color--content-background border--${color}-${emphasis === 'low' ? 'light' : 'normal'} ${getTextColorClass()} ${getBorderClass()} border--solid`;
         
         if (options.hoverable) {
             c += ` hover--${color}-light`
@@ -47,7 +47,7 @@ export function getEmphasisClasses(emphasis: EmphasisType, color: ColorOptionTyp
             c += ` ripple ripple--${color}-light`;
         }
         if (options.hoverable) {
-            c += ` hover-border--${color}-light`;
+            c += ` hover-border--${color}-${emphasis === 'none' ? 'light' : 'normal'}`;
         }
 	
     }
