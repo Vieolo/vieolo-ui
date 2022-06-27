@@ -1,5 +1,5 @@
 export type ColorOptionType = 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' | 'alert' | 'accessory-blue' | 'accessory-orange' | 'accessory-green';
-export type EmphasisType = 'high' | 'medium' | 'low' | 'none';
+export type EmphasisType = 'high' | 'medium' | 'low' | 'low-normal' | 'none' | 'none-normal';
 export type BorderRadiusType = 'full' | 'normal' | 'half' | 'none' | 'default';
 export type FontWeightType = 'light' | 'normal' | 'bold' | 'extra-bold';
 export type GridGapType = 'none' | 'half' | 'one' | 'two';
