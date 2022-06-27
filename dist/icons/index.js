@@ -1,2 +1,2 @@
-import { ArrowDown, ArrowUp, CloseIcon, ShareIcon } from "./icons";
-export { ArrowDown, ArrowUp, CloseIcon, ShareIcon };
+import { ArrowDown, ArrowUp, CloseIcon, ShareIcon, ArrowBackIcon } from "./icons";
+export { ArrowDown, ArrowUp, CloseIcon, ShareIcon, ArrowBackIcon };

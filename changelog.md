@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.22.3 (2022-06-27)
+- Added `Navbar` Component
+- Added `NavDrawer` Component
+- Added `SubNavbarRow` Component
+- Added `Page` Component
+- Added `PageFrame` Component
+- Added `VieoloApp` Component
+- Added `low-normal` and `none-normal` to emphasis types
+
 ## 0.22.2 (2022-06-26)
 - Added `FormSection` ([#17](https://github.com/Vieolo/vieolo-ui/issues/17))
 - Added `DonutChart` ([#20](https://github.com/Vieolo/vieolo-ui/issues/20))

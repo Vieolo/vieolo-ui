@@ -33,7 +33,11 @@ import InputSet from './InputSet';
 import ItemRow from './ItemRow';
 import List from './List';
 import Modal from './Modal';
+import Navbar from './NavBar';
+import NavDrawer from './NavDrawer';
 import PDFViewer from './PDFViewer';
+import Page from './Page';
+import PageFrame from './PageFrame';
 import PeriodSelector , { PeriodOptions } from './PeriodSelector';
 import RadioGroup from './RadioGroup';
 import RadioGroupSet from './RadioGroupSet';
@@ -41,6 +45,7 @@ import Select from './Select';
 import SelectSet from './SelectSet';
 import Spacer from './Spacer';
 import Spinner from './Spinner';
+import SubNavbarRow from './SubNavbarRow';
 import Switch from './Switch';
 import SwitchSet from './SwitchSet';
 import TabSwitch from './TabSwitch';
@@ -51,6 +56,7 @@ import TextareaSet from './TextareaSet';
 import TimeInput from './TimeInput';
 import TitlePeriodCard from './TitlePeriodCard';
 import Typography from './Typography';
+import VieoloApp from './VieoloApp';
 import {
 	ConfirmationDialogMainButton as ConfirmationDialogMainButtonTemp,
 } from './ConfirmationDialog';
@@ -80,6 +86,13 @@ import {
 import {
 	ListItem as ListItemTemp,
 } from './List';
+import {
+	DrawerItem as DrawerItemTemp,
+} from './NavDrawer';
+import {
+	PageFrameDrawerOptions as PageFrameDrawerOptionsTemp,
+	PageFrameNavbarOptions as PageFrameNavbarOptionsTemp,
+} from './PageFrame';
 import {
 	RadioButtonType as RadioButtonTypeTemp,
 } from './RadioGroup';
@@ -152,7 +165,11 @@ export {
 	ItemRow,
 	List,
 	Modal,
+	Navbar,
+	NavDrawer,
 	PDFViewer,
+	Page,
+	PageFrame,
 	PeriodSelector,
 	PeriodOptions,
 	RadioGroup,
@@ -161,6 +178,7 @@ export {
 	SelectSet,
 	Spacer,
 	Spinner,
+	SubNavbarRow,
 	Switch,
 	SwitchSet,
 	TabSwitch,
@@ -171,6 +189,7 @@ export {
 	TimeInput,
 	TitlePeriodCard,
 	Typography,
+	VieoloApp,
 }
 
 
@@ -190,6 +209,9 @@ export type GanttChartRowType = GanttChartRowTypeTemp;
 export type GanttChartColumnTitle = GanttChartColumnTitleTemp;
 export type GanttChartColumnGroup = GanttChartColumnGroupTemp;
 export type ListItem = ListItemTemp;
+export type DrawerItem = DrawerItemTemp;
+export type PageFrameDrawerOptions = PageFrameDrawerOptionsTemp;
+export type PageFrameNavbarOptions = PageFrameNavbarOptionsTemp;
 export type RadioButtonType = RadioButtonTypeTemp;
 export type SelectItemType = SelectItemTypeTemp;
 export type SpacerSizeType = SpacerSizeTypeTemp;
