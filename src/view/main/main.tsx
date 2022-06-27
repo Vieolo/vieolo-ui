@@ -49,13 +49,16 @@ import { TableInteractiveCreator, tableInteractiveOptions } from '../table/table
 import { ClickableCardCreator, clickableCardOptions } from '../card/clickable_card.view';
 import { ModalCreator, modalOptions } from '../dialog/modal.view';
 import { DonutChartCreator, donutChartOptions } from '../charts/donut_chart.view';
+import { SubNavbarRowCreator, subNavbarRowOptions } from '../layout/page/sub_navbar_row.view';
 import Select from '../../Select';
 import SwitchSet from '../../SwitchSet';
-
+import PageFrame from '../../PageFrame';
 
 // Charts
 import { barChartOptions, BarChartCreator } from '../charts/bar_chart.view';
 import List from '../../List';
+import Typography from '../../Typography';
+import Spacer from '../../Spacer';
 
 
 type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDefault" | "borderRadius" | 'fontWeightOptional' | 'emphasis' | 'typographyOptions' | {
@@ -82,9 +85,9 @@ type ViewItemData = {
 export default function MainPage(props: {}): JSX.Element {
 
     let [selectedTitle, setSelectedTitle] = useState<string>("");
-    let [selectedDataOptions, setSelectedDataOptions] = useState<ViewData>(null as ViewData);
+    let [selectedDataOptions, setSelectedDataOptions] = useState<ViewData | undefined>(undefined);
     let [showComponent, setShowComponent] = useState<boolean>(false);
-    let [finalState, setFinalState] = useState<{ [key: string]: any }>(null);
+    let [finalState, setFinalState] = useState<{ [key: string]: any } | undefined>(undefined);
     let history = useHistory();
 
     let items: { [key: string]: ViewItemData } = {
@@ -120,7 +123,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator, group: "Form" },
         "Radio Group Set": { title: "Radio Group Set", data: radioGroupSetOptions(), creator: RadioGroupSetCreator, group: "Form" },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
-        "Form Section": { title: "Form Section", data: formSectionOptions(), creator: FormSectionCreator, group: "Form"},
+        "Form Section": { title: "Form Section", data: formSectionOptions(), creator: FormSectionCreator, group: "Form" },
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator, group: "Layout" },
 
         "Divider": { title: "Divider", data: dividerOptions(), creator: DividerCreator, group: "Layout/Auxiliary" },
@@ -129,6 +132,8 @@ export default function MainPage(props: {}): JSX.Element {
         "Grid": { title: "Grid", data: gridOptions(), creator: GridCreator, group: "Layout/Grid" },
         "Grid Two": { title: "Grid Two", data: gridTwoOptions(), creator: GridTwoCreator, group: "Layout/Grid" },
         "Grid Three": { title: "Grid Three", data: gridThreeOptions(), creator: GridThreeCreator, group: "Layout/Grid" },
+        
+        "SubNavbar Row": { title: "SubNavbar Row", data: subNavbarRowOptions(), creator: SubNavbarRowCreator, group: "Layout/Page" },
 
         "List": { title: "List", data: listOptions(), creator: ListCreator, group: "List" },
 
@@ -219,157 +224,182 @@ export default function MainPage(props: {}): JSX.Element {
         setFinalState(finalState);
     }
 
-    return <div className={`main-page ${showComponent ? "main-page--content" : "main-page--no-content"}`}>
+    return <PageFrame
+        navbar={{
+            title: 'Vieolo UI',
+            logo: <img src='https://vieolo.com/static/logo-nav.svg' height={30} width={30} alt={"logo"} />
+        }}
+        drawer={{
+            topContent: <div className='padding--one'>
+                <Typography text='Vieolo UI' type='title-large' textAlign='center' />
+                <Spacer height='one' />
+                <Typography text='This is a reusable component package for React applications' />
+            </div>,
+            mainItems: [
+                { title: "Item One", icon: "+", href: "/" },
+                { title: "Item Two", icon: "X" },
+                { title: "Item Three" },
+                { title: "Item Four", icon: "€", selected: true },
+            ],
+            bottomItems: [
+                { title: "Bottom 1" },
+                { title: "Bottom 2" },
+            ]
+        }}
+    >
+        <div className={`main-page ${showComponent ? "main-page--content" : "main-page--no-content"}`}>
+            <div className="component-list">
 
-        <div className="component-list">
-
-            <List
-                height={Device.isTouchOnlyDevice ? '80vh' : 'calc(100vh - 20px)'}
-                itemStyle={{
-                    height: 'medium'
-                }}
-                collapsedGroupStyle={{
-                    height: 'medium',
-                    emphasis: 'none',
-                    color: 'secondary'
-                }}
-                expandedGroupStyle={{
-                    height: 'small',
-                    emphasis: 'low',
-                    color: 'primary'
-                }}
-                items={Object.values(items).map((i, index) => {
-                    return {
-                        id: index.toString(),
-                        title: i.title,
-                        selected: selectedTitle === i.title,
-                        group: i.group,
-                        onClick: () => {
-                            handleSelectComponent(i);
-                            history.replace({ pathname: window.location.pathname, search: `tab=${i.title.replace(/ /g, "__")}` });
-                        },
-                    }
-                })}
-            />
-        </div>
-
-        <div className="state-list">
-            {
-                selectedDataOptions != null && selectedDataOptions.variables &&
-                Object.keys(selectedDataOptions.variables).map(k => {
-
-                    let tempVariable = selectedDataOptions.variables[k];
-                    let variable: ViewDataVariable;
-
-                    if (tempVariable === 'boolean') {
-                        variable = {
-                            options: [false, true],
-                            default: false
+                <List
+                    height={Device.isTouchOnlyDevice ? '80vh' : 'calc(100vh - 70px)'}
+                    itemStyle={{
+                        height: 'medium'
+                    }}
+                    collapsedGroupStyle={{
+                        height: 'medium',
+                        emphasis: 'none',
+                        color: 'secondary'
+                    }}
+                    expandedGroupStyle={{
+                        height: 'small',
+                        emphasis: 'low',
+                        color: 'primary'
+                    }}
+                    items={Object.values(items).map((i, index) => {
+                        return {
+                            id: index.toString(),
+                            title: i.title,
+                            selected: selectedTitle === i.title,
+                            group: i.group,
+                            onClick: () => {
+                                handleSelectComponent(i);
+                                history.replace({ pathname: window.location.pathname, search: `tab=${i.title.replace(/ /g, "__")}` });
+                            },
                         }
-                    } else if (tempVariable === "booleanTrueDefault") {
-                        variable = {
-                            options: [false, true],
-                            default: true
-                        }
-                    } else if (tempVariable === "borderRadius") {
-                        variable = {
-                            options: ['default', 'full', 'normal', 'half', 'none'],
-                            default: 'default'
-                        }
-                    } else if (tempVariable === "typographyOptions") {
-                        variable = {
-                            options: ['title-large', 'title-medium', 'title-small', 'paragraph-large', 'paragraph-medium', 'paragraph-small', 'caption-large', 'caption-medium', 'caption-small'],
-                            default: 'paragraph-medium'
-                        }
-                    } else if (tempVariable === 'colors') {
-                        variable = {
-                            options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
-                            default: 'primary'
-                        }
-                    } else if (tempVariable === 'colorsOptional') {
-                        variable = {
-                            options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
-                            default: ''
-                        }
-                    } else if (tempVariable === 'fontWeightOptional') {
-                        variable = {
-                            options: ['light', 'normal', 'bold', 'extra-bold'],
-                            default: ''
-                        }
-                    } else if (tempVariable === 'emphasis') {
-                        variable = {
-                            options: ['high', 'medium', 'low', 'none'],
-                            default: 'none'
-                        }
-                    } else {
-                        variable = tempVariable;
-                    }
+                    })}
+                />
+            </div>
 
-                    if (typeof variable.options[0] === 'string') {
-                        return <div key={k} className="margin-bottom--one">
-                            <Select
-                                error={false}
-                                items={variable.options.map(o => {
-                                    return {
-                                        title: o,
-                                        value: o
-                                    }
-                                })}
-                                onSelect={v => {
-                                    let temp = { ...finalState }
-                                    if (typeof variable !== 'string') {
-                                        temp[k] = variable.type && variable.type === 'number' ? +v[0] : v[0];
-                                    }
-                                    setFinalState(temp);
-                                }}
-                                selectedItems={[finalState[k].toString()]}
-                                title={camelCaseToWords(k)}
-                            />
-                        </div>
-                    } else {
-                        return <div key={k} className="margin-bottom--one">
-                            <SwitchSet
-                                on={finalState[k]}
-                                onChange={v => {
-                                    let temp = { ...finalState }
-                                    temp[k] = v;
-                                    setFinalState(temp);
-                                }}
-                                switchID={`${k}_switch`}
-                                title={camelCaseToWords(k)}
-                            />
-                        </div>
-                    }
-                })
-            }
-        </div>
-
-        <main className="component-state-display">
-            {
-                (finalState !== null && content !== null) &&
-
-                <div>{content}</div>
-
-            }
-        </main>
-
-        {
-            selectedDataOptions &&
-            <div className="floating-action-button" onClick={() => {
-                if (showComponent) {
-                    setShowComponent(false);
-                } else {
-                    setShowComponent(true);
-                }
-            }}>
+            <div className="state-list">
                 {
-                    showComponent
-                        ? <ArrowLeft />
-                        : <ArrowRight />
+                    selectedDataOptions !== undefined && selectedDataOptions.variables &&
+                    Object.keys(selectedDataOptions.variables).map(k => {
+
+                        let tempVariable = selectedDataOptions!.variables[k];
+                        let variable: ViewDataVariable;
+
+                        if (tempVariable === 'boolean') {
+                            variable = {
+                                options: [false, true],
+                                default: false
+                            }
+                        } else if (tempVariable === "booleanTrueDefault") {
+                            variable = {
+                                options: [false, true],
+                                default: true
+                            }
+                        } else if (tempVariable === "borderRadius") {
+                            variable = {
+                                options: ['default', 'full', 'normal', 'half', 'none'],
+                                default: 'default'
+                            }
+                        } else if (tempVariable === "typographyOptions") {
+                            variable = {
+                                options: ['title-large', 'title-medium', 'title-small', 'paragraph-large', 'paragraph-medium', 'paragraph-small', 'caption-large', 'caption-medium', 'caption-small'],
+                                default: 'paragraph-medium'
+                            }
+                        } else if (tempVariable === 'colors') {
+                            variable = {
+                                options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
+                                default: 'primary'
+                            }
+                        } else if (tempVariable === 'colorsOptional') {
+                            variable = {
+                                options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
+                                default: ''
+                            }
+                        } else if (tempVariable === 'fontWeightOptional') {
+                            variable = {
+                                options: ['light', 'normal', 'bold', 'extra-bold'],
+                                default: ''
+                            }
+                        } else if (tempVariable === 'emphasis') {
+                            variable = {
+                                options: ['high', 'medium', 'low', 'none'],
+                                default: 'none'
+                            }
+                        } else {
+                            variable = tempVariable;
+                        }
+
+                        if (typeof variable.options[0] === 'string') {
+                            return <div key={k} className="margin-bottom--one">
+                                <Select
+                                    error={false}
+                                    items={variable.options.map(o => {
+                                        return {
+                                            title: o,
+                                            value: o
+                                        }
+                                    })}
+                                    onSelect={v => {
+                                        let temp = { ...finalState }
+                                        if (typeof variable !== 'string') {
+                                            temp[k] = variable.type && variable.type === 'number' ? +v[0] : v[0];
+                                        }
+                                        setFinalState(temp);
+                                    }}
+                                    selectedItems={[finalState![k].toString()]}
+                                    title={camelCaseToWords(k)}
+                                />
+                            </div>
+                        } else {
+                            return <div key={k} className="margin-bottom--one">
+                                <SwitchSet
+                                    on={finalState![k]}
+                                    onChange={v => {
+                                        let temp = { ...finalState }
+                                        temp[k] = v;
+                                        setFinalState(temp);
+                                    }}
+                                    switchID={`${k}_switch`}
+                                    title={camelCaseToWords(k)}
+                                />
+                            </div>
+                        }
+                    })
                 }
             </div>
-        }
-    </div>
+
+            <main className="component-state-display">
+                {
+                    (finalState !== null && content !== null) &&
+
+                    <div>{content}</div>
+
+                }
+            </main>
+
+            {
+                selectedDataOptions &&
+                <div className="floating-action-button" onClick={() => {
+                    if (showComponent) {
+                        setShowComponent(false);
+                    } else {
+                        setShowComponent(true);
+                    }
+                }}>
+                    {
+                        showComponent
+                            ? <ArrowLeft />
+                            : <ArrowRight />
+                    }
+                </div>
+            }
+        </div>
+    </PageFrame>
+
+
 
 }
 
