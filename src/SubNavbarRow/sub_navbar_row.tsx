@@ -1,3 +1,6 @@
+// React, Router
+import { useHistory } from 'react-router-dom';
+
 // Vieolo UI
 import Flex from "../Flex";
 import Grid from "../Grid";
@@ -21,10 +24,13 @@ export default function SubNavbarRow(props: {
     actions?: any[],
     center?: React.ReactNode,
 }) {
+
+    let history = useHistory();
+    
     let midCol = props.midColumnSize || 4;
     let icon = props.icon || <ArrowBackIcon />
     let backButtonText = props.backButtonText || 'Go Back';
-    let onBack = props.onBack || window.history.back;
+    let onBack = props.onBack || history.goBack;
 
     return <div className="vieolo-sub-navbar-row">
         <GridContainer className="padding-horizontal--one height--pc-100">
