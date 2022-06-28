@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.22.5 (2022-06-28)
+- Updated dependencies
+
 ## 0.22.4 (2022-06-27)
 - Fixed the back functionality of `SubNavbarRow`
 
