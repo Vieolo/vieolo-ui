@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.22.6 (2022-07-02)
+- Fixed the z-index of `Navbar`
+
 ## 0.22.5 (2022-06-28)
 - Updated dependencies
 
