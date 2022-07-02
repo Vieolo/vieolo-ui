@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.22.7 (2022-07-03)
+- Fixed the propagation of the `ExpandableCard`
+
 ## 0.22.6 (2022-07-02)
 - Fixed the z-index of `Navbar`
 
