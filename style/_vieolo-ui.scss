@@ -22,7 +22,7 @@ body {
 	cursor: pointer;
 	background-position: center;
 	transition: background 0.8s;
-	font-size: 16px;
+	font-size: 12px;
 	min-width: 80px;
 	font-weight: $font-weight-bold;
 
@@ -2564,6 +2564,7 @@ body {
 .vieolo-navbar {
 	height: $navbar-height;
 	position: fixed;
+	z-index: 10;
 	top: 0;
 	left: 0;
 	right: 0;
