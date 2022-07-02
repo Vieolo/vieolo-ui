@@ -64,7 +64,8 @@ export default function ExpandableCard(props: {
                     borderRadius={cardStyle.borderRadius || 'default'}
                     emphasis={'none'}
                     ariaLabel={`${props.ariaLabel || props.title} expand button`}
-                    onClick={() => {
+                    onClick={e => {
+                        e.stopPropagation()
                         let newState: 'collapsed' | 'expanded' = state === 'expanded' ? 'collapsed' : 'expanded';
 
                         if (props.state && props.onStateChange) {
