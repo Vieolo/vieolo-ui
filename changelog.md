@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.22.8 (2022-07-03)
+- Added optional property to `TimeInput`
+
 ## 0.22.7 (2022-07-03)
 - Fixed the propagation of the `ExpandableCard`
 
