@@ -17,7 +17,8 @@ export function timeInputOptions(): ViewData {
 
         } as Partial<TimeInputPropsType>,
         variables: {
-            disabled: 'boolean'
+            disabled: 'boolean',
+            optional: 'boolean'
         }
     }
 }
@@ -39,13 +40,14 @@ export function TimeInputCreator(props: {p: TimeInputPropsType}) {
             value={timeText}
             label="Time"
             disabled={props.p.disabled}
+            optional={props.p.optional}
             onChange={(h, m, t) => {
                 if (h !== null && m !== null) {
                     setHour(h);
                     setMinute(m);
                 }
 
-                setTimeText(t);
+                setTimeText(t || '');
             }}
         />
 

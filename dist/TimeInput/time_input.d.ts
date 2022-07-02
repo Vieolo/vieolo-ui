@@ -6,5 +6,6 @@ export default function TimeInput(props: {
     disabled?: boolean;
     tip?: string;
     ariaLabel?: string;
+    optional?: boolean;
 }): JSX.Element;
 export declare function parseInputTimeToCustomDate(input: string): [number | null, number | null];

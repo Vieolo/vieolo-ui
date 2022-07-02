@@ -12,7 +12,8 @@ export default function TimeInput(props: {
     label?: string,
     disabled?: boolean,
     tip?: string,
-    ariaLabel?: string
+    ariaLabel?: string,
+    optional?: boolean
 }): JSX.Element {
 
     return <InputSet
@@ -20,7 +21,7 @@ export default function TimeInput(props: {
         ariaLabel={props.ariaLabel || props.label}
         disabled={props.disabled}
         tip={props.tip}
-        error={parseInputTimeToCustomDate(props.value)[0] === null}
+        error={(props.optional && !props.value.trim()) ? false : parseInputTimeToCustomDate(props.value)[0] === null}
         onChange={v => {
             // Preventing the user to type more than 5 characters
             if (v.length > 5) return;
