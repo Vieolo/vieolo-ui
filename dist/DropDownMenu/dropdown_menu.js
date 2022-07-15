@@ -157,7 +157,10 @@ function DropDownMenuItem(props) {
     let className = ` vieolo-dropdown-menu__dropdown-item color--${props.color || 'primary'}-normal`;
     if (props.onKeyboardFocus)
         className += ` vieolo-dropdown-menu__dropdown-item--keyboard-focus`;
-    return _jsxs("div", Object.assign({ className: className, onClick: () => { props.onClick(props.value); }, "aria-label": `${props.title} select item` }, { children: [props.icon &&
+    return _jsxs("div", Object.assign({ className: className, onClick: e => {
+            e.stopPropagation();
+            props.onClick(props.value);
+        }, "aria-label": `${props.title} select item` }, { children: [props.icon &&
                 props.icon,
             _jsx(Typography, { type: 'paragraph-small', text: props.title, fontWeight: 'bold' }, void 0)] }), void 0);
 }

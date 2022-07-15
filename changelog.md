@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.22.9 (2022-07-15)
+- Fixed the propagation of the `DropDownMenu` item
+
 ## 0.22.8 (2022-07-03)
 - Added optional property to `TimeInput`
 
