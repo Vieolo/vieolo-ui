@@ -4,6 +4,7 @@ import { GridGapType } from '../types/types';
 export type FlexJustifyContent = "start" | "end" | "space-around" | "space-between" | "center";
 export type FlexDirection = "row" | "row-reverse" | "column" | "column-reverse";
 export type FlexAlignItems = "start" | "end" | "center";
+export type FlexWrap = "wrap" | "nowrap" | "wrap-reverse";
 
 export default function Flex(props: {
     justifyContent?: FlexJustifyContent,
@@ -12,6 +13,7 @@ export default function Flex(props: {
     rowGap?: GridGapType,
     columnGap?: GridGapType,
     className?: string,
+    wrap?: FlexWrap,
     children?: React.ReactNode
 }) {
 
@@ -23,6 +25,7 @@ export default function Flex(props: {
     if (props.rowGap) c += ` row-gap--${props.rowGap}`;
     if (props.columnGap) c += ` column-gap--${props.columnGap}`;
     if (props.className) c += ` ${props.className}`
+    if (props.wrap) c += ` flex--wrap--${props.wrap}`
 
     return <div className={c}>
         {props.children}

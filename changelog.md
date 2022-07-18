@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.22.10 (2022-07-18)
+- Added wrap to the `Flex`
+
 ## 0.22.9 (2022-07-15)
 - Fixed the propagation of the `DropDownMenu` item
 
