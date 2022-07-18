@@ -36,4 +36,5 @@ export default function FormDialog(props: {
     inline?: boolean;
     ariaLabel?: string;
     className?: string;
+    isLoading?: boolean;
 }): JSX.Element;

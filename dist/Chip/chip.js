@@ -4,7 +4,7 @@ import { getEmphasisClasses } from '../utility/style_utility';
 import IconButton from '../IconButton';
 export default function Chip(props) {
     let color = props.color || 'primary';
-    let c = `vieolo-chip vieolo-chip--border-radius-${props.borderRadius || 'default'}`;
+    let c = `vieolo-chip vieolo-chip--border-radius-${props.borderRadius || 'default'} vieolo-chip--${props.size || "medium"}`;
     let e = props.emphasis || 'low';
     if (props.disabled)
         c += " disabled";
