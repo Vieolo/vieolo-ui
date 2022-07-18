@@ -31,26 +31,15 @@ export function formDialogOptions(): ViewData {
                 default: 10,
                 type: "number"
             },
-            saveButtonDisabled: {
-                options: [false, true],
-                default: false,
-            },
+            saveButtonDisabled: 'boolean',
             headerRightComponent: {
                 options: ['close', "Custom Component"],
                 default: "close"
             },
-            removeCancelButton: {
-                options: [false, true],
-                default: false,
-            },
-            removeSaveButton: {
-                options: [false, true],
-                default: false,
-            },
-            withExtraButtons: {
-                options: [false, true],
-                default: false,
-            }
+            removeCancelButton: 'boolean',
+            removeSaveButton: 'boolean',
+            withExtraButtons: 'boolean',
+            isLoading: 'boolean'
         }
     }
 }
@@ -69,13 +58,14 @@ export function FormDialogCreator(props: { p: FormDialogPropsType }) {
             extraButtons={(props.p as any).withExtraButtons ? [
                 { color: 'alert', text: 'Extra 1', onClick: () => alert("You clicked on extra 1") },
                 { color: 'secondary', text: 'Extra 2', onClick: () => alert("You clicked on extra 2") },
-            ] : null}
+            ] : undefined}
             headerRightComponent={props.p.headerRightComponent === "close" ? "close" : <IconButton
                 icon={<SampleIcon />}
                 onClick={() => { }}
                 color={'primary'}
                 size={"small"}
             />}
+            isLoading={props.p.isLoading}
             padding={props.p.padding}
             removeCancelButton={props.p.removeCancelButton}
             removeSaveButton={props.p.removeSaveButton}
