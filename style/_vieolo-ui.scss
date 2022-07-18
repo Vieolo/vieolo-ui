@@ -690,6 +690,24 @@ body {
 	display: inline-flex;
 	align-items: center;
 	box-sizing: border-box;
+	$self: &;
+
+	&--small {
+		height: $base-unit-two;
+
+		#{$self}__content {
+			height: $base-unit-two;
+			padding: 2px $base-unit-half 2px 0;
+
+			p {
+				font-size: 9px;
+			}
+
+			svg {
+				height: calc($base-unit * 1.5);
+			}			
+		}
+	}
 
 	&__content {
 		height: $row-height-small;

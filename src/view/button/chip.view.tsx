@@ -28,6 +28,10 @@ export function chipOptions(): ViewData {
                 default: 'low',
                 options: ["low", "medium"]
             },
+            size: {
+                default: 'medium',
+                options: ["small", "medium"]
+            },
             borderRadius: 'borderRadius',
             disabled: 'boolean',
             selectable: 'booleanTrueDefault',
@@ -53,6 +57,7 @@ export function ChipCreator(props: {p: ChipPropsType}) {
         onChipSelect={(props.p as any).selectable ? () => {} : undefined}
         emphasis={props.p.emphasis}
         borderRadius={props.p.borderRadius}
+        size={props.p.size}
         buttonComponent={
             !(props.p as any).withDropDown
                 ? undefined

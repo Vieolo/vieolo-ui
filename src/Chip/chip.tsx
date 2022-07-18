@@ -27,11 +27,12 @@ export default function Chip(props: {
 	buttonComponent?: React.ReactNode,
 	emphasis?: 'medium' | 'low',
 	borderRadius?: BorderRadiusType
-	id?: string
+	id?: string,
+	size?: "medium" | 'small'
 }) {
 
 	let color = props.color || 'primary';
-	let c: string = `vieolo-chip vieolo-chip--border-radius-${props.borderRadius || 'default'}`;
+	let c: string = `vieolo-chip vieolo-chip--border-radius-${props.borderRadius || 'default'} vieolo-chip--${props.size || "medium"}`;
 	let e = props.emphasis || 'low';
 
 	if (props.disabled) c += " disabled";
