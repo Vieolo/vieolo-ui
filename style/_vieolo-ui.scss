@@ -697,7 +697,7 @@ body {
 
 		#{$self}__content {
 			height: $base-unit-two;
-			padding: 2px $base-unit-half 2px 0;
+			padding: 2px $base-unit-half;
 
 			p {
 				font-size: 9px;
@@ -705,7 +705,8 @@ body {
 
 			svg {
 				height: calc($base-unit * 1.5);
-			}			
+				width: calc($base-unit * 1.5);
+			}						
 		}
 	}
 
