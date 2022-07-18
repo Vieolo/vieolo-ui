@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.22.11 (2022-07-18)
+- Added height option to `Chip` ([#178](https://github.com/Vieolo/vieolo-ui/issues/178))
+- Added loading state to `FormDialog` ([#203](https://github.com/Vieolo/vieolo-ui/issues/203))
+
 ## 0.22.10 (2022-07-18)
 - Added wrap to the `Flex`
 

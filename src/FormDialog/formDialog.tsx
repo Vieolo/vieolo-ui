@@ -48,7 +48,8 @@ export default function FormDialog(props: {
     /** If true, will not display the dialog as a modal */
     inline?: boolean,
     ariaLabel?: string,
-    className?: string
+    className?: string,
+    isLoading?: boolean
 }) {
 
     let dialog = <div className="vieolo-form-dialog" aria-label={props.ariaLabel}>
@@ -58,7 +59,9 @@ export default function FormDialog(props: {
                 props.headerRightComponent === 'close' &&
                 <IconButton
                     icon={<CloseIcon />}
-                    onClick={props.onCancel}
+                    onClick={() => {
+                        if (!props.isLoading) props.onCancel()
+                    }}
                     color={'primary'}
                     size={'small'}
                     aria-label={props.ariaLabel ? `${props.ariaLabel} close button` : undefined}
@@ -88,6 +91,7 @@ export default function FormDialog(props: {
                             borderRadius={(props.cancelButtonConfig && props.cancelButtonConfig.borderRadius) ? props.cancelButtonConfig.borderRadius : undefined}
                             emphasis={(props.cancelButtonConfig && props.cancelButtonConfig.emphasis) ? props.cancelButtonConfig.emphasis : "none"}
                             ariaLabel={props.cancelButtonConfig ? props.cancelButtonConfig.ariaLabel : undefined}
+                            disabled={props.isLoading}
                         />
                         <div className="vieolo-form-dialog__footer__spacer--middle"></div>
                     </>
@@ -102,6 +106,7 @@ export default function FormDialog(props: {
                                 text={e.text}
                                 onClick={e.onClick}
                                 ariaLabel={e.ariaLabel}
+                                disabled={props.isLoading}
                             />
                             <div className="vieolo-form-dialog__footer__spacer--middle" key={`form_dialog_extra_button_spacer_${i}`}></div>
                         </Fragment>
@@ -117,7 +122,8 @@ export default function FormDialog(props: {
                         borderRadius={(props.saveButtonConfig && props.saveButtonConfig.borderRadius) ? props.saveButtonConfig.borderRadius : undefined}
                         emphasis={(props.saveButtonConfig && props.saveButtonConfig.emphasis) ? props.saveButtonConfig.emphasis : undefined}
                         ariaLabel={(props.saveButtonConfig || {ariaLabel: ""}).ariaLabel || props.ariaLabel ? `${props.ariaLabel} save button` : undefined}
-                        disabled={props.saveButtonDisabled}
+                        disabled={props.saveButtonDisabled || props.isLoading}
+                        isLoading={props.isLoading}
                     />
                 }
             </div>
@@ -127,7 +133,9 @@ export default function FormDialog(props: {
     if (props.inline) return dialog;
 
     return <Modal
-        onClose={props.onCancel}
+        onClose={() => {
+            if (!props.isLoading) props.onCancel()
+        }}
     >
         {dialog}
     </Modal>
