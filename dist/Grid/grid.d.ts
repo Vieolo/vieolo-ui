@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import { FlexDirection, FlexAlignItems, FlexJustifyContent } from '../Flex';
+import { FlexDirection, FlexAlignItems, FlexJustifyContent, FlexWrap } from '../Flex';
 import { GridGapType } from '../types/types';
 declare type GridSpanType = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 export default function Grid(props: {
@@ -20,6 +20,7 @@ export default function Grid(props: {
         alignItems?: FlexAlignItems;
         rowGap?: GridGapType;
         columnGap?: GridGapType;
+        wrap?: FlexWrap;
         className?: string;
     };
 }): JSX.Element;

@@ -70,6 +70,7 @@ import {
 	FlexJustifyContent as FlexJustifyContentTemp,
 	FlexDirection as FlexDirectionTemp,
 	FlexAlignItems as FlexAlignItemsTemp,
+	FlexWrap as FlexWrapTemp,
 } from './Flex';
 import {
 	FormDialogAccessoryButton as FormDialogAccessoryButtonTemp,
@@ -200,6 +201,7 @@ export type DropDownMenuItemType = DropDownMenuItemTypeTemp;
 export type FlexJustifyContent = FlexJustifyContentTemp;
 export type FlexDirection = FlexDirectionTemp;
 export type FlexAlignItems = FlexAlignItemsTemp;
+export type FlexWrap = FlexWrapTemp;
 export type FormDialogAccessoryButton = FormDialogAccessoryButtonTemp;
 export type FormDialogMainButton = FormDialogMainButtonTemp;
 export type GanttChartContextMenuItem = GanttChartContextMenuItemTemp;

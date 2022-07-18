@@ -13,5 +13,7 @@ export default function Flex(props) {
         c += ` column-gap--${props.columnGap}`;
     if (props.className)
         c += ` ${props.className}`;
+    if (props.wrap)
+        c += ` flex--wrap--${props.wrap}`;
     return _jsx("div", Object.assign({ className: c }, { children: props.children }), void 0);
 }
