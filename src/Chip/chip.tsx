@@ -25,13 +25,14 @@ export default function Chip(props: {
 	/** The custom button component which will appear on the right side of the Chip and has a higher priority than the default button */
 	color?: ColorOptionType,
 	buttonComponent?: React.ReactNode,
-	emphasis?: 'medium' | 'low',
+	emphasis?: 'medium' | 'low' | 'low-normal',
 	borderRadius?: BorderRadiusType
-	id?: string
+	id?: string,
+	size?: "medium" | 'small'
 }) {
 
 	let color = props.color || 'primary';
-	let c: string = `vieolo-chip vieolo-chip--border-radius-${props.borderRadius || 'default'}`;
+	let c: string = `vieolo-chip vieolo-chip--border-radius-${props.borderRadius || 'default'} vieolo-chip--${props.size || "medium"}`;
 	let e = props.emphasis || 'low';
 
 	if (props.disabled) c += " disabled";
