@@ -37,7 +37,10 @@ export default function BarChart(props: {
         // Creating the Tooltip
         function getTooltipHTML(values: { title: string, value: string }[]) {
             return values.map(v => {
-                return `<p class="typography-paragraph-small">${v.title}: ${v.value}</p>`
+                return `<div>
+                    <p class="typography-paragraph-small">${v.title}</p>
+                    <p class="typography-paragraph-small font-weight--bold">${v.value}</p>
+                </div>`
             }).join("");
         }
 
