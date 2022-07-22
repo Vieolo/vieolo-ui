@@ -2,10 +2,13 @@
 import React from 'react';
 
 // Component
-import BarChart from '../../BarChart';
+import BarChart, { BarChartData } from '../../BarChart';
 
 // Types
 import { ViewData } from '../main/main';
+
+// Data
+import { populationData, revenueData } from './chart_sample_data';
 
 type BarChartPropsType = React.ComponentProps<typeof BarChart>;
 
@@ -16,9 +19,17 @@ export function barChartOptions(): ViewData {
 
         } as Partial<BarChartPropsType>,
         variables: {
+            dataType: {
+                default: "Population",
+                options: ["Population", "Revenue"]
+            },
             direction: {
                 options: ['horizontal', 'vertical'],
                 default: 'vertical'
+            },
+            dataAxisMin: {
+                options: ['smallest value', "zero"],
+                default: "zero"
             },
             sorted: {
                 options: [false, true],
@@ -29,29 +40,18 @@ export function barChartOptions(): ViewData {
 }
 
 
-export function BarChartCreator(props: {p: BarChartPropsType}) {
+export function BarChartCreator(props: { p: BarChartPropsType }) {
+
+    let dataTypes: {[key: string]: BarChartData[]} = {
+        "Population": populationData,
+        "Revenue": revenueData
+    }
 
     return <BarChart
         height={400}
         direction={props.p.direction}
         sorted={props.p.sorted}
-        data={[
-            {
-                referenceAxis: 'Germany',
-                dataAxis: 80_000_000,
-                fillColor: "teal",
-                dataDisplay: "80,000,000.00"
-            },
-            {
-                referenceAxis: 'Estonia',
-                dataAxis: 1_300_000,
-                dataDisplay: "1,300,000.00"
-            },
-            {
-                referenceAxis: 'Denmark',
-                dataAxis: 5_000_000,
-                dataDisplay: "5,000,000.00"
-            }
-        ]}
+        data={dataTypes[(props.p as any).dataType]}
+        dataAxisMin={(props.p as any).dataAxisMin}
     />
 }

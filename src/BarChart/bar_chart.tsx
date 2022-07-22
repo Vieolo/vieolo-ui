@@ -5,7 +5,7 @@ import { useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
 
-type BarChartData = {
+export type BarChartData = {
     /** 
      * The X axis in a horizontal bar chart and Y axis in a vertical bar chart.
      * The axis that holds the reference metric
@@ -25,6 +25,7 @@ export default function BarChart(props: {
     sorted?: boolean,
     data: BarChartData[],
     dataAxisMin?: 'zero' | 'smallest value',
+    ignoreNegativeValues?: boolean,
     height: number,
     margin?: { top: number, right: number, bottom: number, left: number }
 }) {
@@ -33,13 +34,15 @@ export default function BarChart(props: {
 
     useEffect(() => {
 
+        // Creating the Tooltip
         function getTooltipHTML(values: { title: string, value: string }[]) {
             return values.map(v => {
-                return `<p class="typography-paragraph-medium">${v.title}: ${v.value}</p>`
+                return `<p class="typography-paragraph-small">${v.title}: ${v.value}</p>`
             }).join("");
         }
 
 
+        // Selecting the HTML div
         d3.select(ref.current).html("");
 
         let finalMargin = props.margin || { top: 30, right: 30, bottom: 70, left: 60 };
@@ -49,7 +52,7 @@ export default function BarChart(props: {
         let hoverColor = '#eec42d';
         let staticColor = '#437c90';
 
-        if (props.sorted) finalData = props.data.sort((a, b) => b.dataAxis - a.dataAxis);
+        if (props.sorted) finalData = [...props.data].sort((a, b) => b.dataAxis - a.dataAxis);
 
         const svg = d3.select(ref.current)
             .append("svg")
@@ -64,6 +67,8 @@ export default function BarChart(props: {
             .attr('class', 'vieolo-bar-chart__tooltip')
             .style('visibility', 'hidden');
 
+
+        // Creating the vertical chart
         if (props.direction === 'vertical') {
 
             // X axis
@@ -71,6 +76,7 @@ export default function BarChart(props: {
                 .range([0, width])
                 .domain(finalData.map(d => d.referenceAxis))
                 .padding(0.2);
+
             svg.append("g")
                 .attr("transform", `translate(0, ${height})`)
                 .call(d3.axisBottom(x))
@@ -78,10 +84,14 @@ export default function BarChart(props: {
                 .attr("transform", "translate(-10,0)rotate(-45)")
                 .style("text-anchor", "end");
 
+            let yBase = props.dataAxisMin === 'smallest value'
+                ? d3.min(finalData.map(d => d.dataAxis))!
+                : 0
+
             // Add Y axis
             const y = d3.scaleLinear()
-                .domain([props.dataAxisMin === 'smallest value' ? d3.min(finalData.map(d => d.dataAxis))! : 0, d3.max(finalData.map(d => d.dataAxis))!])
-                .range([height, 0]);
+                .domain([yBase, d3.max(finalData.map(d => d.dataAxis))!]
+                ).range([height, 0]);
             svg.append("g")
                 .call(d3.axisLeft(y));
 
@@ -114,8 +124,8 @@ export default function BarChart(props: {
             svg.selectAll("rect")
                 .transition()
                 .duration(500)
-                .attr("y", d => y((d as any).dataAxis)!)
-                .attr("height", d => height - y((d as any).dataAxis))
+                .attr("y", (d: any) => y((yBase < 0 && d.dataAxis < 0) ? 0 : d.dataAxis)!)
+                .attr("height", (d: any) => height - y((yBase < 0 && d.dataAxis < 0) ? yBase - d.dataAxis : d.dataAxis + yBase))
                 .delay((d, i) => { return i * 100 })
         } else {
             // Y axis
@@ -123,13 +133,17 @@ export default function BarChart(props: {
                 .range([0, height])
                 .domain(finalData.map(d => d.referenceAxis))
                 .padding(.1);
+
             svg.append("g")
                 .call(d3.axisLeft(y))
 
+            let xBase = props.dataAxisMin === 'smallest value' ? d3.min(finalData.map(d => d.dataAxis))! : 0;
+
             // Add X axis
             const x = d3.scaleLinear()
-                .domain([props.dataAxisMin === 'smallest value' ? d3.min(finalData.map(d => d.dataAxis))! : 0, d3.max(finalData.map(d => d.dataAxis))!])
+                .domain([xBase, d3.max(finalData.map(d => d.dataAxis))!])
                 .range([0, width]);
+
             svg.append("g")
                 .attr("transform", `translate(0, ${height})`)
                 .call(d3.axisBottom(x))
@@ -177,8 +191,8 @@ export default function BarChart(props: {
             svg.selectAll("rect")
                 .transition()
                 .duration(500)
-                .attr("x", d => x(0)!)
-                .attr("width", d => x((d as any).dataAxis))
+                .attr("x", (d: any) => x((xBase < 0 && d.dataAxis < 0) ? d.dataAxis : 0)!)
+                .attr("width", (d: any) => x((xBase < 0 && d.dataAxis < 0) ? xBase - d.dataAxis : d.dataAxis))
                 .delay((d, i) => { return i * 100 })
 
         }
