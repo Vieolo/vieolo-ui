@@ -1,19 +1,23 @@
-export let populationData = [ // internal
+import { BarChartData } from "../../BarChart"
+
+export let populationData: BarChartData[] = [ // internal
     {
         referenceAxis: 'Germany',
-        dataAxis: 80_000_000,
-        fillColor: "teal",
-        dataDisplay: "80,000,000.00"
+        dataAxis: 80_000_000,        
+        dataDisplay: "80,000,000.00",
+        fillColor: 'primary'
     },
     {
         referenceAxis: 'Estonia',
         dataAxis: 1_300_000,
-        dataDisplay: "1,300,000.00"
+        dataDisplay: "1,300,000.00",
+        fillColor: 'secondary'
     },
     {
         referenceAxis: 'Denmark',
         dataAxis: 5_000_000,
-        dataDisplay: "5,000,000.00"
+        dataDisplay: "5,000,000.00",
+        fillColor: 'alert'
     },
     {
         referenceAxis: 'Sweden',
@@ -32,17 +36,17 @@ export let populationData = [ // internal
     }
 ]
 
-export let revenueData = [ // internal
+export let revenueData: BarChartData[] = [ // internal
     {
         referenceAxis: '2010',
         dataAxis: 2.4,
-        fillColor: "teal",
         dataDisplay: "€2.4 M"
     },
     {
         referenceAxis: '2011',
         dataAxis: -0.14,
-        dataDisplay: "- €0.14 M"
+        dataDisplay: "- €0.14 M",
+        fillColor: 'error'
     },
     {
         referenceAxis: '2012',
@@ -67,6 +71,7 @@ export let revenueData = [ // internal
     {
         referenceAxis: '2016',
         dataAxis: -1.8,
-        dataDisplay: "- €1.8 M"
+        dataDisplay: "- €1.8 M",
+        fillColor: 'error'
     }
 ]

@@ -25,7 +25,7 @@ export function barChartOptions(): ViewData {
             },
             direction: {
                 options: ['horizontal', 'vertical'],
-                default: 'vertical'
+                default: 'horizontal'
             },
             dataAxisMin: {
                 options: ['smallest value', "zero"],
@@ -48,7 +48,7 @@ export function BarChartCreator(props: { p: BarChartPropsType }) {
     }
 
     return <BarChart
-        height={400}
+        height={200}
         direction={props.p.direction}
         sorted={props.p.sorted}
         data={dataTypes[(props.p as any).dataType]}

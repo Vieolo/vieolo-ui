@@ -4,6 +4,9 @@ import { useEffect, useRef } from 'react';
 // Intalled Packages
 import * as d3 from 'd3';
 
+// Types
+import { ColorOptionType } from '../types';
+
 
 export type BarChartData = {
     /** 
@@ -16,7 +19,7 @@ export type BarChartData = {
      * The axis that the bars are drawn against
      */
     dataAxis: number,
-    fillColor?: string,
+    fillColor?: ColorOptionType,
     dataDisplay: string
 }
 
@@ -52,8 +55,6 @@ export default function BarChart(props: {
         let width = (ref.current ? ref.current.offsetWidth : 200) - finalMargin.left - finalMargin.right;
         let height = props.height - finalMargin.top - finalMargin.bottom;
         let finalData = props.data;
-        let hoverColor = '#eec42d';
-        let staticColor = '#437c90';
 
         if (props.sorted) finalData = [...props.data].sort((a, b) => b.dataAxis - a.dataAxis);
 
@@ -105,7 +106,7 @@ export default function BarChart(props: {
                 .attr("y", d => y(0))
                 .attr("width", x.bandwidth())
                 .attr("height", d => height - y(0))
-                .attr("fill", finalData[0].fillColor || "#000000")
+                .attr("class", getFillClass)
                 .on('mouseover', function (d, i) {
 
                     let rectElement = d.toElement;
@@ -117,19 +118,19 @@ export default function BarChart(props: {
                         .style('visibility', 'visible')
                         .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
 
-                    d3.select(this).transition().attr('fill', hoverColor);
+                    d3.select(this).transition().attr('class', getHoverClass);
                 })
                 .on('mouseout', function () {
                     tooltip.html(``).style('visibility', 'hidden');
-                    d3.select(this).transition().attr('fill', staticColor);
+                    d3.select(this).transition().attr('class', getFillClass);
                 });
 
             svg.selectAll("rect")
                 .transition()
-                .duration(500)
+                .duration(200)
                 .attr("y", (d: any) => y((yBase < 0 && d.dataAxis < 0) ? 0 : d.dataAxis)!)
                 .attr("height", (d: any) => height - y((yBase < 0 && d.dataAxis < 0) ? yBase - d.dataAxis : d.dataAxis + yBase))
-                .delay((d, i) => { return i * 100 })
+                .delay((d, i) => { return i * 20 })
         } else {
             // Y axis
             const y = d3.scaleBand()
@@ -162,7 +163,7 @@ export default function BarChart(props: {
                 .attr("y", d => y(d.referenceAxis)!)
                 .attr("width", d => x(0))
                 .attr("height", y.bandwidth())
-                .attr("fill", finalData[0].fillColor || "#000000");
+                .attr("class", getFillClass)
 
 
             svg.selectAll("mybar")
@@ -172,7 +173,7 @@ export default function BarChart(props: {
                 .attr("y", d => y(d.referenceAxis)!)
                 .attr("width", d => x(0))
                 .attr("height", y.bandwidth())
-                .attr("fill", finalData[0].fillColor || "#000000")
+                .attr("class", getFillClass)
                 .on('mouseover', function (d, i) {
 
                     let rectElement = d.toElement;
@@ -184,19 +185,19 @@ export default function BarChart(props: {
                         .style('visibility', 'visible')
                         .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
 
-                    d3.select(this).transition().attr('fill', hoverColor);
+                    d3.select(this).transition().attr('class', getHoverClass);
                 })
                 .on('mouseout', function () {
                     tooltip.html(``).style('visibility', 'hidden');
-                    d3.select(this).transition().attr('fill', staticColor);
+                    d3.select(this).transition().attr('class', getFillClass);
                 });
 
             svg.selectAll("rect")
                 .transition()
-                .duration(500)
+                .duration(200)
                 .attr("x", (d: any) => x((xBase < 0 && d.dataAxis < 0) ? d.dataAxis : 0)!)
-                .attr("width", (d: any) => x((xBase < 0 && d.dataAxis < 0) ? xBase - d.dataAxis : d.dataAxis))
-                .delay((d, i) => { return i * 100 })
+                .attr("width", (d: any) => x((xBase < 0 && d.dataAxis < 0) ? xBase - d.dataAxis : d.dataAxis + xBase))
+                .delay((d, i) => { return i * 20 })
 
         }
 
@@ -204,4 +205,13 @@ export default function BarChart(props: {
     }, [props.data, props.dataAxisMin, props.height, props.margin, props.direction, props.sorted])
 
     return <div ref={ref} className='vieolo-bar-chart width--pc-100 height--pc-100'></div>
+}
+
+
+function getFillClass(d: BarChartData | any) : string {
+    return `fill-color--${d.fillColor || 'primary'}-normal`
+}
+
+function getHoverClass(d: BarChartData | any) : string {
+    return `fill-color--${d.fillColor || 'primary'}-light`
 }
