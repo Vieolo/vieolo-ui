@@ -23,10 +23,28 @@ export type BarChartData = {
     dataDisplay: string
 }
 
+export type StackedBarChartData = {
+    /** 
+     * The X axis in a horizontal bar chart and Y axis in a vertical bar chart.
+     * The axis that holds the reference metric
+     */
+    referenceAxis: string,
+    total: number,
+    /** 
+     * The Y axis in a horizonal bar chart and X axis in a vertical bart chart 
+     * 
+     * The axis that the bars are drawn against
+     * 
+     * The keys of the object are group type of stacked data in each bar
+     */
+    dataAxis: { [key: string]: number },
+    dataDisplay?: (value: number) => string
+}
+
 export default function BarChart(props: {
     direction: 'horizontal' | 'vertical',
     sorted?: boolean,
-    data: BarChartData[],
+    data: BarChartData[],// | StackedBarChartData[],
     dataAxisMin?: 'zero' | 'smallest value',
     ignoreNegativeValues?: boolean,
     height: number,
@@ -56,7 +74,7 @@ export default function BarChart(props: {
         let height = props.height - finalMargin.top - finalMargin.bottom;
         let finalData = props.data;
 
-        if (props.sorted) finalData = [...props.data].sort((a, b) => b.dataAxis - a.dataAxis);
+        if (props.sorted) finalData = sortData(props.data as any)
 
         const svg = d3.select(ref.current)
             .append("svg")
@@ -71,135 +89,75 @@ export default function BarChart(props: {
             .attr('class', 'vieolo-bar-chart__tooltip')
             .style('visibility', 'hidden');
 
+        let values = finalData.map(d => typeof d.dataAxis === 'number' ? d.dataAxis : (d as any).total)
 
-        // Creating the vertical chart
-        if (props.direction === 'vertical') {
+        let axisMin = props.dataAxisMin === 'smallest value'
+            ? d3.min(values)!
+            : 0
+        let axisMax = d3.max(values)
 
-            // X axis
-            const x = d3.scaleBand()
-                .range([0, width])
-                .domain(finalData.map(d => d.referenceAxis))
-                .padding(0.2);
+        let refDomain = new d3.InternSet(finalData.map(d => d.referenceAxis))
+        let mainDomain = [axisMin, axisMax]
 
-            svg.append("g")
-                .attr("transform", `translate(0, ${height})`)
-                .call(d3.axisBottom(x))
-                .selectAll("text")
-                .attr("transform", "translate(-10,0)rotate(-45)")
-                .style("text-anchor", "end");
+        let refAxis = d3.scaleBand().range([0, props.direction === 'vertical' ? width : height]).domain(refDomain).padding(0.2)
+        let dataAxis = d3.scaleLinear().domain(mainDomain).range(props.direction === 'vertical' ? [height, 0] : [0, width]);
 
-            let yBase = props.dataAxisMin === 'smallest value'
-                ? d3.min(finalData.map(d => d.dataAxis))!
-                : 0
+        // Left Axis
+        svg.append("g").call(d3.axisLeft(props.direction === 'vertical' ? dataAxis : refAxis as any));
 
-            // Add Y axis
-            const y = d3.scaleLinear()
-                .domain([yBase, d3.max(finalData.map(d => d.dataAxis))!]
-                ).range([height, 0]);
-            svg.append("g")
-                .call(d3.axisLeft(y));
-
-            svg.selectAll("mybar")
-                .data(finalData)
-                .join("rect")
-                .attr("x", d => x(d.referenceAxis)!)
-                .attr("y", d => y(0))
-                .attr("width", x.bandwidth())
-                .attr("height", d => height - y(0))
-                .attr("class", getFillClass)
-                .on('mouseover', function (d, i) {
-
-                    let rectElement = d.toElement;
-
-                    tooltip
-                        .html(
-                            getTooltipHTML([{ title: i.referenceAxis, value: i.dataDisplay }])
-                        )
-                        .style('visibility', 'visible')
-                        .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
-
-                    d3.select(this).transition().attr('class', getHoverClass);
-                })
-                .on('mouseout', function () {
-                    tooltip.html(``).style('visibility', 'hidden');
-                    d3.select(this).transition().attr('class', getFillClass);
-                });
-
-            svg.selectAll("rect")
-                .transition()
-                .duration(200)
-                .attr("y", (d: any) => y((yBase < 0 && d.dataAxis < 0) ? 0 : d.dataAxis)!)
-                .attr("height", (d: any) => height - y((yBase < 0 && d.dataAxis < 0) ? yBase - d.dataAxis : d.dataAxis + yBase))
-                .delay((d, i) => { return i * 20 })
-        } else {
-            // Y axis
-            const y = d3.scaleBand()
-                .range([0, height])
-                .domain(finalData.map(d => d.referenceAxis))
-                .padding(.1);
-
-            svg.append("g")
-                .call(d3.axisLeft(y))
-
-            let xBase = props.dataAxisMin === 'smallest value' ? d3.min(finalData.map(d => d.dataAxis))! : 0;
-
-            // Add X axis
-            const x = d3.scaleLinear()
-                .domain([xBase, d3.max(finalData.map(d => d.dataAxis))!])
-                .range([0, width]);
-
-            svg.append("g")
-                .attr("transform", `translate(0, ${height})`)
-                .call(d3.axisBottom(x))
-                .selectAll("text")
-                .attr("transform", "translate(-10,0)rotate(-45)")
-                .style("text-anchor", "end");
-
-            //Bars
-            svg.selectAll("myRect")
-                .data(finalData)
-                .join("rect")
-                .attr("x", d => x(0))
-                .attr("y", d => y(d.referenceAxis)!)
-                .attr("width", d => x(0))
-                .attr("height", y.bandwidth())
-                .attr("class", getFillClass)
+        // Bottom axis
+        svg
+            .append("g")
+            .attr("transform", `translate(0, ${height})`)
+            .call(d3.axisBottom(props.direction === 'vertical' ? refAxis : dataAxis as any))
+            .selectAll("text")
+            .attr("transform", "translate(-10,0)rotate(-45)")
+            .style("text-anchor", "end");
 
 
-            svg.selectAll("mybar")
-                .data(finalData)
-                .join("rect")
-                .attr("x", d => x(0))
-                .attr("y", d => y(d.referenceAxis)!)
-                .attr("width", d => x(0))
-                .attr("height", y.bandwidth())
-                .attr("class", getFillClass)
-                .on('mouseover', function (d, i) {
+        // Bar Containers
+        svg
+            .selectAll("barContainer")
+            .data(finalData)
+            .join("rect")
+            .attr("x", d => props.direction === 'vertical' ? refAxis(d.referenceAxis)! : dataAxis(0))
+            .attr("y", d => props.direction === 'vertical' ? dataAxis(0) : refAxis(d.referenceAxis)!)
+            .attr("width", d => props.direction === 'vertical' ? refAxis.bandwidth() : dataAxis(0))
+            .attr("height", d => props.direction === 'vertical' ? height - dataAxis(0) : refAxis.bandwidth())
+            .attr("class", getFillClass)
+            .on('mouseover', function (d, i) {
 
-                    let rectElement = d.toElement;
+                let rectElement = d.toElement;
 
-                    tooltip
-                        .html(
-                            getTooltipHTML([{ title: i.referenceAxis, value: i.dataDisplay }])
-                        )
-                        .style('visibility', 'visible')
-                        .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
+                tooltip
+                    .html(
+                        getTooltipHTML([{ title: i.referenceAxis, value: i.dataDisplay }])
+                    )
+                    .style('visibility', 'visible')
+                    .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
 
-                    d3.select(this).transition().attr('class', getHoverClass);
-                })
-                .on('mouseout', function () {
-                    tooltip.html(``).style('visibility', 'hidden');
-                    d3.select(this).transition().attr('class', getFillClass);
-                });
+                d3.select(this).transition().attr('class', getHoverClass);
+            })
+            .on('mouseout', function () {
+                tooltip.html(``).style('visibility', 'hidden');
+                d3.select(this).transition().attr('class', getFillClass);
+            });
 
-            svg.selectAll("rect")
-                .transition()
-                .duration(200)
-                .attr("x", (d: any) => x((xBase < 0 && d.dataAxis < 0) ? d.dataAxis : 0)!)
-                .attr("width", (d: any) => x((xBase < 0 && d.dataAxis < 0) ? xBase - d.dataAxis : d.dataAxis + xBase))
-                .delay((d, i) => { return i * 20 })
 
-        }
+        // Each Bar
+        svg
+            .selectAll("rect")
+            .transition()
+            .duration(200)
+            .attr(props.direction === "vertical" ? "y" : "x", (d: any) => {
+                if (props.direction === 'vertical') return dataAxis((axisMin < 0 && d.dataAxis < 0) ? 0 : d.dataAxis)!
+                else return dataAxis((axisMin < 0 && d.dataAxis < 0) ? d.dataAxis : 0)!
+            })
+            .attr(props.direction === "vertical" ? "height" : "width", (d: any) => {
+                if (props.direction === 'vertical') return height - dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
+                else return dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
+            })
+            .delay((d, i) => { return i * 20 })
 
 
     }, [props.data, props.dataAxisMin, props.height, props.margin, props.direction, props.sorted])
@@ -208,10 +166,22 @@ export default function BarChart(props: {
 }
 
 
-function getFillClass(d: BarChartData | any) : string {
+function getFillClass(d: BarChartData | any): string {
     return `fill-color--${d.fillColor || 'primary'}-normal`
 }
 
-function getHoverClass(d: BarChartData | any) : string {
+function getHoverClass(d: BarChartData | any): string {
     return `fill-color--${d.fillColor || 'primary'}-light`
+}
+
+function sortData(data: BarChartData[]): BarChartData[];
+function sortData(data: StackedBarChartData[]): StackedBarChartData[];
+function sortData(data: BarChartData[] | StackedBarChartData[]): BarChartData[] | StackedBarChartData[] {
+    if (data.length === 0) return data;
+
+    if (typeof data[0].dataAxis === 'number') {  // BarChartData
+        return [...(data as BarChartData[])].sort((a, b) => b.dataAxis - a.dataAxis);
+    } else {  // StackedBarChartData
+        return [...(data as StackedBarChartData[])].sort((a, b) => b.total - a.total);
+    }
 }
