@@ -545,6 +545,10 @@
 	@include colorMixin(background-color, true);
 }
 
+.fill-color {
+	@include colorMixin(fill, true);
+}
+
 .color {
 	@include colorMixin(color, false, !important);
 

@@ -1,11 +1,20 @@
 // React
 import { useEffect, useRef } from 'react';
 
+// Vieolo UI
+import Flex from '../Flex';
+import Typography from '../Typography';
+import GridContainer from '../GridContainer';
+import Grid from '../Grid';
+
 // Intalled Packages
 import * as d3 from 'd3';
 
+// Types
+import { ColorOptionType } from '../types';
 
-type BarChartData = {
+
+export type BarChartData = {
     /** 
      * The X axis in a horizontal bar chart and Y axis in a vertical bar chart.
      * The axis that holds the reference metric
@@ -16,41 +25,106 @@ type BarChartData = {
      * The axis that the bars are drawn against
      */
     dataAxis: number,
-    fillColor?: string,
+    fillColor?: ColorOptionType,
     dataDisplay: string
 }
 
+export type StackedBarChartData = {
+    referenceAxis: string,
+    referenceAxisNumerical: number,
+    dataAxis: { [key: string]: number },
+    dataFormatter?: (n: number) => string,
+    total?: number
+}
+
 export default function BarChart(props: {
+    title?: string,
     direction: 'horizontal' | 'vertical',
     sorted?: boolean,
-    data: BarChartData[],
-    dataAxisMin?: 'zero' | 'smallest value',
+    data: (BarChartData | StackedBarChartData)[],
+    ignoreNegativeValues?: boolean,
     height: number,
-    margin?: { top: number, right: number, bottom: number, left: number }
+    margin?: { top: number, right: number, bottom: number, left: number },
+    showInlineValue?: boolean,
+    tickCount?: number,
+    groupType?: 'stacked' | 'grouped',
+    removeSpaceBetweenBars?: boolean
 }) {
 
     let ref = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
 
+        // Creating the Tooltip
         function getTooltipHTML(values: { title: string, value: string }[]) {
             return values.map(v => {
-                return `<p class="typography-paragraph-medium">${v.title}: ${v.value}</p>`
+                return `<div>
+                    <p class="typography-paragraph-small">${v.title}</p>
+                    <p class="typography-paragraph-small font-weight--bold">${v.value}</p>
+                </div>`
             }).join("");
         }
 
+        function displayTooltip(parent: d3.BaseType | SVGRectElement, e: MouseEvent, title: string | undefined, value: string) {
+            let rectElement = (e as any).toElement;
 
+            let t = title
+            try {
+                if (t === undefined) {
+                    t = rectElement.parentNode.attributes["title"].textContent;
+                }
+            } catch (error) { }
+
+            tooltip.html(getTooltipHTML([{ title: t || "", value: value }]))
+                .style('visibility', 'visible')
+                .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
+
+            d3.select(parent).transition().attr('class', getHoverClass);
+        }
+
+        function removeTooltip(parent: d3.BaseType | SVGRectElement, emptyClass: boolean) {
+            tooltip.html(``).style('visibility', 'hidden');
+            d3.select(parent).transition().attr('class', d => emptyClass ? "" : getFillClass(d));
+        }
+
+
+
+
+
+
+        let ct: 'bar' | 'stacked' | 'grouped' = (props.data[0] && typeof (props.data[0] as StackedBarChartData).dataAxis !== "number") ? props.groupType || 'stacked' : 'bar'
+        let isVertical = props.direction === 'vertical'
+        let animationDuration = 200;
+
+
+        // For rendering the chart:
+        // 1. HTML div is selected
+        // 2. Width and height and final structure of data is calculated
+        // 3. A SVG element is created
+        // 4. Left axis of the chart is created (a `g` element)
+        // 5. Bottom axis of the chart is created (a `g` element)
+        // 6. Bar containers are added
+        // 7. Bar sized are adjusted
+
+
+        // Selecting the HTML div
         d3.select(ref.current).html("");
 
         let finalMargin = props.margin || { top: 30, right: 30, bottom: 70, left: 60 };
         let width = (ref.current ? ref.current.offsetWidth : 200) - finalMargin.left - finalMargin.right;
         let height = props.height - finalMargin.top - finalMargin.bottom;
         let finalData = props.data;
-        let hoverColor = '#eec42d';
-        let staticColor = '#437c90';
 
-        if (props.sorted) finalData = props.data.sort((a, b) => b.dataAxis - a.dataAxis);
+        // If the bar uses a `StackedBarChartData`, the total of each item is added to it manually
+        if (ct === 'stacked') finalData = (finalData as StackedBarChartData[]).map((z: StackedBarChartData) => {
+            if (!z.total) z.total = Object.values(z.dataAxis).reduce((a, b) => a + b, 0)
+            return z
+        })
 
+        // Sorting the data of needed
+        if (props.sorted) finalData = sortData(props.data as any)
+
+        // Creating the basic SVG element
         const svg = d3.select(ref.current)
             .append("svg")
             .attr("width", width + finalMargin.left + finalMargin.right)
@@ -58,133 +132,302 @@ export default function BarChart(props: {
             .append("g")
             .attr("transform", `translate(${finalMargin.left}, ${finalMargin.top})`);
 
+        // The tooltip that appears when user hovers over one of the items
         let tooltip = d3
             .select(ref.current)
             .append('div')
             .attr('class', 'vieolo-bar-chart__tooltip')
             .style('visibility', 'hidden');
 
-        if (props.direction === 'vertical') {
+        // The numerical value of data that to be appear in the data axis of the chart
+        // This array is used to measure the min and max range of the chart
+        let values = finalData.map(d => ct === 'bar'
+            ? (d as BarChartData).dataAxis
+            : ct === 'stacked'
+                ? Object.values((d as StackedBarChartData).dataAxis).reduce((a, b) => a + b, 0)
+                : Object.values((d as StackedBarChartData).dataAxis).sort((a, b) => b - a)[0]
+        )
 
-            // X axis
-            const x = d3.scaleBand()
-                .range([0, width])
-                .domain(finalData.map(d => d.referenceAxis))
-                .padding(0.2);
-            svg.append("g")
-                .attr("transform", `translate(0, ${height})`)
-                .call(d3.axisBottom(x))
-                .selectAll("text")
-                .attr("transform", "translate(-10,0)rotate(-45)")
-                .style("text-anchor", "end");
+        // The min and max range of the chart
+        let axisMin = getDataAxisMin(values)
+        let axisMax = d3.max(values) || axisMin
 
-            // Add Y axis
-            const y = d3.scaleLinear()
-                .domain([props.dataAxisMin === 'smallest value' ? d3.min(finalData.map(d => d.dataAxis))! : 0, d3.max(finalData.map(d => d.dataAxis))!])
-                .range([height, 0]);
-            svg.append("g")
-                .call(d3.axisLeft(y));
+        // The domains
+        let refDomain = new d3.InternSet(finalData.map(d => d.referenceAxis))
+        let dataDomain = [axisMin, axisMax]
 
-            svg.selectAll("mybar")
-                .data(finalData)
+        // Ref axis is the axis the holds the user readable references. In a vertical bar chart, this is the X axis
+        // Data axis is the axis that holds the values. In a vertical bar chart, this is the Y axis
+        // These two are functions.
+
+        /** 
+         * `refAxis` is a function that receives a string and returns the position of the given string in the ref axis as a number
+         * calling `refAxis.bandWidth()` will return the width of each single ref bar
+         */
+        let refAxis = d3.scaleBand().range([0, isVertical ? width : height]).domain(refDomain).padding(props.removeSpaceBetweenBars ? 0 : 0.2)
+
+        /**
+         * `dataAxis` is a function that receives a numerical value and returns the position of the given number in the data axis as a number
+         */
+        let dataAxis = d3.scaleLinear().domain(dataDomain).range(isVertical ? [height, 0] : [0, width]);
+
+        // Left Axis
+        // In a vertical chart, this is the data axis
+        let leftAxis = d3.axisLeft(props.direction === 'vertical' ? dataAxis : refAxis as any)
+
+        // If the chart is very small and the values of the data are large, the ticks of the data axis can get cramped together
+        // So, the implementor can set a maximum number of ticks to be displayed
+        if (props.tickCount) {
+            leftAxis.ticks(props.tickCount)
+        }
+
+        svg.append("g").call(leftAxis);
+
+
+        // Bottom axis
+        // In a vertical chart, this is the ref axis
+        svg
+            .append("g")
+            .attr("transform", `translate(0, ${height})`)
+            .call(d3.axisBottom(props.direction === 'vertical' ? refAxis : dataAxis as any))
+            .selectAll("text")
+            .attr("transform", "translate(-10,0)rotate(-45)") // The text displayed in the ref axis is rotated to avoid overlap of long texts
+            .style("text-anchor", "end");
+
+
+        // Rendering the normal bar chart
+        if (ct === 'bar') {
+            // Bar Containers
+            svg
+                .selectAll("barContainer")
+                .data(finalData as BarChartData[])
                 .join("rect")
-                .attr("x", d => x(d.referenceAxis)!)
-                .attr("y", d => y(0))
-                .attr("width", x.bandwidth())
-                .attr("height", d => height - y(0))
-                .attr("fill", finalData[0].fillColor || "#000000")
-                .on('mouseover', function (d, i) {
+                .attr("x", d => isVertical ? refAxis(d.referenceAxis)! : dataAxis(0))
+                .attr("y", d => isVertical ? dataAxis(0) : refAxis(d.referenceAxis)!)
+                .attr("width", d => isVertical ? refAxis.bandwidth() : dataAxis(0))
+                .attr("height", d => isVertical ? height - dataAxis(0) : refAxis.bandwidth())
+                .attr("class", getFillClass)
+                .on('mouseover', function (d, i) { displayTooltip(this, d, i.referenceAxis, i.dataDisplay) }) // Using `function` keyword is necessary to access `this`
+                .on('mouseout', function () { removeTooltip(this, false) });
 
-                    let rectElement = d.toElement;
-
-                    tooltip
-                        .html(
-                            getTooltipHTML([{ title: i.referenceAxis, value: i.dataDisplay }])
-                        )
-                        .style('visibility', 'visible')
-                        .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
-
-                    d3.select(this).transition().attr('fill', hoverColor);
-                })
-                .on('mouseout', function () {
-                    tooltip.html(``).style('visibility', 'hidden');
-                    d3.select(this).transition().attr('fill', staticColor);
-                });
-
-            svg.selectAll("rect")
+            // Each Bar
+            svg
+                .selectAll("rect")
                 .transition()
-                .duration(500)
-                .attr("y", d => y((d as any).dataAxis)!)
-                .attr("height", d => height - y((d as any).dataAxis))
-                .delay((d, i) => { return i * 100 })
+                .duration(animationDuration)
+                .attr(isVertical ? "y" : "x", (d: any) => {
+                    if (isVertical) return dataAxis((axisMin < 0 && d.dataAxis < 0) ? 0 : d.dataAxis)!
+                    else return dataAxis((axisMin < 0 && d.dataAxis < 0) ? d.dataAxis : 0)!
+                })
+                .attr(isVertical ? "height" : "width", (d: any) => {
+                    if (isVertical) return height - dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
+                    else return dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
+                })
+                .delay((d, i) => { return i * 20 })            
+
         } else {
-            // Y axis
-            const y = d3.scaleBand()
-                .range([0, height])
-                .domain(finalData.map(d => d.referenceAxis))
-                .padding(.1);
-            svg.append("g")
-                .call(d3.axisLeft(y))
 
-            // Add X axis
-            const x = d3.scaleLinear()
-                .domain([props.dataAxisMin === 'smallest value' ? d3.min(finalData.map(d => d.dataAxis))! : 0, d3.max(finalData.map(d => d.dataAxis))!])
-                .range([0, width]);
-            svg.append("g")
-                .attr("transform", `translate(0, ${height})`)
-                .call(d3.axisBottom(x))
-                .selectAll("text")
-                .attr("transform", "translate(-10,0)rotate(-45)")
-                .style("text-anchor", "end");
-
-            //Bars
-            svg.selectAll("myRect")
-                .data(finalData)
-                .join("rect")
-                .attr("x", d => x(0))
-                .attr("y", d => y(d.referenceAxis)!)
-                .attr("width", d => x(0))
-                .attr("height", y.bandwidth())
-                .attr("fill", finalData[0].fillColor || "#000000");
+            /**
+             * Refactoring the data to be used by stacked/grouped chart
+             * The final data will be
+             * {referenceAxis: string, ...{[keys: string]: number}}
+             * The keys (except referenceAxis) will be stacked together
+             */
+            let s: { [key: string]: number | string }[] = (props.data as StackedBarChartData[]).map((z, i) => {
+                return { referenceAxis: z.referenceAxis, ...z.dataAxis }
+            })
 
 
-            svg.selectAll("mybar")
-                .data(finalData)
-                .join("rect")
-                .attr("x", d => x(0))
-                .attr("y", d => y(d.referenceAxis)!)
-                .attr("width", d => x(0))
-                .attr("height", y.bandwidth())
-                .attr("fill", finalData[0].fillColor || "#000000")
-                .on('mouseover', function (d, i) {
+            if (props.groupType === 'stacked') {
 
-                    let rectElement = d.toElement;
+                // In the stacked bar, the data should be passed to the stack object of `d3`
+                let keys = Object.keys((props.data as StackedBarChartData[])[0].dataAxis);
+                const stack = d3.stack().keys(keys)
 
-                    tooltip
-                        .html(
-                            getTooltipHTML([{ title: i.referenceAxis, value: i.dataDisplay }])
-                        )
-                        .style('visibility', 'visible')
-                        .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
+                var sel = svg
+                    // .select('g')
+                    .selectAll('g.series')
+                    .data(stack(s as any))
+                    .join('g')
+                    .classed('series', true)
+                    .style('fill', (d) => d3.schemeTableau10[d.index])
+                    .attr("title", (d, i) => keys[d.index])
 
-                    d3.select(this).transition().attr('fill', hoverColor);
+                sel.selectAll('rect')
+                    .data((d, i, z) => d)
+                    .join('rect')
+                    .attr('x', (d) => isVertical ? refAxis(d.data.referenceAxis.toString())! : dataAxis(d[0]))
+                    .attr('y', (d) => isVertical ? dataAxis(d[1]) : refAxis(d.data.referenceAxis.toString())!)
+                    .attr('width', d => isVertical ? refAxis.bandwidth() : dataAxis(d[1]) - dataAxis(d[0]))
+                    .attr('height', d => isVertical ? dataAxis(d[0]) - dataAxis(d[1]) : refAxis.bandwidth())
+                    .on('mouseover', function (d, i) { displayTooltip(this, d, undefined, (i[1] - i[0]).toString()) })
+                    .on('mouseout', function () { removeTooltip(this, true) });
+
+            } else {
+
+                // Rendering the grouped chart
+
+                // Here, the data is shaped into an array of objects: {referenceAxis: string, groupName: string, groupValue: number}[]
+                let flatData = (props.data as StackedBarChartData[]).flatMap(z => {
+                    return Object.keys(z.dataAxis).map(x => {
+                        return { referenceAxis: z.referenceAxis, groupName: x, groupValue: z.dataAxis[x] }
+                    })
                 })
-                .on('mouseout', function () {
-                    tooltip.html(``).style('visibility', 'hidden');
-                    d3.select(this).transition().attr('fill', staticColor);
-                });
 
-            svg.selectAll("rect")
-                .transition()
-                .duration(500)
-                .attr("x", d => x(0)!)
-                .attr("width", d => x((d as any).dataAxis))
-                .delay((d, i) => { return i * 100 })
+                // const refs = d3.map(flatData, q => q.referenceAxis);
+                const groups = [...new Set(d3.map(flatData, q => q.groupName))];
+                // const groupValues = d3.map(flatData, q => q.groupValue);                
 
+                // The position of each bar in a group
+                // If a each group of bars have, let's say, 5 bars, using this function we can get the correct position of each bar in the group
+                // This is a function that receives the name of the group and returns the position of the group
+                const xzScale = d3.scaleBand(Object.keys((props.data as StackedBarChartData[])[0].dataAxis), [0, refAxis.bandwidth()]).padding(0);
+
+                svg.append('g')
+                    .selectAll('rect')
+                    .data(flatData)
+                    .join('rect')
+                    .attr('y', (d) => isVertical ? dataAxis(d.groupValue) : refAxis(d.referenceAxis.toString())! + xzScale(d.groupName)!)
+                    .attr('x', (d) => isVertical ? refAxis(d.referenceAxis.toString())! + xzScale(d.groupName)! : dataAxis(0))
+                    .attr('width', d => isVertical ? refAxis.bandwidth() / groups.length : dataAxis(d.groupValue) - dataAxis(0))
+                    .attr('height', d => isVertical ? dataAxis(0) - dataAxis(d.groupValue) : refAxis.bandwidth() / groups.length)
+                    .attr("fill", d => d3.schemeTableau10[groups.indexOf(d.groupName) % 10])
+                    .on('mouseover', function (d, i) { displayTooltip(this, d, i.groupName, (i.groupValue || 0).toString()) })
+                    .on('mouseout', function () { removeTooltip(this, true) });
+            }
         }
 
 
-    }, [props.data, props.dataAxisMin, props.height, props.margin, props.direction, props.sorted])
+        if (!isVertical && props.showInlineValue) {
 
-    return <div ref={ref} className='vieolo-bar-chart width--pc-100 height--pc-100'></div>
+            // Adding the value of the bars in the cahrt
+            svg.selectAll(".text")
+                .data(finalData)
+                .enter()
+                .append("text")
+                .attr("class", (d: any) => {
+                    let c = "typography-paragraph-small";
+                    
+                    if (ct !== 'bar') return c;
+                    
+                    let section = getInlineValueSection(d, axisMin, axisMax)
+
+                    if (section === 1 || section === -1) {
+                        c += ` fill-color--${d.fillColor || 'primary'}-text`
+                    }
+                    return c
+                })
+                .attr("x", (d: any) => {
+                    let section = getInlineValueSection(d, axisMin, axisMax)
+                    if (section === 2) {
+                        return dataAxis(d.total || d.dataAxis) + 5
+                    } else if (section === -1) {
+                        return dataAxis(d.total || d.dataAxis) + 5
+                    } else if (section === -2) {
+                        return 10
+                    } else {
+                        return dataAxis(0) + 5
+                    }
+                })
+                .attr("y", (d: BarChartData | StackedBarChartData) => refAxis(d.referenceAxis)!)
+                .attr("dy", refAxis.bandwidth() / 1.5)
+                .text((d: StackedBarChartData | BarChartData) => {
+                    if ((d as BarChartData).dataDisplay !== undefined) return (d as BarChartData).dataDisplay
+                    else {
+                        let t = (d as StackedBarChartData).total || 0;
+                        if ((d as StackedBarChartData).dataFormatter) return (d as StackedBarChartData).dataFormatter!(t)
+                        else return t.toString()
+                    }
+                });
+        }
+
+
+
+    }, [props.data, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount, props.groupType, props.removeSpaceBetweenBars])
+
+
+
+    return <div className='vieolo-bar-chart width--pc-100 height--pc-100'>
+        {
+            (props.title || (props.data.length > 0 && typeof props.data[0].dataAxis !== 'number')) &&
+            <GridContainer>
+                <Grid xl={6}>
+                    <Typography text={props.title || ''} type='title-medium' />
+                </Grid>
+
+                <Grid xl={6}>
+                    {
+                        (props.data.length > 0 && typeof props.data[0].dataAxis !== 'number') &&
+                        <Flex columnGap='one' wrap='wrap' justifyContent='end'>
+                            {Object.keys(props.data[0].dataAxis).map((c, i) => {
+                                return <Flex alignItems='center' columnGap='half' key={c + i}>
+                                    <div style={{ backgroundColor: d3.schemeTableau10[i], height: 15, width: 15, borderRadius: '50%' }}></div>
+                                    <Typography text={c} type='paragraph-small' />
+                                </Flex>
+                            })}
+                        </Flex>
+                    }
+                </Grid>
+            </GridContainer>
+        }
+        <div ref={ref} className="width--pc-100 height--pc-100"></div>
+    </div>
+}
+
+
+function getFillClass(d: BarChartData | any): string {
+    return `fill-color--${d.fillColor || 'primary'}-normal`
+}
+
+function getHoverClass(d: BarChartData | any): string {
+    return `fill-color--${d.fillColor || 'primary'}-light`
+}
+
+function sortData(data: BarChartData[]): BarChartData[];
+function sortData(data: StackedBarChartData[]): StackedBarChartData[];
+function sortData(data: BarChartData[] | StackedBarChartData[]): BarChartData[] | StackedBarChartData[] {
+    if (data.length === 0) return data;
+
+    if (typeof (data[0] as BarChartData).dataAxis === 'number') {  // BarChartData
+        return [...(data as BarChartData[])].sort((a, b) => b.dataAxis - a.dataAxis);
+    } else {  // StackedBarChartData
+        return [...(data as StackedBarChartData[])].sort((a, b) => {
+            return (b.total || 0) - (a.total || 0)
+        })
+    }
+}
+
+
+function getDataAxisMin(values: number[]): number {
+    let sorted = [...values].sort((a, b) => a - b);
+
+    if (sorted[0] >= 0) return 0
+    else if (sorted[0] < 0 && sorted[sorted.length - 1] > 0) return sorted[0]
+    else return sorted[0]
+}
+
+
+/**
+ * This function determines the section of the placement of the inline value.
+ * 
+ * Values above 0 mean that the text is appearing for a positive value, on the right side of the 0 axis and vice versa
+ * 1 (or -1) mean that the text appears inside the bar and 2 (or -2) means that text appears outside of the bar
+ * 
+ */
+function getInlineValueSection(d: BarChartData | StackedBarChartData, axisMin: number, axisMax: number): number {
+    let t = typeof  d.dataAxis === 'number' ? d.dataAxis : (d as StackedBarChartData).total!
+    
+    if (t >= 0) {
+        if (t < (axisMax / 3)) {
+            return 2
+        } else {
+            return 1
+        }
+    } else {
+        if (Math.abs(t) < (Math.abs(axisMin) / 3)) {
+            return -2
+        } else {
+            return -1
+        }
+    }
 }

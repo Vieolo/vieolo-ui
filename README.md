@@ -22,6 +22,10 @@ npm run build-components
 ```
 which uses typescript compiler to create release components in the `dist` folder. The component source files are in `src/lib` and are exported in `src/export.ts` file. If the `build-components` command does not produce any file, check the `noEmit` key in the `tsconfig.json` file.
 
+## Components
+
+[`BarChart`](src/BarChart/BarChart.md)
+
 ## Usage
 In the target package, the components can be imported and used as followed:
 ```JS
