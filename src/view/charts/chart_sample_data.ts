@@ -88,9 +88,14 @@ export let cashReserveChangeData: BarChartData[] = [ // internal
 
 export let revenueData: BarChartData[] = [ // internal
     {
-        referenceAxis: '2010',
+        referenceAxis: '2009',
         dataAxis: 2.4,
         dataDisplay: "€2.4 M"
+    },
+    {
+        referenceAxis: '2010',
+        dataAxis: 0,
+        dataDisplay: "€0 M"
     },
     {
         referenceAxis: '2011',
