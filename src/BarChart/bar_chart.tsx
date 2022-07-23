@@ -37,7 +37,8 @@ export default function BarChart(props: {
     data: (BarChartData | StackedBarChartData)[],
     ignoreNegativeValues?: boolean,
     height: number,
-    margin?: { top: number, right: number, bottom: number, left: number }
+    margin?: { top: number, right: number, bottom: number, left: number },
+    showInlineValue?: boolean
 }) {
 
     let ref = useRef<HTMLDivElement>(null);
@@ -55,6 +56,7 @@ export default function BarChart(props: {
         }
 
         let ct: 'bar' | 'stacked' = (props.data[0] && typeof (props.data[0] as StackedBarChartData).dataAxis !== "number") ? 'stacked' : 'bar'
+        let isVertical = props.direction === 'vertical'
 
 
         // For rendering the chart:
@@ -124,10 +126,10 @@ export default function BarChart(props: {
                 .selectAll("barContainer")
                 .data(finalData as BarChartData[])
                 .join("rect")
-                .attr("x", d => props.direction === 'vertical' ? refAxis(d.referenceAxis)! : dataAxis(0))
-                .attr("y", d => props.direction === 'vertical' ? dataAxis(0) : refAxis(d.referenceAxis)!)
-                .attr("width", d => props.direction === 'vertical' ? refAxis.bandwidth() : dataAxis(0))
-                .attr("height", d => props.direction === 'vertical' ? height - dataAxis(0) : refAxis.bandwidth())
+                .attr("x", d => isVertical ? refAxis(d.referenceAxis)! : dataAxis(0))
+                .attr("y", d => isVertical ? dataAxis(0) : refAxis(d.referenceAxis)!)
+                .attr("width", d => isVertical ? refAxis.bandwidth() : dataAxis(0))
+                .attr("height", d => isVertical ? height - dataAxis(0) : refAxis.bandwidth())
                 .attr("class", getFillClass)
                 .on('mouseover', function (d, i) {
 
@@ -147,26 +149,56 @@ export default function BarChart(props: {
                     d3.select(this).transition().attr('class', getFillClass);
                 });
 
-
             // Each Bar
             svg
                 .selectAll("rect")
                 .transition()
                 .duration(200)
-                .attr(props.direction === "vertical" ? "y" : "x", (d: any) => {
-                    if (props.direction === 'vertical') return dataAxis((axisMin < 0 && d.dataAxis < 0) ? 0 : d.dataAxis)!
+                .attr(isVertical ? "y" : "x", (d: any) => {
+                    if (isVertical) return dataAxis((axisMin < 0 && d.dataAxis < 0) ? 0 : d.dataAxis)!
                     else return dataAxis((axisMin < 0 && d.dataAxis < 0) ? d.dataAxis : 0)!
                 })
-                .attr(props.direction === "vertical" ? "height" : "width", (d: any) => {
-                    if (props.direction === 'vertical') return height - dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
+                .attr(isVertical ? "height" : "width", (d: any) => {
+                    if (isVertical) return height - dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
                     else return dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
                 })
                 .delay((d, i) => { return i * 20 })
 
+            if (!isVertical && props.showInlineValue) {
+                svg.selectAll(".text")
+                    .data(finalData)
+                    .enter()
+                    .append("text")
+                    .attr("class", (d: any) => {
+                        let section = getInlineValueSection(d, axisMin, axisMax)
+                        let c = "typography-paragraph-small";
+
+                        if (section === 1 || section === -1) {
+                            c += ` fill-color--${d.fillColor || 'primary'}-text`
+                        }                        
+                        return c
+                    })
+                    .attr("x", (d: any) => {
+                        let section = getInlineValueSection(d, axisMin, axisMax)
+                        if (section === 2) {
+                            return dataAxis(d.dataAxis) + 5
+                        } else if (section === -1) {
+                            return dataAxis(d.dataAxis) + 5
+                        } else if (section === -2) {
+                            return 10
+                        } else {
+                            return dataAxis(0) + 5
+                        }
+                    })
+                    .attr("y", (d: any) => refAxis(d.referenceAxis)!)
+                    .attr("dy", refAxis.bandwidth() / 1.5)
+                    .text((d: any) => d.dataDisplay);
+            }
+
         } else {
 
             let s: { [key: string]: number | string }[] = (props.data as StackedBarChartData[]).map((z, i) => {
-                return { referenceAxis: z.referenceAxis, ...z.dataAxis }                
+                return { referenceAxis: z.referenceAxis, ...z.dataAxis }
             })
 
             const stack = d3.stack()
@@ -184,10 +216,10 @@ export default function BarChart(props: {
             sel.selectAll('rect')
                 .data((d) => d)
                 .join('rect')
-                .attr('width', refAxis.bandwidth())
-                .attr('y', (d) => dataAxis(d[1]))
-                .attr('x', (d) => refAxis(d.data.referenceAxis.toString())!)
-                .attr('height', (d) => dataAxis(d[0]) - dataAxis(d[1]))
+                .attr('y', (d) => isVertical ? dataAxis(d[1]) : refAxis(d.data.referenceAxis.toString())!)
+                .attr('x', (d) => isVertical ? refAxis(d.data.referenceAxis.toString())! : dataAxis(d[0]))
+                .attr('width', d => isVertical ? refAxis.bandwidth() : dataAxis(d[1]) - dataAxis(d[0]))
+                .attr('height', d => isVertical ? dataAxis(d[0]) - dataAxis(d[1]) : refAxis.bandwidth())
                 .on('mouseover', function (d, i) {
 
                     let rectElement = d.toElement;
@@ -195,7 +227,7 @@ export default function BarChart(props: {
                     try {
                         title = rectElement.attributes["title"].textContent;
                     } catch (error) {
-                        
+
                     }
 
                     tooltip
@@ -210,12 +242,12 @@ export default function BarChart(props: {
                 .on('mouseout', function () {
                     tooltip.html(``).style('visibility', 'hidden');
                     d3.select(this).transition().attr('class', '')
-                });        
+                });
         }
 
 
 
-    }, [props.data, props.height, props.margin, props.direction, props.sorted])
+    }, [props.data, props.height, props.showInlineValue, props.margin, props.direction, props.sorted])
 
     return <div ref={ref} className='vieolo-bar-chart width--pc-100 height--pc-100'></div>
 }
@@ -244,10 +276,34 @@ function sortData(data: BarChartData[] | StackedBarChartData[]): BarChartData[] 
 }
 
 
-function getDataAxisMin(values: number[]) : number {
+function getDataAxisMin(values: number[]): number {
     let sorted = [...values].sort((a, b) => a - b);
-    
+
     if (sorted[0] >= 0) return 0
     else if (sorted[0] < 0 && sorted[sorted.length - 1] > 0) return sorted[0]
     else return sorted[0]
+}
+
+
+/**
+ * This function determines the section of the placement of the inline value.
+ * 
+ * Values above 0 mean that the text is appearing for a positive value, on the right side of the 0 axis and vice versa
+ * 1 (or -1) mean that the text appears inside the bar and 2 (or -2) means that text appears outside of the bar
+ * 
+ */
+function getInlineValueSection(d: BarChartData, axisMin: number, axisMax: number) : number {
+    if (d.dataAxis >= 0) {
+        if (d.dataAxis < (axisMax / 3)) {
+            return 2
+        } else {
+            return 1
+        }
+    } else {
+        if (Math.abs(d.dataAxis) < (Math.abs(axisMin) / 3)) {
+            return -2
+        } else {
+            return -1
+        }
+    }   
 }

@@ -50,5 +50,6 @@ export function BarChartCreator(props: { p: BarChartPropsType }) {
         direction={props.p.direction}
         sorted={props.p.sorted}
         data={dataTypes[(props.p as any).dataType]}
+        showInlineValue
     />
 }

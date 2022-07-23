@@ -10,29 +10,34 @@ export let populationData: BarChartData[] = [ // internal
     {
         referenceAxis: 'Estonia',
         dataAxis: 1_300_000,
-        dataDisplay: "1,300,000.00",
+        dataDisplay: "1,300,000",
         fillColor: 'secondary'
     },
     {
         referenceAxis: 'Denmark',
         dataAxis: 5_000_000,
-        dataDisplay: "5,000,000.00",
+        dataDisplay: "5,000,000",
         fillColor: 'alert'
     },
     {
         referenceAxis: 'Sweden',
         dataAxis: 10_400_000,
-        dataDisplay: "10,400,000.00"
+        dataDisplay: "10,400,000"
     },
     {
         referenceAxis: 'Norway',
         dataAxis: 5_400_000,
-        dataDisplay: "5,400,000.00"
+        dataDisplay: "5,400,000"
     },
     {
         referenceAxis: 'UK',
         dataAxis: 67_200_000,
-        dataDisplay: "67,200,000.00"
+        dataDisplay: "67,200,000"
+    },
+    {
+        referenceAxis: 'Moon',
+        dataAxis: 0,
+        dataDisplay: "0"
     }
 ]
 
@@ -117,6 +122,12 @@ export let revenueData: BarChartData[] = [ // internal
         referenceAxis: '2016',
         dataAxis: -1.8,
         dataDisplay: "- €1.8 M",
+        fillColor: 'error'
+    },
+    {
+        referenceAxis: '2017',
+        dataAxis: -1.1,
+        dataDisplay: "- €1.1 M",
         fillColor: 'error'
     }
 ]
