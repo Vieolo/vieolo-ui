@@ -25,14 +25,15 @@ export function barChartOptions(): ViewData {
             },
             direction: {
                 options: ['horizontal', 'vertical'],
-                default: 'vertical'
+                default: 'horizontal'
             },
             groupType: {
                 options: ["grouped", "stacked"],
-                default: "grouped"
+                default: "stacked"
             },
             sorted: 'boolean',
-            showInlineValue: 'booleanTrueDefault'
+            showInlineValue: 'booleanTrueDefault',
+            removeSpaceBetweenBars: 'boolean'
         }
     }
 }
@@ -56,5 +57,6 @@ export function BarChartCreator(props: { p: BarChartPropsType }) {
         showInlineValue={props.p.showInlineValue}
         title={(props.p as any).dataType}
         groupType={props.p.groupType}
+        removeSpaceBetweenBars={props.p.removeSpaceBetweenBars}
     />
 }

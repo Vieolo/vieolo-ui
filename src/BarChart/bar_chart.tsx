@@ -47,7 +47,8 @@ export default function BarChart(props: {
     margin?: { top: number, right: number, bottom: number, left: number },
     showInlineValue?: boolean,
     tickCount?: number,
-    groupType?: 'stacked' | 'grouped'
+    groupType?: 'stacked' | 'grouped',
+    removeSpaceBetweenBars?: boolean
 }) {
 
     let ref = useRef<HTMLDivElement>(null);
@@ -163,7 +164,7 @@ export default function BarChart(props: {
          * `refAxis` is a function that receives a string and returns the position of the given string in the ref axis as a number
          * calling `refAxis.bandWidth()` will return the width of each single ref bar
          */
-        let refAxis = d3.scaleBand().range([0, isVertical ? width : height]).domain(refDomain).padding(0.2)
+        let refAxis = d3.scaleBand().range([0, isVertical ? width : height]).domain(refDomain).padding(props.removeSpaceBetweenBars ? 0 : 0.2)
 
         /**
          * `dataAxis` is a function that receives a numerical value and returns the position of the given number in the data axis as a number
@@ -342,7 +343,7 @@ export default function BarChart(props: {
 
 
 
-    }, [props.data, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount, props.groupType])
+    }, [props.data, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount, props.groupType, props.removeSpaceBetweenBars])
 
 
 
