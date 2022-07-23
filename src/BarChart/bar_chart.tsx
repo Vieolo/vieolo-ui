@@ -34,8 +34,7 @@ export type StackedBarChartData = {
 export default function BarChart(props: {
     direction: 'horizontal' | 'vertical',
     sorted?: boolean,
-    data: BarChartData[] | StackedBarChartData[],
-    dataAxisMin?: 'zero' | 'smallest value',
+    data: (BarChartData | StackedBarChartData)[],
     ignoreNegativeValues?: boolean,
     height: number,
     margin?: { top: number, right: number, bottom: number, left: number }
@@ -98,9 +97,7 @@ export default function BarChart(props: {
 
         let values = finalData.map(d => ct === 'bar' ? (d as BarChartData).dataAxis : Object.values((d as StackedBarChartData).dataAxis).reduce((a, b) => a + b, 0))
 
-        let axisMin = props.dataAxisMin === 'smallest value'
-            ? d3.min(values)!
-            : 0
+        let axisMin = getDataAxisMin(values)
         let axisMax = d3.max(values) || axisMin
 
         let refDomain = new d3.InternSet(finalData.map(d => d.referenceAxis))
@@ -218,7 +215,7 @@ export default function BarChart(props: {
 
 
 
-    }, [props.data, props.dataAxisMin, props.height, props.margin, props.direction, props.sorted])
+    }, [props.data, props.height, props.margin, props.direction, props.sorted])
 
     return <div ref={ref} className='vieolo-bar-chart width--pc-100 height--pc-100'></div>
 }
@@ -244,4 +241,13 @@ function sortData(data: BarChartData[] | StackedBarChartData[]): BarChartData[] 
             return (b.total || 0) - (a.total || 0)
         })
     }
+}
+
+
+function getDataAxisMin(values: number[]) : number {
+    let sorted = [...values].sort((a, b) => a - b);
+    
+    if (sorted[0] >= 0) return 0
+    else if (sorted[0] < 0 && sorted[sorted.length - 1] > 0) return sorted[0]
+    else return sorted[0]
 }

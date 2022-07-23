@@ -36,6 +36,51 @@ export let populationData: BarChartData[] = [ // internal
     }
 ]
 
+export let cashReserveChangeData: BarChartData[] = [ // internal
+    {
+        referenceAxis: 'Mo',
+        dataAxis: -1.3,        
+        dataDisplay: "- %1.3",
+        fillColor: 'error'
+    },
+    {
+        referenceAxis: 'Tu',
+        dataAxis: -2.1,        
+        dataDisplay: "- %2.1",
+        fillColor: 'error'
+    },
+    {
+        referenceAxis: 'We',
+        dataAxis: -0.3,        
+        dataDisplay: "- %0.3",
+        fillColor: 'error'
+    },
+    {
+        referenceAxis: 'Th',
+        dataAxis: -3.6,        
+        dataDisplay: "- %3.6",
+        fillColor: 'error'
+    },
+    {
+        referenceAxis: 'Fr',
+        dataAxis: -1.1,        
+        dataDisplay: "- %1.1",
+        fillColor: 'error'
+    },
+    {
+        referenceAxis: 'Sa',
+        dataAxis: -1.9,        
+        dataDisplay: "- %1.9",
+        fillColor: 'error'
+    },
+    {
+        referenceAxis: 'Su',
+        dataAxis: -2.4,        
+        dataDisplay: "- %2.4",
+        fillColor: 'error'
+    },
+]
+
 export let revenueData: BarChartData[] = [ // internal
     {
         referenceAxis: '2010',
