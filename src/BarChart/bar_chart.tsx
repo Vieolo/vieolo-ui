@@ -46,7 +46,8 @@ export default function BarChart(props: {
     height: number,
     margin?: { top: number, right: number, bottom: number, left: number },
     showInlineValue?: boolean,
-    tickCount?: number
+    tickCount?: number,
+    groupType?: 'stacked' | 'grouped'
 }) {
 
     let ref = useRef<HTMLDivElement>(null);
@@ -63,7 +64,7 @@ export default function BarChart(props: {
             }).join("");
         }
 
-        let ct: 'bar' | 'stacked' = (props.data[0] && typeof (props.data[0] as StackedBarChartData).dataAxis !== "number") ? 'stacked' : 'bar'
+        let ct: 'bar' | 'stacked' | 'grouped' = (props.data[0] && typeof (props.data[0] as StackedBarChartData).dataAxis !== "number") ? props.groupType || 'stacked' : 'bar'
         let isVertical = props.direction === 'vertical'
 
 
@@ -105,7 +106,12 @@ export default function BarChart(props: {
             .attr('class', 'vieolo-bar-chart__tooltip')
             .style('visibility', 'hidden');
 
-        let values = finalData.map(d => ct === 'bar' ? (d as BarChartData).dataAxis : Object.values((d as StackedBarChartData).dataAxis).reduce((a, b) => a + b, 0))
+        let values = finalData.map(d => ct === 'bar' 
+            ? (d as BarChartData).dataAxis 
+            : ct === 'stacked'
+                ? Object.values((d as StackedBarChartData).dataAxis).reduce((a, b) => a + b, 0)
+                : Object.values((d as StackedBarChartData).dataAxis).sort((a, b) => b - a)[0]
+        )
 
         let axisMin = getDataAxisMin(values)
         let axisMax = d3.max(values) || axisMin
@@ -118,11 +124,11 @@ export default function BarChart(props: {
 
         // Left Axis
         let leftAxis = d3.axisLeft(props.direction === 'vertical' ? dataAxis : refAxis as any)
-        
+
         if (isVertical && props.tickCount) {
             leftAxis.ticks(props.tickCount)
         }
-        
+
         svg.append("g").call(leftAxis);
 
         // Bottom axis
@@ -215,53 +221,93 @@ export default function BarChart(props: {
                 return { referenceAxis: z.referenceAxis, ...z.dataAxis }
             })
 
-            const stack = d3.stack()
-                .keys(Object.keys((props.data as StackedBarChartData[])[0].dataAxis))
+            
+            if (props.groupType === 'stacked') {
+                let keys = Object.keys((props.data as StackedBarChartData[])[0].dataAxis);
+                const stack = d3.stack().keys(keys)
 
+                var sel = svg
+                    // .select('g')
+                    .selectAll('g.series')
+                    .data(stack(s as any))
+                    .join('g')
+                    .classed('series', true)
+                    .style('fill', (d) => d3.schemeTableau10[d.index])
+                    .attr("title", (d, i) => keys[d.index])            
 
-            var sel = svg
-                .select('g')
-                .selectAll('g.series')
-                .data(stack(s as any))
-                .join('g')
-                .classed('series', true)
-                .style('fill', (d) => d3.schemeTableau10[d.index]);
+                sel.selectAll('rect')
+                    .data((d, i, z) => d)
+                    .join('rect')
+                    .attr('y', (d) => isVertical ? dataAxis(d[1]) : refAxis(d.data.referenceAxis.toString())!)
+                    .attr('x', (d) => isVertical ? refAxis(d.data.referenceAxis.toString())! : dataAxis(d[0]))
+                    .attr('width', d => isVertical ? refAxis.bandwidth() : dataAxis(d[1]) - dataAxis(d[0]))
+                    .attr('height', d => isVertical ? dataAxis(d[0]) - dataAxis(d[1]) : refAxis.bandwidth())
+                    .on('mouseover', function (d, i) {
 
-            sel.selectAll('rect')
-                .data((d) => d)
-                .join('rect')
-                .attr('y', (d) => isVertical ? dataAxis(d[1]) : refAxis(d.data.referenceAxis.toString())!)
-                .attr('x', (d) => isVertical ? refAxis(d.data.referenceAxis.toString())! : dataAxis(d[0]))
-                .attr('width', d => isVertical ? refAxis.bandwidth() : dataAxis(d[1]) - dataAxis(d[0]))
-                .attr('height', d => isVertical ? dataAxis(d[0]) - dataAxis(d[1]) : refAxis.bandwidth())
-                .on('mouseover', function (d, i) {
+                        let rectElement = d.toElement;
+                        let title = ''
+                        try {
+                            title = rectElement.parentNode.attributes["title"].textContent;
+                        } catch (error) {}
+                        
+                        tooltip
+                            .html(
+                                getTooltipHTML([{ title: title, value: (i[1] - i[0]).toString() }])
+                            )
+                            .style('visibility', 'visible')
+                            .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
 
-                    let rectElement = d.toElement;
-                    let title = ''
-                    try {
-                        title = rectElement.attributes["title"].textContent;
-                    } catch (error) {
+                        d3.select(this).transition().attr('class', getHoverClass);
+                    })
+                    .on('mouseout', function () {
+                        tooltip.html(``).style('visibility', 'hidden');
+                        d3.select(this).transition().attr('class', '')
+                    });
 
-                    }
+            } else {
+                let flatData = (props.data as StackedBarChartData[]).flatMap(z => {
+                    return Object.keys(z.dataAxis).map(x => {
+                        return {referenceAxis: z.referenceAxis, groupName: x, groupValue: z.dataAxis[x]}
+                    })
+                })                                
 
-                    tooltip
-                        .html(
-                            getTooltipHTML([{ title: title, value: (i[1] - i[0]).toString() }])
-                        )
-                        .style('visibility', 'visible')
-                        .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
+                // const refs = d3.map(flatData, q => q.referenceAxis);
+                const groups = [...new Set(d3.map(flatData, q => q.groupName))];
+                // const groupValues = d3.map(flatData, q => q.groupValue);                
 
-                    d3.select(this).transition().attr('class', getHoverClass);
-                })
-                .on('mouseout', function () {
-                    tooltip.html(``).style('visibility', 'hidden');
-                    d3.select(this).transition().attr('class', '')
-                });
+                const xzScale = d3.scaleBand(Object.keys((props.data as StackedBarChartData[])[0].dataAxis), [0, refAxis.bandwidth()]).padding(0);
+                
+                svg.append('g')
+                    .selectAll('rect')
+                    .data(flatData)
+                    .join('rect')
+                    .attr('y', (d) => isVertical ? dataAxis(d.groupValue) : refAxis(d.referenceAxis.toString())! + xzScale(d.groupName)!)
+                    .attr('x', (d) => isVertical ? refAxis(d.referenceAxis.toString())! + xzScale(d.groupName)! : dataAxis(0))
+                    .attr('width', d => isVertical ? refAxis.bandwidth() / groups.length : dataAxis(d.groupValue) - dataAxis(0))
+                    .attr('height', d => isVertical ? dataAxis(0) - dataAxis(d.groupValue) : refAxis.bandwidth() / groups.length)
+                    .attr("fill", d => d3.schemeTableau10[groups.indexOf(d.groupName) % 10])
+                    .on('mouseover', function (d, i) {
+
+                        let rectElement = d.toElement;                                                
+                        tooltip
+                            .html(
+                                getTooltipHTML([{ title: i.groupName, value: (i.groupValue || 0).toString() }])
+                            )
+                            .style('visibility', 'visible')
+                            .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
+
+                        d3.select(this).transition().attr('class', getHoverClass);
+                    })
+                    .on('mouseout', function () {
+                        tooltip.html(``).style('visibility', 'hidden');
+                        d3.select(this).transition().attr('class', '')
+                    });
+            }
         }
 
 
 
-    }, [props.data, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount])
+    }, [props.data, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount, props.groupType])
 
     return <div className='vieolo-bar-chart width--pc-100 height--pc-100'>
         {
@@ -276,7 +322,7 @@ export default function BarChart(props: {
                         (props.data.length > 0 && typeof props.data[0].dataAxis !== 'number') &&
                         <Flex columnGap='one' wrap='wrap' justifyContent='end'>
                             {Object.keys(props.data[0].dataAxis).map((c, i) => {
-                                return <Flex alignItems='center' columnGap='half'>
+                                return <Flex alignItems='center' columnGap='half' key={c + i}>
                                     <div style={{ backgroundColor: d3.schemeTableau10[i], height: 15, width: 15, borderRadius: '50%' }}></div>
                                     <Typography text={c} type='paragraph-small' />
                                 </Flex>
