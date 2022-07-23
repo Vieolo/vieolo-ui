@@ -20,17 +20,15 @@ export function barChartOptions(): ViewData {
         } as Partial<BarChartPropsType>,
         variables: {
             dataType: {
-                default: "Sales Breakdown",
+                default: "Revenue",
                 options: ["Population", "Revenue", "Sales Breakdown", "Cash Reserve Change"]
             },
             direction: {
                 options: ['horizontal', 'vertical'],
                 default: 'vertical'
             },
-            sorted: {
-                options: [false, true],
-                default: false
-            }
+            sorted: 'boolean',
+            showInlineValue: 'booleanTrueDefault'
         }
     }
 }
@@ -50,6 +48,7 @@ export function BarChartCreator(props: { p: BarChartPropsType }) {
         direction={props.p.direction}
         sorted={props.p.sorted}
         data={dataTypes[(props.p as any).dataType]}
-        showInlineValue
+        showInlineValue={props.p.showInlineValue}
+        title={(props.p as any).dataType}
     />
 }

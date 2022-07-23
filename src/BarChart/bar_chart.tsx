@@ -1,6 +1,12 @@
 // React
 import { useEffect, useRef } from 'react';
 
+// Vieolo UI
+import Flex from '../Flex';
+import Typography from '../Typography';
+import GridContainer from '../GridContainer';
+import Grid from '../Grid';
+
 // Intalled Packages
 import * as d3 from 'd3';
 
@@ -32,6 +38,7 @@ export type StackedBarChartData = {
 }
 
 export default function BarChart(props: {
+    title?: string,
     direction: 'horizontal' | 'vertical',
     sorted?: boolean,
     data: (BarChartData | StackedBarChartData)[],
@@ -175,7 +182,7 @@ export default function BarChart(props: {
 
                         if (section === 1 || section === -1) {
                             c += ` fill-color--${d.fillColor || 'primary'}-text`
-                        }                        
+                        }
                         return c
                     })
                     .attr("x", (d: any) => {
@@ -249,7 +256,28 @@ export default function BarChart(props: {
 
     }, [props.data, props.height, props.showInlineValue, props.margin, props.direction, props.sorted])
 
-    return <div ref={ref} className='vieolo-bar-chart width--pc-100 height--pc-100'></div>
+    return <div className='vieolo-bar-chart width--pc-100 height--pc-100'>
+        <GridContainer>
+            <Grid xl={6}>
+                <Typography text={props.title || ''} type='title-medium' />
+            </Grid>
+
+            <Grid xl={6}>
+                {
+                    (props.data.length > 0 && typeof props.data[0].dataAxis !== 'number') &&
+                    <Flex columnGap='one' wrap='wrap' justifyContent='end'>
+                        {Object.keys(props.data[0].dataAxis).map((c, i) => {
+                            return <Flex alignItems='center' columnGap='half'>
+                                <div style={{ backgroundColor: d3.schemeTableau10[i], height: 15, width: 15, borderRadius: '50%' }}></div>
+                                <Typography text={c} type='paragraph-small' />
+                            </Flex>
+                        })}
+                    </Flex>
+                }
+            </Grid>
+        </GridContainer>
+        <div ref={ref} className="width--pc-100 height--pc-100"></div>
+    </div>
 }
 
 
@@ -292,7 +320,7 @@ function getDataAxisMin(values: number[]): number {
  * 1 (or -1) mean that the text appears inside the bar and 2 (or -2) means that text appears outside of the bar
  * 
  */
-function getInlineValueSection(d: BarChartData, axisMin: number, axisMax: number) : number {
+function getInlineValueSection(d: BarChartData, axisMin: number, axisMax: number): number {
     if (d.dataAxis >= 0) {
         if (d.dataAxis < (axisMax / 3)) {
             return 2
@@ -305,5 +333,5 @@ function getInlineValueSection(d: BarChartData, axisMin: number, axisMax: number
         } else {
             return -1
         }
-    }   
+    }
 }
