@@ -2,13 +2,13 @@
 import React from 'react';
 
 // Component
-import BarChart, { BarChartData } from '../../BarChart';
+import BarChart, { BarChartData, StackedBarChartData } from '../../BarChart';
 
 // Types
 import { ViewData } from '../main/main';
 
 // Data
-import { populationData, revenueData } from './chart_sample_data';
+import { populationData, revenueData, weeklySalesBreakdown } from './chart_sample_data';
 
 type BarChartPropsType = React.ComponentProps<typeof BarChart>;
 
@@ -20,12 +20,12 @@ export function barChartOptions(): ViewData {
         } as Partial<BarChartPropsType>,
         variables: {
             dataType: {
-                default: "Population",
-                options: ["Population", "Revenue"]
+                default: "Sales Breakdown",
+                options: ["Population", "Revenue", "Sales Breakdown"]
             },
             direction: {
                 options: ['horizontal', 'vertical'],
-                default: 'horizontal'
+                default: 'vertical'
             },
             dataAxisMin: {
                 options: ['smallest value', "zero"],
@@ -42,13 +42,14 @@ export function barChartOptions(): ViewData {
 
 export function BarChartCreator(props: { p: BarChartPropsType }) {
 
-    let dataTypes: {[key: string]: BarChartData[]} = {
+    let dataTypes: {[key: string]: BarChartData[] | StackedBarChartData[]} = {
         "Population": populationData,
-        "Revenue": revenueData
+        "Revenue": revenueData,
+        "Sales Breakdown": weeklySalesBreakdown
     }
 
     return <BarChart
-        height={200}
+        height={300}
         direction={props.p.direction}
         sorted={props.p.sorted}
         data={dataTypes[(props.p as any).dataType]}

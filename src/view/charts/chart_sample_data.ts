@@ -1,4 +1,4 @@
-import { BarChartData } from "../../BarChart"
+import { BarChartData, StackedBarChartData } from "../../BarChart"
 
 export let populationData: BarChartData[] = [ // internal
     {
@@ -73,5 +73,79 @@ export let revenueData: BarChartData[] = [ // internal
         dataAxis: -1.8,
         dataDisplay: "- €1.8 M",
         fillColor: 'error'
+    }
+]
+
+
+export let weeklySalesBreakdown: StackedBarChartData[] = [ // internal
+    {
+        referenceAxis: "Mo",
+        referenceAxisNumerical: 1,
+        dataAxis: {
+            "Mobile": 12_234,
+            "Tablet": 987,
+            "Laptop": 3_356,
+            "Monitor": 488,
+        },
+    },
+    {
+        referenceAxis: "Tu",
+        referenceAxisNumerical: 2,
+        dataAxis: {
+            "Mobile": 8_125,
+            "Tablet": 336,
+            "Laptop": 1_126,
+            "Monitor": 245,
+        },
+    },
+    {
+        referenceAxis: "We",
+        referenceAxisNumerical: 3,
+        dataAxis: {
+            "Mobile": 6_336,
+            "Tablet": 1_156,
+            "Laptop": 997,
+            "Monitor": 178,
+        },
+    },
+    {
+        referenceAxis: "Th",
+        referenceAxisNumerical: 4,
+        dataAxis: {
+            "Mobile": 7_354,
+            "Tablet": 678,
+            "Laptop": 1_898,
+            "Monitor": 467,
+        },
+    },
+    {
+        referenceAxis: "Fr",
+        referenceAxisNumerical: 5,
+        dataAxis: {
+            "Mobile": 14_356,
+            "Tablet": 2_024,
+            "Laptop": 5_356,
+            "Monitor": 87,
+        },
+    },
+    {
+        referenceAxis: "Sa",
+        referenceAxisNumerical: 6,
+        dataAxis: {
+            "Mobile": 15_235,
+            "Tablet": 2_287,
+            "Laptop": 5_002,
+            "Monitor": 1_234,
+        },
+    },
+    {
+        referenceAxis: "Su",
+        referenceAxisNumerical: 7,
+        dataAxis: {
+            "Mobile": 14_002,
+            "Tablet": 1_958,
+            "Laptop": 2_216,
+            "Monitor": 154,
+        },
     }
 ]

@@ -24,27 +24,17 @@ export type BarChartData = {
 }
 
 export type StackedBarChartData = {
-    /** 
-     * The X axis in a horizontal bar chart and Y axis in a vertical bar chart.
-     * The axis that holds the reference metric
-     */
     referenceAxis: string,
-    total: number,
-    /** 
-     * The Y axis in a horizonal bar chart and X axis in a vertical bart chart 
-     * 
-     * The axis that the bars are drawn against
-     * 
-     * The keys of the object are group type of stacked data in each bar
-     */
+    referenceAxisNumerical: number,
     dataAxis: { [key: string]: number },
-    dataDisplay?: (value: number) => string
+    dataFormatter?: (n: number) => string,
+    total?: number
 }
 
 export default function BarChart(props: {
     direction: 'horizontal' | 'vertical',
     sorted?: boolean,
-    data: BarChartData[],// | StackedBarChartData[],
+    data: BarChartData[] | StackedBarChartData[],
     dataAxisMin?: 'zero' | 'smallest value',
     ignoreNegativeValues?: boolean,
     height: number,
@@ -65,6 +55,18 @@ export default function BarChart(props: {
             }).join("");
         }
 
+        let ct: 'bar' | 'stacked' = (props.data[0] && typeof (props.data[0] as StackedBarChartData).dataAxis !== "number") ? 'stacked' : 'bar'
+
+
+        // For rendering the chart:
+        // 1. HTML div is selected
+        // 2. Width and height and final structure of data is calculated
+        // 3. A SVG element is created
+        // 4. Left axis of the chart is created (a `g` element)
+        // 5. Bottom axis of the chart is created (a `g` element)
+        // 6. Bar containers are added
+        // 7. Bar sized are adjusted
+
 
         // Selecting the HTML div
         d3.select(ref.current).html("");
@@ -73,6 +75,11 @@ export default function BarChart(props: {
         let width = (ref.current ? ref.current.offsetWidth : 200) - finalMargin.left - finalMargin.right;
         let height = props.height - finalMargin.top - finalMargin.bottom;
         let finalData = props.data;
+
+        if (ct === 'stacked') finalData = (finalData as StackedBarChartData[]).map((z: StackedBarChartData) => {
+            if (!z.total) z.total = Object.values(z.dataAxis).reduce((a, b) => a + b, 0)
+            return z
+        })
 
         if (props.sorted) finalData = sortData(props.data as any)
 
@@ -89,12 +96,12 @@ export default function BarChart(props: {
             .attr('class', 'vieolo-bar-chart__tooltip')
             .style('visibility', 'hidden');
 
-        let values = finalData.map(d => typeof d.dataAxis === 'number' ? d.dataAxis : (d as any).total)
+        let values = finalData.map(d => ct === 'bar' ? (d as BarChartData).dataAxis : Object.values((d as StackedBarChartData).dataAxis).reduce((a, b) => a + b, 0))
 
         let axisMin = props.dataAxisMin === 'smallest value'
             ? d3.min(values)!
             : 0
-        let axisMax = d3.max(values)
+        let axisMax = d3.max(values) || axisMin
 
         let refDomain = new d3.InternSet(finalData.map(d => d.referenceAxis))
         let mainDomain = [axisMin, axisMax]
@@ -114,50 +121,101 @@ export default function BarChart(props: {
             .attr("transform", "translate(-10,0)rotate(-45)")
             .style("text-anchor", "end");
 
+        if (ct === 'bar') {
+            // Bar Containers
+            svg
+                .selectAll("barContainer")
+                .data(finalData as BarChartData[])
+                .join("rect")
+                .attr("x", d => props.direction === 'vertical' ? refAxis(d.referenceAxis)! : dataAxis(0))
+                .attr("y", d => props.direction === 'vertical' ? dataAxis(0) : refAxis(d.referenceAxis)!)
+                .attr("width", d => props.direction === 'vertical' ? refAxis.bandwidth() : dataAxis(0))
+                .attr("height", d => props.direction === 'vertical' ? height - dataAxis(0) : refAxis.bandwidth())
+                .attr("class", getFillClass)
+                .on('mouseover', function (d, i) {
 
-        // Bar Containers
-        svg
-            .selectAll("barContainer")
-            .data(finalData)
-            .join("rect")
-            .attr("x", d => props.direction === 'vertical' ? refAxis(d.referenceAxis)! : dataAxis(0))
-            .attr("y", d => props.direction === 'vertical' ? dataAxis(0) : refAxis(d.referenceAxis)!)
-            .attr("width", d => props.direction === 'vertical' ? refAxis.bandwidth() : dataAxis(0))
-            .attr("height", d => props.direction === 'vertical' ? height - dataAxis(0) : refAxis.bandwidth())
-            .attr("class", getFillClass)
-            .on('mouseover', function (d, i) {
+                    let rectElement = d.toElement;
 
-                let rectElement = d.toElement;
+                    tooltip
+                        .html(
+                            getTooltipHTML([{ title: i.referenceAxis, value: i.dataDisplay }])
+                        )
+                        .style('visibility', 'visible')
+                        .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
 
-                tooltip
-                    .html(
-                        getTooltipHTML([{ title: i.referenceAxis, value: i.dataDisplay }])
-                    )
-                    .style('visibility', 'visible')
-                    .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
+                    d3.select(this).transition().attr('class', getHoverClass);
+                })
+                .on('mouseout', function () {
+                    tooltip.html(``).style('visibility', 'hidden');
+                    d3.select(this).transition().attr('class', getFillClass);
+                });
 
-                d3.select(this).transition().attr('class', getHoverClass);
+
+            // Each Bar
+            svg
+                .selectAll("rect")
+                .transition()
+                .duration(200)
+                .attr(props.direction === "vertical" ? "y" : "x", (d: any) => {
+                    if (props.direction === 'vertical') return dataAxis((axisMin < 0 && d.dataAxis < 0) ? 0 : d.dataAxis)!
+                    else return dataAxis((axisMin < 0 && d.dataAxis < 0) ? d.dataAxis : 0)!
+                })
+                .attr(props.direction === "vertical" ? "height" : "width", (d: any) => {
+                    if (props.direction === 'vertical') return height - dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
+                    else return dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
+                })
+                .delay((d, i) => { return i * 20 })
+
+        } else {
+
+            let s: { [key: string]: number | string }[] = (props.data as StackedBarChartData[]).map((z, i) => {
+                return { referenceAxis: z.referenceAxis, ...z.dataAxis }                
             })
-            .on('mouseout', function () {
-                tooltip.html(``).style('visibility', 'hidden');
-                d3.select(this).transition().attr('class', getFillClass);
-            });
+
+            const stack = d3.stack()
+                .keys(Object.keys((props.data as StackedBarChartData[])[0].dataAxis))
 
 
-        // Each Bar
-        svg
-            .selectAll("rect")
-            .transition()
-            .duration(200)
-            .attr(props.direction === "vertical" ? "y" : "x", (d: any) => {
-                if (props.direction === 'vertical') return dataAxis((axisMin < 0 && d.dataAxis < 0) ? 0 : d.dataAxis)!
-                else return dataAxis((axisMin < 0 && d.dataAxis < 0) ? d.dataAxis : 0)!
-            })
-            .attr(props.direction === "vertical" ? "height" : "width", (d: any) => {
-                if (props.direction === 'vertical') return height - dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
-                else return dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
-            })
-            .delay((d, i) => { return i * 20 })
+            var sel = svg
+                .select('g')
+                .selectAll('g.series')
+                .data(stack(s as any))
+                .join('g')
+                .classed('series', true)
+                .style('fill', (d) => d3.schemeTableau10[d.index]);
+
+            sel.selectAll('rect')
+                .data((d) => d)
+                .join('rect')
+                .attr('width', refAxis.bandwidth())
+                .attr('y', (d) => dataAxis(d[1]))
+                .attr('x', (d) => refAxis(d.data.referenceAxis.toString())!)
+                .attr('height', (d) => dataAxis(d[0]) - dataAxis(d[1]))
+                .on('mouseover', function (d, i) {
+
+                    let rectElement = d.toElement;
+                    let title = ''
+                    try {
+                        title = rectElement.attributes["title"].textContent;
+                    } catch (error) {
+                        
+                    }
+
+                    tooltip
+                        .html(
+                            getTooltipHTML([{ title: title, value: (i[1] - i[0]).toString() }])
+                        )
+                        .style('visibility', 'visible')
+                        .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
+
+                    d3.select(this).transition().attr('class', getHoverClass);
+                })
+                .on('mouseout', function () {
+                    tooltip.html(``).style('visibility', 'hidden');
+                    d3.select(this).transition().attr('class', '')
+                });        
+        }
+
 
 
     }, [props.data, props.dataAxisMin, props.height, props.margin, props.direction, props.sorted])
@@ -179,9 +237,11 @@ function sortData(data: StackedBarChartData[]): StackedBarChartData[];
 function sortData(data: BarChartData[] | StackedBarChartData[]): BarChartData[] | StackedBarChartData[] {
     if (data.length === 0) return data;
 
-    if (typeof data[0].dataAxis === 'number') {  // BarChartData
+    if (typeof (data[0] as BarChartData).dataAxis === 'number') {  // BarChartData
         return [...(data as BarChartData[])].sort((a, b) => b.dataAxis - a.dataAxis);
     } else {  // StackedBarChartData
-        return [...(data as StackedBarChartData[])].sort((a, b) => b.total - a.total);
+        return [...(data as StackedBarChartData[])].sort((a, b) => {
+            return (b.total || 0) - (a.total || 0)
+        })
     }
 }
