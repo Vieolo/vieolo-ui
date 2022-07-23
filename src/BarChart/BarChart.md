@@ -14,3 +14,4 @@ The horizontal layout is more appropriate in cases where the number of bars is n
 The bars displayed in the chart can be of the following types:
 - `Normal bar`: These are regular bars. use `BarChartData[]` to render this type.
 - `Stacked bar`: In this case, each bar contains a series of smaller bars indicating the breakdown of each bar. use `StackedBarChartData[]` to render this type of bars.
+- `Grouped Bar`: In this case, bars are placed inside a group (as compared to the stacked bar where they are placed in a single bar). The structure of the data used by this type of chart is identical to that of `Stacked Bar` and the differentiation is made by the `groupType` prop.

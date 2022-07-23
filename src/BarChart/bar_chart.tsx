@@ -222,41 +222,7 @@ export default function BarChart(props: {
                     if (isVertical) return height - dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
                     else return dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
                 })
-                .delay((d, i) => { return i * 20 })
-
-
-            if (!isVertical && props.showInlineValue) {
-
-                // Adding the value of the bars in the cahrt
-                svg.selectAll(".text")
-                    .data(finalData)
-                    .enter()
-                    .append("text")
-                    .attr("class", (d: any) => {
-                        let section = getInlineValueSection(d, axisMin, axisMax)
-                        let c = "typography-paragraph-small";
-
-                        if (section === 1 || section === -1) {
-                            c += ` fill-color--${d.fillColor || 'primary'}-text`
-                        }
-                        return c
-                    })
-                    .attr("x", (d: any) => {
-                        let section = getInlineValueSection(d, axisMin, axisMax)
-                        if (section === 2) {
-                            return dataAxis(d.dataAxis) + 5
-                        } else if (section === -1) {
-                            return dataAxis(d.dataAxis) + 5
-                        } else if (section === -2) {
-                            return 10
-                        } else {
-                            return dataAxis(0) + 5
-                        }
-                    })
-                    .attr("y", (d: any) => refAxis(d.referenceAxis)!)
-                    .attr("dy", refAxis.bandwidth() / 1.5)
-                    .text((d: any) => d.dataDisplay);
-            }
+                .delay((d, i) => { return i * 20 })            
 
         } else {
 
@@ -328,6 +294,50 @@ export default function BarChart(props: {
                     .on('mouseover', function (d, i) { displayTooltip(this, d, i.groupName, (i.groupValue || 0).toString()) })
                     .on('mouseout', function () { removeTooltip(this, true) });
             }
+        }
+
+
+        if (!isVertical && props.showInlineValue) {
+
+            // Adding the value of the bars in the cahrt
+            svg.selectAll(".text")
+                .data(finalData)
+                .enter()
+                .append("text")
+                .attr("class", (d: any) => {
+                    let c = "typography-paragraph-small";
+                    
+                    if (ct !== 'bar') return c;
+                    
+                    let section = getInlineValueSection(d, axisMin, axisMax)
+
+                    if (section === 1 || section === -1) {
+                        c += ` fill-color--${d.fillColor || 'primary'}-text`
+                    }
+                    return c
+                })
+                .attr("x", (d: any) => {
+                    let section = getInlineValueSection(d, axisMin, axisMax)
+                    if (section === 2) {
+                        return dataAxis(d.total || d.dataAxis) + 5
+                    } else if (section === -1) {
+                        return dataAxis(d.total || d.dataAxis) + 5
+                    } else if (section === -2) {
+                        return 10
+                    } else {
+                        return dataAxis(0) + 5
+                    }
+                })
+                .attr("y", (d: BarChartData | StackedBarChartData) => refAxis(d.referenceAxis)!)
+                .attr("dy", refAxis.bandwidth() / 1.5)
+                .text((d: StackedBarChartData | BarChartData) => {
+                    if ((d as BarChartData).dataDisplay !== undefined) return (d as BarChartData).dataDisplay
+                    else {
+                        let t = (d as StackedBarChartData).total || 0;
+                        if ((d as StackedBarChartData).dataFormatter) return (d as StackedBarChartData).dataFormatter!(t)
+                        else return t.toString()
+                    }
+                });
         }
 
 
@@ -403,15 +413,17 @@ function getDataAxisMin(values: number[]): number {
  * 1 (or -1) mean that the text appears inside the bar and 2 (or -2) means that text appears outside of the bar
  * 
  */
-function getInlineValueSection(d: BarChartData, axisMin: number, axisMax: number): number {
-    if (d.dataAxis >= 0) {
-        if (d.dataAxis < (axisMax / 3)) {
+function getInlineValueSection(d: BarChartData | StackedBarChartData, axisMin: number, axisMax: number): number {
+    let t = typeof  d.dataAxis === 'number' ? d.dataAxis : (d as StackedBarChartData).total!
+    
+    if (t >= 0) {
+        if (t < (axisMax / 3)) {
             return 2
         } else {
             return 1
         }
     } else {
-        if (Math.abs(d.dataAxis) < (Math.abs(axisMin) / 3)) {
+        if (Math.abs(t) < (Math.abs(axisMin) / 3)) {
             return -2
         } else {
             return -1
