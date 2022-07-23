@@ -45,7 +45,8 @@ export default function BarChart(props: {
     ignoreNegativeValues?: boolean,
     height: number,
     margin?: { top: number, right: number, bottom: number, left: number },
-    showInlineValue?: boolean
+    showInlineValue?: boolean,
+    tickCount?: number
 }) {
 
     let ref = useRef<HTMLDivElement>(null);
@@ -116,7 +117,13 @@ export default function BarChart(props: {
         let dataAxis = d3.scaleLinear().domain(mainDomain).range(props.direction === 'vertical' ? [height, 0] : [0, width]);
 
         // Left Axis
-        svg.append("g").call(d3.axisLeft(props.direction === 'vertical' ? dataAxis : refAxis as any));
+        let leftAxis = d3.axisLeft(props.direction === 'vertical' ? dataAxis : refAxis as any)
+        
+        if (isVertical && props.tickCount) {
+            leftAxis.ticks(props.tickCount)
+        }
+        
+        svg.append("g").call(leftAxis);
 
         // Bottom axis
         svg
@@ -254,28 +261,31 @@ export default function BarChart(props: {
 
 
 
-    }, [props.data, props.height, props.showInlineValue, props.margin, props.direction, props.sorted])
+    }, [props.data, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount])
 
     return <div className='vieolo-bar-chart width--pc-100 height--pc-100'>
-        <GridContainer>
-            <Grid xl={6}>
-                <Typography text={props.title || ''} type='title-medium' />
-            </Grid>
+        {
+            (props.title || (props.data.length > 0 && typeof props.data[0].dataAxis !== 'number')) &&
+            <GridContainer>
+                <Grid xl={6}>
+                    <Typography text={props.title || ''} type='title-medium' />
+                </Grid>
 
-            <Grid xl={6}>
-                {
-                    (props.data.length > 0 && typeof props.data[0].dataAxis !== 'number') &&
-                    <Flex columnGap='one' wrap='wrap' justifyContent='end'>
-                        {Object.keys(props.data[0].dataAxis).map((c, i) => {
-                            return <Flex alignItems='center' columnGap='half'>
-                                <div style={{ backgroundColor: d3.schemeTableau10[i], height: 15, width: 15, borderRadius: '50%' }}></div>
-                                <Typography text={c} type='paragraph-small' />
-                            </Flex>
-                        })}
-                    </Flex>
-                }
-            </Grid>
-        </GridContainer>
+                <Grid xl={6}>
+                    {
+                        (props.data.length > 0 && typeof props.data[0].dataAxis !== 'number') &&
+                        <Flex columnGap='one' wrap='wrap' justifyContent='end'>
+                            {Object.keys(props.data[0].dataAxis).map((c, i) => {
+                                return <Flex alignItems='center' columnGap='half'>
+                                    <div style={{ backgroundColor: d3.schemeTableau10[i], height: 15, width: 15, borderRadius: '50%' }}></div>
+                                    <Typography text={c} type='paragraph-small' />
+                                </Flex>
+                            })}
+                        </Flex>
+                    }
+                </Grid>
+            </GridContainer>
+        }
         <div ref={ref} className="width--pc-100 height--pc-100"></div>
     </div>
 }

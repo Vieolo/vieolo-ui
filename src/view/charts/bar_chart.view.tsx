@@ -45,6 +45,7 @@ export function BarChartCreator(props: { p: BarChartPropsType }) {
 
     return <BarChart
         height={300}
+        // tickCount={5}
         direction={props.p.direction}
         sorted={props.p.sorted}
         data={dataTypes[(props.p as any).dataType]}
