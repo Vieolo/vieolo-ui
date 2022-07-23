@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.23.0 (2022-07-24)
+- Improved the `BarChart`
+- Added `Stacked` and `Grouped` types to the `BarChart`
+
+#### Breaking Changes
+- `color` field of the `BarChartData` is changed from string to the Vieolo UI color pallet
+- `dataAxisMin` prop is removed from `BarChart`
+
 ## 0.22.11 (2022-07-18)
 - Added height option to `Chip` ([#178](https://github.com/Vieolo/vieolo-ui/issues/178))
 - Added loading state to `FormDialog` ([#203](https://github.com/Vieolo/vieolo-ui/issues/203))

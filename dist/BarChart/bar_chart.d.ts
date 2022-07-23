@@ -1,5 +1,6 @@
 /// <reference types="react" />
-declare type BarChartData = {
+import { ColorOptionType } from '../types';
+export declare type BarChartData = {
     /**
      * The X axis in a horizontal bar chart and Y axis in a vertical bar chart.
      * The axis that holds the reference metric
@@ -10,14 +11,24 @@ declare type BarChartData = {
      * The axis that the bars are drawn against
      */
     dataAxis: number;
-    fillColor?: string;
+    fillColor?: ColorOptionType;
     dataDisplay: string;
 };
+export declare type StackedBarChartData = {
+    referenceAxis: string;
+    referenceAxisNumerical: number;
+    dataAxis: {
+        [key: string]: number;
+    };
+    dataFormatter?: (n: number) => string;
+    total?: number;
+};
 export default function BarChart(props: {
+    title?: string;
     direction: 'horizontal' | 'vertical';
     sorted?: boolean;
-    data: BarChartData[];
-    dataAxisMin?: 'zero' | 'smallest value';
+    data: (BarChartData | StackedBarChartData)[];
+    ignoreNegativeValues?: boolean;
     height: number;
     margin?: {
         top: number;
@@ -25,5 +36,8 @@ export default function BarChart(props: {
         bottom: number;
         left: number;
     };
+    showInlineValue?: boolean;
+    tickCount?: number;
+    groupType?: 'stacked' | 'grouped';
+    removeSpaceBetweenBars?: boolean;
 }): JSX.Element;
-export {};

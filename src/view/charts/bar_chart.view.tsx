@@ -2,10 +2,13 @@
 import React from 'react';
 
 // Component
-import BarChart from '../../BarChart';
+import BarChart, { BarChartData, StackedBarChartData } from '../../BarChart';
 
 // Types
 import { ViewData } from '../main/main';
+
+// Data
+import { cashReserveChangeData, populationData, revenueData, weeklySalesBreakdown } from './chart_sample_data';
 
 type BarChartPropsType = React.ComponentProps<typeof BarChart>;
 
@@ -16,42 +19,44 @@ export function barChartOptions(): ViewData {
 
         } as Partial<BarChartPropsType>,
         variables: {
+            dataType: {
+                default: "Sales Breakdown",
+                options: ["Population", "Revenue", "Sales Breakdown", "Cash Reserve Change"]
+            },
             direction: {
                 options: ['horizontal', 'vertical'],
-                default: 'vertical'
+                default: 'horizontal'
             },
-            sorted: {
-                options: [false, true],
-                default: false
-            }
+            groupType: {
+                options: ["grouped", "stacked"],
+                default: "stacked"
+            },
+            sorted: 'boolean',
+            showInlineValue: 'booleanTrueDefault',
+            removeSpaceBetweenBars: 'boolean'
         }
     }
 }
 
 
-export function BarChartCreator(props: {p: BarChartPropsType}) {
+export function BarChartCreator(props: { p: BarChartPropsType }) {
+
+    let dataTypes: {[key: string]: BarChartData[] | StackedBarChartData[]} = {
+        "Population": populationData,
+        "Revenue": revenueData,
+        "Sales Breakdown": weeklySalesBreakdown,
+        "Cash Reserve Change": cashReserveChangeData
+    }
 
     return <BarChart
         height={400}
+        // tickCount={5}
         direction={props.p.direction}
         sorted={props.p.sorted}
-        data={[
-            {
-                referenceAxis: 'Germany',
-                dataAxis: 80_000_000,
-                fillColor: "teal",
-                dataDisplay: "80,000,000.00"
-            },
-            {
-                referenceAxis: 'Estonia',
-                dataAxis: 1_300_000,
-                dataDisplay: "1,300,000.00"
-            },
-            {
-                referenceAxis: 'Denmark',
-                dataAxis: 5_000_000,
-                dataDisplay: "5,000,000.00"
-            }
-        ]}
+        data={dataTypes[(props.p as any).dataType]}
+        showInlineValue={props.p.showInlineValue}
+        title={(props.p as any).dataType}
+        groupType={props.p.groupType}
+        removeSpaceBetweenBars={props.p.removeSpaceBetweenBars}
     />
 }

@@ -58,6 +58,10 @@ import TitlePeriodCard from './TitlePeriodCard';
 import Typography from './Typography';
 import VieoloApp from './VieoloApp';
 import {
+	BarChartData as BarChartDataTemp,
+	StackedBarChartData as StackedBarChartDataTemp,
+} from './BarChart';
+import {
 	ConfirmationDialogMainButton as ConfirmationDialogMainButtonTemp,
 } from './ConfirmationDialog';
 import {
@@ -195,6 +199,8 @@ export {
 
 
 
+export type BarChartData = BarChartDataTemp;
+export type StackedBarChartData = StackedBarChartDataTemp;
 export type ConfirmationDialogMainButton = ConfirmationDialogMainButtonTemp;
 export type ContextMenuItem = ContextMenuItemTemp;
 export type DropDownMenuItemType = DropDownMenuItemTypeTemp;

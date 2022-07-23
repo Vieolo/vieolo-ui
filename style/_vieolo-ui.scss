@@ -1749,10 +1749,15 @@ body {
 
 	&__tooltip {
 		position: absolute;
-		@include card-light-shadow;
+		box-shadow: $elevation-shadow-1;
 		padding: $base-unit;
+		background-color: $content-background-color;
+		border-radius: $border-radius-normal;
 		top: 0;
-		//transform: translateX(-50%);
+		
+		p {
+			margin: 0;
+		}
 	}
 }
 

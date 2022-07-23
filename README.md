@@ -5,7 +5,7 @@ The component package containing the UI components of Vieolo OÜ
 to install, add the following to the `dependency` key of the `package.json` file of the project.
 
 ```json
-"@vieolo/vieolo-ui": "github:Vieolo/vieolo-ui#0.22.11"
+"@vieolo/vieolo-ui": "github:Vieolo/vieolo-ui#0.23.0"
 ```
 
 ## Development View
@@ -21,6 +21,10 @@ In order to build the release components, run
 npm run build-components
 ```
 which uses typescript compiler to create release components in the `dist` folder. The component source files are in `src/lib` and are exported in `src/export.ts` file. If the `build-components` command does not produce any file, check the `noEmit` key in the `tsconfig.json` file.
+
+## Components
+
+[`BarChart`](src/BarChart/BarChart.md)
 
 ## Usage
 In the target package, the components can be imported and used as followed:
