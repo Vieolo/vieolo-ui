@@ -26,68 +26,59 @@ $universal-border-radius-half: 5px !default; // deprecated
 
 // Pallet Colors
 
-$background-color: #fffffb !default;
-$content-background-color: #fffffb !default;
-$hover-color: rgb(220, 247, 231) !default;
-$border-color: #f2f2f2 !default;
-
-$normal-text-color: #2e2e2e !default;
-$gray-text-color: gray !default;
-$disable-color-normal: #b0bec5 !default;
-
-$primary-color-normal: #2D4DA5 !default;
+$primary-color-normal: #1460BA !default;
 $primary-color-transparent: rgba(45, 77, 165, 0.2) !default;
 $primary-color-light: #B8E6FF !default;
 $primary-color-text: #ececec !default;
-$primary-color-text-light: $primary-color-normal;
+$primary-color-text-light: $primary-color-normal !default;
 
-$secondary-color-normal: #034727 !default;
-$secondary-color-transparent: rgba(3, 71, 39, 0.2) !default;
-$secondary-color-light: #71ECB3 !default;
-$secondary-color-text: white !default;
-$secondary-color-text-light: $secondary-color-normal;
+$secondary-color-normal: #6750A4 !default;
+$secondary-color-transparent: rgba(103, 80, 164, 0.2) !default;
+$secondary-color-light: #EADDFF !default;
+$secondary-color-text: rgb(236, 236, 236) !default;
+$secondary-color-text-light: $secondary-color-normal !default;
 
-$tertiary-color-normal: #c9dfd2 !default;
-$tertiary-color-transparent: rgba(201, 223, 210, 0.3) !default;
-$tertiary-color-light: rgb(220, 247, 231) !default;
-$tertiary-color-text: white !default;
-$tertiary-color-text-light: $tertiary-color-normal;
+$tertiary-color-normal: #d5fe65 !default;
+$tertiary-color-transparent: rgba(219, 255, 118, 0.2) !default;
+$tertiary-color-light: #ebfbbe !default;
+$tertiary-color-text: black !default;
+$tertiary-color-text-light: black !default;
 
 $alert-color-normal: #91832A !default;
 $alert-color-transparent: rgba(145, 131, 42, 0.2) !default;
 $alert-color-light: #F8F8AC !default;
 $alert-color-text: white !default;
-$alert-color-text-light: $alert-color-normal;
+$alert-color-text-light: $alert-color-normal !default;
 
 $error-color-normal: #E74420 !default;
 $error-color-transparent: rgba(231, 68, 32, 0.2) !default;
 $error-color-light: #FFE8E3 !default;
 $error-color-text: white !default;
-$error-color-text-light: $error-color-normal;
+$error-color-text-light: $error-color-normal !default;
 
 $success-color-normal: #13AE2D !default;
 $success-color-transparent: rgba(19, 174, 45, 0.2) !default;
 $success-color-light: #EDFFE1 !default;
 $success-color-text: white !default;
-$success-color-text-light: $success-color-normal;
+$success-color-text-light: $success-color-normal !default;
 
 $accessory-orange-normal: #FF9029 !default;
 $accessory-orange-transparent: rgba(255, 144, 41, 0.2) !default;
 $accessory-orange-light: #FFF1E5 !default;
 $accessory-orange-text: black !default;
-$accessory-orange-text-light: $accessory-orange-normal;
+$accessory-orange-text-light: $accessory-orange-normal !default;
 
 $accessory-blue-normal: #2085BB !default;
 $accessory-blue-transparent: rgba(32, 133, 187, 0.2) !default;
 $accessory-blue-light: #E3FCFF !default;
 $accessory-blue-text: white !default;
-$accessory-blue-text-light: $accessory-blue-normal;
+$accessory-blue-text-light: $accessory-blue-normal !default;
 
 $accessory-green-normal: #00958D !default;
 $accessory-green-transparent: rgba(0, 149, 141, 0.2) !default;
 $accessory-green-light: #DCFFF7 !default;
 $accessory-green-text: black !default;
-$accessory-green-text-light: $accessory-green-normal;
+$accessory-green-text-light: $accessory-green-normal !default;
 
 $colorOptions: (
 	"primary",
@@ -100,6 +91,15 @@ $colorOptions: (
 	"accessory-orange",
 	"accessory-blue"
 );
+
+$background-color: #fffffb !default;
+$content-background-color: #fffffb !default;
+$hover-color: $primary-color-light !default;
+$border-color: #f2f2f2 !default;
+
+$normal-text-color: #2e2e2e !default;
+$gray-text-color: gray !default;
+$disable-color-normal: #b0bec5 !default;
 
 
 // Sizes

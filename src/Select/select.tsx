@@ -256,7 +256,7 @@ export default function Select(props: SelectProps) {
                         icon={<CloseIcon />}
                         onClick={() => props.onSelect([])}
                         color="error"
-                        size="small"
+                        size="extra-small"
                     />
             }
 
