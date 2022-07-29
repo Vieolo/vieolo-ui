@@ -1,8 +1,10 @@
 // React
+import { toFixed } from '@vieolo/parsers';
 import React from 'react';
 
 // Component
 import DonutChart from '../../DonutChart';
+import { DonutChartData } from '../../DonutChart/donut_chart';
 
 // Types
 import { ViewData } from '../main/main';
@@ -11,47 +13,72 @@ type DonutChartPropsType = React.ComponentProps<typeof DonutChart>;
 
 export function donutChartOptions(): ViewData {
 
-  return {
-    constants: {      
-      innerText: "Donut Chart",
-      data : [{
-        title: 'Donut 1',
-        percent: 0.30,
-        displayValue: '4,000'
-      },
-      {
-        title: 'Donut 2',
-        percent: 0.25,
-        displayValue: '2,500'
-      },
-      {
-        title: 'Donut 3',
-        percent: 0.20,
-        displayValue: '2,000'
-      },
-      {
-        title: 'Donut 4',
-        percent: 0.15,
-        displayValue: '1,500'
-      }
-    ],
-    includeLegend: true,
+    return {
+        constants: {
+            includeLegend: true,
 
-    } as Partial<DonutChartPropsType>,
-    variables: {
-      disabled: {
-        options: [false, true],
-        default: false,
-    },
+        } as Partial<DonutChartPropsType>,
+        variables: {
+            dataType: {
+                default: "Percentage - Long",
+                options: [
+                    "Percentage - Long",
+                    "Percentage - Short",
+                    "Value - Long",
+                    "Value - short"
+                ]
+            },
+            disabled: 'boolean',
+            sorted: 'boolean',
+        }
     }
-  }
 }
 
-export function DonutChartCreator(props: { p: DonutChartPropsType}) {
-  return <DonutChart
-    innerText={props.p.innerText}
-    data={props.p.data}
-    includeLegend={props.p.includeLegend}
-    disabled={props.p.disabled}
+export function DonutChartCreator(props: { p: DonutChartPropsType }) {
+
+    let values = [
+        4000,
+        2500,
+        2000,
+        1500,
+        1500,
+        1500,
+        1500,
+        1500,
+        1500,
+        3500,
+        500,
+        1500,
+        2500,
+        3500,
+        100
+    ]        
+
+    let total = values.reduce((a, b) => a + b, 0);
+    
+    let data: DonutChartData[] = values.map((z, i) => {
+        let f: DonutChartData = {
+            title: `Donut ${i + 1}`,
+            id: i.toString(),            
+        }
+
+        if ((props.p as any).dataType.includes("Percentage")) {
+            f.percent = z / total
+            f.displayValue = `${toFixed((z / total) * 100, 2)}%`
+        } else {
+            f.value = z
+            f.displayValue = z.toString()
+        }
+
+        return f
+    })
+
+    return <DonutChart
+        innerText={props.p.innerText}
+        data={(props.p as any).dataType.includes("Long") ? data : data.slice(0, 3)}
+        includeLegend={props.p.includeLegend}
+        disabled={props.p.disabled}
+        height={300}
+        sorted={props.p.sorted}
     />
 }
