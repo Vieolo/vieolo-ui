@@ -1,6 +1,6 @@
 // React
 import { toFixed } from '@vieolo/parsers';
-import React from 'react';
+import React, { useState } from 'react';
 
 // Component
 import DonutChart from '../../DonutChart';
@@ -36,6 +36,8 @@ export function donutChartOptions(): ViewData {
 
 export function DonutChartCreator(props: { p: DonutChartPropsType }) {
 
+    let [selected, setSelected] = useState<DonutChartData | undefined>(undefined)
+
     let values = [
         4000,
         2500,
@@ -60,6 +62,7 @@ export function DonutChartCreator(props: { p: DonutChartPropsType }) {
         let f: DonutChartData = {
             title: `Donut ${i + 1}`,
             id: i.toString(),            
+            selected: selected && selected.id === i.toString()
         }
 
         if ((props.p as any).dataType.includes("Percentage")) {
@@ -80,5 +83,9 @@ export function DonutChartCreator(props: { p: DonutChartPropsType }) {
         disabled={props.p.disabled}
         height={300}
         sorted={props.p.sorted}
+        onClick={(d) => {
+            if (selected && d.id === selected.id) setSelected(undefined)            
+            else setSelected(d)
+        }}
     />
 }

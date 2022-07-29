@@ -13,7 +13,8 @@ export type DonutChartData = {
     /** The numerical value of data */
     value?: number,
     /** This value is displayed when the legend is selected and is not considered in the calculations */
-    displayValue?: string
+    displayValue?: string,
+    selected?: boolean,
 }
 
 export default function DonutChart(props: {
@@ -23,7 +24,7 @@ export default function DonutChart(props: {
     disabled?: boolean,
     height?: number,
     sorted?: boolean,
-    selected?: boolean
+    onClick?: (d: DonutChartData) => void,
 }) {
 
     let ref = useRef<HTMLDivElement>(null);
@@ -44,6 +45,8 @@ export default function DonutChart(props: {
                 return (b.percent || b.value || 0) - (a.percent || a.value || 0)
             })
         }
+
+        let hasSelected = finalData.some(z => z.selected);
 
         // Selecting the HTML div
         d3.select(ref.current).html("");
@@ -88,8 +91,17 @@ export default function DonutChart(props: {
             .selectAll("path")
             .data(pie)
             .join("path")
-            .attr("fill", d => color(N[d.index]))
+            .attr("fill", d => {
+                if (hasSelected && !finalData[d.index].selected) return "#ddd"
+
+                return color(N[d.index])
+            })
             .attr("d", arc as any)
+            .on("click", (e, d) => {
+                if (props.onClick) {
+                    props.onClick(finalData[d.index])
+                }
+            })
             .append("title")
             .text(function (d) {
                 if (finalData[0].percent !== undefined) {
@@ -113,6 +125,7 @@ export default function DonutChart(props: {
             .attr("class", "typography-paragraph-small")
             .attr("dy", ".35em")
             .text(function (d) {
+                if (hasSelected && !finalData[d.index].selected) return ""
                 return percent(d.index)
             })
             .merge(text as any)
@@ -154,7 +167,10 @@ export default function DonutChart(props: {
         polyline
             .join("polyline")
             .attr("stroke", "black")
-            .attr("stroke-width", "1px")
+            .attr("stroke-width", d => {
+                if (hasSelected && !finalData[d.index].selected) return "0px"
+                return "1px"
+            })
             .attr("fill", "none")
             .transition()
             .duration(1000)
