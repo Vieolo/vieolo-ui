@@ -176,5 +176,5 @@ export default function DonutChart(props: {
     }, [props, props.data, propsRef, props.height, props.sorted])
 
 
-    return <div className='vieolo-donut-chart width--pc-100 height--pc-100' ref={ref}></div>
+    return <div className={`vieolo-donut-chart width--pc-100 height--pc-100 ${props.disabled ? "disabled" : ""}`} ref={ref}></div>
 }
