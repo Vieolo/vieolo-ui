@@ -23,6 +23,7 @@ export function clickableCardOptions(): ViewData {
             withIcon: 'boolean',
             withDescription: 'boolean',
             withRightItems: 'boolean',
+            keepEmphasisTextColorClasses: 'boolean',
             descriptionTypography: 'typographyOptions',
             borderRadius: 'borderRadius',
             emphasis: 'emphasis',
@@ -41,6 +42,7 @@ export function ClickableCardCreator(props: {p: ClickableCardPropsType}) {
         emphasis={props.p.emphasis}
         borderRadius={props.p.borderRadius}
         color={props.p.color}
+        keepEmphasisTextColorClasses={props.p.keepEmphasisTextColorClasses}
         description={!(props.p as any).withDescription ? undefined : {
             text: "A new project allows you to organize your tasks in a much more managable and production environment",
             typographyType: (props.p as any).descriptionTypography
