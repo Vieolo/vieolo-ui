@@ -464,10 +464,9 @@ body {
 	width: 160px;
 
 	&__select-button {
-		@include card-no-shadow;
 		margin: 0 auto;
-		@include tertiary-background;
-		border-color: $tertiary-color-normal;
+		border: 2px solid $primary-color-light;
+		border-radius: $border-radius-half;
 		cursor: pointer;
 		@include flex-row-space-between;
 		@include no-text-overflow;
@@ -509,12 +508,8 @@ body {
 			}
 		}
 
-		.vieolo-icon-button {
-			background-color: $tertiary-color-normal;
-		}
 
 		input {
-			background-color: $tertiary-color-normal;
 			border: none;
 
 			&:focus,
@@ -566,10 +561,21 @@ body {
 
 		&:hover {
 			background-color: $hover-color;
+
+			color: $normal-text-color;
+
+			p {
+				color: $normal-text-color;
+			}
 		}
 
 		&--selected {
-			@include tertiary-background;
+			background-color: $primary-color-normal;
+			color: $primary-color-text;
+
+			p {
+				color: $primary-color-text;
+			}
 		}
 
 		&--subtitle {
