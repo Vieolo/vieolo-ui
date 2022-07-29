@@ -1,5 +1,5 @@
 // React
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Vieolo UI
 import Flex from '../Flex';
@@ -52,8 +52,15 @@ export default function BarChart(props: {
 }) {
 
     let ref = useRef<HTMLDivElement>(null);
+    let [propsRef, setPropsRef] = useState<string>("")  
 
     useEffect(() => {
+
+        // If the props is equal to the current state, the function is cancelled
+        let stringified = JSON.stringify(props)
+        if (propsRef && stringified === propsRef) return        
+
+        setPropsRef(stringified)
 
         // Creating the Tooltip
         function getTooltipHTML(values: { title: string, value: string }[]) {
@@ -94,7 +101,7 @@ export default function BarChart(props: {
 
         let ct: 'bar' | 'stacked' | 'grouped' = (props.data[0] && typeof (props.data[0] as StackedBarChartData).dataAxis !== "number") ? props.groupType || 'stacked' : 'bar'
         let isVertical = props.direction === 'vertical'
-        // let animationDuration = 200;
+        let animationDuration = 200;
 
 
         // For rendering the chart:
@@ -213,8 +220,8 @@ export default function BarChart(props: {
             // Each Bar
             svg
                 .selectAll("rect")
-                // .transition()
-                // .duration(animationDuration)
+                .transition()
+                .duration(animationDuration)
                 .attr(isVertical ? "y" : "x", (d: any) => {
                     if (isVertical) return dataAxis((axisMin < 0 && d.dataAxis < 0) ? 0 : d.dataAxis)!
                     else return dataAxis((axisMin < 0 && d.dataAxis < 0) ? d.dataAxis : 0)!
@@ -343,7 +350,7 @@ export default function BarChart(props: {
 
 
 
-    }, [props.data, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount, props.groupType, props.removeSpaceBetweenBars])
+    }, [props, props.data, propsRef, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount, props.groupType, props.removeSpaceBetweenBars])
 
 
 

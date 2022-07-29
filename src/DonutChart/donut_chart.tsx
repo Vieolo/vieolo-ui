@@ -27,12 +27,15 @@ export default function DonutChart(props: {
 }) {
 
     let ref = useRef<HTMLDivElement>(null);
+    let [propsRef, setPropsRef] = useState<string>("")    
 
-    let [selectedItem, setSelectedItem] = useState<number>(-1);
-    let [selectedValue, setSelectedValue] = useState<string>('');
+    useEffect(() => {        
 
+        // If the data is equal to the current state, the function is cancelled
+        let stringified = JSON.stringify(props)
+        if (propsRef && stringified === propsRef) return        
 
-    useEffect(() => {
+        setPropsRef(stringified)        
 
         let finalData = props.data;
 
@@ -60,14 +63,12 @@ export default function DonutChart(props: {
 
         let innerRadius = Math.min(width, height) / 6
         let outerRadius = Math.min(width, height) / 2
-        let labelRadius = (innerRadius + outerRadius) / 2
 
-        const arcs = d3.pie().padAngle(0.02).sort(null).value(i => V[i as any])(I);
+        const pie = d3.pie().padAngle(0.02).sort(null).value(i => V[i as any])(I);
         const arc = d3.arc().innerRadius(outerRadius * 0.4).outerRadius(outerRadius * 0.8);
         var outerArc = d3.arc()
             .innerRadius(outerRadius * 0.9)
-            .outerRadius(outerRadius * 0.9);
-        // const arcLabel = d3.arc().innerRadius(labelRadius).outerRadius(labelRadius);
+            .outerRadius(outerRadius * 0.9);        
 
         const formatValue = d3.format(",");
         let total = finalData.map(z => z.percent || z.value || 0).reduce((a, b) => a + b, 0)
@@ -85,7 +86,7 @@ export default function DonutChart(props: {
             .attr("stroke-width", 1)
             .attr("stroke-linejoin", "round")
             .selectAll("path")
-            .data(arcs)
+            .data(pie)
             .join("path")
             .attr("fill", d => color(N[d.index]))
             .attr("d", arc as any)
@@ -105,7 +106,7 @@ export default function DonutChart(props: {
 
 
         var text = svg.select(".labels").selectAll("text")
-            .data(arcs);
+            .data(pie);
 
         text.enter()
             .append("text")
@@ -148,7 +149,7 @@ export default function DonutChart(props: {
         const polyline = svg
             .select(".lines")
             .selectAll("polyline")
-            .data(arcs);
+            .data(pie);
 
         polyline
             .join("polyline")
@@ -172,7 +173,7 @@ export default function DonutChart(props: {
         polyline.exit().remove();
 
         
-    }, [props.data, props.height, props.sorted])
+    }, [props, props.data, propsRef, props.height, props.sorted])
 
 
     return <div className='vieolo-donut-chart width--pc-100 height--pc-100' ref={ref}></div>
