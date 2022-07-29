@@ -32,11 +32,11 @@ $primary-color-light: #B8E6FF !default;
 $primary-color-text: #ececec !default;
 $primary-color-text-light: $primary-color-normal !default;
 
-$secondary-color-normal: #424656 !default;
-$secondary-color-transparent: rgba(66, 70, 86, 0.2) !default;
-$secondary-color-light: #a0a5b8 !default;
+$secondary-color-normal: #6750A4 !default;
+$secondary-color-transparent: rgba(103, 80, 164, 0.2) !default;
+$secondary-color-light: #EADDFF !default;
 $secondary-color-text: rgb(236, 236, 236) !default;
-$secondary-color-text-light: $secondary-color-normal;
+$secondary-color-text-light: $secondary-color-normal !default;
 
 $tertiary-color-normal: #d5fe65 !default;
 $tertiary-color-transparent: rgba(219, 255, 118, 0.2) !default;
