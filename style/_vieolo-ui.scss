@@ -60,6 +60,15 @@ body {
 		height: $row-height-small;
 	}
 
+	&--extra-small {
+		height: $base-unit-two;
+
+		svg {
+			height: $base-unit * 1.5;
+			width: $base-unit * 1.5;
+		}
+	}
+
 	&--full-width {
 		width: 100%;
 	}
