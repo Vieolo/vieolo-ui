@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.23.3 (2022-07-30)
+- Fixed the color range of `DonutChart`
+
 ## 0.23.2 (2022-07-30)
 - Fixed the rendition of `DonutChart` when passed an empty array
 
