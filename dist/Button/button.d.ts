@@ -12,7 +12,7 @@ export default function Button(props: {
      * selects the subclass of the `vieolo-button`
      * default: medium
      */
-    height?: 'large' | 'medium' | 'small';
+    height?: 'large' | 'medium' | 'small' | 'extra-small';
     /** default: content */
     width?: 'content' | 'full';
     className?: string;

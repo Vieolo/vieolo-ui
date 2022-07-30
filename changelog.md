@@ -1,5 +1,14 @@
 # Change Log
 
+## 0.23.1 (2022-07-30)
+- Fixed the re-render of the `BarChart`
+- Re-wrote the `DonutChart`
+- Added extra-small size to `Button`
+- Improved the color styles of `ClickableCard`
+- Added thickness and padding to `Divider`
+- Improved the style of `Select`
+- Added `ActionCard` component
+
 ## 0.23.0 (2022-07-24)
 - Improved the `BarChart`
 - Added `Stacked` and `Grouped` types to the `BarChart`

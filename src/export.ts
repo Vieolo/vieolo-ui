@@ -1,4 +1,5 @@
 // Imports
+import ActionCard from './ActionCard';
 import BackButton from './BackButton';
 import BackButtonRow from './BackButtonRow';
 import BarChart from './BarChart';
@@ -68,6 +69,9 @@ import {
 	ContextMenuItem as ContextMenuItemTemp,
 } from './ContextMenu';
 import {
+	DonutChartData as DonutChartDataTemp,
+} from './DonutChart';
+import {
 	DropDownMenuItemType as DropDownMenuItemTypeTemp,
 } from './DropDownMenu';
 import {
@@ -136,6 +140,7 @@ import {
 
 
 export {
+	ActionCard,
 	BackButton,
 	BackButtonRow,
 	BarChart,
@@ -203,6 +208,7 @@ export type BarChartData = BarChartDataTemp;
 export type StackedBarChartData = StackedBarChartDataTemp;
 export type ConfirmationDialogMainButton = ConfirmationDialogMainButtonTemp;
 export type ContextMenuItem = ContextMenuItemTemp;
+export type DonutChartData = DonutChartDataTemp;
 export type DropDownMenuItemType = DropDownMenuItemTypeTemp;
 export type FlexJustifyContent = FlexJustifyContentTemp;
 export type FlexDirection = FlexDirectionTemp;

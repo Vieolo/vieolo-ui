@@ -1,53 +1,163 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { jsx as _jsx } from "react/jsx-runtime";
 // React
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+// Installed Packages
 import { toFixed } from '@vieolo/parsers/number_parsers';
+import * as d3 from 'd3';
 export default function DonutChart(props) {
-    let [selectedItem, setSelectedItem] = useState(-1);
-    let [selectedValue, setSelectedValue] = useState('');
-    // The first <g> is meant to show the empty part of the chart
-    // The strokeDashoffset marks the distance of the end of the section to the 100% mark
-    // The strokeDashoffset has a max number of 440, so 100 is actually 100 of 440
-    // The biggest sections should be added first
-    // The percent in the data should be ranged between 0 and 1
-    const colors = [
-        "primary",
-        "secondary",
-        "alert",
-        "error",
-        "success",
-        "accessoryOrange",
-        "accessoryBlue",
-        "accessoryGreen",
-    ];
-    function getColor(index) {
-        return `${colors[index]}-normal`;
-    }
-    let percentTotal = 0;
-    props.data.forEach(d => percentTotal += d.percent);
-    if (percentTotal > 1)
-        percentTotal = 1;
-    let soFar = 0;
-    let sorted = props.data.filter(d => d.percent > 0).sort((a, b) => b.percent - a.percent);
-    let legendContainerWidth = 0;
-    if (props.includeLegend) {
-        let remaining = sorted.length % 6;
-        legendContainerWidth = 80 * (((sorted.length - remaining) / 6) + (remaining === 0 ? 0 : 1));
-    }
-    return _jsxs("div", Object.assign({ className: `vieolo-donut-chart${props.disabled ? ' disabled' : ''}` }, { children: [_jsxs("div", Object.assign({ className: "vieolo-donut-chart__chart-container" }, { children: [_jsx("h2", { children: selectedValue || props.innerText || '' }, void 0),
-                    _jsxs("svg", Object.assign({ width: "160", height: "160" }, { children: [_jsx("g", { children: _jsx("circle", { style: { "strokeDashoffset": 0 }, className: "donut", r: "69.85699", cy: "81", cx: "81", "stroke-width": "8", stroke: "#ddd", fill: "none" }, void 0) }, void 0),
-                            sorted.map((d, i) => {
-                                soFar += d.percent;
-                                return _jsxs("g", { children: [_jsx("title", { children: `${d.title}: ${toFixed(d.percent * 100, 2)}%` }, void 0),
-                                        _jsx("circle", { style: { "strokeDashoffset": (1 - percentTotal + soFar - d.percent) * 440 }, className: `vieolo-donut-chart__chart-container__donut vieolo-donut-chart__chart-container__donut--${getColor(i)} ${(selectedItem > -1 && (selectedItem < i || selectedItem > i)) ? '#ddd' : 'gray-normal'}`, r: "69.85699", cy: "81", cx: "81", "stroke-width": "8", fill: "none" }, void 0)] }, void 0);
-                            })] }), void 0)] }), void 0),
-            props.includeLegend &&
-                _jsx("div", Object.assign({ className: "vieolo-donut-chart__legend-container", style: { width: legendContainerWidth + 20 } }, { children: sorted.map((d, i) => {
-                        return _jsxs("div", Object.assign({ className: "vieolo-donut-chart__legend-container__legend-item", onClick: () => {
-                                setSelectedItem(i === selectedItem ? -1 : i);
-                                setSelectedValue(i === selectedItem ? '' : d.displayValue || '');
-                            } }, { children: [_jsx("div", { className: `background-color--${getColor(i)}` }, void 0),
-                                _jsxs("div", { children: [_jsx("p", Object.assign({ className: "title", title: d.title }, { children: d.title }), void 0),
-                                        _jsx("p", Object.assign({ className: "subtitle" }, { children: `${toFixed(d.percent * 100, 2)}%` }), void 0)] }, void 0)] }), void 0);
-                    }) }), void 0)] }), void 0);
+    let ref = useRef(null);
+    let [propsRef, setPropsRef] = useState("");
+    useEffect(() => {
+        var _a;
+        // If the data is equal to the current state, the function is cancelled
+        let stringified = JSON.stringify(props);
+        if (propsRef && stringified === propsRef)
+            return;
+        setPropsRef(stringified);
+        // Sorting the data if necessary
+        // Sorting the data here, instead of the source, allows the parent to maintain the data more easily
+        let finalData = props.data;
+        if (props.sorted) {
+            finalData = [...props.data].sort((a, b) => {
+                return (b.percent || b.value || 0) - (a.percent || a.value || 0);
+            });
+        }
+        // If at least of the items are selected
+        // This means that the chart is in the selected mode
+        let hasSelected = finalData.some(z => z.selected);
+        // Selecting the HTML div
+        d3.select(ref.current).html("");
+        // Calculating the width and height of the chart
+        let width = ((_a = ref.current) === null || _a === void 0 ? void 0 : _a.offsetWidth) || 400;
+        let height = Math.min(width * 0.4, props.height || 300);
+        // List of titles (N), values (V), and the final filtered list of values (I)
+        const N = d3.map(finalData, z => z.title);
+        const V = d3.map(finalData, z => z.percent || z.value || 0);
+        const I = d3.range(N.length).filter(i => !isNaN(V[i]));
+        // Names and colors of the chart
+        let names = new d3.InternSet(N);
+        let colors = d3.schemeSpectral[Math.min(names.size, 11)];
+        const color = d3.scaleOrdinal(names, colors);
+        // Calculating the radius and arcs of the chart
+        let innerRadius = Math.min(width, height) / 6;
+        let outerRadius = Math.min(width, height) / 2;
+        const pie = d3.pie().padAngle(0.02).sort(null).value(i => V[i])(I);
+        const arc = d3.arc().innerRadius(outerRadius * 0.4).outerRadius(outerRadius * 0.8);
+        var outerArc = d3.arc().innerRadius(outerRadius * 0.9).outerRadius(outerRadius * 0.9);
+        // The total values of the chart
+        // This is used to calculate the percentage of each slice
+        let total = finalData.map(z => z.percent || z.value || 0).reduce((a, b) => a + b, 0);
+        // The title and value of the 
+        const formatValue = d3.format(",");
+        let title = (i) => `${N[i]}\n${formatValue(V[i])}`;
+        let percent = (i) => `${N[i]} (${toFixed((V[i] / total) * 100, 2)}%)`;
+        // Creating the SVG element
+        const svg = d3.select(ref.current).append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .attr("viewBox", [-width / 2, -height / 2, width, height])
+            .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+        // Creating the slices with possible onClick method
+        svg.append("g")
+            .attr("stroke", innerRadius > 0 ? "none" : "white")
+            .attr("stroke-width", 1)
+            .attr("stroke-linejoin", "round")
+            .selectAll("path")
+            .data(pie)
+            .join("path")
+            .attr("fill", d => {
+            if (hasSelected && !finalData[d.index].selected)
+                return "#ddd";
+            return color(N[d.index]);
+        })
+            .attr("d", arc)
+            .on("click", (e, d) => {
+            if (props.onClick) {
+                props.onClick(finalData[d.index]);
+            }
+        })
+            .append("title")
+            .text(function (d) {
+            if (finalData[0].percent !== undefined) {
+                return percent(d.index);
+            }
+            else {
+                return title(d.index);
+            }
+        });
+        // Creating the groups for lables and lines
+        svg.append("g")
+            .attr("class", "labels");
+        svg.append("g")
+            .attr("class", "lines");
+        // Creating the texts
+        var text = svg.select(".labels").selectAll("text")
+            .data(pie);
+        text.enter()
+            .append("text")
+            .attr("class", "typography-paragraph-small")
+            .attr("dy", ".35em")
+            .text(function (d) {
+            if (hasSelected && !finalData[d.index].selected)
+                return "";
+            return percent(d.index);
+        })
+            .merge(text)
+            .transition()
+            .duration(1000)
+            .attrTween("transform", function (d) {
+            this._current = this._current || d;
+            const interpolate = d3.interpolate(this._current, d);
+            this._current = interpolate(0);
+            return function (t) {
+                const d2 = interpolate(t);
+                const pos = outerArc.centroid(d2);
+                pos[0] = outerRadius * (midAngle(d2) < Math.PI ? 1 : -1);
+                return "translate(" + pos + ")";
+            };
+        })
+            .styleTween("text-anchor", function (d) {
+            this._current = this._current || d;
+            const interpolate = d3.interpolate(this._current, d);
+            this._current = interpolate(0);
+            return function (t) {
+                const d2 = interpolate(t);
+                return midAngle(d2) < Math.PI ? "start" : "end";
+            };
+        });
+        text.exit()
+            .remove();
+        function midAngle(d) {
+            return d.startAngle + (d.endAngle - d.startAngle) / 2;
+        }
+        // Creating the lines connecting the lables to the slices
+        const polyline = svg
+            .select(".lines")
+            .selectAll("polyline")
+            .data(pie);
+        polyline
+            .join("polyline")
+            .attr("stroke", "black")
+            .attr("stroke-width", d => {
+            if (hasSelected && !finalData[d.index].selected)
+                return "0px";
+            return "1px";
+        })
+            .attr("fill", "none")
+            .transition()
+            .duration(1000)
+            .attrTween("points", function (d) {
+            this._current = this._current || d;
+            const interpolate = d3.interpolate(this._current, d);
+            this._current = interpolate(0);
+            return function (t) {
+                const d2 = interpolate(t);
+                const pos = outerArc.centroid(d2);
+                pos[0] = outerRadius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
+                return [arc.centroid(d2), outerArc.centroid(d2), pos];
+            };
+        });
+        polyline.exit().remove();
+    }, [props, props.data, propsRef, props.height, props.sorted]);
+    return _jsx("div", { className: `vieolo-donut-chart width--pc-100 height--pc-100 ${props.disabled ? "disabled" : ""}`, ref: ref }, void 0);
 }

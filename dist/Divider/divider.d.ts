@@ -6,4 +6,6 @@ export default function Divider(props: {
     color?: ColorOptionType;
     colorType?: 'light' | 'normal' | 'text';
     position?: 'start' | 'center' | 'end';
+    thickness?: "1" | "2" | 'half';
+    spaceAround?: "half" | 'one' | 'two';
 }): JSX.Element;
