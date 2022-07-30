@@ -28,7 +28,7 @@ export function buttonOptions(): ViewData {
             },
             emphasis: 'emphasis',
             height: {
-                options: ['large', 'medium', 'small'],
+                options: ['large', 'medium', 'small', 'extra-small'],
                 default: 'medium'
             },
             width: {
@@ -75,7 +75,7 @@ export function ButtonCreator(props: { p: ButtonPropsType }) {
         isLoading={props.p.isLoading}
         auxiliary={
             (props.p as any).auxiliaryButton === "None"
-                ? null
+                ? undefined
                 : (props.p as any).auxiliaryButton === "Plain"
                     ? {
                         icon: <IconOne />, onClick: () => { },

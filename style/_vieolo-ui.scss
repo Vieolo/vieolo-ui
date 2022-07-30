@@ -60,6 +60,15 @@ body {
 		height: $row-height-small;
 	}
 
+	&--extra-small {
+		height: $base-unit-two;
+
+		svg {
+			height: $base-unit * 1.5;
+			width: $base-unit * 1.5;
+		}
+	}
+
 	&--full-width {
 		width: 100%;
 	}
@@ -464,10 +473,9 @@ body {
 	width: 160px;
 
 	&__select-button {
-		@include card-no-shadow;
 		margin: 0 auto;
-		@include tertiary-background;
-		border-color: $tertiary-color-normal;
+		border: 2px solid $primary-color-light;
+		border-radius: $border-radius-half;
 		cursor: pointer;
 		@include flex-row-space-between;
 		@include no-text-overflow;
@@ -509,12 +517,8 @@ body {
 			}
 		}
 
-		.vieolo-icon-button {
-			background-color: $tertiary-color-normal;
-		}
 
 		input {
-			background-color: $tertiary-color-normal;
 			border: none;
 
 			&:focus,
@@ -566,10 +570,21 @@ body {
 
 		&:hover {
 			background-color: $hover-color;
+
+			color: $normal-text-color;
+
+			p {
+				color: $normal-text-color;
+			}
 		}
 
 		&--selected {
-			@include tertiary-background;
+			background-color: $primary-color-normal;
+			color: $primary-color-text;
+
+			p {
+				color: $primary-color-text;
+			}
 		}
 
 		&--subtitle {
@@ -2303,7 +2318,6 @@ body {
 	&--vertical {
 		flex-direction: column;
 		height: 100%;
-		width: $base-unit-half;
 	}
 
 	&--start {
@@ -2316,6 +2330,34 @@ body {
 
 	&--end {
 		justify-content: end;
+	}
+
+	&--thickness-vertical {
+		&--1 {
+			width: 1px;
+		}
+
+		&--2 {
+			width: 2px;
+		}
+
+		&--half {
+			width: $base-unit-half;
+		}
+	}
+
+	&--thickness-horizontal {
+		&--1 {
+			height: 1px;
+		}
+
+		&--2 {
+			height: 2px;
+		}
+
+		&--half {
+			height: $base-unit-half;
+		}
 	}
 }
 
@@ -2509,80 +2551,10 @@ body {
 	}
 }
 
-.vieolo-donut-chart {
-	display: flex;
-	align-items: center;
+// .vieolo-donut-chart {
 
-	&__chart-container {
-		position: relative;
-		display: inline-block;
-
-		h2 {
-			text-align: center;
-			position: absolute;
-			line-height: 135px;
-			width: 100%;
-			font-size: 15px;
-		}
-
-		svg {
-			transform: rotate(-90deg);
-		}
-
-		&__donut {
-			stroke-dasharray: 440;
-			-webkit-animation: donut 1s ease-out forwards;
-			animation: donut 1s ease-out forwards;
-			@include colorMixin(stroke, false);
-		}
-	}
-
-	&__legend-container {
-		height: 170px;
-		display: flex;
-		flex-flow: column;
-		padding-left: $base-unit-two;
-		flex-wrap: wrap;
-
-		&__legend-item {
-			display: flex;
-			width: 80px;
-			margin-top: $base-unit-half;
-			align-items: center;
-			cursor: pointer;
-
-			div:nth-child(1) {
-				height: $base-unit;
-				width: $base-unit;
-				border-radius: 50%;
-				margin-right: $base-unit-half;
-			}
-
-			div:nth-child(2) {
-				width: 65px;
-
-				p {
-					@include no-text-overflow;
-					margin: 0;
-				}
-
-				.title {
-					font-size: 12px;
-				}
-
-				.subtitle {
-					font-size: 10px;
-					@include font-light;
-				}
-			}
-		}
-
-		&__legend-item:nth-child(odd) {
-			background-color: #f2f2f2;
-			border-radius: $base-unit-half;
-		}
-	}
-}
+	
+// }
 
 
 .vieolo-navbar {

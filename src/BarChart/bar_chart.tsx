@@ -1,5 +1,5 @@
 // React
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 // Vieolo UI
 import Flex from '../Flex';
@@ -52,8 +52,15 @@ export default function BarChart(props: {
 }) {
 
     let ref = useRef<HTMLDivElement>(null);
+    let [propsRef, setPropsRef] = useState<string>("")  
 
     useEffect(() => {
+
+        // If the props is equal to the current state, the function is cancelled
+        let stringified = JSON.stringify(props)
+        if (propsRef && stringified === propsRef) return        
+
+        setPropsRef(stringified)
 
         // Creating the Tooltip
         function getTooltipHTML(values: { title: string, value: string }[]) {
@@ -223,7 +230,7 @@ export default function BarChart(props: {
                     if (isVertical) return height - dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
                     else return dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
                 })
-                .delay((d, i) => { return i * 20 })            
+                // .delay((d, i) => { return i * 20 })            
 
         } else {
 
@@ -343,7 +350,7 @@ export default function BarChart(props: {
 
 
 
-    }, [props.data, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount, props.groupType, props.removeSpaceBetweenBars])
+    }, [props, props.data, propsRef, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount, props.groupType, props.removeSpaceBetweenBars])
 
 
 

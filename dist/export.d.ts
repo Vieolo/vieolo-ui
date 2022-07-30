@@ -1,3 +1,4 @@
+import ActionCard from './ActionCard';
 import BackButton from './BackButton';
 import BackButtonRow from './BackButtonRow';
 import BarChart from './BarChart';
@@ -59,6 +60,7 @@ import VieoloApp from './VieoloApp';
 import { BarChartData as BarChartDataTemp, StackedBarChartData as StackedBarChartDataTemp } from './BarChart';
 import { ConfirmationDialogMainButton as ConfirmationDialogMainButtonTemp } from './ConfirmationDialog';
 import { ContextMenuItem as ContextMenuItemTemp } from './ContextMenu';
+import { DonutChartData as DonutChartDataTemp } from './DonutChart';
 import { DropDownMenuItemType as DropDownMenuItemTypeTemp } from './DropDownMenu';
 import { FlexJustifyContent as FlexJustifyContentTemp, FlexDirection as FlexDirectionTemp, FlexAlignItems as FlexAlignItemsTemp, FlexWrap as FlexWrapTemp } from './Flex';
 import { FormDialogAccessoryButton as FormDialogAccessoryButtonTemp, FormDialogMainButton as FormDialogMainButtonTemp } from './FormDialog';
@@ -73,11 +75,12 @@ import { TableSortDirection as TableSortDirectionTemp, TableRow as TableRowTemp 
 import { TableInteractiveCell as TableInteractiveCellTemp } from './TableInteractive';
 import { TypographyTextAlign as TypographyTextAlignTemp, TypographyFontFamily as TypographyFontFamilyTemp, TypographyMargin as TypographyMarginTemp, TypographyColorType as TypographyColorTypeTemp } from './Typography';
 import { ColorOptionType as ColorOptionTypeTemp, EmphasisType as EmphasisTypeTemp, BorderRadiusType as BorderRadiusTypeTemp, FontWeightType as FontWeightTypeTemp, GridGapType as GridGapTypeTemp, ElevationType as ElevationTypeTemp, RowHeightType as RowHeightTypeTemp, RowStyleType as RowStyleTypeTemp, WidthAndHeightSize as WidthAndHeightSizeTemp, CardExtraActionType as CardExtraActionTypeTemp, TypographyOptionTypes as TypographyOptionTypesTemp } from './types';
-export { BackButton, BackButtonRow, BarChart, Button, CalendarStateful, CalendarStateless, Card, Checkbox, Chip, ClickableCard, ConfirmationDialog, ContextMenu, DateInput, DatePicker, DateTimePicker, Divider, DonutChart, DropDownMenu, ExpandableCard, FileInput, Flex, FormDialog, FormSection, GanttChart, Grid, GridContainer, GridThree, GridTwo, IconButton, Input, InputSet, ItemRow, List, Modal, Navbar, NavDrawer, PDFViewer, Page, PageFrame, PeriodSelector, PeriodOptions, RadioGroup, RadioGroupSet, Select, SelectSet, Spacer, Spinner, SubNavbarRow, Switch, SwitchSet, TabSwitch, Table, TableInteractive, Textarea, TextareaSet, TimeInput, TitlePeriodCard, Typography, VieoloApp, };
+export { ActionCard, BackButton, BackButtonRow, BarChart, Button, CalendarStateful, CalendarStateless, Card, Checkbox, Chip, ClickableCard, ConfirmationDialog, ContextMenu, DateInput, DatePicker, DateTimePicker, Divider, DonutChart, DropDownMenu, ExpandableCard, FileInput, Flex, FormDialog, FormSection, GanttChart, Grid, GridContainer, GridThree, GridTwo, IconButton, Input, InputSet, ItemRow, List, Modal, Navbar, NavDrawer, PDFViewer, Page, PageFrame, PeriodSelector, PeriodOptions, RadioGroup, RadioGroupSet, Select, SelectSet, Spacer, Spinner, SubNavbarRow, Switch, SwitchSet, TabSwitch, Table, TableInteractive, Textarea, TextareaSet, TimeInput, TitlePeriodCard, Typography, VieoloApp, };
 export declare type BarChartData = BarChartDataTemp;
 export declare type StackedBarChartData = StackedBarChartDataTemp;
 export declare type ConfirmationDialogMainButton = ConfirmationDialogMainButtonTemp;
 export declare type ContextMenuItem = ContextMenuItemTemp;
+export declare type DonutChartData = DonutChartDataTemp;
 export declare type DropDownMenuItemType = DropDownMenuItemTypeTemp;
 export declare type FlexJustifyContent = FlexJustifyContentTemp;
 export declare type FlexDirection = FlexDirectionTemp;

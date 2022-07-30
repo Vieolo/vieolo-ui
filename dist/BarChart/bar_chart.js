@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 // React
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 // Vieolo UI
 import Flex from '../Flex';
 import Typography from '../Typography';
@@ -10,7 +10,13 @@ import Grid from '../Grid';
 import * as d3 from 'd3';
 export default function BarChart(props) {
     let ref = useRef(null);
+    let [propsRef, setPropsRef] = useState("");
     useEffect(() => {
+        // If the props is equal to the current state, the function is cancelled
+        let stringified = JSON.stringify(props);
+        if (propsRef && stringified === propsRef)
+            return;
+        setPropsRef(stringified);
         // Creating the Tooltip
         function getTooltipHTML(values) {
             return values.map(v => {
@@ -151,8 +157,8 @@ export default function BarChart(props) {
                     return height - dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin);
                 else
                     return dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin);
-            })
-                .delay((d, i) => { return i * 20; });
+            });
+            // .delay((d, i) => { return i * 20 })            
         }
         else {
             /**
@@ -259,7 +265,7 @@ export default function BarChart(props) {
                 }
             });
         }
-    }, [props.data, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount, props.groupType, props.removeSpaceBetweenBars]);
+    }, [props, props.data, propsRef, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount, props.groupType, props.removeSpaceBetweenBars]);
     return _jsxs("div", Object.assign({ className: 'vieolo-bar-chart width--pc-100 height--pc-100' }, { children: [(props.title || (props.data.length > 0 && typeof props.data[0].dataAxis !== 'number')) &&
                 _jsxs(GridContainer, { children: [_jsx(Grid, Object.assign({ xl: 6 }, { children: _jsx(Typography, { text: props.title || '', type: 'title-medium' }, void 0) }), void 0),
                         _jsx(Grid, Object.assign({ xl: 6 }, { children: (props.data.length > 0 && typeof props.data[0].dataAxis !== 'number') &&
