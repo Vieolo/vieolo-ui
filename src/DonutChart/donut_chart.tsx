@@ -66,7 +66,7 @@ export default function DonutChart(props: {
 
         // Names and colors of the chart
         let names = new d3.InternSet(N);
-        let colors = d3.schemeSpectral[Math.min(names.size || 1, 11)];
+        let colors = d3.schemeTableau10;
         const color = props.data.length > 0 ? d3.scaleOrdinal(names, colors) : (i: string) => "#ddd"
 
         // Calculating the radius and arcs of the chart

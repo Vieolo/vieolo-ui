@@ -25,8 +25,10 @@ export function donutChartOptions(): ViewData {
                     "Empty Data",
                     "Percentage - Long",
                     "Percentage - Short",
+                    "Percentage - Single",
                     "Value - Long",
-                    "Value - short"
+                    "Value - Short",
+                    "Value - Single"
                 ]
             },
             disabled: 'boolean',
@@ -79,7 +81,14 @@ export function DonutChartCreator(props: { p: DonutChartPropsType }) {
 
     return <DonutChart
         innerText={props.p.innerText}
-        data={(props.p as any).dataType === "Empty Data" ? [] : (props.p as any).dataType.includes("Long") ? data : data.slice(0, 3)}
+        data={(props.p as any).dataType === "Empty Data" 
+            ? [] 
+            : (props.p as any).dataType.includes("Long") 
+                ? data 
+                : (props.p as any).dataType.includes("Short")
+                    ? data.slice(0, 3)
+                    : data.slice(0, 1)
+        }
         includeLegend={props.p.includeLegend}
         disabled={props.p.disabled}
         height={300}
