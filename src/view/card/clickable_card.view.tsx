@@ -50,7 +50,7 @@ export function ClickableCardCreator(props: {p: ClickableCardPropsType}) {
         icon={(props.p as any).withIcon ? <IconOne /> : undefined}
         width={'250px'}
         rightItems={!(props.p as any).withRightItems ? undefined : [
-            <IconTwo />
+            <IconTwo key={"right icon"} />
         ]}
     />
 }

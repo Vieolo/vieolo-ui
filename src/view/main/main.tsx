@@ -50,6 +50,7 @@ import { ClickableCardCreator, clickableCardOptions } from '../card/clickable_ca
 import { ModalCreator, modalOptions } from '../dialog/modal.view';
 import { DonutChartCreator, donutChartOptions } from '../charts/donut_chart.view';
 import { SubNavbarRowCreator, subNavbarRowOptions } from '../layout/page/sub_navbar_row.view';
+import { ActionCardCreator, actionCardOptions } from '../card/action_card.view';
 import Select from '../../Select';
 import SwitchSet from '../../SwitchSet';
 import PageFrame from '../../PageFrame';
@@ -98,6 +99,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator, group: "Buttons" },
 
         "Card": { title: "Card", data: cardOptions(), creator: CardCreator, group: "Cards" },
+        "Action Card": { title: "Action Card", data: actionCardOptions(), creator: ActionCardCreator, group: "Cards" },
         "Clickable Card": { title: "Clickable Card", data: clickableCardOptions(), creator: ClickableCardCreator, group: "Cards" },
         "Title Period Card": { title: "Title Period Card", data: titlePeriodCardOptions(), creator: TitlePeriodCardCreator, group: "Cards" },
 
