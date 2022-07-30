@@ -60,14 +60,14 @@ export default function DonutChart(props: {
         let height = Math.min(width * 0.4, props.height || 300)
 
         // List of titles (N), values (V), and the final filtered list of values (I)
-        const N = d3.map(finalData, z => z.title);
-        const V = d3.map(finalData, z => z.percent || z.value || 0);
+        const N = props.data.length === 0 ? [""] : d3.map(finalData, z => z.title);
+        const V = props.data.length === 0 ? [1] : d3.map(finalData, z => z.percent || z.value || 0);
         const I = d3.range(N.length).filter(i => !isNaN(V[i]));
 
         // Names and colors of the chart
         let names = new d3.InternSet(N);
-        let colors = d3.schemeSpectral[Math.min(names.size, 11)];
-        const color = d3.scaleOrdinal(names, colors);
+        let colors = d3.schemeSpectral[Math.min(names.size || 1, 11)];
+        const color = props.data.length > 0 ? d3.scaleOrdinal(names, colors) : (i: string) => "#ddd"
 
         // Calculating the radius and arcs of the chart
         let innerRadius = Math.min(width, height) / 6
@@ -113,12 +113,16 @@ export default function DonutChart(props: {
             })
             .append("title")
             .text(function (d) {
-                if (finalData[0].percent !== undefined) {
+                if (finalData.length === 0) {
+                    return ""
+                }else if (finalData[0].percent !== undefined) {
                     return percent(d.index);
                 } else {
                     return title(d.index)
                 }
             })
+
+        if (props.data.length === 0) return
 
         // Creating the groups for lables and lines
         svg.append("g")
