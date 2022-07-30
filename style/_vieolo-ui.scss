@@ -60,6 +60,15 @@ body {
 		height: $row-height-small;
 	}
 
+	&--extra-small {
+		height: $base-unit-two;
+
+		svg {
+			height: $base-unit * 1.5;
+			width: $base-unit * 1.5;
+		}
+	}
+
 	&--full-width {
 		width: 100%;
 	}
@@ -2309,7 +2318,6 @@ body {
 	&--vertical {
 		flex-direction: column;
 		height: 100%;
-		width: $base-unit-half;
 	}
 
 	&--start {
@@ -2322,6 +2330,34 @@ body {
 
 	&--end {
 		justify-content: end;
+	}
+
+	&--thickness-vertical {
+		&--1 {
+			width: 1px;
+		}
+
+		&--2 {
+			width: 2px;
+		}
+
+		&--half {
+			width: $base-unit-half;
+		}
+	}
+
+	&--thickness-horizontal {
+		&--1 {
+			height: 1px;
+		}
+
+		&--2 {
+			height: 2px;
+		}
+
+		&--half {
+			height: $base-unit-half;
+		}
 	}
 }
 

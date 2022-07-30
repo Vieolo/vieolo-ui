@@ -1,5 +1,5 @@
 // Vieolo UI
-import Typography from "../Typography";
+import Typography, { TypographyColorType } from "../Typography";
 import Card from "../Card";
 import Flex from "../Flex";
 import Spacer from "../Spacer";
@@ -29,6 +29,17 @@ export default function ClickableCard(props: {
     keepEmphasisTextColorClasses?: boolean
 }) {
 
+    let textColor: ColorOptionType | undefined = undefined
+    let textColorType: TypographyColorType | undefined = undefined
+
+    if (props.keepEmphasisTextColorClasses) {
+        textColor = props.emphasis === 'high' ? props.color || 'primary' : props.color
+        textColorType = props.emphasis === 'high' 
+            ? 'text' 
+            : props.emphasis === 'medium'
+                ? 'text-light'
+                : 'normal'
+    }
 
     return <Card
         ariaLabel={props.ariaLabel}
@@ -57,9 +68,9 @@ export default function ClickableCard(props: {
                     text={props.title}
                     fontWeight='bold'
                     fontFamily="secondary"
-                    color={props.emphasis === 'high' ? props.color || 'primary' : undefined}
-                    colorType={props.emphasis === 'high' ? 'text' : undefined} 
-                    />
+                    color={textColor}
+                    colorType={textColorType}
+                />
             </Flex>
 
             <Flex direction="row-reverse" alignItems="center" columnGap="half">
@@ -79,15 +90,15 @@ export default function ClickableCard(props: {
                         ? <Typography
                             type="paragraph-small"
                             text={props.description}
-                            color={props.emphasis === 'high' ? props.color || 'primary' : undefined}
-                            colorType={props.emphasis === 'high' ? 'text' : undefined}
+                            color={textColor}
+                            colorType={textColorType}
                         />
                         : <Typography
                             type={props.description.typographyType || 'paragraph-small'}
                             text={props.description.text}
                             textAlign={props.description.textAlign}
-                            color={props.emphasis === 'high' ? props.color || 'primary' : undefined}
-                            colorType={props.emphasis === 'high' ? 'text' : undefined}
+                            color={textColor}
+                            colorType={textColorType}
                         />
                 }
             </>
