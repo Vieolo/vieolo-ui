@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.23.2 (2022-07-30)
+- Fixed the rendition of `DonutChart` when passed an empty array
+
 ## 0.23.1 (2022-07-30)
 - Fixed the re-render of the `BarChart`
 - Re-wrote the `DonutChart`
