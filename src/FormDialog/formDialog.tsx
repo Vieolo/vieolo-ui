@@ -90,7 +90,7 @@ export default function FormDialog(props: {
                             text={(props.cancelButtonConfig && props.cancelButtonConfig.text) ? props.cancelButtonConfig.text : "Cancel"}
                             borderRadius={(props.cancelButtonConfig && props.cancelButtonConfig.borderRadius) ? props.cancelButtonConfig.borderRadius : undefined}
                             emphasis={(props.cancelButtonConfig && props.cancelButtonConfig.emphasis) ? props.cancelButtonConfig.emphasis : "none"}
-                            ariaLabel={props.cancelButtonConfig ? props.cancelButtonConfig.ariaLabel : undefined}
+                            ariaLabel={getButtonAriaLabel(props.headerTitle, "cancel button", props.ariaLabel, props.cancelButtonConfig)}
                             disabled={props.isLoading}
                         />
                         <div className="vieolo-form-dialog__footer__spacer--middle"></div>
@@ -105,7 +105,7 @@ export default function FormDialog(props: {
                                 color={e.color}
                                 text={e.text}
                                 onClick={e.onClick}
-                                ariaLabel={e.ariaLabel}
+                                ariaLabel={getButtonAriaLabel(props.headerTitle, e.text, props.ariaLabel, e)}
                                 disabled={props.isLoading}
                             />
                             <div className="vieolo-form-dialog__footer__spacer--middle" key={`form_dialog_extra_button_spacer_${i}`}></div>
@@ -121,7 +121,7 @@ export default function FormDialog(props: {
                         text={(props.saveButtonConfig && props.saveButtonConfig.text) ? props.saveButtonConfig.text : "Save"}
                         borderRadius={(props.saveButtonConfig && props.saveButtonConfig.borderRadius) ? props.saveButtonConfig.borderRadius : undefined}
                         emphasis={(props.saveButtonConfig && props.saveButtonConfig.emphasis) ? props.saveButtonConfig.emphasis : undefined}
-                        ariaLabel={(props.saveButtonConfig || {ariaLabel: ""}).ariaLabel || props.ariaLabel ? `${props.ariaLabel} save button` : undefined}
+                        ariaLabel={getButtonAriaLabel(props.headerTitle, "save button", props.ariaLabel, props.saveButtonConfig)}
                         disabled={props.saveButtonDisabled || props.isLoading}
                         isLoading={props.isLoading}
                     />
@@ -139,4 +139,10 @@ export default function FormDialog(props: {
     >
         {dialog}
     </Modal>
+}
+
+function getButtonAriaLabel(headerTitle: string, buttonType: string, dialogAL?: string, buttonConfig?: {ariaLabel?: string},) : string {
+    if (buttonConfig && buttonConfig.ariaLabel) return buttonConfig.ariaLabel
+    if (dialogAL) return `${dialogAL} ${buttonType}`
+    return `${headerTitle} ${buttonType}`
 }
