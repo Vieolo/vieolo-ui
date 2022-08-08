@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.23.4 (2022-08-09)
+- Fixed the keyboard interaction of `Select` when disabled ([#191](https://github.com/Vieolo/vieolo-ui/issues/191))
+- Added title to the auxiliary items of `GanttChart` ([#202](https://github.com/Vieolo/vieolo-ui/issues/202))
+- Fixed the aria label of buttons of `FormDialog` ([#211](https://github.com/Vieolo/vieolo-ui/issues/211))
+
 ## 0.23.3 (2022-07-30)
 - Fixed the color range of `DonutChart`
 
