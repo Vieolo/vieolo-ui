@@ -46,6 +46,7 @@ export declare type GanttChartAuxiliaryItemType = {
     from: number;
     to: number;
     ariaLabel?: string;
+    title?: string;
 };
 export declare type GanttChartRowType = {
     /** The value to identify the row on click */

@@ -345,6 +345,7 @@ body {
 		text-align: left;
 		margin: 0;
 		padding: 0 0 0 44px;
+		@include nonselectable;
 
 		&:before,
 		&:after {
@@ -353,9 +354,6 @@ body {
 			margin: 0;
 			outline: 0;
 			top: 50%;
-			-ms-transform: translate(0, -50%);
-			-webkit-transform: translate(0, -50%);
-			transform: translate(0, -50%);
 			-webkit-transition: all 0.3s ease;
 			transition: all 0.3s ease;
 		}
@@ -363,19 +361,23 @@ body {
 		&:before {
 			left: 1px;
 			width: 34px;
-			height: 14px;
+			height: 20px;
 			background-color: #9e9e9e;
-			border-radius: 8px;
+			border-radius: 10px;
+			-ms-transform: translate(0, -50%);
+			-webkit-transform: translate(0, -50%);
+			transform: translate(0, -50%);
 		}
 
 		&:after {
-			left: 0;
-			width: 20px;
-			height: 20px;
+			left: 3px;
+			width: 12px;
+			height: 12px;
 			background-color: #fafafa;
 			border-radius: 50%;
-			box-shadow: 0 $base-unit-half 1px -2px rgba(0, 0, 0, 0.14), 0 2px 2px 0 rgba(0, 0, 0, 0.098),
-				0 1px $base-unit-half 0 rgba(0, 0, 0, 0.084);
+			-ms-transform: translate(0, -6px);
+			-webkit-transform: translate(0, -6px);
+			transform: translate(0, -6px);
 		}
 
 		.switch-on {
@@ -393,9 +395,11 @@ body {
 
 	.switch-input:checked+.switch-label:after {
 		background-color: $secondary-color-normal;
-		-ms-transform: translate(80%, -50%);
-		-webkit-transform: translate(80%, -50%);
-		transform: translate(80%, -50%);
+		-ms-transform: translate(15px, -7.5px);
+		-webkit-transform: translate(15px, -7.5px);
+		transform: translate(15px, -7.5px);
+		width: 15px;
+		height: 15px;
 	}
 
 	.switch-input:checked+.switch-label .switch-on {

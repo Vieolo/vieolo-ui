@@ -200,7 +200,7 @@ export default function GanttChart(props) {
                                             let supLeft = (s.from / props.columnTitles.length) * 100;
                                             let supWidth = ((s.to - s.from) / props.columnTitles.length) * 100;
                                             let supRight = (s.to / props.columnTitles.length) * 100;
-                                            return _jsx("div", { className: "vieolo-gantt-chart__content-div__row__bar-column__sup-item-bar", style: { left: `${supLeft}%`, width: `${supWidth}%`, right: `${supRight}%` }, "aria-label": `${row.title} ${(s.ariaLabel || "sup-item") + ' ' + z.toString()}` }, `${row.value} ${s.id} supitem ${s.from}_${s.to}_${z}`);
+                                            return _jsx("div", { title: s.title, className: "vieolo-gantt-chart__content-div__row__bar-column__sup-item-bar", style: { left: `${supLeft}%`, width: `${supWidth}%`, right: `${supRight}%` }, "aria-label": `${row.title} ${(s.ariaLabel || "sup-item") + ' ' + z.toString()}` }, `${row.value} ${s.id} supitem ${s.from}_${s.to}_${z}`);
                                         }),
                                     dataRow.map((d, i) => {
                                         let finalStart = d.from;
@@ -271,7 +271,7 @@ export default function GanttChart(props) {
                                             let subLeft = (s.from / props.columnTitles.length) * 100;
                                             let subWidth = ((s.to - s.from) / props.columnTitles.length) * 100;
                                             let subRight = (s.to / props.columnTitles.length) * 100;
-                                            return _jsx("div", { className: "vieolo-gantt-chart__content-div__row__bar-column__sub-item-bar", style: { left: `${subLeft}%`, width: `${subWidth}%`, right: `${subRight}%` }, "aria-label": `${row.title} ${(s.ariaLabel || "sub-item") + ' ' + z.toString()}` }, `${row.value} ${s.id} subitem ${s.from}_${s.to}_${z}`);
+                                            return _jsx("div", { title: s.title, className: "vieolo-gantt-chart__content-div__row__bar-column__sub-item-bar", style: { left: `${subLeft}%`, width: `${subWidth}%`, right: `${subRight}%` }, "aria-label": `${row.title} ${(s.ariaLabel || "sub-item") + ' ' + z.toString()}` }, `${row.value} ${s.id} subitem ${s.from}_${s.to}_${z}`);
                                         })] }), void 0),
                             (row.title.trim() && props.onDragReorder && draggedRow) &&
                                 _jsx(GanttRowDropZone, { position: 'bottom', onDrop: e => {

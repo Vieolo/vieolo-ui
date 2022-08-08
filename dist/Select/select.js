@@ -123,6 +123,8 @@ export default function Select(props) {
     }
     const itemsComponent = _jsx("div", Object.assign({ className: "vieolo-select__select-dropdown", style: style, role: "list" }, { children: items }), void 0);
     return _jsxs("div", Object.assign({ className: `vieolo-select${props.disabled ? ' disabled' : ''}`, ref: container }, { children: [_jsxs("div", Object.assign({ className: `vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${props.height || 'medium'}`, onClick: e => handleOpen(e), tabIndex: 0, role: "button", "aria-label": `Select ${props.title}`, onKeyDown: e => {
+                    if (props.disabled)
+                        return;
                     handleOnKeyDown(e, {
                         onEnter: () => {
                             if (!open)

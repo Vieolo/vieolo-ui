@@ -64,7 +64,8 @@ export type GanttChartAuxiliaryItemType = {
     id: string,
     from: number,
     to: number,
-    ariaLabel?: string
+    ariaLabel?: string,
+    title?: string
 }
 
 
@@ -226,7 +227,7 @@ export default function GanttChart(props: {
         }
 
         let response = await props.itemResize?.onItemResized({ ...resizeItem.row, value: resizeItem.row.value.split("___")[0] }, { ...resizeItem.item, from: finalPos.left, to: finalPos.right })
-        
+
         if (response === true || response === undefined) {
             setResizeItem(null);
         } else {
@@ -389,6 +390,7 @@ export default function GanttChart(props: {
                                     let supRight = (s.to / props.columnTitles.length) * 100;
                                     return <div
                                         key={`${row.value} ${s.id} supitem ${s.from}_${s.to}_${z}`}
+                                        title={s.title}
                                         className="vieolo-gantt-chart__content-div__row__bar-column__sup-item-bar"
                                         style={{ left: `${supLeft}%`, width: `${supWidth}%`, right: `${supRight}%` }}
                                         aria-label={`${row.title} ${(s.ariaLabel || "sup-item") + ' ' + z.toString()}`}
@@ -507,6 +509,7 @@ export default function GanttChart(props: {
                                     let subRight = (s.to / props.columnTitles.length) * 100;
                                     return <div
                                         key={`${row.value} ${s.id} subitem ${s.from}_${s.to}_${z}`}
+                                        title={s.title}
                                         className="vieolo-gantt-chart__content-div__row__bar-column__sub-item-bar"
                                         style={{ left: `${subLeft}%`, width: `${subWidth}%`, right: `${subRight}%` }}
                                         aria-label={`${row.title} ${(s.ariaLabel || "sub-item") + ' ' + z.toString()}`}

@@ -227,7 +227,7 @@ export function ganttChartOptions(): ViewData {
                 {title: "Something", onClick: (r) => alert(r.title  + " Something")},
                 {title: "Very", onClick: (r) => alert(r.title + " Very")},
             ],
-            supItems: [{from: 10,  to: 11, id: "1" }, {from: 16, to: 18, id: "2"}],
+            supItems: [{from: 10,  to: 11, id: "1", title: "SupItem" }, {from: 16, to: 18, id: "2"}],
             subItems: [{from: 10,  to: 12, id: "1" }, {from: 14, to: 15, id: "2"}],
         },
         {
