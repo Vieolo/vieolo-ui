@@ -178,6 +178,7 @@ export default function Select(props: SelectProps) {
             role="button"
             aria-label={`Select ${props.title}`}
             onKeyDown={e => {
+                if (props.disabled) return
                 handleOnKeyDown(e, {
                     onEnter: () => {
                         if (!open) handleOpen(undefined, true);
