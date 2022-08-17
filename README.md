@@ -1,5 +1,10 @@
 # Vieolo UI
-The component package containing the UI components of Vieolo OÜ
+The UI package for front-end applications using React.
+
+## Goals
+1. Providing a complete set of UI components that are required to create a full-blown front-end application with all the batteries included, with stable, responsive, accessible, and optimized components.
+2. Easy setup in a target project while allowing the implementer to modify every aspect of the design of every component using SCSS
+3. Removing the need to create a custom CSS class for a new component/layout. Most of custom components/layouts should be achievable with a combination of differenet VUI components without leaving the `.tsx` file.
 
 ## Install
 to install, add the following to the `dependency` key of the `package.json` file of the project.
@@ -27,7 +32,15 @@ which uses typescript compiler to create release components in the `dist` folder
 [`BarChart`](src/BarChart/BarChart.md)
 
 ## Usage
-In the target package, the components can be imported and used as followed:
+(Recommended)
+
+Components can be imported individually. This type of import will produce the smallest build size after the tree shaking
+```js
+import IconButton from '@vieolo/vieolo-ui/dist/IconButton'
+```
+
+(Not Recommended)
+Components can also be imported in the following manner. This way, however, may result in an extremely large build size as the tree shaking may fail.
 ```JS
 import { IconButton, Button } from '@vieolo/vieolo-ui'
 ```
