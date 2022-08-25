@@ -82,6 +82,7 @@ export function listOptions(): ViewData {
             enableSubtitleSearch: 'boolean',
             onlyAllowOneGroupToExpand: 'boolean',
             headerActions: 'boolean',
+            controlItemBorderRadius: 'boolean',
             elevation: {
                 options: ['0', '1', '2'],
                 default: "0"
@@ -99,6 +100,10 @@ export function listOptions(): ViewData {
             itemHeight: {
                 options: ["small", "medium", "large", "over"],
                 default: "large"
+            },
+            rowGap: {
+                options: ["none", 'half', 'one'],
+                default: 'half'
             }
         }
     }
@@ -122,6 +127,8 @@ export function ListCreator(props: { p: ListPropsType; }) {
         enableSubtitleSearch={props.p.enableSubtitleSearch}
         horizontalPadding={props.p.horizontalPadding}
         onlyAllowOneGroupToExpand={props.p.onlyAllowOneGroupToExpand}
+        controlItemBorderRadius={props.p.controlItemBorderRadius}
+        rowGap={props.p.rowGap}
         headerActions={!props.p.headerActions ? undefined : [
             <IconButton 
                 key={"action 1"}

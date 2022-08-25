@@ -7,9 +7,11 @@ import Typography from '../Typography';
 import Flex from '../Flex';
 
 // Types
-import { ColorOptionType, RowStyleType } from '../types/types';
+import { BorderRadiusValueType, ColorOptionType, RowStyleType } from '../types/types';
 import ExpandableCard from '../ExpandableCard/expandable_card';
 import Divider from '../Divider';
+import { GridGapType } from '../types';
+import { getManagedBorderRadius } from '../utility/style_utility';
 
 
 export type ListItem = {
@@ -56,8 +58,43 @@ export default function List(props: {
     horizontalPadding?: 'none' | 'half' | 'one',
     ariaLabel?: string,
     onlyAllowOneGroupToExpand?: boolean,
-    headerActions?: React.ReactNode
+    headerActions?: React.ReactNode,
+    controlItemBorderRadius?: boolean,
+    rowGap?: GridGapType
 }) {
+
+    function changeItemRowBorderRadius(items: ListItem[]) {
+        let elements: React.ReactNode[] = []
+        for (let i = 0; i < items.length; i++) {
+            const a = items[i];
+
+            let ts = props.itemStyle ? { ...props.itemStyle } : { borderRadius: 'default' as BorderRadiusValueType };
+
+            if (props.controlItemBorderRadius && items.length > 1) {
+                ts.borderRadius = getManagedBorderRadius(i, items.length, typeof ts.borderRadius === 'string' ? ts.borderRadius as BorderRadiusValueType : 'default')
+            }
+
+            let row = <ItemRow
+                key={a.id}
+                selected={a.selected}
+                title={a.title}
+                subTitle={a.subTitle}
+                onClick={a.onClick}
+                buttonClick={a.onButtonClick}
+                buttonColor={a.buttonColor}
+                buttonIcon={a.buttonIcon}
+                buttonSize={a.buttonSize}
+                leadingIcon={a.leadingIcon}
+                disabled={a.disabled}
+                itemStyle={ts}
+                ariaLabel={a.ariaLabel}
+            />
+
+            elements.push(row)
+        }
+
+        return elements
+    }
 
     let [query, setQuery] = useState<string>("");
     let [openedGroup, setOpenedGroup] = useState<string>("");
@@ -81,39 +118,30 @@ export default function List(props: {
     let grouped: {
         [group: string]: {
             items: ReactNode[],
+            data: ListItem[]
             group: string
         }
     } = {};
+    let ungroupedData: ListItem[] = [];
     let ungrouped: ReactNode[] = [];
 
     for (let i = 0; i < sortedItems.length; i++) {
         const a = sortedItems[i];
 
-        let row = <ItemRow
-            key={a.id}
-            selected={a.selected}
-            title={a.title}
-            subTitle={a.subTitle}
-            onClick={a.onClick}
-            buttonClick={a.onButtonClick}
-            buttonColor={a.buttonColor}
-            buttonIcon={a.buttonIcon}
-            buttonSize={a.buttonSize}
-            leadingIcon={a.leadingIcon}
-            disabled={a.disabled}
-            itemStyle={props.itemStyle}
-            ariaLabel={a.ariaLabel}
-        />
-
         if (a.group) {
-            if (!grouped[a.group]) grouped[a.group] = { group: a.group, items: [] }
-            grouped[a.group].items.push(row)
+            if (!grouped[a.group]) grouped[a.group] = { group: a.group, items: [], data: [] }
+            grouped[a.group].data.push(a)
         } else {
-            ungrouped.push(row)
+            ungroupedData.push(a)
         }
     }
 
+    for (let i = 0; i < Object.keys(grouped).length; i++) {
+        const g = grouped[Object.keys(grouped)[i]];
+        g.items = changeItemRowBorderRadius(g.data)
+    }
 
+    ungrouped = changeItemRowBorderRadius(ungroupedData)
 
     return <div
         className={`vieolo-list padding-horizontal--${props.horizontalPadding || 'none'}`}
@@ -137,7 +165,7 @@ export default function List(props: {
                         </Flex>
                     }
                 </Flex>
-                <Divider direction='horizontal' length='pc-100' thickness='1' colorType='normal' />
+                <Divider direction='horizontal' length='pc-100' thickness='1' colorType='normal' spaceAround='half' />
             </>
 
         }
@@ -153,15 +181,28 @@ export default function List(props: {
             />
         }
 
-        {
-            Object.values(grouped).map(g => {
-                return <div className="margin-vertical--half" key={g.group}>
-                    <ExpandableCard
+        <Flex direction='column' rowGap={props.rowGap || 'half'}>
+            {
+                Object.values(grouped).map((g, i) => {
+                    let cs = {...(props.collapsedGroupStyle || {})};
+                    let es = {...(props.expandedGroupStyle || props.collapsedGroupStyle || {})};
+
+                    if (props.controlItemBorderRadius) {
+                        if (!cs.borderRadius) cs.borderRadius = 'default'
+                        if (!es.borderRadius) es.borderRadius = 'default'
+                        cs.borderRadius = getManagedBorderRadius(i, Object.keys(grouped).length, typeof cs.borderRadius === 'string' ? cs.borderRadius as BorderRadiusValueType : 'default')
+                        es.borderRadius = getManagedBorderRadius(i, Object.keys(grouped).length, typeof es.borderRadius === 'string' ? es.borderRadius as BorderRadiusValueType : 'default')
+                    }
+
+                    console.log(g.group, cs.borderRadius)
+
+                    return <ExpandableCard
+                        key={g.group}
                         title={g.group}
                         initialState='collapsed'
                         ariaLabel={g.group}
-                        collapsedCardStyle={props.collapsedGroupStyle}
-                        expandedCardStyle={props.expandedGroupStyle || props.collapsedGroupStyle}
+                        collapsedCardStyle={cs}
+                        expandedCardStyle={es}
                         state={props.onlyAllowOneGroupToExpand ? openedGroup === g.group ? "expanded" : "collapsed" : undefined}
                         onStateChange={v => {
                             if (v === "expanded") setOpenedGroup(g.group);
@@ -170,12 +211,15 @@ export default function List(props: {
                             }
                         }}
                     >
-                        {g.items}
+                        <Flex direction='column' rowGap={props.rowGap || 'half'}>
+                            {g.items}
+                        </Flex>
                     </ExpandableCard>
-                </div>
-            })
-        }
 
-        {ungrouped}
+                })
+            }
+
+            {ungrouped}
+        </Flex>
     </div>
 }
