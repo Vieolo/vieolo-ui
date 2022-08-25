@@ -4,10 +4,12 @@ import React, { ReactNode, useState } from 'react';
 // Vieolo UI
 import ItemRow from '../ItemRow';
 import Typography from '../Typography';
+import Flex from '../Flex';
 
 // Types
 import { ColorOptionType, RowStyleType } from '../types/types';
 import ExpandableCard from '../ExpandableCard/expandable_card';
+import Divider from '../Divider';
 
 
 export type ListItem = {
@@ -53,7 +55,8 @@ export default function List(props: {
     height: string,
     horizontalPadding?: 'none' | 'half' | 'one',
     ariaLabel?: string,
-    onlyAllowOneGroupToExpand?: boolean
+    onlyAllowOneGroupToExpand?: boolean,
+    headerActions?: React.ReactNode
 }) {
 
     let [query, setQuery] = useState<string>("");
@@ -112,14 +115,31 @@ export default function List(props: {
 
 
 
-    return <div 
-        className={`vieolo-list padding-horizontal--${props.horizontalPadding || 'none'}`} 
+    return <div
+        className={`vieolo-list padding-horizontal--${props.horizontalPadding || 'none'}`}
         style={{ height: props.height }}
         aria-label={props.ariaLabel || props.title}
     >
         {
-            props.title &&
-            <div className="center-by-flex-row"><Typography type='title-medium' text={props.title} className="margin-vertical--10" /></div>
+            (props.title || props.headerActions) &&
+            <>
+                <Flex justifyContent='space-between' alignItems='center'>
+                    {
+                        props.title
+                            ? <div className="center-by-flex-row"><Typography type='title-medium' text={props.title} className="margin-vertical--10" /></div>
+                            : <span></span>
+                    }
+
+                    {
+                        props.headerActions &&
+                        <Flex alignItems='center' columnGap='half'>
+                            {props.headerActions}
+                        </Flex>
+                    }
+                </Flex>
+                <Divider direction='horizontal' length='pc-100' thickness='1' colorType='normal' />
+            </>
+
         }
 
         {

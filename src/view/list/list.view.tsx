@@ -9,6 +9,7 @@ import SampleIcon2 from '@mui/icons-material/FlipCameraAndroid';
 import List, { ListItem } from '../../List';
 // Types
 import { ViewData } from '../main/main';
+import IconButton from '../../IconButton';
 
 type ListPropsType = React.ComponentProps<typeof List>;
 
@@ -80,6 +81,7 @@ export function listOptions(): ViewData {
             enableSearch: 'boolean',
             enableSubtitleSearch: 'boolean',
             onlyAllowOneGroupToExpand: 'boolean',
+            headerActions: 'boolean',
             elevation: {
                 options: ['0', '1', '2'],
                 default: "0"
@@ -120,6 +122,20 @@ export function ListCreator(props: { p: ListPropsType; }) {
         enableSubtitleSearch={props.p.enableSubtitleSearch}
         horizontalPadding={props.p.horizontalPadding}
         onlyAllowOneGroupToExpand={props.p.onlyAllowOneGroupToExpand}
+        headerActions={!props.p.headerActions ? undefined : [
+            <IconButton 
+                key={"action 1"}
+                icon={<SampleIcon1 />}
+                onClick={() => {}}
+                size='extra-small'
+            />,
+            <IconButton 
+                key={"action 2"}
+                icon={<SampleIcon2 />}
+                onClick={() => {}}
+                size='extra-small'
+            />
+        ]}
     />
 
 }
