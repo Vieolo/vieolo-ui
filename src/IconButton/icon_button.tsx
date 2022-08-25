@@ -4,7 +4,7 @@ import Spinner from '../Spinner/spinner';
 
 // Type
 import { BorderRadiusType, ColorOptionType, EmphasisType } from '../types/types';
-import { getEmphasisClasses } from '../utility/style_utility';
+import { getBorderRadiusClasses, getEmphasisClasses } from '../utility/style_utility';
 
 
 
@@ -29,7 +29,10 @@ export default function IconButton(props: {
 	ariaLabel?: string,
 	isLoading?: boolean
 }) {	
-	let c = `vieolo-icon-button vieolo-icon-button--${props.size || 'medium'} vieolo-icon-button--border-radius-${props.borderRadius || 'default'}`;
+	let c = `vieolo-icon-button vieolo-icon-button--${props.size || 'medium'}`;
+
+	c += getBorderRadiusClasses('vieolo-icon-button', props.borderRadius || 'default')
+
 	let e = props.emphasis || 'none';
 	let col = props.color || 'primary';
 

@@ -451,25 +451,7 @@ body {
 		}
 	}
 
-	&--border-radius-full {
-		border-radius: $border-radius-full;
-	}
-
-	&--border-radius-normal {
-		border-radius: $border-radius-normal;
-	}
-
-	&--border-radius-default {
-		border-radius: $border-radius-half;
-	}
-
-	&--border-radius-half {
-		border-radius: $border-radius-half;
-	}
-
-	&--border-radius-none {
-		border-radius: 0px;
-	}
+	@include borderRadiusMixin(border-radius, true, $border-radius-half)
 }
 
 .vieolo-select {
