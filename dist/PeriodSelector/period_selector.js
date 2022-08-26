@@ -18,11 +18,12 @@ export var PeriodOptions;
     PeriodOptions["year"] = "Year";
 })(PeriodOptions || (PeriodOptions = {}));
 export default function PeriodSelector(props) {
+    let weekdays = props.weekdayNames || ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     function getSelectedDateRepresentation() {
         let sdr = "";
         switch (props.period) {
             case PeriodOptions.day:
-                sdr = props.selectedDate.formatDate("month dd, yyyy").split(",")[0];
+                sdr = `${weekdays[props.selectedDate.getDay()]}, ${props.selectedDate.formatDate("month dd, yyyy").split(",")[0]}`;
                 break;
             case PeriodOptions.week:
                 sdr = `Week ${props.selectedDate.getWeek().weekNumber}`;

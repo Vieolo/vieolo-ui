@@ -184,8 +184,8 @@ export default function List(props: {
         <Flex direction='column' rowGap={props.rowGap || 'half'}>
             {
                 Object.values(grouped).map((g, i) => {
-                    let cs = {...(props.collapsedGroupStyle || {})};
-                    let es = {...(props.expandedGroupStyle || props.collapsedGroupStyle || {})};
+                    let cs = { ...(props.collapsedGroupStyle || {}) };
+                    let es = { ...(props.expandedGroupStyle || props.collapsedGroupStyle || {}) };
 
                     if (props.controlItemBorderRadius) {
                         if (!cs.borderRadius) cs.borderRadius = 'default'
@@ -193,8 +193,6 @@ export default function List(props: {
                         cs.borderRadius = getManagedBorderRadius(i, Object.keys(grouped).length, typeof cs.borderRadius === 'string' ? cs.borderRadius as BorderRadiusValueType : 'default')
                         es.borderRadius = getManagedBorderRadius(i, Object.keys(grouped).length, typeof es.borderRadius === 'string' ? es.borderRadius as BorderRadiusValueType : 'default')
                     }
-
-                    console.log(g.group, cs.borderRadius)
 
                     return <ExpandableCard
                         key={g.group}

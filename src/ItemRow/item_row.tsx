@@ -60,7 +60,6 @@ export default function ItemRow(props: {
     let mainClassName = `vieolo-item-row elevation--${(props.itemStyle || { elevation: undefined }).elevation || '0'}`;
     mainClassName += borderRadius;
 
-    console.log(borderRadius, props.title, props.itemStyle?.borderRadius)
 
     if (props.disabled) mainClassName += ` disabled`;
 

@@ -127,6 +127,7 @@ import {
 import {
 	ColorOptionType as ColorOptionTypeTemp,
 	EmphasisType as EmphasisTypeTemp,
+	BorderRadiusValueType as BorderRadiusValueTypeTemp,
 	BorderRadiusType as BorderRadiusTypeTemp,
 	FontWeightType as FontWeightTypeTemp,
 	GridGapType as GridGapTypeTemp,
@@ -238,6 +239,7 @@ export type TypographyMargin = TypographyMarginTemp;
 export type TypographyColorType = TypographyColorTypeTemp;
 export type ColorOptionType = ColorOptionTypeTemp;
 export type EmphasisType = EmphasisTypeTemp;
+export type BorderRadiusValueType = BorderRadiusValueTypeTemp;
 export type BorderRadiusType = BorderRadiusTypeTemp;
 export type FontWeightType = FontWeightTypeTemp;
 export type GridGapType = GridGapTypeTemp;

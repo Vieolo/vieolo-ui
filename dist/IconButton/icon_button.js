@@ -1,8 +1,9 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import Spinner from '../Spinner/spinner';
-import { getEmphasisClasses } from '../utility/style_utility';
+import { getBorderRadiusClasses, getEmphasisClasses } from '../utility/style_utility';
 export default function IconButton(props) {
-    let c = `vieolo-icon-button vieolo-icon-button--${props.size || 'medium'} vieolo-icon-button--border-radius-${props.borderRadius || 'default'}`;
+    let c = `vieolo-icon-button vieolo-icon-button--${props.size || 'medium'}`;
+    c += getBorderRadiusClasses('vieolo-icon-button', props.borderRadius || 'default');
     let e = props.emphasis || 'none';
     let col = props.color || 'primary';
     c += getEmphasisClasses(e, col, {
