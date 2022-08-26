@@ -451,25 +451,7 @@ body {
 		}
 	}
 
-	&--border-radius-full {
-		border-radius: $border-radius-full;
-	}
-
-	&--border-radius-normal {
-		border-radius: $border-radius-normal;
-	}
-
-	&--border-radius-default {
-		border-radius: $border-radius-half;
-	}
-
-	&--border-radius-half {
-		border-radius: $border-radius-half;
-	}
-
-	&--border-radius-none {
-		border-radius: 0px;
-	}
+	@include borderRadiusMixin(border-radius, true, $border-radius-half)
 }
 
 .vieolo-select {
@@ -772,7 +754,6 @@ body {
 
 .vieolo-item-row {
 	width: 100%;
-	margin: 6px 0;
 
 	&__item-content {
 		padding: 0 $base-unit;
@@ -820,25 +801,7 @@ body {
 		@include center-by-flex-column;
 	}
 
-	&--border-radius-default {
-		border-radius: $border-radius-normal;
-	}
-
-	&--border-radius-full {
-		border-radius: $border-radius-full;
-	}
-
-	&--border-radius-normal {
-		border-radius: $border-radius-normal;
-	}
-
-	&--border-radius-half {
-		border-radius: $border-radius-half;
-	}
-
-	&--border-radius-none {
-		border-radius: 0px;
-	}
+	@include borderRadiusMixin(border-radius, true, $border-radius-normal)
 }
 
 .vieolo-pdf-viewer-component {
@@ -2263,25 +2226,7 @@ body {
 
 
 .vieolo-card {
-	&--border-radius-default {
-		border-radius: $border-radius-normal;
-	}
-
-	&--border-radius-full {
-		border-radius: $border-radius-full;
-	}
-
-	&--border-radius-normal {
-		border-radius: $border-radius-normal;
-	}
-
-	&--border-radius-half {
-		border-radius: $border-radius-half;
-	}
-
-	&--border-radius-none {
-		border-radius: 0px;
-	}
+	@include borderRadiusMixin(border-radius, true, $border-radius-normal)
 }
 
 

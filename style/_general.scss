@@ -649,6 +649,65 @@
 	}
 }
 
+@mixin borderRadiusMixin($prefix, $includeIndividaul, $defaultValue) {
+	$prefixFull: '--';
+	@if $prefix != "" {
+		$prefixFull: '--#{$prefix}-'
+	}
+	
+	&#{$prefixFull}zero {
+		border-radius: 0px;
+	}
+
+	&#{$prefixFull}none {
+		border-radius: 0px;
+	}
+
+	&#{$prefixFull}half {
+		border-radius: $border-radius-half;
+	}
+
+	&#{$prefixFull}normal {
+		border-radius: $border-radius-normal;
+	}
+
+	&#{$prefixFull}full {
+		border-radius: $border-radius-full;		
+	}
+
+	&#{$prefixFull}default {
+		border-radius: $defaultValue;		
+	}
+
+	@if $includeIndividaul {
+		@each $ind in (top-left, top-right, bottom-left, bottom-right) {
+			&#{$prefixFull}#{$ind}-zero {
+				border-#{$ind}-radius: 0px;
+			}
+		
+			&#{$prefixFull}#{$ind}-none {
+				border-#{$ind}-radius: 0px;
+			}
+		
+			&#{$prefixFull}#{$ind}-half {
+				border-#{$ind}-radius: $border-radius-half;
+			}
+		
+			&#{$prefixFull}#{$ind}-normal {
+				border-#{$ind}-radius: $border-radius-normal;
+			}
+		
+			&#{$prefixFull}#{$ind}-full {
+				border-#{$ind}-radius: $border-radius-full;		
+			}
+			
+			&#{$prefixFull}#{$ind}-default {
+				border-#{$ind}-radius: $defaultValue;		
+			}
+		}
+	}
+}
+
 // #endregion
 
 

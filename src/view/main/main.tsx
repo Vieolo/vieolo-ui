@@ -255,18 +255,23 @@ export default function MainPage(props: {}): JSX.Element {
                 <List
                     height={Device.isTouchOnlyDevice ? '80vh' : 'calc(100vh - 70px)'}
                     itemStyle={{
-                        height: 'medium'
+                        height: 'medium',
+                        emphasis: 'low-normal'
                     }}
                     collapsedGroupStyle={{
                         height: 'medium',
-                        emphasis: 'none',
-                        color: 'secondary'
+                        emphasis: 'low',
+                        color: 'primary',
+                        borderRadius: 'full'
                     }}
                     expandedGroupStyle={{
                         height: 'small',
-                        emphasis: 'low',
-                        color: 'primary'
+                        emphasis: 'low-normal',
+                        color: 'primary',
+                        borderRadius: 'full'
                     }}
+                    controlItemBorderRadius
+                    rowGap='none'
                     items={Object.values(items).map((i, index) => {
                         return {
                             id: index.toString(),

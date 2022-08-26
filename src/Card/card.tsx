@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Utils and logics
-import { getEmphasisClasses } from '../utility/style_utility';
+import { getBorderRadiusClasses, getEmphasisClasses } from '../utility/style_utility';
 
 // Types
 import { BorderRadiusType, ColorOptionType, ElevationType, EmphasisType } from '../types/types';
@@ -26,7 +26,6 @@ export default function Card(props: {
 
     let em = props.emphasis || 'none';
     let el = props.elevation || "0";
-    let br = props.borderRadius || 'default';
     let co = props.color || 'primary';
 
     let className = `vieolo-card`;
@@ -38,7 +37,7 @@ export default function Card(props: {
         hoverable: props.onClick !== undefined,
     });
 
-    className += ` vieolo-card--border-radius-${br}`;
+    className += getBorderRadiusClasses("vieolo-card", props.borderRadius)
     className += ` elevation--${el}`;
     className += ` padding--${props.padding || 'one'}`
 
