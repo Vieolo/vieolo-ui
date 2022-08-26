@@ -1,10 +1,9 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 // Utils and logics
-import { getEmphasisClasses } from '../utility/style_utility';
+import { getBorderRadiusClasses, getEmphasisClasses } from '../utility/style_utility';
 export default function Card(props) {
     let em = props.emphasis || 'none';
     let el = props.elevation || "0";
-    let br = props.borderRadius || 'default';
     let co = props.color || 'primary';
     let className = `vieolo-card`;
     if (props.className)
@@ -14,7 +13,7 @@ export default function Card(props) {
         hasRipple: props.onClick !== undefined,
         hoverable: props.onClick !== undefined,
     });
-    className += ` vieolo-card--border-radius-${br}`;
+    className += getBorderRadiusClasses("vieolo-card", props.borderRadius);
     className += ` elevation--${el}`;
     className += ` padding--${props.padding || 'one'}`;
     if (props.onClick)

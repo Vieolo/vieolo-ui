@@ -1,5 +1,6 @@
 import React from 'react';
 import { ColorOptionType, RowStyleType } from '../types/types';
+import { GridGapType } from '../types';
 export declare type ListItem = {
     id: string;
     title: string;
@@ -41,4 +42,7 @@ export default function List(props: {
     horizontalPadding?: 'none' | 'half' | 'one';
     ariaLabel?: string;
     onlyAllowOneGroupToExpand?: boolean;
+    headerActions?: React.ReactNode;
+    controlItemBorderRadius?: boolean;
+    rowGap?: GridGapType;
 }): JSX.Element;

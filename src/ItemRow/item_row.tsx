@@ -10,7 +10,7 @@ import CloseIcon from '@mui/icons-material/CloseRounded';
 
 // Types
 import { ColorOptionType, EmphasisType, RowStyleType } from '../types/types';
-import { getEmphasisClasses } from '../utility/style_utility';
+import { getBorderRadiusClasses, getEmphasisClasses } from '../utility/style_utility';
 
 
 
@@ -40,7 +40,7 @@ export default function ItemRow(props: {
 }) {
 
     let color = (props.itemStyle || { color: undefined }).color || 'secondary';
-    let borderRadius = ` vieolo-item-row--border-radius-${(props.itemStyle && props.itemStyle.borderRadius) ? props.itemStyle.borderRadius : 'default'}`;
+    let borderRadius = getBorderRadiusClasses("vieolo-item-row", props.itemStyle ? props.itemStyle.borderRadius : 'default')
 
     let contentClassName: string = `vieolo-item-row__item-content row-height--${(props.itemStyle || { height: undefined }).height || 'large'}`;
     contentClassName += borderRadius;
@@ -59,6 +59,7 @@ export default function ItemRow(props: {
 
     let mainClassName = `vieolo-item-row elevation--${(props.itemStyle || { elevation: undefined }).elevation || '0'}`;
     mainClassName += borderRadius;
+
 
     if (props.disabled) mainClassName += ` disabled`;
 

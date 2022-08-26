@@ -1,14 +1,20 @@
 /// <reference types="react" />
 export declare type ColorOptionType = 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' | 'alert' | 'accessory-blue' | 'accessory-orange' | 'accessory-green';
 export declare type EmphasisType = 'high' | 'medium' | 'low' | 'low-normal' | 'none' | 'none-normal';
-export declare type BorderRadiusType = 'full' | 'normal' | 'half' | 'none' | 'default';
+export declare type BorderRadiusValueType = 'full' | 'normal' | 'half' | 'none' | 'default';
+export declare type BorderRadiusType = BorderRadiusValueType | {
+    topLeft?: BorderRadiusValueType;
+    topRight?: BorderRadiusValueType;
+    bottomLeft?: BorderRadiusValueType;
+    bottomRight?: BorderRadiusValueType;
+};
 export declare type FontWeightType = 'light' | 'normal' | 'bold' | 'extra-bold';
 export declare type GridGapType = 'none' | 'half' | 'one' | 'two';
 export declare type ElevationType = '0' | '1' | '2';
 export declare type RowHeightType = "small" | "medium" | "large" | "over";
 export declare type RowStyleType = {
     elevation?: ElevationType;
-    emphasis?: "none" | "low";
+    emphasis?: "none" | "low" | 'low-normal';
     borderRadius?: BorderRadiusType;
     color?: ColorOptionType;
     height?: RowHeightType;

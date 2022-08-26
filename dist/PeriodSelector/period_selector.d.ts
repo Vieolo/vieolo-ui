@@ -14,4 +14,6 @@ export default function PeriodSelector(props: {
     periodOptions?: PeriodOptions[];
     onPeriodChange: (p: PeriodOptions) => void;
     ariaLabel?: string;
+    /** This array can be used for I18N. If ommited, the english week days are used. Sunday should be first day */
+    weekdayNames?: string[];
 }): JSX.Element;

@@ -30,15 +30,19 @@ export default function PeriodSelector (props: {
     onDateChange: (d: VDate) => void,
     periodOptions?: PeriodOptions[],
     onPeriodChange: (p: PeriodOptions) => void,
-    ariaLabel?: string
+    ariaLabel?: string,
+    /** This array can be used for I18N. If ommited, the english week days are used. Sunday should be first day */
+    weekdayNames?: string[]
 }) {
+
+    let weekdays = props.weekdayNames || ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
     function getSelectedDateRepresentation() : string {
         let sdr = "";
         
         switch (props.period) {
             case PeriodOptions.day:
-                sdr = props.selectedDate.formatDate("month dd, yyyy").split(",")[0];
+                sdr = `${weekdays[props.selectedDate.getDay()]}, ${props.selectedDate.formatDate("month dd, yyyy").split(",")[0]}`;
                 break;
             case PeriodOptions.week:
                 sdr = `Week ${props.selectedDate.getWeek().weekNumber}`;

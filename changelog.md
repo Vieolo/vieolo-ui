@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.23.5 (2022-08-26)
+- Added weekday to the day period of `PeriodSelector`
+- Changed the display of title of the `List` ([#219](https://github.com/Vieolo/vieolo-ui/issues/219))
+- Added action buttons to the `List` ([#221](https://github.com/Vieolo/vieolo-ui/issues/221))
+- Added managed border radius mode to the `List` ([#223](https://github.com/Vieolo/vieolo-ui/issues/223))
+
 ## 0.23.4 (2022-08-09)
 - Fixed the keyboard interaction of `Select` when disabled ([#191](https://github.com/Vieolo/vieolo-ui/issues/191))
 - Added title to the auxiliary items of `GanttChart` ([#202](https://github.com/Vieolo/vieolo-ui/issues/202))
