@@ -26,8 +26,9 @@ export default function Chip(props) {
                     props.onButtonClick();
             }, borderRadius: props.borderRadius !== 'default' ? props.borderRadius : 'full', color: color, size: 'extra-small', emphasis: "none", borderWidth: '0' }, void 0);
     }
-    return _jsx("div", Object.assign({ className: c, style: { ...s, ...props.style }, id: props.id, onClick: () => {
+    return _jsx("div", Object.assign({ className: c, style: { ...s, ...props.style }, id: props.id, onClick: e => {
             if (props.onChipSelect) {
+                e.stopPropagation();
                 props.onChipSelect();
             }
         } }, { children: _jsxs("div", Object.assign({ className: `vieolo-chip__content` }, { children: [props.icon &&

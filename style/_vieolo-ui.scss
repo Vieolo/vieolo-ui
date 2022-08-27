@@ -707,7 +707,7 @@ body {
 			svg {
 				height: calc($base-unit * 1.5);
 				width: calc($base-unit * 1.5);
-			}						
+			}
 		}
 	}
 
@@ -1736,7 +1736,7 @@ body {
 		background-color: $content-background-color;
 		border-radius: $border-radius-normal;
 		top: 0;
-		
+
 		p {
 			margin: 0;
 		}
@@ -2502,7 +2502,7 @@ body {
 
 // .vieolo-donut-chart {
 
-	
+
 // }
 
 
@@ -2522,7 +2522,8 @@ body {
 		position: fixed;
 		top: $navbar-height;
 		width: $drawer-width;
-		left: -$drawer-width;;
+		left: -$drawer-width;
+		;
 		bottom: 0px;
 		background-color: $content-background-color;
 		padding: 0px;
@@ -2532,9 +2533,9 @@ body {
 		&--open {
 			left: 0;
 			padding: 10px 0px;
-			overflow-y: auto;			
+			overflow-y: auto;
 		}
-	}	
+	}
 
 	&__outer-area {
 
@@ -2576,8 +2577,8 @@ body {
 		}
 
 		p {
-			margin-left: 15px;	
-		}		
+			margin-left: 15px;
+		}
 
 		&--selected {
 			background-color: $secondary-color-normal;
@@ -2598,8 +2599,94 @@ body {
 
 .vieolo-page {
 	padding-top: $navbar-height;
-	
-	&__content {	
+
+	&__content {
 		padding: $base-unit;
 	}
+}
+
+
+.vieolo-double-toggle-list {
+	display: grid;
+	grid-template-columns: 40% 60%;
+	@include card-no-shadow;
+	padding: $base-unit;
+	border: 1px solid transparent;
+
+	&:hover {
+		border: 1px solid $secondary-color-normal;
+	}
+
+	&__text-container {
+		border-right: 2px solid #f2f2f2;
+	}
+
+	&__list-container {
+		display: grid;
+		grid-template-columns: 50% 50%;
+	}
+
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		row-gap: $base-unit-half;
+		column-gap: $base-unit-half;
+
+		&--on {
+			flex-direction: row-reverse;
+			padding-right: $base-unit-half;
+			border-right: 1px solid #f2f2f2;
+		}
+
+		&--off {
+			flex-direction: row;
+			padding-left: $base-unit-half;
+			border-left: 1px solid #f2f2f2;
+		}
+	}
+}
+
+
+.vieolo-sub-dashboard {
+
+
+	&__grid {
+		padding-left: $base-unit;
+		display: grid;
+		grid-template-columns: 300px 1fr;
+		column-gap: $base-unit;
+
+		&--subnavbar {
+			height: calc(100vh - $navbar-height - $subnavbar-height);
+		}
+
+		&--bare {
+			height: calc(100vh - $navbar-height);
+		}
+
+		&__left-col {
+			border-right: 2px solid #ddd;
+			padding-bottom: $base-unit;
+			overflow-y: scroll;
+		}
+
+		&__right-col {
+			&__empty {
+				height: 100%;
+				@include center-by-flex-column;
+
+				p {
+					color: $primary-color-light;
+				}
+
+				svg {
+					color: $primary-color-light;
+					height: 10vh;
+					width: 10vh;
+				}
+			}
+		}
+
+	}
+
 }
