@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.23.6 (2022-08-28)
+- Added `DoubleToggleList` component ([#132](https://github.com/Vieolo/vieolo-ui/issues/132))
+- Added `SubDashboard` component
+- Fixed propagation of `Chip` ([#216](https://github.com/Vieolo/vieolo-ui/issues/216))
+
 ## 0.23.5 (2022-08-26)
 - Added weekday to the day period of `PeriodSelector`
 - Changed the display of title of the `List` ([#219](https://github.com/Vieolo/vieolo-ui/issues/219))

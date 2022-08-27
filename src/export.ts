@@ -17,6 +17,7 @@ import DatePicker from './DatePicker';
 import DateTimePicker from './DateTimePicker';
 import Divider from './Divider';
 import DonutChart from './DonutChart';
+import DoubleToggleList from './DoubleToggleList';
 import DropDownMenu from './DropDownMenu';
 import ExpandableCard from './ExpandableCard';
 import FileInput from './FileInput';
@@ -46,6 +47,7 @@ import Select from './Select';
 import SelectSet from './SelectSet';
 import Spacer from './Spacer';
 import Spinner from './Spinner';
+import SubDashboard from './SubDashboard';
 import SubNavbarRow from './SubNavbarRow';
 import Switch from './Switch';
 import SwitchSet from './SwitchSet';
@@ -71,6 +73,9 @@ import {
 import {
 	DonutChartData as DonutChartDataTemp,
 } from './DonutChart';
+import {
+	DoubleToggleListItem as DoubleToggleListItemTemp,
+} from './DoubleToggleList';
 import {
 	DropDownMenuItemType as DropDownMenuItemTypeTemp,
 } from './DropDownMenu';
@@ -159,6 +164,7 @@ export {
 	DateTimePicker,
 	Divider,
 	DonutChart,
+	DoubleToggleList,
 	DropDownMenu,
 	ExpandableCard,
 	FileInput,
@@ -189,6 +195,7 @@ export {
 	SelectSet,
 	Spacer,
 	Spinner,
+	SubDashboard,
 	SubNavbarRow,
 	Switch,
 	SwitchSet,
@@ -210,6 +217,7 @@ export type StackedBarChartData = StackedBarChartDataTemp;
 export type ConfirmationDialogMainButton = ConfirmationDialogMainButtonTemp;
 export type ContextMenuItem = ContextMenuItemTemp;
 export type DonutChartData = DonutChartDataTemp;
+export type DoubleToggleListItem = DoubleToggleListItemTemp;
 export type DropDownMenuItemType = DropDownMenuItemTypeTemp;
 export type FlexJustifyContent = FlexJustifyContentTemp;
 export type FlexDirection = FlexDirectionTemp;
