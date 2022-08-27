@@ -23,7 +23,8 @@ export default function DoubleToggleList(props: {
     title: string,
     description: string,
     items: DoubleToggleListItem[],
-    onItemToggle: (id: string, newValue: boolean) => void
+    onItemToggle: (id: string, newValue: boolean) => void,
+    chipSize?: 'small' | 'medium'
 }) {
 
     let onList: DoubleToggleListItem[] = [];
@@ -50,12 +51,14 @@ export default function DoubleToggleList(props: {
                 list={onList}
                 on={true}
                 onItemToggle={props.onItemToggle}
+                chipSize={props.chipSize}
             />
 
             <SingleList
                 list={offList}
                 on={false}
                 onItemToggle={props.onItemToggle}
+                chipSize={props.chipSize}
             />
         </div>
 
@@ -64,7 +67,12 @@ export default function DoubleToggleList(props: {
 
 
 
-function SingleList(props: { on: boolean, list: DoubleToggleListItem[], onItemToggle: (id: string, on: boolean) => void }) {
+function SingleList(props: { 
+    on: boolean, 
+    list: DoubleToggleListItem[], 
+    onItemToggle: (id: string, on: boolean) => void,
+    chipSize?: 'small' | 'medium'
+}) {
     return <div className={`vieolo-double-toggle-list__list vieolo-double-toggle-list__list--${props.on ? "on" : "off"}`}>
 
         {
@@ -75,6 +83,7 @@ function SingleList(props: { on: boolean, list: DoubleToggleListItem[], onItemTo
                     id={i.id}
                     color={props.on ? 'success' : 'error'}
                     emphasis='medium'
+                    size={props.chipSize}
                     icon={props.on ? <DoneIcon /> : <CloseIcon />}
                     onChipSelect={() => props.onItemToggle(i.id, !props.on)
                     }

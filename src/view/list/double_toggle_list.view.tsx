@@ -22,7 +22,10 @@ export function doubleToggleOptions(): ViewData {
 
         } as Partial<DoubleToggleListPropsType>,
         variables: {
-
+            chipSize: {
+                options: ["small", "medium"],
+                default: "medium"
+            }
         }
     }
 }
@@ -41,6 +44,7 @@ export function DoubleToggleListCreator(props: { p: DoubleToggleListPropsType })
         items={items}
         description='By clicking on the items, they move from one side to the other. Magical!'
         title='Double Toggle List'
+        chipSize={props.p.chipSize}
         onItemToggle={(id, newValue) => {
             setItems(items.map(z => {
                 if (z.id === id) z.on = newValue
