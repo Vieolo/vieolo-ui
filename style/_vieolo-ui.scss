@@ -2603,3 +2603,44 @@ body {
 		padding: $base-unit;
 	}
 }
+
+
+.vieolo-double-toggle-list {
+	display: grid;
+	grid-template-columns: 40% 60%;
+	@include card-no-shadow;
+	padding: $base-unit;
+	border: 1px solid transparent;
+
+	&:hover {
+		border: 1px solid $secondary-color-normal;
+	}
+
+	&__text-container {
+		border-right: 2px solid #f2f2f2;
+	}
+
+	&__list-container {
+		display: grid;
+		grid-template-columns: 50% 50%;
+	}
+
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		row-gap: $base-unit-half;
+		column-gap: $base-unit-half;		
+		
+		&--on {			
+			flex-direction: row-reverse;
+			padding-right: $base-unit-half;
+			border-right: 1px solid #f2f2f2;
+		}
+
+		&--off {			
+			flex-direction: row;
+			padding-left: $base-unit-half;
+			border-left: 1px solid #f2f2f2;
+		}
+	}
+}
