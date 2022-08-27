@@ -16,7 +16,8 @@ export default function SubDashboard(props: {
     itemStyle?: RowStyleType,
     subNavbarOptions?: React.ComponentProps<typeof SubNavbarRow>,
     emptyText?: string,
-    emptyIcon?: React.ReactNode
+    emptyIcon?: React.ReactNode,
+    itemListOptions?: Omit<React.ComponentProps<typeof List>, "items" | "itemStyle" | "height">
 }) {
 
     let history = useHistory();
@@ -54,10 +55,9 @@ export default function SubDashboard(props: {
             <div className='vieolo-sub-dashboard__grid__left-col'>
                 <List
                     height='100%'
-                    title=''
                     itemStyle={props.itemStyle}
                     items={props.items}
-
+                    {...props.itemListOptions}
                 />
             </div>
 

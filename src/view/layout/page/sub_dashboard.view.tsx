@@ -23,7 +23,7 @@ export function subDashboardOptions(): ViewData {
 
         } as Partial<SubDashboardPropsType>,
         variables: {
-
+            withListOptions: 'boolean'
         }
     }
 }
@@ -34,13 +34,14 @@ export function SubDashboardCreator(props: { p: SubDashboardPropsType }) {
     let [selected, setSelected] = useState<string>("");
 
     return <SubDashboard
-        items={["First", "Second", "Third"].map(z => {
+        items={[{title: "First"}, {title: "Second"}, {title: "Third"}, {title: "one", group: "Fourth"}, {title: "two", group: "Fourth"}].map(z => {
             return {
-                id: z,
-                selected: selected === z,
-                title: z,
+                id: z.title,
+                selected: selected === z.title,
+                title: z.title,
+                group: z.group,
                 onClick: () => {
-                    setSelected(z)
+                    setSelected(z.title)
                 },
             }
         })}
@@ -50,6 +51,11 @@ export function SubDashboardCreator(props: { p: SubDashboardPropsType }) {
         subNavbarOptions={{
             backButtonText: "Go Back",
             onBack: () => {}
+        }}
+        itemListOptions={!(props.p as any).withListOptions ? undefined : {
+            title: "Pages",
+            controlItemBorderRadius: true,
+            rowGap:"none"
         }}
     >
         {
