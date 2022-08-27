@@ -69,8 +69,9 @@ export default function Chip(props: {
 		className={c}
 		style={{ ...s, ...props.style }}
 		id={props.id}
-		onClick={() => {
+		onClick={e => {
 			if (props.onChipSelect) {
+				e.stopPropagation();
 				props.onChipSelect()
 			}
 		}}
