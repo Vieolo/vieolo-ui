@@ -106,7 +106,7 @@ export default function PeriodSelector (props: {
             props.periodOptions &&
             <div className="vieolo-period-selector__dropdown-div">
                 <DropDownMenu 
-                    buttonComponent={<div className="vieolo-period-selector__dropdown-button">
+                    buttonComponent={<div className="vieolo-period-selector__dropdown-button" aria-label={props.ariaLabel ? `${props.ariaLabel} period options` : undefined}>
                         <DownArrow />
                     </div>}
                     items={props.periodOptions.map(o => {
