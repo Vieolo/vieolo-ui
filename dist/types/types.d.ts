@@ -14,7 +14,7 @@ export declare type ElevationType = '0' | '1' | '2';
 export declare type RowHeightType = "small" | "medium" | "large" | "over";
 export declare type RowStyleType = {
     elevation?: ElevationType;
-    emphasis?: "none" | "low" | 'low-normal';
+    emphasis?: EmphasisType;
     borderRadius?: BorderRadiusType;
     color?: ColorOptionType;
     height?: RowHeightType;
