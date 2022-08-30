@@ -5,6 +5,7 @@ import { useState } from "react";
 import Card from "../Card/card";
 import IconButton from "../IconButton";
 import Typography from "../Typography";
+import Flex from "../Flex";
 
 // Types
 import { RowStyleType } from "../types/types";
@@ -83,9 +84,9 @@ export default function ExpandableCard(props: {
 
                 {
                     props.actions &&
-                    <div className="vieolo-expandable-card__header__actions">
+                    <Flex alignItems="center" columnGap="half" className="vieolo-expandable-card__header__actions">
                         {props.actions}
-                    </div>
+                    </Flex>
                 }
             </div>
 
