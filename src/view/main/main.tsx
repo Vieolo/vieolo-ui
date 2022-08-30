@@ -38,6 +38,7 @@ import { timeInputOptions, TimeInputCreator } from '../date_time/time_input.view
 import { dateTimePickerOptions, DateTimePickerCreator } from '../date_time/date_time_picker.view';
 import { dateInputOptions, DateInputCreator } from '../date_time/date_input.view';
 import { cardOptions, CardCreator } from '../card/card.view';
+import { expandableCardOptions, ExpandableCardCreator } from '../card/expandable_card.view';
 import { titlePeriodCardOptions, TitlePeriodCardCreator } from '../card/title_period_card.view';
 import { typographyOptions, TypographyCreator } from '../typography/typography.view';
 import { gridOptions, GridCreator } from '../layout/grid/grid.view';
@@ -104,6 +105,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Action Card": { title: "Action Card", data: actionCardOptions(), creator: ActionCardCreator, group: "Cards" },
         "Clickable Card": { title: "Clickable Card", data: clickableCardOptions(), creator: ClickableCardCreator, group: "Cards" },
         "Title Period Card": { title: "Title Period Card", data: titlePeriodCardOptions(), creator: TitlePeriodCardCreator, group: "Cards" },
+        "Expandable Card": { title: "Expandable Card", data: expandableCardOptions(), creator: ExpandableCardCreator, group: "Cards" },
 
         "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator, group: "Charts" },
         "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator, group: "Charts" },

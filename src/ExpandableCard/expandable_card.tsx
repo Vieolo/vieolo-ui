@@ -5,6 +5,7 @@ import { useState } from "react";
 import Card from "../Card/card";
 import IconButton from "../IconButton";
 import Typography from "../Typography";
+import Flex from "../Flex";
 
 // Types
 import { RowStyleType } from "../types/types";
@@ -28,7 +29,7 @@ export default function ExpandableCard(props: {
     onStateChange?: (s: 'expanded' | 'collapsed') => void,
     state?: "expanded" | "collapsed",
     /** The title displayed in the header of the card */
-    title: string,
+    title: string | React.ReactNode,
     /** The style of the card when collapsed */
     collapsedCardStyle?: RowStyleType,
     /** The style of the card when expanded */
@@ -79,13 +80,17 @@ export default function ExpandableCard(props: {
 
                 <div className="padding-horizontal--half"></div>
 
-                <Typography type='paragraph-medium' text={props.title} fontWeight={'bold'} ariaLabel={`${props.ariaLabel || props.title} title`} />
+                {
+                    typeof props.title === 'string'
+                        ? <Typography type='paragraph-medium' text={props.title} fontWeight={'bold'} ariaLabel={`${props.ariaLabel || props.title} title`} />
+                        : <>{props.title}</>
+                }
 
                 {
                     props.actions &&
-                    <div className="vieolo-expandable-card__header__actions">
+                    <Flex alignItems="center" columnGap="half" className="vieolo-expandable-card__header__actions">
                         {props.actions}
-                    </div>
+                    </Flex>
                 }
             </div>
 

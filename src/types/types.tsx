@@ -14,7 +14,7 @@ export type RowHeightType = "small" | "medium" | "large" | "over";
 
 export type RowStyleType = {
     elevation?: ElevationType,
-    emphasis?: "none" | "low" | 'low-normal',
+    emphasis?: EmphasisType,
     borderRadius?: BorderRadiusType,
     color?: ColorOptionType,
     height?: RowHeightType
