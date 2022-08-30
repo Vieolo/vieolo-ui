@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.23.7 (2022-08-30)
+- Improved the emphasis options of `ExpandableCard` ([#218](https://github.com/Vieolo/vieolo-ui/issues/218))
+- Fixed the display of multiple actions in `ExpandableCard` ([#225](https://github.com/Vieolo/vieolo-ui/issues/225))
+- Improved the accessibility of `PeriodSelector` ([#228](https://github.com/Vieolo/vieolo-ui/issues/228))
+
 ## 0.23.6 (2022-08-28)
 - Added `DoubleToggleList` component ([#132](https://github.com/Vieolo/vieolo-ui/issues/132))
 - Added `SubDashboard` component

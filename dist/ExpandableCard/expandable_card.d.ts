@@ -13,7 +13,7 @@ export default function ExpandableCard(props: {
     onStateChange?: (s: 'expanded' | 'collapsed') => void;
     state?: "expanded" | "collapsed";
     /** The title displayed in the header of the card */
-    title: string;
+    title: string | React.ReactNode;
     /** The style of the card when collapsed */
     collapsedCardStyle?: RowStyleType;
     /** The style of the card when expanded */

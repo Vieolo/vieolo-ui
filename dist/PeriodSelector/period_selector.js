@@ -67,7 +67,7 @@ export default function PeriodSelector(props) {
                     _jsx(IconButton, { icon: _jsx(RightArrow, {}, void 0), onClick: () => handleDateChange(1), size: "small", borderWidth: '0', ariaLabel: props.ariaLabel ? `${props.ariaLabel} right button` : undefined }, void 0)] }), void 0),
             _jsx("div", Object.assign({ className: "vieolo-period-selector__year-div" }, { children: _jsx(Typography, { text: props.selectedDate.getFullYear().toString() }, void 0) }), void 0),
             props.periodOptions &&
-                _jsx("div", Object.assign({ className: "vieolo-period-selector__dropdown-div" }, { children: _jsx(DropDownMenu, { buttonComponent: _jsx("div", Object.assign({ className: "vieolo-period-selector__dropdown-button" }, { children: _jsx(DownArrow, {}, void 0) }), void 0), items: props.periodOptions.map(o => {
+                _jsx("div", Object.assign({ className: "vieolo-period-selector__dropdown-div" }, { children: _jsx(DropDownMenu, { buttonComponent: _jsx("div", Object.assign({ className: "vieolo-period-selector__dropdown-button", "aria-label": props.ariaLabel ? `${props.ariaLabel} period options` : undefined }, { children: _jsx(DownArrow, {}, void 0) }), void 0), items: props.periodOptions.map(o => {
                             return {
                                 title: o,
                                 value: o
