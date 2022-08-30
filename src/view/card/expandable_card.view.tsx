@@ -35,7 +35,7 @@ export function ExpandableCardCreator(props: {p: ExpandableCardPropsType}) {
     return <ExpandableCard
         title='Expandable Card'
         collapsedCardStyle={{
-            emphasis: 'low-normal'
+            emphasis: 'medium'
         }}
         expandedCardStyle={{
             emphasis: 'low-normal'
