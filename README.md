@@ -10,7 +10,7 @@ The UI package for front-end applications using React.
 to install, add the following to the `dependency` key of the `package.json` file of the project.
 
 ```json
-"@vieolo/vieolo-ui": "github:Vieolo/vieolo-ui#0.23.7"
+"@vieolo/vieolo-ui": "github:Vieolo/vieolo-ui#0.23.8"
 ```
 
 ## Development View

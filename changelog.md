@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.23.8 (2022-09-03)
+- Added `VideoViewer` component
+- Added `ImageViewer` component
+- Added `FileViewer` component ([#231](https://github.com/Vieolo/vieolo-ui/issues/231))
+
 ## 0.23.7 (2022-08-30)
 - Improved the emphasis options of `ExpandableCard` ([#218](https://github.com/Vieolo/vieolo-ui/issues/218))
 - Fixed the display of multiple actions in `ExpandableCard` ([#225](https://github.com/Vieolo/vieolo-ui/issues/225))

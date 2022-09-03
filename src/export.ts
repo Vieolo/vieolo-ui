@@ -21,6 +21,7 @@ import DoubleToggleList from './DoubleToggleList';
 import DropDownMenu from './DropDownMenu';
 import ExpandableCard from './ExpandableCard';
 import FileInput from './FileInput';
+import FileViewer from './FileViewer';
 import Flex from './Flex';
 import FormDialog from './FormDialog';
 import FormSection from './FormSection';
@@ -30,6 +31,7 @@ import GridContainer from './GridContainer';
 import GridThree from './GridThree';
 import GridTwo from './GridTwo';
 import IconButton from './IconButton';
+import ImageViewer from './ImageViewer';
 import Input from './Input';
 import InputSet from './InputSet';
 import ItemRow from './ItemRow';
@@ -59,6 +61,7 @@ import TextareaSet from './TextareaSet';
 import TimeInput from './TimeInput';
 import TitlePeriodCard from './TitlePeriodCard';
 import Typography from './Typography';
+import VideoViewer from './VideoViewer';
 import VieoloApp from './VieoloApp';
 import {
 	BarChartData as BarChartDataTemp,
@@ -168,6 +171,7 @@ export {
 	DropDownMenu,
 	ExpandableCard,
 	FileInput,
+	FileViewer,
 	Flex,
 	FormDialog,
 	FormSection,
@@ -177,6 +181,7 @@ export {
 	GridThree,
 	GridTwo,
 	IconButton,
+	ImageViewer,
 	Input,
 	InputSet,
 	ItemRow,
@@ -207,6 +212,7 @@ export {
 	TimeInput,
 	TitlePeriodCard,
 	Typography,
+	VideoViewer,
 	VieoloApp,
 }
 
