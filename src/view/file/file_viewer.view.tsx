@@ -32,9 +32,12 @@ export function fileViewerOptions(): ViewData {
                     '/annotated.pdf',
                     "/flower.mp4",
                     "/flower.webm",
+                    "/portrait_image.jpg",
+                    "/landscape_image.jpg",
+                    "/square_image.jpg",
                     'non-existend file',
                 ],
-                default: '/simple.pdf'
+                default: '/portrait_image.jpg'
             },
             context: {
                 options: ["embedded", "full screen"],
@@ -49,16 +52,18 @@ export function fileViewerOptions(): ViewData {
 }
 
 
-export function FileViewerCreator(props: {p: FileViewerPropsType}) {
-    
+export function FileViewerCreator(props: { p: FileViewerPropsType }) {
 
-    return <FileViewer
-        key={props.p.file.toString()}
-        file={props.p.file}
-        context={props.p.context}
-        heightDeduction={105}
-        onClose={props.p.onClose}
-        expandable={props.p.expandable}
-        fileName={(props.p.file as string).split("/")[1]}
-    />
+
+    return <div className='height--vh-80'>
+        <FileViewer
+            key={props.p.file.toString()}
+            file={props.p.file}
+            context={props.p.context}
+            heightDeduction={105}
+            onClose={props.p.onClose}
+            expandable={props.p.expandable}
+            fileName={(props.p.file as string).split("/")[1]}
+        />
+    </div>
 }
