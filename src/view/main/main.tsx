@@ -20,8 +20,8 @@ import { InputSetCreator, inputSetOptions } from '../form/input_set.view';
 import { ListCreator, listOptions } from '../list/list.view';
 import { SwitchSetCreator, switchSetOptions } from '../form/switch_set.view';
 import { DropDownMenuCreator, dropDownMenuOptions } from '../menu/dropdown_menu.view';
-import { PDFViewerEmbeddedCreator, pdfViewerEmbeddedOptions } from '../pdf_viewer/pdf_viewer_embedded.view';
-import { PDFViewerFullScreenCreator, pdfViewerFullScreenOptions } from '../pdf_viewer/pdf_viewer_full_screen.view';
+import { PDFViewerEmbeddedCreator, pdfViewerEmbeddedOptions } from '../file/pdf_viewer_embedded.view';
+import { PDFViewerFullScreenCreator, pdfViewerFullScreenOptions } from '../file/pdf_viewer_full_screen.view';
 import { FormDialogCreator, formDialogOptions } from '../dialog/form_dialog.view';
 import { ConfirmationDialogCreator, confirmationDialogOptions } from '../dialog/confirmation_dialog.view';
 import { TableCreator, tableOptions } from '../table/table.view';
@@ -54,6 +54,7 @@ import { SubNavbarRowCreator, subNavbarRowOptions } from '../layout/page/sub_nav
 import { SubDashboardCreator, subDashboardOptions } from '../layout/page/sub_dashboard.view';
 import { ActionCardCreator, actionCardOptions } from '../card/action_card.view';
 import { DoubleToggleListCreator, doubleToggleOptions } from '../list/double_toggle_list.view';
+import { fileViewerOptions, FileViewerCreator } from '../file/file_viewer.view';
 import Select from '../../Select';
 import SwitchSet from '../../SwitchSet';
 import PageFrame from '../../PageFrame';
@@ -145,8 +146,9 @@ export default function MainPage(props: {}): JSX.Element {
         "List": { title: "List", data: listOptions(), creator: ListCreator, group: "List" },
         "Double Toggle List": { title: "Double Toggle List", data: doubleToggleOptions(), creator: DoubleToggleListCreator, group: "List" },
 
-        "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerEmbeddedOptions(), creator: PDFViewerEmbeddedCreator, group: "PDF" },
-        "PDF Viewer Fullscreen": { title: "PDF Viewer Fullscreen", data: pdfViewerFullScreenOptions(), creator: PDFViewerFullScreenCreator, group: "PDF" },
+        "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerEmbeddedOptions(), creator: PDFViewerEmbeddedCreator, group: "File" },
+        "PDF Viewer Fullscreen": { title: "PDF Viewer Fullscreen", data: pdfViewerFullScreenOptions(), creator: PDFViewerFullScreenCreator, group: "File" },
+        "File Viewer": { title: "File Viewer", data: fileViewerOptions(), creator: FileViewerCreator, group: "File" },
 
         "Table": { title: "Table", data: tableOptions(), creator: TableCreator, group: "Table" },
         "Table Interactive": { title: "Table Interactive", data: tableInteractiveOptions(), creator: TableInteractiveCreator, group: "Table" },

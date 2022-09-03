@@ -56,7 +56,7 @@ export function PDFViewerEmbeddedCreator(props: { p: ViewerPropsType }) {
         <PDFViewer
             key={props.p.filePath.toString()}
             filePath={props.p.filePath}
-            pageInFocus={parseInt(pageNumber) || null}
+            pageInFocus={parseInt(pageNumber) || undefined}
             context={props.p.context}
             heightDeduction={props.p.heightDeduction}
             onClose={props.p.onClose}
