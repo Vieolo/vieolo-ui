@@ -22,8 +22,9 @@ export default function FileViewer(props) {
             if (typeof props.file === 'string') {
                 fetch(props.file).then(res => {
                     res.blob().then(blob => {
+                        let headerContentType = res.headers.get("Content-Type");
                         setFile(new File([blob], props.fileName, {
-                            type: res.headers.get("Content-Type") || contentTypeMap[props.file.split(".").slice(-1)[0].toLowerCase()]
+                            type: (!headerContentType || headerContentType === 'binary/octet-stream') ? contentTypeMap[props.file.split("?")[0].split(".").slice(-1)[0].toLowerCase()] : headerContentType
                         }));
                     });
                 }).catch(() => setFile(null));
