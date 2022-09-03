@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.23.9 (2022-09-03)
+- Adjusted the `FileViewer` for `binary/octet-stream` content type
+
 ## 0.23.8 (2022-09-03)
 - Added `VideoViewer` component
 - Added `ImageViewer` component
