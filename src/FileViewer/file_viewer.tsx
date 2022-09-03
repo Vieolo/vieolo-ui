@@ -1,11 +1,12 @@
 // React
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PDFViewer from '../PDFViewer';
+import Spinner from '../Spinner';
 import Typography from '../Typography';
 
 
 export default function FileViewer(props: {
-    file: File,
+    file: string | File,
     fileName: string,
     context: 'full screen' | 'embedded',
     /** Used for PDF files */
@@ -29,10 +30,43 @@ export default function FileViewer(props: {
 	errorMessage?: string
 }) {
 
+    let [file, setFile] = useState<File | undefined | null>(undefined);
 
-    let fileType = props.file.type;
+    useEffect(() => {
+        if (file === undefined) {
+            let contentTypeMap: {[key: string]: string} = {
+                "pdf": "application/pdf",
+                "jpg": "image/jpeg",
+                "jpeg": "image/jpeg",
+                "mp3": "audio/mpeg",
+                "mp4": "video/mp4",
+                "webm": "video/webm"
+            }
+            
+            if (typeof props.file === 'string') {
+                fetch(props.file).then(res => {
+                    res.blob().then(blob => {
+                        setFile(new File([blob], props.fileName, {
+                            type: res.headers.get("Content-Type") || contentTypeMap[(props.file as string).split(".").slice(-1)[0].toLowerCase()]
+                        }))
+                    })  
+                }).catch(() => setFile(null))
+            } else {
+                setFile(props.file)
+            }
+        }
+    }, [props.file, file, props.fileName])
 
-    if (fileType === 'application/pdf') return <PDFViewer {...props} filePath={props.file} />
+    console.log(file)
+
+    if (file === undefined) return <Spinner />
+    else if (file === null) return <div>
+        <Typography text='The file does not exist' />
+    </div>
+
+    let fileType = file.type;    
+
+    if (fileType === 'application/pdf') return <PDFViewer {...props} filePath={file} />
     else if (["image/jpg", "image/jpeg", "image/png"].includes(fileType)) return <div></div>
     else if (["audio/mpeg"].includes(fileType)) return <div></div>
     else if (["video/mp4", "video/webm"].includes(fileType)) return <div></div>
