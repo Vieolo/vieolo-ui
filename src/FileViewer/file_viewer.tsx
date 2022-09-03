@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import PDFViewer from '../PDFViewer';
 import Spinner from '../Spinner';
 import Typography from '../Typography';
+import VideoViewer from '../VideoViewer';
 
 
 export default function FileViewer(props: {
@@ -14,6 +15,7 @@ export default function FileViewer(props: {
 	/** 
 	 * The vertical pixels that has to be deducted to fit the viewer in the page. 
 	 * The given value will be added as a style. e.g. calc(100vh - 100px)
+     * This prop is ignored for `embedded` viewers
 	 */
 	heightDeduction: number,
 	onClose?: () => void,
@@ -31,6 +33,7 @@ export default function FileViewer(props: {
 }) {
 
     let [file, setFile] = useState<File | undefined | null>(undefined);
+    // let [fileURL, setFileURL] = useState<string | undefined>(undefined)
 
     useEffect(() => {
         if (file === undefined) {
@@ -42,7 +45,7 @@ export default function FileViewer(props: {
                 "mp4": "video/mp4",
                 "webm": "video/webm"
             }
-            
+
             if (typeof props.file === 'string') {
                 fetch(props.file).then(res => {
                     res.blob().then(blob => {
@@ -55,9 +58,7 @@ export default function FileViewer(props: {
                 setFile(props.file)
             }
         }
-    }, [props.file, file, props.fileName])
-
-    console.log(file)
+    }, [props.file, file, props.fileName])    
 
     if (file === undefined) return <Spinner />
     else if (file === null) return <div>
@@ -69,7 +70,7 @@ export default function FileViewer(props: {
     if (fileType === 'application/pdf') return <PDFViewer {...props} filePath={file} />
     else if (["image/jpg", "image/jpeg", "image/png"].includes(fileType)) return <div></div>
     else if (["audio/mpeg"].includes(fileType)) return <div></div>
-    else if (["video/mp4", "video/webm"].includes(fileType)) return <div></div>
+    else if (["video/mp4", "video/webm"].includes(fileType)) return <VideoViewer file={file} context={props.context} onClose={props.onClose} />
     else return <div>
         <Typography text='The given file is not supported!' />
     </div>

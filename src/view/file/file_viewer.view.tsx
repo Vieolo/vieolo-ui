@@ -30,9 +30,15 @@ export function fileViewerOptions(): ViewData {
                     '/many_pages.pdf',
                     '/rotated.pdf',
                     '/annotated.pdf',
-                    'non-existend file'
+                    "/flower.mp4",
+                    "/flower.webm",
+                    'non-existend file',
                 ],
                 default: '/simple.pdf'
+            },
+            context: {
+                options: ["embedded", "full screen"],
+                default: "embedded"
             },
             expandable: {
                 options: [false, true],
@@ -49,7 +55,7 @@ export function FileViewerCreator(props: {p: FileViewerPropsType}) {
     return <FileViewer
         key={props.p.file.toString()}
         file={props.p.file}
-        context={"embedded"}
+        context={props.p.context}
         heightDeduction={105}
         onClose={props.p.onClose}
         expandable={props.p.expandable}

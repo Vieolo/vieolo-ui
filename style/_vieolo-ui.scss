@@ -2690,3 +2690,14 @@ body {
 	}
 
 }
+
+
+.vieolo-video-viewer {
+	width: 100%;
+
+	&--embedded {
+		video {
+			width: 100%;
+		}
+	}	
+}
