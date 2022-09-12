@@ -98,7 +98,10 @@ export default function ItemRow(props: {
                     ? <div className={`vieolo-item-row__button-col`}>
                         <IconButton
                             icon={props.buttonIcon}
-                            onClick={props.buttonClick}
+                            onClick={e => {
+                                e.stopPropagation();
+                                if (props.buttonClick) props.buttonClick();
+                            }}
                             color={props.buttonColor || 'primary'}
                             size={props.buttonSize || 'small'}
                         />
@@ -107,7 +110,10 @@ export default function ItemRow(props: {
                     <div className="vieolo-item-row__button-col">
                         <IconButton
                             icon={<CloseIcon />}
-                            onClick={() => props.searchRow!.onQueryChange('')}
+                            onClick={e => {
+                                e.stopPropagation();
+                                props.searchRow!.onQueryChange('')
+                            }}
                             color={'error'}
                             size={'small'}
                         />
