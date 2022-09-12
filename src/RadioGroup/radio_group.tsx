@@ -7,7 +7,8 @@ import { handleOnKeyDown } from "../utility/onkeydown_utility";
 export type RadioButtonType = {
     id: string,
     /** If passing a component, do not add an on click functionality as it is handled by the Radio Button */
-    button: string | React.ReactNode
+    button: string | React.ReactNode,
+    ariaLabel?: string
 }
 
 export default function RadioGroup(props: {
@@ -32,6 +33,7 @@ export default function RadioGroup(props: {
                 props.options.map((o: RadioButtonType) => {
                     return <div
                         key={o.id}
+                        aria-label={o.ariaLabel || undefined}
                         tabIndex={props.disabled ? undefined : 0}
                         className={`${buttonClass} ${props.value === o.id ? buttonClass + "--selected" : ""} ${buttonClass}--${props.direction || 'horizontal'}`}
                         onClick={() => {

@@ -37,7 +37,14 @@ export default function ItemRow(props) {
                             props.subTitle &&
                                 _jsx(Typography, { type: 'caption-large', text: props.subTitle, showTitle: true, color: props.selected ? color : undefined, colorType: props.selected ? 'text' : undefined }, void 0)] }), void 0),
                 (props.buttonClick && props.buttonIcon)
-                    ? _jsx("div", Object.assign({ className: `vieolo-item-row__button-col` }, { children: _jsx(IconButton, { icon: props.buttonIcon, onClick: props.buttonClick, color: props.buttonColor || 'primary', size: props.buttonSize || 'small' }, void 0) }), void 0)
+                    ? _jsx("div", Object.assign({ className: `vieolo-item-row__button-col` }, { children: _jsx(IconButton, { icon: props.buttonIcon, onClick: e => {
+                                e.stopPropagation();
+                                if (props.buttonClick)
+                                    props.buttonClick();
+                            }, color: props.buttonColor || 'primary', size: props.buttonSize || 'small' }, void 0) }), void 0)
                     : (props.searchRow && props.searchRow.query.trim()) &&
-                        _jsx("div", Object.assign({ className: "vieolo-item-row__button-col" }, { children: _jsx(IconButton, { icon: _jsx(CloseIcon, {}, void 0), onClick: () => props.searchRow.onQueryChange(''), color: 'error', size: 'small' }, void 0) }), void 0)] }), void 0) }), void 0);
+                        _jsx("div", Object.assign({ className: "vieolo-item-row__button-col" }, { children: _jsx(IconButton, { icon: _jsx(CloseIcon, {}, void 0), onClick: e => {
+                                    e.stopPropagation();
+                                    props.searchRow.onQueryChange('');
+                                }, color: 'error', size: 'small' }, void 0) }), void 0)] }), void 0) }), void 0);
 }

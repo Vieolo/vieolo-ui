@@ -7,6 +7,7 @@ export default function SwitchSet(props: {
     onChange: (v: boolean) => void;
     switchID: string;
     disabled?: boolean;
+    ariaLabel?: string;
     /**
      * The height of the row
      * To change the default height, override the "vieolo-swith-set--default-height" CSS class

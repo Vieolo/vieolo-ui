@@ -28,7 +28,8 @@ export default function Chip(props: {
 	emphasis?: 'medium' | 'low' | 'low-normal',
 	borderRadius?: BorderRadiusType
 	id?: string,
-	size?: "medium" | 'small'
+	size?: "medium" | 'small',
+	ariaLabel?: string
 }) {
 
 	let color = props.color || 'primary';
@@ -62,6 +63,7 @@ export default function Chip(props: {
 			size={'extra-small'}
 			emphasis="none"
 			borderWidth='0'
+			ariaLabel={`${props.ariaLabel || (props.label + " chip")} button`}
 		/>
 	}
 
@@ -69,6 +71,7 @@ export default function Chip(props: {
 		className={c}
 		style={{ ...s, ...props.style }}
 		id={props.id}
+		aria-label={props.ariaLabel || `${props.label} chip`}
 		onClick={e => {
 			if (props.onChipSelect) {
 				e.stopPropagation();

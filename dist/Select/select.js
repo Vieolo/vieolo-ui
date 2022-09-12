@@ -188,7 +188,10 @@ export default function Select(props) {
                                 : _jsx(Typography, { type: 'title-small', text: thisSelectedItems.map(s => s.title).join(", "), className: "vieolo-select__select-button__button-text__button-value" }, void 0)] }), void 0),
                     (!props.clearable || (props.clearable && (!props.selectedItems || props.selectedItems.length === 0)))
                         ? _jsx(DownIcon, {}, void 0)
-                        : _jsx(IconButton, { icon: _jsx(CloseIcon, {}, void 0), onClick: () => props.onSelect([]), color: "error", size: "extra-small" }, void 0)] }), void 0),
+                        : _jsx(IconButton, { icon: _jsx(CloseIcon, {}, void 0), onClick: e => {
+                                e.stopPropagation();
+                                props.onSelect([]);
+                            }, color: "error", size: "extra-small" }, void 0)] }), void 0),
             open && (Device.isTouchOnlyDevice ?
                 _jsx(Modal, Object.assign({ onClose: () => setOpen(false) }, { children: _jsxs(Card, { children: [_jsx(Typography, { type: 'title-small', text: props.title || '', className: 'vieolo-select__modal-title' }, void 0),
                             itemsComponent] }, void 0) }), void 0)
