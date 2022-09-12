@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.23.10 (2022-09-12)
+- Added aria label to `RadioGroup` items ([#229](https://github.com/Vieolo/vieolo-ui/issues/229))
+- Fixed the children of `FormSection` ([#239](https://github.com/Vieolo/vieolo-ui/issues/239))
+- Added aria label to `SwitchSet` ([#240](https://github.com/Vieolo/vieolo-ui/issues/240))
+- Added aria label to `Chip` ([#241](https://github.com/Vieolo/vieolo-ui/issues/241))
+- Fixed propagation of `Select` clear button ([#244](https://github.com/Vieolo/vieolo-ui/issues/244))
+- Fixed propagation of `ItemRow` ([#245](https://github.com/Vieolo/vieolo-ui/issues/245))
+
 ## 0.23.9 (2022-09-03)
 - Adjusted the `FileViewer` for `binary/octet-stream` content type
 

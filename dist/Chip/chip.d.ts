@@ -21,4 +21,5 @@ export default function Chip(props: {
     borderRadius?: BorderRadiusType;
     id?: string;
     size?: "medium" | 'small';
+    ariaLabel?: string;
 }): JSX.Element;

@@ -24,9 +24,9 @@ export default function Chip(props) {
                 e.stopPropagation();
                 if (props.onButtonClick)
                     props.onButtonClick();
-            }, borderRadius: props.borderRadius !== 'default' ? props.borderRadius : 'full', color: color, size: 'extra-small', emphasis: "none", borderWidth: '0' }, void 0);
+            }, borderRadius: props.borderRadius !== 'default' ? props.borderRadius : 'full', color: color, size: 'extra-small', emphasis: "none", borderWidth: '0', ariaLabel: `${props.ariaLabel || (props.label + " chip")} button` }, void 0);
     }
-    return _jsx("div", Object.assign({ className: c, style: { ...s, ...props.style }, id: props.id, onClick: e => {
+    return _jsx("div", Object.assign({ className: c, style: { ...s, ...props.style }, id: props.id, "aria-label": props.ariaLabel || `${props.label} chip`, onClick: e => {
             if (props.onChipSelect) {
                 e.stopPropagation();
                 props.onChipSelect();

@@ -4,4 +4,5 @@ export default function Switch(props: {
     on: boolean;
     onChange: (value: boolean) => void;
     disabled?: boolean;
+    ariaLabel?: string;
 }): JSX.Element;
