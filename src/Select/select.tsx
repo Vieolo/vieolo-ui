@@ -255,7 +255,10 @@ export default function Select(props: SelectProps) {
                     ? <DownIcon />
                     : <IconButton
                         icon={<CloseIcon />}
-                        onClick={() => props.onSelect([])}
+                        onClick={e => {
+                            e.stopPropagation();
+                            props.onSelect([])
+                        }}
                         color="error"
                         size="extra-small"
                     />
