@@ -175,7 +175,7 @@ export function rewriteExports() {
 
                 for (let k = 0; k < files.length; k++) {
                     const f = files[k];
-                    if (!f.includes(".tsx") || f === "index.ts" || f === "index.tsx" || f.includes(".test.ts")) continue;
+                    if (!f.includes(".tsx") || f === "index.ts" || f === "index.tsx" || f.includes(".test.ts") || f.includes(".view.tsx")) continue;
 
                     folderEx = getFileExports(o, f);
 
