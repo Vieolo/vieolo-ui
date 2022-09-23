@@ -833,28 +833,6 @@ body {
 		}
 	}
 
-	&__toolbar {
-		background-color: $content-background-color;
-		height: $row-height-small;
-		padding: 1px;
-		border-radius: inherit;
-		width: 100%;
-		border: 1px solid $primary-color-normal;
-		@include flex-row-space-between;
-		position: absolute;
-		top: 0;
-		z-index: 2;
-
-		@media (pointer: coarse) {
-			height: $row-height-medium;
-
-			.vieolo-icon-button {
-				height: $row-height-small;
-				width: $row-height-small;
-			}
-		}
-	}
-
 	&__canvas-container {
 		overflow: auto;
 		width: 100%;
@@ -1188,6 +1166,28 @@ body {
 			.fileAttachmentAnnotation {
 				cursor: pointer;
 			}
+		}
+	}
+}
+
+.vieolo-file-viewer-frame {
+	background-color: $content-background-color;
+	height: $row-height-small;
+	padding: 1px;
+	border-radius: inherit;
+	width: 100%;
+	border: 1px solid $primary-color-normal;
+	@include flex-row-space-between;
+	position: absolute;
+	top: 0;
+	z-index: 2;
+
+	@media (pointer: coarse) {
+		height: $row-height-medium;
+
+		.vieolo-icon-button {
+			height: $row-height-small;
+			width: $row-height-small;
 		}
 	}
 }
@@ -2699,14 +2699,14 @@ body {
 		video {
 			width: 100%;
 		}
-	}	
+	}
 }
 
 
-.vieolo-image-viewer {	
+.vieolo-image-viewer {
 	width: 100%;
 	height: 100%;
 	background-position: center;
 	background-repeat: no-repeat;
-	background-size: contain;	
+	background-size: contain;
 }

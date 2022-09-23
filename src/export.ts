@@ -22,6 +22,7 @@ import DropDownMenu from './DropDownMenu';
 import ExpandableCard from './ExpandableCard';
 import FileInput from './FileInput';
 import FileViewer from './FileViewer';
+import FileViewerFrame from './FileViewerFrame';
 import Flex from './Flex';
 import FormDialog from './FormDialog';
 import FormSection from './FormSection';
@@ -172,6 +173,7 @@ export {
 	ExpandableCard,
 	FileInput,
 	FileViewer,
+	FileViewerFrame,
 	Flex,
 	FormDialog,
 	FormSection,
