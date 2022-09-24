@@ -37,7 +37,7 @@ export function fileViewerOptions(): ViewData {
                     "/square_image.jpg",
                     'non-existend file',
                 ],
-                default: '/flower.mp4'
+                default: '/simple.pdf'
             },
             context: {
                 options: ["embedded", "full screen"],

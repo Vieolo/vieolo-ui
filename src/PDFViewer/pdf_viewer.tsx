@@ -7,6 +7,7 @@ import Modal from '../Modal/modal';
 // Installed Packages
 import { PDFDocumentProxy } from 'pdfjs-dist/types/display/api';
 import Device, { DeviceSizeCategory } from '@vieolo/device-js';
+import { downloadBlob } from "@vieolo/file-management";
 
 // Vieolo UI
 import { getPDFDocument, renderPDFPageAsCanvas } from './pdf_renderer';
@@ -189,13 +190,13 @@ export default function PDFViewer(props: {
 			context={props.context}
 			expandable={props.expandable || false}
 			mode={mode}
-			onDownload={() => {
-				var link = document.createElement("a");
-				link.download = fileName.split('___').slice(-1)[0];
-				link.href = props.filePath as string;
-				document.body.appendChild(link);
-				link.click();
-				document.body.removeChild(link);
+			onDownload={async () => {
+				if (typeof props.filePath === 'string') {
+					let blob = await (await fetch(props.filePath)).blob();
+					downloadBlob(blob, fileName)
+				} else {
+					downloadBlob(props.filePath, fileName)
+				}
 			}}
 			onModeChange={(m) => {
 				if (m === 'full screen') {
