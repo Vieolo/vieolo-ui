@@ -5,6 +5,9 @@ import { useState } from "react";
 import Modal from "../Modal"
 import FileViewerFrame from "../FileViewerFrame"
 
+// Installed Packages
+import { downloadBlob } from "@vieolo/file-management";
+
 export default function VideoViewer(props: {
     file: string | File,
     context: 'embedded' | 'full screen',
@@ -17,9 +20,16 @@ export default function VideoViewer(props: {
         context={props.context}
         expandable
         mode={mode}
-        onDownload={() => { }}
+        onDownload={async () => { 
+            if (typeof props.file === 'string') {
+                let blob = await (await fetch(props.file)).blob();
+                downloadBlob(blob, props.file.split("?")[0].split("___").slice(-1)[0])
+            } else {
+                downloadBlob(props.file, props.file.name)
+            }
+        }}
         onModeChange={m => setMode(m)}
-        onShare={() => { }}
+        onShare={() => { }} // TODO: add share functionality
         onClose={props.onClose}
     />
 
