@@ -1170,27 +1170,7 @@ body {
 	}
 }
 
-.vieolo-file-viewer-frame {
-	background-color: $content-background-color;
-	height: $row-height-small;
-	padding: 1px;
-	border-radius: inherit;
-	width: 100%;
-	border: 1px solid $primary-color-normal;
-	@include flex-row-space-between;
-	position: absolute;
-	top: 0;
-	z-index: 2;
 
-	@media (pointer: coarse) {
-		height: $row-height-medium;
-
-		.vieolo-icon-button {
-			height: $row-height-small;
-			width: $row-height-small;
-		}
-	}
-}
 
 .vieolo-back-button-row {
 	height: 50px;
@@ -2691,14 +2671,72 @@ body {
 
 }
 
+.vieolo-file-viewer-frame {
+	background-color: $content-background-color;
+	height: $row-height-small;
+	padding: 1px;
+	border-radius: inherit;
+	width: 100%;
+	border: 1px solid $primary-color-normal;
+	@include flex-row-space-between;
+	position: absolute;
+	top: 0;
+	z-index: 2;
+
+	@media (pointer: coarse) {
+		height: $row-height-medium;
+
+		.vieolo-icon-button {
+			height: $row-height-small;
+			width: $row-height-small;
+		}
+	}
+}
+
 
 .vieolo-video-viewer {
 	width: 100%;
+	position: relative;
+	$self: &;
 
 	&--embedded {
+			
 		video {
+			margin-top: $row-height-small;
 			width: 100%;
+
+			@media (pointer: coarse) {
+				margin-top: $row-height-medium;
+			}
 		}
+	}
+
+	&--full-screen {
+
+		height: 100vh;
+		width: 100vw;
+
+		.vieolo-file-viewer-frame {
+			left: 0;
+			right: 0;
+			width: 100vw;
+		}
+
+		#{$self}__video-container {
+			width: 74vw;
+			margin-left: 13vw;
+			padding-top: $row-height-small;
+			
+			video {
+				margin-top: $row-height-small;
+				width: 100%;
+	
+				@media (pointer: coarse) {
+					margin-top: $row-height-medium;
+				}
+			}
+		}
+				
 	}
 }
 
