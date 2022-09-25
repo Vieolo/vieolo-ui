@@ -5,9 +5,6 @@ import { useState } from "react";
 import Modal from "../Modal"
 import FileViewerFrame from "../FileViewerFrame"
 
-// Installed Packages
-import { downloadBlob } from "@vieolo/file-management";
-
 export default function VideoViewer(props: {
     file: string | File,
     context: 'embedded' | 'full screen',
@@ -21,6 +18,7 @@ export default function VideoViewer(props: {
         expandable
         mode={mode}
         onDownload={async () => { 
+            let { downloadBlob } = await import("@vieolo/file-management/download");
             if (typeof props.file === 'string') {
                 let blob = await (await fetch(props.file)).blob();
                 downloadBlob(blob, props.file.split("?")[0].split("___").slice(-1)[0])

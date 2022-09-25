@@ -7,7 +7,6 @@ import Modal from '../Modal/modal';
 // Installed Packages
 import { PDFDocumentProxy } from 'pdfjs-dist/types/display/api';
 import Device, { DeviceSizeCategory } from '@vieolo/device-js';
-import { downloadBlob } from "@vieolo/file-management";
 
 // Vieolo UI
 import { getPDFDocument, renderPDFPageAsCanvas } from './pdf_renderer';
@@ -191,6 +190,7 @@ export default function PDFViewer(props: {
 			expandable={props.expandable || false}
 			mode={mode}
 			onDownload={async () => {
+				let { downloadBlob } = await import("@vieolo/file-management/download");
 				if (typeof props.filePath === 'string') {
 					let blob = await (await fetch(props.filePath)).blob();
 					downloadBlob(blob, fileName)
