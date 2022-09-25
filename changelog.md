@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.23.11 (2022-09-25)
+- Added `FileViewerFrame` component
+- Added file frame for `VideoViewer` ([#235](https://github.com/Vieolo/vieolo-ui/issues/234))
+- Added file frame for `ImageViewer` ([#235](https://github.com/Vieolo/vieolo-ui/issues/235))
+- Improved the download of file in `FileViewer` ([#237](https://github.com/Vieolo/vieolo-ui/issues/237))
+
 ## 0.23.10 (2022-09-12)
 - Added aria label to `RadioGroup` items ([#229](https://github.com/Vieolo/vieolo-ui/issues/229))
 - Fixed the children of `FormSection` ([#239](https://github.com/Vieolo/vieolo-ui/issues/239))
