@@ -1,18 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 // React
 import { useState, useEffect, useRef } from 'react';
-// Material UI
-import ZoomInIcon from '@mui/icons-material/AddRounded';
-import ZoomOutIcon from '@mui/icons-material/RemoveRounded';
-import DownloadIcon from '@mui/icons-material/CloudDownload';
-import RotateLeft from '@mui/icons-material/RotateLeftRounded';
-import RotateRight from '@mui/icons-material/RotateRightRounded';
-import CloseIcon from '@mui/icons-material/CloseRounded';
-import ExpandIcon from '@mui/icons-material/FullscreenRounded';
-// Icons
-import { ShareIcon } from '../icons/icons';
 // Components
-import IconButton from '../IconButton';
 import Modal from '../Modal/modal';
 import Device, { DeviceSizeCategory } from '@vieolo/device-js';
 // Vieolo UI
@@ -20,6 +9,7 @@ import { getPDFDocument, renderPDFPageAsCanvas } from './pdf_renderer';
 import Typography from '../Typography';
 import Spinner from '../Spinner/spinner';
 import Spacer from '../Spacer';
+import FileViewerFrame from '../FileViewerFrame';
 export default function PDFViewer(props) {
     let [doc, setDoc] = useState(null);
     let [totalPage, setTotalPage] = useState(0);
@@ -116,65 +106,41 @@ export default function PDFViewer(props) {
     let viewerClass = `vieolo-pdf-viewer-component vieolo-pdf-viewer-component--${state}`;
     if (mode === 'full screen')
         viewerClass += " vieolo-pdf-viewer-component--full";
-    let viewer = _jsxs("div", Object.assign({ className: viewerClass, style: mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction}px)` } : undefined }, { children: [_jsxs("div", Object.assign({ className: "vieolo-pdf-viewer-component__toolbar" }, { children: [_jsx("div", Object.assign({ className: 'flex-start' }, { children: (props.onClose || mode === 'full screen') &&
-                            _jsx(IconButton, { size: "extra-small", icon: _jsx(CloseIcon, {}, void 0), color: "error", disabled: !props.onClose, onClick: () => {
-                                    if (props.context === 'embedded' && mode === 'full screen') {
-                                        setMode('embedded');
-                                        if (props.onExpandToggle)
-                                            props.onExpandToggle("embedded");
-                                    }
-                                    else {
-                                        if (window.location.search.includes("pdf_file_in_view")) {
-                                            window.history.back();
-                                        }
-                                        else {
-                                            if (props.onClose)
-                                                props.onClose();
-                                        }
-                                    }
-                                } }, void 0) }), void 0),
-                    _jsx("div", { children: _jsx(Typography, { text: state === 'done' ? `${currentPage} / ${totalPage}` : "" }, void 0) }, void 0),
-                    _jsxs("div", Object.assign({ className: "flex-start column-gap--half" }, { children: [_jsx(IconButton, { size: "extra-small", icon: _jsx(ZoomOutIcon, {}, void 0), onClick: () => { setZoomMultiple(zoomMultiple - 0.1); }, disabled: state !== 'done' }, void 0),
-                            _jsx(IconButton, { size: "extra-small", icon: _jsx(ZoomInIcon, {}, void 0), onClick: () => { setZoomMultiple(zoomMultiple + 0.1); }, disabled: state !== 'done' }, void 0)] }), void 0),
-                    _jsxs("div", Object.assign({ className: "flex-start column-gap--half" }, { children: [("share" in window.navigator) &&
-                                _jsx(IconButton, { size: "extra-small", icon: _jsx(ShareIcon, {}, void 0), disabled: state !== 'done', onClick: async () => {
-                                        try {
-                                            await window.navigator.share({
-                                                files: typeof props.filePath === 'string'
-                                                    ? [new File([await (await fetch(props.filePath)).blob()], fileName)]
-                                                    : [props.filePath],
-                                            });
-                                        }
-                                        catch (error) {
-                                        }
-                                    } }, void 0),
-                            _jsx(IconButton, { size: "extra-small", icon: _jsx(DownloadIcon, {}, void 0), disabled: state !== 'done', onClick: () => {
-                                    var link = document.createElement("a");
-                                    link.download = fileName.split('___').slice(-1)[0];
-                                    link.href = props.filePath;
-                                    document.body.appendChild(link);
-                                    link.click();
-                                    document.body.removeChild(link);
-                                } }, void 0),
-                            _jsx(IconButton, { size: "extra-small", icon: _jsx(RotateLeft, {}, void 0), disabled: state !== 'done', onClick: () => setRotation(rotation - 90) }, void 0),
-                            _jsx(IconButton, { size: "extra-small", icon: _jsx(RotateRight, {}, void 0), disabled: state !== 'done', onClick: () => setRotation(rotation + 90) }, void 0),
-                            (props.expandable && props.context === 'embedded') &&
-                                _jsx(IconButton, { size: "extra-small", icon: _jsx(ExpandIcon, {}, void 0), onClick: () => {
-                                        if (mode === 'embedded') {
-                                            setMode('full screen');
-                                            if (props.onExpandToggle)
-                                                props.onExpandToggle("full screen");
-                                            handleBrowserBack();
-                                        }
-                                        else {
-                                            if (window.location.search.includes("pdf_file_in_view")) {
-                                                window.history.back();
-                                            }
-                                            setMode('embedded');
-                                            if (props.onExpandToggle)
-                                                props.onExpandToggle("embedded");
-                                        }
-                                    } }, void 0)] }), void 0)] }), void 0),
+    let viewer = _jsxs("div", Object.assign({ className: viewerClass, style: mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction}px)` } : undefined }, { children: [_jsx(FileViewerFrame, { context: props.context, expandable: props.expandable || false, mode: mode, onDownload: async () => {
+                    let { downloadBlob } = await import("@vieolo/file-management/download");
+                    if (typeof props.filePath === 'string') {
+                        let blob = await (await fetch(props.filePath)).blob();
+                        downloadBlob(blob, fileName);
+                    }
+                    else {
+                        downloadBlob(props.filePath, fileName);
+                    }
+                }, onModeChange: (m) => {
+                    if (m === 'full screen') {
+                        setMode('full screen');
+                        if (props.onExpandToggle)
+                            props.onExpandToggle("full screen");
+                        handleBrowserBack();
+                    }
+                    else {
+                        if (window.location.search.includes("pdf_file_in_view")) {
+                            window.history.back();
+                        }
+                        setMode('embedded');
+                        if (props.onExpandToggle)
+                            props.onExpandToggle("embedded");
+                    }
+                }, onShare: async () => {
+                    try {
+                        await window.navigator.share({
+                            files: typeof props.filePath === 'string'
+                                ? [new File([await (await fetch(props.filePath)).blob()], fileName)]
+                                : [props.filePath],
+                        });
+                    }
+                    catch (error) {
+                    }
+                }, isLoading: state !== "done", onClose: props.onClose, onRotationChange: r => setRotation(r === '-' ? rotation - 90 : rotation + 90), onZoomChange: z => setZoomMultiple(z === "-" ? zoomMultiple - 0.1 : zoomMultiple + 0.1), page: state === 'done' ? `${currentPage} / ${totalPage}` : "" }, void 0),
             content] }), void 0);
     if (mode === 'embedded')
         return viewer;
