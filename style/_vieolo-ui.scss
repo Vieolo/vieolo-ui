@@ -2700,7 +2700,7 @@ body {
 	$self: &;
 
 	&--embedded {
-			
+
 		video {
 			margin-top: $row-height-small;
 			width: 100%;
@@ -2726,25 +2726,69 @@ body {
 			width: 74vw;
 			margin-left: 13vw;
 			padding-top: $row-height-small;
-			
+
 			video {
 				margin-top: $row-height-small;
 				width: 100%;
-	
+
 				@media (pointer: coarse) {
 					margin-top: $row-height-medium;
 				}
 			}
 		}
-				
+
 	}
 }
 
 
 .vieolo-image-viewer {
-	width: 100%;
-	height: 100%;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: contain;
+	position: relative;
+	$self: &;
+
+	&__image {
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: contain;
+	}
+
+	&--full-screen {
+		width: 100vw;
+		height: 100vh;
+		padding-top: $row-height-small;
+
+		@media (pointer: coarse) {
+			padding-top: $row-height-medium;
+		}
+
+		#{$self}__container {
+			width: 90vw;
+			height: 90vh;
+			margin-left: 5vw;
+			margin-top: calc(5vh - $row-height-small);
+
+			@media (pointer: coarse) {
+				margin-top: calc(5vh - $row-height-medium);
+			}
+		}
+
+		#{$self}__image {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	&--embedded {
+		width: 100%;
+		height: 100%;
+		padding-top: $row-height-small;
+
+		@media (pointer: coarse) {
+			padding-top: $row-height-medium;
+		}
+
+		#{$self}__image {
+			width: 100%;
+			height: 100%;
+		}
+	}
 }

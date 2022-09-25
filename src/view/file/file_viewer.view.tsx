@@ -37,7 +37,7 @@ export function fileViewerOptions(): ViewData {
                     "/square_image.jpg",
                     'non-existend file',
                 ],
-                default: '/simple.pdf'
+                default: '/portrait_image.jpg'
             },
             context: {
                 options: ["embedded", "full screen"],
