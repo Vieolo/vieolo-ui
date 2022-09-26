@@ -52,7 +52,7 @@ export default function FileViewer(props: {
                     res.blob().then(blob => {
                         let headerContentType = res.headers.get("Content-Type")                        
                         setFile(new File([blob], props.fileName, {
-                            type: (!headerContentType || headerContentType === 'binary/octet-stream') ? contentTypeMap[(props.file as string).split("?")[0].split(".").slice(-1)[0].toLowerCase()] : headerContentType
+                            type: (!headerContentType || headerContentType === 'binary/octet-stream' || headerContentType.includes("multipart/form-data")) ? contentTypeMap[(props.file as string).split("?")[0].split(".").slice(-1)[0].toLowerCase()] : headerContentType
                         }))
                     })  
                 }).catch(() => setFile(null))

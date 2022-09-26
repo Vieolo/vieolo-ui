@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.23.12 (2022-09-26)
+- Improved the content type detection of the `FileViewer`
+
 ## 0.23.11 (2022-09-25)
 - Added `FileViewerFrame` component
 - Added file frame for `VideoViewer` ([#235](https://github.com/Vieolo/vieolo-ui/issues/234))
