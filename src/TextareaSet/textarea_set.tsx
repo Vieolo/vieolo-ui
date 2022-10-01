@@ -10,7 +10,9 @@ import TipIcon from '../private/tip_icon';
 import Textarea from '../Textarea/textarea';
 
 
-
+/**
+ * @deprecated Use the `InputSet` component instead
+ */
 export default function TextareaSet(props: {
     label: string,
     placeholder?: string,

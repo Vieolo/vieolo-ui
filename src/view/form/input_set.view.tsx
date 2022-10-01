@@ -45,6 +45,10 @@ export function inputSetOptions(): ViewData {
             type: {
                 options: ['text', 'number', 'password'],
                 default: "text"
+            },
+            inputType: {
+                options: ['input', 'textarea'],
+                default: "input"
             }
         }
     }    
@@ -64,15 +68,16 @@ export function InputSetCreator(props: {p: InputSetPropsType}) {
         onChange={v => setValue(v)}
         value={value}
         disabled={props.p.disabled}
-        placeholder={(props.p as any).withPlaceholder ? 'Placeholder...' : null}
+        placeholder={(props.p as any).withPlaceholder ? 'Placeholder...' : undefined}
         size={props.p.size}
-        tip={(props.p as any).withTip ? "This is a tip to the user" : null}
+        tip={(props.p as any).withTip ? "This is a tip to the user" : undefined}
         type={props.p.type}
+        inputType={props.p.inputType}
         actionButton={(props.p as any).withActionButton ? {
             description: "This button does something nice!",
             icon: <LoopIcon />,
             onClick: () => {}
-        } : null}
+        } : undefined}
     />
 
 }
