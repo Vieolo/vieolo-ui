@@ -2,7 +2,9 @@
 import React from 'react';
 
 
-
+/**
+ * @deprecated Use the `Input` component instead
+ */
 export default function Textarea (props: {
     value: string,
     placeholder?: string,

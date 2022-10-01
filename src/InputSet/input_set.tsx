@@ -24,6 +24,7 @@ export default function InputSet(props: {
     type?: 'text' | 'number' | 'password',
     autoFocus?: boolean,
     onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void,
+    inputType?: 'input' | 'textarea',
     actionButton?: {
         description: string,
         icon: React.ReactNode,
@@ -76,6 +77,7 @@ export default function InputSet(props: {
             ariaLabel={props.ariaLabel || props.label}
             autoFocus={props.autoFocus}
             onKeyDown={props.onKeyDown}
+            inputType={props.inputType}
         />
     </div>
 }

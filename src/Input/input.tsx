@@ -13,13 +13,26 @@ export default function Input(props: {
     disabled?: boolean,
     ariaLabel?: string,
     autoFocus?: boolean,
-    onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void
+    onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void,
+    inputType?: 'input' | 'textarea'
 }) {
     let size = props.size || 'medium';
     let width = '180px';
     if (size === 'small') width = '100px';
     else if (size === 'large') width = '240px';
     else if (size === 'full') width = '100%';
+
+    if (props.inputType === 'textarea') {
+        return <textarea
+            value={props.value}
+            onChange={e => props.onChange(e.target.value)}
+            className={`vieolo-textarea${props.error ? ' input-error' : ''}`}
+            placeholder={props.placeholder || ''}
+            style={{ width: width }}
+            aria-label={props.ariaLabel}
+        >
+        </textarea>
+    }
 
     return <input
         autoFocus={props.autoFocus}
