@@ -41,6 +41,7 @@ import Modal from './Modal';
 import Navbar from './NavBar';
 import NavDrawer from './NavDrawer';
 import NumberInput from './NumberInput';
+import NumberInputSet from './NumberInputSet';
 import PDFViewer from './PDFViewer';
 import Page from './Page';
 import PageFrame from './PageFrame';
@@ -193,6 +194,7 @@ export {
 	Navbar,
 	NavDrawer,
 	NumberInput,
+	NumberInputSet,
 	PDFViewer,
 	Page,
 	PageFrame,
