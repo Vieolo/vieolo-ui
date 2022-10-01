@@ -43,7 +43,7 @@
     "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.7",
     "@vieolo/date": "github:Vieolo/date-js#1.0.0",
-    "@vieolo/device-js": "^0.1.3",
+    "@vieolo/device-js": "^0.1.4",
     "@vieolo/file-management": "github:Vieolo/file-management-js#0.2.11",
     "@vieolo/parsers": "github:Vieolo/parsers-js#0.2.4",
     "@vieolo/regex-library": "^0.1.4",
