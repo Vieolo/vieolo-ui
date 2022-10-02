@@ -10,4 +10,5 @@ export default function Input(props: {
     ariaLabel?: string;
     autoFocus?: boolean;
     onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+    inputType?: 'input' | 'textarea';
 }): JSX.Element;

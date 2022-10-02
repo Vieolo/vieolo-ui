@@ -1,4 +1,7 @@
 /// <reference types="react" />
+/**
+ * @deprecated Use the `InputSet` component instead
+ */
 export default function TextareaSet(props: {
     label: string;
     placeholder?: string;

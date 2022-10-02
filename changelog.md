@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.23.13 (2022-10-01)
+- Added `NumberInput` component ([#246](https://github.com/Vieolo/vieolo-ui/issues/246))
+- Added `NumberInputSet` component ([#247](https://github.com/Vieolo/vieolo-ui/issues/247))
+- Merged `Textarea` into`Input` ([#248](https://github.com/Vieolo/vieolo-ui/issues/248))
+
+#### Deprecation
+- `Textarea` and `TextareaSet` components are now deprecated in favor of `Input` and `InputSet` components respectively
+
 ## 0.23.12 (2022-09-26)
 - Improved the content type detection of the `FileViewer`
 
