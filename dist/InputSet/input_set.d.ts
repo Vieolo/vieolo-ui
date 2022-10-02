@@ -12,6 +12,7 @@ export default function InputSet(props: {
     type?: 'text' | 'number' | 'password';
     autoFocus?: boolean;
     onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+    inputType?: 'input' | 'textarea';
     actionButton?: {
         description: string;
         icon: React.ReactNode;

@@ -1,4 +1,7 @@
 import { jsx as _jsx } from "react/jsx-runtime";
+/**
+ * @deprecated Use the `Input` component instead
+ */
 export default function Textarea(props) {
     let size = props.size || 'medium';
     let width = '180px';

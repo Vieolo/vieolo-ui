@@ -3,6 +3,9 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import TipIcon from '../private/tip_icon';
 // Public Components
 import Textarea from '../Textarea/textarea';
+/**
+ * @deprecated Use the `InputSet` component instead
+ */
 export default function TextareaSet(props) {
     let size = props.size || 'medium';
     let width = '180px';
