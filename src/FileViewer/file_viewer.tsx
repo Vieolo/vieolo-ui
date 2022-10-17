@@ -70,7 +70,7 @@ export default function FileViewer(props: {
     let fileType = file.type;    
 
     if (fileType === 'application/pdf') return <PDFViewer {...props} filePath={file} heightDeduction={props.heightDeduction === undefined ? 100 : props.heightDeduction} />
-    else if (["image/jpg", "image/jpeg", "image/png"].includes(fileType)) return <ImageViewer file={file} fileName={props.fileName} context={props.context} />
+    else if (["image/jpg", "image/jpeg", "image/png"].includes(fileType)) return <ImageViewer file={file} fileName={props.fileName} context={props.context} onClose={props.onClose} />
     else if (["audio/mpeg"].includes(fileType)) return <div></div>
     else if (["video/mp4", "video/webm"].includes(fileType)) return <VideoViewer file={file} context={props.context} onClose={props.onClose} />
     else return <div>

@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.23.14 (2022-10-17)
+- Added basic close button to `ImageViewer` ([#249](https://github.com/Vieolo/vieolo-ui/issues/249))
+- Added `min-width` CSS classes ([#252](https://github.com/Vieolo/vieolo-ui/issues/252))
+
 ## 0.23.13 (2022-10-01)
 - Added `NumberInput` component ([#246](https://github.com/Vieolo/vieolo-ui/issues/246))
 - Added `NumberInputSet` component ([#247](https://github.com/Vieolo/vieolo-ui/issues/247))
