@@ -1096,6 +1096,9 @@ html {
 	}	
 }
 
+.min-width {
+	@include widthAndHeightSizes("min-width");
+}
 
 .max-width {
 	@include widthAndHeightSizes("max-width");
