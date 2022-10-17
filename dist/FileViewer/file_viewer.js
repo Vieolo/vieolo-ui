@@ -42,7 +42,7 @@ export default function FileViewer(props) {
     if (fileType === 'application/pdf')
         return _jsx(PDFViewer, Object.assign({}, props, { filePath: file, heightDeduction: props.heightDeduction === undefined ? 100 : props.heightDeduction }), void 0);
     else if (["image/jpg", "image/jpeg", "image/png"].includes(fileType))
-        return _jsx(ImageViewer, { file: file, fileName: props.fileName, context: props.context }, void 0);
+        return _jsx(ImageViewer, { file: file, fileName: props.fileName, context: props.context, onClose: props.onClose }, void 0);
     else if (["audio/mpeg"].includes(fileType))
         return _jsx("div", {}, void 0);
     else if (["video/mp4", "video/webm"].includes(fileType))
