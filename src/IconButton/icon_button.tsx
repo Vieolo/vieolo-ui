@@ -50,7 +50,7 @@ export default function IconButton(props: {
 
 	if (props.className) c += " " + props.className;
 
-	return <button className={c} onClick={props.onClick} style={props.style || {}} type={props.type} aria-label={props.ariaLabel} >
+	return <button className={c} onClick={props.isLoading ? undefined : props.onClick} style={props.style || {}} type={props.type} aria-label={props.ariaLabel} >
 		{props.isLoading ? <Spinner size={props.size} color={col} colorType={e === 'high' ? 'text' : 'normal'} /> : props.icon}
 		{
 			props.tooltip &&
