@@ -631,12 +631,13 @@ body {
 .vieolo-dropdown-menu {
 	display: inline-block;
 
-	.dropdown {
+	&__dropdown {
 		position: fixed;
 		z-index: 99;
-		width: 190px;
-		padding: $base-unit-half;
-		@include card-dark-shadow;
+		width: 260px;
+		box-shadow: $elevation-shadow-1;
+		background-color: $background-content-color;
+		border-radius: $border-radius-half;
 		max-height: 240px;
 		overflow: scroll;
 	}
@@ -644,13 +645,14 @@ body {
 	&__dropdown-item {
 		padding: $base-unit-half;
 		cursor: pointer;
-		border-radius: $universal-border-radius-half;
+		// border-radius: $border-radius-half;
 		@include transition;
 		display: flex;
 		align-items: center;
+		min-height: $row-height-small;
 
 		&:hover {
-			background-color: $hover-color;
+			background-color: $primary-color-light;
 		}
 
 		&--keyboard-focus {

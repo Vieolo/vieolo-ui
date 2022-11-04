@@ -185,7 +185,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 
         {
             open &&
-            <div className={`dropdown`} style={style} >
+            <div className={`vieolo-dropdown-menu__dropdown`} style={style} >
                 {
                     props.items.map((item, i) => {
                         return <DropDownMenuItem

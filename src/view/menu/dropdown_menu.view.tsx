@@ -24,7 +24,15 @@ export function dropDownMenuOptions(): ViewData {
                 {title: "One", icon: <IconOne />, value: "One"},
                 {title: "Two", icon: <IconTwo />, value: "Two", color: 'secondary'}, 
                 {title: "Three", icon: <IconThree />, value: "Three", color: 'success'},
-                {title: "One Two Three Four Five", icon: <IconFour />, value: "Four", color: 'error'}
+                {title: "One Two Three Four Five", icon: <IconFour />, value: "Four", color: 'error'},
+                {title: "One", icon: <IconOne />, value: "One 2"},
+                {title: "Two", icon: <IconTwo />, value: "Two 2", color: 'secondary'}, 
+                {title: "Three", icon: <IconThree />, value: "Three 2", color: 'success'},
+                {title: "One Two Three Four Five", icon: <IconFour />, value: "Four 2", color: 'error'},
+                {title: "One", icon: <IconOne />, value: "One 3"},
+                {title: "Two", icon: <IconTwo />, value: "Two 3", color: 'secondary'}, 
+                {title: "Three", icon: <IconThree />, value: "Three 3", color: 'success'},
+                {title: "One Two Three Four Five", icon: <IconFour />, value: "Four 3", color: 'error'}
             ]
         } as Partial<DropDownMenuPropsType>,
         variables: {
