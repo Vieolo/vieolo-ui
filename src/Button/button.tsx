@@ -33,6 +33,7 @@ export default function Button(props: {
 	emphasis?: EmphasisType,
 	/** default: `vieolo-button` css class */
 	borderRadius?: BorderRadiusType,
+	isTransparent?: boolean,
 	/** Adds an Icon button to the right side of the button */
 	auxiliary?: {
 		icon: React.ReactNode,
@@ -67,7 +68,8 @@ export default function Button(props: {
 
 	c += getEmphasisClasses(e, props.color, {
 		hasRipple: true,
-		hoverable: true
+		hoverable: true,
+		transparentBackground: props.isTransparent
 	});
 
 	if (props.disabled) c += " disabled";

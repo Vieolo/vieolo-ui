@@ -477,6 +477,10 @@
 			#{$property}: $background-content-color unquote($optionalSuffix);
 		}
 
+		&--background-content {
+			#{$property}: $background-content-color unquote($optionalSuffix);
+		}
+
 		&--white {
 			#{$property}: white unquote($optionalSuffix);
 		}
@@ -640,6 +644,10 @@
 
 .hover-border {
 	@include colorStateMixin(border-color, false, !important, "&:hover");
+}
+
+.hover-background {
+	@include colorStateMixin(background-color, false, !important, "&:hover");
 }
 
 

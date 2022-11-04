@@ -223,7 +223,7 @@ export default function MainPage(props: {}): JSX.Element {
                 }
             } else if (variable === 'emphasis') {
                 finalVariable = {
-                    options: ['high', 'medium', 'low', "low-normal", 'none', "none-normal"],
+                    options: ['high', 'medium', 'low', "low-normal", 'none', "none-normal", 'none-background'],
                     default: 'none'
                 }
             } else {
@@ -340,7 +340,7 @@ export default function MainPage(props: {}): JSX.Element {
                             }
                         } else if (tempVariable === 'emphasis') {
                             variable = {
-                                options: ['high', 'medium', 'low', 'low-normal', 'none', 'none-normal'],
+                                options: ['high', 'medium', 'low', 'low-normal', 'none', 'none-normal', 'none-background'],
                                 default: 'none'
                             }
                         } else {

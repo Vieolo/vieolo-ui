@@ -11,6 +11,7 @@ import Button from '../../Button';
 // Types
 import { ColorOptionType } from '../../types/types';
 import { ViewData } from '../main/main';
+import Card from '../../Card';
 
 type ButtonPropsType = React.ComponentProps<typeof Button>;
 
@@ -47,6 +48,7 @@ export function buttonOptions(): ViewData {
                 options: ['None', 'Plain', 'With DropDown'],
                 default: 'None'
             },
+            isTransparent: 'boolean',
             isLoading: 'boolean',
             isAuxiliaryLoading: 'boolean'
         }
@@ -56,7 +58,7 @@ export function buttonOptions(): ViewData {
 
 export function ButtonCreator(props: { p: ButtonPropsType }) {
 
-    return <Button
+    let b = <Button
         onClick={props.p.onClick}
         className={props.p.className}
         color={props.p.color}
@@ -73,6 +75,7 @@ export function ButtonCreator(props: { p: ButtonPropsType }) {
         type={props.p.type}
         width={props.p.width as any}
         isLoading={props.p.isLoading}
+        isTransparent={props.p.isTransparent}
         auxiliary={
             (props.p as any).auxiliaryButton === "None"
                 ? undefined
@@ -89,6 +92,14 @@ export function ButtonCreator(props: { p: ButtonPropsType }) {
                     }
         }
     />
+
+    if (props.p.isTransparent) {
+        return <Card emphasis='high' color={props.p.color === 'primary' ? 'tertiary' : 'primary'}>
+            {b}
+        </Card>
+    }
+
+    return b
 
 }
 
