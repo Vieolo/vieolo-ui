@@ -659,6 +659,10 @@ body {
 			background-color: $primary-color-light;
 		}
 
+		&--top-border {
+			border-top: 2px solid $primary-color-light;
+		}
+
 		p {
 			padding: 0px $base-unit-half;
 		}

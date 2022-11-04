@@ -26,6 +26,7 @@ export type DropDownMenuItemType = {
     icon?: React.ReactNode,
     color?: ColorOptionType,
     switch?: DropDownMenuSwitch,
+    topBorder?: boolean
 }
 
 
@@ -201,6 +202,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
                         return <DropDownMenuItem
                             key={`${item.value}_${i}`}
                             title={item.title}
+                            topBorder={item.topBorder}
                             value={item.value}
                             icon={item.icon}
                             color={item.color}
@@ -223,6 +225,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 }
 
 function DropDownMenuItem(props: {
+    topBorder?: boolean,
     title: string,
     value: string,
     switch?: DropDownMenuSwitch,
@@ -233,7 +236,7 @@ function DropDownMenuItem(props: {
     onKeyboardFocus?: boolean
     itemRef?: React.RefObject<HTMLDivElement>
 }) {
-    let className = ` vieolo-dropdown-menu__dropdown-item color--${props.color || 'primary'}-normal`;
+    let className = ` vieolo-dropdown-menu__dropdown-item ${props.topBorder ? "vieolo-dropdown-menu__dropdown-item--top-border" : ''} color--${props.color || 'primary'}-normal`;
     if (props.onKeyboardFocus) className += ` vieolo-dropdown-menu__dropdown-item--keyboard-focus`;
 
     if (props.switch) {

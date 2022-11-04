@@ -49,7 +49,7 @@ export function DropDownMenuCreator(props: {p: DropDownMenuPropsType}) {
         {title: "Two", icon: <IconTwo />, value: "Two 2", color: 'secondary'}, 
         {title: "Three", icon: <IconThree />, value: "Three 2", color: 'success'},
         {title: "One Two Three Four Five", icon: <IconFour />, value: "Four 2", color: 'error'},
-        {title: "One", icon: <IconOne />, value: "One 3"},
+        {title: "One", icon: <IconOne />, value: "One 3", topBorder: true},
         {title: "Two", icon: <IconTwo />, value: "Two 3", color: 'secondary'}, 
         {title: "Three", icon: <IconThree />, value: "Three 3", color: 'success'},
         {title: "One Two Three Four Five", icon: <IconFour />, value: "Four 3", color: 'error'}
