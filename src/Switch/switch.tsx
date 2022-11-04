@@ -12,7 +12,15 @@ export default function Switch(props: {
 }) {
     return <div className={`vieolo-switch${props.disabled ? ' disabled' : ''}`} >
         <input id={props.switchID} type="checkbox" name="set-name" className="switch-input" checked={props.on} readOnly />
-        <label htmlFor={props.switchID} className="switch-label" onClick={() => { props.onChange(!props.on); }} aria-label={props.ariaLabel}>
+        <label 
+            htmlFor={props.switchID} 
+            className="switch-label" 
+            onClick={(e) => { 
+                e.stopPropagation();
+                props.onChange(!props.on); 
+            }} 
+            aria-label={props.ariaLabel}
+        >
             <span className="switch-on"></span>
             <span className="switch-off"></span>
         </label>
