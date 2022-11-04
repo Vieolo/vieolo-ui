@@ -53,7 +53,7 @@
 }
 
 @mixin disable-background {
-	background-color: $disable-color-normal;
+	background-color: $disabled-color;
 	color: black;
 }
 .disable-background {
@@ -85,14 +85,14 @@
 }
 
 @mixin default-text-color {
-	color: $normal-text-color;
+	color: $light-mode-normal-text-color;
 }
 .default-text-color {
 	@include default-text-color;
 }
 
 @mixin gray-text-color {
-	color: $gray-text-color;
+	color: $light-mode-gray-text-color;
 }
 .gray-text-color {
 	@include gray-text-color;
@@ -141,7 +141,7 @@
 }
 
 @mixin disable-color {
-	color: $disable-color-normal;
+	color: $disabled-color;
 }
 .disable-color {
 	@include disable-color;
@@ -474,7 +474,7 @@
 		}
 
 		&--content-background {
-			#{$property}: $content-background-color unquote($optionalSuffix);
+			#{$property}: $background-content-color unquote($optionalSuffix);
 		}
 
 		&--white {
@@ -509,7 +509,7 @@
 	}
 
 	@if $includeSingleValueColors {
-		&--hover {
+		&--hover { // deprecated (use emphasis instead)
 			#{$state} {
 				#{$property}: $hover-color unquote($optionalSuffix);
 			}
@@ -521,9 +521,27 @@
 			}
 		}
 
-		&--content-background {
+		&--content-background { // deprecated (user --background-content instead)
 			#{$state} {
-				#{$property}: $content-background-color unquote($optionalSuffix);
+				#{$property}: $background-content-color unquote($optionalSuffix);
+			}
+		}
+
+		&--background-content {
+			#{$state} {
+				#{$property}: $background-content-color unquote($optionalSuffix);
+			}
+		}
+
+		&--light-mode-normal-text {
+			#{$state} {
+				#{$property}: $light-mode-normal-text-color unquote($optionalSuffix);
+			}
+		}
+
+		&--light-mode-gray-text {
+			#{$state} {
+				#{$property}: $light-mode-gray-text-color unquote($optionalSuffix);
 			}
 		}
 
@@ -555,13 +573,13 @@
 	&--gray-text,
 	&--gray-normal,
 	&--gray-light {
-		color: $gray-text-color;
+		color: $light-mode-gray-text-color;
 	}
 
 	&--default-text,
 	&--default-normal,
 	&--default-light {
-		color: $normal-text-color;
+		color: $light-mode-normal-text-color;
 	}
 }
 
