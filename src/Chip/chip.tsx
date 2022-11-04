@@ -25,7 +25,8 @@ export default function Chip(props: {
 	/** The custom button component which will appear on the right side of the Chip and has a higher priority than the default button */
 	color?: ColorOptionType,
 	buttonComponent?: React.ReactNode,
-	emphasis?: 'medium' | 'low' | 'low-normal',
+	emphasis?: 'medium' | 'low' | 'low-normal' | 'none' | 'none-normal' | 'none-background',
+	isTransparent?: boolean,
 	borderRadius?: BorderRadiusType
 	id?: string,
 	size?: "medium" | 'small',
@@ -40,7 +41,8 @@ export default function Chip(props: {
 
 	c += getEmphasisClasses(props.selected ? 'high' : e, color, {
 		hasRipple: true,
-		hoverable: true
+		hoverable: true,
+		transparentBackground: props.isTransparent
 	});
 
 	let s: { [key: string]: any } = {};
