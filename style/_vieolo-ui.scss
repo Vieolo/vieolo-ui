@@ -1713,7 +1713,7 @@ body {
 		position: absolute;
 		box-shadow: $elevation-shadow-1;
 		padding: $base-unit;
-		background-color: $content-background-color;
+		background-color: $background-content-color;
 		border-radius: $border-radius-normal;
 		top: 0;
 
@@ -2223,7 +2223,7 @@ body {
 		padding: 0 $base-unit-half;
 
 		&--expanded {
-			border-bottom: 1px solid $disable-color-normal;
+			border-bottom: 1px solid $disabled-color;
 		}
 
 		&__actions {
@@ -2505,7 +2505,7 @@ body {
 		left: -$drawer-width;
 		;
 		bottom: 0px;
-		background-color: $content-background-color;
+		background-color: $background-content-color;
 		padding: 0px;
 		z-index: 999;
 		@include transition;
@@ -2573,7 +2573,7 @@ body {
 
 .vieolo-sub-navbar-row {
 	height: $subnavbar-height;
-	background-color: $content-background-color;
+	background-color: $background-content-color;
 }
 
 
@@ -2672,7 +2672,7 @@ body {
 }
 
 .vieolo-file-viewer-frame {
-	background-color: $content-background-color;
+	background-color: $background-content-color;
 	height: $row-height-small;
 	padding: 1px;
 	border-radius: inherit;

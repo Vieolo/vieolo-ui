@@ -9,6 +9,7 @@ import IconButton from '../../IconButton';
 
 // Types
 import { ViewData } from '../main/main';
+import Card from '../../Card';
 
 type IconButtonPropsType = React.ComponentProps<typeof IconButton>;
 
@@ -20,15 +21,13 @@ export function iconButtonOptions(): ViewData {
         } as Partial<IconButtonPropsType>,
         variables: {
             color: 'colors',
-            emphasis: {
-                options: ['high', 'medium', 'low', 'none'],
-                default: 'none'
-            },
+            emphasis: 'emphasis',
             size: {
                 options: ['medium', 'small', 'extra-small'],
                 default: 'medium'
             },
             borderRadius: 'borderRadius',
+            isTransparent: 'boolean',
             isLoading: 'boolean',
             borderWidth: {
                 default: '2',
@@ -42,7 +41,7 @@ export function iconButtonOptions(): ViewData {
 
 export function IconButtonCreator(props: { p: IconButtonPropsType }) {    
 
-    return <IconButton
+    let b = <IconButton
         icon={<IconOne />}
         onClick={props.p.onClick}
         className={props.p.className}
@@ -55,7 +54,15 @@ export function IconButtonCreator(props: { p: IconButtonPropsType }) {
         tooltipPosition={props.p.tooltipPosition}
         borderWidth={props.p.borderWidth}
         isLoading={props.p.isLoading}
+        isTransparent={props.p.isTransparent}
     />
 
+    if (props.p.isTransparent) {
+        return <Card emphasis='high' color={props.p.color === 'primary' ? 'tertiary' : 'primary'}>
+            {b}
+        </Card>
+    }
+
+    return b
 }
 
