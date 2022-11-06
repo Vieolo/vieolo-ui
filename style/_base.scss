@@ -15,6 +15,8 @@ $row-height-over: $base-unit * 7 !default;
 $border-radius-normal: $base-unit !default;
 $border-radius-half: $base-unit-half !default;
 $border-radius-full: $base-unit * 2 !default;
+$border-radius-round: 10000000px !default;
+$border-radius-circle: 50% !default;
 $border-radius-none: 0 !default;
 
 $box-shadow: 0px 3px 10px rgba(27, 78, 96, 0.2) !default; // deprecated

@@ -695,6 +695,14 @@
 	&--full {
 		border-radius: $border-radius-full;
 	}
+
+	&--round {
+		border-radius: $border-radius-round;
+	}
+
+	&--circle {
+		border-radius: $border-radius-circle;
+	}
 }
 
 @mixin borderRadiusMixin($prefix, $includeIndividaul, $defaultValue) {
@@ -723,6 +731,14 @@
 		border-radius: $border-radius-full;		
 	}
 
+	&#{$prefixFull}round {
+		border-radius: $border-radius-round;		
+	}
+
+	&#{$prefixFull}circle {
+		border-radius: $border-radius-circle;		
+	}
+
 	&#{$prefixFull}default {
 		border-radius: $defaultValue;		
 	}
@@ -747,6 +763,14 @@
 		
 			&#{$prefixFull}#{$ind}-full {
 				border-#{$ind}-radius: $border-radius-full;		
+			}
+
+			&#{$prefixFull}#{$ind}-round {
+				border-#{$ind}-radius: $border-radius-round;		
+			}
+			
+			&#{$prefixFull}#{$ind}-circle {
+				border-#{$ind}-radius: $border-radius-circle;		
 			}
 			
 			&#{$prefixFull}#{$ind}-default {

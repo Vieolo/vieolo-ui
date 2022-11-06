@@ -201,7 +201,7 @@ export default function MainPage(props: {}): JSX.Element {
                 }
             } else if (variable === "borderRadius") {
                 finalVariable = {
-                    options: ['default', 'full', 'normal', 'half', 'none'],
+                    options: ['default', 'round', 'full', 'normal', 'half', 'none', 'circle'],
                     default: 'default'
                 }
             } else if (variable === "typographyOptions") {
@@ -318,7 +318,7 @@ export default function MainPage(props: {}): JSX.Element {
                             }
                         } else if (tempVariable === "borderRadius") {
                             variable = {
-                                options: ['default', 'full', 'normal', 'half', 'none'],
+                                options: ['default', 'round', 'full', 'normal', 'half', 'none', 'circle'],
                                 default: 'default'
                             }
                         } else if (tempVariable === "typographyOptions") {
