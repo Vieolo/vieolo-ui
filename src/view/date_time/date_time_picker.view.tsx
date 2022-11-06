@@ -50,7 +50,7 @@ export function DateTimePickerCreator(props: {p: DateTimePickerPropsType}) {
                 setMinute(m);
             }
 
-            setTimeText(t);
+            setTimeText(t || '');
         }}
         onDateSelect={v => setDate(v)}
         includeWeek={props.p.includeWeek}

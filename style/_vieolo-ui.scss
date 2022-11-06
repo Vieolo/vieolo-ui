@@ -2798,3 +2798,73 @@ body {
 		}
 	}
 }
+
+
+.vieolo-calendar-statistic {
+	&__content-small,
+	&__content-large {
+		width: 100%;
+		padding: $base-unit-half;
+
+		&__header {
+			@include flex-row-space-between;
+			padding: 0 $base-unit-half;
+		}
+
+		&__day-container {
+			&__weekday-row {
+				@include flex-row-space-between;
+			}
+
+			&__day-row {
+				display: flex;
+				width: 100%;
+				justify-content: space-between;
+				border-top: 1px solid $primary-color-light;
+			}
+
+			&__day-cell {
+				height: $row-height-medium;
+				width: 100%;
+				@include center-by-flex-column;
+				row-gap: $base-unit-half;
+				position: relative;				
+
+				&__percent {
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					right: 0;
+				}
+			}
+		}
+	}
+
+	&__content-large {
+		max-width: 500px;
+		width: 90vw;
+		padding: $base-unit-half;
+
+		&__header {
+			height: $row-height-medium;
+		}
+
+		&__day-container {
+			&__day-cell {
+				height: $row-height-over;
+				width: $row-height-over;
+				@include center-by-flex-column;
+				border-radius: $border-radius-half;
+				position: relative;				
+
+				&:hover {
+					background-color: $hover-color;
+				}
+
+				.typography-paragraph-small {
+					font-size: 13px;
+				}
+			}
+		}
+	}
+}

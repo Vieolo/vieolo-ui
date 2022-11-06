@@ -41,7 +41,7 @@ export function PeriodSelectorCreator(props: {p: PeriodSelectorPropsType}) {
             PeriodOptions.month,
             PeriodOptions.quarter,
             PeriodOptions.year
-        ] : null}
+        ] : undefined}
     />
 
 }

@@ -6,6 +6,7 @@ import BarChart from './BarChart';
 import Button from './Button';
 import CalendarStateful from './CalendarStateful';
 import CalendarStateless from './CalendarStateless';
+import CalendarStatistic from './CalendarStatistic';
 import Card from './Card';
 import Checkbox from './CheckBox';
 import Chip from './Chip';
@@ -83,6 +84,7 @@ import {
 	DoubleToggleListItem as DoubleToggleListItemTemp,
 } from './DoubleToggleList';
 import {
+	DropDownMenuSwitch as DropDownMenuSwitchTemp,
 	DropDownMenuItemType as DropDownMenuItemTypeTemp,
 } from './DropDownMenu';
 import {
@@ -159,6 +161,7 @@ export {
 	Button,
 	CalendarStateful,
 	CalendarStateless,
+	CalendarStatistic,
 	Card,
 	Checkbox,
 	Chip,
@@ -230,6 +233,7 @@ export type ConfirmationDialogMainButton = ConfirmationDialogMainButtonTemp;
 export type ContextMenuItem = ContextMenuItemTemp;
 export type DonutChartData = DonutChartDataTemp;
 export type DoubleToggleListItem = DoubleToggleListItemTemp;
+export type DropDownMenuSwitch = DropDownMenuSwitchTemp;
 export type DropDownMenuItemType = DropDownMenuItemTypeTemp;
 export type FlexJustifyContent = FlexJustifyContentTemp;
 export type FlexDirection = FlexDirectionTemp;
