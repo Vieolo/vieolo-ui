@@ -34,7 +34,7 @@ export default function FileViewerFrame(props: {
 }) {
     
 
-    return <div className="vieolo-file-viewer-frame">
+    return <div className={`vieolo-file-viewer-frame vieolo-file-viewer-frame--${props.mode.replace(" ", "-")}`}>
 
         <Flex>
             {
