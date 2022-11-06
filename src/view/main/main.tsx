@@ -55,6 +55,7 @@ import { SubDashboardCreator, subDashboardOptions } from '../layout/page/sub_das
 import { ActionCardCreator, actionCardOptions } from '../card/action_card.view';
 import { DoubleToggleListCreator, doubleToggleOptions } from '../list/double_toggle_list.view';
 import { fileViewerOptions, FileViewerCreator } from '../file/file_viewer.view';
+import { calendarStatisticOptions, CalendarStatisticCreator } from '../../CalendarStatistic/calendar_statistic.view';
 import Select from '../../Select';
 import SwitchSet from '../../SwitchSet';
 import PageFrame from '../../PageFrame';
@@ -111,6 +112,8 @@ export default function MainPage(props: {}): JSX.Element {
         "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator, group: "Charts" },
         "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator, group: "Charts" },
         "Donut Chart": { title: "Donut Chart", data: donutChartOptions(), creator: DonutChartCreator, group: "Charts" },
+        
+        "Calendar Statistic": { title: "Calendar Statistic", data: calendarStatisticOptions(), creator: CalendarStatisticCreator, group: "Date and Time" },
         "Date Input": { title: "Date Input", data: dateInputOptions(), creator: DateInputCreator, group: "Date and Time" },
         "Date Picker": { title: "Date Picker", data: datePickerOptions(), creator: DatePickerCreator, group: "Date and Time" },
         "Date Time Picker": { title: "Date Time Picker", data: dateTimePickerOptions(), creator: DateTimePickerCreator, group: "Date and Time" },

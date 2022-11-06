@@ -374,6 +374,8 @@
 		@return $primary-color-normal;
 	} @else if $colorName == "primary" and $colorType == "light" {
 		@return $primary-color-light;
+	} @else if $colorName == "primary" and $colorType == "transparent" {
+		@return $primary-color-transparent;
 	} @else if $colorName == "primary" and $colorType == "text" {
 		@return $primary-color-text;
 	} @else if $colorName == "primary" and $colorType == "text-light" {
@@ -382,6 +384,8 @@
 		@return $secondary-color-normal;
 	} @else if $colorName == "secondary" and $colorType == "light" {
 		@return $secondary-color-light;
+	} @else if $colorName == "secondary" and $colorType == "transparent" {
+		@return $secondary-color-transparent;
 	} @else if $colorName == "secondary" and $colorType == "text" {
 		@return $secondary-color-text;
 	} @else if $colorName == "secondary" and $colorType == "text-light" {
@@ -390,6 +394,8 @@
 		@return $tertiary-color-normal;
 	} @else if $colorName == "tertiary" and $colorType == "light" {
 		@return $tertiary-color-light;
+	} @else if $colorName == "tertiary" and $colorType == "transparent" {
+		@return $tertiary-color-transparent;
 	} @else if $colorName == "tertiary" and $colorType == "text" {
 		@return $tertiary-color-text;
 	} @else if $colorName == "tertiary" and $colorType == "text-light" {
@@ -398,6 +404,8 @@
 		@return $alert-color-normal;
 	} @else if $colorName == "alert" and $colorType == "light" {
 		@return $alert-color-light;
+	} @else if $colorName == "alert" and $colorType == "transparent" {
+		@return $alert-color-transparent;
 	} @else if $colorName == "alert" and $colorType == "text" {
 		@return $alert-color-text;
 	} @else if $colorName == "alert" and $colorType == "text-light" {
@@ -406,6 +414,8 @@
 		@return $error-color-normal;
 	} @else if $colorName == "error" and $colorType == "light" {
 		@return $error-color-light;
+	} @else if $colorName == "error" and $colorType == "transparent" {
+		@return $error-color-transparent;
 	} @else if $colorName == "error" and $colorType == "text" {
 		@return $error-color-text;
 	} @else if $colorName == "error" and $colorType == "text-light" {
@@ -414,6 +424,8 @@
 		@return $success-color-normal;
 	} @else if $colorName == "success" and $colorType == "light" {
 		@return $success-color-light;
+	} @else if $colorName == "success" and $colorType == "transparent" {
+		@return $success-color-transparent;
 	} @else if $colorName == "success" and $colorType == "text" {
 		@return $success-color-text;
 	} @else if $colorName == "success" and $colorType == "text-light" {
@@ -422,6 +434,8 @@
 		@return $accessory-blue-normal;
 	} @else if $colorName == "accessory-blue" and $colorType == "light" {
 		@return $accessory-blue-light;
+	} @else if $colorName == "accessory-blue" and $colorType == "transparent" {
+		@return $accessory-blue-transparent;
 	} @else if $colorName == "accessory-blue" and $colorType == "text" {
 		@return $accessory-blue-text;
 	} @else if $colorName == "accessory-blue" and $colorType == "text-light" {
@@ -430,6 +444,8 @@
 		@return $accessory-green-normal;
 	} @else if $colorName == "accessory-green" and $colorType == "light" {
 		@return $accessory-green-light;
+	} @else if $colorName == "accessory-green" and $colorType == "transparent" {
+		@return $accessory-green-transparent;
 	} @else if $colorName == "accessory-green" and $colorType == "text" {
 		@return $accessory-green-text;
 	} @else if $colorName == "accessory-green" and $colorType == "text-light" {
@@ -438,6 +454,8 @@
 		@return $accessory-orange-normal;
 	} @else if $colorName == "accessory-orange" and $colorType == "light" {
 		@return $accessory-orange-light;
+	} @else if $colorName == "accessory-orange" and $colorType == "transparent" {
+		@return $accessory-orange-transparent;
 	} @else if $colorName == "accessory-orange" and $colorType == "text" {
 		@return $accessory-orange-text;
 	} @else if $colorName == "accessory-orange" and $colorType == "text-light" {
@@ -453,6 +471,10 @@
 
 		&--#{$c}-light {
 			#{$property}: getColorVariable($c, "light") unquote($optionalSuffix);
+		}
+
+		&--#{$c}-transparent {
+			#{$property}: getColorVariable($c, "transparent") unquote($optionalSuffix);
 		}
 
 		&--#{$c}-text {
