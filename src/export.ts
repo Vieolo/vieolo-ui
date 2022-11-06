@@ -72,6 +72,9 @@ import {
 	StackedBarChartData as StackedBarChartDataTemp,
 } from './BarChart';
 import {
+	CalendarStatisticData as CalendarStatisticDataTemp,
+} from './CalendarStatistic';
+import {
 	ConfirmationDialogMainButton as ConfirmationDialogMainButtonTemp,
 } from './ConfirmationDialog';
 import {
@@ -229,6 +232,7 @@ export {
 
 export type BarChartData = BarChartDataTemp;
 export type StackedBarChartData = StackedBarChartDataTemp;
+export type CalendarStatisticData = CalendarStatisticDataTemp;
 export type ConfirmationDialogMainButton = ConfirmationDialogMainButtonTemp;
 export type ContextMenuItem = ContextMenuItemTemp;
 export type DonutChartData = DonutChartDataTemp;

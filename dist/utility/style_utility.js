@@ -6,31 +6,70 @@ export function getEmphasisClasses(emphasis, color, options) {
         return options.removeTextColorClasses ? "" : `color--${color}-${emphasis === "high" ? "text" : emphasis === 'medium' ? 'text-light' : "normal"}`;
     }
     let c = "";
+    // High emphasis
+    // Normal background color
+    // Ripple with light color
     if (emphasis === 'high') {
         c = ` background-color--${color}-normal ${getTextColorClass()} border--px-0`;
         if (options.hasRipple) {
             c += ` ripple ripple--${color}-light`;
         }
+        // Medium Emphasis
+        // Light background color
+        // Ripple with normal color (should change)
     }
     else if (emphasis === 'medium') {
         c = ` background-color--${color}-light border--px-0 ${getTextColorClass()}`;
         if (options.hasRipple) {
             c += ` ripple ripple--${color}-normal`;
         }
+        // Low and Low-Normal
+        // Content or transparent background
+        // Border with light or normal color
+        // Hover with light background
     }
     else if (emphasis === 'low' || emphasis === 'low-normal') {
-        c = ` background-color--content-background border--${color}-${emphasis === 'low' ? 'light' : 'normal'} ${getTextColorClass()} ${getBorderClass()} border--solid`;
+        // Settin the background
+        c = ` background-color--${options.transparentBackground ? 'transparent' : "background-content"}`;
+        // Settin ght eborder color
+        c += ` border--${color}-${emphasis === 'low' ? 'light' : 'normal'}`;
+        // Setting the text color
+        c += ` ${getTextColorClass()}`;
+        // Setting the border thickness
+        c += ` ${getBorderClass()}`;
+        // Setting the style of the border
+        c += ` border--solid`;
         if (options.hoverable) {
             c += ` hover--${color}-light`;
         }
+        // None | None-Normal | None-Background
+        // Content or transparent background
+        // No border
+        // Hover with border (light or normal) or background (light)
     }
     else {
-        c = ` background-color--content-background border--content-background ${getTextColorClass()} ${getBorderClass()} border--solid`;
+        // Setting the background color 
+        c = ` background-color--${options.transparentBackground ? 'transparent' : "background-content"}`;
+        // Seting the border color
+        c += ` border--${options.transparentBackground ? 'transparent' : "background-content"}`;
+        // Setting the color of the text
+        c += ` ${getTextColorClass()}`;
+        // Setting the width of the border
+        c += ` ${getBorderClass()}`;
+        // Setting the shape of the border
+        c += ` border--solid`;
+        // Setting the ripple effect
         if (options.hasRipple) {
             c += ` ripple ripple--${color}-light`;
         }
+        // Setting the hover effect
         if (options.hoverable) {
-            c += ` hover-border--${color}-${emphasis === 'none' ? 'light' : 'normal'}`;
+            if (emphasis.includes("background") && !options.transparentBackground) {
+                c += ` hover-background--${color}-light`;
+            }
+            else {
+                c += ` hover-border--${color}-${emphasis === 'none' ? 'light' : 'normal'}`;
+            }
         }
     }
     return c;

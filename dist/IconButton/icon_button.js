@@ -9,7 +9,8 @@ export default function IconButton(props) {
     c += getEmphasisClasses(e, col, {
         hasRipple: true,
         hoverable: true,
-        borderWidth: props.borderWidth
+        borderWidth: props.borderWidth,
+        transparentBackground: props.isTransparent
     });
     if (props.tooltip)
         c += " vieolo-tooltip";
@@ -17,7 +18,7 @@ export default function IconButton(props) {
         c += " disabled";
     if (props.className)
         c += " " + props.className;
-    return _jsxs("button", Object.assign({ className: c, onClick: props.onClick, style: props.style || {}, type: props.type, "aria-label": props.ariaLabel }, { children: [props.isLoading ? _jsx(Spinner, { size: props.size, color: col, colorType: e === 'high' ? 'text' : 'normal' }, void 0) : props.icon,
+    return _jsxs("button", Object.assign({ className: c, onClick: props.isLoading ? undefined : props.onClick, style: props.style || {}, type: props.type, "aria-label": props.ariaLabel }, { children: [props.isLoading ? _jsx(Spinner, { size: props.size, color: col, colorType: e === 'high' ? 'text' : 'normal' }, void 0) : props.icon,
             props.tooltip &&
                 _jsx("div", Object.assign({ className: `tooltip-text-${props.tooltipPosition || 'up'}` }, { children: props.tooltip }), void 0)] }), void 0);
 }

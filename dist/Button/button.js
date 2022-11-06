@@ -22,13 +22,14 @@ export default function Button(props) {
     }
     c += getEmphasisClasses(e, props.color, {
         hasRipple: true,
-        hoverable: true
+        hoverable: true,
+        transparentBackground: props.isTransparent
     });
     if (props.disabled)
         c += " disabled";
     if (props.className)
         c += " " + props.className;
-    let button = _jsxs("button", Object.assign({ className: c, onClick: props.onClick, style: s, "aria-label": props.ariaLabel }, { children: [props.isLoading
+    let button = _jsxs("button", Object.assign({ className: c, onClick: props.isLoading ? undefined : props.onClick, style: s, "aria-label": props.ariaLabel }, { children: [props.isLoading
                 ? _jsx(Spinner, { size: props.height, color: props.color, colorType: e === 'high' ? 'text' : 'normal' }, void 0)
                 : _jsx(_Fragment, { children: props.startIcon &&
                         _jsx("span", Object.assign({ className: "start-icon" }, { children: props.startIcon }), void 0) }, void 0),

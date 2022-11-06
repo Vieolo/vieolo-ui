@@ -1,5 +1,21 @@
 # Change Log
 
+## 0.23.15 (2022-11-06)
+- Added `CalendarStatistic` component ([#13](https://github.com/Vieolo/vieolo-ui/issues/13))
+- Added root colors ([#214](https://github.com/Vieolo/vieolo-ui/issues/214))
+- Added `none-background` emphases ([#217](https://github.com/Vieolo/vieolo-ui/issues/217))
+- Fixed the position of toolbar framework in `FileViewer` in mobile devices ([#258](https://github.com/Vieolo/vieolo-ui/issues/258))
+- Added `round` and `circle` to the border radius values
+- Fixed the `onClick` of buttons when in loading state
+- Added ability to add `SwitchSet` in the `DropDownMenu`
+- Added transparent background to buttons in low and none emphasis modes
+
+#### Deprecation
+- scss: deprecated `content-background-color` in favor of `background-content-color`
+- scss: deprecated `normal-text-color` in favor of `light-mode-normal-text-color`
+- scss: deprecated `border-color`
+- scss: deprecated `hover-color`
+
 ## 0.23.14 (2022-10-17)
 - Added basic close button to `ImageViewer` ([#249](https://github.com/Vieolo/vieolo-ui/issues/249))
 - Added `min-width` CSS classes ([#252](https://github.com/Vieolo/vieolo-ui/issues/252))
