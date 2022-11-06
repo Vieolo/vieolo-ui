@@ -2689,6 +2689,11 @@ body {
 	top: 0;
 	z-index: 2;
 
+	&--full-screen {
+		position: fixed;
+		top: 0;
+	}
+
 	@media (pointer: coarse) {
 		height: $row-height-medium;
 
