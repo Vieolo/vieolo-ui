@@ -14,7 +14,7 @@ import IconButton from "../IconButton";
 import Typography from '../Typography';
 import Flex from '../Flex';
 export default function FileViewerFrame(props) {
-    return _jsxs("div", Object.assign({ className: "vieolo-file-viewer-frame" }, { children: [_jsx(Flex, { children: (props.onClose || props.mode === 'full screen') &&
+    return _jsxs("div", Object.assign({ className: `vieolo-file-viewer-frame vieolo-file-viewer-frame--${props.mode.replace(" ", "-")}` }, { children: [_jsx(Flex, { children: (props.onClose || props.mode === 'full screen') &&
                     _jsx(IconButton, { size: "extra-small", icon: _jsx(CloseIcon, {}, void 0), color: "error", disabled: !props.onClose, onClick: () => {
                             if (props.context === 'embedded' && props.mode === 'full screen') {
                                 props.onModeChange('embedded');

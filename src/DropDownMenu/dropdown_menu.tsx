@@ -3,6 +3,7 @@ import React, { useState, useRef, useEffect, CSSProperties } from 'react';
 
 // Vieolo UI
 import Typography from '../Typography';
+import SwitchSet from '../SwitchSet';
 
 // Types
 import { ColorOptionType } from '../types/types';
@@ -10,12 +11,22 @@ import { ColorOptionType } from '../types/types';
 // Utility
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
 
+export type DropDownMenuSwitch = {
+    on: boolean,
+    ariaLabel?: string,
+    subTitle?: string,
+    disabled?: boolean
+}
+
+
 export type DropDownMenuItemType = {
     title: string,
     /** The unique value of each item which is used to reference this item */
     value: string,
     icon?: React.ReactNode,
-    color?: ColorOptionType
+    color?: ColorOptionType,
+    switch?: DropDownMenuSwitch,
+    topBorder?: boolean
 }
 
 
@@ -92,7 +103,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
                     b = 0;
                 }
 
-                if (props.position === 'right' || (rect.x - (190 - rect.width)) < 190) {
+                if (props.position === 'right' || (rect.x - (260 - rect.width)) < 260) {
                     l = rect.left;
                     r = 0;
                 } else {
@@ -185,17 +196,19 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 
         {
             open &&
-            <div className={`dropdown`} style={style} >
+            <div className={`vieolo-dropdown-menu__dropdown`} style={style} >
                 {
                     props.items.map((item, i) => {
                         return <DropDownMenuItem
                             key={`${item.value}_${i}`}
                             title={item.title}
+                            topBorder={item.topBorder}
                             value={item.value}
                             icon={item.icon}
                             color={item.color}
-                            onClick={(v: string) => {
-                                setOpen(!open);
+                            switch={item.switch}
+                            onClick={(v: string, closeDialog: boolean) => {
+                                if (closeDialog) setOpen(!open);
                                 props.onItemSelect(v);
                             }}
                             onItemSelect={(t: DropDownMenuItemType) => { handleSelectItem(t) }}
@@ -212,23 +225,39 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 }
 
 function DropDownMenuItem(props: {
+    topBorder?: boolean,
     title: string,
     value: string,
-    onClick: (selectedValue: string) => void,
+    switch?: DropDownMenuSwitch,
+    onClick: (selectedValue: string, closeDialog: boolean) => void,
     onItemSelect: (item: DropDownMenuItemType) => void,
     icon?: React.ReactNode,
     color?: ColorOptionType
     onKeyboardFocus?: boolean
     itemRef?: React.RefObject<HTMLDivElement>
 }) {
-    let className = ` vieolo-dropdown-menu__dropdown-item color--${props.color || 'primary'}-normal`;
+    let className = ` vieolo-dropdown-menu__dropdown-item ${props.topBorder ? "vieolo-dropdown-menu__dropdown-item--top-border" : ''} color--${props.color || 'primary'}-normal`;
     if (props.onKeyboardFocus) className += ` vieolo-dropdown-menu__dropdown-item--keyboard-focus`;
+
+    if (props.switch) {
+        return <SwitchSet 
+            on={props.switch.on}
+            onChange={() => {
+                props.onClick(props.value, false)
+            }}
+            switchID={`dropdown_${props.value}_switch`}
+            title={props.title}
+            ariaLabel={props.switch.ariaLabel}
+            disabled={props.switch.disabled}
+            subtitle={props.switch.subTitle}
+        />
+    }
 
     return <div
         className={className}
         onClick={e => {
             e.stopPropagation();
-            props.onClick(props.value)
+            props.onClick(props.value, true)
         }}
         aria-label={`${props.title} select item`}
     >

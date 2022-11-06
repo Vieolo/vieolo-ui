@@ -631,12 +631,13 @@ body {
 .vieolo-dropdown-menu {
 	display: inline-block;
 
-	.dropdown {
+	&__dropdown {
 		position: fixed;
 		z-index: 99;
-		width: 190px;
-		padding: $base-unit-half;
-		@include card-dark-shadow;
+		width: 260px;
+		box-shadow: $elevation-shadow-1;
+		background-color: $background-content-color;
+		border-radius: $border-radius-half;
 		max-height: 240px;
 		overflow: scroll;
 	}
@@ -644,17 +645,22 @@ body {
 	&__dropdown-item {
 		padding: $base-unit-half;
 		cursor: pointer;
-		border-radius: $universal-border-radius-half;
+		// border-radius: $border-radius-half;
 		@include transition;
 		display: flex;
 		align-items: center;
+		min-height: $row-height-small;
 
 		&:hover {
-			background-color: $hover-color;
+			background-color: $primary-color-light;
 		}
 
 		&--keyboard-focus {
 			background-color: $primary-color-light;
+		}
+
+		&--top-border {
+			border-top: 2px solid $primary-color-light;
 		}
 
 		p {
@@ -1713,7 +1719,7 @@ body {
 		position: absolute;
 		box-shadow: $elevation-shadow-1;
 		padding: $base-unit;
-		background-color: $content-background-color;
+		background-color: $background-content-color;
 		border-radius: $border-radius-normal;
 		top: 0;
 
@@ -2223,7 +2229,7 @@ body {
 		padding: 0 $base-unit-half;
 
 		&--expanded {
-			border-bottom: 1px solid $disable-color-normal;
+			border-bottom: 1px solid $disabled-color;
 		}
 
 		&__actions {
@@ -2505,7 +2511,7 @@ body {
 		left: -$drawer-width;
 		;
 		bottom: 0px;
-		background-color: $content-background-color;
+		background-color: $background-content-color;
 		padding: 0px;
 		z-index: 999;
 		@include transition;
@@ -2573,7 +2579,7 @@ body {
 
 .vieolo-sub-navbar-row {
 	height: $subnavbar-height;
-	background-color: $content-background-color;
+	background-color: $background-content-color;
 }
 
 
@@ -2672,7 +2678,7 @@ body {
 }
 
 .vieolo-file-viewer-frame {
-	background-color: $content-background-color;
+	background-color: $background-content-color;
 	height: $row-height-small;
 	padding: 1px;
 	border-radius: inherit;
@@ -2682,6 +2688,11 @@ body {
 	position: absolute;
 	top: 0;
 	z-index: 2;
+
+	&--full-screen {
+		position: fixed;
+		top: 0;
+	}
 
 	@media (pointer: coarse) {
 		height: $row-height-medium;
@@ -2789,6 +2800,76 @@ body {
 		#{$self}__image {
 			width: 100%;
 			height: 100%;
+		}
+	}
+}
+
+
+.vieolo-calendar-statistic {
+	&__content-small,
+	&__content-large {
+		width: 100%;
+		padding: $base-unit-half;
+
+		&__header {
+			@include flex-row-space-between;
+			padding: 0 $base-unit-half;
+		}
+
+		&__day-container {
+			&__weekday-row {
+				@include flex-row-space-between;
+			}
+
+			&__day-row {
+				display: flex;
+				width: 100%;
+				justify-content: space-between;
+				border-top: 1px solid $primary-color-light;
+			}
+
+			&__day-cell {
+				height: $row-height-medium;
+				width: 100%;
+				@include center-by-flex-column;
+				row-gap: $base-unit-half;
+				position: relative;				
+
+				&__percent {
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					right: 0;
+				}
+			}
+		}
+	}
+
+	&__content-large {
+		max-width: 500px;
+		width: 90vw;
+		padding: $base-unit-half;
+
+		&__header {
+			height: $row-height-medium;
+		}
+
+		&__day-container {
+			&__day-cell {
+				height: $row-height-over;
+				width: $row-height-over;
+				@include center-by-flex-column;
+				border-radius: $border-radius-half;
+				position: relative;				
+
+				&:hover {
+					background-color: $hover-color;
+				}
+
+				.typography-paragraph-small {
+					font-size: 13px;
+				}
+			}
 		}
 	}
 }

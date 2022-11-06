@@ -17,6 +17,7 @@ export default function SetRowTemplate(props) {
     if (props.disabled)
         c += " disabled";
     return _jsxs("div", Object.assign({ className: c, tabIndex: props.handleKeyboardNav ? 0 : undefined, onKeyDown: e => {
+            e.stopPropagation();
             if (!props.handleKeyboardNav || !props.onRowClick)
                 return;
             handleOnKeyDown(e, {
@@ -25,7 +26,8 @@ export default function SetRowTemplate(props) {
                         props.onRowClick();
                 }
             });
-        } }, { children: [_jsxs("div", Object.assign({ className: "vieolo-set-row-template__title-container", onClick: () => {
+        } }, { children: [_jsxs("div", Object.assign({ className: "vieolo-set-row-template__title-container", onClick: e => {
+                    e.stopPropagation();
                     if (props.onRowClick)
                         props.onRowClick();
                 } }, { children: [typeof props.title === 'string'

@@ -24,6 +24,7 @@ export default function Button(props: {
     emphasis?: EmphasisType;
     /** default: `vieolo-button` css class */
     borderRadius?: BorderRadiusType;
+    isTransparent?: boolean;
     /** Adds an Icon button to the right side of the button */
     auxiliary?: {
         icon: React.ReactNode;

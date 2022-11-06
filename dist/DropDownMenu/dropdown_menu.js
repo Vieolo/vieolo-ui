@@ -3,6 +3,7 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useRef, useEffect } from 'react';
 // Vieolo UI
 import Typography from '../Typography';
+import SwitchSet from '../SwitchSet';
 // Utility
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
 export default function DropDownMenu(props) {
@@ -56,7 +57,7 @@ export default function DropDownMenu(props) {
                     t = rect.top + rect.height;
                     b = 0;
                 }
-                if (props.position === 'right' || (rect.x - (190 - rect.width)) < 190) {
+                if (props.position === 'right' || (rect.x - (260 - rect.width)) < 260) {
                     l = rect.left;
                     r = 0;
                 }
@@ -146,20 +147,26 @@ export default function DropDownMenu(props) {
                     });
                 } }, { children: props.buttonComponent }), void 0),
             open &&
-                _jsx("div", Object.assign({ className: `dropdown`, style: style }, { children: props.items.map((item, i) => {
-                        return _jsx(DropDownMenuItem, { title: item.title, value: item.value, icon: item.icon, color: item.color, onClick: (v) => {
-                                setOpen(!open);
+                _jsx("div", Object.assign({ className: `vieolo-dropdown-menu__dropdown`, style: style }, { children: props.items.map((item, i) => {
+                        return _jsx(DropDownMenuItem, { title: item.title, topBorder: item.topBorder, value: item.value, icon: item.icon, color: item.color, switch: item.switch, onClick: (v, closeDialog) => {
+                                if (closeDialog)
+                                    setOpen(!open);
                                 props.onItemSelect(v);
                             }, onItemSelect: (t) => { handleSelectItem(t); }, onKeyboardFocus: itemKeyboardFocus === item.value, itemRef: item.value === itemKeyboardFocus ? itemKeyboardRef : undefined }, `${item.value}_${i}`);
                     }) }), void 0)] }), void 0);
 }
 function DropDownMenuItem(props) {
-    let className = ` vieolo-dropdown-menu__dropdown-item color--${props.color || 'primary'}-normal`;
+    let className = ` vieolo-dropdown-menu__dropdown-item ${props.topBorder ? "vieolo-dropdown-menu__dropdown-item--top-border" : ''} color--${props.color || 'primary'}-normal`;
     if (props.onKeyboardFocus)
         className += ` vieolo-dropdown-menu__dropdown-item--keyboard-focus`;
+    if (props.switch) {
+        return _jsx(SwitchSet, { on: props.switch.on, onChange: () => {
+                props.onClick(props.value, false);
+            }, switchID: `dropdown_${props.value}_switch`, title: props.title, ariaLabel: props.switch.ariaLabel, disabled: props.switch.disabled, subtitle: props.switch.subTitle }, void 0);
+    }
     return _jsxs("div", Object.assign({ className: className, onClick: e => {
             e.stopPropagation();
-            props.onClick(props.value);
+            props.onClick(props.value, true);
         }, "aria-label": `${props.title} select item` }, { children: [props.icon &&
                 props.icon,
             _jsx(Typography, { type: 'paragraph-small', text: props.title, fontWeight: 'bold' }, void 0)] }), void 0);

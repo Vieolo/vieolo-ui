@@ -44,7 +44,7 @@ export function FileInputCreator(props: { p: FileInputPropsType }) {
                         onChange={f => {
                             let fs = [...files];
                             for (let i = 0; i < f.length; i++) {
-                                fs.push(f.item(i));
+                                fs.push(f.item(i)!);
                             }
                             setFiles(fs)
                         }}

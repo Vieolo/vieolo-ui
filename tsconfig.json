@@ -30,6 +30,7 @@
     "node_modules",
     "**/*.test.ts",
     "**/*.test.tsx",
+    "**/*.view.tsx",
     "**/*.stories.tsx",
     "./src/setupTests.ts",
     "./src/App.tsx",

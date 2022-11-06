@@ -27,6 +27,7 @@ export default function IconButton(props: {
 	borderWidth?: '0' | '1' | '2',
 	type?: 'button' | 'submit' | 'reset',
 	ariaLabel?: string,
+	isTransparent?: boolean,
 	isLoading?: boolean
 }) {	
 	let c = `vieolo-icon-button vieolo-icon-button--${props.size || 'medium'}`;
@@ -39,7 +40,8 @@ export default function IconButton(props: {
 	c += getEmphasisClasses(e, col, {
 		hasRipple: true,
 		hoverable: true,
-		borderWidth: props.borderWidth
+		borderWidth: props.borderWidth,
+		transparentBackground: props.isTransparent
 	});	
 
 	if (props.tooltip) c += " vieolo-tooltip";	
@@ -48,7 +50,7 @@ export default function IconButton(props: {
 
 	if (props.className) c += " " + props.className;
 
-	return <button className={c} onClick={props.onClick} style={props.style || {}} type={props.type} aria-label={props.ariaLabel} >
+	return <button className={c} onClick={props.isLoading ? undefined : props.onClick} style={props.style || {}} type={props.type} aria-label={props.ariaLabel} >
 		{props.isLoading ? <Spinner size={props.size} color={col} colorType={e === 'high' ? 'text' : 'normal'} /> : props.icon}
 		{
 			props.tooltip &&

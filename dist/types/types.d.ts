@@ -1,7 +1,7 @@
 /// <reference types="react" />
 export declare type ColorOptionType = 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' | 'alert' | 'accessory-blue' | 'accessory-orange' | 'accessory-green';
-export declare type EmphasisType = 'high' | 'medium' | 'low' | 'low-normal' | 'none' | 'none-normal';
-export declare type BorderRadiusValueType = 'full' | 'normal' | 'half' | 'none' | 'default';
+export declare type EmphasisType = 'high' | 'medium' | 'low' | 'low-normal' | 'none' | 'none-normal' | 'none-background';
+export declare type BorderRadiusValueType = 'full' | 'normal' | 'half' | 'none' | 'default' | 'round' | 'circle';
 export declare type BorderRadiusType = BorderRadiusValueType | {
     topLeft?: BorderRadiusValueType;
     topRight?: BorderRadiusValueType;

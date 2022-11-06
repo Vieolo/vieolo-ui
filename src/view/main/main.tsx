@@ -55,6 +55,7 @@ import { SubDashboardCreator, subDashboardOptions } from '../layout/page/sub_das
 import { ActionCardCreator, actionCardOptions } from '../card/action_card.view';
 import { DoubleToggleListCreator, doubleToggleOptions } from '../list/double_toggle_list.view';
 import { fileViewerOptions, FileViewerCreator } from '../file/file_viewer.view';
+import { calendarStatisticOptions, CalendarStatisticCreator } from '../../CalendarStatistic/calendar_statistic.view';
 import Select from '../../Select';
 import SwitchSet from '../../SwitchSet';
 import PageFrame from '../../PageFrame';
@@ -111,6 +112,8 @@ export default function MainPage(props: {}): JSX.Element {
         "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator, group: "Charts" },
         "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator, group: "Charts" },
         "Donut Chart": { title: "Donut Chart", data: donutChartOptions(), creator: DonutChartCreator, group: "Charts" },
+        
+        "Calendar Statistic": { title: "Calendar Statistic", data: calendarStatisticOptions(), creator: CalendarStatisticCreator, group: "Date and Time" },
         "Date Input": { title: "Date Input", data: dateInputOptions(), creator: DateInputCreator, group: "Date and Time" },
         "Date Picker": { title: "Date Picker", data: datePickerOptions(), creator: DatePickerCreator, group: "Date and Time" },
         "Date Time Picker": { title: "Date Time Picker", data: dateTimePickerOptions(), creator: DateTimePickerCreator, group: "Date and Time" },
@@ -198,7 +201,7 @@ export default function MainPage(props: {}): JSX.Element {
                 }
             } else if (variable === "borderRadius") {
                 finalVariable = {
-                    options: ['default', 'full', 'normal', 'half', 'none'],
+                    options: ['default', 'round', 'full', 'normal', 'half', 'none', 'circle'],
                     default: 'default'
                 }
             } else if (variable === "typographyOptions") {
@@ -223,7 +226,7 @@ export default function MainPage(props: {}): JSX.Element {
                 }
             } else if (variable === 'emphasis') {
                 finalVariable = {
-                    options: ['high', 'medium', 'low', "low-normal", 'none', "none-normal"],
+                    options: ['high', 'medium', 'low', "low-normal", 'none', "none-normal", 'none-background'],
                     default: 'none'
                 }
             } else {
@@ -315,7 +318,7 @@ export default function MainPage(props: {}): JSX.Element {
                             }
                         } else if (tempVariable === "borderRadius") {
                             variable = {
-                                options: ['default', 'full', 'normal', 'half', 'none'],
+                                options: ['default', 'round', 'full', 'normal', 'half', 'none', 'circle'],
                                 default: 'default'
                             }
                         } else if (tempVariable === "typographyOptions") {
@@ -340,7 +343,7 @@ export default function MainPage(props: {}): JSX.Element {
                             }
                         } else if (tempVariable === 'emphasis') {
                             variable = {
-                                options: ['high', 'medium', 'low', 'low-normal', 'none', 'none-normal'],
+                                options: ['high', 'medium', 'low', 'low-normal', 'none', 'none-normal', 'none-background'],
                                 default: 'none'
                             }
                         } else {

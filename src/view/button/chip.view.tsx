@@ -26,7 +26,7 @@ export function chipOptions(): ViewData {
             color: 'colors',
             emphasis: {
                 default: 'low',
-                options: ["low", "low-normal", "medium"]
+                options: ["low", "low-normal", "medium", 'none', 'none-normal', 'none-background']
             },
             size: {
                 default: 'medium',

@@ -37,6 +37,7 @@ export default function SetRowTemplate(props: { // internal
         className={c} 
         tabIndex={props.handleKeyboardNav ? 0 : undefined}
         onKeyDown={e => {
+            e.stopPropagation();
             if (!props.handleKeyboardNav || !props.onRowClick) return;
             handleOnKeyDown(e, {
                 onEnter: () => {
@@ -47,7 +48,8 @@ export default function SetRowTemplate(props: { // internal
     >
         <div 
             className={"vieolo-set-row-template__title-container"}
-            onClick={() => {
+            onClick={e => {
+                e.stopPropagation();
                 if (props.onRowClick) props.onRowClick();
             }}
             >
