@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.23.17 (2022-11-16)
+- Improved the VUI interaction in cypress tools
+
 ## 0.23.16 (2022-11-16)
 - Added `cypressTools`, a set of commands and functions to ease the writing of Cypress tests for Vieolo UI
 
