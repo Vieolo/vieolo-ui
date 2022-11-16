@@ -1,5 +1,5 @@
 /// <reference types="react" />
-export declare type DonutChartData = {
+export type DonutChartData = {
     id?: string;
     title: string;
     /** The percent in the data should be ranged between 0 and 1. If this field is ommited, the `value` field is used instead */

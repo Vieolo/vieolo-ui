@@ -1,6 +1,6 @@
 import React from 'react';
 import { ColorOptionType } from '../types/types';
-export declare type TableInteractiveCell = {
+export type TableInteractiveCell = {
     id?: string;
     /**
      * A string or a react node
@@ -17,7 +17,7 @@ export declare type TableInteractiveCell = {
     background?: ColorOptionType;
     onTextEdit?: (newValue: string) => void;
 };
-declare type HeaderFormatter = (s: string | number) => string;
+type HeaderFormatter = (s: string | number) => string;
 export default function TableInteractive(props: {
     headers: (string | {
         name: string;

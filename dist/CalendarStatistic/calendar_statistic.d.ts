@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import VDate from '@vieolo/date';
 import { ColorOptionType } from '../types';
-export declare type CalendarStatisticData = {
+export type CalendarStatisticData = {
     [day: string]: {
         text: string;
         disabled?: boolean;

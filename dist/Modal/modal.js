@@ -24,5 +24,5 @@ export default function Modal({ onClose, children }) {
                 main.style.removeProperty("overflow");
         };
     }, [container, handleClickOutside]);
-    return _jsx("div", Object.assign({ className: `vieolo-modal`, onClick: e => handleClickOutside(e) }, { children: _jsx("div", Object.assign({ className: "modal-content", ref: container }, { children: children }), void 0) }), void 0);
+    return _jsx("div", { className: `vieolo-modal`, onClick: e => handleClickOutside(e), children: _jsx("div", { className: "modal-content", ref: container, children: children }) });
 }

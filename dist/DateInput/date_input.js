@@ -33,7 +33,7 @@ export default function DateInput(props) {
                 return;
             let d = parseInputDateToVDate(v);
             props.onChange(d, v);
-        }, value: props.value, placeholder: props.dateFormat, size: "small" }, void 0);
+        }, value: props.value, placeholder: props.dateFormat, size: "small" });
 }
 // TODO: Add support for different types of date format
 export function parseInputDateToVDate(input) {

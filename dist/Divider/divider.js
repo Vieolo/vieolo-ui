@@ -16,5 +16,5 @@ export default function Divider(props) {
     dividerClass += ` background-color--${props.color || 'primary'}-${props.colorType || 'light'}`;
     // The border radius class
     dividerClass += ` border-radius--half`;
-    return _jsx("div", Object.assign({ className: className }, { children: _jsx("div", { className: dividerClass }, void 0) }), void 0);
+    return _jsx("div", { className: className, children: _jsx("div", { className: dividerClass }) });
 }

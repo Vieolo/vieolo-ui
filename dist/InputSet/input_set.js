@@ -13,16 +13,13 @@ export default function InputSet(props) {
         width = '240px';
     else if (size === 'full')
         width = '100%';
-    let actionComponent = _jsx("span", {}, void 0);
+    let actionComponent = _jsx("span", {});
     if (props.actionButton) {
-        actionComponent = _jsx(IconButton, { icon: props.actionButton.icon, onClick: props.actionButton.onClick, tooltip: props.actionButton.description, tooltipPosition: 'down-left', size: 'small' }, void 0);
+        actionComponent = _jsx(IconButton, { icon: props.actionButton.icon, onClick: props.actionButton.onClick, tooltip: props.actionButton.description, tooltipPosition: 'down-left', size: 'small' });
     }
     else if (props.tip) {
-        actionComponent = _jsxs("div", Object.assign({ className: "tip-div vieolo-tooltip" }, { children: [_jsx(TipIcon, {}, void 0),
-                _jsx("div", Object.assign({ className: "tooltip-text-small tooltip-text-down-left" }, { children: props.tip }), void 0)] }), void 0);
+        actionComponent = _jsxs("div", { className: "tip-div vieolo-tooltip", children: [_jsx(TipIcon, {}), _jsx("div", { className: "tooltip-text-small tooltip-text-down-left", children: props.tip })] });
     }
-    return _jsxs("div", Object.assign({ className: `vieolo-input-set${props.disabled ? ' disabled' : ''}`, style: { width: width } }, { children: [(props.label || props.actionButton) &&
-                _jsxs("div", Object.assign({ className: "label-container" }, { children: [_jsx("label", { children: props.label }, void 0),
-                        actionComponent] }), void 0),
-            _jsx(Input, { value: props.value, error: props.error, onChange: props.onChange, placeholder: props.placeholder || '', size: props.size, type: props.type, ariaLabel: props.ariaLabel || props.label, autoFocus: props.autoFocus, onKeyDown: props.onKeyDown, inputType: props.inputType }, void 0)] }), void 0);
+    return _jsxs("div", { className: `vieolo-input-set${props.disabled ? ' disabled' : ''}`, style: { width: width }, children: [(props.label || props.actionButton) &&
+                _jsxs("div", { className: "label-container", children: [_jsx("label", { children: props.label }), actionComponent] }), _jsx(Input, { value: props.value, error: props.error, onChange: props.onChange, placeholder: props.placeholder || '', size: props.size, type: props.type, ariaLabel: props.ariaLabel || props.label, autoFocus: props.autoFocus, onKeyDown: props.onKeyDown, inputType: props.inputType })] });
 }

@@ -85,13 +85,11 @@ export default function PDFViewer(props) {
     let content;
     let state = documentLoadError ? 'error' : !doc ? 'loading' : 'done';
     if (state === 'error') {
-        content = _jsx("span", Object.assign({ className: 'vieolo-pdf-viewer-component__content' }, { children: _jsx(Typography, { text: props.errorMessage || "There was a problem loading the PDF file!", color: 'error' }, void 0) }), void 0);
+        content = _jsx("span", { className: 'vieolo-pdf-viewer-component__content', children: _jsx(Typography, { text: props.errorMessage || "There was a problem loading the PDF file!", color: 'error' }) });
     }
     else {
         if (state === 'loading')
-            content = _jsxs("span", Object.assign({ className: 'vieolo-pdf-viewer-component__content' }, { children: [_jsx(Spinner, {}, void 0),
-                    _jsx(Spacer, { height: 'one' }, void 0),
-                    _jsx(Typography, { text: fileName }, void 0)] }), void 0);
+            content = _jsxs("span", { className: 'vieolo-pdf-viewer-component__content', children: [_jsx(Spinner, {}), _jsx(Spacer, { height: 'one' }), _jsx(Typography, { text: fileName })] });
         else {
             let pages = [];
             for (let i = 1; i <= totalPage; i++) {
@@ -100,13 +98,13 @@ export default function PDFViewer(props) {
                             setPageHeight(height);
                     }, pageHeight: pageHeight }, `pdf_page_${i}`));
             }
-            content = _jsx(_Fragment, { children: _jsx("div", Object.assign({ className: `vieolo-pdf-viewer-component__canvas-container ${mode === 'full screen' ? 'vieolo-pdf-viewer-component__canvas-container--full' : ''}`, ref: focusRef, style: mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction + (Device.sizeCategory() === DeviceSizeCategory.mobile ? 40 : 30)}px)` } : undefined }, { children: pages }), void 0) }, void 0);
+            content = _jsx(_Fragment, { children: _jsx("div", { className: `vieolo-pdf-viewer-component__canvas-container ${mode === 'full screen' ? 'vieolo-pdf-viewer-component__canvas-container--full' : ''}`, ref: focusRef, style: mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction + (Device.sizeCategory() === DeviceSizeCategory.mobile ? 40 : 30)}px)` } : undefined, children: pages }) });
         }
     }
     let viewerClass = `vieolo-pdf-viewer-component vieolo-pdf-viewer-component--${state}`;
     if (mode === 'full screen')
         viewerClass += " vieolo-pdf-viewer-component--full";
-    let viewer = _jsxs("div", Object.assign({ className: viewerClass, style: mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction}px)` } : undefined }, { children: [_jsx(FileViewerFrame, { context: props.context, expandable: props.expandable || false, mode: mode, onDownload: async () => {
+    let viewer = _jsxs("div", { className: viewerClass, style: mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction}px)` } : undefined, children: [_jsx(FileViewerFrame, { context: props.context, expandable: props.expandable || false, mode: mode, onDownload: async () => {
                     let { downloadBlob } = await import("@vieolo/file-management/download");
                     if (typeof props.filePath === 'string') {
                         let blob = await (await fetch(props.filePath)).blob();
@@ -140,12 +138,11 @@ export default function PDFViewer(props) {
                     }
                     catch (error) {
                     }
-                }, isLoading: state !== "done", onClose: props.onClose, onRotationChange: r => setRotation(r === '-' ? rotation - 90 : rotation + 90), onZoomChange: z => setZoomMultiple(z === "-" ? zoomMultiple - 0.1 : zoomMultiple + 0.1), page: state === 'done' ? `${currentPage} / ${totalPage}` : "" }, void 0),
-            content] }), void 0);
+                }, isLoading: state !== "done", onClose: props.onClose, onRotationChange: r => setRotation(r === '-' ? rotation - 90 : rotation + 90), onZoomChange: z => setZoomMultiple(z === "-" ? zoomMultiple - 0.1 : zoomMultiple + 0.1), page: state === 'done' ? `${currentPage} / ${totalPage}` : "" }), content] });
     if (mode === 'embedded')
         return viewer;
     else
-        return _jsx(Modal, Object.assign({ onClose: () => { } }, { children: _jsx("div", Object.assign({ className: "width--vw-100 height--vh-100" }, { children: viewer }), void 0) }), void 0);
+        return _jsx(Modal, { onClose: () => { }, children: _jsx("div", { className: "width--vw-100 height--vh-100", children: viewer }) });
 }
 function PDFPage(props) {
     let canvasID = `${props.fileName.replace(".", "")}_canvas_${props.pageNumber}`;
@@ -193,9 +190,7 @@ function PDFPage(props) {
         }
         // eslint-disable-next-line
     }, [props.zoomMultiple, props.rotation, setRendered]);
-    return _jsxs("div", Object.assign({ className: "vieolo-pdf-viewer-component__page", id: pageID, style: { height: rendered ? undefined : props.pageHeight } }, { children: [_jsx("canvas", { id: canvasID, height: rendered ? undefined : props.pageHeight }, canvasID),
-            _jsx("div", { className: "vieolo-pdf-viewer-component__page__text-layer", id: textLayerID }, textLayerID),
-            _jsx("div", { className: "vieolo-pdf-viewer-component__page__annotation-layer", id: annotationLayerID }, annotationLayerID)] }), void 0);
+    return _jsxs("div", { className: "vieolo-pdf-viewer-component__page", id: pageID, style: { height: rendered ? undefined : props.pageHeight }, children: [_jsx("canvas", { id: canvasID, height: rendered ? undefined : props.pageHeight }, canvasID), _jsx("div", { className: "vieolo-pdf-viewer-component__page__text-layer", id: textLayerID }, textLayerID), _jsx("div", { className: "vieolo-pdf-viewer-component__page__annotation-layer", id: annotationLayerID }, annotationLayerID)] });
     //return <img src={canvas} width={width * props.zoomMultiple} height={height * props.zoomMultiple} key={canvasID} style={{ transform: `rotateZ(${currentRotation}deg)` }} alt="pdf page" />
 }
 function useOnScreen(elementID, threshold = 0) {

@@ -143,42 +143,35 @@ export default function GanttChart(props) {
             resizeItem.el.style.left = `${left}%`;
         }
     }
-    return _jsxs("div", Object.assign({ className: "vieolo-gantt-chart", style: { height: chartHeight + 'px' } }, { children: [_jsxs("div", Object.assign({ className: "vieolo-gantt-chart__base" }, { children: [_jsx("div", Object.assign({ className: "vieolo-gantt-chart__base__item-column" }, { children: _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__base__item-column__item-title", style: { height: props.columnGroups ? '65px' : '45px' } }, { children: [_jsx(Typography, { text: props.dataTitle }, void 0),
-                                _jsx(RadioGroup, { horizontalButtonPadding: 7, onOptionChange: v => setFilter(v), options: [
-                                        { button: _jsx(AllIcon, {}, void 0), id: 'All' },
-                                        { button: _jsx(SelectedIcon, {}, void 0), id: 'Full' },
-                                        { button: _jsx(UnSelectedIcon, {}, void 0), id: 'Empty' },
-                                    ], value: filter }, void 0)] }), void 0) }), void 0),
-                    props.columnTitles.map((t, i) => {
-                        return _jsx("div", Object.assign({ className: "vieolo-gantt-chart__base__data-column", style: { width: colWidth } }, { children: _jsxs("div", Object.assign({ className: `vieolo-gantt-chart__base__data-column__title-container${t.onClick ? ' clickable' : ''}`, style: { paddingBottom: props.columnGroups ? '0px' : '0', height: props.columnGroups ? '45px' : '45px', width: "100%" }, onClick: () => {
+    return _jsxs("div", { className: "vieolo-gantt-chart", style: { height: chartHeight + 'px' }, children: [_jsxs("div", { className: "vieolo-gantt-chart__base", children: [_jsx("div", { className: "vieolo-gantt-chart__base__item-column", children: _jsxs("div", { className: "vieolo-gantt-chart__base__item-column__item-title", style: { height: props.columnGroups ? '65px' : '45px' }, children: [_jsx(Typography, { text: props.dataTitle }), _jsx(RadioGroup, { horizontalButtonPadding: 7, onOptionChange: v => setFilter(v), options: [
+                                        { button: _jsx(AllIcon, {}), id: 'All' },
+                                        { button: _jsx(SelectedIcon, {}), id: 'Full' },
+                                        { button: _jsx(UnSelectedIcon, {}), id: 'Empty' },
+                                    ], value: filter })] }) }), props.columnTitles.map((t, i) => {
+                        return _jsx("div", { className: "vieolo-gantt-chart__base__data-column", style: { width: colWidth }, children: _jsxs("div", { className: `vieolo-gantt-chart__base__data-column__title-container${t.onClick ? ' clickable' : ''}`, style: { paddingBottom: props.columnGroups ? '0px' : '0', height: props.columnGroups ? '45px' : '45px', width: "100%" }, onClick: () => {
                                     if (t.onClick)
                                         t.onClick();
-                                } }, { children: [_jsx(Typography, { text: t.title }, void 0),
-                                    t.subtitle &&
-                                        _jsx(Typography, { type: 'caption-medium', text: t.subtitle }, void 0)] }), void 0) }), `${t}_${i}`);
-                    })] }), void 0),
-            props.columnGroups &&
-                _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__group-div" }, { children: [_jsx("div", { className: "vieolo-gantt-chart__group-div__item-column" }, void 0),
-                        _jsx("div", Object.assign({ className: "vieolo-gantt-chart__group-div__group-column" }, { children: props.columnGroups.map((g, i) => {
+                                }, children: [_jsx(Typography, { text: t.title }), t.subtitle &&
+                                        _jsx(Typography, { type: 'caption-medium', text: t.subtitle })] }) }, `${t}_${i}`);
+                    })] }), props.columnGroups &&
+                _jsxs("div", { className: "vieolo-gantt-chart__group-div", children: [_jsx("div", { className: "vieolo-gantt-chart__group-div__item-column" }), _jsx("div", { className: "vieolo-gantt-chart__group-div__group-column", children: props.columnGroups.map((g, i) => {
                                 let left = (g.start / props.columnTitles.length) * 100;
                                 let width = ((g.end - g.start) / props.columnTitles.length) * 100;
                                 let right = (g.end / props.columnTitles.length) * 100;
                                 let style = { left: `${left}%`, width: `${width}%`, right: `${right}%` };
-                                return _jsx("div", Object.assign({ className: 'vieolo-gantt-chart__group-div__group-column__group-bar', style: style }, { children: _jsx(Typography, { text: g.title }, void 0) }), `${g.title}_${i}`);
-                            }) }), void 0)] }), void 0),
-            _jsx("div", Object.assign({ className: "vieolo-gantt-chart__content-div", style: { top: props.columnGroups ? '65px' : '45px', maxHeight: chartHeight - (props.columnGroups ? 65 : 45) } }, { children: finalData.map((row, rowIndex) => {
+                                return _jsx("div", { className: 'vieolo-gantt-chart__group-div__group-column__group-bar', style: style, children: _jsx(Typography, { text: g.title }) }, `${g.title}_${i}`);
+                            }) })] }), _jsx("div", { className: "vieolo-gantt-chart__content-div", style: { top: props.columnGroups ? '65px' : '45px', maxHeight: chartHeight - (props.columnGroups ? 65 : 45) }, children: finalData.map((row, rowIndex) => {
                     let dataRow = row.items;
                     let style = {};
                     if (row.colorIndicator) {
                         style.borderLeft = `2px solid ${row.colorIndicator}`;
                         style.marginLeft = '-2px';
                     }
-                    return _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__content-div__row", style: style }, { children: [(row.title.trim() && props.onDragReorder && draggedRow) &&
+                    return _jsxs("div", { className: "vieolo-gantt-chart__content-div__row", style: style, children: [(row.title.trim() && props.onDragReorder && draggedRow) &&
                                 _jsx(GanttRowDropZone, { position: 'top', onDrop: e => {
                                         if (draggedRow !== row.value)
                                             handleRowReorderDrop(row.value, 'top');
-                                    } }, void 0),
-                            _jsxs("div", Object.assign({ className: `vieolo-gantt-chart__content-div__row__item-column ${(row.contextMenuItems && row.contextMenuItems.length > 0) ? " clickable" : ""}`, draggable: (props.onDragReorder && row.title.trim()) ? true : false, onDragStart: e => {
+                                    } }), _jsxs("div", { className: `vieolo-gantt-chart__content-div__row__item-column ${(row.contextMenuItems && row.contextMenuItems.length > 0) ? " clickable" : ""}`, draggable: (props.onDragReorder && row.title.trim()) ? true : false, onDragStart: e => {
                                     setDraggedRow(row.value);
                                     e.currentTarget.style.backgroundColor = "#f2f2f2";
                                 }, onDragEnd: e => {
@@ -192,17 +185,14 @@ export default function GanttChart(props) {
                                         setContextMenuRow(row);
                                         setContextMenuPosition({ x: e.pageX, y: e.pageY });
                                     }
-                                } }, { children: [_jsx("p", Object.assign({ className: "vieolo-gantt-chart__content-div__row__item-column__title", title: row.title }, { children: row.title }), void 0),
-                                    row.subtitle &&
-                                        _jsx(Typography, { type: 'paragraph-small', text: row.subtitle, showTitle: true }, void 0)] }), row.value + " col title"),
-                            _jsxs("div", Object.assign({ className: "vieolo-gantt-chart__content-div__row__bar-column", onDragOver: !resizeItem ? undefined : handleItemResize }, { children: [row.supItems &&
+                                }, children: [_jsx("p", { className: "vieolo-gantt-chart__content-div__row__item-column__title", title: row.title, children: row.title }), row.subtitle &&
+                                        _jsx(Typography, { type: 'paragraph-small', text: row.subtitle, showTitle: true })] }, row.value + " col title"), _jsxs("div", { className: "vieolo-gantt-chart__content-div__row__bar-column", onDragOver: !resizeItem ? undefined : handleItemResize, children: [row.supItems &&
                                         row.supItems.map((s, z) => {
                                             let supLeft = (s.from / props.columnTitles.length) * 100;
                                             let supWidth = ((s.to - s.from) / props.columnTitles.length) * 100;
                                             let supRight = (s.to / props.columnTitles.length) * 100;
                                             return _jsx("div", { title: s.title, className: "vieolo-gantt-chart__content-div__row__bar-column__sup-item-bar", style: { left: `${supLeft}%`, width: `${supWidth}%`, right: `${supRight}%` }, "aria-label": `${row.title} ${(s.ariaLabel || "sup-item") + ' ' + z.toString()}` }, `${row.value} ${s.id} supitem ${s.from}_${s.to}_${z}`);
-                                        }),
-                                    dataRow.map((d, i) => {
+                                        }), dataRow.map((d, i) => {
                                         let finalStart = d.from;
                                         let finalEnd = d.to;
                                         let className = `vieolo-gantt-chart__content-div__row__bar-column__bar`;
@@ -232,7 +222,7 @@ export default function GanttChart(props) {
                                             style.backgroundColor = d.color.background;
                                             style.color = d.color.text;
                                         }
-                                        return _jsxs("div", Object.assign({ "aria-label": `${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + i.toString()}`, className: className, style: style, onClick: (e) => {
+                                        return _jsxs("div", { "aria-label": `${row.title} ${d.ariaLabel || (d.title || "item") + ' ' + i.toString()}`, className: className, style: style, onClick: (e) => {
                                                 let hasContextMenu = d.contextMenuItems && d.contextMenuItems.length > 0;
                                                 let isTouchEvent = e.nativeEvent instanceof PointerEvent && e.nativeEvent.pointerType === 'touch';
                                                 let isTouchOnlyDevice = "ontouchstart" in window && window.matchMedia("(pointer: coarse)").matches && !window.matchMedia("(pointer: fine)").matches;
@@ -255,31 +245,24 @@ export default function GanttChart(props) {
                                                     setContextMenuRow(row);
                                                     setContextMenuPosition({ x: e.pageX, y: e.pageY });
                                                 }
-                                            } }, { children: [props.itemResize &&
-                                                    _jsx(GanttItemResizeHandle, { position: 'left', onDragStart: (el, cor) => handleItemResizeStart(el, 'left', cor, d, row), onDragEnd: handleItemResizeEnd }, void 0),
-                                                (d.title || d.icon) &&
-                                                    _jsxs("div", Object.assign({ className: 'center-by-flex-row' }, { children: [d.icon && d.icon,
-                                                            d.title &&
-                                                                _jsx("p", Object.assign({ className: "vieolo-gantt-chart__content-div__row__bar-column__bar__row-title", title: d.title }, { children: d.title }), void 0)] }), void 0),
-                                                d.subtitle &&
-                                                    _jsx("p", Object.assign({ className: "vieolo-gantt-chart__content-div__row__bar-column__bar__row-subtitle", title: d.subtitle }, { children: d.subtitle }), void 0),
-                                                props.itemResize &&
-                                                    _jsx(GanttItemResizeHandle, { position: 'right', onDragStart: (el, cor) => handleItemResizeStart(el, 'right', cor, d, row), onDragEnd: handleItemResizeEnd }, void 0)] }), `${i}__${d.title || "no_title"}_${d.from}_${d.to}`);
-                                    }),
-                                    row.subItems &&
+                                            }, children: [props.itemResize &&
+                                                    _jsx(GanttItemResizeHandle, { position: 'left', onDragStart: (el, cor) => handleItemResizeStart(el, 'left', cor, d, row), onDragEnd: handleItemResizeEnd }), (d.title || d.icon) &&
+                                                    _jsxs("div", { className: 'center-by-flex-row', children: [d.icon && d.icon, d.title &&
+                                                                _jsx("p", { className: "vieolo-gantt-chart__content-div__row__bar-column__bar__row-title", title: d.title, children: d.title })] }), d.subtitle &&
+                                                    _jsx("p", { className: "vieolo-gantt-chart__content-div__row__bar-column__bar__row-subtitle", title: d.subtitle, children: d.subtitle }), props.itemResize &&
+                                                    _jsx(GanttItemResizeHandle, { position: 'right', onDragStart: (el, cor) => handleItemResizeStart(el, 'right', cor, d, row), onDragEnd: handleItemResizeEnd })] }, `${i}__${d.title || "no_title"}_${d.from}_${d.to}`);
+                                    }), row.subItems &&
                                         row.subItems.map((s, z) => {
                                             let subLeft = (s.from / props.columnTitles.length) * 100;
                                             let subWidth = ((s.to - s.from) / props.columnTitles.length) * 100;
                                             let subRight = (s.to / props.columnTitles.length) * 100;
                                             return _jsx("div", { title: s.title, className: "vieolo-gantt-chart__content-div__row__bar-column__sub-item-bar", style: { left: `${subLeft}%`, width: `${subWidth}%`, right: `${subRight}%` }, "aria-label": `${row.title} ${(s.ariaLabel || "sub-item") + ' ' + z.toString()}` }, `${row.value} ${s.id} subitem ${s.from}_${s.to}_${z}`);
-                                        })] }), void 0),
-                            (row.title.trim() && props.onDragReorder && draggedRow) &&
+                                        })] }), (row.title.trim() && props.onDragReorder && draggedRow) &&
                                 _jsx(GanttRowDropZone, { position: 'bottom', onDrop: e => {
                                         if (draggedRow !== row.value)
                                             handleRowReorderDrop(row.value, 'bottom');
-                                    } }, void 0)] }), row.value);
-                }) }), void 0),
-            (contextMenuRow && contextMenuPosition) &&
+                                    } })] }, row.value);
+                }) }), (contextMenuRow && contextMenuPosition) &&
                 _jsx(ContextMenu, { position: contextMenuPosition, items: (contextMenuItem || contextMenuRow).contextMenuItems.map(c => {
                         return {
                             title: c.title,
@@ -292,7 +275,7 @@ export default function GanttChart(props) {
                         setContextMenuRow(undefined);
                         setContextMenuItem(undefined);
                         setContextMenuPosition(null);
-                    } }, `${contextMenuPosition.x}_${contextMenuPosition.y}`)] }), void 0);
+                    } }, `${contextMenuPosition.x}_${contextMenuPosition.y}`)] });
 }
 /**
  * Checks whether the items of the data overlap each other not. This function only checks the overlap
@@ -385,7 +368,7 @@ function GanttRowDropZone(props) {
         }, onDragLeave: e => {
             e.preventDefault();
             e.currentTarget.style.backgroundColor = 'transparent';
-        } }, void 0);
+        } });
 }
 function GanttItemResizeHandle(props) {
     function getInitialPos(e) {
@@ -407,7 +390,7 @@ function GanttItemResizeHandle(props) {
             props.onDragStart(e.currentTarget.parentElement, getInitialPos(e));
         }, onDragEnd: e => {
             props.onDragEnd();
-        } }, void 0);
+        } });
 }
 function doPeriodsOverlap(oneStart, oneEnd, twoStart, twoEnd) {
     return (oneStart === twoStart ||

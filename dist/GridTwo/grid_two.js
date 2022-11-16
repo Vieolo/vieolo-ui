@@ -14,7 +14,7 @@ export default function GridTwo(props) {
             return ['lg', 'md', 'sm'].includes(props.responsiveBreakpoint || '') ? 12 : 6;
         }
     }
-    return _jsx(GridContainer, Object.assign({ rowGap: props.rowGap, columnGap: props.columnGap }, { children: props.children.map((c, i) => {
-            return _jsx(Grid, Object.assign({ xl: 6, lg: getFlex('lg'), md: getFlex('md'), sm: getFlex('sm') }, { children: c }), i);
-        }) }), void 0);
+    return _jsx(GridContainer, { rowGap: props.rowGap, columnGap: props.columnGap, children: props.children.map((c, i) => {
+            return _jsx(Grid, { xl: 6, lg: getFlex('lg'), md: getFlex('md'), sm: getFlex('sm'), children: c }, i);
+        }) });
 }

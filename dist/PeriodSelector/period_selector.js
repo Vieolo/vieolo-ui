@@ -62,15 +62,11 @@ export default function PeriodSelector(props) {
             finalDate = newDate.addYear(change);
         props.onDateChange(finalDate);
     }
-    return _jsxs("div", Object.assign({ className: "vieolo-period-selector", "aria-label": props.ariaLabel }, { children: [_jsxs("div", Object.assign({ className: "vieolo-period-selector__carousel-div" }, { children: [_jsx(IconButton, { icon: _jsx(LeftArrow, {}, void 0), onClick: () => handleDateChange(-1), size: "small", borderWidth: '0', ariaLabel: props.ariaLabel ? `${props.ariaLabel} left button` : undefined }, void 0),
-                    _jsx(Typography, { text: getSelectedDateRepresentation() }, void 0),
-                    _jsx(IconButton, { icon: _jsx(RightArrow, {}, void 0), onClick: () => handleDateChange(1), size: "small", borderWidth: '0', ariaLabel: props.ariaLabel ? `${props.ariaLabel} right button` : undefined }, void 0)] }), void 0),
-            _jsx("div", Object.assign({ className: "vieolo-period-selector__year-div" }, { children: _jsx(Typography, { text: props.selectedDate.getFullYear().toString() }, void 0) }), void 0),
-            props.periodOptions &&
-                _jsx("div", Object.assign({ className: "vieolo-period-selector__dropdown-div" }, { children: _jsx(DropDownMenu, { buttonComponent: _jsx("div", Object.assign({ className: "vieolo-period-selector__dropdown-button", "aria-label": props.ariaLabel ? `${props.ariaLabel} period options` : undefined }, { children: _jsx(DownArrow, {}, void 0) }), void 0), items: props.periodOptions.map(o => {
+    return _jsxs("div", { className: "vieolo-period-selector", "aria-label": props.ariaLabel, children: [_jsxs("div", { className: "vieolo-period-selector__carousel-div", children: [_jsx(IconButton, { icon: _jsx(LeftArrow, {}), onClick: () => handleDateChange(-1), size: "small", borderWidth: '0', ariaLabel: props.ariaLabel ? `${props.ariaLabel} left button` : undefined }), _jsx(Typography, { text: getSelectedDateRepresentation() }), _jsx(IconButton, { icon: _jsx(RightArrow, {}), onClick: () => handleDateChange(1), size: "small", borderWidth: '0', ariaLabel: props.ariaLabel ? `${props.ariaLabel} right button` : undefined })] }), _jsx("div", { className: "vieolo-period-selector__year-div", children: _jsx(Typography, { text: props.selectedDate.getFullYear().toString() }) }), props.periodOptions &&
+                _jsx("div", { className: "vieolo-period-selector__dropdown-div", children: _jsx(DropDownMenu, { buttonComponent: _jsx("div", { className: "vieolo-period-selector__dropdown-button", "aria-label": props.ariaLabel ? `${props.ariaLabel} period options` : undefined, children: _jsx(DownArrow, {}) }), items: props.periodOptions.map(o => {
                             return {
                                 title: o,
                                 value: o
                             };
-                        }), onItemSelect: o => props.onPeriodChange(o) }, void 0) }), void 0)] }), void 0);
+                        }), onItemSelect: o => props.onPeriodChange(o) }) })] });
 }

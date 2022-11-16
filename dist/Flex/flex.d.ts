@@ -1,9 +1,9 @@
 /// <reference types="react" />
 import { GridGapType } from '../types/types';
-export declare type FlexJustifyContent = "start" | "end" | "space-around" | "space-between" | "center";
-export declare type FlexDirection = "row" | "row-reverse" | "column" | "column-reverse";
-export declare type FlexAlignItems = "start" | "end" | "center";
-export declare type FlexWrap = "wrap" | "nowrap" | "wrap-reverse";
+export type FlexJustifyContent = "start" | "end" | "space-around" | "space-between" | "center";
+export type FlexDirection = "row" | "row-reverse" | "column" | "column-reverse";
+export type FlexAlignItems = "start" | "end" | "center";
+export type FlexWrap = "wrap" | "nowrap" | "wrap-reverse";
 export default function Flex(props: {
     justifyContent?: FlexJustifyContent;
     direction?: FlexDirection;

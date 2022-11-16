@@ -26,25 +26,22 @@ export default function ItemRow(props) {
     mainClassName += borderRadius;
     if (props.disabled)
         mainClassName += ` disabled`;
-    return _jsx("div", Object.assign({ className: mainClassName, "aria-label": props.ariaLabel || props.title }, { children: _jsxs("div", Object.assign({ className: contentClassName, onClick: () => {
+    return _jsx("div", { className: mainClassName, "aria-label": props.ariaLabel || props.title, children: _jsxs("div", { className: contentClassName, onClick: () => {
                 if (props.onClick)
                     props.onClick();
-            } }, { children: [props.leadingIcon &&
-                    _jsx("div", Object.assign({ className: "vieolo-item-row__leading-icon-div" }, { children: props.leadingIcon }), void 0),
-                props.searchRow
-                    ? _jsx("input", { value: props.searchRow.query, onChange: e => { var _a; return (_a = props.searchRow) === null || _a === void 0 ? void 0 : _a.onQueryChange(e.target.value); }, placeholder: props.title || "Search..." }, void 0)
-                    : _jsxs("div", Object.assign({ className: "vieolo-item-row__title-col" }, { children: [_jsx(Typography, { text: props.title || '', fontWeight: 'bold', color: props.selected ? color : undefined, colorType: props.selected ? 'text' : undefined }, void 0),
-                            props.subTitle &&
-                                _jsx(Typography, { type: 'caption-large', text: props.subTitle, showTitle: true, color: props.selected ? color : undefined, colorType: props.selected ? 'text' : undefined }, void 0)] }), void 0),
-                (props.buttonClick && props.buttonIcon)
-                    ? _jsx("div", Object.assign({ className: `vieolo-item-row__button-col` }, { children: _jsx(IconButton, { icon: props.buttonIcon, onClick: e => {
+            }, children: [props.leadingIcon &&
+                    _jsx("div", { className: "vieolo-item-row__leading-icon-div", children: props.leadingIcon }), props.searchRow
+                    ? _jsx("input", { value: props.searchRow.query, onChange: e => { var _a; return (_a = props.searchRow) === null || _a === void 0 ? void 0 : _a.onQueryChange(e.target.value); }, placeholder: props.title || "Search..." })
+                    : _jsxs("div", { className: "vieolo-item-row__title-col", children: [_jsx(Typography, { text: props.title || '', fontWeight: 'bold', color: props.selected ? color : undefined, colorType: props.selected ? 'text' : undefined }), props.subTitle &&
+                                _jsx(Typography, { type: 'caption-large', text: props.subTitle, showTitle: true, color: props.selected ? color : undefined, colorType: props.selected ? 'text' : undefined })] }), (props.buttonClick && props.buttonIcon)
+                    ? _jsx("div", { className: `vieolo-item-row__button-col`, children: _jsx(IconButton, { icon: props.buttonIcon, onClick: e => {
                                 e.stopPropagation();
                                 if (props.buttonClick)
                                     props.buttonClick();
-                            }, color: props.buttonColor || 'primary', size: props.buttonSize || 'small' }, void 0) }), void 0)
+                            }, color: props.buttonColor || 'primary', size: props.buttonSize || 'small' }) })
                     : (props.searchRow && props.searchRow.query.trim()) &&
-                        _jsx("div", Object.assign({ className: "vieolo-item-row__button-col" }, { children: _jsx(IconButton, { icon: _jsx(CloseIcon, {}, void 0), onClick: e => {
+                        _jsx("div", { className: "vieolo-item-row__button-col", children: _jsx(IconButton, { icon: _jsx(CloseIcon, {}), onClick: e => {
                                     e.stopPropagation();
                                     props.searchRow.onQueryChange('');
-                                }, color: 'error', size: 'small' }, void 0) }), void 0)] }), void 0) }), void 0);
+                                }, color: 'error', size: 'small' }) })] }) });
 }

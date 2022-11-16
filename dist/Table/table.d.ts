@@ -1,7 +1,7 @@
 import React from 'react';
 import { TypographyOptionTypes } from '../types';
-export declare type TableSortDirection = 'ascending' | 'descending';
-export declare type TableRow = {
+export type TableSortDirection = 'ascending' | 'descending';
+export type TableRow = {
     id: string;
     items: React.ReactNode[];
     /**

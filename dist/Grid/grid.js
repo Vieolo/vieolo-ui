@@ -12,7 +12,7 @@ export default function Grid(props) {
         c += ` grid-${d}--md--${props.md}`;
     if (props.sm !== undefined)
         c += ` grid-${d}--sm--${props.sm}`;
-    return _jsx("div", Object.assign({ className: c }, { children: props.flex
-            ? _jsx(Flex, Object.assign({ alignItems: props.flex.alignItems, className: props.flex.className, columnGap: props.flex.columnGap, direction: props.flex.direction, justifyContent: props.flex.justifyContent, rowGap: props.flex.rowGap }, { children: props.children }), void 0)
-            : props.children }), void 0);
+    return _jsx("div", { className: c, children: props.flex
+            ? _jsx(Flex, { alignItems: props.flex.alignItems, className: props.flex.className, columnGap: props.flex.columnGap, direction: props.flex.direction, justifyContent: props.flex.justifyContent, rowGap: props.flex.rowGap, children: props.children })
+            : props.children });
 }

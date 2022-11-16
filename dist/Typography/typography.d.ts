@@ -1,9 +1,9 @@
 import React from 'react';
 import { ColorOptionType, FontWeightType, TypographyOptionTypes } from '../types/types';
-export declare type TypographyTextAlign = "left" | "center" | "right" | "justify";
-export declare type TypographyFontFamily = "primary" | "secondary";
-export declare type TypographyMargin = "0" | "5" | "10" | "20" | "half" | "one" | "two";
-export declare type TypographyColorType = 'normal' | 'text' | 'light' | 'text-light';
+export type TypographyTextAlign = "left" | "center" | "right" | "justify";
+export type TypographyFontFamily = "primary" | "secondary";
+export type TypographyMargin = "0" | "5" | "10" | "20" | "half" | "one" | "two";
+export type TypographyColorType = 'normal' | 'text' | 'light' | 'text-light';
 export default function Typography(props: {
     /** default: paragraph-medium */
     type?: TypographyOptionTypes;

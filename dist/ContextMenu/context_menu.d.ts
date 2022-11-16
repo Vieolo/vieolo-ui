@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { ColorOptionType } from '../types/types';
-export declare type ContextMenuItem = {
+export type ContextMenuItem = {
     title: string;
     icon?: ReactNode;
     color?: ColorOptionType;

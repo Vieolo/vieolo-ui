@@ -25,16 +25,14 @@ export default function Chip(props) {
                 e.stopPropagation();
                 if (props.onButtonClick)
                     props.onButtonClick();
-            }, borderRadius: props.borderRadius !== 'default' ? props.borderRadius : 'full', color: color, size: 'extra-small', emphasis: "none", borderWidth: '0', ariaLabel: `${props.ariaLabel || (props.label + " chip")} button` }, void 0);
+            }, borderRadius: props.borderRadius !== 'default' ? props.borderRadius : 'full', color: color, size: 'extra-small', emphasis: "none", borderWidth: '0', ariaLabel: `${props.ariaLabel || (props.label + " chip")} button` });
     }
-    return _jsx("div", Object.assign({ className: c, style: { ...s, ...props.style }, id: props.id, "aria-label": props.ariaLabel || `${props.label} chip`, onClick: e => {
+    return _jsx("div", { className: c, style: { ...s, ...props.style }, id: props.id, "aria-label": props.ariaLabel || `${props.label} chip`, onClick: e => {
             if (props.onChipSelect) {
                 e.stopPropagation();
                 props.onChipSelect();
             }
-        } }, { children: _jsxs("div", Object.assign({ className: `vieolo-chip__content` }, { children: [props.icon &&
-                    props.icon,
-                _jsx("p", Object.assign({ className: props.icon ? "margin-left--5" : "" }, { children: props.label }), void 0),
-                ((props.onButtonClick && props.buttonIcon) || (props.buttonComponent)) &&
-                    _jsx("span", { children: button }, void 0)] }), void 0) }), void 0);
+        }, children: _jsxs("div", { className: `vieolo-chip__content`, children: [props.icon &&
+                    props.icon, _jsx("p", { className: props.icon ? "margin-left--5" : "", children: props.label }), ((props.onButtonClick && props.buttonIcon) || (props.buttonComponent)) &&
+                    _jsx("span", { children: button })] }) });
 }

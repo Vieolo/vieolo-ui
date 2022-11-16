@@ -164,5 +164,5 @@ export default function DonutChart(props) {
         });
         polyline.exit().remove();
     }, [props, props.data, propsRef, props.height, props.sorted]);
-    return _jsx("div", { className: `vieolo-donut-chart width--pc-100 height--pc-100 ${props.disabled ? "disabled" : ""}`, ref: ref }, void 0);
+    return _jsx("div", { className: `vieolo-donut-chart width--pc-100 height--pc-100 ${props.disabled ? "disabled" : ""}`, ref: ref });
 }

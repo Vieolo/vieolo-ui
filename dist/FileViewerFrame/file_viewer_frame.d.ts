@@ -1,5 +1,5 @@
 /// <reference types="react" />
-declare type FileViewerMode = "full screen" | "embedded";
+type FileViewerMode = "full screen" | "embedded";
 export default function FileViewerFrame(props: {
     onClose?: () => void;
     mode: FileViewerMode;

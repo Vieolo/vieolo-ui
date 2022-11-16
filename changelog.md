@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.23.16 (2022-11-16)
+- Added `cypressTools`, a set of commands and functions to ease the writing of Cypress tests for Vieolo UI
+
 ## 0.23.15 (2022-11-06)
 - Added `CalendarStatistic` component ([#13](https://github.com/Vieolo/vieolo-ui/issues/13))
 - Added root colors ([#214](https://github.com/Vieolo/vieolo-ui/issues/214))
