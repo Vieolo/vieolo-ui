@@ -1,7 +1,7 @@
 // Installed Packages
 import VDate from '@vieolo/date'
 
-export class Assertions {
+export default class Assertions {
     static assertInputInErrorMode(selector: string) {
         cy.get(selector).should('have.css', 'border-color').and('eq', 'rgb(245, 0, 87)');
     }

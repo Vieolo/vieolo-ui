@@ -1,7 +1,7 @@
 // Installed Packages
 import VDate from '@vieolo/date'
 
-export class VieoloUIInteraction {
+export default class VieoloUIInteraction {
     static GANTT_ROW_CLASS = '.vieolo-gantt-chart__content-div__row';
 
     static selectDateFromDateTimePicker(label: string, targetDate: VDate | string) {

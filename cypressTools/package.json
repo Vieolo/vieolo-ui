@@ -4,7 +4,7 @@
   "description": "Cypress custom commands and functions to test applications made with Vieolo UI",
   "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc"
   },
   "author": "Vieolo OÜ",
   "license": "UNLICENSED",

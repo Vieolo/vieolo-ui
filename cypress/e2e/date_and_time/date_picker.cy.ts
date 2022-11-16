@@ -1,4 +1,7 @@
-import { LocalServer, VieoloUIInteraction } from "../../support/utils";
+import { LocalServer } from "../../support/utils";
+import { VieoloUIInteraction } from 'cypresstools'
+
+
 describe("Date and Time", () => {
 
   it("Date Picker", () => {
