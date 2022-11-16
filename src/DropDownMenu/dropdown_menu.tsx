@@ -259,7 +259,7 @@ function DropDownMenuItem(props: {
             e.stopPropagation();
             props.onClick(props.value, true)
         }}
-        aria-label={`${props.title} select item`}
+        aria-label={`${props.value} select item`}
     >
         {
             props.icon &&
