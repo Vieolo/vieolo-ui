@@ -41,6 +41,11 @@ declare namespace Cypress {
          * @param borderColor Backgound color in RGB
          */
         hasBorderColor(borderColor: string): void,
+        hasInputValue(value: string): Chainable<Element>,
+        assertInputInErrorMode(expectedColor?: string): Chainable<Element>,
+        assertTextColor(expectedColor: string): Chainable<Element>,
+        assertTextWithErrorColor(expectedColor?: string): Chainable<Element>,
+        assertTextWithSuccessColor(expectedColor?: string): Chainable<Element>,
     }
 }
 
@@ -92,4 +97,32 @@ Cypress.Commands.add('hasBorderColor', { prevSubject: true }, (subject, borderCo
     if (subject) {
         cy.wrap(subject).should('have.css', 'border-color').and('eq', borderColor);
     }
+});
+
+Cypress.Commands.add('hasInputValue', { prevSubject: true }, (subject, value: string) => {
+    cy.get(subject.selector).should('have.value', value);
+});
+
+Cypress.Commands.add('assertInputInErrorMode', { prevSubject: true }, (subject, expectedColor?: string) => {
+    import("./constants").then((c) => {
+        cy.get(subject.selector).should('have.css', 'border-color').and('eq', expectedColor || c.E2EColors.ERROR_COLOR_NORMAL);
+    })
+});
+
+Cypress.Commands.add('assertTextColor', { prevSubject: true }, (subject, expectedColor: string) => {
+    cy.get(subject.selector).should('have.css', 'color').and('eq', expectedColor);import("./constants").then((c) => {
+        
+    })
+});
+
+Cypress.Commands.add('assertTextWithErrorColor', { prevSubject: true }, (subject, expectedColor?: string) => {
+    import("./constants").then((c) => {
+        cy.get(subject.selector).should('have.css', 'color').and('eq', expectedColor || c.E2EColors.ERROR_COLOR_NORMAL);
+    })
+});
+
+Cypress.Commands.add('assertTextWithSuccessColor', { prevSubject: true }, (subject, expectedColor?: string) => {
+    import("./constants").then((c) => {
+        cy.get(subject.selector).should('have.css', 'color').and('eq', expectedColor || c.E2EColors.SUCCESS_COLOR_NORMAL);
+    })
 });

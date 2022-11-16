@@ -34,5 +34,10 @@ declare namespace Cypress {
          * @param borderColor Backgound color in RGB
          */
         hasBorderColor(borderColor: string): void;
+        hasInputValue(value: string): Chainable<Element>;
+        assertInputInErrorMode(expectedColor?: string): Chainable<Element>;
+        assertTextColor(expectedColor: string): Chainable<Element>;
+        assertTextWithErrorColor(expectedColor?: string): Chainable<Element>;
+        assertTextWithSuccessColor(expectedColor?: string): Chainable<Element>;
     }
 }
