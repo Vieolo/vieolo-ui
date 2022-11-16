@@ -1,6 +1,4 @@
-import { E2EColors } from "cypresstools";
-
-export default class TestColors extends E2EColors {
+export class E2EColors {
 
     static BACKGROUND_COLOR = 'rgb(255, 255, 251)';
     static BACKGROUND_CONTENT_COLOR = 'rgb(255, 255, 251)';
