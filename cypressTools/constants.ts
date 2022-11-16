@@ -4,6 +4,7 @@ export class E2EColors {
     static BACKGROUND_CONTENT_COLOR = 'rgb(255, 255, 251)';
     static HOVER_COLOR = 'rgb(220, 247, 231)';
     static BORDER_COLOR = 'rgb(242, 242, 242)';
+    static NEUTRAL_COLOR = 'rgb(242, 242, 242)';
 
     static NORMAL_TEXT_COLOR = 'rgb(46, 46, 46)';
     static GRAY_TEXT_COLOR = 'rgb(128, 128, 128)';
