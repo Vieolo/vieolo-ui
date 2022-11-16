@@ -3,6 +3,7 @@ export declare class E2EColors {
     static BACKGROUND_CONTENT_COLOR: string;
     static HOVER_COLOR: string;
     static BORDER_COLOR: string;
+    static NEUTRAL_COLOR: string;
     static NORMAL_TEXT_COLOR: string;
     static GRAY_TEXT_COLOR: string;
     static DISABLE_COLOR_NORMAL: string;

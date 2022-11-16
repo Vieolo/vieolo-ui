@@ -6,11 +6,11 @@ import VDate from '@vieolo/date'
 
 export default class Assertions {
     static assertInputInErrorMode(selector: string, expectedColor?: string) {
-        cy.get(selector).should('have.css', 'border-color').and('eq', E2EColors.ERROR_COLOR_NORMAL);
+        cy.get(selector).should('have.css', 'border-color').and('eq', expectedColor || E2EColors.ERROR_COLOR_NORMAL);
     }
 
-    static assertInputInNormalMode(selector: string) {
-        cy.get(selector).should('have.css', 'border-color').and('eq', E2EColors.NEUTRAL_COLOR);
+    static assertInputInNormalMode(selector: string, expectedColor?: string) {
+        cy.get(selector).should('have.css', 'border-color').and('eq', expectedColor ||E2EColors.NEUTRAL_COLOR);
     }    
 
     static assertURLPath(path: string) {
