@@ -4,10 +4,14 @@ import VDate from '@vieolo/date'
 export default class VieoloUIInteraction {
     static GANTT_ROW_CLASS = '.vieolo-gantt-chart__content-div__row';
 
-    static selectDateFromDateTimePicker(label: string, targetDate: VDate | string) {
+    static selectDateFromDateTimePicker(label: string, targetDate: VDate | string, time?: string) {
         cy.get(`[aria-label='${label} Date button']`).focus().type('{enter}');
     
         cy.get(`[aria-label='${label} Date Search Date']`).focus().type(`${(typeof targetDate === 'string' ? new VDate(targetDate) : targetDate).formatDate('dd/mm/yyyy')}{enter}`);
+
+        if (time) {
+            cy.getByAriaLabel(`${label} Time`).clear().type(time)
+        }
     }
 
     static selectDateFromDatePicker(label: string, targetDate: VDate | string) {
