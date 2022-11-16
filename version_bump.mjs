@@ -1,6 +1,7 @@
 import { execSync } from 'child_process';
 import * as fs from 'fs';
 import { rewriteExports } from './export_rewrite.mjs';
+import path from 'path'
 
 if (process.argv.length === 2) throw new Error('Please select add the bump level. The accepted options are "build", "minor", and "major"');
 
@@ -35,6 +36,10 @@ packageJSON.version = fv;
 // Writing the package.json
 fs.writeFileSync('./package.json', JSON.stringify(packageJSON, null, 2));
 
+// Updating the Version number of the `cypressTools`
+let ctJSON = JSON.parse(fs.readFileSync('./cypressTools/package.json').toString());
+ctJSON.version = fv;
+fs.writeFileSync('./cypressTools/package.json', JSON.stringify(ctJSON, null, 2));
 
 // Updating the ReadMe file
 let readMe = fs.readFileSync('./README.md').toString();
@@ -88,14 +93,22 @@ fs.writeFileSync('./tsconfig.json', JSON.stringify(tsConfig, null, 2));
 console.log("Rewriting the export files")
 rewriteExports();
 
-// Removing the existing dist folder
+// Removing the existing dist folder (both the main and the one for cypressTools)
 fs.rmSync("./dist", { recursive: true, force: true });
+fs.rmSync("./cypressTools/dist", { recursive: true, force: true });
 
+// Building the components
 execSync('npm run build-components');
-
-
 tsConfig.compilerOptions.noEmit = true;
 fs.writeFileSync('./tsconfig.json', JSON.stringify(tsConfig, null, 2));
+
+// Building the cypressTools and copy it in the dist folder
+process.chdir("./cypressTools")
+execSync('npm run build');
+process.chdir("..")
+copyFolderRecursiveSync('./cypressTools/dist', './dist')
+fs.renameSync('./dist/dist', './dist/cypressTools')
+
 
 console.log('\x1b[32m', 'The package is successfully built' ,'\x1b[0m');
 
@@ -112,3 +125,40 @@ function today() {
     return `${y}-${m < 10 ? "0" + m : m}-${d < 10 ? "0" + d : d}`;
 }
 
+
+function copyFileSync( source, target ) {
+
+    var targetFile = target;
+
+    // If target is a directory, a new file with the same name will be created
+    if ( fs.existsSync( target ) ) {
+        if ( fs.lstatSync( target ).isDirectory() ) {
+            targetFile = path.join( target, path.basename( source ) );
+        }
+    }
+
+    fs.writeFileSync(targetFile, fs.readFileSync(source));
+}
+
+function copyFolderRecursiveSync( source, target ) {
+    var files = [];
+
+    // Check if folder needs to be created or integrated
+    var targetFolder = path.join( target, path.basename( source ) );
+    if ( !fs.existsSync( targetFolder ) ) {
+        fs.mkdirSync( targetFolder );
+    }
+
+    // Copy
+    if ( fs.lstatSync( source ).isDirectory() ) {
+        files = fs.readdirSync( source );
+        files.forEach( function ( file ) {
+            var curSource = path.join( source, file );
+            if ( fs.lstatSync( curSource ).isDirectory() ) {
+                copyFolderRecursiveSync( curSource, targetFolder );
+            } else {
+                copyFileSync( curSource, targetFolder );
+            }
+        } );
+    }
+}
