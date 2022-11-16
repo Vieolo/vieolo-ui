@@ -491,6 +491,10 @@
 			#{$property}: $hover-color unquote($optionalSuffix);
 		}
 
+		&--neutral {
+			#{$property}: $neutral-color unquote($optionalSuffix);
+		}
+
 		&--background {
 			#{$property}: $background-color unquote($optionalSuffix);
 		}
@@ -538,6 +542,12 @@
 		&--hover { // deprecated (use emphasis instead)
 			#{$state} {
 				#{$property}: $hover-color unquote($optionalSuffix);
+			}
+		}
+
+		&--neutral { // deprecated (use emphasis instead)
+			#{$state} {
+				#{$property}: $neutral-color unquote($optionalSuffix);
 			}
 		}
 
