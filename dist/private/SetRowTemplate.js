@@ -16,7 +16,7 @@ export default function SetRowTemplate(props) {
         c += ` ${props.className}`;
     if (props.disabled)
         c += " disabled";
-    return _jsxs("div", Object.assign({ className: c, tabIndex: props.handleKeyboardNav ? 0 : undefined, onKeyDown: e => {
+    return _jsxs("div", { className: c, tabIndex: props.handleKeyboardNav ? 0 : undefined, onKeyDown: e => {
             e.stopPropagation();
             if (!props.handleKeyboardNav || !props.onRowClick)
                 return;
@@ -26,16 +26,14 @@ export default function SetRowTemplate(props) {
                         props.onRowClick();
                 }
             });
-        } }, { children: [_jsxs("div", Object.assign({ className: "vieolo-set-row-template__title-container", onClick: e => {
+        }, children: [_jsxs("div", { className: "vieolo-set-row-template__title-container", onClick: e => {
                     e.stopPropagation();
                     if (props.onRowClick)
                         props.onRowClick();
-                } }, { children: [typeof props.title === 'string'
-                        ? _jsx(Typography, { type: 'paragraph-large', text: props.title }, void 0)
-                        : _jsx(_Fragment, { children: props.title }, void 0),
-                    props.subtitle &&
+                }, children: [typeof props.title === 'string'
+                        ? _jsx(Typography, { type: 'paragraph-large', text: props.title })
+                        : _jsx(_Fragment, { children: props.title }), props.subtitle &&
                         _jsx(_Fragment, { children: typeof props.subtitle === 'string'
-                                ? _jsx(Typography, { type: 'caption-large', text: props.subtitle }, void 0)
-                                : _jsx(_Fragment, { children: props.subtitle }, void 0) }, void 0)] }), void 0),
-            _jsx("div", Object.assign({ className: 'vieolo-set-row-template__right-container' }, { children: props.rightSideComponent }), void 0)] }), void 0);
+                                ? _jsx(Typography, { type: 'caption-large', text: props.subtitle })
+                                : _jsx(_Fragment, { children: props.subtitle }) })] }), _jsx("div", { className: 'vieolo-set-row-template__right-container', children: props.rightSideComponent })] });
 }

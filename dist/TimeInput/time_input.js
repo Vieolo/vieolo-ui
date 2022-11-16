@@ -17,7 +17,7 @@ export default function TimeInput(props) {
                 return;
             let [h, m] = parseInputTimeToCustomDate(v);
             props.onChange(h, m, v);
-        }, value: props.value, placeholder: "00:00", size: "small" }, void 0);
+        }, value: props.value, placeholder: "00:00", size: "small" });
 }
 export function parseInputTimeToCustomDate(input) {
     if (input.length !== 5)

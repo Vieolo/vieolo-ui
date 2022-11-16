@@ -266,14 +266,11 @@ export default function BarChart(props) {
             });
         }
     }, [props, props.data, propsRef, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount, props.groupType, props.removeSpaceBetweenBars]);
-    return _jsxs("div", Object.assign({ className: 'vieolo-bar-chart width--pc-100 height--pc-100' }, { children: [(props.title || (props.data.length > 0 && typeof props.data[0].dataAxis !== 'number')) &&
-                _jsxs(GridContainer, { children: [_jsx(Grid, Object.assign({ xl: 6 }, { children: _jsx(Typography, { text: props.title || '', type: 'title-medium' }, void 0) }), void 0),
-                        _jsx(Grid, Object.assign({ xl: 6 }, { children: (props.data.length > 0 && typeof props.data[0].dataAxis !== 'number') &&
-                                _jsx(Flex, Object.assign({ columnGap: 'one', wrap: 'wrap', justifyContent: 'end' }, { children: Object.keys(props.data[0].dataAxis).map((c, i) => {
-                                        return _jsxs(Flex, Object.assign({ alignItems: 'center', columnGap: 'half' }, { children: [_jsx("div", { style: { backgroundColor: d3.schemeTableau10[i], height: 15, width: 15, borderRadius: '50%' } }, void 0),
-                                                _jsx(Typography, { text: c, type: 'paragraph-small' }, void 0)] }), c + i);
-                                    }) }), void 0) }), void 0)] }, void 0),
-            _jsx("div", { ref: ref, className: "width--pc-100 height--pc-100" }, void 0)] }), void 0);
+    return _jsxs("div", { className: 'vieolo-bar-chart width--pc-100 height--pc-100', children: [(props.title || (props.data.length > 0 && typeof props.data[0].dataAxis !== 'number')) &&
+                _jsxs(GridContainer, { children: [_jsx(Grid, { xl: 6, children: _jsx(Typography, { text: props.title || '', type: 'title-medium' }) }), _jsx(Grid, { xl: 6, children: (props.data.length > 0 && typeof props.data[0].dataAxis !== 'number') &&
+                                _jsx(Flex, { columnGap: 'one', wrap: 'wrap', justifyContent: 'end', children: Object.keys(props.data[0].dataAxis).map((c, i) => {
+                                        return _jsxs(Flex, { alignItems: 'center', columnGap: 'half', children: [_jsx("div", { style: { backgroundColor: d3.schemeTableau10[i], height: 15, width: 15, borderRadius: '50%' } }), _jsx(Typography, { text: c, type: 'paragraph-small' })] }, c + i);
+                                    }) }) })] }), _jsx("div", { ref: ref, className: "width--pc-100 height--pc-100" })] });
 }
 function getFillClass(d) {
     return `fill-color--${d.fillColor || 'primary'}-normal`;

@@ -12,5 +12,5 @@ export default function Typography(props) {
     finalClassName += `typography-${finalType} `;
     if (props.nonselectable)
         finalClassName += "nonselectable ";
-    return _jsx("p", Object.assign({ className: finalClassName.trim(), title: props.showTitle ? (props.hoverTitle || props.text) : "", "aria-label": props.ariaLabel, "data-testid": props.dataTestID, style: props.style }, { children: props.text }), void 0);
+    return _jsx("p", { className: finalClassName.trim(), title: props.showTitle ? (props.hoverTitle || props.text) : "", "aria-label": props.ariaLabel, "data-testid": props.dataTestID, style: props.style, children: props.text });
 }

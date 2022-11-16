@@ -15,5 +15,5 @@ export default function GridContainer(props) {
     }
     className += ` row-gap--${props.rowGap || 'none'}`;
     className += ` column-gap--${props.columnGap || 'none'}`;
-    return _jsx("div", Object.assign({ className: className, style: style }, { children: props.children }), void 0);
+    return _jsx("div", { className: className, style: style, children: props.children });
 }

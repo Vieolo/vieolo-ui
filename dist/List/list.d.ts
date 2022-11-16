@@ -1,7 +1,7 @@
 import React from 'react';
 import { ColorOptionType, RowStyleType } from '../types/types';
 import { GridGapType } from '../types';
-export declare type ListItem = {
+export type ListItem = {
     id: string;
     title: string;
     subTitle?: string;

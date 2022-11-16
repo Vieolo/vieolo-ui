@@ -1,7 +1,9 @@
-export default class TestColors {
+import { E2EColors } from "cypresstools";
+
+export default class TestColors extends E2EColors {
 
     static BACKGROUND_COLOR = 'rgb(255, 255, 251)';
-    static CONTENT_BACKGROUND_COLOR = 'rgb(255, 255, 251)';
+    static BACKGROUND_CONTENT_COLOR = 'rgb(255, 255, 251)';
     static HOVER_COLOR = 'rgb(220, 247, 231)';
     static BORDER_COLOR = 'rgb(242, 242, 242)';
 
@@ -9,13 +11,13 @@ export default class TestColors {
     static GRAY_TEXT_COLOR = 'rgb(128, 128, 128)';
     static DISABLE_COLOR_NORMAL = 'rgb(176, 190, 197)';
 
-    static PRIMARY_COLOR_NORMAL = 'rgb(45, 77, 165)';
+    static PRIMARY_COLOR_NORMAL = 'rgb(20, 96, 186)';
     static PRIMARY_COLOR_TRANSPARENT = 'rgba(45, 77, 165, 0.2)';
     static PRIMARY_COLOR_LIGHT = 'rgb(184, 230, 255)';
     static PRIMARY_COLOR_TEXT = 'rgb(236, 236, 236)';
     static PRIMARY_COLOR_TEXT_LIGHT = 'rgb(45, 77, 165)';
 
-    static SECONDARY_COLOR_NORMAL = 'rgb(3, 71, 39)';
+    static SECONDARY_COLOR_NORMAL = 'rgb(103, 80, 164)';
     static SECONDARY_COLOR_TRANSPARENT = 'rgba(3, 71, 39, 0.2)';
     static SECONDARY_COLOR_LIGHT = 'rgb(113, 236, 179)';
     static SECONDARY_COLOR_TEXT = 'rgb(255, 255, 255)';
@@ -23,7 +25,7 @@ export default class TestColors {
 
     static TERTIARY_COLOR_NORMAL = 'rgb(220, 247, 231)';
     static TERTIARY_COLOR_TRANSPARENT = 'rgba(201, 223, 210, 0.3)';
-    static TERTIARY_COLOR_LIGHT = 'rgb(220, 247, 231)';
+    static TERTIARY_COLOR_LIGHT = 'rgb(235, 251, 190)';
     static TERTIARY_COLOR_TEXT = 'rgb(255, 255, 255)';
     static TERTIARY_COLOR_TEXT_LIGHT = 'rgb(220, 247, 231)';
 

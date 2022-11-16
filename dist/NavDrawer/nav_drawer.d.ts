@@ -1,5 +1,5 @@
 /// <reference types="react" />
-export declare type DrawerItem = {
+export type DrawerItem = {
     title: string;
     icon?: React.ReactNode;
     selected?: boolean;

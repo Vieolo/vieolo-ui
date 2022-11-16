@@ -34,9 +34,8 @@ export default function ContextMenu(props) {
             setTop(`${clickY - rootH}px`);
         }
     }, [container, props.position]);
-    return _jsx("div", Object.assign({ ref: container, className: "vieolo-context-menu", style: { top: top, left: left } }, { children: props.items.map(i => {
-            return _jsxs("div", Object.assign({ "aria-label": `Context Menu ${i.ariaLabel || i.title}`, className: `vieolo-context-menu__menu-row vieolo-context-menu__menu-row-${i.color || 'primary'} ${i.disabled ? ' disabled' : ''}`, onClick: () => { i.onClick(i.title); props.onClose(); } }, { children: [i.icon &&
-                        _jsx(Fragment, { children: i.icon }, void 0),
-                    _jsx("p", { children: i.title }, void 0)] }), i.title);
-        }) }), void 0);
+    return _jsx("div", { ref: container, className: "vieolo-context-menu", style: { top: top, left: left }, children: props.items.map(i => {
+            return _jsxs("div", { "aria-label": `Context Menu ${i.ariaLabel || i.title}`, className: `vieolo-context-menu__menu-row vieolo-context-menu__menu-row-${i.color || 'primary'} ${i.disabled ? ' disabled' : ''}`, onClick: () => { i.onClick(i.title); props.onClose(); }, children: [i.icon &&
+                        _jsx(Fragment, { children: i.icon }), _jsx("p", { children: i.title })] }, i.title);
+        }) });
 }

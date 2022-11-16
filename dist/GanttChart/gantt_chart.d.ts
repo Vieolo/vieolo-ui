@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
 import { ColorOptionType } from '../types/types';
-export declare type GanttChartContextMenuItem = {
+export type GanttChartContextMenuItem = {
     title: string;
     icon?: ReactNode;
     onClick: (r: GanttChartRowType, d?: GanttChartItemType) => void;
     color?: ColorOptionType;
     disabled?: boolean;
 };
-export declare type GanttChartItemType = {
+export type GanttChartItemType = {
     id?: number;
     from: number;
     to: number;
@@ -41,14 +41,14 @@ export declare type GanttChartItemType = {
      */
     ignoredInFilter?: boolean;
 };
-export declare type GanttChartAuxiliaryItemType = {
+export type GanttChartAuxiliaryItemType = {
     id: string;
     from: number;
     to: number;
     ariaLabel?: string;
     title?: string;
 };
-export declare type GanttChartRowType = {
+export type GanttChartRowType = {
     /** The value to identify the row on click */
     value: string;
     /** The title of row which is displayed on the left-most column of the chart */
@@ -62,12 +62,12 @@ export declare type GanttChartRowType = {
     supItems?: GanttChartAuxiliaryItemType[];
     colorIndicator?: string;
 };
-export declare type GanttChartColumnTitle = {
+export type GanttChartColumnTitle = {
     title: string;
     subtitle?: string;
     onClick?: () => void;
 };
-export declare type GanttChartColumnGroup = {
+export type GanttChartColumnGroup = {
     start: number;
     end: number;
     title: string;

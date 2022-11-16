@@ -1,0 +1,18 @@
+{
+  "name": "cypresstools",
+  "version": "0.23.16",
+  "description": "Cypress custom commands and functions to test applications made with Vieolo UI",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "Vieolo OÜ",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "@vieolo/date": "github:Vieolo/date-js#1.0.0",
+    "cypress": "^11.1.0"
+  }
+}

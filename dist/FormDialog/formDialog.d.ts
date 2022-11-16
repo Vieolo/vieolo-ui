@@ -1,12 +1,12 @@
 /// <reference types="react" />
 import { ColorOptionType, EmphasisType, BorderRadiusType } from "../types/types";
-export declare type FormDialogAccessoryButton = {
+export type FormDialogAccessoryButton = {
     text: string;
     color: ColorOptionType;
     onClick: () => void;
     ariaLabel?: string;
 };
-export declare type FormDialogMainButton = {
+export type FormDialogMainButton = {
     text?: string;
     color?: ColorOptionType;
     emphasis?: EmphasisType;

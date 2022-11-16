@@ -15,12 +15,10 @@ export default function VideoViewer(props) {
             else {
                 downloadBlob(props.file, props.file.name);
             }
-        }, onModeChange: m => setMode(m), onShare: () => { }, onClose: props.onClose }, void 0);
-    let video = _jsx("div", Object.assign({ className: "vieolo-video-viewer__video-container" }, { children: _jsx("video", { src: typeof props.file === 'string' ? props.file : window.URL.createObjectURL(props.file), controls: true }, void 0) }), void 0);
+        }, onModeChange: m => setMode(m), onShare: () => { }, onClose: props.onClose });
+    let video = _jsx("div", { className: "vieolo-video-viewer__video-container", children: _jsx("video", { src: typeof props.file === 'string' ? props.file : window.URL.createObjectURL(props.file), controls: true }) });
     if (mode === 'full screen')
-        return _jsx(Modal, Object.assign({ onClose: () => { if (props.onClose)
-                props.onClose(); } }, { children: _jsxs("div", Object.assign({ className: `vieolo-video-viewer vieolo-video-viewer--${mode.replace(" ", "-")}` }, { children: [frame,
-                    video] }), void 0) }), void 0);
-    return _jsxs("div", Object.assign({ className: `vieolo-video-viewer vieolo-video-viewer--${mode.replace(" ", "-")}` }, { children: [frame,
-            video] }), void 0);
+        return _jsx(Modal, { onClose: () => { if (props.onClose)
+                props.onClose(); }, children: _jsxs("div", { className: `vieolo-video-viewer vieolo-video-viewer--${mode.replace(" ", "-")}`, children: [frame, video] }) });
+    return _jsxs("div", { className: `vieolo-video-viewer vieolo-video-viewer--${mode.replace(" ", "-")}`, children: [frame, video] });
 }

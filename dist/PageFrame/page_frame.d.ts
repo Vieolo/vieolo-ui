@@ -1,12 +1,12 @@
 /// <reference types="react" />
 import { DrawerItem } from '../NavDrawer';
 import { ElevationType } from "../types";
-export declare type PageFrameDrawerOptions = {
+export type PageFrameDrawerOptions = {
     mainItems: DrawerItem[];
     bottomItems?: DrawerItem[];
     topContent?: React.ReactNode;
 };
-export declare type PageFrameNavbarOptions = {
+export type PageFrameNavbarOptions = {
     elevation?: ElevationType;
     logo?: React.ReactNode;
     title?: string;

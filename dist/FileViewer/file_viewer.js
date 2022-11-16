@@ -35,18 +35,18 @@ export default function FileViewer(props) {
         }
     }, [props.file, file, props.fileName]);
     if (file === undefined)
-        return _jsx(Spinner, {}, void 0);
+        return _jsx(Spinner, {});
     else if (file === null)
-        return _jsx("div", { children: _jsx(Typography, { text: 'The file does not exist' }, void 0) }, void 0);
+        return _jsx("div", { children: _jsx(Typography, { text: 'The file does not exist' }) });
     let fileType = file.type;
     if (fileType === 'application/pdf')
-        return _jsx(PDFViewer, Object.assign({}, props, { filePath: file, heightDeduction: props.heightDeduction === undefined ? 100 : props.heightDeduction }), void 0);
+        return _jsx(PDFViewer, { ...props, filePath: file, heightDeduction: props.heightDeduction === undefined ? 100 : props.heightDeduction });
     else if (["image/jpg", "image/jpeg", "image/png"].includes(fileType))
-        return _jsx(ImageViewer, { file: file, fileName: props.fileName, context: props.context, onClose: props.onClose }, void 0);
+        return _jsx(ImageViewer, { file: file, fileName: props.fileName, context: props.context, onClose: props.onClose });
     else if (["audio/mpeg"].includes(fileType))
-        return _jsx("div", {}, void 0);
+        return _jsx("div", {});
     else if (["video/mp4", "video/webm"].includes(fileType))
-        return _jsx(VideoViewer, { file: file, context: props.context, onClose: props.onClose }, void 0);
+        return _jsx(VideoViewer, { file: file, context: props.context, onClose: props.onClose });
     else
-        return _jsx("div", { children: _jsx(Typography, { text: 'The given file is not supported!' }, void 0) }, void 0);
+        return _jsx("div", { children: _jsx(Typography, { text: 'The given file is not supported!' }) });
 }

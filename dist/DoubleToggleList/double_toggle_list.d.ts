@@ -1,5 +1,5 @@
 /// <reference types="react" />
-export declare type DoubleToggleListItem = {
+export type DoubleToggleListItem = {
     title: string;
     id: string;
     on: boolean;

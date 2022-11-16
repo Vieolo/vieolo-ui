@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { ColorOptionType, EmphasisType, BorderRadiusType } from "../types/types";
-export declare type ConfirmationDialogMainButton = {
+export type ConfirmationDialogMainButton = {
     text?: string;
     color?: ColorOptionType;
     emphasis?: EmphasisType;

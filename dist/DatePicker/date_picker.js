@@ -30,10 +30,7 @@ export default function DatePicker(props) {
         else
             return new VDate().setToDateStart();
     }
-    let datePickerButton = props.buttonComponent || _jsxs("div", Object.assign({ className: "vieolo-date-picker__button-container__default-button" }, { children: [_jsxs("div", Object.assign({ className: "vieolo-date-picker__button-container__default-button__text-container" }, { children: [_jsx("div", { children: _jsx(Typography, { type: 'caption-large', text: props.title || "" }, void 0) }, void 0),
-                    _jsx("div", { children: _jsx(Typography, { text: props.selectedDate ? props.selectedDate.formatDate('dd/mm/yyyy') : "" }, void 0) }, void 0),
-                    _jsx("div", { children: _jsx(Typography, { type: 'caption-large', text: (props.showSelectedWeek && props.selectedDate) ? `Week ${props.selectedDate.getWeek().weekNumber}` : "" }, void 0) }, void 0)] }), void 0),
-            _jsx(CalendarIcon, {}, void 0)] }), void 0);
+    let datePickerButton = props.buttonComponent || _jsxs("div", { className: "vieolo-date-picker__button-container__default-button", children: [_jsxs("div", { className: "vieolo-date-picker__button-container__default-button__text-container", children: [_jsx("div", { children: _jsx(Typography, { type: 'caption-large', text: props.title || "" }) }), _jsx("div", { children: _jsx(Typography, { text: props.selectedDate ? props.selectedDate.formatDate('dd/mm/yyyy') : "" }) }), _jsx("div", { children: _jsx(Typography, { type: 'caption-large', text: (props.showSelectedWeek && props.selectedDate) ? `Week ${props.selectedDate.getWeek().weekNumber}` : "" }) })] }), _jsx(CalendarIcon, {})] });
     const calendarStatefulCompoment = _jsx(CalendarStateful, { showSearchInput: openedByKeyboard, onKeyboardExit: () => setOpen(false), onDateSelect: s => {
             props.onDateSelect(s);
             setOpen(false);
@@ -44,8 +41,8 @@ export default function DatePicker(props) {
                 setOpen(false);
                 setOpenedByKeyboard(false);
             }
-        }, includeWeek: props.includeWeek, selectedDate: props.selectedDate ? [props.selectedDate.formatDate("yyyy-mm-dd")] : undefined, selectedWeek: props.selectedWeek, startDate: getStartDate(), ariaLabel: `${props.ariaLabel || props.title || "date picker"}`, dateCellAriaLabelSuffix: `${props.ariaLabel || props.title || "date picker"} date cell` }, void 0);
-    return _jsxs("div", Object.assign({ className: `vieolo-date-picker ${props.disabled ? 'disabled' : ''}`, ref: container }, { children: [_jsx("div", Object.assign({ className: 'vieolo-date-picker__button-container', onClick: () => setOpen(!open), tabIndex: 0, role: "button", "aria-label": `${props.ariaLabel || props.title || "date picker"} button`, onKeyDown: e => {
+        }, includeWeek: props.includeWeek, selectedDate: props.selectedDate ? [props.selectedDate.formatDate("yyyy-mm-dd")] : undefined, selectedWeek: props.selectedWeek, startDate: getStartDate(), ariaLabel: `${props.ariaLabel || props.title || "date picker"}`, dateCellAriaLabelSuffix: `${props.ariaLabel || props.title || "date picker"} date cell` });
+    return _jsxs("div", { className: `vieolo-date-picker ${props.disabled ? 'disabled' : ''}`, ref: container, children: [_jsx("div", { className: 'vieolo-date-picker__button-container', onClick: () => setOpen(!open), tabIndex: 0, role: "button", "aria-label": `${props.ariaLabel || props.title || "date picker"} button`, onKeyDown: e => {
                     if (props.disabled)
                         return;
                     handleOnKeyDown(e, {
@@ -68,9 +65,7 @@ export default function DatePicker(props) {
                             }
                         }
                     });
-                } }, { children: datePickerButton }), void 0),
-            open && (Device.isTouchOnlyDevice ?
-                _jsx(Modal, Object.assign({ onClose: () => setOpen(false) }, { children: _jsxs(Card, { children: [_jsx(Typography, { type: 'title-small', text: props.title || '', className: 'vieolo-date-picker__modal-title' }, void 0),
-                            calendarStatefulCompoment] }, void 0) }), void 0)
-                : calendarStatefulCompoment)] }), void 0);
+                }, children: datePickerButton }), open && (Device.isTouchOnlyDevice ?
+                _jsx(Modal, { onClose: () => setOpen(false), children: _jsxs(Card, { children: [_jsx(Typography, { type: 'title-small', text: props.title || '', className: 'vieolo-date-picker__modal-title' }), calendarStatefulCompoment] }) })
+                : calendarStatefulCompoment)] });
 }

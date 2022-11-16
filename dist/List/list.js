@@ -61,19 +61,15 @@ export default function List(props) {
         g.items = changeItemRowBorderRadius(g.data);
     }
     ungrouped = changeItemRowBorderRadius(ungroupedData);
-    return _jsxs("div", Object.assign({ className: `vieolo-list padding-horizontal--${props.horizontalPadding || 'none'}`, style: { height: props.height }, "aria-label": props.ariaLabel || props.title }, { children: [(props.title || props.headerActions) &&
-                _jsxs(_Fragment, { children: [_jsxs(Flex, Object.assign({ justifyContent: 'space-between', alignItems: 'center' }, { children: [props.title
-                                    ? _jsx("div", Object.assign({ className: "center-by-flex-row" }, { children: _jsx(Typography, { type: 'title-medium', text: props.title, className: "margin-vertical--10" }, void 0) }), void 0)
-                                    : _jsx("span", {}, void 0),
-                                props.headerActions &&
-                                    _jsx(Flex, Object.assign({ alignItems: 'center', columnGap: 'half' }, { children: props.headerActions }), void 0)] }), void 0),
-                        _jsx(Divider, { direction: 'horizontal', length: 'pc-100', thickness: '1', colorType: 'normal', spaceAround: 'half' }, void 0)] }, void 0),
-            props.enableSearch &&
+    return _jsxs("div", { className: `vieolo-list padding-horizontal--${props.horizontalPadding || 'none'}`, style: { height: props.height }, "aria-label": props.ariaLabel || props.title, children: [(props.title || props.headerActions) &&
+                _jsxs(_Fragment, { children: [_jsxs(Flex, { justifyContent: 'space-between', alignItems: 'center', children: [props.title
+                                    ? _jsx("div", { className: "center-by-flex-row", children: _jsx(Typography, { type: 'title-medium', text: props.title, className: "margin-vertical--10" }) })
+                                    : _jsx("span", {}), props.headerActions &&
+                                    _jsx(Flex, { alignItems: 'center', columnGap: 'half', children: props.headerActions })] }), _jsx(Divider, { direction: 'horizontal', length: 'pc-100', thickness: '1', colorType: 'normal', spaceAround: 'half' })] }), props.enableSearch &&
                 _jsx(ItemRow, { itemStyle: props.itemStyle, searchRow: {
                         query: query,
                         onQueryChange: (c) => setQuery(c)
-                    } }, void 0),
-            _jsxs(Flex, Object.assign({ direction: 'column', rowGap: props.rowGap || 'half' }, { children: [Object.values(grouped).map((g, i) => {
+                    } }), _jsxs(Flex, { direction: 'column', rowGap: props.rowGap || 'half', children: [Object.values(grouped).map((g, i) => {
                         let cs = { ...(props.collapsedGroupStyle || {}) };
                         let es = { ...(props.expandedGroupStyle || props.collapsedGroupStyle || {}) };
                         if (props.controlItemBorderRadius) {
@@ -84,14 +80,13 @@ export default function List(props) {
                             cs.borderRadius = getManagedBorderRadius(i, Object.keys(grouped).length, typeof cs.borderRadius === 'string' ? cs.borderRadius : 'default');
                             es.borderRadius = getManagedBorderRadius(i, Object.keys(grouped).length, typeof es.borderRadius === 'string' ? es.borderRadius : 'default');
                         }
-                        return _jsx(ExpandableCard, Object.assign({ title: g.group, initialState: 'collapsed', ariaLabel: g.group, collapsedCardStyle: cs, expandedCardStyle: es, state: props.onlyAllowOneGroupToExpand ? openedGroup === g.group ? "expanded" : "collapsed" : undefined, onStateChange: v => {
+                        return _jsx(ExpandableCard, { title: g.group, initialState: 'collapsed', ariaLabel: g.group, collapsedCardStyle: cs, expandedCardStyle: es, state: props.onlyAllowOneGroupToExpand ? openedGroup === g.group ? "expanded" : "collapsed" : undefined, onStateChange: v => {
                                 if (v === "expanded")
                                     setOpenedGroup(g.group);
                                 else {
                                     if (openedGroup === g.group)
                                         setOpenedGroup('');
                                 }
-                            } }, { children: _jsx(Flex, Object.assign({ direction: 'column', rowGap: props.rowGap || 'half' }, { children: g.items }), void 0) }), g.group);
-                    }),
-                    ungrouped] }), void 0)] }), void 0);
+                            }, children: _jsx(Flex, { direction: 'column', rowGap: props.rowGap || 'half', children: g.items }) }, g.group);
+                    }), ungrouped] })] });
 }

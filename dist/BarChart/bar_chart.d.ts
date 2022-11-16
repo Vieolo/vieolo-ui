@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { ColorOptionType } from '../types';
-export declare type BarChartData = {
+export type BarChartData = {
     /**
      * The X axis in a horizontal bar chart and Y axis in a vertical bar chart.
      * The axis that holds the reference metric
@@ -14,7 +14,7 @@ export declare type BarChartData = {
     fillColor?: ColorOptionType;
     dataDisplay: string;
 };
-export declare type StackedBarChartData = {
+export type StackedBarChartData = {
     referenceAxis: string;
     referenceAxisNumerical: number;
     dataAxis: {

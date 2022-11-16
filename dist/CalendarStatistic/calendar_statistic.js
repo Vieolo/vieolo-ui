@@ -40,20 +40,15 @@ export default function CalendarStatistic(props) {
         else if (!dayData || dayData.disabled) {
             className += " disabled";
         }
-        (dayCards[`week ${thisWeek.weekNumber}`] = dayCards[`week ${thisWeek.weekNumber}`] || []).push(_jsxs("div", Object.assign({ className: className, title: hoverTitle }, { children: [_jsx(Typography, { type: 'caption-medium', text: thisDate.getDate().toString(), nonselectable: true }, void 0),
-                _jsx(Typography, { type: 'paragraph-small', text: thisDateFormatted in props.data ? props.data[thisDateFormatted].text : defaultValue, nonselectable: true }, void 0),
-                (props.showPercentage && dayData && dayData.percent) &&
-                    _jsx("div", { className: `${cellClass}__percent background-color--${typeof dayData.percent === 'number' ? 'primary' : dayData.percent.color}-transparent`, style: { height: `${(typeof dayData.percent === 'number' ? dayData.percent : dayData.percent.value) * 100}%` } }, void 0)] }), thisDateFormatted));
+        (dayCards[`week ${thisWeek.weekNumber}`] = dayCards[`week ${thisWeek.weekNumber}`] || []).push(_jsxs("div", { className: className, title: hoverTitle, children: [_jsx(Typography, { type: 'caption-medium', text: thisDate.getDate().toString(), nonselectable: true }), _jsx(Typography, { type: 'paragraph-small', text: thisDateFormatted in props.data ? props.data[thisDateFormatted].text : defaultValue, nonselectable: true }), (props.showPercentage && dayData && dayData.percent) &&
+                    _jsx("div", { className: `${cellClass}__percent background-color--${typeof dayData.percent === 'number' ? 'primary' : dayData.percent.color}-transparent`, style: { height: `${(typeof dayData.percent === 'number' ? dayData.percent : dayData.percent.value) * 100}%` } })] }, thisDateFormatted));
     }
-    let sc = _jsx("div", Object.assign({ className: "vieolo-calendar-statistic" }, { children: _jsxs("div", Object.assign({ className: contentClass }, { children: [_jsxs("div", Object.assign({ className: `${contentClass}__header` }, { children: [_jsx(Typography, { type: 'paragraph-large', text: props.selectedMonth.formatMonth() }, void 0),
-                        _jsx(IconButton, { icon: expanded ? _jsx(CollapseIcon, {}, void 0) : _jsx(ExpandIcon, {}, void 0), onClick: () => setExpanded(!expanded), color: "primary", size: "small" }, void 0)] }), void 0),
-                _jsxs("div", Object.assign({ className: `${contentClass}__day-container` }, { children: [_jsx("div", Object.assign({ className: `${contentClass}__day-container__weekday-row` }, { children: ["M", "T", "W", "T", "F", "S", "S"].map((wd, i) => {
-                                return _jsx("div", Object.assign({ className: `${contentClass}__day-container__day-cell` }, { children: _jsx(Typography, { type: 'caption-large', text: wd }, void 0) }), `${wd}${i}`);
-                            }) }), void 0),
-                        Object.keys(dayCards).map((w, i) => {
-                            return _jsx("div", Object.assign({ className: `${contentClass}__day-container__day-row` }, { children: dayCards[w] }), `${w[0]}${i}`);
-                        })] }), void 0)] }), void 0) }), void 0);
+    let sc = _jsx("div", { className: "vieolo-calendar-statistic", children: _jsxs("div", { className: contentClass, children: [_jsxs("div", { className: `${contentClass}__header`, children: [_jsx(Typography, { type: 'paragraph-large', text: props.selectedMonth.formatMonth() }), _jsx(IconButton, { icon: expanded ? _jsx(CollapseIcon, {}) : _jsx(ExpandIcon, {}), onClick: () => setExpanded(!expanded), color: "primary", size: "small" })] }), _jsxs("div", { className: `${contentClass}__day-container`, children: [_jsx("div", { className: `${contentClass}__day-container__weekday-row`, children: ["M", "T", "W", "T", "F", "S", "S"].map((wd, i) => {
+                                return _jsx("div", { className: `${contentClass}__day-container__day-cell`, children: _jsx(Typography, { type: 'caption-large', text: wd }) }, `${wd}${i}`);
+                            }) }), Object.keys(dayCards).map((w, i) => {
+                            return _jsx("div", { className: `${contentClass}__day-container__day-row`, children: dayCards[w] }, `${w[0]}${i}`);
+                        })] })] }) });
     if (!expanded)
         return sc;
-    return _jsx(Modal, Object.assign({ onClose: () => setExpanded(false) }, { children: _jsx(Card, { children: sc }, void 0) }), void 0);
+    return _jsx(Modal, { onClose: () => setExpanded(false), children: _jsx(Card, { children: sc }) });
 }

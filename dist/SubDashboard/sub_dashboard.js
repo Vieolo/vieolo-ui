@@ -21,14 +21,11 @@ export default function SubDashboard(props) {
             }
         }
     }, [props, history]);
-    return _jsxs("div", Object.assign({ className: 'vieolo-sub-dashboard' }, { children: [props.subNavbarOptions &&
-                _jsx(SubNavbarRow, { actions: props.subNavbarOptions ? props.subNavbarOptions.actions : undefined, backButtonText: props.subNavbarOptions ? props.subNavbarOptions.backButtonText : undefined, center: props.subNavbarOptions ? props.subNavbarOptions.center : undefined, midColumnSize: props.subNavbarOptions ? props.subNavbarOptions.midColumnSize : undefined, icon: props.subNavbarOptions ? props.subNavbarOptions.icon : undefined, onBack: props.subNavbarOptions ? props.subNavbarOptions.onBack : undefined, removeBackButton: props.subNavbarOptions ? props.subNavbarOptions.removeBackButton : undefined }, void 0),
-            _jsxs("div", Object.assign({ className: `vieolo-sub-dashboard__grid  vieolo-sub-dashboard__grid--${props.subNavbarOptions ? "subnavbar" : 'bare'}` }, { children: [_jsx("div", Object.assign({ className: 'vieolo-sub-dashboard__grid__left-col' }, { children: _jsx(List, Object.assign({ height: '100%', itemStyle: props.itemStyle, items: props.items }, props.itemListOptions), void 0) }), void 0),
-                    _jsx("div", Object.assign({ className: "sub-dashboard__grid__right-col" }, { children: props.children
+    return _jsxs("div", { className: 'vieolo-sub-dashboard', children: [props.subNavbarOptions &&
+                _jsx(SubNavbarRow, { actions: props.subNavbarOptions ? props.subNavbarOptions.actions : undefined, backButtonText: props.subNavbarOptions ? props.subNavbarOptions.backButtonText : undefined, center: props.subNavbarOptions ? props.subNavbarOptions.center : undefined, midColumnSize: props.subNavbarOptions ? props.subNavbarOptions.midColumnSize : undefined, icon: props.subNavbarOptions ? props.subNavbarOptions.icon : undefined, onBack: props.subNavbarOptions ? props.subNavbarOptions.onBack : undefined, removeBackButton: props.subNavbarOptions ? props.subNavbarOptions.removeBackButton : undefined }), _jsxs("div", { className: `vieolo-sub-dashboard__grid  vieolo-sub-dashboard__grid--${props.subNavbarOptions ? "subnavbar" : 'bare'}`, children: [_jsx("div", { className: 'vieolo-sub-dashboard__grid__left-col', children: _jsx(List, { height: '100%', itemStyle: props.itemStyle, items: props.items, ...props.itemListOptions }) }), _jsx("div", { className: "sub-dashboard__grid__right-col", children: props.children
                             ? props.children
                             : (props.emptyIcon || props.emptyText) &&
-                                _jsxs("div", Object.assign({ className: "sub-dashboard__grid__right-col__empty" }, { children: [props.emptyIcon &&
-                                            props.emptyIcon,
-                                        props.emptyText &&
-                                            _jsx(Typography, { type: 'title-medium', text: props.emptyText }, void 0)] }), void 0) }), void 0)] }), void 0)] }), void 0);
+                                _jsxs("div", { className: "sub-dashboard__grid__right-col__empty", children: [props.emptyIcon &&
+                                            props.emptyIcon, props.emptyText &&
+                                            _jsx(Typography, { type: 'title-medium', text: props.emptyText })] }) })] })] });
 }

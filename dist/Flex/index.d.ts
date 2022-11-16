@@ -1,7 +1,7 @@
 import Flex from './flex';
 import { FlexJustifyContent as FlexJustifyContentTemp, FlexDirection as FlexDirectionTemp, FlexAlignItems as FlexAlignItemsTemp, FlexWrap as FlexWrapTemp } from './flex';
 export default Flex;
-export declare type FlexJustifyContent = FlexJustifyContentTemp;
-export declare type FlexDirection = FlexDirectionTemp;
-export declare type FlexAlignItems = FlexAlignItemsTemp;
-export declare type FlexWrap = FlexWrapTemp;
+export type FlexJustifyContent = FlexJustifyContentTemp;
+export type FlexDirection = FlexDirectionTemp;
+export type FlexAlignItems = FlexAlignItemsTemp;
+export type FlexWrap = FlexWrapTemp;

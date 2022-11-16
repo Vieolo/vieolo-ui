@@ -121,8 +121,8 @@ export default function Select(props) {
         const prev = i > 0 ? filtered[i - 1] : undefined;
         items.push(_jsx(SelectItem, { item: item, isSelected: props.selectedItems.includes(item.value), previousItem: prev, onKeyboardFocus: itemKeyboardFocus === item.value, onSelect: (t) => handleSelectItem(t), itemRef: item.value === itemKeyboardFocus ? itemKeyboardRef : undefined }, item.value));
     }
-    const itemsComponent = _jsx("div", Object.assign({ className: "vieolo-select__select-dropdown", style: style, role: "list" }, { children: items }), void 0);
-    return _jsxs("div", Object.assign({ className: `vieolo-select${props.disabled ? ' disabled' : ''}`, ref: container }, { children: [_jsxs("div", Object.assign({ className: `vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${props.height || 'medium'}`, onClick: e => handleOpen(e), tabIndex: 0, role: "button", "aria-label": `Select ${props.title}`, onKeyDown: e => {
+    const itemsComponent = _jsx("div", { className: "vieolo-select__select-dropdown", style: style, role: "list", children: items });
+    return _jsxs("div", { className: `vieolo-select${props.disabled ? ' disabled' : ''}`, ref: container, children: [_jsxs("div", { className: `vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${props.height || 'medium'}`, onClick: e => handleOpen(e), tabIndex: 0, role: "button", "aria-label": `Select ${props.title}`, onKeyDown: e => {
                     if (props.disabled)
                         return;
                     handleOnKeyDown(e, {
@@ -179,23 +179,19 @@ export default function Select(props) {
                             }
                         }
                     });
-                } }, { children: [_jsxs("div", Object.assign({ className: "vieolo-select__select-button__button-text", onClick: e => {
+                }, children: [_jsxs("div", { className: "vieolo-select__select-button__button-text", onClick: e => {
                             e.stopPropagation();
                             handleOpen(e);
-                        } }, { children: [_jsx(Typography, { type: 'paragraph-small', text: props.title, className: "vieolo-select__select-button__button-text__button-title" }, void 0),
-                            (props.searchable && open)
-                                ? _jsx("input", { autoFocus: true, value: searchQuery, onChange: e => setSearchQuery(e.target.value), placeholder: "Search...", "aria-label": `Search ${props.title} items` }, void 0)
-                                : _jsx(Typography, { type: 'title-small', text: thisSelectedItems.map(s => s.title).join(", "), className: "vieolo-select__select-button__button-text__button-value" }, void 0)] }), void 0),
-                    (!props.clearable || (props.clearable && (!props.selectedItems || props.selectedItems.length === 0)))
-                        ? _jsx(DownIcon, {}, void 0)
-                        : _jsx(IconButton, { icon: _jsx(CloseIcon, {}, void 0), onClick: e => {
+                        }, children: [_jsx(Typography, { type: 'paragraph-small', text: props.title, className: "vieolo-select__select-button__button-text__button-title" }), (props.searchable && open)
+                                ? _jsx("input", { autoFocus: true, value: searchQuery, onChange: e => setSearchQuery(e.target.value), placeholder: "Search...", "aria-label": `Search ${props.title} items` })
+                                : _jsx(Typography, { type: 'title-small', text: thisSelectedItems.map(s => s.title).join(", "), className: "vieolo-select__select-button__button-text__button-value" })] }), (!props.clearable || (props.clearable && (!props.selectedItems || props.selectedItems.length === 0)))
+                        ? _jsx(DownIcon, {})
+                        : _jsx(IconButton, { icon: _jsx(CloseIcon, {}), onClick: e => {
                                 e.stopPropagation();
                                 props.onSelect([]);
-                            }, color: "error", size: "extra-small" }, void 0)] }), void 0),
-            open && (Device.isTouchOnlyDevice ?
-                _jsx(Modal, Object.assign({ onClose: () => setOpen(false) }, { children: _jsxs(Card, { children: [_jsx(Typography, { type: 'title-small', text: props.title || '', className: 'vieolo-select__modal-title' }, void 0),
-                            itemsComponent] }, void 0) }), void 0)
-                : itemsComponent)] }), void 0);
+                            }, color: "error", size: "extra-small" })] }), open && (Device.isTouchOnlyDevice ?
+                _jsx(Modal, { onClose: () => setOpen(false), children: _jsxs(Card, { children: [_jsx(Typography, { type: 'title-small', text: props.title || '', className: 'vieolo-select__modal-title' }), itemsComponent] }) })
+                : itemsComponent)] });
 }
 function SelectItem(props) {
     let className = "vieolo-select__select-item";
@@ -208,11 +204,9 @@ function SelectItem(props) {
     if (props.onKeyboardFocus)
         className += " vieolo-select__select-item--keyboard-focus";
     return _jsxs(Fragment, { children: [(props.item.category && (!props.previousItem || props.item.category !== props.previousItem.category)) &&
-                _jsx("p", Object.assign({ className: "vieolo-select__select-item__category-name" }, { children: props.item.category }), void 0),
-            _jsxs("div", Object.assign({ className: className, onClick: e => {
+                _jsx("p", { className: "vieolo-select__select-item__category-name", children: props.item.category }), _jsxs("div", { className: className, onClick: e => {
                     e.stopPropagation();
                     props.onSelect(props.item);
-                }, ref: props.itemRef, role: "listitem", "aria-label": props.item.title }, { children: [_jsx(Typography, { text: props.item.title }, void 0),
-                    props.item.subTitle &&
-                        _jsx(Typography, { type: 'caption-medium', text: props.item.subTitle }, void 0)] }), void 0)] }, void 0);
+                }, ref: props.itemRef, role: "listitem", "aria-label": props.item.title, children: [_jsx(Typography, { text: props.item.title }), props.item.subTitle &&
+                        _jsx(Typography, { type: 'caption-medium', text: props.item.subTitle })] })] });
 }

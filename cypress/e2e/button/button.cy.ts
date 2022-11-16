@@ -1,5 +1,6 @@
 import TestColors from '../../support/constants';
-import { LocalServer, VieoloUIInteraction } from '../../support/utils';
+import { LocalServer } from '../../support/utils';
+import { VieoloUIInteraction } from 'cypresstools'
 
 describe("Button", () => {
 
@@ -7,7 +8,7 @@ describe("Button", () => {
 
         LocalServer.start("Buttons", "Button");
 
-        cy.get("main").find(".vieolo-button").hasBackgroundColor(TestColors.PRIMARY_COLOR_NORMAL);
+        cy.get("main").find(".vieolo-button").hasBackgroundColor(TestColors.BACKGROUND_CONTENT_COLOR);
     });
 
     it("Opens Button Change Color", () => {
@@ -15,6 +16,7 @@ describe("Button", () => {
         LocalServer.start("Buttons", "Button");
 
         VieoloUIInteraction.selectOptionFromSelect("Color", "secondary");
+        VieoloUIInteraction.selectOptionFromSelect("Emphasis", "high");
 
         cy.get("main").find(".vieolo-button").hasBackgroundColor(TestColors.SECONDARY_COLOR_NORMAL);
     });

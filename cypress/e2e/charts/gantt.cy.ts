@@ -1,4 +1,5 @@
-import { LocalServer, VieoloUIInteraction } from "../../support/utils";
+import { LocalServer } from "../../support/utils";
+import { VieoloUIInteraction } from 'cypresstools'
 
 describe("Charts", () => {
 

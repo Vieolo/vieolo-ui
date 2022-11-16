@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import Card from "../Card";
 import { DropDownMenuItemType } from "../DropDownMenu";
-declare type CardPropsType = React.ComponentProps<typeof Card>;
+type CardPropsType = React.ComponentProps<typeof Card>;
 export default function ActionCard(props: {
     headerTitle: string;
     headerIcon?: React.ReactNode;
