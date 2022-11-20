@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.23.18 (2022-11-20)
+- Updated dependencies
+
 ## 0.23.17 (2022-11-16)
 - Improved the VUI interaction in cypress tools
 
