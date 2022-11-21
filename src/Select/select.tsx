@@ -26,7 +26,8 @@ export type SelectItemType = {
 }
 
 type SelectProps = {
-    title: string,
+    title?: string,
+    placeHolder?: string,
     items: SelectItemType[],
     selectedItems: string[],
     onSelect: (values: string[]) => void,
@@ -170,9 +171,14 @@ export default function Select(props: SelectProps) {
         {items}
     </div>
 
+    let height = 'small';
+
+    if (props.height) height = props.height
+    else if (props.title) height = 'medium'
+
     return <div className={`vieolo-select${props.disabled ? ' disabled' : ''}`} ref={container as any}>
         <div
-            className={`vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${props.height || 'medium'}`}
+            className={`vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${height}`}
             onClick={e => handleOpen(e)}
             tabIndex={0}
             role="button"
@@ -236,7 +242,14 @@ export default function Select(props: SelectProps) {
                 e.stopPropagation();
                 handleOpen(e);
             }}>
-                <Typography type='paragraph-small' text={props.title} className="vieolo-select__select-button__button-text__button-title" />
+                {
+                    props.title &&
+                    <Typography type='paragraph-small' text={props.title} className="vieolo-select__select-button__button-text__button-title" />
+                }
+                {
+                    (!props.title && props.placeHolder && (!props.selectedItems || props.selectedItems.length === 0)) &&
+                    <Typography type='caption-large' text={props.placeHolder} className="vieolo-select__select-button__button-text__button-title" />
+                }
                 {
                     (props.searchable && open)
                         ? <input

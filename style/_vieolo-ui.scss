@@ -460,7 +460,7 @@ body {
 
 	&__select-button {
 		margin: 0 auto;
-		border: 2px solid $primary-color-light;
+		border: 2px solid $neutral-color;
 		border-radius: $border-radius-half;
 		cursor: pointer;
 		@include flex-row-space-between;

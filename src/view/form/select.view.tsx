@@ -55,7 +55,8 @@ export function selectOptions(): ViewData {
             disabled: {
                 options: [false, true],
                 default: false,
-            }
+            },
+            removeTitle: 'boolean'
         }
     }
 }
@@ -73,7 +74,8 @@ export function SelectCreator(props: {p: SelectPropsType}) {
         items={props.p.items}
         onSelect={o => setSelected(o)}
         selectedItems={selected}
-        title={props.p.title}
+        title={(props.p as any).removeTitle ? undefined : props.p.title}
+        placeHolder={(props.p as any).removeTitle ? "Select" : ""}
         clearable={props.p.clearable}
         searchable={props.p.searchable}
         multipleChoice={props.p.multipleChoice}
