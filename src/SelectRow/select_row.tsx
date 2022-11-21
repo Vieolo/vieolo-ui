@@ -8,9 +8,9 @@ import Select from '../Select';
 import { SelectItemType } from '../Select';
 
 // Private
-import SetRowTemplate from '../private/SetRowTemplate';
+import ComponentRowTemplate from '../private/ComponentRowTemplate';
 
-export default function SelectSet(props: {
+export default function SelectRow(props: {
     title: string | React.ReactNode,
     subtitle?: string | React.ReactNode,
     items: SelectItemType[],
@@ -24,7 +24,7 @@ export default function SelectSet(props: {
     disabled?: boolean,
 
 }) {
-    return <SetRowTemplate
+    return <ComponentRowTemplate
         title={props.title}
         subtitle={props.subtitle}
         disabled={props.disabled}
@@ -33,17 +33,16 @@ export default function SelectSet(props: {
         height={props.height}
         rightSideComponent={
             <Select
-            title={'Title'}
-            items={props.items}
-            selectedItems={props.selectedItems}
-            onSelect={props.onSelect}
-            error={props.error}
-            clearable={props.clearable}
-            searchable={props.searchable}
-            multipleChoice={props.multipleChoice}
-            height={props.height}
-            disabled={props.disabled}
+                items={props.items}
+                selectedItems={props.selectedItems}
+                onSelect={props.onSelect}
+                error={props.error}
+                clearable={props.clearable}
+                searchable={props.searchable}
+                multipleChoice={props.multipleChoice}
+                height={props.height}
+                disabled={props.disabled}
             />
         }
     />
-  }
+}

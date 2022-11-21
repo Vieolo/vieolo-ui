@@ -2,14 +2,14 @@
 import React, { useState, useEffect } from 'react';
 
 // Vieolo UI
-import SelectSet from '../../SelectSet';
+import SelectRow from '../../SelectRow';
 
 // Types
 import { ViewData } from '../main/main';
 
-type SelectSetPropsType = React.ComponentProps<typeof SelectSet>;
+type SelectRowPropsType = React.ComponentProps<typeof SelectRow>;
 
-export function selectSetOptions(): ViewData {
+export function selectRowOptions(): ViewData {
   return {
     constants: {
       title: "Item",
@@ -28,7 +28,7 @@ export function selectSetOptions(): ViewData {
           {title: "Twelve", value: "12", category: "Third", subTitle: "The Substitle"},
           {title: "Thirteen", value: "13", category: "Third"} 
       ]
-  } as Partial<SelectSetPropsType>,
+  } as Partial<SelectRowPropsType>,
     variables: {
       height: {
         options: ["small", "medium"],
@@ -70,14 +70,14 @@ export function selectSetOptions(): ViewData {
   }
 }
 
-export function SelectSetCreator(props: {p: SelectSetPropsType}) {
+export function SelectRowCreator(props: {p: SelectRowPropsType}) {
   const [selected, setSelected] = useState<string[]>(props.p.selectedItems || []);
 
   useEffect(() => {
     setSelected(props.p.selectedItems);
   }, [props.p.selectedItems])
 
-  return <SelectSet 
+  return <SelectRow
     error={props.p.error}
     items={props.p.items}
     onSelect={o => setSelected(o)}

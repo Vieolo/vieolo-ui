@@ -3,7 +3,7 @@ import React, { useState, useRef, useEffect, CSSProperties } from 'react';
 
 // Vieolo UI
 import Typography from '../Typography';
-import SwitchSet from '../SwitchSet';
+import SwitchRow from '../SwitchRow';
 
 // Types
 import { ColorOptionType } from '../types/types';
@@ -240,7 +240,7 @@ function DropDownMenuItem(props: {
     if (props.onKeyboardFocus) className += ` vieolo-dropdown-menu__dropdown-item--keyboard-focus`;
 
     if (props.switch) {
-        return <SwitchSet 
+        return <SwitchRow
             on={props.switch.on}
             onChange={() => {
                 props.onClick(props.value, false)

@@ -50,13 +50,13 @@ import PeriodSelector , { PeriodOptions } from './PeriodSelector';
 import RadioGroup from './RadioGroup';
 import RadioGroupSet from './RadioGroupSet';
 import Select from './Select';
-import SelectSet from './SelectSet';
+import SelectRow from './SelectRow';
 import Spacer from './Spacer';
 import Spinner from './Spinner';
 import SubDashboard from './SubDashboard';
 import SubNavbarRow from './SubNavbarRow';
 import Switch from './Switch';
-import SwitchSet from './SwitchSet';
+import SwitchRow from './SwitchRow';
 import TabSwitch from './TabSwitch';
 import Table from './Table';
 import TableInteractive from './TableInteractive';
@@ -209,13 +209,13 @@ export {
 	RadioGroup,
 	RadioGroupSet,
 	Select,
-	SelectSet,
+	SelectRow,
 	Spacer,
 	Spinner,
 	SubDashboard,
 	SubNavbarRow,
 	Switch,
-	SwitchSet,
+	SwitchRow,
 	TabSwitch,
 	Table,
 	TableInteractive,
