@@ -33,7 +33,7 @@ export default function List(props) {
             return true;
         return false;
     });
-    if (!props.disableSorting) {
+    if (props.enableSorting) {
         sortedItems.sort((a, b) => {
             if (!a.group && !b.group)
                 return a.title > b.title ? 1 : -1;

@@ -6,7 +6,8 @@ export type SelectItemType = {
     subTitle?: string;
 };
 type SelectProps = {
-    title: string;
+    title?: string;
+    placeHolder?: string;
     items: SelectItemType[];
     selectedItems: string[];
     onSelect: (values: string[]) => void;
@@ -16,6 +17,8 @@ type SelectProps = {
     multipleChoice?: boolean;
     height?: 'medium' | 'small';
     disabled?: boolean;
+    ariaLabel?: string;
+    width?: 'small' | 'medium' | 'full';
 };
 export default function Select(props: SelectProps): JSX.Element;
 export {};

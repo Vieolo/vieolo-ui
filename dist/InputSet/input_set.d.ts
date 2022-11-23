@@ -4,7 +4,7 @@ export default function InputSet(props: {
     ariaLabel?: string;
     placeholder?: string;
     tip?: string;
-    error: boolean;
+    error: boolean | string;
     value: string;
     onChange: (value: string) => void;
     disabled?: boolean;

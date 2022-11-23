@@ -8,7 +8,7 @@ import { RowHeightType } from '../types/types';
 import Typography from '../Typography';
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
 
-export default function SetRowTemplate(props: { // internal
+export default function ComponentRowTemplate(props: { // internal
     title: string | React.ReactNode,
     subtitle: string | React.ReactNode,
     disabled?: boolean | undefined,
@@ -19,14 +19,14 @@ export default function SetRowTemplate(props: { // internal
     onRowClick?: () => void
 }) {
 
-    let c = `vieolo-set-row-template`
+    let c = `vieolo-component-row-template`
     if (props.height && props.height !== 'default') {
         c += ` row-height--${props.height}`
     } else {
-        c += " vieolo-set-row-template--height-default"
+        c += " vieolo-component-row-template--height-default"
     }
 
-    if (props.onRowClick) c += " vieolo-set-row-template--clickable"
+    if (props.onRowClick) c += " vieolo-component-row-template--clickable"
 
 
     if (props.className) c += ` ${props.className}`;
@@ -47,7 +47,7 @@ export default function SetRowTemplate(props: { // internal
         }}
     >
         <div 
-            className={"vieolo-set-row-template__title-container"}
+            className={"vieolo-component-row-template__title-container"}
             onClick={e => {
                 e.stopPropagation();
                 if (props.onRowClick) props.onRowClick();
@@ -73,7 +73,7 @@ export default function SetRowTemplate(props: { // internal
                 </>                
             }
         </div>
-        <div className={'vieolo-set-row-template__right-container'}>
+        <div className={'vieolo-component-row-template__right-container'}>
             {props.rightSideComponent}
         </div>
     </div>

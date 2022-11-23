@@ -35,7 +35,7 @@ export default function List(props: {
     expandedGroupStyle?: RowStyleType;
     items: ListItem[];
     enableSearch?: boolean;
-    disableSorting?: boolean;
+    enableSorting?: boolean;
     enableSubtitleSearch?: boolean;
     title?: string;
     height: string;

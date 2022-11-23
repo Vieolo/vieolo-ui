@@ -7,6 +7,11 @@ export default class VieoloUIInteraction {
     static ganttGetAllRow(): Cypress.Chainable<JQuery<HTMLElement>>;
     static ganttGetRowAt(index: number): Cypress.Chainable<JQuery<HTMLElement>>;
     static ganttdragRow(dragIndex: number, targetIndex: number, targetPosition: 'top' | 'bottom'): void;
-    static selectOptionFromSelect(selectTitle: string, itemTitle: string, containerLabel?: string): void;
+    static selectOptionFromSelect(options: {
+        containerLabel?: string;
+        selectTitle?: string;
+        ariaLabel?: string;
+        itemTitle: string;
+    }): void;
     static textInput(label: string, text: string): void;
 }

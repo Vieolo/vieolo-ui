@@ -4,6 +4,7 @@ import TipIcon from '../private/tip_icon';
 // Public Components
 import Input from '../Input/input';
 import IconButton from '../IconButton';
+import Typography from '../Typography';
 export default function InputSet(props) {
     let size = props.size || 'medium';
     let width = '180px';
@@ -21,5 +22,6 @@ export default function InputSet(props) {
         actionComponent = _jsxs("div", { className: "tip-div vieolo-tooltip", children: [_jsx(TipIcon, {}), _jsx("div", { className: "tooltip-text-small tooltip-text-down-left", children: props.tip })] });
     }
     return _jsxs("div", { className: `vieolo-input-set${props.disabled ? ' disabled' : ''}`, style: { width: width }, children: [(props.label || props.actionButton) &&
-                _jsxs("div", { className: "label-container", children: [_jsx("label", { children: props.label }), actionComponent] }), _jsx(Input, { value: props.value, error: props.error, onChange: props.onChange, placeholder: props.placeholder || '', size: props.size, type: props.type, ariaLabel: props.ariaLabel || props.label, autoFocus: props.autoFocus, onKeyDown: props.onKeyDown, inputType: props.inputType })] });
+                _jsxs("div", { className: "label-container", children: [_jsx("label", { children: props.label }), actionComponent] }), _jsx(Input, { value: props.value, error: props.error === true || (typeof props.error === 'string' && props.error.trim().length > 0), onChange: props.onChange, placeholder: props.placeholder || '', size: props.size, type: props.type, ariaLabel: props.ariaLabel || props.label, autoFocus: props.autoFocus, onKeyDown: props.onKeyDown, inputType: props.inputType }), (typeof props.error === 'string' && props.error.trim().length > 0) &&
+                _jsx(Typography, { text: props.error, type: 'caption-medium', color: 'error', colorType: 'normal', className: 'vieolo-input-set__error' })] });
 }

@@ -45,3 +45,10 @@ type TypographyMainType = 'title' | 'paragraph' | 'caption';
 type TypographySecondaryType = 'large' | 'medium' | 'small';
 
 export type TypographyOptionTypes = `${TypographyMainType}-${TypographySecondaryType}`
+
+export type NumberInputValueType = {
+    number: number | null,
+    text: string,
+    errorMessage?: string,
+    isValid: boolean
+}

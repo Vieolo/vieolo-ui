@@ -27,14 +27,14 @@ class VieoloUIInteraction {
         this.ganttGetRowAt(dragIndex).find(".vieolo-gantt-chart__content-div__row__item-column__title").trigger('dragstart', { dataTransfer: new DataTransfer() });
         this.ganttGetRowAt(targetIndex).find(`.vieolo-gantt-chart__content-div__drop-zone--${targetPosition}`).trigger('drop');
     }
-    static selectOptionFromSelect(selectTitle, itemTitle, containerLabel) {
-        if (containerLabel) {
-            cy.getByAriaLabel(containerLabel).find(`[aria-label='Select ${selectTitle}']`).click();
-            cy.getByAriaLabel(containerLabel).find(`[aria-label='${itemTitle}']`).click();
+    static selectOptionFromSelect(options) {
+        if (options.containerLabel) {
+            cy.getByAriaLabel(options.containerLabel).find(`[aria-label='${options.ariaLabel || `Select ${options.selectTitle}`}']`).click();
+            cy.getByAriaLabel(options.containerLabel).find(`[aria-label='${options.itemTitle}']`).click();
         }
         else {
-            cy.getByAriaLabel(`Select ${selectTitle}`).click();
-            cy.getByAriaLabel(itemTitle).click();
+            cy.getByAriaLabel(options.ariaLabel || `Select ${options.selectTitle}`).click();
+            cy.getByAriaLabel(options.itemTitle).click();
         }
     }
     static textInput(label, text) {

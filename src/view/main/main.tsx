@@ -18,7 +18,7 @@ import { ButtonCreator, buttonOptions } from '../button/button.view';
 import { ChipCreator, chipOptions } from '../button/chip.view';
 import { InputSetCreator, inputSetOptions } from '../form/input_set.view';
 import { ListCreator, listOptions } from '../list/list.view';
-import { SwitchSetCreator, switchSetOptions } from '../form/switch_set.view';
+import { SwitchRowCreator, switchRowOptions } from '../form/switch_row.view';
 import { DropDownMenuCreator, dropDownMenuOptions } from '../menu/dropdown_menu.view';
 import { PDFViewerEmbeddedCreator, pdfViewerEmbeddedOptions } from '../file/pdf_viewer_embedded.view';
 import { PDFViewerFullScreenCreator, pdfViewerFullScreenOptions } from '../file/pdf_viewer_full_screen.view';
@@ -26,8 +26,8 @@ import { FormDialogCreator, formDialogOptions } from '../dialog/form_dialog.view
 import { ConfirmationDialogCreator, confirmationDialogOptions } from '../dialog/confirmation_dialog.view';
 import { TableCreator, tableOptions } from '../table/table.view';
 import { RadioGroupCreator, radioGroupOptions } from '../form/radio_group.view';
-import { RadioGroupSetCreator, radioGroupSetOptions } from '../form/radio_group_set.view';
-import { SelectSetCreator, selectSetOptions } from '../form/select_set.view';
+import { RadioGroupRowCreator, radioGroupRowOptions  } from '../form/radio_group_row.view';
+import { SelectRowCreator, selectRowOptions } from '../form/select_row.view';
 import { FormSectionCreator, formSectionOptions } from '../form/form_section.view';
 import { TabSwitchCreator, tabSwitchOptions } from '../layout/tab_switch.view';
 import { DatePickerCreator, datePickerOptions } from '../date_time/date_picker.view';
@@ -56,8 +56,10 @@ import { ActionCardCreator, actionCardOptions } from '../card/action_card.view';
 import { DoubleToggleListCreator, doubleToggleOptions } from '../list/double_toggle_list.view';
 import { fileViewerOptions, FileViewerCreator } from '../file/file_viewer.view';
 import { calendarStatisticOptions, CalendarStatisticCreator } from '../../CalendarStatistic/calendar_statistic.view';
+import { SelectSetCreator, selectSetOptions } from '../../SelectSet/select_set.view';
+import { NumberInputSetCreator, numberInputOptions } from '../../NumberInputSet/number_input_set.view';
 import Select from '../../Select';
-import SwitchSet from '../../SwitchSet';
+import SwitchRow from '../../SwitchRow';
 import PageFrame from '../../PageFrame';
 
 // Charts
@@ -127,13 +129,17 @@ export default function MainPage(props: {}): JSX.Element {
         "Checkbox": { title: "Checkbox", data: checkboxOptions(), creator: CheckboxCreator, group: "Form" },
         "File Input": { title: "File Input", data: fileInputOptions(), creator: FileInputCreator, group: "Form" },
         "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator, group: "Form" },
+        "Number Input Set": { title: "Number Input Set", data: numberInputOptions(), creator: NumberInputSetCreator, group: "Form" },
         "Radio Group": { title: "Radio Group", data: radioGroupOptions(), creator: RadioGroupCreator, group: "Form" },
         "Select": { title: "Select", data: selectOptions(), creator: SelectCreator, group: "Form" },
+        "Select Row": { title: "Select Row", data: selectRowOptions(), creator: SelectRowCreator, group: "Form" },
         "Select Set": { title: "Select Set", data: selectSetOptions(), creator: SelectSetCreator, group: "Form" },
-        "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator, group: "Form" },
-        "Radio Group Set": { title: "Radio Group Set", data: radioGroupSetOptions(), creator: RadioGroupSetCreator, group: "Form" },
-        "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
+        "Switch Row": { title: "Switch Row", data: switchRowOptions(), creator: SwitchRowCreator, group: "Form" },
+        "Radio Group Row": { title: "Radio Group Row", data: radioGroupRowOptions(), creator: RadioGroupRowCreator, group: "Form" },
         "Form Section": { title: "Form Section", data: formSectionOptions(), creator: FormSectionCreator, group: "Form" },
+
+        "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
+
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator, group: "Layout" },
 
         "Divider": { title: "Divider", data: dividerOptions(), creator: DividerCreator, group: "Layout/Auxiliary" },
@@ -264,6 +270,7 @@ export default function MainPage(props: {}): JSX.Element {
             <div className="component-list">
 
                 <List
+                    enableSorting
                     height={Device.isTouchOnlyDevice ? '80vh' : 'calc(100vh - 70px)'}
                     itemStyle={{
                         height: 'medium',
@@ -373,7 +380,7 @@ export default function MainPage(props: {}): JSX.Element {
                             </div>
                         } else {
                             return <div key={k} className="margin-bottom--one">
-                                <SwitchSet
+                                <SwitchRow
                                     on={finalState![k]}
                                     onChange={v => {
                                         let temp = { ...finalState }

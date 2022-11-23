@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 // Vieolo UI
 import Typography from '../../Typography';
-import RadioGroupSet from '../../RadioGroupSet';
+import RadioGroupRow from '../../RadioGroupRow';
 
 // Types
 import { ViewData } from '../main/main';
@@ -13,12 +13,12 @@ import SampleIcon1 from '@mui/icons-material/AccessibleForwardTwoTone';
 import SampleIcon2 from '@mui/icons-material/Backspace';
 import SampleIcon3 from '@mui/icons-material/Cached';
 
-type RadioGroupSetPropsType = React.ComponentProps<typeof RadioGroupSet>;
+type RadioGroupRowPropsType = React.ComponentProps<typeof RadioGroupRow>;
 
-export function radioGroupSetOptions(): ViewData {
+export function radioGroupRowOptions(): ViewData {
   return {
     constants: {
-  } as Partial<RadioGroupSetPropsType>,
+  } as Partial<RadioGroupRowPropsType>,
     variables: {
       direction: {
         options: ['horizontal', "vertical"],
@@ -54,7 +54,7 @@ export function radioGroupSetOptions(): ViewData {
   }
 }
 
-export function RadioGroupSetCreator(props: { p: RadioGroupSetPropsType }) {
+export function RadioGroupRowCreator(props: { p: RadioGroupRowPropsType }) {
   let [selected, setSelected] = useState<string>("One");
 
   let textOptions = [
@@ -69,7 +69,7 @@ export function RadioGroupSetCreator(props: { p: RadioGroupSetPropsType }) {
     { id: 'Three', button: <SampleIcon3 /> },
   ];
 
-  return <RadioGroupSet
+  return <RadioGroupRow
     direction={props.p.direction}
     onOptionChange={o => setSelected(o)}
     options={(props.p as any).withIcon ? iconOptions : textOptions}

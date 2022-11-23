@@ -33,13 +33,18 @@ export default class VieoloUIInteraction {
         this.ganttGetRowAt(targetIndex).find(`.vieolo-gantt-chart__content-div__drop-zone--${targetPosition}`).trigger('drop');
     }
 
-    static selectOptionFromSelect(selectTitle: string, itemTitle: string, containerLabel?: string) {
-        if (containerLabel) {
-            cy.getByAriaLabel(containerLabel).find(`[aria-label='Select ${selectTitle}']`).click();
-            cy.getByAriaLabel(containerLabel).find(`[aria-label='${itemTitle}']`).click();
+    static selectOptionFromSelect(options: {
+        containerLabel?: string,
+        selectTitle?: string,
+        ariaLabel?: string,
+        itemTitle: string
+    }) {
+        if (options.containerLabel) {
+            cy.getByAriaLabel(options.containerLabel).find(`[aria-label='${options.ariaLabel || `Select ${options.selectTitle}`}']`).click();
+            cy.getByAriaLabel(options.containerLabel).find(`[aria-label='${options.itemTitle}']`).click();
         } else {
-            cy.getByAriaLabel(`Select ${selectTitle}`).click();
-            cy.getByAriaLabel(itemTitle).click()
+            cy.getByAriaLabel(options.ariaLabel ||`Select ${options.selectTitle}`).click();
+            cy.getByAriaLabel(options.itemTitle).click()
         }        
     }
 

@@ -2,20 +2,20 @@
 import React, { useState } from 'react';
 
 // Vieolo UI
-import SwitchSet from '../../SwitchSet';
+import SwitchRow from '../../SwitchRow';
 import Typography from '../../Typography';
 
 // Types
 import { ViewData } from '../main/main';
 
-type SwitchSetPropsType = React.ComponentProps<typeof SwitchSet>;
+type SwitchRowPropsType = React.ComponentProps<typeof SwitchRow>;
 
-export function switchSetOptions(): ViewData {
+export function switchRowOptions(): ViewData {
 
     return {
         constants: {
             switchID: 'sample_id'
-        } as Partial<SwitchSetPropsType>,
+        } as Partial<SwitchRowPropsType>,
         variables: {
             disabled: {
                 options: [false, true],
@@ -43,10 +43,10 @@ export function switchSetOptions(): ViewData {
 }
 
 
-export function SwitchSetCreator(props: { p: SwitchSetPropsType }) {
+export function SwitchRowCreator(props: { p: SwitchRowPropsType }) {
     let [on, setOn] = useState<boolean>(false);
 
-    return <SwitchSet
+    return <SwitchRow
         on={on}
         onChange={v => setOn(v)}
         switchID={props.p.switchID}

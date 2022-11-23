@@ -8,9 +8,9 @@ import { RadioButtonType } from '../RadioGroup';
 import { RowHeightType } from '../types/types';
 
 //Private
-import SetRowTemplate from '../private/SetRowTemplate';
+import SetRowTemplate from '../private/ComponentRowTemplate';
 
-export default function RadioGroupSet(props: {
+export default function RadioGroupRow(props: {
     title: string | React.ReactNode,
     subtitle?: string | React.ReactNode,
     value: string,
@@ -26,7 +26,7 @@ export default function RadioGroupSet(props: {
         title={props.title}
         subtitle={props.subtitle}
         handleKeyboardNav={false}
-        className="vieolo-radio-group-set"
+        className="vieolo-radio-group-row"
         height={props.height}
         disabled={props.disabled}
         rightSideComponent={

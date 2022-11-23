@@ -51,7 +51,7 @@ export default function List(props: {
     expandedGroupStyle?: RowStyleType,
     items: ListItem[],
     enableSearch?: boolean,
-    disableSorting?: boolean,
+    enableSorting?: boolean,
     enableSubtitleSearch?: boolean,
     title?: string,
     height: string,
@@ -107,7 +107,7 @@ export default function List(props: {
         return false;
     })
 
-    if (!props.disableSorting) {
+    if (props.enableSorting) {
         sortedItems.sort((a, b) => {
             if (!a.group && !b.group) return a.title > b.title ? 1 : -1;
             if (a.group === b.group) return a.title > b.title ? 1 : -1;

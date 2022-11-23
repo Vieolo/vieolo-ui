@@ -48,15 +48,16 @@ import Page from './Page';
 import PageFrame from './PageFrame';
 import PeriodSelector , { PeriodOptions } from './PeriodSelector';
 import RadioGroup from './RadioGroup';
-import RadioGroupSet from './RadioGroupSet';
+import RadioGroupRow from './RadioGroupRow';
 import Select from './Select';
+import SelectRow from './SelectRow';
 import SelectSet from './SelectSet';
 import Spacer from './Spacer';
 import Spinner from './Spinner';
 import SubDashboard from './SubDashboard';
 import SubNavbarRow from './SubNavbarRow';
 import Switch from './Switch';
-import SwitchSet from './SwitchSet';
+import SwitchRow from './SwitchRow';
 import TabSwitch from './TabSwitch';
 import Table from './Table';
 import TableInteractive from './TableInteractive';
@@ -153,6 +154,7 @@ import {
 	WidthAndHeightSize as WidthAndHeightSizeTemp,
 	CardExtraActionType as CardExtraActionTypeTemp,
 	TypographyOptionTypes as TypographyOptionTypesTemp,
+	NumberInputValueType as NumberInputValueTypeTemp,
 } from './types';
 
 
@@ -207,15 +209,16 @@ export {
 	PeriodSelector,
 	PeriodOptions,
 	RadioGroup,
-	RadioGroupSet,
+	RadioGroupRow,
 	Select,
+	SelectRow,
 	SelectSet,
 	Spacer,
 	Spinner,
 	SubDashboard,
 	SubNavbarRow,
 	Switch,
-	SwitchSet,
+	SwitchRow,
 	TabSwitch,
 	Table,
 	TableInteractive,
@@ -277,3 +280,4 @@ export type RowStyleType = RowStyleTypeTemp;
 export type WidthAndHeightSize = WidthAndHeightSizeTemp;
 export type CardExtraActionType = CardExtraActionTypeTemp;
 export type TypographyOptionTypes = TypographyOptionTypesTemp;
+export type NumberInputValueType = NumberInputValueTypeTemp;
