@@ -1,49 +1,46 @@
 // React
 import React from 'react';
 
-// Vieolo UI
+// Private Components
+import TipIcon from '../private/tip_icon';
+
+
+// Public Components
 import Select from '../Select';
 
-// Types
-import { SelectItemType } from '../Select';
+type SelectPropType = React.ComponentProps<typeof Select>
 
-// Private
-import SetRowTemplate from '../private/SetRowTemplate';
 
 export default function SelectSet(props: {
-    title: string | React.ReactNode,
-    subtitle?: string | React.ReactNode,
-    items: SelectItemType[],
-    selectedItems: string[],
-    onSelect: (values: string[]) => void,
-    error: boolean,
-    clearable?: boolean,
-    searchable?: boolean,
-    multipleChoice?: boolean,
-    height?: 'medium' | 'small',
-    disabled?: boolean,
+    label: string,
+    tip?: string,
+} & SelectPropType) {
 
-}) {
-    return <SetRowTemplate
-        title={props.title}
-        subtitle={props.subtitle}
-        disabled={props.disabled}
-        handleKeyboardNav={false}
-        className="vieolo-select-set"
-        height={props.height}
-        rightSideComponent={
-            <Select
-            title={'Title'}
-            items={props.items}
-            selectedItems={props.selectedItems}
-            onSelect={props.onSelect}
-            error={props.error}
-            clearable={props.clearable}
-            searchable={props.searchable}
-            multipleChoice={props.multipleChoice}
-            height={props.height}
-            disabled={props.disabled}
-            />
-        }
-    />
-  }
+    let actionComponent;
+
+    if (props.tip) {
+        actionComponent = <div className="tip-div vieolo-tooltip">
+            <TipIcon />
+            <div className="tooltip-text-small tooltip-text-down-left">{props.tip}</div>
+        </div>
+    }
+
+    let className = `vieolo-select-set vieolo-select-set--${props.width || 'medium'}`
+    if (props.disabled) {
+        className += "disabled";
+    }
+
+    return <div
+        className={className} >
+        <div className="label-container">
+            <label>
+                {props.label}
+            </label>
+            {actionComponent && actionComponent}
+        </div>
+
+        <Select
+            {...props}
+        />
+    </div>
+}

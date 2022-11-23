@@ -8,9 +8,9 @@ import Switch from '../Switch';
 import { RowHeightType } from '../types/types';
 
 // Private
-import SetRowTemplate from '../private/SetRowTemplate';
+import SetRowTemplate from '../private/ComponentRowTemplate';
 
-export default function SwitchSet(props: {
+export default function SwitchRow(props: {
     title: string | React.ReactNode,
     subtitle?: string | React.ReactNode,
     on: boolean,

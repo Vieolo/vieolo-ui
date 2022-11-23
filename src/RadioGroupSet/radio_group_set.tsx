@@ -8,7 +8,7 @@ import { RadioButtonType } from '../RadioGroup';
 import { RowHeightType } from '../types/types';
 
 //Private
-import SetRowTemplate from '../private/SetRowTemplate';
+import SetRowTemplate from '../private/ComponentRowTemplate';
 
 export default function RadioGroupSet(props: {
     title: string | React.ReactNode,

@@ -149,6 +149,7 @@ body {
 }
 
 .vieolo-input-set,
+.vieolo-select-set,
 .vieolo-textarea-set {
 	.label-container {
 		height: 30px;
@@ -160,6 +161,20 @@ body {
 			font-size: 12px;
 			font-weight: $font-weight-bold;
 		}
+	}
+}
+
+.vieolo-select-set {
+	&--small {
+		width: 100px;
+	}
+
+	&--medium {
+		width: 160px;
+	}
+
+	&--full {
+		width: 100%;
 	}
 }
 
@@ -456,16 +471,38 @@ body {
 
 .vieolo-select {
 	display: inline-block;
-	width: 160px;
+
+	&--small {
+		width: 100px;
+
+		&__select-button {
+			width: 100px;
+		}
+	}
+
+	&--medium {
+		width: 160px;
+
+		&__select-button {
+			width: 160px;
+		}
+	}
+
+	&--full {
+		width: 100%;
+
+		&__select-button {
+			width: 100%;
+		}
+	}
 
 	&__select-button {
 		margin: 0 auto;
-		border: 2px solid $primary-color-light;
+		border: 2px solid $neutral-color;
 		border-radius: $border-radius-half;
 		cursor: pointer;
 		@include flex-row-space-between;
 		@include no-text-overflow;
-		width: 160px;
 		padding: 0 $base-unit-half;
 
 		&:focus {
@@ -2430,7 +2467,7 @@ body {
 	}
 }
 
-.vieolo-set-row-template {
+.vieolo-component-row-template {
 	padding: $base-unit-half;
 	grid-template-columns: 1fr 50px;
 	border: 2px solid transparent;

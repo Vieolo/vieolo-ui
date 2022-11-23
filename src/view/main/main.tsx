@@ -18,7 +18,7 @@ import { ButtonCreator, buttonOptions } from '../button/button.view';
 import { ChipCreator, chipOptions } from '../button/chip.view';
 import { InputSetCreator, inputSetOptions } from '../form/input_set.view';
 import { ListCreator, listOptions } from '../list/list.view';
-import { SwitchSetCreator, switchSetOptions } from '../form/switch_set.view';
+import { SwitchRowCreator, switchRowOptions } from '../form/switch_row.view';
 import { DropDownMenuCreator, dropDownMenuOptions } from '../menu/dropdown_menu.view';
 import { PDFViewerEmbeddedCreator, pdfViewerEmbeddedOptions } from '../file/pdf_viewer_embedded.view';
 import { PDFViewerFullScreenCreator, pdfViewerFullScreenOptions } from '../file/pdf_viewer_full_screen.view';
@@ -27,7 +27,7 @@ import { ConfirmationDialogCreator, confirmationDialogOptions } from '../dialog/
 import { TableCreator, tableOptions } from '../table/table.view';
 import { RadioGroupCreator, radioGroupOptions } from '../form/radio_group.view';
 import { RadioGroupSetCreator, radioGroupSetOptions } from '../form/radio_group_set.view';
-import { SelectSetCreator, selectSetOptions } from '../form/select_set.view';
+import { SelectRowCreator, selectRowOptions } from '../form/select_row.view';
 import { FormSectionCreator, formSectionOptions } from '../form/form_section.view';
 import { TabSwitchCreator, tabSwitchOptions } from '../layout/tab_switch.view';
 import { DatePickerCreator, datePickerOptions } from '../date_time/date_picker.view';
@@ -56,8 +56,9 @@ import { ActionCardCreator, actionCardOptions } from '../card/action_card.view';
 import { DoubleToggleListCreator, doubleToggleOptions } from '../list/double_toggle_list.view';
 import { fileViewerOptions, FileViewerCreator } from '../file/file_viewer.view';
 import { calendarStatisticOptions, CalendarStatisticCreator } from '../../CalendarStatistic/calendar_statistic.view';
+import { SelectSetCreator, selectSetOptions } from '../../SelectSet/select_set.view';
 import Select from '../../Select';
-import SwitchSet from '../../SwitchSet';
+import SwitchRow from '../../SwitchRow';
 import PageFrame from '../../PageFrame';
 
 // Charts
@@ -129,8 +130,9 @@ export default function MainPage(props: {}): JSX.Element {
         "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator, group: "Form" },
         "Radio Group": { title: "Radio Group", data: radioGroupOptions(), creator: RadioGroupCreator, group: "Form" },
         "Select": { title: "Select", data: selectOptions(), creator: SelectCreator, group: "Form" },
+        "Select Row": { title: "Select Row", data: selectRowOptions(), creator: SelectRowCreator, group: "Form" },
         "Select Set": { title: "Select Set", data: selectSetOptions(), creator: SelectSetCreator, group: "Form" },
-        "Switch Set": { title: "Switch Set", data: switchSetOptions(), creator: SwitchSetCreator, group: "Form" },
+        "Switch Row": { title: "Switch Row", data: switchRowOptions(), creator: SwitchRowCreator, group: "Form" },
         "Radio Group Set": { title: "Radio Group Set", data: radioGroupSetOptions(), creator: RadioGroupSetCreator, group: "Form" },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
         "Form Section": { title: "Form Section", data: formSectionOptions(), creator: FormSectionCreator, group: "Form" },
@@ -373,7 +375,7 @@ export default function MainPage(props: {}): JSX.Element {
                             </div>
                         } else {
                             return <div key={k} className="margin-bottom--one">
-                                <SwitchSet
+                                <SwitchRow
                                     on={finalState![k]}
                                     onChange={v => {
                                         let temp = { ...finalState }
