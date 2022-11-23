@@ -8,6 +8,7 @@ import TipIcon from '../private/tip_icon';
 // Public Components
 import Input from '../Input/input';
 import IconButton from '../IconButton';
+import Typography from '../Typography';
 
 
 
@@ -16,7 +17,7 @@ export default function InputSet(props: {
     ariaLabel?: string,
     placeholder?: string,
     tip?: string,
-    error: boolean,
+    error: boolean | string,
     value: string,
     onChange: (value: string) => void,
     disabled?: boolean,
@@ -69,7 +70,7 @@ export default function InputSet(props: {
 
         <Input
             value={props.value}
-            error={props.error}
+            error={props.error === true || (typeof props.error === 'string' && props.error.trim().length > 0)}
             onChange={props.onChange}
             placeholder={props.placeholder || ''}
             size={props.size}
@@ -79,5 +80,10 @@ export default function InputSet(props: {
             onKeyDown={props.onKeyDown}
             inputType={props.inputType}
         />
+
+        {
+            (typeof props.error === 'string' && props.error.trim().length > 0) &&
+            <Typography text={props.error} type='caption-medium' color='error' colorType='normal' className='vieolo-input-set__error' />
+        }
     </div>
 }

@@ -181,7 +181,7 @@ export default function Select(props: SelectProps) {
     let className = `vieolo-select vieolo-select--${props.width || 'medium'}`;
 
     if (props.disabled) {
-        className += "disabled"
+        className += " disabled"
     }
 
     return <div className={className} ref={container as any}>

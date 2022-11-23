@@ -22,6 +22,10 @@ export function inputSetOptions(): ViewData {
                 options: [false, true],
                 default: false,
             },
+            withErrorMessage: {
+                options: [false, true],
+                default: false,
+            },
             disabled: {
                 options: [false, true],
                 default: false,
@@ -63,7 +67,7 @@ export function InputSetCreator(props: {p: InputSetPropsType}) {
     }, [props.p.value])
 
     return <InputSet 
-        error={props.p.error}
+        error={props.p.error ? (props.p as any).withErrorMessage ? "Error message for the input" : true : false}
         label={"Label"}
         onChange={v => setValue(v)}
         value={value}

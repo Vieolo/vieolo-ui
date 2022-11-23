@@ -162,6 +162,11 @@ body {
 			font-weight: $font-weight-bold;
 		}
 	}
+
+	&__error {
+		padding-top: 2px;
+		padding-left: 2px;
+	}
 }
 
 .vieolo-select-set {
@@ -471,6 +476,7 @@ body {
 
 .vieolo-select {
 	display: inline-block;
+	$self: &;
 
 	&--small {
 		width: 100px;
@@ -511,6 +517,8 @@ body {
 		}
 
 		&--error {
+			border-color: $error-color-normal;
+		
 			p {
 				@include error-color;
 			}

@@ -7,13 +7,15 @@ import TipIcon from '../private/tip_icon';
 
 // Public Components
 import Select from '../Select';
+import Typography from '../Typography';
 
-type SelectPropType = React.ComponentProps<typeof Select>
+type SelectPropType = Omit<React.ComponentProps<typeof Select>, "error">
 
 
 export default function SelectSet(props: {
     label: string,
     tip?: string,
+    error: boolean | string
 } & SelectPropType) {
 
     let actionComponent;
@@ -27,7 +29,7 @@ export default function SelectSet(props: {
 
     let className = `vieolo-select-set vieolo-select-set--${props.width || 'medium'}`
     if (props.disabled) {
-        className += "disabled";
+        className += " disabled";
     }
 
     return <div
@@ -41,6 +43,12 @@ export default function SelectSet(props: {
 
         <Select
             {...props}
+            error={props.error === true || (typeof props.error === 'string' && props.error.length > 0)}
         />
+        
+        {
+            (typeof props.error === 'string' && props.error.trim().length > 0) &&
+            <Typography text={props.error} type='caption-medium' color='error' colorType='normal' className='vieolo-input-set__error' />
+        }
     </div>
 }

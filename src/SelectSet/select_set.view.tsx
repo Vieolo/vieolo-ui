@@ -43,6 +43,10 @@ export function selectSetOptions(): ViewData {
                 options: [false, true],
                 default: false
             },
+            withErrorMessage: {
+                options: [false, true],
+                default: false
+            },
             clearable: {
                 options: [false, true],
                 default: false
@@ -76,7 +80,7 @@ export function SelectSetCreator(props: { p: SelectSetPropsType }) {
     return <SelectSet
         label='Item'
         tip={(props.p as any).withTip ? 'This is a tip to the user' : undefined}
-        error={props.p.error}
+        error={props.p.error ? (props.p as any).withErrorMessage ? "Error message for select" : true : false}
         items={props.p.items}
         onSelect={o => setSelected(o)}
         selectedItems={selected}
