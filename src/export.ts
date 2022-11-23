@@ -51,6 +51,7 @@ import RadioGroup from './RadioGroup';
 import RadioGroupSet from './RadioGroupSet';
 import Select from './Select';
 import SelectRow from './SelectRow';
+import SelectSet from './SelectSet';
 import Spacer from './Spacer';
 import Spinner from './Spinner';
 import SubDashboard from './SubDashboard';
@@ -210,6 +211,7 @@ export {
 	RadioGroupSet,
 	Select,
 	SelectRow,
+	SelectSet,
 	Spacer,
 	Spinner,
 	SubDashboard,

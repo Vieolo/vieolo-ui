@@ -1,15 +1,16 @@
 // React
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // Vieolo UI
-import SelectRow from '../../SelectRow';
+import SelectSet from './select_set';
 
 // Types
-import { ViewData } from '../main/main';
+import { ViewData } from '../view/main/main';
 
-type SelectRowPropsType = React.ComponentProps<typeof SelectRow>;
+type SelectSetPropsType = React.ComponentProps<typeof SelectSet>;
 
-export function selectRowOptions(): ViewData {
+export function selectSetOptions(): ViewData {
+
     return {
         constants: {
             title: "Item",
@@ -28,10 +29,14 @@ export function selectRowOptions(): ViewData {
                 { title: "Twelve", value: "12", category: "Third", subTitle: "The Substitle" },
                 { title: "Thirteen", value: "13", category: "Third" }
             ]
-        } as Partial<SelectRowPropsType>,
+        } as Partial<SelectSetPropsType>,
         variables: {
             height: {
                 options: ["small", "medium"],
+                default: "medium"
+            },
+            width: {
+                options: ["small", "medium", "full"],
                 default: "medium"
             },
             error: {
@@ -54,41 +59,33 @@ export function selectRowOptions(): ViewData {
                 options: [false, true],
                 default: false,
             },
-            withSubtitle: {
-                options: [true, false],
-                default: false
-            },
-            titleType: {
-                options: ['string', 'component'],
-                default: 'string'
-            },
-            subtitleType: {
-                options: ['string', 'component'],
-                default: 'string'
-            },
+            withTip: 'boolean'
         }
     }
 }
 
-export function SelectRowCreator(props: { p: SelectRowPropsType }) {
-    const [selected, setSelected] = useState<string[]>(props.p.selectedItems || []);
+
+export function SelectSetCreator(props: { p: SelectSetPropsType }) {
+
+    let [selected, setSelected] = useState<string[]>(props.p.selectedItems || []);
 
     useEffect(() => {
         setSelected(props.p.selectedItems);
     }, [props.p.selectedItems])
 
-    return <SelectRow
-        placeHolder='Select'
-        rowTitle="Item"
-        rowSubtitle="Some other information"
+    return <SelectSet
+        label='Item'
+        tip={(props.p as any).withTip ? 'This is a tip to the user' : undefined}
         error={props.p.error}
         items={props.p.items}
         onSelect={o => setSelected(o)}
         selectedItems={selected}
+        placeHolder={(props.p as any).removeTitle ? "Select" : ""}
         clearable={props.p.clearable}
         searchable={props.p.searchable}
         multipleChoice={props.p.multipleChoice}
         height={props.p.height}
+        width={props.p.width}
         disabled={props.p.disabled}
     />
 }

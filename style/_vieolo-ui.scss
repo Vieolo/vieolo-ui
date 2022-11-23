@@ -149,6 +149,7 @@ body {
 }
 
 .vieolo-input-set,
+.vieolo-select-set,
 .vieolo-textarea-set {
 	.label-container {
 		height: 30px;
@@ -160,6 +161,20 @@ body {
 			font-size: 12px;
 			font-weight: $font-weight-bold;
 		}
+	}
+}
+
+.vieolo-select-set {
+	&--small {
+		width: 100px;
+	}
+
+	&--medium {
+		width: 160px;
+	}
+
+	&--full {
+		width: 100%;
 	}
 }
 

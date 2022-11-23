@@ -56,6 +56,7 @@ import { ActionCardCreator, actionCardOptions } from '../card/action_card.view';
 import { DoubleToggleListCreator, doubleToggleOptions } from '../list/double_toggle_list.view';
 import { fileViewerOptions, FileViewerCreator } from '../file/file_viewer.view';
 import { calendarStatisticOptions, CalendarStatisticCreator } from '../../CalendarStatistic/calendar_statistic.view';
+import { SelectSetCreator, selectSetOptions } from '../../SelectSet/select_set.view';
 import Select from '../../Select';
 import SwitchRow from '../../SwitchRow';
 import PageFrame from '../../PageFrame';
@@ -130,6 +131,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Radio Group": { title: "Radio Group", data: radioGroupOptions(), creator: RadioGroupCreator, group: "Form" },
         "Select": { title: "Select", data: selectOptions(), creator: SelectCreator, group: "Form" },
         "Select Row": { title: "Select Row", data: selectRowOptions(), creator: SelectRowCreator, group: "Form" },
+        "Select Set": { title: "Select Set", data: selectSetOptions(), creator: SelectSetCreator, group: "Form" },
         "Switch Row": { title: "Switch Row", data: switchRowOptions(), creator: SwitchRowCreator, group: "Form" },
         "Radio Group Set": { title: "Radio Group Set", data: radioGroupSetOptions(), creator: RadioGroupSetCreator, group: "Form" },
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },

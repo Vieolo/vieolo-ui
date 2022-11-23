@@ -36,6 +36,10 @@ export function selectOptions(): ViewData {
                 options: ["small", "medium"],
                 default: "medium"
             },
+            width: {
+                options: ["small", "medium", "full"],
+                default: "medium"
+            },
             error: {
                 options: [false, true],
                 default: false
@@ -80,6 +84,7 @@ export function SelectCreator(props: {p: SelectPropsType}) {
         searchable={props.p.searchable}
         multipleChoice={props.p.multipleChoice}
         height={props.p.height}
+        width={props.p.width}
         disabled={props.p.disabled}
     />
 
