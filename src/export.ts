@@ -48,7 +48,7 @@ import Page from './Page';
 import PageFrame from './PageFrame';
 import PeriodSelector , { PeriodOptions } from './PeriodSelector';
 import RadioGroup from './RadioGroup';
-import RadioGroupSet from './RadioGroupSet';
+import RadioGroupRow from './RadioGroupRow';
 import Select from './Select';
 import SelectRow from './SelectRow';
 import SelectSet from './SelectSet';
@@ -208,7 +208,7 @@ export {
 	PeriodSelector,
 	PeriodOptions,
 	RadioGroup,
-	RadioGroupSet,
+	RadioGroupRow,
 	Select,
 	SelectRow,
 	SelectSet,

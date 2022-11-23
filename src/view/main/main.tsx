@@ -26,7 +26,7 @@ import { FormDialogCreator, formDialogOptions } from '../dialog/form_dialog.view
 import { ConfirmationDialogCreator, confirmationDialogOptions } from '../dialog/confirmation_dialog.view';
 import { TableCreator, tableOptions } from '../table/table.view';
 import { RadioGroupCreator, radioGroupOptions } from '../form/radio_group.view';
-import { RadioGroupSetCreator, radioGroupSetOptions } from '../form/radio_group_set.view';
+import { RadioGroupRowCreator, radioGroupRowOptions  } from '../form/radio_group_row.view';
 import { SelectRowCreator, selectRowOptions } from '../form/select_row.view';
 import { FormSectionCreator, formSectionOptions } from '../form/form_section.view';
 import { TabSwitchCreator, tabSwitchOptions } from '../layout/tab_switch.view';
@@ -135,7 +135,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Select Row": { title: "Select Row", data: selectRowOptions(), creator: SelectRowCreator, group: "Form" },
         "Select Set": { title: "Select Set", data: selectSetOptions(), creator: SelectSetCreator, group: "Form" },
         "Switch Row": { title: "Switch Row", data: switchRowOptions(), creator: SwitchRowCreator, group: "Form" },
-        "Radio Group Set": { title: "Radio Group Set", data: radioGroupSetOptions(), creator: RadioGroupSetCreator, group: "Form" },
+        "Radio Group Row": { title: "Radio Group Row", data: radioGroupRowOptions(), creator: RadioGroupRowCreator, group: "Form" },
         "Form Section": { title: "Form Section", data: formSectionOptions(), creator: FormSectionCreator, group: "Form" },
 
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
