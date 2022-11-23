@@ -38,7 +38,7 @@ type SelectProps = {
     height?: 'medium' | 'small',
     disabled?: boolean,
     ariaLabel?: string,
-    width?: 'medium' | 'full'
+    width?: 'small' | 'medium' | 'full'
 }
 
 
