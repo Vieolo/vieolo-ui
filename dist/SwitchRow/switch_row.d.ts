@@ -1,6 +1,6 @@
 import React from 'react';
 import { RowHeightType } from '../types/types';
-export default function SwitchSet(props: {
+export default function SwitchRow(props: {
     title: string | React.ReactNode;
     subtitle?: string | React.ReactNode;
     on: boolean;

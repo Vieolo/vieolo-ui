@@ -2,16 +2,16 @@ import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-run
 // Vieolo UI
 import Typography from '../Typography';
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
-export default function SetRowTemplate(props) {
-    let c = `vieolo-set-row-template`;
+export default function ComponentRowTemplate(props) {
+    let c = `vieolo-component-row-template`;
     if (props.height && props.height !== 'default') {
         c += ` row-height--${props.height}`;
     }
     else {
-        c += " vieolo-set-row-template--height-default";
+        c += " vieolo-component-row-template--height-default";
     }
     if (props.onRowClick)
-        c += " vieolo-set-row-template--clickable";
+        c += " vieolo-component-row-template--clickable";
     if (props.className)
         c += ` ${props.className}`;
     if (props.disabled)
@@ -26,7 +26,7 @@ export default function SetRowTemplate(props) {
                         props.onRowClick();
                 }
             });
-        }, children: [_jsxs("div", { className: "vieolo-set-row-template__title-container", onClick: e => {
+        }, children: [_jsxs("div", { className: "vieolo-component-row-template__title-container", onClick: e => {
                     e.stopPropagation();
                     if (props.onRowClick)
                         props.onRowClick();
@@ -35,5 +35,5 @@ export default function SetRowTemplate(props) {
                         : _jsx(_Fragment, { children: props.title }), props.subtitle &&
                         _jsx(_Fragment, { children: typeof props.subtitle === 'string'
                                 ? _jsx(Typography, { type: 'caption-large', text: props.subtitle })
-                                : _jsx(_Fragment, { children: props.subtitle }) })] }), _jsx("div", { className: 'vieolo-set-row-template__right-container', children: props.rightSideComponent })] });
+                                : _jsx(_Fragment, { children: props.subtitle }) })] }), _jsx("div", { className: 'vieolo-component-row-template__right-container', children: props.rightSideComponent })] });
 }

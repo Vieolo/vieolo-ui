@@ -2,8 +2,8 @@ import { jsx as _jsx } from "react/jsx-runtime";
 // Vieolo UI
 import Switch from '../Switch';
 // Private
-import SetRowTemplate from '../private/SetRowTemplate';
-export default function SwitchSet(props) {
+import SetRowTemplate from '../private/ComponentRowTemplate';
+export default function SwitchRow(props) {
     function handleChange() {
         props.onChange(!props.on);
     }

@@ -122,7 +122,16 @@ export default function Select(props) {
         items.push(_jsx(SelectItem, { item: item, isSelected: props.selectedItems.includes(item.value), previousItem: prev, onKeyboardFocus: itemKeyboardFocus === item.value, onSelect: (t) => handleSelectItem(t), itemRef: item.value === itemKeyboardFocus ? itemKeyboardRef : undefined }, item.value));
     }
     const itemsComponent = _jsx("div", { className: "vieolo-select__select-dropdown", style: style, role: "list", children: items });
-    return _jsxs("div", { className: `vieolo-select${props.disabled ? ' disabled' : ''}`, ref: container, children: [_jsxs("div", { className: `vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${props.height || 'medium'}`, onClick: e => handleOpen(e), tabIndex: 0, role: "button", "aria-label": `Select ${props.title}`, onKeyDown: e => {
+    let height = 'small';
+    if (props.height)
+        height = props.height;
+    else if (props.title)
+        height = 'medium';
+    let className = `vieolo-select vieolo-select--${props.width || 'medium'}`;
+    if (props.disabled) {
+        className += " disabled";
+    }
+    return _jsxs("div", { className: className, ref: container, children: [_jsxs("div", { className: `vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${height}`, onClick: e => handleOpen(e), tabIndex: 0, role: "button", "aria-label": props.ariaLabel || `Select ${props.title}`, onKeyDown: e => {
                     if (props.disabled)
                         return;
                     handleOnKeyDown(e, {
@@ -182,8 +191,10 @@ export default function Select(props) {
                 }, children: [_jsxs("div", { className: "vieolo-select__select-button__button-text", onClick: e => {
                             e.stopPropagation();
                             handleOpen(e);
-                        }, children: [_jsx(Typography, { type: 'paragraph-small', text: props.title, className: "vieolo-select__select-button__button-text__button-title" }), (props.searchable && open)
-                                ? _jsx("input", { autoFocus: true, value: searchQuery, onChange: e => setSearchQuery(e.target.value), placeholder: "Search...", "aria-label": `Search ${props.title} items` })
+                        }, children: [props.title &&
+                                _jsx(Typography, { type: 'paragraph-small', text: props.title, className: "vieolo-select__select-button__button-text__button-title" }), (!props.title && props.placeHolder && (!props.selectedItems || props.selectedItems.length === 0)) &&
+                                _jsx(Typography, { type: 'caption-large', text: props.placeHolder, className: "vieolo-select__select-button__button-text__button-title" }), (props.searchable && open)
+                                ? _jsx("input", { autoFocus: true, value: searchQuery, onChange: e => setSearchQuery(e.target.value), placeholder: "Search...", "aria-label": props.ariaLabel ? (props.ariaLabel + " items") : `Search ${props.title} items` })
                                 : _jsx(Typography, { type: 'title-small', text: thisSelectedItems.map(s => s.title).join(", "), className: "vieolo-select__select-button__button-text__button-value" })] }), (!props.clearable || (props.clearable && (!props.selectedItems || props.selectedItems.length === 0)))
                         ? _jsx(DownIcon, {})
                         : _jsx(IconButton, { icon: _jsx(CloseIcon, {}), onClick: e => {

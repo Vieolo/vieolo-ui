@@ -1,15 +1,9 @@
 import React from 'react';
-import { SelectItemType } from '../Select';
+import Select from '../Select';
+type SelectPropType = Omit<React.ComponentProps<typeof Select>, "error">;
 export default function SelectSet(props: {
-    title: string | React.ReactNode;
-    subtitle?: string | React.ReactNode;
-    items: SelectItemType[];
-    selectedItems: string[];
-    onSelect: (values: string[]) => void;
-    error: boolean;
-    clearable?: boolean;
-    searchable?: boolean;
-    multipleChoice?: boolean;
-    height?: 'medium' | 'small';
-    disabled?: boolean;
-}): JSX.Element;
+    label: string;
+    tip?: string;
+    error: boolean | string;
+} & SelectPropType): JSX.Element;
+export {};

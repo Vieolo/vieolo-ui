@@ -1,7 +1,7 @@
 import React from 'react';
 import { RadioButtonType } from '../RadioGroup';
 import { RowHeightType } from '../types/types';
-export default function RadioGroupSet(props: {
+export default function RadioGroupRow(props: {
     title: string | React.ReactNode;
     subtitle?: string | React.ReactNode;
     value: string;

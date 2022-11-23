@@ -3,7 +3,7 @@ import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useState, useRef, useEffect } from 'react';
 // Vieolo UI
 import Typography from '../Typography';
-import SwitchSet from '../SwitchSet';
+import SwitchRow from '../SwitchRow';
 // Utility
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
 export default function DropDownMenu(props) {
@@ -159,7 +159,7 @@ function DropDownMenuItem(props) {
     if (props.onKeyboardFocus)
         className += ` vieolo-dropdown-menu__dropdown-item--keyboard-focus`;
     if (props.switch) {
-        return _jsx(SwitchSet, { on: props.switch.on, onChange: () => {
+        return _jsx(SwitchRow, { on: props.switch.on, onChange: () => {
                 props.onClick(props.value, false);
             }, switchID: `dropdown_${props.value}_switch`, title: props.title, ariaLabel: props.switch.ariaLabel, disabled: props.switch.disabled, subtitle: props.switch.subTitle });
     }

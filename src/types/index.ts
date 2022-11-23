@@ -11,6 +11,7 @@ import {
 	WidthAndHeightSize as WidthAndHeightSizeTemp,
 	CardExtraActionType as CardExtraActionTypeTemp,
 	TypographyOptionTypes as TypographyOptionTypesTemp,
+	NumberInputValueType as NumberInputValueTypeTemp,
 } from './types';
 
 
@@ -26,3 +27,4 @@ export type RowStyleType = RowStyleTypeTemp;
 export type WidthAndHeightSize = WidthAndHeightSizeTemp;
 export type CardExtraActionType = CardExtraActionTypeTemp;
 export type TypographyOptionTypes = TypographyOptionTypesTemp;
+export type NumberInputValueType = NumberInputValueTypeTemp;

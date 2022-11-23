@@ -1,5 +1,18 @@
 # Change Log
 
+## 0.24.0 (2022-11-23)
+- Added width to `Select`
+- Added error message to set components
+- Added `SelectSet`
+
+#### Breaking Changes
+- Disabled the sorting of items of `List` by default ([#177](https://github.com/Vieolo/vieolo-ui/issues/177))
+- Renamed the `SelectSet` to `SelectRow`
+- Renamed the `SwitchSet` to `SwitchRow`
+- Renamed the `RadioGroupSet` to `RadioGroupRow`
+- Changed the value of the `NumberInputSet` from array to object
+- Changed the arguments of `selectOptionFromSelect` of `VieoloUIInteraction` of `cypressTools`
+
 ## 0.23.18 (2022-11-20)
 - Updated dependencies
 
