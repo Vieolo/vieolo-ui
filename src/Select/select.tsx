@@ -37,6 +37,8 @@ type SelectProps = {
     multipleChoice?: boolean,
     height?: 'medium' | 'small',
     disabled?: boolean,
+    ariaLabel?: string,
+    width?: 'medium' | 'full'
 }
 
 
@@ -176,13 +178,19 @@ export default function Select(props: SelectProps) {
     if (props.height) height = props.height
     else if (props.title) height = 'medium'
 
-    return <div className={`vieolo-select${props.disabled ? ' disabled' : ''}`} ref={container as any}>
+    let className = `vieolo-select vieolo-select--${props.width || 'medium'}`;
+
+    if (props.disabled) {
+        className += "disabled"
+    }
+
+    return <div className={className} ref={container as any}>
         <div
             className={`vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${height}`}
             onClick={e => handleOpen(e)}
             tabIndex={0}
             role="button"
-            aria-label={`Select ${props.title}`}
+            aria-label={props.ariaLabel || `Select ${props.title}`}
             onKeyDown={e => {
                 if (props.disabled) return
                 handleOnKeyDown(e, {
@@ -257,7 +265,7 @@ export default function Select(props: SelectProps) {
                             value={searchQuery}
                             onChange={e => setSearchQuery(e.target.value)}
                             placeholder="Search..."
-                            aria-label={`Search ${props.title} items`}
+                            aria-label={props.ariaLabel ? (props.ariaLabel + " items") : `Search ${props.title} items`}
                         />
                         : <Typography type='title-small' text={thisSelectedItems.map(s => s.title).join(", ")} className="vieolo-select__select-button__button-text__button-value" />
                 }

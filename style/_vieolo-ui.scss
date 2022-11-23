@@ -456,7 +456,30 @@ body {
 
 .vieolo-select {
 	display: inline-block;
-	width: 160px;
+
+	&--small {
+		width: 100px;
+
+		&__select-button {
+			width: 100px;
+		}
+	}
+
+	&--medium {
+		width: 160px;
+
+		&__select-button {
+			width: 160px;
+		}
+	}
+
+	&--full {
+		width: 100%;
+
+		&__select-button {
+			width: 100%;
+		}
+	}
 
 	&__select-button {
 		margin: 0 auto;
@@ -465,7 +488,6 @@ body {
 		cursor: pointer;
 		@include flex-row-space-between;
 		@include no-text-overflow;
-		width: 160px;
 		padding: 0 $base-unit-half;
 
 		&:focus {
