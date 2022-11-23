@@ -136,8 +136,10 @@ export default function MainPage(props: {}): JSX.Element {
         "Select Set": { title: "Select Set", data: selectSetOptions(), creator: SelectSetCreator, group: "Form" },
         "Switch Row": { title: "Switch Row", data: switchRowOptions(), creator: SwitchRowCreator, group: "Form" },
         "Radio Group Set": { title: "Radio Group Set", data: radioGroupSetOptions(), creator: RadioGroupSetCreator, group: "Form" },
-        "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
         "Form Section": { title: "Form Section", data: formSectionOptions(), creator: FormSectionCreator, group: "Form" },
+
+        "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
+
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator, group: "Layout" },
 
         "Divider": { title: "Divider", data: dividerOptions(), creator: DividerCreator, group: "Layout/Auxiliary" },
@@ -268,6 +270,7 @@ export default function MainPage(props: {}): JSX.Element {
             <div className="component-list">
 
                 <List
+                    enableSorting
                     height={Device.isTouchOnlyDevice ? '80vh' : 'calc(100vh - 70px)'}
                     itemStyle={{
                         height: 'medium',
