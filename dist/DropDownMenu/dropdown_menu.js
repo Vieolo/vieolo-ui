@@ -1,9 +1,11 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 // React
 import { useState, useRef, useEffect } from 'react';
 // Vieolo UI
 import Typography from '../Typography';
 import SwitchRow from '../SwitchRow';
+// Installed Packages
+import Device from '@vieolo/device-js';
 // Utility
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
 export default function DropDownMenu(props) {
@@ -45,7 +47,7 @@ export default function DropDownMenu(props) {
         if (!props.disabled) {
             if (e)
                 e.stopPropagation();
-            if (!open) {
+            if (!open && !Device.isTouchOnlyDevice) {
                 let rect = container.current.getBoundingClientRect();
                 let displaySize = { width: window.innerWidth, height: window.innerHeight };
                 let r = 0, l = 0, t = 0, b = 0;
@@ -88,14 +90,16 @@ export default function DropDownMenu(props) {
     if (props.disabled)
         className += " disabled";
     let style = {};
-    if (right !== 0)
-        style.right = right;
-    if (left !== 0)
-        style.left = left;
-    if (top !== 0)
-        style.top = top;
-    if (bottom !== 0)
-        style.bottom = bottom;
+    if (!Device.isTouchOnlyDevice) {
+        if (right !== 0)
+            style.right = right;
+        if (left !== 0)
+            style.left = left;
+        if (top !== 0)
+            style.top = top;
+        if (bottom !== 0)
+            style.bottom = bottom;
+    }
     return _jsxs("div", { className: className, ref: container, children: [_jsx("div", { onClick: e => handleOpen(e), tabIndex: 0, onKeyDown: e => {
                     handleOnKeyDown(e, {
                         onEnter: () => {
@@ -146,13 +150,16 @@ export default function DropDownMenu(props) {
                         }
                     });
                 }, children: props.buttonComponent }), open &&
-                _jsx("div", { className: `vieolo-dropdown-menu__dropdown`, style: style, children: props.items.map((item, i) => {
-                        return _jsx(DropDownMenuItem, { title: item.title, topBorder: item.topBorder, value: item.value, icon: item.icon, color: item.color, switch: item.switch, onClick: (v, closeDialog) => {
-                                if (closeDialog)
-                                    setOpen(!open);
-                                props.onItemSelect(v);
-                            }, onItemSelect: (t) => { handleSelectItem(t); }, onKeyboardFocus: itemKeyboardFocus === item.value, itemRef: item.value === itemKeyboardFocus ? itemKeyboardRef : undefined }, `${item.value}_${i}`);
-                    }) })] });
+                _jsxs(_Fragment, { children: [_jsx("div", { className: "vieolo-dropdown-menu__backdrop", onClick: (e) => {
+                                e.stopPropagation();
+                                setOpen(!open);
+                            } }), _jsx("div", { className: `vieolo-dropdown-menu__dropdown`, style: style, children: props.items.map((item, i) => {
+                                return _jsx(DropDownMenuItem, { title: item.title, topBorder: item.topBorder, value: item.value, icon: item.icon, color: item.color, switch: item.switch, onClick: (v, closeDialog) => {
+                                        if (closeDialog)
+                                            setOpen(!open);
+                                        props.onItemSelect(v);
+                                    }, onItemSelect: (t) => { handleSelectItem(t); }, onKeyboardFocus: itemKeyboardFocus === item.value, itemRef: item.value === itemKeyboardFocus ? itemKeyboardRef : undefined }, `${item.value}_${i}`);
+                            }) })] })] });
 }
 function DropDownMenuItem(props) {
     let className = ` vieolo-dropdown-menu__dropdown-item ${props.topBorder ? "vieolo-dropdown-menu__dropdown-item--top-border" : ''} color--${props.color || 'primary'}-normal`;
