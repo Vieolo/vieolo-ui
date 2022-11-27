@@ -685,12 +685,13 @@ body {
 		border-radius: $border-radius-half;
 		max-height: 240px;
 		overflow: scroll;
+		padding: $base-unit-half;
 	}
 
 	&__dropdown-item {
 		padding: $base-unit-half;
 		cursor: pointer;
-		// border-radius: $border-radius-half;
+		border-radius: $border-radius-half;
 		@include transition;
 		display: flex;
 		align-items: center;
