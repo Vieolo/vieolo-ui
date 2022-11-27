@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.24.1 (2022-11-28)
+- Fixed the responsiveness of the `DropDownMenu` ([#198](https://github.com/Vieolo/vieolo-ui/issues/198))
+- Improved the responsiveness of `Select`
+
 ## 0.24.0 (2022-11-23)
 - Added width to `Select`
 - Added error message to set components

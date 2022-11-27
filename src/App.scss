@@ -11,12 +11,12 @@
     &--no-content {
         @media all and (max-width: $mobileBreakPoint) {
             grid-template-columns: 50% 1fr;
-    
+
             .component-state-display {
                 display: none;
             }
         }
-    }    
+    }
 
     &--content {
         @media all and (max-width: $mobileBreakPoint) {
@@ -25,15 +25,15 @@
             .component-list,
             .state-list {
                 display: none;
-            }            
-        }    
+            }
+        }
     }
 
     .component-list,
     .state-list,
     .component-state-display {
         height: calc(100vh - 20px - $navbar-height);
-        overflow-y: scroll;        
+        overflow-y: scroll;
     }
 
     .component-list,
@@ -43,12 +43,12 @@
         }
     }
 
-    
+
 
     .component-state-display {
         padding: 20px;
-        @include card-no-shadow;            
-        
+        @include card-no-shadow;
+
         @media (pointer: coarse) {
             @include height--100vh-fill;
         }

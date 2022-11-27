@@ -1,4 +1,4 @@
-import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 // React
 import { Fragment, useEffect, useRef, useState } from 'react';
 //Installed Packages
@@ -9,8 +9,6 @@ import CloseIcon from '@mui/icons-material/CloseRounded';
 // Vieolo UI
 import IconButton from '../IconButton';
 import Typography from '../Typography';
-import Modal from '../Modal/modal';
-import Card from '../Card/card';
 // Utility
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
 export default function Select(props) {
@@ -19,6 +17,7 @@ export default function Select(props) {
     let [left, setLeft] = useState(0);
     let [bottom, setBottom] = useState(0);
     let [right, setRight] = useState(0);
+    let [virtKeyboardOffset, setVirtKeyboardOffset] = useState(0);
     // eslint-disable-next-line
     let [container, setContainer] = useState(useRef(null));
     let [searchQuery, setSearchQuery] = useState("");
@@ -37,6 +36,27 @@ export default function Select(props) {
             document.removeEventListener("click", handleClickOutside);
         };
     }, [container]);
+    useEffect(() => {
+        const handleVirtualKeyboard = (event) => {
+            const viewport = window.visualViewport;
+            setVirtKeyboardOffset(window.innerHeight - viewport.height);
+        };
+        if (open && Device.isTouchOnlyDevice && Device.isAnAppleDevice() && window.visualViewport) {
+            window.visualViewport.addEventListener("resize", handleVirtualKeyboard);
+            window.visualViewport.addEventListener("scroll", handleVirtualKeyboard);
+        }
+        else if (!open && Device.isTouchOnlyDevice && Device.isAnAppleDevice() && window.visualViewport) {
+            window.visualViewport.removeEventListener("resize", handleVirtualKeyboard);
+            window.visualViewport.removeEventListener("scroll", handleVirtualKeyboard);
+            setVirtKeyboardOffset(0);
+        }
+        return () => {
+            if (open && Device.isTouchOnlyDevice && Device.isAnAppleDevice() && window.visualViewport) {
+                window.visualViewport.removeEventListener("resize", handleVirtualKeyboard);
+                window.visualViewport.removeEventListener("scroll", handleVirtualKeyboard);
+            }
+        };
+    }, [open]);
     useEffect(() => {
         let main = document.querySelector('main');
         if (main) {
@@ -106,14 +126,19 @@ export default function Select(props) {
     }
     let thisSelectedItems = getSelectedItems(props.selectedItems);
     let style = {};
-    if (right !== 0)
-        style.right = right;
-    if (left !== 0)
-        style.left = left;
-    if (top !== 0)
-        style.top = top;
-    if (bottom !== 0)
-        style.bottom = bottom;
+    if (!Device.isTouchOnlyDevice) {
+        if (right !== 0)
+            style.right = right;
+        if (left !== 0)
+            style.left = left;
+        if (top !== 0)
+            style.top = top;
+        if (bottom !== 0)
+            style.bottom = bottom;
+    }
+    if (virtKeyboardOffset) {
+        style.maxHeight = '25vh';
+    }
     let items = [];
     let filtered = props.items.filter(item => (!searchQuery.trim() || item.title.toLowerCase().includes(searchQuery.toLowerCase())));
     for (let i = 0; i < filtered.length; i++) {
@@ -128,9 +153,13 @@ export default function Select(props) {
     else if (props.title)
         height = 'medium';
     let className = `vieolo-select vieolo-select--${props.width || 'medium'}`;
+    if (props.searchable) {
+        className += " vieolo-select--searchable";
+    }
     if (props.disabled) {
         className += " disabled";
     }
+    let searchInput = _jsx("input", { autoFocus: true, value: searchQuery, onChange: e => setSearchQuery(e.target.value), placeholder: "Search...", "aria-label": props.ariaLabel ? (props.ariaLabel + " items") : `Search ${props.title} items` });
     return _jsxs("div", { className: className, ref: container, children: [_jsxs("div", { className: `vieolo-select__select-button${props.error ? ' vieolo-select__select-button--error' : ''} vieolo-select__select-button--${height}`, onClick: e => handleOpen(e), tabIndex: 0, role: "button", "aria-label": props.ariaLabel || `Select ${props.title}`, onKeyDown: e => {
                     if (props.disabled)
                         return;
@@ -193,15 +222,18 @@ export default function Select(props) {
                             handleOpen(e);
                         }, children: [props.title &&
                                 _jsx(Typography, { type: 'paragraph-small', text: props.title, className: "vieolo-select__select-button__button-text__button-title" }), (!props.title && props.placeHolder && (!props.selectedItems || props.selectedItems.length === 0)) &&
-                                _jsx(Typography, { type: 'caption-large', text: props.placeHolder, className: "vieolo-select__select-button__button-text__button-title" }), (props.searchable && open)
-                                ? _jsx("input", { autoFocus: true, value: searchQuery, onChange: e => setSearchQuery(e.target.value), placeholder: "Search...", "aria-label": props.ariaLabel ? (props.ariaLabel + " items") : `Search ${props.title} items` })
+                                _jsx(Typography, { type: 'caption-large', text: props.placeHolder, className: "vieolo-select__select-button__button-text__button-title" }), (props.searchable && open && !Device.isTouchOnlyDevice)
+                                ? searchInput
                                 : _jsx(Typography, { type: 'title-small', text: thisSelectedItems.map(s => s.title).join(", "), className: "vieolo-select__select-button__button-text__button-value" })] }), (!props.clearable || (props.clearable && (!props.selectedItems || props.selectedItems.length === 0)))
                         ? _jsx(DownIcon, {})
                         : _jsx(IconButton, { icon: _jsx(CloseIcon, {}), onClick: e => {
                                 e.stopPropagation();
                                 props.onSelect([]);
                             }, color: "error", size: "extra-small" })] }), open && (Device.isTouchOnlyDevice ?
-                _jsx(Modal, { onClose: () => setOpen(false), children: _jsxs(Card, { children: [_jsx(Typography, { type: 'title-small', text: props.title || '', className: 'vieolo-select__modal-title' }), itemsComponent] }) })
+                _jsxs(_Fragment, { children: [_jsx("div", { className: "vieolo-select__backdrop", onClick: (e) => {
+                                e.stopPropagation();
+                                setOpen(!open);
+                            } }), _jsxs("div", { className: `vieolo-select__modal`, style: virtKeyboardOffset ? { bottom: (virtKeyboardOffset) + "px", maxHeight: '35vh' } : undefined, children: [props.searchable && searchInput, _jsx("div", { className: 'vieolo-select__modal__container', children: itemsComponent })] })] })
                 : itemsComponent)] });
 }
 function SelectItem(props) {

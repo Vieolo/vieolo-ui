@@ -11,8 +11,6 @@ import CloseIcon from '@mui/icons-material/CloseRounded';
 // Vieolo UI
 import IconButton from '../IconButton';
 import Typography from '../Typography';
-import Modal from '../Modal/modal';
-import Card from '../Card/card';
 
 // Utility
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
@@ -49,6 +47,7 @@ export default function Select(props: SelectProps) {
     let [left, setLeft] = useState<number>(0);
     let [bottom, setBottom] = useState<number>(0);
     let [right, setRight] = useState<number>(0);
+    let [virtKeyboardOffset, setVirtKeyboardOffset] = useState<number>(0);
     // eslint-disable-next-line
     let [container, setContainer] = useState(useRef<HTMLDivElement>(null));
     let [searchQuery, setSearchQuery] = useState("");
@@ -71,6 +70,28 @@ export default function Select(props: SelectProps) {
             document.removeEventListener("click", handleClickOutside);
         }
     }, [container])
+
+    useEffect(() => {
+        const handleVirtualKeyboard = (event: Event) => {
+            const viewport = window.visualViewport!;
+            setVirtKeyboardOffset(window.innerHeight - viewport.height)
+        }
+
+        if (open && Device.isTouchOnlyDevice && Device.isAnAppleDevice() && window.visualViewport) {
+            window.visualViewport.addEventListener("resize", handleVirtualKeyboard);
+            window.visualViewport.addEventListener("scroll", handleVirtualKeyboard);
+        } else if (!open && Device.isTouchOnlyDevice && Device.isAnAppleDevice() && window.visualViewport) {
+            window.visualViewport.removeEventListener("resize", handleVirtualKeyboard);
+            window.visualViewport.removeEventListener("scroll", handleVirtualKeyboard);
+            setVirtKeyboardOffset(0)
+        }
+        return () => {
+            if (open && Device.isTouchOnlyDevice && Device.isAnAppleDevice() && window.visualViewport) {
+                window.visualViewport.removeEventListener("resize", handleVirtualKeyboard);
+                window.visualViewport.removeEventListener("scroll", handleVirtualKeyboard);
+            }
+        }
+    }, [open])
 
     useEffect(() => {
         let main = document.querySelector('main')
@@ -146,10 +167,16 @@ export default function Select(props: SelectProps) {
 
     let style: CSSProperties = {}
 
-    if (right !== 0) style.right = right;
-    if (left !== 0) style.left = left;
-    if (top !== 0) style.top = top;
-    if (bottom !== 0) style.bottom = bottom;
+    if (!Device.isTouchOnlyDevice) {
+        if (right !== 0) style.right = right;
+        if (left !== 0) style.left = left;
+        if (top !== 0) style.top = top;
+        if (bottom !== 0) style.bottom = bottom;
+    }
+
+    if (virtKeyboardOffset) {
+        style.maxHeight = '25vh'
+    }
 
     let items: React.ReactNode[] = [];
     let filtered = props.items.filter(item => (!searchQuery.trim() || item.title.toLowerCase().includes(searchQuery.toLowerCase())));
@@ -180,9 +207,21 @@ export default function Select(props: SelectProps) {
 
     let className = `vieolo-select vieolo-select--${props.width || 'medium'}`;
 
+    if (props.searchable) {
+        className += " vieolo-select--searchable"
+    }
+
     if (props.disabled) {
         className += " disabled"
     }
+
+    let searchInput = <input
+        autoFocus
+        value={searchQuery}
+        onChange={e => setSearchQuery(e.target.value)}
+        placeholder="Search..."
+        aria-label={props.ariaLabel ? (props.ariaLabel + " items") : `Search ${props.title} items`}
+    />
 
     return <div className={className} ref={container as any}>
         <div
@@ -259,14 +298,8 @@ export default function Select(props: SelectProps) {
                     <Typography type='caption-large' text={props.placeHolder} className="vieolo-select__select-button__button-text__button-title" />
                 }
                 {
-                    (props.searchable && open)
-                        ? <input
-                            autoFocus
-                            value={searchQuery}
-                            onChange={e => setSearchQuery(e.target.value)}
-                            placeholder="Search..."
-                            aria-label={props.ariaLabel ? (props.ariaLabel + " items") : `Search ${props.title} items`}
-                        />
+                    (props.searchable && open && !Device.isTouchOnlyDevice)
+                        ? searchInput
                         : <Typography type='title-small' text={thisSelectedItems.map(s => s.title).join(", ")} className="vieolo-select__select-button__button-text__button-value" />
                 }
             </div>
@@ -288,12 +321,23 @@ export default function Select(props: SelectProps) {
         </div>
         {
             open && (Device.isTouchOnlyDevice ?
-                <Modal onClose={() => setOpen(false)}>
-                    <Card >
-                        <Typography type='title-small' text={props.title || ''} className='vieolo-select__modal-title' />
-                        {itemsComponent}
-                    </Card>
-                </Modal>
+                <>
+                    <div
+                        className="vieolo-select__backdrop"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            setOpen(!open)
+                        }}
+                    >
+                    </div>
+
+                    <div className={`vieolo-select__modal`} style={virtKeyboardOffset ? {bottom: (virtKeyboardOffset) + "px", maxHeight: '35vh'} : undefined}>
+                        {props.searchable && searchInput}
+                        <div className='vieolo-select__modal__container'>
+                            {itemsComponent}
+                        </div>
+                    </div>
+                </>
                 : itemsComponent
             )
         }
