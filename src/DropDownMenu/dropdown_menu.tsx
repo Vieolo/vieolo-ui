@@ -5,6 +5,9 @@ import React, { useState, useRef, useEffect, CSSProperties } from 'react';
 import Typography from '../Typography';
 import SwitchRow from '../SwitchRow';
 
+// Installed Packages
+import Device from '@vieolo/device-js';
+
 // Types
 import { ColorOptionType } from '../types/types';
 
@@ -87,7 +90,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
     function handleOpen(e?: React.MouseEvent<HTMLDivElement, MouseEvent>, openedByKeyboard?: boolean) {
         if (!props.disabled) {
             if (e) e.stopPropagation();
-            if (!open) {
+            if (!open && !Device.isTouchOnlyDevice) {
                 let rect = container.current!.getBoundingClientRect();
                 let displaySize = { width: window.innerWidth, height: window.innerHeight }
                 let r = 0,
@@ -133,10 +136,12 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 
     let style: CSSProperties = {}
 
-    if (right !== 0) style.right = right;
-    if (left !== 0) style.left = left;
-    if (top !== 0) style.top = top;
-    if (bottom !== 0) style.bottom = bottom;
+    if (!Device.isTouchOnlyDevice) {
+        if (right !== 0) style.right = right;
+        if (left !== 0) style.left = left;
+        if (top !== 0) style.top = top;
+        if (bottom !== 0) style.bottom = bottom;
+    }
 
 
     return <div className={className} ref={container as any}>
@@ -196,28 +201,38 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 
         {
             open &&
-            <div className={`vieolo-dropdown-menu__dropdown`} style={style} >
-                {
-                    props.items.map((item, i) => {
-                        return <DropDownMenuItem
-                            key={`${item.value}_${i}`}
-                            title={item.title}
-                            topBorder={item.topBorder}
-                            value={item.value}
-                            icon={item.icon}
-                            color={item.color}
-                            switch={item.switch}
-                            onClick={(v: string, closeDialog: boolean) => {
-                                if (closeDialog) setOpen(!open);
-                                props.onItemSelect(v);
-                            }}
-                            onItemSelect={(t: DropDownMenuItemType) => { handleSelectItem(t) }}
-                            onKeyboardFocus={itemKeyboardFocus === item.value}
-                            itemRef={item.value === itemKeyboardFocus ? itemKeyboardRef : undefined}
-                        />
-                    })
-                }
-            </div>
+            <>
+                <div 
+                    className="vieolo-dropdown-menu__backdrop" 
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        setOpen(!open)
+                    }}
+                    >
+                </div>
+                <div className={`vieolo-dropdown-menu__dropdown`} style={style} >
+                    {
+                        props.items.map((item, i) => {
+                            return <DropDownMenuItem
+                                key={`${item.value}_${i}`}
+                                title={item.title}
+                                topBorder={item.topBorder}
+                                value={item.value}
+                                icon={item.icon}
+                                color={item.color}
+                                switch={item.switch}
+                                onClick={(v: string, closeDialog: boolean) => {
+                                    if (closeDialog) setOpen(!open);
+                                    props.onItemSelect(v);
+                                }}
+                                onItemSelect={(t: DropDownMenuItemType) => { handleSelectItem(t) }}
+                                onKeyboardFocus={itemKeyboardFocus === item.value}
+                                itemRef={item.value === itemKeyboardFocus ? itemKeyboardRef : undefined}
+                            />
+                        })
+                    }
+                </div>
+            </>
         }
     </div>
 

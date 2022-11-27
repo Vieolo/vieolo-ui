@@ -676,6 +676,21 @@ body {
 .vieolo-dropdown-menu {
 	display: inline-block;
 
+	&__backdrop {
+		display: none;
+
+		@include for-touch-device {
+			display: block;
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 90;
+			background-color: rgba(0, 0, 0, 0.2);
+		}
+	}
+
 	&__dropdown {
 		position: fixed;
 		z-index: 99;
@@ -686,6 +701,20 @@ body {
 		max-height: 240px;
 		overflow: scroll;
 		padding: $base-unit-half;
+
+		@include for-touch-device {
+			max-height: 50vh;
+			bottom: 0;
+			width: 96vw;
+			max-width: 400px;
+			left: 50%;
+			transform: translateX(-50%);
+			border-radius: $base-unit;
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
+			overscroll-behavior: contain;
+			padding: $base-unit;
+		}
 	}
 
 	&__dropdown-item {
@@ -697,6 +726,10 @@ body {
 		align-items: center;
 		min-height: $row-height-small;
 
+		@include for-touch-device {
+			min-height: $row-height-large;
+		}
+
 		&:hover {
 			background-color: $primary-color-light;
 		}
@@ -707,6 +740,8 @@ body {
 
 		&--top-border {
 			border-top: 2px solid $primary-color-light;
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
 		}
 
 		p {
