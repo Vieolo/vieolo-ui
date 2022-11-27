@@ -518,7 +518,7 @@ body {
 
 		&--error {
 			border-color: $error-color-normal;
-		
+
 			p {
 				@include error-color;
 			}
@@ -559,10 +559,82 @@ body {
 		}
 	}
 
-	&__modal-title {
-		margin-bottom: $base-unit-half;
-		text-align: center;
+	&__backdrop {
+		display: none;
+
+		@include for-touch-device {
+			display: block;
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			z-index: 90;
+			overscroll-behavior: contain;
+			background-color: rgba(0, 0, 0, 0.2);
+		}
 	}
+
+	&--searchable {
+		#{$self}__modal {
+			@include for-touch-device {
+				@media all and (min-width: $tablet10LandscapeBreakPoint) {
+					max-width: 610px;
+					display: grid;
+					grid-template-columns: 210px 380px;
+				}
+			}
+		}
+
+		#{$self}__select-dropdown {
+			@include for-touch-device {
+				@media all and (min-width: $tablet10LandscapeBreakPoint) {
+					max-height: 50vh;
+				}
+			}
+		}
+	}
+
+	&__modal {
+		display: none;
+
+		@include for-touch-device {
+			display: block;
+			z-index: 99;
+			position: fixed;
+			bottom: 0;
+			overscroll-behavior: contain;
+			width: 96vw;
+			max-width: 400px;
+			background-color: $background-content-color;
+			left: 50%;
+			transform: translateX(-50%);
+			border-top-left-radius: $base-unit;
+			border-top-right-radius: $base-unit;
+			padding: $base-unit;
+			min-height: 20vh;
+
+		}
+
+		input {
+			background-color: $background-content-color;
+			width: 90%;
+			margin-left: 5%;
+			margin-bottom: $base-unit;
+			height: $row-height-medium;
+			border: none;
+			background-color: $neutral-color;
+			border-radius: $base-unit-half;
+			padding: 0 $base-unit;
+			font-size: 16px;
+
+			&:focus {
+				border: none;
+				outline: none;
+			}
+		}
+	}
+
 
 	&__select-dropdown {
 		position: fixed;
@@ -574,10 +646,13 @@ body {
 		max-height: 240px;
 		overflow-y: auto;
 
-		@media(pointer: coarse) {
+		@include for-touch-device {
 			position: static;
-			width: 240px;
-			max-height: 300px;
+			width: 100%;
+			max-height: 40vh;
+			overscroll-behavior: contain;
+			box-shadow: none;
+
 		}
 	}
 
@@ -594,9 +669,10 @@ body {
 		flex-direction: column;
 		justify-content: center;
 
-		@media (pointer: coarse) {
+		@include for-touch-device {
 			height: $row-height-medium;
 			font-size: 14px;
+			height: $row-height-large;
 		}
 
 		&:hover {
@@ -2887,6 +2963,7 @@ body {
 
 
 .vieolo-calendar-statistic {
+
 	&__content-small,
 	&__content-large {
 		width: 100%;
@@ -2914,7 +2991,7 @@ body {
 				width: 100%;
 				@include center-by-flex-column;
 				row-gap: $base-unit-half;
-				position: relative;				
+				position: relative;
 
 				&__percent {
 					position: absolute;
@@ -2941,7 +3018,7 @@ body {
 				width: $row-height-over;
 				@include center-by-flex-column;
 				border-radius: $border-radius-half;
-				position: relative;				
+				position: relative;
 
 				&:hover {
 					background-color: $hover-color;
