@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useState } from 'react';
 
 // Component
 import FormDialog from '../../FormDialog';
@@ -10,6 +10,8 @@ import SampleIcon from '@mui/icons-material/RefreshRounded';
 
 // Types
 import { ViewData } from '../main/main';
+import Select from '../../Select';
+import Input from '../../Input';
 
 type FormDialogPropsType = React.ComponentProps<typeof FormDialog>;
 
@@ -22,10 +24,6 @@ export function formDialogOptions(): ViewData {
             onSave: () => alert("saved"),
         } as FormDialogPropsType,
         variables: {
-            width: {
-                options: ["500px", "30vw"],
-                default: "500px"
-            },
             padding: {
                 options: ["10", "20", "30"],
                 default: 10,
@@ -47,14 +45,14 @@ export function formDialogOptions(): ViewData {
 
 export function FormDialogCreator(props: { p: FormDialogPropsType }) {
 
+    let [inline, setInline] = useState<boolean>(true)
 
     return <div className="background-color--primary-light padding--one center-by-flex-row">
         <FormDialog
-            inline
+            inline={inline}
             headerTitle={props.p.headerTitle}
-            onCancel={() => {}}
+            onCancel={() => setInline(!inline)}
             onSave={props.p.onSave}
-            width={props.p.width}
             extraButtons={(props.p as any).withExtraButtons ? [
                 { color: 'alert', text: 'Extra 1', onClick: () => alert("You clicked on extra 1") },
                 { color: 'secondary', text: 'Extra 2', onClick: () => alert("You clicked on extra 2") },
@@ -72,6 +70,44 @@ export function FormDialogCreator(props: { p: FormDialogPropsType }) {
             saveButtonDisabled={props.p.saveButtonDisabled}
         >
             <p>The contents of the dialog</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <p>Click on the cancel button to see toggle the inline mode</p>
+            <Input value='xcxc' error={false} onChange={v => {}} />
+            <Select 
+                error={false}
+                items={[{title: "One", value: "One"}, {title: "Two", value: "Two"}]}
+                selectedItems={["One"]}
+                onSelect={v => {}}
+            />
         </FormDialog>
     </div>
 

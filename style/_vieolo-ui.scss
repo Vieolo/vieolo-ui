@@ -131,6 +131,10 @@ body {
 	&:active {
 		outline: none;
 	}
+
+	@include for-touch-device {
+		font-size: 16px;
+	}
 }
 
 .vieolo-textarea {
@@ -1446,26 +1450,87 @@ body {
 .vieolo-form-dialog {
 	background-color: white;
 	border-radius: $base-unit-half;
+	max-width: 94vw;
+	max-height: 90vh;
+	overflow-y: scroll;
+	$self: &;
 
-	&__header {
-		border-bottom: 1px solid #f2f2f2;
-		height: 40px;
-		padding: 0 $base-unit;
+	&--keyboard-open {
+		
+		@include for-touch-device {
+			@media screen and (max-width: $tablet13LandscapeBreakPoint) {
+				max-height: 25vh;
+				
+				@include for-apple-touch-device {
+					max-height: 35vh;
+				}
+			}
+			
+			@media screen and (max-width: $mobileBreakPoint) {
+				max-height: 40vh;
+			}
+			overscroll-behavior: contain;
+
+			#{$self}__content {
+				overflow-y: scroll;
+				overscroll-behavior: contain;
+				
+				@media screen and (max-width: $tablet13LandscapeBreakPoint) {
+					max-height: calc(25vh - $row-height-medium - $row-height-medium);
+
+					@include for-apple-touch-device {
+						max-height: calc(35vh - $row-height-medium - $row-height-medium);
+					}
+				}
+
+				@media screen and (max-width: $mobileBreakPoint) {
+					max-height: calc(40vh - $row-height-medium - $row-height-medium);
+				}
+			}
+
+			#{$self}__header {
+				height: $row-height-medium;
+			}
+			
+			#{$self}__footer {
+				height: $row-height-medium;
+			}
+		}
 	}
+	
+	
+	&__header {
+		border-bottom: 1px solid $neutral-color;
+		height: $row-height-medium;
+		padding: 0 $base-unit;
+		
+		@include for-touch-device {
+			height: $row-height-large;
+		}
+	}
+	
+	&__content {
+		max-height: calc(90vh - $row-height-medium - $row-height-large);
+		overflow-y: scroll;
 
+		@include for-touch-device {
+			max-height: calc(80vh - $row-height-large - $row-height-large);
+		}
+	}
+	
 	&__footer {
-		height: 50px;
-		border-top: 2px solid #f2f2f2;
+		height: $row-height-large;
+		border-top: 2px solid $neutral-color;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		padding: 0 $base-unit;
-
+		
 		&__spacer {
 			&--left {
 				margin-left: auto;
 			}
-
+			
 			&--middle {
 				width: $base-unit-half;
 			}
@@ -2257,8 +2322,8 @@ body {
 	}
 
 	input {
-		-webkit-appearance: none;
-		-moz-appearance: none;
+		// -webkit-appearance: none;
+		// -moz-appearance: none;
 		position: relative;
 		outline: none;
 		background: white;

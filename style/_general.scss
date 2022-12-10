@@ -2222,5 +2222,9 @@ html {
 // #endregion
 
 @mixin for-touch-device {
-	@media (pointer: coarse) {@content}
+	@media (pointer: coarse) {@content;}
+}
+
+@mixin for-apple-touch-device {
+	@supports (-webkit-touch-callout: none) {@content;}
 }
