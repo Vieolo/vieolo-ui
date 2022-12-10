@@ -724,6 +724,11 @@ body {
 	z-index: 99;
 	background-color: rgba(0, 0, 0, 0.4);
 	@include center-by-flex-column;
+	
+	&--top {
+		justify-content: start;
+		padding-top: 10px
+	}
 }
 
 .vieolo-modal-header {
