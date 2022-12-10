@@ -1541,6 +1541,8 @@ body {
 .vieolo-confirmation-dialog {
 	background-color: white;
 	border-radius: $base-unit-half;
+	width: 500px;
+	max-width: 90vw;
 
 	&__header {
 		border-bottom: 1px solid #f2f2f2;
@@ -1556,16 +1558,7 @@ body {
 		align-items: center;
 		padding: 0 $base-unit;
 		margin-top: 20px;
-
-		&__spacer {
-			&--left {
-				margin-left: auto;
-			}
-
-			&--middle {
-				width: $base-unit-half;
-			}
-		}
+		justify-content: space-between;		
 	}
 }
 

@@ -25,7 +25,7 @@ export default function ConfirmationDialog(props: {
     acceptButtonConfig?: ConfirmationDialogMainButton,
     /** defaults to 10 */
     padding?: number,
-    width: number | string,
+    width?: number | string,
     onAccept: () => void,
     removeRejectButton?: boolean,
     message?: string | React.ReactNode,
@@ -33,9 +33,9 @@ export default function ConfirmationDialog(props: {
     inline?: boolean
 }) {
 
-    let dialog = <div className="vieolo-confirmation-dialog" aria-label="Confirmation Dialog">
+    let dialog = <div className="vieolo-confirmation-dialog" aria-label="Confirmation Dialog" style={{width: props.width}}>
 
-        <div className="vieolo-form-dialog__message" style={{ width: props.width, padding: props.padding === undefined ? 10 : props.padding }}>
+        <div className="vieolo-form-dialog__message" style={{padding: props.padding === undefined ? 10 : props.padding }}>
             {
                 typeof props.message === 'string'
                     ? <Typography type="paragraph-large" text={props.message} />
@@ -45,8 +45,7 @@ export default function ConfirmationDialog(props: {
             }
         </div>
 
-        <div className="vieolo-confirmation-dialog__footer">
-            <div className="vieolo-confirmation-dialog__footer__spacer--left"></div>
+        <div className="vieolo-confirmation-dialog__footer">            
             {
                 !props.removeRejectButton &&
                 <>
@@ -60,7 +59,6 @@ export default function ConfirmationDialog(props: {
                         emphasis={(props.rejectButtonConfig && props.rejectButtonConfig.emphasis) ? props.rejectButtonConfig.emphasis : "none"}
                         ariaLabel={props.rejectButtonConfig ? props.rejectButtonConfig.ariaLabel : undefined}
                     />
-                    <div className="vieolo-form-dialog__footer__spacer--middle"></div>
                 </>
             }
 
