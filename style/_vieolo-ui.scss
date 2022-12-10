@@ -1746,6 +1746,7 @@ body {
 	&__calendar-year {
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 
 		@include for-touch-device {
 			margin: $base-unit-half;
