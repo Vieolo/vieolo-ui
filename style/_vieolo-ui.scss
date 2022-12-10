@@ -1744,9 +1744,10 @@ body {
 
 	&__calendar-month,
 	&__calendar-year {
-		@include center-by-flex-row;
+		display: flex;
+		justify-content: space-between;
 
-		@media(pointer: coarse) {
+		@include for-touch-device {
 			margin: $base-unit-half;
 		}
 
@@ -1754,6 +1755,16 @@ body {
 			width: 130px;
 			text-align: center;
 			margin: 0 8px;
+
+			@include for-touch-device {
+				font-size: 18px;
+			}
+		}
+	}
+
+	&__calendar-month {
+		@include for-touch-device {
+			margin-bottom: $base-unit-two;
 		}
 	}
 }
@@ -1788,7 +1799,6 @@ body {
 			border-radius: 50%;
 			font-size: 10px;
 			font-weight: 500;
-			color: gray;
 
 			@media(pointer: coarse) {
 				width: 30px;
@@ -1845,11 +1855,7 @@ body {
 				background: $hover-color;
 				background-image: $hover-color;
 			}
-		}
-
-		&__today {
-			background-color: $accessory-green-normal;
-		}
+		}		
 
 		&__not-in-same-month {
 			color: gray;
@@ -1866,12 +1872,14 @@ body {
 	}
 
 	&__today {
-		background-color: $accessory-green-normal;
-		color: $accessory-green-text;
+		background-color: $accessory-green-light;
+		color: black;
 	}
 
 	&__selected#{&}__today {
-		border: 1px solid $primary-color-normal;
+		background-color: $primary-color-normal;
+		color: $primary-color-text;
+		border: 3px solid $accessory-green-normal;
 	}
 
 	&__not-in-same-month {
@@ -1913,12 +1921,7 @@ body {
 				grid-template-rows: 33% 33% 34%;
 			}
 		}
-	}
-
-	&__modal-title {
-		margin-top: $base-unit-half;
-		text-align: center;
-	}
+	}	
 
 	.vieolo-calendar-statefull-component {
 		position: absolute;
