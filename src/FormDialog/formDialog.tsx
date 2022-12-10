@@ -1,5 +1,5 @@
 // React
-import { Fragment } from "react"
+import { Fragment, useEffect, useState } from "react"
 
 // Vieolo UI
 import { ColorOptionType, EmphasisType, BorderRadiusType } from "../types/types"
@@ -7,6 +7,9 @@ import Typography from "../Typography"
 import Modal from "../Modal/modal"
 import IconButton from "../IconButton"
 import Button from '../Button/button';
+
+//Installed Packages
+import Device from '@vieolo/device-js';
 
 // Material UI
 import CloseIcon from '@mui/icons-material/CloseRounded';
@@ -33,6 +36,10 @@ export default function FormDialog(props: {
     saveButtonConfig?: FormDialogMainButton,
     /** defaults to 10 */
     padding?: number,
+    /** 
+     * @deprecated
+     * Add the width to the content
+     */
     width?: number | string,
     onSave: () => void,
     /** Passing true will cause the save button to be disabled. Usefull when preventing the user from submitting invalid form */
@@ -52,9 +59,40 @@ export default function FormDialog(props: {
     isLoading?: boolean
 }) {
 
-    let dialog = <div className="vieolo-form-dialog" aria-label={props.ariaLabel}>
+    let [virtKeyboardOffset, setVirtKeyboardOffset] = useState<number>(0);    
+
+    useEffect(() => {
+        const handleVirtualKeyboard = (event: Event) => {
+            const viewport = window.visualViewport!;
+            let value = viewport.offsetTop ? viewport.offsetTop : window.innerHeight - viewport.height
+            setVirtKeyboardOffset(value)            
+            if (value && Device.isAnAppleDevice()) window.scrollBy({top: -viewport.offsetTop})
+        }
+
+        if (Device.isTouchOnlyDevice && window.visualViewport) {
+            window.visualViewport.addEventListener("resize", handleVirtualKeyboard);
+            // window.visualViewport.addEventListener("scroll", handleVirtualKeyboard);
+        }
+
+        return () => {
+            if (Device.isTouchOnlyDevice && window.visualViewport) {
+                window.visualViewport.removeEventListener("resize", handleVirtualKeyboard);
+                // window.visualViewport.removeEventListener("scroll", handleVirtualKeyboard);
+            }
+        }
+    }, [])
+
+    let dClass = "vieolo-form-dialog";
+    let footerButtonSize: 'small' | "medium" = "medium"
+
+    if (!props.inline && virtKeyboardOffset > 0) {
+        dClass += " vieolo-form-dialog--keyboard-open"
+        footerButtonSize = "small"
+    }
+
+    let dialog = <div className={dClass} aria-label={props.ariaLabel}>
         <div className="vieolo-form-dialog__header flex-row-space-between">
-            <Typography type="title-small" text={props.headerTitle} />
+            <Typography type="title-small" text={props.headerTitle + virtKeyboardOffset} />
             {
                 props.headerRightComponent === 'close' &&
                 <IconButton
@@ -85,6 +123,7 @@ export default function FormDialog(props: {
                     !props.removeCancelButton &&
                     <>
                         <Button
+                            height={footerButtonSize}
                             onClick={props.onCancel}
                             color={(props.cancelButtonConfig && props.cancelButtonConfig.color) ? props.cancelButtonConfig.color : "error"}
                             text={(props.cancelButtonConfig && props.cancelButtonConfig.text) ? props.cancelButtonConfig.text : "Cancel"}
@@ -107,6 +146,7 @@ export default function FormDialog(props: {
                                 onClick={e.onClick}
                                 ariaLabel={getButtonAriaLabel(props.headerTitle, e.text, props.ariaLabel, e)}
                                 disabled={props.isLoading}
+                                height={footerButtonSize}
                             />
                             <div className="vieolo-form-dialog__footer__spacer--middle" key={`form_dialog_extra_button_spacer_${i}`}></div>
                         </Fragment>
@@ -124,6 +164,7 @@ export default function FormDialog(props: {
                         ariaLabel={getButtonAriaLabel(props.headerTitle, "save button", props.ariaLabel, props.saveButtonConfig)}
                         disabled={props.saveButtonDisabled || props.isLoading}
                         isLoading={props.isLoading}
+                        height={footerButtonSize}
                     />
                 }
             </div>
@@ -136,6 +177,7 @@ export default function FormDialog(props: {
         onClose={() => {
             if (!props.isLoading) props.onCancel()
         }}
+        position={virtKeyboardOffset > 0 ? 'top' : 'center'}
     >
         {dialog}
     </Modal>

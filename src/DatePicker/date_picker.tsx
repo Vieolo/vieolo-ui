@@ -12,7 +12,6 @@ import Device from '@vieolo/device-js';
 import CalendarStateful from '../CalendarStateful';
 import Typography from '../Typography';
 import Modal from '../Modal';
-import Card from '../Card';
 
 // Hooks
 import { useAppearingContainer } from '../hooks/useAppearingContainer';
@@ -85,6 +84,7 @@ export default function DatePicker(props: {
     const calendarStatefulCompoment = <CalendarStateful
         showSearchInput={openedByKeyboard}
         onKeyboardExit={() => setOpen(false)}
+        title={(Device.isTouchOnlyDevice && props.title) ? props.title : undefined}
         onDateSelect={s => {
             props.onDateSelect(s);
             setOpen(false);
@@ -143,10 +143,7 @@ export default function DatePicker(props: {
         {
             open && (Device.isTouchOnlyDevice ?
                 <Modal onClose={() => setOpen(false)}>
-                    <Card >
-                        <Typography type='title-small' text={props.title || ''} className='vieolo-date-picker__modal-title' />
-                        {calendarStatefulCompoment}
-                    </Card>
+                    {calendarStatefulCompoment}                    
                 </Modal>
                 : calendarStatefulCompoment
             )

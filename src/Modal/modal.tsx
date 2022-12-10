@@ -4,8 +4,9 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 
 type onCloseEvent = MouseEvent | React.MouseEvent<HTMLDivElement, MouseEvent>;
 
-export default function Modal({ onClose, children }: {
+export default function Modal({ onClose, position, children }: {
     onClose: (event: onCloseEvent) => void,
+    position?: 'center' | 'top',
     children: React.ReactNode
 }) {
 
@@ -39,8 +40,13 @@ export default function Modal({ onClose, children }: {
         }
     }, [container, handleClickOutside]);
 
+    let className = "vieolo-modal";
 
-    return <div className={`vieolo-modal`} onClick={e => handleClickOutside(e)}>
+    if (position === 'top') {
+        className += " vieolo-modal--top"
+    }
+
+    return <div className={className} onClick={e => handleClickOutside(e)}>
         <div className="modal-content" ref={container as any}>
             {children}
         </div>
