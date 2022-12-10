@@ -77,16 +77,16 @@ export default function Select(props: SelectProps) {
             setVirtKeyboardOffset(window.innerHeight - viewport.height)
         }
 
-        if (open && Device.isTouchOnlyDevice && Device.isAnAppleDevice() && window.visualViewport) {
+        if (open && Device.isTouchOnlyDevice && window.visualViewport) {
             window.visualViewport.addEventListener("resize", handleVirtualKeyboard);
             window.visualViewport.addEventListener("scroll", handleVirtualKeyboard);
-        } else if (!open && Device.isTouchOnlyDevice && Device.isAnAppleDevice() && window.visualViewport) {
+        } else if (!open && Device.isTouchOnlyDevice && window.visualViewport) {
             window.visualViewport.removeEventListener("resize", handleVirtualKeyboard);
             window.visualViewport.removeEventListener("scroll", handleVirtualKeyboard);
             setVirtKeyboardOffset(0)
         }
         return () => {
-            if (open && Device.isTouchOnlyDevice && Device.isAnAppleDevice() && window.visualViewport) {
+            if (open && Device.isTouchOnlyDevice && window.visualViewport) {
                 window.visualViewport.removeEventListener("resize", handleVirtualKeyboard);
                 window.visualViewport.removeEventListener("scroll", handleVirtualKeyboard);
             }
@@ -174,7 +174,9 @@ export default function Select(props: SelectProps) {
         if (bottom !== 0) style.bottom = bottom;
     }
 
-    if (virtKeyboardOffset) {
+    // On Android devices, virtualKeyboardOffset is sometimes a negative value instead of 0
+    // So, it should be explicitly checked to be greater than 0
+    if (virtKeyboardOffset > 0) {
         style.maxHeight = '25vh'
     }
 
@@ -331,7 +333,7 @@ export default function Select(props: SelectProps) {
                     >
                     </div>
 
-                    <div className={`vieolo-select__modal`} style={virtKeyboardOffset ? {bottom: (virtKeyboardOffset) + "px", maxHeight: '35vh'} : undefined}>
+                    <div className={`vieolo-select__modal`} style={virtKeyboardOffset > 0 ? {bottom: (virtKeyboardOffset) + "px", maxHeight: '35vh'} : undefined}>
                         {props.searchable && searchInput}
                         <div className='vieolo-select__modal__container'>
                             {itemsComponent}
