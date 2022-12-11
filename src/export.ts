@@ -68,6 +68,7 @@ import TitlePeriodCard from './TitlePeriodCard';
 import Typography from './Typography';
 import VideoViewer from './VideoViewer';
 import VieoloApp from './VieoloApp';
+import Walkthrough from './Walkthrough';
 import {
 	BarChartData as BarChartDataTemp,
 	StackedBarChartData as StackedBarChartDataTemp,
@@ -229,6 +230,7 @@ export {
 	Typography,
 	VideoViewer,
 	VieoloApp,
+	Walkthrough,
 }
 
 
