@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.24.4 (2022-12-12)
+- Added `StringInput` and `StringInputSet` components ([#250](https://github.com/Vieolo/vieolo-ui/issues/250))
+
 ## 0.24.3 (2022-12-11)
 - Added position to `Modal`
 - Improved the responsiveness of the `FormDialog`

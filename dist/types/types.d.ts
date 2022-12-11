@@ -45,4 +45,10 @@ export type NumberInputValueType = {
     errorMessage?: string;
     isValid: boolean;
 };
+export type StringInputValueType = {
+    string: string | null;
+    text: string;
+    errorMessage?: string;
+    isValid: boolean;
+};
 export {};
