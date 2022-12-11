@@ -10,6 +10,7 @@ import NextIcon from '@mui/icons-material/ArrowForwardIosRounded';
 import VDate from '@vieolo/date';
 // Internal Components
 import CalendarStateless from '../CalendarStateless';
+import Device from '@vieolo/device-js';
 // External Components
 import IconButton from '../IconButton';
 import DateInput from '../DateInput';
@@ -26,7 +27,10 @@ export default function CalendarStateful(props) {
             setCurrentDate(props.selectedWeek.startDate);
         // eslint-disable-next-line
     }, []);
-    return _jsxs("div", { className: "vieolo-calendar-statefull-component", "aria-label": props.ariaLabel + " popup", children: [props.showSearchInput &&
+    let isTouchDevice = Device.isTouchOnlyDevice;
+    let className = "vieolo-calendar-statefull-component";
+    return _jsxs("div", { className: className, "aria-label": props.ariaLabel + " popup", children: [props.title &&
+                _jsx(Typography, { text: props.title, type: 'title-medium', textAlign: 'center', className: 'padding-bottom--two padding-top--one' }), props.showSearchInput &&
                 _jsx("div", { className: 'padding-vertical--half center-by-flex-row', children: _jsx("form", { onSubmit: e => {
                             e.preventDefault();
                             e.stopPropagation();
@@ -47,19 +51,19 @@ export default function CalendarStateful(props) {
                                             props.onKeyboardExit();
                                     }
                                 });
-                            }, autoFocus: true, dateFormat: 'DD/MM/YYYY', ariaLabel: props.ariaLabel + ` Search Date` }) }) }), _jsxs("div", { className: "vieolo-calendar-statefull-component__calendar-year", children: [_jsx(IconButton, { icon: _jsx(PreviousIcon, {}), size: "extra-small", borderRadius: 'normal', ariaLabel: props.ariaLabel + " year decrease button", onClick: e => {
+                            }, autoFocus: true, dateFormat: 'DD/MM/YYYY', ariaLabel: props.ariaLabel + ` Search Date` }) }) }), _jsxs("div", { className: "vieolo-calendar-statefull-component__calendar-year", children: [_jsx(IconButton, { icon: _jsx(PreviousIcon, {}), size: isTouchDevice ? "small" : "extra-small", borderRadius: 'normal', ariaLabel: props.ariaLabel + " year decrease button", onClick: e => {
                             e.stopPropagation();
                             let newDate = new VDate(currentDate).setToMonthStart().addYear(-1);
                             setCurrentDate(newDate);
-                        } }), _jsx(Typography, { text: `${currentDate.getFullYear()}` }), _jsx(IconButton, { icon: _jsx(NextIcon, {}), size: "extra-small", borderRadius: 'normal', ariaLabel: props.ariaLabel + " year increase button", onClick: e => {
+                        } }), _jsx(Typography, { text: `${currentDate.getFullYear()}` }), _jsx(IconButton, { icon: _jsx(NextIcon, {}), size: isTouchDevice ? "small" : "extra-small", borderRadius: 'normal', ariaLabel: props.ariaLabel + " year increase button", onClick: e => {
                             e.stopPropagation();
                             let newDate = new VDate(currentDate).setToMonthStart().addYear(1);
                             setCurrentDate(newDate);
-                        } })] }), _jsxs("div", { className: "vieolo-calendar-statefull-component__calendar-month", children: [_jsx(IconButton, { icon: _jsx(PreviousIcon, {}), size: "extra-small", borderRadius: 'normal', ariaLabel: props.ariaLabel + " month decrease button", onClick: e => {
+                        } })] }), _jsxs("div", { className: "vieolo-calendar-statefull-component__calendar-month", children: [_jsx(IconButton, { icon: _jsx(PreviousIcon, {}), size: isTouchDevice ? "small" : "extra-small", borderRadius: 'normal', ariaLabel: props.ariaLabel + " month decrease button", onClick: e => {
                             e.stopPropagation();
                             let newDate = new VDate(currentDate).setToMonthStart().addDay(-1).setToMonthStart();
                             setCurrentDate(newDate);
-                        } }), _jsx(Typography, { text: `${currentDate.formatMonth().split(' ')[0]}` }), _jsx(IconButton, { icon: _jsx(NextIcon, {}), size: "extra-small", borderRadius: 'normal', ariaLabel: props.ariaLabel + " month increase button", onClick: e => {
+                        } }), _jsx(Typography, { text: `${currentDate.formatMonth().split(' ')[0]}` }), _jsx(IconButton, { icon: _jsx(NextIcon, {}), size: isTouchDevice ? "small" : "extra-small", borderRadius: 'normal', ariaLabel: props.ariaLabel + " month increase button", onClick: e => {
                             e.stopPropagation();
                             let newDate = new VDate(currentDate).setToMonthStart().addDay(33).setToMonthStart();
                             setCurrentDate(newDate);

@@ -14,7 +14,7 @@ export default function ConfirmationDialog(props: {
     acceptButtonConfig?: ConfirmationDialogMainButton;
     /** defaults to 10 */
     padding?: number;
-    width: number | string;
+    width?: number | string;
     onAccept: () => void;
     removeRejectButton?: boolean;
     message?: string | React.ReactNode;

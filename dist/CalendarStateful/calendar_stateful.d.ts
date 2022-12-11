@@ -16,4 +16,5 @@ export default function CalendarStateful(props: {
     onKeyboardExit?: () => void;
     ariaLabel?: string;
     dateCellAriaLabelSuffix?: string;
+    title?: string;
 }): JSX.Element;
