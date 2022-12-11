@@ -15,6 +15,7 @@ import VDate from '@vieolo/date';
 
 // Internal Components
 import CalendarStateless from '../CalendarStateless';
+import Device from '@vieolo/device-js';
 
 
 // External Components
@@ -37,7 +38,8 @@ export default function CalendarStateful(props: {
     showSearchInput?: boolean,
     onKeyboardExit?: () => void,
     ariaLabel?: string,
-    dateCellAriaLabelSuffix?: string
+    dateCellAriaLabelSuffix?: string,
+    title?: string
 }) {
 
     let [currentDate, setCurrentDate] = useState<VDate>(new VDate().setToDateStart());
@@ -52,11 +54,19 @@ export default function CalendarStateful(props: {
     }, [])
 
 
+    let isTouchDevice = Device.isTouchOnlyDevice;
+
+    let className = "vieolo-calendar-statefull-component";    
 
     return <div 
-        className="vieolo-calendar-statefull-component"
+        className={className}
         aria-label={props.ariaLabel + " popup"}
     >
+
+        {
+            props.title &&
+            <Typography text={props.title} type='title-medium' textAlign='center' className='padding-bottom--two padding-top--one' />
+        }
 
         {
             props.showSearchInput &&
@@ -94,7 +104,7 @@ export default function CalendarStateful(props: {
         <div className="vieolo-calendar-statefull-component__calendar-year">
             <IconButton
                 icon={<PreviousIcon />}
-                size="extra-small"
+                size={isTouchDevice ? "small" : "extra-small"}
                 borderRadius='normal'
                 ariaLabel={props.ariaLabel + " year decrease button"}
                 onClick={e => {
@@ -106,7 +116,7 @@ export default function CalendarStateful(props: {
             <Typography text={`${currentDate.getFullYear()}`} />
             <IconButton
                 icon={<NextIcon />}
-                size="extra-small"
+                size={isTouchDevice ? "small" : "extra-small"}
                 borderRadius='normal'
                 ariaLabel={props.ariaLabel + " year increase button"}
                 onClick={e => {
@@ -121,7 +131,7 @@ export default function CalendarStateful(props: {
         <div className="vieolo-calendar-statefull-component__calendar-month">
             <IconButton
                 icon={<PreviousIcon />}
-                size="extra-small"
+                size={isTouchDevice ? "small" : "extra-small"}
                 borderRadius='normal'
                 ariaLabel={props.ariaLabel + " month decrease button"}
                 onClick={e => {
@@ -133,7 +143,7 @@ export default function CalendarStateful(props: {
             <Typography text={`${currentDate.formatMonth().split(' ')[0]}`} />
             <IconButton
                 icon={<NextIcon />}
-                size="extra-small"
+                size={isTouchDevice ? "small" : "extra-small"}
                 borderRadius='normal'
                 ariaLabel={props.ariaLabel + " month increase button"}
                 onClick={e => {

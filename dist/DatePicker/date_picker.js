@@ -10,7 +10,6 @@ import Device from '@vieolo/device-js';
 import CalendarStateful from '../CalendarStateful';
 import Typography from '../Typography';
 import Modal from '../Modal';
-import Card from '../Card';
 // Hooks
 import { useAppearingContainer } from '../hooks/useAppearingContainer';
 // Utility
@@ -31,7 +30,7 @@ export default function DatePicker(props) {
             return new VDate().setToDateStart();
     }
     let datePickerButton = props.buttonComponent || _jsxs("div", { className: "vieolo-date-picker__button-container__default-button", children: [_jsxs("div", { className: "vieolo-date-picker__button-container__default-button__text-container", children: [_jsx("div", { children: _jsx(Typography, { type: 'caption-large', text: props.title || "" }) }), _jsx("div", { children: _jsx(Typography, { text: props.selectedDate ? props.selectedDate.formatDate('dd/mm/yyyy') : "" }) }), _jsx("div", { children: _jsx(Typography, { type: 'caption-large', text: (props.showSelectedWeek && props.selectedDate) ? `Week ${props.selectedDate.getWeek().weekNumber}` : "" }) })] }), _jsx(CalendarIcon, {})] });
-    const calendarStatefulCompoment = _jsx(CalendarStateful, { showSearchInput: openedByKeyboard, onKeyboardExit: () => setOpen(false), onDateSelect: s => {
+    const calendarStatefulCompoment = _jsx(CalendarStateful, { showSearchInput: openedByKeyboard, onKeyboardExit: () => setOpen(false), title: (Device.isTouchOnlyDevice && props.title) ? props.title : undefined, onDateSelect: s => {
             props.onDateSelect(s);
             setOpen(false);
             setOpenedByKeyboard(false);
@@ -66,6 +65,6 @@ export default function DatePicker(props) {
                         }
                     });
                 }, children: datePickerButton }), open && (Device.isTouchOnlyDevice ?
-                _jsx(Modal, { onClose: () => setOpen(false), children: _jsxs(Card, { children: [_jsx(Typography, { type: 'title-small', text: props.title || '', className: 'vieolo-date-picker__modal-title' }), calendarStatefulCompoment] }) })
+                _jsx(Modal, { onClose: () => setOpen(false), children: calendarStatefulCompoment })
                 : calendarStatefulCompoment)] });
 }

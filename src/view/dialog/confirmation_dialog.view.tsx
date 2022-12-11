@@ -1,5 +1,5 @@
 // React
-import React from 'react';
+import React, { useState } from 'react';
 
 // Component
 import ConfirmationDialog from '../../ConfirmationDialog';
@@ -23,8 +23,8 @@ export function confirmationDialogOptions(): ViewData {
         } as ConfirmationDialogPropsType,
         variables: {
             width: {
-                options: ["500px", "30vw"],
-                default: "500px"
+                options: ["500px", "30vw", "auto"],
+                default: "auto"
             },
             padding: {
                 options: ["10", "20", "30"],
@@ -46,18 +46,19 @@ export function confirmationDialogOptions(): ViewData {
 
 export function ConfirmationDialogCreator(props: { p: ConfirmationDialogPropsType }) {
 
+    let [inline, setInline] = useState<boolean>(false);
 
     return <div className="background-color--primary-light padding--one center-by-flex-row">
         <ConfirmationDialog
-            inline
-            onReject={props.p.onReject}
+            inline={inline}
+            onReject={() => setInline(!inline)}
             onAccept={props.p.onAccept}
-            width={props.p.width}
+            width={props.p.width === "auto" ? undefined : props.p.width}
             padding={props.p.padding}
             removeRejectButton={props.p.removeRejectButton}
             message={
                 (props.p as any).messageType === 'string'
-                    ? "Are you sure you want to continue?"
+                    ? "Are you sure you want to continue? This is a long message to see the effect of such long messages in responsiveness of the confirmation dialog"
                     : <div>
                         <Typography text='Are you sure you want to continue?' />
                         <div className="padding--half"></div>

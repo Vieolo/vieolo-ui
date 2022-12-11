@@ -1,5 +1,16 @@
 # Change Log
 
+## 0.24.3 (2022-12-11)
+- Added position to `Modal`
+- Improved the responsiveness of the `FormDialog`
+- Improved the responsiveness of the `ConfirmationDialog` ([#196](https://github.com/Vieolo/vieolo-ui/issues/196))
+- Improved the responsiveness of the `DatePicker` ([#262](https://github.com/Vieolo/vieolo-ui/issues/262))
+- Added `Walkthrough` component
+- Added the ability to add extra buttons to the left side of `FormDialog`
+
+#### Deprecation
+- The `width` prop of the `FormDialog` is deprecated in favor of the width provided by content.
+
 ## 0.24.2 (2022-11-28)
 - Updated dependencies
 

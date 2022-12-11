@@ -68,6 +68,7 @@ import TitlePeriodCard from './TitlePeriodCard';
 import Typography from './Typography';
 import VideoViewer from './VideoViewer';
 import VieoloApp from './VieoloApp';
+import Walkthrough from './Walkthrough';
 import {
 	BarChartData as BarChartDataTemp,
 	StackedBarChartData as StackedBarChartDataTemp,
@@ -141,6 +142,9 @@ import {
 	TypographyMargin as TypographyMarginTemp,
 	TypographyColorType as TypographyColorTypeTemp,
 } from './Typography';
+import {
+	WalkthroughSinglePage as WalkthroughSinglePageTemp,
+} from './Walkthrough';
 import {
 	ColorOptionType as ColorOptionTypeTemp,
 	EmphasisType as EmphasisTypeTemp,
@@ -229,6 +233,7 @@ export {
 	Typography,
 	VideoViewer,
 	VieoloApp,
+	Walkthrough,
 }
 
 
@@ -268,6 +273,7 @@ export type TypographyTextAlign = TypographyTextAlignTemp;
 export type TypographyFontFamily = TypographyFontFamilyTemp;
 export type TypographyMargin = TypographyMarginTemp;
 export type TypographyColorType = TypographyColorTypeTemp;
+export type WalkthroughSinglePage = WalkthroughSinglePageTemp;
 export type ColorOptionType = ColorOptionTypeTemp;
 export type EmphasisType = EmphasisTypeTemp;
 export type BorderRadiusValueType = BorderRadiusValueTypeTemp;

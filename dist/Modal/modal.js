@@ -1,7 +1,7 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 // React
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-export default function Modal({ onClose, children }) {
+export default function Modal({ onClose, position, children }) {
     let [container,] = useState(useRef(null));
     let handleClickOutside = useCallback((event) => {
         if (container.current && !container.current.contains(event.target)) {
@@ -24,5 +24,9 @@ export default function Modal({ onClose, children }) {
                 main.style.removeProperty("overflow");
         };
     }, [container, handleClickOutside]);
-    return _jsx("div", { className: `vieolo-modal`, onClick: e => handleClickOutside(e), children: _jsx("div", { className: "modal-content", ref: container, children: children }) });
+    let className = "vieolo-modal";
+    if (position === 'top') {
+        className += " vieolo-modal--top";
+    }
+    return _jsx("div", { className: className, onClick: e => handleClickOutside(e), children: _jsx("div", { className: "modal-content", ref: container, children: children }) });
 }

@@ -68,10 +68,17 @@ export default function CalendarStateless(props: {
         else if (props.selectedDate && props.selectedDate.includes(thisDate.formatDate('yyyy-mm-dd'))) className += " vieolo-calendar-stateless-component__selected";
 
         (dayCards[`${thisWeek.start.formatDate()}`] = dayCards[`${thisWeek.start.formatDate()}`] || []).push(
-            <div className={className} aria-label={`${thisDate.formatDate()} ${props.dateCellAriaLabelSuffix || ''}`.trim()} key={thisDate.formatDate()} onClick={e => {
-                e.stopPropagation()
-                props.onDateSelect(thisDate);
-            }}>{thisDate.getMonth() === props.currentDate.getMonth() ? thisDate.getDate() : ''}</div>
+            <div 
+                className={className} 
+                aria-label={`${thisDate.formatDate()} ${props.dateCellAriaLabelSuffix || ''}`.trim()} 
+                key={thisDate.formatDate()} 
+                onClick={e => {
+                    e.stopPropagation()
+                    props.onDateSelect(thisDate);
+                }
+            }>
+                {thisDate.getMonth() === props.currentDate.getMonth() ? thisDate.getDate() : ''}
+            </div>
         )
     }
 
