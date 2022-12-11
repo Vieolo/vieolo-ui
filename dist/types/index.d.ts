@@ -1,4 +1,4 @@
-import { ColorOptionType as ColorOptionTypeTemp, EmphasisType as EmphasisTypeTemp, BorderRadiusValueType as BorderRadiusValueTypeTemp, BorderRadiusType as BorderRadiusTypeTemp, FontWeightType as FontWeightTypeTemp, GridGapType as GridGapTypeTemp, ElevationType as ElevationTypeTemp, RowHeightType as RowHeightTypeTemp, RowStyleType as RowStyleTypeTemp, WidthAndHeightSize as WidthAndHeightSizeTemp, CardExtraActionType as CardExtraActionTypeTemp, TypographyOptionTypes as TypographyOptionTypesTemp, NumberInputValueType as NumberInputValueTypeTemp } from './types';
+import { ColorOptionType as ColorOptionTypeTemp, EmphasisType as EmphasisTypeTemp, BorderRadiusValueType as BorderRadiusValueTypeTemp, BorderRadiusType as BorderRadiusTypeTemp, FontWeightType as FontWeightTypeTemp, GridGapType as GridGapTypeTemp, ElevationType as ElevationTypeTemp, RowHeightType as RowHeightTypeTemp, RowStyleType as RowStyleTypeTemp, WidthAndHeightSize as WidthAndHeightSizeTemp, CardExtraActionType as CardExtraActionTypeTemp, TypographyOptionTypes as TypographyOptionTypesTemp, NumberInputValueType as NumberInputValueTypeTemp, StringInputValueType as StringInputValueTypeTemp } from './types';
 export type ColorOptionType = ColorOptionTypeTemp;
 export type EmphasisType = EmphasisTypeTemp;
 export type BorderRadiusValueType = BorderRadiusValueTypeTemp;
@@ -12,3 +12,4 @@ export type WidthAndHeightSize = WidthAndHeightSizeTemp;
 export type CardExtraActionType = CardExtraActionTypeTemp;
 export type TypographyOptionTypes = TypographyOptionTypesTemp;
 export type NumberInputValueType = NumberInputValueTypeTemp;
+export type StringInputValueType = StringInputValueTypeTemp;
