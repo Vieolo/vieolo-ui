@@ -1,5 +1,5 @@
 // React
-import { Fragment, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 
 // Vieolo UI
 import { ColorOptionType, EmphasisType, BorderRadiusType } from "../types/types"
@@ -7,6 +7,7 @@ import Typography from "../Typography"
 import Modal from "../Modal/modal"
 import IconButton from "../IconButton"
 import Button from '../Button/button';
+import Flex from "../Flex"
 
 //Installed Packages
 import Device from '@vieolo/device-js';
@@ -18,7 +19,10 @@ export type FormDialogAccessoryButton = {
     text: string,
     color: ColorOptionType,
     onClick: () => void,
-    ariaLabel?: string
+    ariaLabel?: string,
+    emphasis?: EmphasisType,
+    borderRadius?: BorderRadiusType,
+    startIcon?: React.ReactNode
 }
 
 export type FormDialogMainButton = {
@@ -26,7 +30,8 @@ export type FormDialogMainButton = {
     color?: ColorOptionType,
     emphasis?: EmphasisType,
     borderRadius?: BorderRadiusType,
-    ariaLabel?: string
+    ariaLabel?: string,
+    startIcon?: React.ReactNode
 }
 
 export default function FormDialog(props: {
@@ -46,8 +51,10 @@ export default function FormDialog(props: {
     saveButtonDisabled?: boolean,
     removeCancelButton?: boolean,
     removeSaveButton?: boolean,
-    /** These buttons will be displayed between the cancel and save button */
+    /** These buttons will be displayed on the left side of the save button */
     extraButtons?: FormDialogAccessoryButton[],
+    /** These buttons will be displayed on the right side of the cancel button */
+    extraButtonsLeft?: FormDialogAccessoryButton[],
     children?: React.ReactNode,
     headerTitle: string,
     /** This component will be displayed on the right side of the header. You can either pass a component or pass 'close' which renders a close button */
@@ -59,14 +66,14 @@ export default function FormDialog(props: {
     isLoading?: boolean
 }) {
 
-    let [virtKeyboardOffset, setVirtKeyboardOffset] = useState<number>(0);    
+    let [virtKeyboardOffset, setVirtKeyboardOffset] = useState<number>(0);
 
     useEffect(() => {
         const handleVirtualKeyboard = (event: Event) => {
             const viewport = window.visualViewport!;
             let value = viewport.offsetTop ? viewport.offsetTop : window.innerHeight - viewport.height
-            setVirtKeyboardOffset(value)            
-            if (value && Device.isAnAppleDevice()) window.scrollBy({top: -viewport.offsetTop})
+            setVirtKeyboardOffset(value)
+            if (value && Device.isAnAppleDevice()) window.scrollBy({ top: -viewport.offsetTop })
         }
 
         if (Device.isTouchOnlyDevice && window.visualViewport) {
@@ -92,7 +99,7 @@ export default function FormDialog(props: {
 
     let dialog = <div className={dClass} aria-label={props.ariaLabel}>
         <div className="vieolo-form-dialog__header flex-row-space-between">
-            <Typography type="title-small" text={props.headerTitle + virtKeyboardOffset} />
+            <Typography type="title-small" text={props.headerTitle} />
             {
                 props.headerRightComponent === 'close' &&
                 <IconButton
@@ -118,10 +125,9 @@ export default function FormDialog(props: {
         {
             (!props.removeCancelButton || !props.removeSaveButton || props.extraButtons || (props.extraButtons || []).length > 0) &&
             <div className="vieolo-form-dialog__footer">
-                <div className="vieolo-form-dialog__footer__spacer--left"></div>
-                {
-                    !props.removeCancelButton &&
-                    <>
+                <Flex justifyContent="start" alignItems="center" columnGap="one">
+                    {
+                        !props.removeCancelButton &&
                         <Button
                             height={footerButtonSize}
                             onClick={props.onCancel}
@@ -131,15 +137,13 @@ export default function FormDialog(props: {
                             emphasis={(props.cancelButtonConfig && props.cancelButtonConfig.emphasis) ? props.cancelButtonConfig.emphasis : "none"}
                             ariaLabel={getButtonAriaLabel(props.headerTitle, "cancel button", props.ariaLabel, props.cancelButtonConfig)}
                             disabled={props.isLoading}
+                            startIcon={(props.cancelButtonConfig || {}).startIcon}
                         />
-                        <div className="vieolo-form-dialog__footer__spacer--middle"></div>
-                    </>
-                }
+                    }
 
-                {
-                    (props.extraButtons || []).map((e, i) => {
-                        return <Fragment key={`form_dialog_extra_button_fragment_${i}`} >
-                            <Button
+                    {
+                        (props.extraButtonsLeft || []).map((e, i) => {
+                            return <Button
                                 key={`form_dialog_extra_button_button_${i}`}
                                 color={e.color}
                                 text={e.text}
@@ -147,26 +151,48 @@ export default function FormDialog(props: {
                                 ariaLabel={getButtonAriaLabel(props.headerTitle, e.text, props.ariaLabel, e)}
                                 disabled={props.isLoading}
                                 height={footerButtonSize}
+                                emphasis={e.emphasis}
+                                borderRadius={e.borderRadius}
+                                startIcon={e.startIcon}
                             />
-                            <div className="vieolo-form-dialog__footer__spacer--middle" key={`form_dialog_extra_button_spacer_${i}`}></div>
-                        </Fragment>
-                    })
-                }
+                        })
+                    }
+                </Flex>
 
-                {
-                    !props.removeSaveButton &&
-                    <Button
-                        onClick={props.onSave}
-                        color={(props.saveButtonConfig && props.saveButtonConfig.color) ? props.saveButtonConfig.color : "primary"}
-                        text={(props.saveButtonConfig && props.saveButtonConfig.text) ? props.saveButtonConfig.text : "Save"}
-                        borderRadius={(props.saveButtonConfig && props.saveButtonConfig.borderRadius) ? props.saveButtonConfig.borderRadius : undefined}
-                        emphasis={(props.saveButtonConfig && props.saveButtonConfig.emphasis) ? props.saveButtonConfig.emphasis : undefined}
-                        ariaLabel={getButtonAriaLabel(props.headerTitle, "save button", props.ariaLabel, props.saveButtonConfig)}
-                        disabled={props.saveButtonDisabled || props.isLoading}
-                        isLoading={props.isLoading}
-                        height={footerButtonSize}
-                    />
-                }
+                <Flex alignItems="center" justifyContent="end">
+                    {
+                        (props.extraButtons || []).map((e, i) => {
+                            return <Button
+                                key={`form_dialog_extra_button_button_${i}`}
+                                color={e.color}
+                                text={e.text}
+                                onClick={e.onClick}
+                                ariaLabel={getButtonAriaLabel(props.headerTitle, e.text, props.ariaLabel, e)}
+                                disabled={props.isLoading}
+                                height={footerButtonSize}
+                                emphasis={e.emphasis}
+                                borderRadius={e.borderRadius}
+                                startIcon={e.startIcon}
+                            />
+                        })
+                    }
+
+                    {
+                        !props.removeSaveButton &&
+                        <Button
+                            onClick={props.onSave}
+                            color={(props.saveButtonConfig && props.saveButtonConfig.color) ? props.saveButtonConfig.color : "primary"}
+                            text={(props.saveButtonConfig && props.saveButtonConfig.text) ? props.saveButtonConfig.text : "Save"}
+                            borderRadius={(props.saveButtonConfig && props.saveButtonConfig.borderRadius) ? props.saveButtonConfig.borderRadius : undefined}
+                            emphasis={(props.saveButtonConfig && props.saveButtonConfig.emphasis) ? props.saveButtonConfig.emphasis : undefined}
+                            ariaLabel={getButtonAriaLabel(props.headerTitle, "save button", props.ariaLabel, props.saveButtonConfig)}
+                            disabled={props.saveButtonDisabled || props.isLoading}
+                            isLoading={props.isLoading}
+                            height={footerButtonSize}
+                            startIcon={(props.saveButtonConfig || {}).startIcon}
+                        />
+                    }
+                </Flex>
             </div>
         }
     </div>
@@ -183,7 +209,7 @@ export default function FormDialog(props: {
     </Modal>
 }
 
-function getButtonAriaLabel(headerTitle: string, buttonType: string, dialogAL?: string, buttonConfig?: {ariaLabel?: string},) : string {
+function getButtonAriaLabel(headerTitle: string, buttonType: string, dialogAL?: string, buttonConfig?: { ariaLabel?: string },): string {
     if (buttonConfig && buttonConfig.ariaLabel) return buttonConfig.ariaLabel
     if (dialogAL) return `${dialogAL} ${buttonType}`
     return `${headerTitle} ${buttonType}`

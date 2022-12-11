@@ -58,6 +58,7 @@ import { fileViewerOptions, FileViewerCreator } from '../file/file_viewer.view';
 import { calendarStatisticOptions, CalendarStatisticCreator } from '../../CalendarStatistic/calendar_statistic.view';
 import { SelectSetCreator, selectSetOptions } from '../../SelectSet/select_set.view';
 import { NumberInputSetCreator, numberInputOptions } from '../../NumberInputSet/number_input_set.view';
+import { WalkthroughCreator, walkthroughOptions } from '../../Walkthrough/walkthrough.view';
 import Select from '../../Select';
 import SwitchRow from '../../SwitchRow';
 import PageFrame from '../../PageFrame';
@@ -137,6 +138,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Switch Row": { title: "Switch Row", data: switchRowOptions(), creator: SwitchRowCreator, group: "Form" },
         "Radio Group Row": { title: "Radio Group Row", data: radioGroupRowOptions(), creator: RadioGroupRowCreator, group: "Form" },
         "Form Section": { title: "Form Section", data: formSectionOptions(), creator: FormSectionCreator, group: "Form" },
+        "Walkthrough": { title: "Walkthrough", data: walkthroughOptions(), creator: WalkthroughCreator, group: "Form" },
 
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
 
