@@ -58,6 +58,7 @@ import { fileViewerOptions, FileViewerCreator } from '../file/file_viewer.view';
 import { calendarStatisticOptions, CalendarStatisticCreator } from '../../CalendarStatistic/calendar_statistic.view';
 import { SelectSetCreator, selectSetOptions } from '../../SelectSet/select_set.view';
 import { NumberInputSetCreator, numberInputOptions } from '../../NumberInputSet/number_input_set.view';
+import { StringInputSetCreator, stringInputSetOptions } from '../../StringInputSet/string_input_set.view';
 import { WalkthroughCreator, walkthroughOptions } from '../../Walkthrough/walkthrough.view';
 import Select from '../../Select';
 import SwitchRow from '../../SwitchRow';
@@ -131,6 +132,7 @@ export default function MainPage(props: {}): JSX.Element {
         "File Input": { title: "File Input", data: fileInputOptions(), creator: FileInputCreator, group: "Form" },
         "Input Set": { title: "Input Set", data: inputSetOptions(), creator: InputSetCreator, group: "Form" },
         "Number Input Set": { title: "Number Input Set", data: numberInputOptions(), creator: NumberInputSetCreator, group: "Form" },
+        "String Input Set": { title: "String Input Set", data: stringInputSetOptions(), creator: StringInputSetCreator, group: "Form" },
         "Radio Group": { title: "Radio Group", data: radioGroupOptions(), creator: RadioGroupCreator, group: "Form" },
         "Select": { title: "Select", data: selectOptions(), creator: SelectCreator, group: "Form" },
         "Select Row": { title: "Select Row", data: selectRowOptions(), creator: SelectRowCreator, group: "Form" },
