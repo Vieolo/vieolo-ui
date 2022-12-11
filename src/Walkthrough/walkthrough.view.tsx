@@ -37,20 +37,25 @@ export function WalkthroughCreator(props: { p: WalkthroughPropsType }) {
         </div>
     }
 
+    let totalPage = 5;
 
     return <div className='width--vw-90 max-width--px-600'>
         <Walkthrough
             currentPage={currentPage}
             onBack={() => setCurrentPage(currentPage - 1)}
-            onNext={() => setCurrentPage((currentPage + 1) === 4 ? 0 : currentPage + 1)}
+            onNext={() => setCurrentPage((currentPage + 1) === totalPage ? 0 : currentPage + 1)}
             onSkip={() => setCurrentPage(currentPage + 1)}
-            totalPage={4}
+            totalPage={totalPage}
             backButtonText={"Go Back"}
             backButtonIcon={<BackIcon />}
             nextButtonText={"Next Page"}
             skipButtonText={"Skip for now"}
             skipButtonIcon={<SkipIcon />}
             startButtonText={"Yee haa"}
+            progressBarConfig={{
+                color: 'secondary',
+                thickness: '1'
+            }}
             onCancel={(props.p as any).disableCancel ? undefined : () => setCalcelled(true)}
             pages={[
                 {
@@ -63,14 +68,22 @@ export function WalkthroughCreator(props: { p: WalkthroughPropsType }) {
                 },
                 {
                     index: 1,
-                    title: "Your Details",
+                    title: "Verify Your email",
                     preventSkip: true,
                     content: <div>
-                        Image asking for the name
+                        Asking the user to verify it's email
                     </div>
                 },
                 {
                     index: 2,
+                    title: "Your Details",
+                    preventSkip: true,
+                    content: <div>
+                        Imagine asking for the name
+                    </div>
+                },
+                {
+                    index: 3,
                     title: "Your company",
                     content: <div>
                         You can skip this page

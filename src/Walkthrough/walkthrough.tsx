@@ -1,5 +1,7 @@
 // Vieolo UI
 import FormDialog, { FormDialogAccessoryButton } from "../FormDialog"
+import Divider from "../Divider";
+import { ColorOptionType } from "../types";
 
 
 
@@ -50,6 +52,11 @@ export default function Walkthrough(props: {
     doneButtonIcon?: React.ReactNode,
     disableNextButton?: boolean,
     pages: WalkthroughSinglePage[],
+    progressBarConfig?: {
+        color?: ColorOptionType,
+        colorType?: "text" | "normal" | "light" | undefined,
+        thickness?: "1" | "2"
+    }
     /**
      * If this function is omited, there won't be a way for the user to cancel the walkthrough entirely
      */
@@ -118,6 +125,15 @@ export default function Walkthrough(props: {
             startIcon: saveButtonIcon
         }}        
     >        
+        <div style={{width: `${((props.currentPage + 1) / props.totalPage) * 100}%`}}>
+            <Divider 
+                direction="horizontal" 
+                length="pc-100"
+                color={(props.progressBarConfig && props.progressBarConfig.color) ? props.progressBarConfig.color : 'primary'}
+                thickness={(props.progressBarConfig && props.progressBarConfig.thickness) ? props.progressBarConfig.thickness : '2'}
+                colorType={(props.progressBarConfig && props.progressBarConfig.colorType) ? props.progressBarConfig.colorType : 'normal'}
+            />
+        </div>
         <div className="padding--one">
             {page.content}
         </div>
