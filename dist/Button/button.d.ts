@@ -5,7 +5,7 @@ export default function Button(props: {
     text: string;
     onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     disabled?: boolean;
-    color: ColorOptionType;
+    color?: ColorOptionType;
     startIcon?: React.ReactNode;
     endIcon?: React.ReactNode;
     /**

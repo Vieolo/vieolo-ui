@@ -5,7 +5,7 @@ import Typography from '../Typography';
 // Installed Packges
 import { fileNameValidation } from '@vieolo/validation-js';
 export default function FileInput(props) {
-    return _jsxs("form", { className: "vieolo-file-input", children: [_jsx("input", { type: "file", value: '', multiple: props.multiple || false, title: "", accept: props.accept, onChange: e => {
+    return _jsxs("form", { className: "vieolo-file-input", style: props.style, children: [_jsx("input", { type: "file", value: '', multiple: props.multiple || false, title: "", accept: props.accept, onChange: e => {
                     if (props.accept) {
                         for (const file of e.target.files) {
                             if (!props.accept.includes(file.type)) {

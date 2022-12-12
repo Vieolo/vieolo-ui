@@ -11,6 +11,7 @@ import ArrowLeft from '@mui/icons-material/ArrowLeft';
 
 // Main Creators
 import { spinnerOptions, SpinnerCreator } from '../auxiliary/spinner.view';
+import { imagePickerOptions, ImagePickerCreator } from '../../ImagePicker/image_picker.view';
 import { SelectCreator, selectOptions } from '../form/select.view';
 import { PeriodSelectorCreator, periodSelectorOptions } from '../date_time/period_selector.view';
 import { IconButtonCreator, iconButtonOptions } from '../button/icon_button.view';
@@ -141,6 +142,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Radio Group Row": { title: "Radio Group Row", data: radioGroupRowOptions(), creator: RadioGroupRowCreator, group: "Form" },
         "Form Section": { title: "Form Section", data: formSectionOptions(), creator: FormSectionCreator, group: "Form" },
         "Walkthrough": { title: "Walkthrough", data: walkthroughOptions(), creator: WalkthroughCreator, group: "Form" },
+        "Image Picker": { title: "Image Picker", data: imagePickerOptions(), creator: ImagePickerCreator, group: "Form" },
 
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
 

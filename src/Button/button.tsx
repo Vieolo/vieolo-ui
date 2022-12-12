@@ -14,7 +14,7 @@ export default function Button(props: {
 	text: string,
 	onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
 	disabled?: boolean,
-	color: ColorOptionType,
+	color?: ColorOptionType,
 	startIcon?: React.ReactNode,
 	endIcon?: React.ReactNode,
 	/** 
@@ -66,7 +66,7 @@ export default function Button(props: {
 		s.marginRight = 2;
 	}
 
-	c += getEmphasisClasses(e, props.color, {
+	c += getEmphasisClasses(e, props.color || 'primary', {
 		hasRipple: true,
 		hoverable: true,
 		transparentBackground: props.isTransparent
@@ -79,7 +79,7 @@ export default function Button(props: {
 	let button = <button className={c} onClick={props.isLoading ? undefined : props.onClick} style={s} aria-label={props.ariaLabel}>
 		{
 			props.isLoading
-				? <Spinner size={props.height} color={props.color} colorType={e === 'high' ? 'text' : 'normal'}  />
+				? <Spinner size={props.height} color={props.color || 'primary'} colorType={e === 'high' ? 'text' : 'normal'}  />
 				: <>
 					{
 						props.startIcon &&
@@ -113,7 +113,7 @@ export default function Button(props: {
 				if (!props.auxiliary!.dropDownMenuItems || props.auxiliary!.dropDownMenuItems.length === 0) props.auxiliary!.onClick();
 			}}
 		>
-			{props.auxiliary.isLoading ? <Spinner size={props.height} color={props.color} colorType={e === 'high' ? 'text' : 'normal'} /> : props.auxiliary.icon}
+			{props.auxiliary.isLoading ? <Spinner size={props.height} color={props.color || 'primary'} colorType={e === 'high' ? 'text' : 'normal'} /> : props.auxiliary.icon}
 		</button>
 
 		return <div className="flex">

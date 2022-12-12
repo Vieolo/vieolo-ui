@@ -20,6 +20,7 @@ export default function FileInput(props: {
     multiple?: boolean,
     accept?: string,
     validateFileName?: boolean,
+    style?: React.CSSProperties,
     /** 
      * This function (if provided) will change the name of the file prior checking for validation. 
      * This function is useful if the name of the file will change before being used or uploaded to the server
@@ -35,7 +36,7 @@ export default function FileInput(props: {
     }
 }) {
 
-    return <form className="vieolo-file-input">
+    return <form className="vieolo-file-input" style={props.style}>
         <input
             type="file"
             value={''}
