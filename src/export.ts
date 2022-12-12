@@ -33,6 +33,7 @@ import GridContainer from './GridContainer';
 import GridThree from './GridThree';
 import GridTwo from './GridTwo';
 import IconButton from './IconButton';
+import ImagePicker from './ImagePicker';
 import ImageViewer from './ImageViewer';
 import Input from './Input';
 import InputSet from './InputSet';
@@ -200,6 +201,7 @@ export {
 	GridThree,
 	GridTwo,
 	IconButton,
+	ImagePicker,
 	ImageViewer,
 	Input,
 	InputSet,
