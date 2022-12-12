@@ -22,13 +22,21 @@ export default function ImagePicker(props: {
         aspectRatio?: number | "1:1" | "16:9" | "4:3" | "2:3",
         /** default: 1 */
         quality?: number
-        /** default 600 */
+        /** 
+         * default 600 
+         * By Inceasing the max height or max width, the resolution and size of the image increases
+         */
         maxHeight?: number
-        /** default: 600 */
+        /** 
+         * default: 600 
+         * By Inceasing the max height or max width, the resolution and size of the image increases
+         */
         maxWidth?: number,
         /** default: "Crop Your Image" */
         title?: string,
+        /** default: "Cancel" */
         cancelText?: string,
+        /** default: "Done" */
         doneText?: string
     },
     imageDisplay: {
@@ -44,6 +52,7 @@ export default function ImagePicker(props: {
 
     if (props.cropperSetting.aspectRatio) {
         if (typeof props.cropperSetting.aspectRatio === 'number') ar = props.cropperSetting.aspectRatio
+        // Calculating the predefined aspect ratios
         else {
             let s = props.cropperSetting.aspectRatio.split(":").map(z => +z)
             ar = s[0] / s[1]
@@ -51,7 +60,7 @@ export default function ImagePicker(props: {
     }
 
     return <>
-        <div className={`vieolo-image-picker vieolo-image-picker--${props.existingImage ? "full" : "empty"} ${props.className || ''}`}>
+        <div className={`vieolo-image-picker vieolo-image-picker--${props.existingImage ? "full" : "empty"} ${props.className || ''}`} style={{height: props.imageDisplay.height, width: props.imageDisplay.width}}>
             {
                 props.existingImage &&
                 <img
