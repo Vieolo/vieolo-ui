@@ -32,6 +32,7 @@ import GridContainer from './GridContainer';
 import GridThree from './GridThree';
 import GridTwo from './GridTwo';
 import IconButton from './IconButton';
+import ImagePicker from './ImagePicker';
 import ImageViewer from './ImageViewer';
 import Input from './Input';
 import InputSet from './InputSet';
@@ -91,7 +92,7 @@ import { TableInteractiveCell as TableInteractiveCellTemp } from './TableInterac
 import { TypographyTextAlign as TypographyTextAlignTemp, TypographyFontFamily as TypographyFontFamilyTemp, TypographyMargin as TypographyMarginTemp, TypographyColorType as TypographyColorTypeTemp } from './Typography';
 import { WalkthroughSinglePage as WalkthroughSinglePageTemp } from './Walkthrough';
 import { ColorOptionType as ColorOptionTypeTemp, EmphasisType as EmphasisTypeTemp, BorderRadiusValueType as BorderRadiusValueTypeTemp, BorderRadiusType as BorderRadiusTypeTemp, FontWeightType as FontWeightTypeTemp, GridGapType as GridGapTypeTemp, ElevationType as ElevationTypeTemp, RowHeightType as RowHeightTypeTemp, RowStyleType as RowStyleTypeTemp, WidthAndHeightSize as WidthAndHeightSizeTemp, CardExtraActionType as CardExtraActionTypeTemp, TypographyOptionTypes as TypographyOptionTypesTemp, NumberInputValueType as NumberInputValueTypeTemp, StringInputValueType as StringInputValueTypeTemp } from './types';
-export { ActionCard, BackButton, BackButtonRow, BarChart, Button, CalendarStateful, CalendarStateless, CalendarStatistic, Card, Checkbox, Chip, ClickableCard, ConfirmationDialog, ContextMenu, DateInput, DatePicker, DateTimePicker, Divider, DonutChart, DoubleToggleList, DropDownMenu, ExpandableCard, FileInput, FileViewer, FileViewerFrame, Flex, FormDialog, FormSection, GanttChart, Grid, GridContainer, GridThree, GridTwo, IconButton, ImageViewer, Input, InputSet, ItemRow, List, Modal, Navbar, NavDrawer, NumberInput, NumberInputSet, PDFViewer, Page, PageFrame, PeriodSelector, PeriodOptions, RadioGroup, RadioGroupRow, Select, SelectRow, SelectSet, Spacer, Spinner, StringInput, StringInputSet, SubDashboard, SubNavbarRow, Switch, SwitchRow, TabSwitch, Table, TableInteractive, Textarea, TextareaSet, TimeInput, TitlePeriodCard, Typography, VideoViewer, VieoloApp, Walkthrough, };
+export { ActionCard, BackButton, BackButtonRow, BarChart, Button, CalendarStateful, CalendarStateless, CalendarStatistic, Card, Checkbox, Chip, ClickableCard, ConfirmationDialog, ContextMenu, DateInput, DatePicker, DateTimePicker, Divider, DonutChart, DoubleToggleList, DropDownMenu, ExpandableCard, FileInput, FileViewer, FileViewerFrame, Flex, FormDialog, FormSection, GanttChart, Grid, GridContainer, GridThree, GridTwo, IconButton, ImagePicker, ImageViewer, Input, InputSet, ItemRow, List, Modal, Navbar, NavDrawer, NumberInput, NumberInputSet, PDFViewer, Page, PageFrame, PeriodSelector, PeriodOptions, RadioGroup, RadioGroupRow, Select, SelectRow, SelectSet, Spacer, Spinner, StringInput, StringInputSet, SubDashboard, SubNavbarRow, Switch, SwitchRow, TabSwitch, Table, TableInteractive, Textarea, TextareaSet, TimeInput, TitlePeriodCard, Typography, VideoViewer, VieoloApp, Walkthrough, };
 export type BarChartData = BarChartDataTemp;
 export type StackedBarChartData = StackedBarChartDataTemp;
 export type CalendarStatisticData = CalendarStatisticDataTemp;

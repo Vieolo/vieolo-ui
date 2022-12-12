@@ -20,7 +20,7 @@ export default function Button(props) {
         s.borderBottomRightRadius = 0;
         s.marginRight = 2;
     }
-    c += getEmphasisClasses(e, props.color, {
+    c += getEmphasisClasses(e, props.color || 'primary', {
         hasRipple: true,
         hoverable: true,
         transparentBackground: props.isTransparent
@@ -30,7 +30,7 @@ export default function Button(props) {
     if (props.className)
         c += " " + props.className;
     let button = _jsxs("button", { className: c, onClick: props.isLoading ? undefined : props.onClick, style: s, "aria-label": props.ariaLabel, children: [props.isLoading
-                ? _jsx(Spinner, { size: props.height, color: props.color, colorType: e === 'high' ? 'text' : 'normal' })
+                ? _jsx(Spinner, { size: props.height, color: props.color || 'primary', colorType: e === 'high' ? 'text' : 'normal' })
                 : _jsx(_Fragment, { children: props.startIcon &&
                         _jsx("span", { className: "start-icon", children: props.startIcon }) }), props.text, props.endIcon &&
                 _jsx("span", { className: 'end-icon', children: props.endIcon })] });
@@ -43,7 +43,7 @@ export default function Button(props) {
             }, onClick: () => {
                 if (!props.auxiliary.dropDownMenuItems || props.auxiliary.dropDownMenuItems.length === 0)
                     props.auxiliary.onClick();
-            }, children: props.auxiliary.isLoading ? _jsx(Spinner, { size: props.height, color: props.color, colorType: e === 'high' ? 'text' : 'normal' }) : props.auxiliary.icon });
+            }, children: props.auxiliary.isLoading ? _jsx(Spinner, { size: props.height, color: props.color || 'primary', colorType: e === 'high' ? 'text' : 'normal' }) : props.auxiliary.icon });
         return _jsxs("div", { className: "flex", children: [button, (props.auxiliary.dropDownMenuItems && props.auxiliary.dropDownMenuItems.length > 0)
                     ? _jsx(DropDownMenu, { buttonComponent: aux, items: props.auxiliary.dropDownMenuItems, onItemSelect: v => props.auxiliary.onClick(v) })
                     : aux] });
