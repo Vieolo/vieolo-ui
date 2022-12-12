@@ -3098,3 +3098,29 @@ body {
 		}
 	}
 }
+
+.vieolo-image-picker {
+    height: 150px;
+    width: 150px;
+    position: relative;
+    border-radius: $border-radius-normal;
+
+    $self: &;
+
+    &--full {
+        .vieolo-file-input {
+            position: absolute;
+            top:0;
+            left: 0;
+        }
+
+        img {
+            position: absolute;
+            top:0;
+            left: 0;
+            z-index: 2;
+            pointer-events: none;
+            border-radius: $border-radius-normal;
+        }        
+    }
+}
