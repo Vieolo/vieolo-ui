@@ -35,7 +35,6 @@ export function StringInputSetCreator(props: { p: StringInputSetPropsType }) {
             maxLength: 20,
             emptyMessage: "Please add a text",
             optional: false,
-            regexTest: "general",
             tooLongMessage: "Oh, way too long"
         }}
         value={value}       

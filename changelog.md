@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.24.6 (2022-12-15)
+- Updated dependencies
+
 ## 0.24.5 (2022-12-12)
 - Added `ImagePicker` component ([#204](https://github.com/Vieolo/vieolo-ui/issues/204))
 
