@@ -4,6 +4,7 @@ import {
 	TypographyFontFamily as TypographyFontFamilyTemp,
 	TypographyMargin as TypographyMarginTemp,
 	TypographyColorType as TypographyColorTypeTemp,
+	TypographyStyle as TypographyStyleTemp,
 } from './typography';
 
 
@@ -12,3 +13,4 @@ export type TypographyTextAlign = TypographyTextAlignTemp;
 export type TypographyFontFamily = TypographyFontFamilyTemp;
 export type TypographyMargin = TypographyMarginTemp;
 export type TypographyColorType = TypographyColorTypeTemp;
+export type TypographyStyle = TypographyStyleTemp;

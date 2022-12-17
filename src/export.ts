@@ -144,6 +144,7 @@ import {
 	TypographyFontFamily as TypographyFontFamilyTemp,
 	TypographyMargin as TypographyMarginTemp,
 	TypographyColorType as TypographyColorTypeTemp,
+	TypographyStyle as TypographyStyleTemp,
 } from './Typography';
 import {
 	WalkthroughSinglePage as WalkthroughSinglePageTemp,
@@ -280,6 +281,7 @@ export type TypographyTextAlign = TypographyTextAlignTemp;
 export type TypographyFontFamily = TypographyFontFamilyTemp;
 export type TypographyMargin = TypographyMarginTemp;
 export type TypographyColorType = TypographyColorTypeTemp;
+export type TypographyStyle = TypographyStyleTemp;
 export type WalkthroughSinglePage = WalkthroughSinglePageTemp;
 export type ColorOptionType = ColorOptionTypeTemp;
 export type EmphasisType = EmphasisTypeTemp;
