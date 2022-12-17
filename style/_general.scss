@@ -525,134 +525,78 @@
 }
 
 @mixin colorMixin($property, $includeSingleValueColors, $optionalSuffix: "") {
+	$colTypes: (
+		"normal",
+		"light",
+		"transparent",
+		"text",
+		"text-light"
+	);
+
+	$auxCols: (
+		"hover": $hover-color,
+		"neutral": $neutral-color,
+		"background": $background-color,
+		"content-background": $background-content-color,
+		"background-content": $background-content-color,
+		"white": white,
+		"transparent": transparent,
+	);
+	
 	@each $c in $colorOptions {
-		&--#{$c}-normal {
-			#{$property}: getColorVariable($c, "normal") unquote($optionalSuffix);
-		}
-
-		&--#{$c}-light {
-			#{$property}: getColorVariable($c, "light") unquote($optionalSuffix);
-		}
-
-		&--#{$c}-transparent {
-			#{$property}: getColorVariable($c, "transparent") unquote($optionalSuffix);
-		}
-
-		&--#{$c}-text {
-			#{$property}: getColorVariable($c, "text") unquote($optionalSuffix);
-		}
-
-		&--#{$c}-text-light {
-			#{$property}: getColorVariable($c, "text-light") unquote($optionalSuffix);
+		@each $ct in $colTypes {
+			&--#{$c}-#{$ct} {
+				#{$property}: getColorVariable($c, $ct) unquote($optionalSuffix);	
+			}
 		}
 	}
 
 	@if $includeSingleValueColors {
-		&--hover {
-			#{$property}: $hover-color unquote($optionalSuffix);
-		}
-
-		&--neutral {
-			#{$property}: $neutral-color unquote($optionalSuffix);
-		}
-
-		&--background {
-			#{$property}: $background-color unquote($optionalSuffix);
-		}
-
-		&--content-background {
-			#{$property}: $background-content-color unquote($optionalSuffix);
-		}
-
-		&--background-content {
-			#{$property}: $background-content-color unquote($optionalSuffix);
-		}
-
-		&--white {
-			#{$property}: white unquote($optionalSuffix);
-		}
-
-		&--transparent {
-			#{$property}: transparent unquote($optionalSuffix);
-		}
+		@each $ac, $av in $auxCols {
+			&--#{$ac} {
+				#{$property}: $av unquote($optionalSuffix);
+			}	
+		}		
 	}
 }
 
 @mixin colorStateMixin($property, $includeSingleValueColors, $optionalSuffix: "", $state: "") {
+	$colTypes: (
+		"normal",
+		"light",
+		"text"
+	);
+
+	$auxCols: (
+		"hover": $hover-color, // deprecated (use emphasis instead)
+		"neutral": $neutral-color, // deprecated (use emphasis instead)
+		"background": $background-color,
+		"content-background": $background-content-color, // deprecated (user --background-content instead)
+		"background-content": $background-content-color,
+		"light-mode-normal-text": $light-mode-normal-text-color,
+		"light-mode-gray-text": $light-mode-gray-text-color, 
+		"white": white,
+		"transparent": transparent,
+	);
+
 	@each $c in $colorOptions {
-		&--#{$c}-normal {
-			#{$state} {
-				#{$property}: getColorVariable($c, "normal") unquote($optionalSuffix);
-			}
-		}
-
-		&--#{$c}-light {
-			#{$state} {
-				#{$property}: getColorVariable($c, "light") unquote($optionalSuffix);
-			}
-		}
-
-		&--#{$c}-text {
-			#{$state} {
-				#{$property}: getColorVariable($c, "text") unquote($optionalSuffix);
-			}
-		}
+		@each $colT in $colTypes {
+			&--#{$c}-#{$colT} {
+				#{$state} {
+					#{$property}: getColorVariable($c, $colT) unquote($optionalSuffix);
+				}
+			}	
+		}		
 	}
 
 	@if $includeSingleValueColors {
-		&--hover { // deprecated (use emphasis instead)
-			#{$state} {
-				#{$property}: $hover-color unquote($optionalSuffix);
-			}
-		}
-
-		&--neutral { // deprecated (use emphasis instead)
-			#{$state} {
-				#{$property}: $neutral-color unquote($optionalSuffix);
-			}
-		}
-
-		&--background {
-			#{$state} {
-				#{$property}: $background-color unquote($optionalSuffix);
-			}
-		}
-
-		&--content-background { // deprecated (user --background-content instead)
-			#{$state} {
-				#{$property}: $background-content-color unquote($optionalSuffix);
-			}
-		}
-
-		&--background-content {
-			#{$state} {
-				#{$property}: $background-content-color unquote($optionalSuffix);
-			}
-		}
-
-		&--light-mode-normal-text {
-			#{$state} {
-				#{$property}: $light-mode-normal-text-color unquote($optionalSuffix);
-			}
-		}
-
-		&--light-mode-gray-text {
-			#{$state} {
-				#{$property}: $light-mode-gray-text-color unquote($optionalSuffix);
-			}
-		}
-
-		&--white {
-			#{$state} {
-				#{$property}: white unquote($optionalSuffix);
-			}
-		}
-
-		&--transparent {
-			#{$state} {
-				#{$property}: transparent unquote($optionalSuffix);
-			}
-		}
+		@each $ac, $av in $auxCols {
+			&--#{$ac} { // deprecated (use emphasis instead)
+				#{$state} {
+					#{$property}: $av unquote($optionalSuffix);
+				}
+			}	
+		}		
 	}
 }
 
