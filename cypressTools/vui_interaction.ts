@@ -40,10 +40,10 @@ export default class VieoloUIInteraction {
         itemTitle: string
     }) {
         if (options.containerLabel) {
-            cy.getByAriaLabel(options.containerLabel).find(`[aria-label='${options.ariaLabel || `Select ${options.selectTitle}`}']`).click();
+            cy.getByAriaLabel(options.containerLabel).find(`[aria-label='${options.ariaLabel || `Select ${options.selectTitle || ''}`}']`).click();
             cy.getByAriaLabel(options.containerLabel).find(`[aria-label='${options.itemTitle}']`).click();
         } else {
-            cy.getByAriaLabel(options.ariaLabel ||`Select ${options.selectTitle}`).click();
+            cy.getByAriaLabel(options.ariaLabel || `Select ${options.selectTitle || ''}`).click();
             cy.getByAriaLabel(options.itemTitle).click()
         }        
     }
