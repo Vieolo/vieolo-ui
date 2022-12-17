@@ -1,8 +1,7 @@
 @use "sass:meta";
 @import "base";
 
-@mixin interClassSubDesktopVariant($args...) {
-    @debug meta.keywords($args);
+@mixin interClassSubDesktopVariant($args...) {    
     $sizes: (
         "lg": $laptop13BreakPoint,
         "md": $tablet10LandscapeBreakPoint,
@@ -20,6 +19,36 @@
     @each $s, $bp in $sizes {
         @each $state, $con in meta.keywords($args) {
         &--#{$state} {
+                &--#{$s} {
+                    @media all and (max-width: $bp) {
+						@each $k, $v in $con {
+							#{$k}: $v;
+						}
+					}
+                }
+            }
+        }
+    }
+} 
+
+@mixin multiClassSubDesktopVariant($args...) {
+    $sizes: (
+        "lg": $laptop13BreakPoint,
+        "md": $tablet10LandscapeBreakPoint,
+        "sm": $mobileBreakPoint
+    );
+    
+    @each $cl, $con in meta.keywords($args) {
+        .#{$cl} {
+            @each $k, $v in $con {
+                    #{$k}: $v;
+                }
+        }
+    }
+    
+    @each $s, $bp in $sizes {
+        @each $cl, $con in meta.keywords($args) {
+        .#{$cl} {
                 &--#{$s} {
                     @media all and (max-width: $bp) {
 						@each $k, $v in $con {
@@ -833,67 +862,52 @@
 
 
 @mixin typography-title-large {
-	font-size: 20px;
-}
-.typography-title-large {
-	@include typography-title-large;
+	font-size: $typography-title-large;
 }
 
 @mixin typography-title-medium {
-	font-size: 18px;
-}
-.typography-title-medium {
-	@include typography-title-medium;
+	font-size: $typography-title-medium;
 }
 
 @mixin typography-title-small {
-	font-size: 16px;
-}
-.typography-title-small {
-	@include typography-title-small;
+	font-size: $typography-title-small;
 }
 
 @mixin typography-paragraph-large {
-	font-size: 16px;
-}
-.typography-paragraph-large {
-	@include typography-paragraph-large;
+	font-size: $typography-paragraph-large;
 }
 
 @mixin typography-paragraph-medium {
-	font-size: 14px;
-}
-.typography-paragraph-medium {
-	@include typography-paragraph-medium;
+	font-size: $typography-paragraph-medium ;
 }
 
 @mixin typography-paragraph-small {
-	font-size: 12px;
-}
-.typography-paragraph-small {
-	@include typography-paragraph-small;
+	font-size: $typography-paragraph-small;
 }
 
 @mixin typography-caption-large {
-	font-size: 12px;
-}
-.typography-caption-large {
-	@include typography-caption-large;
+	font-size: $typography-caption-large;
 }
 
 @mixin typography-caption-medium {
-	font-size: 10px;
-}
-.typography-caption-medium {
-	@include typography-caption-medium;
+	font-size: $typography-caption-medium;
 }
 
 @mixin typography-caption-small {
-	font-size: 8px;
+	font-size: $typography-caption-small;
 }
-.typography-caption-small {
-	@include typography-caption-small;
-}
+
+@include multiClassSubDesktopVariant(
+	$typography-title-large: (font-size: $typography-title-large),
+	$typography-title-medium: (font-size: $typography-title-medium),
+	$typography-title-small: (font-size: $typography-title-small),
+	$typography-paragraph-large: (font-size: $typography-paragraph-large),
+	$typography-paragraph-medium: (font-size: $typography-paragraph-medium),
+	$typography-paragraph-small: (font-size: $typography-paragraph-small),
+	$typography-caption-large: (font-size: $typography-caption-large),
+	$typography-caption-medium: (font-size: $typography-caption-medium),
+	$typography-caption-small: (font-size: $typography-caption-small),
+);
 
 
 
