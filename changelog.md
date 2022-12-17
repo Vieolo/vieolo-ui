@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.24.7 (2022-12-17)
+- Added responsiveness to `Typography` ([#213](https://github.com/Vieolo/vieolo-ui/issues/213))
+
 ## 0.24.6 (2022-12-15)
 - Updated dependencies
 
