@@ -1,4 +1,36 @@
+@use "sass:meta";
 @import "base";
+
+@mixin interClassSubDesktopVariant($args...) {
+    @debug meta.keywords($args);
+    $sizes: (
+        "lg": $laptop13BreakPoint,
+        "md": $tablet10LandscapeBreakPoint,
+        "sm": $mobileBreakPoint
+    );
+    
+    @each $state, $con in meta.keywords($args) {
+        &--#{$state} {
+            @each $k, $v in $con {
+                    #{$k}: $v;
+                }
+        }
+    }
+    
+    @each $s, $bp in $sizes {
+        @each $state, $con in meta.keywords($args) {
+        &--#{$state} {
+                &--#{$s} {
+                    @media all and (max-width: $bp) {
+						@each $k, $v in $con {
+							#{$k}: $v;
+						}
+					}
+                }
+            }
+        }
+    }
+} 
 
 
 // #region Colors and Pallet
@@ -799,60 +831,6 @@
 
 // #region Fonts and Typography
 
-@mixin font-light {
-	font-family: $font-family-primary;
-	font-weight: $font-weight-light;
-}
-.font-light {
-	@include font-light;
-}
-
-
-@mixin font-normal {
-	font-family: $font-family-primary;
-	font-weight: $font-weight-normal;
-}
-.font-normal {
-	@include font-normal;
-}
-
-
-@mixin font-header {
-	font-family: $font-family-secondary;
-	font-weight: $font-weight-bold;
-}
-.font-header {
-	@include font-header;
-}
-
-.font-weight {
-	&--light {
-		font-weight: $font-weight-light;
-	}
-
-	&--normal {
-		font-weight: $font-weight-normal;
-	}
-
-	&--bold {
-		font-weight: $font-weight-bold;
-	}
-
-	&--extra-bold {
-		font-weight: $font-weight-extra-bold;
-	}
-}
-
-.font-family {
-	&--primary {
-		font-family: $font-family-primary;
-	}
-
-	&--secondary {
-		font-family: $font-family-secondary;
-	}
-}
-
 
 @mixin typography-title-large {
 	font-size: 20px;
@@ -915,6 +893,50 @@
 }
 .typography-caption-small {
 	@include typography-caption-small;
+}
+
+
+
+@mixin font-light {
+	font-family: $font-family-primary;
+	font-weight: $font-weight-light;
+}
+.font-light {
+	@include font-light;
+}
+
+
+@mixin font-normal {
+	font-family: $font-family-primary;
+	font-weight: $font-weight-normal;
+}
+.font-normal {
+	@include font-normal;
+}
+
+
+@mixin font-header {
+	font-family: $font-family-secondary;
+	font-weight: $font-weight-bold;
+}
+.font-header {
+	@include font-header;
+}
+
+.font-weight {
+	@include interClassSubDesktopVariant(
+		$light: (font-weight: $font-weight-light),
+		$normal: (font-weight: $font-weight-normal),
+		$bold: (font-weight: $font-weight-bold),
+		$extra-bold: (font-weight: $font-weight-extra-bold),
+	)
+}
+
+.font-family {
+	@include interClassSubDesktopVariant(
+		$primary: (font-family: $font-family-primary),
+		$secondary: (font-family: $font-family-secondary),		
+	)
 }
 
 // #endregion
@@ -1826,21 +1848,12 @@ html {
 }
 
 .text-align {
-	&--left {
-		text-align: left;
-	}
-
-	&--center {
-		text-align: center;
-	}
-
-	&--right {
-		text-align: right;
-	}
-
-	&--justify {
-		text-align: justify;
-	}
+	@include interClassSubDesktopVariant(
+		$left: (text-align: left),
+		$center: (text-align: center),
+		$right: (text-align: right),
+		$justify: (text-align: justify),
+	)
 }
 
 
