@@ -15,8 +15,8 @@ describe("Button", () => {
 
         LocalServer.start("Buttons", "Button");
 
-        VieoloUIInteraction.selectOptionFromSelect("Color", "secondary");
-        VieoloUIInteraction.selectOptionFromSelect("Emphasis", "high");
+        VieoloUIInteraction.selectOptionFromSelect({selectTitle: "Color", itemTitle: "secondary"});
+        VieoloUIInteraction.selectOptionFromSelect({selectTitle: "Emphasis", itemTitle: "high"});
 
         cy.get("main").find(".vieolo-button").hasBackgroundColor(TestColors.SECONDARY_COLOR_NORMAL);
     });

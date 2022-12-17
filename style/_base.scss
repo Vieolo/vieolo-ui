@@ -153,7 +153,18 @@ $font-weight-bold: 700 !default;
 $font-weight-extra-bold: 900 !default;
 
 $font-family-primary: 'Roboto', sans-serif !default;
-$font-family-secondary: "Archivo", sans-serif !default;
+$font-family-secondary: 'Barlow Condensed', sans-serif !default;
+
+$typography-title-large: 20px !default;
+$typography-title-medium: 18px !default;
+$typography-title-small: 16px !default;
+$typography-paragraph-large: 16px !default;
+$typography-paragraph-medium: 14px !default;
+$typography-paragraph-small: 12px !default;
+$typography-caption-large: 12px !default;
+$typography-caption-medium: 10px !default;
+$typography-caption-small: 8px !default;
+
 
 // Elevation
 $elevation-shadow-0: none;

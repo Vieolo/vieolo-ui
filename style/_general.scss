@@ -1,4 +1,65 @@
+@use "sass:meta";
 @import "base";
+
+@mixin interClassSubDesktopVariant($args...) {    
+    $sizes: (
+        "lg": $laptop13BreakPoint,
+        "md": $tablet10LandscapeBreakPoint,
+        "sm": $mobileBreakPoint
+    );
+    
+    @each $state, $con in meta.keywords($args) {
+        &--#{$state} {
+            @each $k, $v in $con {
+                    #{$k}: $v;
+                }
+        }
+    }
+    
+    @each $s, $bp in $sizes {
+        @each $state, $con in meta.keywords($args) {
+        &--#{$state} {
+                &--#{$s} {
+                    @media all and (max-width: $bp) {
+						@each $k, $v in $con {
+							#{$k}: $v;
+						}
+					}
+                }
+            }
+        }
+    }
+} 
+
+@mixin multiClassSubDesktopVariant($args...) {
+    $sizes: (
+        "lg": $laptop13BreakPoint,
+        "md": $tablet10LandscapeBreakPoint,
+        "sm": $mobileBreakPoint
+    );
+    
+    @each $cl, $con in meta.keywords($args) {
+        .#{$cl} {
+            @each $k, $v in $con {
+                    #{$k}: $v;
+                }
+        }
+    }
+    
+    @each $s, $bp in $sizes {
+        @each $cl, $con in meta.keywords($args) {
+        .#{$cl} {
+                &--#{$s} {
+                    @media all and (max-width: $bp) {
+						@each $k, $v in $con {
+							#{$k}: $v;
+						}
+					}
+                }
+            }
+        }
+    }
+} 
 
 
 // #region Colors and Pallet
@@ -464,135 +525,144 @@
 }
 
 @mixin colorMixin($property, $includeSingleValueColors, $optionalSuffix: "") {
+	$colTypes: (
+		"normal",
+		"light",
+		"transparent",
+		"text",
+		"text-light"
+	);
+
+	$sizes: (
+        "lg": $laptop13BreakPoint,
+        "md": $tablet10LandscapeBreakPoint,
+        "sm": $mobileBreakPoint
+    );
+
+	$auxCols: (
+		"hover": $hover-color,
+		"neutral": $neutral-color,
+		"background": $background-color,
+		"content-background": $background-content-color,
+		"background-content": $background-content-color,
+		"white": white,
+		"transparent": transparent,
+	);
+	
 	@each $c in $colorOptions {
-		&--#{$c}-normal {
-			#{$property}: getColorVariable($c, "normal") unquote($optionalSuffix);
-		}
-
-		&--#{$c}-light {
-			#{$property}: getColorVariable($c, "light") unquote($optionalSuffix);
-		}
-
-		&--#{$c}-transparent {
-			#{$property}: getColorVariable($c, "transparent") unquote($optionalSuffix);
-		}
-
-		&--#{$c}-text {
-			#{$property}: getColorVariable($c, "text") unquote($optionalSuffix);
-		}
-
-		&--#{$c}-text-light {
-			#{$property}: getColorVariable($c, "text-light") unquote($optionalSuffix);
+		@each $ct in $colTypes {
+			&--#{$c}-#{$ct} {
+				#{$property}: getColorVariable($c, $ct) unquote($optionalSuffix);	
+			}
 		}
 	}
 
 	@if $includeSingleValueColors {
-		&--hover {
-			#{$property}: $hover-color unquote($optionalSuffix);
-		}
+		@each $ac, $av in $auxCols {
+			&--#{$ac} {
+				#{$property}: $av unquote($optionalSuffix);
+			}	
+		}		
+	}
 
-		&--neutral {
-			#{$property}: $neutral-color unquote($optionalSuffix);
+	@each $sz, $bp in $sizes {
+		@each $c in $colorOptions {
+			@each $ct in $colTypes {
+				&--#{$c}-#{$ct}--#{$sz} {
+					@media all and (max-width: $bp) {
+						#{$property}: getColorVariable($c, $ct) unquote($optionalSuffix);	
+					}
+				}
+			}
 		}
+	}	
 
-		&--background {
-			#{$property}: $background-color unquote($optionalSuffix);
-		}
-
-		&--content-background {
-			#{$property}: $background-content-color unquote($optionalSuffix);
-		}
-
-		&--background-content {
-			#{$property}: $background-content-color unquote($optionalSuffix);
-		}
-
-		&--white {
-			#{$property}: white unquote($optionalSuffix);
-		}
-
-		&--transparent {
-			#{$property}: transparent unquote($optionalSuffix);
-		}
+	@if $includeSingleValueColors {
+		@each $sz, $bp in $sizes {
+			@each $ac, $av in $auxCols {
+				&--#{$ac}--#{$sz} {
+					@media all and (max-width: $bp) {
+						#{$property}: $av unquote($optionalSuffix);
+					}
+				}	
+			}		
+		}		
 	}
 }
 
 @mixin colorStateMixin($property, $includeSingleValueColors, $optionalSuffix: "", $state: "") {
+	$colTypes: (
+		"normal",
+		"light",
+		"text"
+	);
+
+	$sizes: (
+        "lg": $laptop13BreakPoint,
+        "md": $tablet10LandscapeBreakPoint,
+        "sm": $mobileBreakPoint
+    );
+
+	$auxCols: (
+		"hover": $hover-color, // deprecated (use emphasis instead)
+		"neutral": $neutral-color, // deprecated (use emphasis instead)
+		"background": $background-color,
+		"content-background": $background-content-color, // deprecated (user --background-content instead)
+		"background-content": $background-content-color,
+		"light-mode-normal-text": $light-mode-normal-text-color,
+		"light-mode-gray-text": $light-mode-gray-text-color, 
+		"white": white,
+		"transparent": transparent,
+	);
+
 	@each $c in $colorOptions {
-		&--#{$c}-normal {
-			#{$state} {
-				#{$property}: getColorVariable($c, "normal") unquote($optionalSuffix);
-			}
-		}
-
-		&--#{$c}-light {
-			#{$state} {
-				#{$property}: getColorVariable($c, "light") unquote($optionalSuffix);
-			}
-		}
-
-		&--#{$c}-text {
-			#{$state} {
-				#{$property}: getColorVariable($c, "text") unquote($optionalSuffix);
-			}
-		}
+		@each $colT in $colTypes {
+			&--#{$c}-#{$colT} {
+				#{$state} {
+					#{$property}: getColorVariable($c, $colT) unquote($optionalSuffix);
+				}
+			}	
+		}		
 	}
 
 	@if $includeSingleValueColors {
-		&--hover { // deprecated (use emphasis instead)
-			#{$state} {
-				#{$property}: $hover-color unquote($optionalSuffix);
-			}
-		}
-
-		&--neutral { // deprecated (use emphasis instead)
-			#{$state} {
-				#{$property}: $neutral-color unquote($optionalSuffix);
-			}
-		}
-
-		&--background {
-			#{$state} {
-				#{$property}: $background-color unquote($optionalSuffix);
-			}
-		}
-
-		&--content-background { // deprecated (user --background-content instead)
-			#{$state} {
-				#{$property}: $background-content-color unquote($optionalSuffix);
-			}
-		}
-
-		&--background-content {
-			#{$state} {
-				#{$property}: $background-content-color unquote($optionalSuffix);
-			}
-		}
-
-		&--light-mode-normal-text {
-			#{$state} {
-				#{$property}: $light-mode-normal-text-color unquote($optionalSuffix);
-			}
-		}
-
-		&--light-mode-gray-text {
-			#{$state} {
-				#{$property}: $light-mode-gray-text-color unquote($optionalSuffix);
-			}
-		}
-
-		&--white {
-			#{$state} {
-				#{$property}: white unquote($optionalSuffix);
-			}
-		}
-
-		&--transparent {
-			#{$state} {
-				#{$property}: transparent unquote($optionalSuffix);
-			}
-		}
+		@each $ac, $av in $auxCols {
+			&--#{$ac} {
+				#{$state} {
+					#{$property}: $av unquote($optionalSuffix);
+				}
+			}	
+		}		
 	}
+
+	@each $sz, $bp in $sizes {
+        @each $c in $colorOptions {
+			@each $colT in $colTypes {
+				&--#{$c}-#{$colT}--#{$sz} {
+					@media all and (max-width: $bp) {
+						#{$state} {
+							#{$property}: getColorVariable($c, $colT) unquote($optionalSuffix);
+						}
+					}					
+				}	
+			}		
+		}
+    }
+
+	@if $includeSingleValueColors {
+		@each $sz, $bp in $sizes {
+			@each $ac, $av in $auxCols {
+				&--#{$ac}--#{$sz} {
+					@media all and (max-width: $bp) {
+						#{$state} {
+							#{$property}: $av unquote($optionalSuffix);
+						}
+					}					
+				}	
+			}		
+		}		
+	}
+	
 }
 
 .background-color {
@@ -799,6 +869,57 @@
 
 // #region Fonts and Typography
 
+
+@mixin typography-title-large {
+	font-size: $typography-title-large;
+}
+
+@mixin typography-title-medium {
+	font-size: $typography-title-medium;
+}
+
+@mixin typography-title-small {
+	font-size: $typography-title-small;
+}
+
+@mixin typography-paragraph-large {
+	font-size: $typography-paragraph-large;
+}
+
+@mixin typography-paragraph-medium {
+	font-size: $typography-paragraph-medium ;
+}
+
+@mixin typography-paragraph-small {
+	font-size: $typography-paragraph-small;
+}
+
+@mixin typography-caption-large {
+	font-size: $typography-caption-large;
+}
+
+@mixin typography-caption-medium {
+	font-size: $typography-caption-medium;
+}
+
+@mixin typography-caption-small {
+	font-size: $typography-caption-small;
+}
+
+@include multiClassSubDesktopVariant(
+	$typography-title-large: (font-size: $typography-title-large),
+	$typography-title-medium: (font-size: $typography-title-medium),
+	$typography-title-small: (font-size: $typography-title-small),
+	$typography-paragraph-large: (font-size: $typography-paragraph-large),
+	$typography-paragraph-medium: (font-size: $typography-paragraph-medium),
+	$typography-paragraph-small: (font-size: $typography-paragraph-small),
+	$typography-caption-large: (font-size: $typography-caption-large),
+	$typography-caption-medium: (font-size: $typography-caption-medium),
+	$typography-caption-small: (font-size: $typography-caption-small),
+);
+
+
+
 @mixin font-light {
 	font-family: $font-family-primary;
 	font-weight: $font-weight-light;
@@ -826,95 +947,19 @@
 }
 
 .font-weight {
-	&--light {
-		font-weight: $font-weight-light;
-	}
-
-	&--normal {
-		font-weight: $font-weight-normal;
-	}
-
-	&--bold {
-		font-weight: $font-weight-bold;
-	}
-
-	&--extra-bold {
-		font-weight: $font-weight-extra-bold;
-	}
+	@include interClassSubDesktopVariant(
+		$light: (font-weight: $font-weight-light),
+		$normal: (font-weight: $font-weight-normal),
+		$bold: (font-weight: $font-weight-bold),
+		$extra-bold: (font-weight: $font-weight-extra-bold),
+	)
 }
 
 .font-family {
-	&--primary {
-		font-family: $font-family-primary;
-	}
-
-	&--secondary {
-		font-family: $font-family-secondary;
-	}
-}
-
-
-@mixin typography-title-large {
-	font-size: 20px;
-}
-.typography-title-large {
-	@include typography-title-large;
-}
-
-@mixin typography-title-medium {
-	font-size: 18px;
-}
-.typography-title-medium {
-	@include typography-title-medium;
-}
-
-@mixin typography-title-small {
-	font-size: 16px;
-}
-.typography-title-small {
-	@include typography-title-small;
-}
-
-@mixin typography-paragraph-large {
-	font-size: 16px;
-}
-.typography-paragraph-large {
-	@include typography-paragraph-large;
-}
-
-@mixin typography-paragraph-medium {
-	font-size: 14px;
-}
-.typography-paragraph-medium {
-	@include typography-paragraph-medium;
-}
-
-@mixin typography-paragraph-small {
-	font-size: 12px;
-}
-.typography-paragraph-small {
-	@include typography-paragraph-small;
-}
-
-@mixin typography-caption-large {
-	font-size: 12px;
-}
-.typography-caption-large {
-	@include typography-caption-large;
-}
-
-@mixin typography-caption-medium {
-	font-size: 10px;
-}
-.typography-caption-medium {
-	@include typography-caption-medium;
-}
-
-@mixin typography-caption-small {
-	font-size: 8px;
-}
-.typography-caption-small {
-	@include typography-caption-small;
+	@include interClassSubDesktopVariant(
+		$primary: (font-family: $font-family-primary),
+		$secondary: (font-family: $font-family-secondary),		
+	)
 }
 
 // #endregion
@@ -1826,21 +1871,12 @@ html {
 }
 
 .text-align {
-	&--left {
-		text-align: left;
-	}
-
-	&--center {
-		text-align: center;
-	}
-
-	&--right {
-		text-align: right;
-	}
-
-	&--justify {
-		text-align: justify;
-	}
+	@include interClassSubDesktopVariant(
+		$left: (text-align: left),
+		$center: (text-align: center),
+		$right: (text-align: right),
+		$justify: (text-align: justify),
+	)
 }
 
 

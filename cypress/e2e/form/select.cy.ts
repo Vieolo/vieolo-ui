@@ -9,7 +9,7 @@ describe("Form", () => {
 
     cy.get('.vieolo-select');
 
-    VieoloUIInteraction.selectOptionFromSelect("Item", "Six");
+    VieoloUIInteraction.selectOptionFromSelect({selectTitle: "Item", itemTitle: "Six"});
 
   });
 

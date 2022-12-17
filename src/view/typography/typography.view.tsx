@@ -32,6 +32,7 @@ export function typographyOptions(): ViewData {
             },
             showTitle: 'booleanTrueDefault',
             customHoverTitle: 'boolean',
+            responsiveStyle: 'boolean',
             color: 'colorsOptional',
             colorType: {
                 options: ["normal", 'text', "light", "text-light"],
@@ -72,5 +73,14 @@ export function TypographyCreator(props: { p: TypographyPropsType }) {
         textAlign={props.p.textAlign}
         nonselectable={props.p.nonselectable}
         hoverTitle={(props.p as any).customHoverTitle ? "This is a different text from the main one" : undefined}
+        md={!(props.p as any).responsiveStyle ? undefined : {
+            color: 'error',
+            colorType: 'normal',
+            fontFamily: 'secondary',
+            fontWeight: 'light',
+            margin: '20',
+            textAlign: 'right',
+            type: 'title-large'
+        }}
     />
 }

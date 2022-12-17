@@ -8,7 +8,7 @@ describe("Layout Auxiliary", () => {
 
     LocalServer.start('Layout/Auxiliary', 'Divider');
 
-    VieoloUIInteraction.selectOptionFromSelect("Color Type", "normal");
+    VieoloUIInteraction.selectOptionFromSelect({selectTitle: "Color Type", itemTitle: "normal"});
 
     cy.get('.height--vh-50 > div > div').hasBackgroundColor(TestColors.PRIMARY_COLOR_NORMAL);
 
