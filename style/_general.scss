@@ -533,6 +533,12 @@
 		"text-light"
 	);
 
+	$sizes: (
+        "lg": $laptop13BreakPoint,
+        "md": $tablet10LandscapeBreakPoint,
+        "sm": $mobileBreakPoint
+    );
+
 	$auxCols: (
 		"hover": $hover-color,
 		"neutral": $neutral-color,
@@ -558,6 +564,30 @@
 			}	
 		}		
 	}
+
+	@each $sz, $bp in $sizes {
+		@each $c in $colorOptions {
+			@each $ct in $colTypes {
+				&--#{$c}-#{$ct}--#{$sz} {
+					@media all and (max-width: $bp) {
+						#{$property}: getColorVariable($c, $ct) unquote($optionalSuffix);	
+					}
+				}
+			}
+		}
+	}	
+
+	@if $includeSingleValueColors {
+		@each $sz, $bp in $sizes {
+			@each $ac, $av in $auxCols {
+				&--#{$ac}--#{$sz} {
+					@media all and (max-width: $bp) {
+						#{$property}: $av unquote($optionalSuffix);
+					}
+				}	
+			}		
+		}		
+	}
 }
 
 @mixin colorStateMixin($property, $includeSingleValueColors, $optionalSuffix: "", $state: "") {
@@ -566,6 +596,12 @@
 		"light",
 		"text"
 	);
+
+	$sizes: (
+        "lg": $laptop13BreakPoint,
+        "md": $tablet10LandscapeBreakPoint,
+        "sm": $mobileBreakPoint
+    );
 
 	$auxCols: (
 		"hover": $hover-color, // deprecated (use emphasis instead)
@@ -591,13 +627,42 @@
 
 	@if $includeSingleValueColors {
 		@each $ac, $av in $auxCols {
-			&--#{$ac} { // deprecated (use emphasis instead)
+			&--#{$ac} {
 				#{$state} {
 					#{$property}: $av unquote($optionalSuffix);
 				}
 			}	
 		}		
 	}
+
+	@each $sz, $bp in $sizes {
+        @each $c in $colorOptions {
+			@each $colT in $colTypes {
+				&--#{$c}-#{$colT}--#{$sz} {
+					@media all and (max-width: $bp) {
+						#{$state} {
+							#{$property}: getColorVariable($c, $colT) unquote($optionalSuffix);
+						}
+					}					
+				}	
+			}		
+		}
+    }
+
+	@if $includeSingleValueColors {
+		@each $sz, $bp in $sizes {
+			@each $ac, $av in $auxCols {
+				&--#{$ac}--#{$sz} {
+					@media all and (max-width: $bp) {
+						#{$state} {
+							#{$property}: $av unquote($optionalSuffix);
+						}
+					}					
+				}	
+			}		
+		}		
+	}
+	
 }
 
 .background-color {
