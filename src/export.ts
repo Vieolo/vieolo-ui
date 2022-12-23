@@ -68,6 +68,7 @@ import Textarea from './Textarea';
 import TextareaSet from './TextareaSet';
 import TimeInput from './TimeInput';
 import TitlePeriodCard from './TitlePeriodCard';
+import TreeList from './TreeList';
 import Typography from './Typography';
 import VideoViewer from './VideoViewer';
 import VieoloApp from './VieoloApp';
@@ -140,6 +141,9 @@ import {
 import {
 	TableInteractiveCell as TableInteractiveCellTemp,
 } from './TableInteractive';
+import {
+	TreeListItem as TreeListItemTemp,
+} from './TreeList';
 import {
 	TypographyTextAlign as TypographyTextAlignTemp,
 	TypographyFontFamily as TypographyFontFamilyTemp,
@@ -239,6 +243,7 @@ export {
 	TextareaSet,
 	TimeInput,
 	TitlePeriodCard,
+	TreeList,
 	Typography,
 	VideoViewer,
 	VieoloApp,
@@ -279,6 +284,7 @@ export type SpacerSizeType = SpacerSizeTypeTemp;
 export type TableSortDirection = TableSortDirectionTemp;
 export type TableRow = TableRowTemp;
 export type TableInteractiveCell = TableInteractiveCellTemp;
+export type TreeListItem = TreeListItemTemp;
 export type TypographyTextAlign = TypographyTextAlignTemp;
 export type TypographyFontFamily = TypographyFontFamilyTemp;
 export type TypographyMargin = TypographyMarginTemp;

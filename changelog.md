@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.25.2 (2022-12-23)
+- Added `TreeList` component ([#266](https://github.com/Vieolo/vieolo-ui/issues/266))
+
 ## 0.25.1 (2022-12-23)
 - Fixed the typing of `VieoloApp`
 
