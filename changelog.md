@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.25.1 (2022-12-23)
+- Fixed the typing of `VieoloApp`
+
 ## 0.25.0 (2022-12-23)
 - Added `VieoloScaffold`
 
