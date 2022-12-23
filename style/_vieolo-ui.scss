@@ -3122,3 +3122,18 @@ body {
         }        
     }
 }
+
+.vieolo-tree-list-item {
+	&__row {
+		svg {
+			fill: $primary-color-normal;
+			height: $base-unit-two;
+		}
+	}
+
+	&__children-container {
+		margin-left: $base-unit;
+		padding-left: $base-unit;
+		border-left: 1px solid $primary-color-normal;
+	}
+}
