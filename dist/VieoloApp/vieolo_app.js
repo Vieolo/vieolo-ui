@@ -1,13 +1,27 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 // React, Router
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// Vieolo UI
-import PageFrame from "../PageFrame";
+import React from "react";
+import { BrowserRouter as Router } from "react-router-dom";
+import { Provider as ReactReduxProvider } from "react-redux";
 export default function VieoloApp(props) {
-    return _jsx(Router, { children: _jsx(PageFrame, { drawer: props.drawer, navbar: props.navbar, children: _jsx("main", { children: _jsx(Switch, { children: props.routes.map(r => {
-                        if (r.path.includes("/:")) {
-                            return _jsx(Route, { path: r.path, component: r.page }, r.path);
-                        }
-                        return _jsx(Route, { path: r.path, children: r.page }, r.path);
-                    }) }) }) }) });
+    let c = props.children || _jsx("div", {});
+    let one;
+    let two;
+    let three;
+    if (!props.removeStrictMode) {
+        one = _jsx(React.StrictMode, { children: c });
+    }
+    else
+        one = c;
+    if (props.store) {
+        two = _jsx(ReactReduxProvider, { store: props.store, children: one });
+    }
+    else
+        two = one;
+    if (!props.removeRouter) {
+        three = _jsx(Router, { children: two });
+    }
+    else
+        three = two;
+    return three;
 }

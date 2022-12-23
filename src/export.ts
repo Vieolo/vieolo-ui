@@ -71,6 +71,7 @@ import TitlePeriodCard from './TitlePeriodCard';
 import Typography from './Typography';
 import VideoViewer from './VideoViewer';
 import VieoloApp from './VieoloApp';
+import VieoloScaffold from './VieoloScaffold';
 import Walkthrough from './Walkthrough';
 import {
 	BarChartData as BarChartDataTemp,
@@ -241,6 +242,7 @@ export {
 	Typography,
 	VideoViewer,
 	VieoloApp,
+	VieoloScaffold,
 	Walkthrough,
 }
 
