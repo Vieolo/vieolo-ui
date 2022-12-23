@@ -54,6 +54,7 @@ import { DonutChartCreator, donutChartOptions } from '../charts/donut_chart.view
 import { SubNavbarRowCreator, subNavbarRowOptions } from '../layout/page/sub_navbar_row.view';
 import { SubDashboardCreator, subDashboardOptions } from '../layout/page/sub_dashboard.view';
 import { ActionCardCreator, actionCardOptions } from '../card/action_card.view';
+import { TreeListCreator, treeListOptions } from '../../TreeList/tree_list.view';
 import { DoubleToggleListCreator, doubleToggleOptions } from '../list/double_toggle_list.view';
 import { fileViewerOptions, FileViewerCreator } from '../file/file_viewer.view';
 import { calendarStatisticOptions, CalendarStatisticCreator } from '../../CalendarStatistic/calendar_statistic.view';
@@ -159,6 +160,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Sub Dashboard": { title: "Sub Dashboard", data: subDashboardOptions(), creator: SubDashboardCreator, group: "Layout/Page" },
 
         "List": { title: "List", data: listOptions(), creator: ListCreator, group: "List" },
+        "Tree List": { title: "Tree List", data: treeListOptions(), creator: TreeListCreator, group: "List" },
         "Double Toggle List": { title: "Double Toggle List", data: doubleToggleOptions(), creator: DoubleToggleListCreator, group: "List" },
 
         "PDF Viewer Embedded": { title: "PDF Viewer Embedded", data: pdfViewerEmbeddedOptions(), creator: PDFViewerEmbeddedCreator, group: "File" },

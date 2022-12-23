@@ -68,6 +68,7 @@ import Textarea from './Textarea';
 import TextareaSet from './TextareaSet';
 import TimeInput from './TimeInput';
 import TitlePeriodCard from './TitlePeriodCard';
+import TreeList from './TreeList';
 import Typography from './Typography';
 import VideoViewer from './VideoViewer';
 import VieoloApp from './VieoloApp';
@@ -239,6 +240,7 @@ export {
 	TextareaSet,
 	TimeInput,
 	TitlePeriodCard,
+	TreeList,
 	Typography,
 	VideoViewer,
 	VieoloApp,
