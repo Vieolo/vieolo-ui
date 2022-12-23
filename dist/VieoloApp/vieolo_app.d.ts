@@ -1,17 +1,7 @@
-/// <reference types="react" />
-import { PageFrameDrawerOptions, PageFrameNavbarOptions } from "../PageFrame";
+import React from "react";
 export default function VieoloApp(props: {
-    drawer?: PageFrameDrawerOptions;
-    navbar?: PageFrameNavbarOptions;
-    routes: {
-        /**
-         * @example
-         * ```js
-         * "/blogs"
-         * "/blogs/:id"
-         * ```
-         */
-        path: string;
-        page: React.ReactNode;
-    }[];
-}): JSX.Element;
+    removeRouter?: boolean;
+    removeStrictMode?: boolean;
+    store?: any;
+    children?: React.ReactNode;
+}): {};

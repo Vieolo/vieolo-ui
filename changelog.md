@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.25.0 (2022-12-23)
+- Added `VieoloScaffold`
+
+#### Breaking Changes
+- `VieoloScaffold` replaces the functionality of `VieoloApp` to render the pages and frames and `VieoloApp` now wraps the main react app with router and redux
+
 ## 0.24.7 (2022-12-17)
 - Added responsiveness to `Typography` ([#213](https://github.com/Vieolo/vieolo-ui/issues/213))
 
