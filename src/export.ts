@@ -142,6 +142,9 @@ import {
 	TableInteractiveCell as TableInteractiveCellTemp,
 } from './TableInteractive';
 import {
+	TreeListItem as TreeListItemTemp,
+} from './TreeList';
+import {
 	TypographyTextAlign as TypographyTextAlignTemp,
 	TypographyFontFamily as TypographyFontFamilyTemp,
 	TypographyMargin as TypographyMarginTemp,
@@ -281,6 +284,7 @@ export type SpacerSizeType = SpacerSizeTypeTemp;
 export type TableSortDirection = TableSortDirectionTemp;
 export type TableRow = TableRowTemp;
 export type TableInteractiveCell = TableInteractiveCellTemp;
+export type TreeListItem = TreeListItemTemp;
 export type TypographyTextAlign = TypographyTextAlignTemp;
 export type TypographyFontFamily = TypographyFontFamilyTemp;
 export type TypographyMargin = TypographyMarginTemp;
