@@ -7,8 +7,8 @@ export default function VieoloApp(props: {
     removeRouter?: boolean,
     removeStrictMode?: boolean,
     store?: any,
-    children?: React.ReactNode
-}) {
+    children?: JSX.Element
+}) : JSX.Element {
     let c = props.children || <div></div>;
     let one;
     let two;

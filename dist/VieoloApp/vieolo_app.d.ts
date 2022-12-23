@@ -1,7 +1,7 @@
-import React from "react";
+/// <reference types="react" />
 export default function VieoloApp(props: {
     removeRouter?: boolean;
     removeStrictMode?: boolean;
     store?: any;
-    children?: React.ReactNode;
-}): {};
+    children?: JSX.Element;
+}): JSX.Element;
