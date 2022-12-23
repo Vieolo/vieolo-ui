@@ -1,43 +1,37 @@
 // React, Router
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
-// Vieolo UI
-import PageFrame, { PageFrameDrawerOptions, PageFrameNavbarOptions } from "../PageFrame";
+import React from "react";
+import { BrowserRouter as Router} from "react-router-dom";
+import { Provider as ReactReduxProvider } from "react-redux";
 
 export default function VieoloApp(props: {
-    drawer?: PageFrameDrawerOptions,
-    navbar?: PageFrameNavbarOptions,
-    routes: {
-        /** 
-         * @example
-         * ```js
-         * "/blogs"
-         * "/blogs/:id"
-         * ```
-         */
-        path: string,
-        page: React.ReactNode
-    }[]
+    removeRouter?: boolean,
+    removeStrictMode?: boolean,
+    store?: any,
+    children?: React.ReactNode
 }) {
-    return <Router>
-        <PageFrame
-            drawer={props.drawer}
-            navbar={props.navbar}
-        >
-            <main>
-                <Switch>
-                    {
-                        props.routes.map(r => {
-                            if (r.path.includes("/:")) {
-                                return <Route path={r.path} component={r.page as any} key={r.path} />
-                            }
-                            return <Route path={r.path} key={r.path}>
-                                {r.page}
-                            </Route>
-                        })
-                    }
-                </Switch>
-            </main>
-        </PageFrame>
-    </Router>
+    let c = props.children || <div></div>;
+    let one;
+    let two;
+    let three;
+
+    if (!props.removeStrictMode) {
+        one = <React.StrictMode>
+            {c}
+        </React.StrictMode>
+    } else one = c
+
+    if (props.store) {
+        two = <ReactReduxProvider store={props.store}>
+            {one}
+        </ReactReduxProvider>
+    } else two = one
+
+    if (!props.removeRouter) {
+        three = <Router>
+            {two}
+        </Router>
+    } else three = two
+
+
+    return three
 }
