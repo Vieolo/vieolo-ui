@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.25.3 (2022-12-25)
+- Improved the display of the selected item in the `TreeList`
+- Removed the hover when there is no onClick call back for the `Chip` ([#264](https://github.com/Vieolo/vieolo-ui/issues/264))
+
 ## 0.25.2 (2022-12-23)
 - Added `TreeList` component ([#266](https://github.com/Vieolo/vieolo-ui/issues/266))
 
