@@ -41,7 +41,7 @@ export default function Chip(props: {
 
 	c += getEmphasisClasses(props.selected ? 'high' : e, color, {
 		hasRipple: true,
-		hoverable: true,
+		hoverable: props.onChipSelect ? true : false,
 		transparentBackground: props.isTransparent
 	});
 

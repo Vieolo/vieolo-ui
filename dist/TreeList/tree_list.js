@@ -5,7 +5,7 @@ import Typography from "../Typography";
 // Icons
 // Icons
 import { ArrowDown as ExpandIcon, ArrowUp as CollapseIcon } from '../icons/icons';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Flex from "../Flex";
 import IconButton from "../IconButton";
 export default function TreeList(props) {
@@ -15,6 +15,25 @@ export default function TreeList(props) {
 }
 function SingleParent(props) {
     let [mode, setMode] = useState("collapsed");
+    useEffect(() => {
+        function loop(children) {
+            for (let i = 0; i < children.length; i++) {
+                const ch = children[i];
+                if (ch.id === props.selectedId) {
+                    setMode("expanded");
+                    break;
+                }
+                else {
+                    if (ch.children) {
+                        loop(ch.children);
+                    }
+                }
+            }
+        }
+        if (props.item.children && props.item.children.length > 0) {
+            loop(props.item.children);
+        }
+    }, [props.selectedId, props.item.children]);
     let hasChildren = props.item.children && props.item.children.length > 0;
     let isSelected = props.item.selected || (props.selectedId && props.item.id === props.selectedId);
     return _jsxs(Card, { className: "vieolo-tree-list-item", padding: "none", children: [_jsxs(Flex, { alignItems: "center", children: [hasChildren &&
