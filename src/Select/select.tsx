@@ -21,6 +21,7 @@ export type SelectItemType = {
     value: string,
     category?: string,
     subTitle?: string,
+    icon?: React.ReactNode,
 }
 
 type SelectProps = {
@@ -333,7 +334,7 @@ export default function Select(props: SelectProps) {
                     >
                     </div>
 
-                    <div className={`vieolo-select__modal`} style={virtKeyboardOffset > 0 ? {bottom: (virtKeyboardOffset) + "px", maxHeight: '35vh'} : undefined}>
+                    <div className={`vieolo-select__modal`} style={virtKeyboardOffset > 0 ? { bottom: (virtKeyboardOffset) + "px", maxHeight: '35vh' } : undefined}>
                         {props.searchable && searchInput}
                         <div className='vieolo-select__modal__container'>
                             {itemsComponent}
@@ -380,11 +381,16 @@ function SelectItem(props: {
             role="listitem"
             aria-label={props.item.title}
         >
-            <Typography text={props.item.title} />
             {
-                props.item.subTitle &&
-                <Typography type='caption-medium' text={props.item.subTitle} />
+                props.item.icon && props.item.icon
             }
+            <div className='vieolo-select__select-item__text-container'>
+                <Typography text={props.item.title} />
+                {
+                    props.item.subTitle &&
+                    <Typography type='caption-medium' text={props.item.subTitle} />
+                }
+            </div>
         </div>
     </Fragment>
 
