@@ -5,10 +5,13 @@ export type PageFrameDrawerOptions = {
     mainItems: DrawerItem[];
     bottomItems?: DrawerItem[];
     topContent?: React.ReactNode;
+    footPrint?: React.ReactNode;
 };
 export type PageFrameNavbarOptions = {
     elevation?: ElevationType;
     logo?: React.ReactNode;
+    /** The URL that the user is redirected to when clicked on the logo */
+    logoRedirectURL?: string;
     title?: string;
     drawerButton?: React.ReactNode;
     onDrawerButtonClicked?: () => void;

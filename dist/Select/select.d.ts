@@ -1,9 +1,10 @@
-/// <reference types="react" />
+import React from 'react';
 export type SelectItemType = {
     title: string;
     value: string;
     category?: string;
     subTitle?: string;
+    icon?: React.ReactNode;
 };
 type SelectProps = {
     title?: string;

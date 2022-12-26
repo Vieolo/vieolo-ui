@@ -252,6 +252,6 @@ function SelectItem(props) {
                 _jsx("p", { className: "vieolo-select__select-item__category-name", children: props.item.category }), _jsxs("div", { className: className, onClick: e => {
                     e.stopPropagation();
                     props.onSelect(props.item);
-                }, ref: props.itemRef, role: "listitem", "aria-label": props.item.title, children: [_jsx(Typography, { text: props.item.title }), props.item.subTitle &&
-                        _jsx(Typography, { type: 'caption-medium', text: props.item.subTitle })] })] });
+                }, ref: props.itemRef, role: "listitem", "aria-label": props.item.title, children: [props.item.icon && props.item.icon, _jsxs("div", { className: 'vieolo-select__select-item__text-container', children: [_jsx(Typography, { text: props.item.title }), props.item.subTitle &&
+                                _jsx(Typography, { type: 'caption-medium', text: props.item.subTitle })] })] })] });
 }
