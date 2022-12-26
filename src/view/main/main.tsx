@@ -254,7 +254,8 @@ export default function MainPage(props: {}): JSX.Element {
     return <PageFrame
         navbar={{
             title: 'Vieolo UI',
-            logo: <img src='https://vieolo.com/static/logo-nav.svg' height={30} width={30} alt={"logo"} />
+            logo: <img src='https://vieolo.com/static/logo-nav.svg' height={30} width={30} alt={"logo"} />,
+            logoRedirectURL: "/"
         }}
         drawer={{
             topContent: <div className='padding--one'>

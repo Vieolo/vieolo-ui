@@ -17,6 +17,8 @@ export type PageFrameDrawerOptions = {
 export type PageFrameNavbarOptions = {
     elevation?: ElevationType,
     logo?: React.ReactNode,
+    /** The URL that the user is redirected to when clicked on the logo */
+    logoRedirectURL?: string,
     title?: string,
     drawerButton?: React.ReactNode,
     onDrawerButtonClicked?: () => void,
@@ -40,6 +42,7 @@ export default function PageFrame(props: {
             <Navbar
                 drawerButton={props.navbar.drawerButton}
                 elevation={props.navbar.elevation}
+                logoRedirectURL={props.navbar.logoRedirectURL}
                 hasDrawerButton={props.drawer !== undefined}
                 logo={props.navbar.logo}
                 onDrawerButtonClicked={props.drawer === undefined ? undefined : () => {

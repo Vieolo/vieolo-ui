@@ -19,6 +19,8 @@ export default function Navbar(props: {
     elevation?: ElevationType,
     logo?: React.ReactNode,
     title?: string,
+    /** The URL that the user is redirected to when clicked on the logo */
+    logoRedirectURL?: string,
     hasDrawerButton?: boolean,
     drawerButton?: React.ReactNode,
     onDrawerButtonClicked?: () => void,
@@ -29,6 +31,14 @@ export default function Navbar(props: {
 }) {
 
     let [query, setQuery] = useState<string>("");
+
+    let logo;
+
+    if (props.logo && props.logoRedirectURL) {
+        logo = <a href={props.logoRedirectURL}>{props.logo}</a>
+    } else if (props.logo) {
+        logo = props.logo
+    }
 
     return <Card elevation={props.elevation} className="vieolo-navbar" borderRadius="none">
         <Flex justifyContent="space-between" alignItems="center" className="height--pc-100">
@@ -51,7 +61,7 @@ export default function Navbar(props: {
                 }
 
                 {
-                    props.logo && props.logo
+                    logo && logo
                 }
 
                 {
