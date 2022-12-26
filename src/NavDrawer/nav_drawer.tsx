@@ -8,7 +8,9 @@ export type DrawerItem = {
     icon?: React.ReactNode,
     selected?: boolean,
     href?: string,
-    onClick?: () => void
+    onClick?: () => void,
+    height?: 'medium' | 'large' | 'small',
+    newGroup?: boolean
 }
 
 export default function NavDrawer(props: {
@@ -16,7 +18,8 @@ export default function NavDrawer(props: {
     topContent?: React.ReactNode,
     mainItems: DrawerItem[],
     bottomItems?: DrawerItem[],
-    onDrawerClose: () => void
+    onDrawerClose: () => void,
+    footPrint?: React.ReactNode
 }) {
     return <div className={`vieolo-nav-drawer`}>
         <div className={`vieolo-nav-drawer__drawer vieolo-nav-drawer__drawer--${props.state}`}>
@@ -43,6 +46,9 @@ export default function NavDrawer(props: {
                         (props.bottomItems || []).map(z => {
                             return <NavDrawerItem item={z} key={z.title} />
                         })
+                    }
+                    {
+                        props.footPrint && props.footPrint
                     }
                 </Flex>
 
@@ -71,8 +77,25 @@ function NavDrawerItem(props: { item: DrawerItem }) {
     </Flex>
     let c = `vieolo-nav-drawer__item vieolo-nav-drawer__item--${props.item.selected ? "selected" : "not-selected"}`
 
+    c += ` vieolo-nav-drawer__item--${props.item.height || 'medium'}`
+
+    if (props.item.newGroup) {
+        c += ` margin-top--two `
+    }
+
     if (props.item.href) {
-        return <a href={props.item.href} className={c}>
+        return <a 
+            href={props.item.href} 
+            className={c}
+            onClick={e => {
+                if (props.item.onClick) {
+                    // Preventing the default when clicked
+                    // The on click functionality will be handled by the implementor to prevent unnecessary reload of the page
+                    e.preventDefault();
+                    props.item.onClick();
+                }
+            }} 
+        >
             {t}
         </a>
     } else {

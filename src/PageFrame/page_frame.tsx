@@ -12,6 +12,7 @@ export type PageFrameDrawerOptions = {
     mainItems: DrawerItem[],
     bottomItems?: DrawerItem[],
     topContent?: React.ReactNode,
+    footPrint?: React.ReactNode,
 }
 
 export type PageFrameNavbarOptions = {
@@ -64,6 +65,7 @@ export default function PageFrame(props: {
                 mainItems={props.drawer.mainItems}
                 bottomItems={props.drawer.bottomItems}
                 topContent={props.drawer.topContent}
+                footPrint={props.drawer.footPrint}
                 onDrawerClose={() => setDrawerOpen(false)}
             />
         }

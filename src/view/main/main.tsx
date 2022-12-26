@@ -71,6 +71,7 @@ import { barChartOptions, BarChartCreator } from '../charts/bar_chart.view';
 import List from '../../List';
 import Typography from '../../Typography';
 import Spacer from '../../Spacer';
+import Divider from '../../Divider';
 
 
 type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDefault" | "borderRadius" | 'fontWeightOptional' | 'emphasis' | 'typographyOptions' | {
@@ -265,14 +266,20 @@ export default function MainPage(props: {}): JSX.Element {
             </div>,
             mainItems: [
                 { title: "Item One", icon: "+", href: "/" },
-                { title: "Item Two", icon: "X" },
-                { title: "Item Three" },
+                { title: "Item Two Large", icon: "X", height: 'large' },
+                { title: "Item Three Small", height: 'small' },
                 { title: "Item Four", icon: "€", selected: true },
+                { title: "Another Group", selected: false, newGroup: true},
             ],
             bottomItems: [
-                { title: "Bottom 1" },
-                { title: "Bottom 2" },
-            ]
+                { title: "Bottom 1", height: 'small' },
+                { title: "Bottom 2", height: 'small' },
+            ],
+            footPrint: <div>
+                <Divider direction='horizontal' thickness='1' colorType='light' length='pc-100' spaceAround='half' />
+                <Typography className='padding-left--one' text='Vieolo UI' type='paragraph-small' />
+                <Typography className='padding-left--one' text='All Rights Reserved - Vieolo OÜ' type='caption-medium' />
+            </div>
         }}
     >
         <div className={`main-page ${showComponent ? "main-page--content" : "main-page--no-content"}`}>
