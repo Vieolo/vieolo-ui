@@ -5,6 +5,8 @@ export type DrawerItem = {
     selected?: boolean;
     href?: string;
     onClick?: () => void;
+    height?: 'medium' | 'large' | 'small';
+    newGroup?: boolean;
 };
 export default function NavDrawer(props: {
     state: 'open' | 'closed';
@@ -12,4 +14,5 @@ export default function NavDrawer(props: {
     mainItems: DrawerItem[];
     bottomItems?: DrawerItem[];
     onDrawerClose: () => void;
+    footPrint?: React.ReactNode;
 }): JSX.Element;

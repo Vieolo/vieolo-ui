@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.25.4 (2022-12-26)
+- Added logo redirect URL to the `navbar`
+- Improved the style and contents of the `NavDrawer`
+- Added support for logo to `Select` ([#265](https://github.com/Vieolo/vieolo-ui/issues/265))
+
 ## 0.25.3 (2022-12-25)
 - Improved the display of the selected item in the `TreeList`
 - Removed the hover when there is no onClick call back for the `Chip` ([#264](https://github.com/Vieolo/vieolo-ui/issues/264))

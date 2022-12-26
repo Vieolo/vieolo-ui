@@ -670,13 +670,25 @@ body {
 		font-size: 12px;
 		@include no-text-overflow;
 		display: flex;
-		flex-direction: column;
-		justify-content: center;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-items: center;
+		column-gap: $base-unit-half;
 
 		@include for-touch-device {
-			height: $row-height-medium;
 			font-size: 14px;
 			height: $row-height-large;
+		}
+
+		svg {
+			height: $base-unit-two;
+		}
+
+		&__text-container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			height: 100%;
 		}
 
 		&:hover {
@@ -2768,7 +2780,6 @@ body {
 	&__item {
 		width: $drawer-item-width;
 		border-radius: 0 20px 20px 0;
-		height: 40px;
 		margin-bottom: 5px;
 		display: flex;
 		align-items: center;
@@ -2776,7 +2787,20 @@ body {
 		text-decoration: none;
 		padding-left: $base-unit-two;
 		cursor: pointer;
+		@include nonselectable;
 		@include transition;
+
+		&--small {
+			height: $row-height-small;
+		}
+		
+		&--medium {
+			height: $row-height-medium;
+		}
+		
+		&--large {
+			height: $row-height-large;
+		}
 
 		&:hover {
 			background-color: $secondary-color-light;
