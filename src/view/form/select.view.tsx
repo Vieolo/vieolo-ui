@@ -2,7 +2,12 @@
 import React, { useEffect, useState } from 'react';
 
 // Component
-import Select from '../../Select';
+import Select, { SelectItemType } from '../../Select';
+
+// Material UI
+import SampleIcon1 from '@mui/icons-material/AccessibleForwardTwoTone';
+import SampleIcon2 from '@mui/icons-material/Backspace';
+import SampleIcon3 from '@mui/icons-material/Cached';
 
 // Types
 import { ViewData } from '../main/main';
@@ -16,20 +21,6 @@ export function selectOptions(): ViewData {
         constants: {
             title: "Item",
             selectedItems: [],
-            items: [
-                {title: "One", value: "1"}, 
-                {title: "Two", value: "2"}, 
-                {title: "Three", value: "3", category: "Third"},
-                {title: "One Two Three Four Five", value: "4", category: "Third"},
-                {title: "Six", value: "6", category: "Third"},
-                {title: "Seven", value: "7", category: "Third"} ,
-                {title: "Eight", value: "8", category: "Third"},
-                {title: "Nine", value: "9", category: "Third"} ,
-                {title: "Ten", value: "10", category: "Third"},
-                {title: "Eleven", value: "11", category: "Third"} ,
-                {title: "Twelve", value: "12", category: "Third", subTitle: "The Substitle"},
-                {title: "Thirteen", value: "13", category: "Third"} 
-            ]
         } as Partial<SelectPropsType>,
         variables: {
             height: {
@@ -40,27 +31,13 @@ export function selectOptions(): ViewData {
                 options: ["small", "medium", "full"],
                 default: "medium"
             },
-            error: {
-                options: [false, true],
-                default: false
-            },
-            clearable: {
-                options: [false, true],
-                default: false
-            },
-            searchable: {
-                options: [false, true],
-                default: false
-            },
-            multipleChoice: {
-                options: [false, true],
-                default: false
-            },
-            disabled: {
-                options: [false, true],
-                default: false,
-            },
-            removeTitle: 'boolean'
+            error: 'boolean',
+            clearable: 'boolean',
+            searchable: 'boolean',
+            multipleChoice: 'boolean',
+            disabled: 'boolean',
+            removeTitle: 'boolean',
+            withIcon: 'boolean'
         }
     }
 }
@@ -69,13 +46,28 @@ export function selectOptions(): ViewData {
 export function SelectCreator(props: {p: SelectPropsType}) {
     let [selected, setSelected] = useState<string[]>(props.p.selectedItems || []);
 
+    let items: SelectItemType[] = [
+        {title: "One", value: "1",subTitle: "Some long ass subtitle", icon: (props.p as any).withIcon ? <SampleIcon1 /> : undefined}, 
+        {title: "Two", value: "2", icon: (props.p as any).withIcon ? <SampleIcon2 /> : undefined}, 
+        {title: "Three", value: "3", category: "Third", icon: (props.p as any).withIcon ? <SampleIcon3 /> : undefined},
+        {title: "One Two Three Four Five", value: "4", category: "Third"},
+        {title: "Six", value: "6", category: "Third"},
+        {title: "Seven", value: "7", category: "Third"} ,
+        {title: "Eight", value: "8", category: "Third"},
+        {title: "Nine", value: "9", category: "Third"} ,
+        {title: "Ten", value: "10", category: "Third"},
+        {title: "Eleven", value: "11", category: "Third"} ,
+        {title: "Twelve", value: "12", category: "Third", subTitle: "The Substitle"},
+        {title: "Thirteen", value: "13", category: "Third"} 
+    ]
+
     useEffect(() => {
         setSelected(props.p.selectedItems);
     }, [props.p.selectedItems])
 
     return <Select 
         error={props.p.error}
-        items={props.p.items}
+        items={items}
         onSelect={o => setSelected(o)}
         selectedItems={selected}
         title={(props.p as any).removeTitle ? undefined : props.p.title}

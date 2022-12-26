@@ -670,13 +670,25 @@ body {
 		font-size: 12px;
 		@include no-text-overflow;
 		display: flex;
-		flex-direction: column;
-		justify-content: center;
+		flex-direction: row;
+		justify-content: start;
+		align-items: center;
+		column-gap: $base-unit-half;
 
 		@include for-touch-device {
-			height: $row-height-medium;
 			font-size: 14px;
 			height: $row-height-large;
+		}
+
+		svg {
+			height: $base-unit-two;
+		}
+
+		&__text-container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			height: 100%;
 		}
 
 		&:hover {
