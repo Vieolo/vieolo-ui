@@ -61,6 +61,7 @@ import SubDashboard from './SubDashboard';
 import SubNavbarRow from './SubNavbarRow';
 import Switch from './Switch';
 import SwitchRow from './SwitchRow';
+import TabRow from './TabRow';
 import TabSwitch from './TabSwitch';
 import Table from './Table';
 import TableInteractive from './TableInteractive';
@@ -236,6 +237,7 @@ export {
 	SubNavbarRow,
 	Switch,
 	SwitchRow,
+	TabRow,
 	TabSwitch,
 	Table,
 	TableInteractive,

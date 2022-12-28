@@ -55,6 +55,7 @@ import { SubNavbarRowCreator, subNavbarRowOptions } from '../layout/page/sub_nav
 import { SubDashboardCreator, subDashboardOptions } from '../layout/page/sub_dashboard.view';
 import { ActionCardCreator, actionCardOptions } from '../card/action_card.view';
 import { TreeListCreator, treeListOptions } from '../../TreeList/tree_list.view';
+import { TabRowCreator, tabRowOptions } from '../../TabRow/tab_row.view';
 import { DoubleToggleListCreator, doubleToggleOptions } from '../list/double_toggle_list.view';
 import { fileViewerOptions, FileViewerCreator } from '../file/file_viewer.view';
 import { calendarStatisticOptions, CalendarStatisticCreator } from '../../CalendarStatistic/calendar_statistic.view';
@@ -149,6 +150,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Drop Down Menu": { title: "Drop Down Menu", data: dropDownMenuOptions(), creator: DropDownMenuCreator, group: "Menu" },
 
         "Tab Switch": { title: "Tab Switch", data: tabSwitchOptions(), creator: TabSwitchCreator, group: "Layout" },
+        "Tab Row": { title: "Tab Row", data: tabRowOptions(), creator: TabRowCreator, group: "Layout" },
 
         "Divider": { title: "Divider", data: dividerOptions(), creator: DividerCreator, group: "Layout/Auxiliary" },
         "Spacer": { title: "Spacer", data: spacerOptions(), creator: SpacerCreator, group: "Layout/Auxiliary" },
