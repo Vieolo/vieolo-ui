@@ -1,11 +1,12 @@
 /// <reference types="react" />
-import { ColorOptionType, WidthAndHeightSize } from "../types/types";
+import { ColorOptionSubType, ColorOptionType, WidthAndHeightSize } from "../types/types";
+export type DividerThickness = "1" | "2" | 'half';
 export default function Divider(props: {
     direction: 'horizontal' | 'vertical';
     length: WidthAndHeightSize;
     color?: ColorOptionType;
-    colorType?: 'light' | 'normal' | 'text';
+    colorType?: ColorOptionSubType;
     position?: 'start' | 'center' | 'end';
-    thickness?: "1" | "2" | 'half';
+    thickness?: DividerThickness;
     spaceAround?: "half" | 'one' | 'two';
 }): JSX.Element;

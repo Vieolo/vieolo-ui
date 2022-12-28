@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.25.5 (2022-12-28)
+- Added `TabRow` component ([#141](https://github.com/Vieolo/vieolo-ui/issues/141))
+- Added scroll to the wrap options of the `Flex`
+
 ## 0.25.4 (2022-12-26)
 - Added logo redirect URL to the `navbar`
 - Improved the style and contents of the `NavDrawer`

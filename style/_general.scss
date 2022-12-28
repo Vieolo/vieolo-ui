@@ -998,7 +998,7 @@
 
 
 @mixin transition {
-	transition: all ease 0.5s;
+	transition: all ease 0.3s;
 }
 .transition {
 	@include transition;
@@ -1040,6 +1040,27 @@ html {
 .overflow {
 	&--y-scroll {
 		overflow-y: scroll;
+	}
+	
+	&--scroll-y {
+		overflow-y: scroll;
+	}
+	
+	&--x-scroll {
+		overflow-x: scroll;
+	}
+	
+	&--scroll-x {
+		overflow-x: scroll;
+	}
+
+	&--hide-scrollbar {
+		scrollbar-width: none;
+
+		&::-webkit-scrollbar { /* WebKit */
+			width: 0;
+			height: 0;
+		}
 	}
 }
 
@@ -2250,6 +2271,14 @@ html {
 		&--wrap-reverse {
 			flex-wrap: wrap-reverse;
 		}		
+
+		&--scroll-y {
+			overflow-y: scroll;
+		}
+		
+		&--scroll-x {
+			overflow-x: scroll;
+		}
 	}
 
 }

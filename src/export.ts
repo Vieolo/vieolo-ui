@@ -61,6 +61,7 @@ import SubDashboard from './SubDashboard';
 import SubNavbarRow from './SubNavbarRow';
 import Switch from './Switch';
 import SwitchRow from './SwitchRow';
+import TabRow from './TabRow';
 import TabSwitch from './TabSwitch';
 import Table from './Table';
 import TableInteractive from './TableInteractive';
@@ -87,6 +88,9 @@ import {
 import {
 	ContextMenuItem as ContextMenuItemTemp,
 } from './ContextMenu';
+import {
+	DividerThickness as DividerThicknessTemp,
+} from './Divider';
 import {
 	DonutChartData as DonutChartDataTemp,
 } from './DonutChart';
@@ -135,6 +139,9 @@ import {
 	SpacerSizeType as SpacerSizeTypeTemp,
 } from './Spacer';
 import {
+	TabRowItem as TabRowItemTemp,
+} from './TabRow';
+import {
 	TableSortDirection as TableSortDirectionTemp,
 	TableRow as TableRowTemp,
 } from './Table';
@@ -156,6 +163,7 @@ import {
 } from './Walkthrough';
 import {
 	ColorOptionType as ColorOptionTypeTemp,
+	ColorOptionSubType as ColorOptionSubTypeTemp,
 	EmphasisType as EmphasisTypeTemp,
 	BorderRadiusValueType as BorderRadiusValueTypeTemp,
 	BorderRadiusType as BorderRadiusTypeTemp,
@@ -236,6 +244,7 @@ export {
 	SubNavbarRow,
 	Switch,
 	SwitchRow,
+	TabRow,
 	TabSwitch,
 	Table,
 	TableInteractive,
@@ -258,6 +267,7 @@ export type StackedBarChartData = StackedBarChartDataTemp;
 export type CalendarStatisticData = CalendarStatisticDataTemp;
 export type ConfirmationDialogMainButton = ConfirmationDialogMainButtonTemp;
 export type ContextMenuItem = ContextMenuItemTemp;
+export type DividerThickness = DividerThicknessTemp;
 export type DonutChartData = DonutChartDataTemp;
 export type DoubleToggleListItem = DoubleToggleListItemTemp;
 export type DropDownMenuSwitch = DropDownMenuSwitchTemp;
@@ -281,6 +291,7 @@ export type PageFrameNavbarOptions = PageFrameNavbarOptionsTemp;
 export type RadioButtonType = RadioButtonTypeTemp;
 export type SelectItemType = SelectItemTypeTemp;
 export type SpacerSizeType = SpacerSizeTypeTemp;
+export type TabRowItem = TabRowItemTemp;
 export type TableSortDirection = TableSortDirectionTemp;
 export type TableRow = TableRowTemp;
 export type TableInteractiveCell = TableInteractiveCellTemp;
@@ -292,6 +303,7 @@ export type TypographyColorType = TypographyColorTypeTemp;
 export type TypographyStyle = TypographyStyleTemp;
 export type WalkthroughSinglePage = WalkthroughSinglePageTemp;
 export type ColorOptionType = ColorOptionTypeTemp;
+export type ColorOptionSubType = ColorOptionSubTypeTemp;
 export type EmphasisType = EmphasisTypeTemp;
 export type BorderRadiusValueType = BorderRadiusValueTypeTemp;
 export type BorderRadiusType = BorderRadiusTypeTemp;
