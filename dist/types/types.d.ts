@@ -1,5 +1,6 @@
 /// <reference types="react" />
 export type ColorOptionType = 'primary' | 'secondary' | 'tertiary' | 'error' | 'success' | 'alert' | 'accessory-blue' | 'accessory-orange' | 'accessory-green';
+export type ColorOptionSubType = 'light' | 'normal' | 'text' | 'text-light';
 export type EmphasisType = 'high' | 'medium' | 'low' | 'low-normal' | 'none' | 'none-normal' | 'none-background';
 export type BorderRadiusValueType = 'full' | 'normal' | 'half' | 'none' | 'default' | 'round' | 'circle';
 export type BorderRadiusType = BorderRadiusValueType | {

@@ -1,5 +1,6 @@
 import {
 	ColorOptionType as ColorOptionTypeTemp,
+	ColorOptionSubType as ColorOptionSubTypeTemp,
 	EmphasisType as EmphasisTypeTemp,
 	BorderRadiusValueType as BorderRadiusValueTypeTemp,
 	BorderRadiusType as BorderRadiusTypeTemp,
@@ -17,6 +18,7 @@ import {
 
 
 export type ColorOptionType = ColorOptionTypeTemp;
+export type ColorOptionSubType = ColorOptionSubTypeTemp;
 export type EmphasisType = EmphasisTypeTemp;
 export type BorderRadiusValueType = BorderRadiusValueTypeTemp;
 export type BorderRadiusType = BorderRadiusTypeTemp;

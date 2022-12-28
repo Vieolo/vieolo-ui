@@ -14,6 +14,6 @@ export default function Flex(props) {
     if (props.className)
         c += ` ${props.className}`;
     if (props.wrap)
-        c += ` flex--wrap--${props.wrap}`;
+        c += ` flex--wrap--${props.wrap === 'scroll' ? `scroll-${(props.direction || 'row').includes("row") ? "x" : "y"}` : props.wrap}`;
     return _jsx("div", { className: c, children: props.children });
 }

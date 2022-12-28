@@ -64,7 +64,7 @@ export function getEmphasisClasses(emphasis, color, options) {
         }
         // Setting the hover effect
         if (options.hoverable) {
-            if (emphasis.includes("background") && !options.transparentBackground) {
+            if (emphasis.includes("background")) {
                 c += ` hover-background--${color}-light`;
             }
             else {
