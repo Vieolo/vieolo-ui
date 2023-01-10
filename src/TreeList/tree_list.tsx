@@ -15,7 +15,8 @@ import IconButton from "../IconButton";
 export type TreeListItem = {
     title: string,
     id: string,
-    icon?: React.ReactNode,
+    startIcon?: React.ReactNode,
+    endIcon?: React.ReactNode,
     selected?: boolean,
     children?: TreeListItem[],
     /**
@@ -87,10 +88,16 @@ function SingleParent(props: { selectedId?: string, item: TreeListItem, onItemSe
                 }}
             >
                 <Flex className="height--pc-100" justifyContent="space-between" alignItems="center">
-                    <Typography text={props.item.title} type='title-small' color={isSelected ? "primary" : undefined} colorType={isSelected ? 'text-light' : undefined} />
+                    <Flex alignItems="center" columnGap="half">
+                        {
+                            props.item.startIcon &&
+                            props.item.startIcon
+                        }
+                        <Typography text={props.item.title} type='title-small' color={isSelected ? "primary" : undefined} colorType={isSelected ? 'text-light' : undefined} />
+                    </Flex>
                     {
-                        props.item.icon &&
-                        props.item.icon
+                        props.item.endIcon &&
+                        props.item.endIcon
                     }
                 </Flex>
             </Card>
