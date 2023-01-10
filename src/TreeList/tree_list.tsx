@@ -14,7 +14,7 @@ import {
 } from '../icons/icons';
 
 
-type CardPropType = Omit<React.ComponentProps<typeof Card>, "children" | "onClick"> 
+type CardPropType = Omit<React.ComponentProps<typeof Card>, "children" | "onClick">
 
 export type TreeListItem = {
     title: string,
@@ -36,6 +36,7 @@ export type TreeListItem = {
      */
     group?: {
         title: string,
+        description?: string,
         card?: CardPropType
     }
 }
@@ -71,69 +72,76 @@ function SingleParent(props: { selectedId?: string, item: TreeListItem, onItemSe
                         loop(ch.children)
                     }
                 }
-            }            
+            }
         }
 
         if (props.item.children && props.item.children.length > 0) {
-            loop(props.item.children)            
+            loop(props.item.children)
         }
     }, [props.selectedId, props.item.children])
-    
+
     let hasChildren = props.item.children && props.item.children.length > 0
     let isSelected = props.item.selected || (props.selectedId && props.item.id === props.selectedId)
 
-    return <Card className="vieolo-tree-list-item" padding="none">
+    return <>
         {
             props.item.group &&
-            <Card 
+            <Card
                 {...(props.item.group.card || {})}
-                className="margin-top--one margin-bottom--half"
+                className="margin-top--one"
             >
                 <Typography text={props.item.group.title} type='title-small' />
-            </Card>
-        }
-        <Flex alignItems="center">
-            {
-                hasChildren &&
-                <IconButton
-                    icon={mode === 'collapsed' ? <ExpandIcon /> : <CollapseIcon />}
-                    onClick={() => setMode(mode === 'collapsed' ? 'expanded' : 'collapsed')}
-                    size='extra-small'
-                />
-            }
-            <Card 
-                emphasis={isSelected ? "medium" : "none-background"} 
-                padding='half' 
-                className="height--pc-100 width--pc-100 vieolo-tree-list-item__row"
-                onClick={(isSelected || props.item.blockOnClick) ? undefined : () => { 
-                    props.onItemSelected(props.item.id, props.item.title)
-                }}
-            >
-                <Flex className="height--pc-100" justifyContent="space-between" alignItems="center">
-                    <Flex alignItems="center" columnGap="half">
-                        {
-                            props.item.startIcon &&
-                            props.item.startIcon
-                        }
-                        <Typography text={props.item.title} type='title-small' color={isSelected ? "primary" : undefined} colorType={isSelected ? 'text-light' : undefined} />
-                    </Flex>
-                    {
-                        props.item.endIcon &&
-                        props.item.endIcon
-                    }
-                </Flex>
-            </Card>
-        </Flex>
-
-        {
-            mode === 'expanded' &&
-            <div className="vieolo-tree-list-item__children-container">
                 {
-                    props.item.children!.map(c => {
-                        return <SingleParent onItemSelected={(id, p) => props.onItemSelected(id, `${props.item.title}/${p}`)} item={c} key={c.title} selectedId={props.selectedId} />
-                    })
+                    props.item.group.description &&
+                <Typography text={props.item.group.description} type='paragraph-small' />
                 }
-            </div>
+            </Card>
         }
-    </Card>
+        <Card className="vieolo-tree-list-item" padding="none">
+
+            <Flex alignItems="center">
+                {
+                    hasChildren &&
+                    <IconButton
+                        icon={mode === 'collapsed' ? <ExpandIcon /> : <CollapseIcon />}
+                        onClick={() => setMode(mode === 'collapsed' ? 'expanded' : 'collapsed')}
+                        size='extra-small'
+                    />
+                }
+                <Card
+                    emphasis={isSelected ? "medium" : "none-background"}
+                    padding='half'
+                    className="height--pc-100 width--pc-100 vieolo-tree-list-item__row"
+                    onClick={(isSelected || props.item.blockOnClick) ? undefined : () => {
+                        props.onItemSelected(props.item.id, props.item.title)
+                    }}
+                >
+                    <Flex className="height--pc-100" justifyContent="space-between" alignItems="center">
+                        <Flex alignItems="center" columnGap="half">
+                            {
+                                props.item.startIcon &&
+                                props.item.startIcon
+                            }
+                            <Typography text={props.item.title} type='title-small' color={isSelected ? "primary" : undefined} colorType={isSelected ? 'text-light' : undefined} />
+                        </Flex>
+                        {
+                            props.item.endIcon &&
+                            props.item.endIcon
+                        }
+                    </Flex>
+                </Card>
+            </Flex>
+
+            {
+                mode === 'expanded' &&
+                <div className="vieolo-tree-list-item__children-container">
+                    {
+                        props.item.children!.map(c => {
+                            return <SingleParent onItemSelected={(id, p) => props.onItemSelected(id, `${props.item.title}/${p}`)} item={c} key={c.title} selectedId={props.selectedId} />
+                        })
+                    }
+                </div>
+            }
+        </Card>
+    </>
 }
