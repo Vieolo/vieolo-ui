@@ -63,6 +63,7 @@ export function TreeListCreator(props: { p: TreeListPropsType }) {
                     title: "What you can do afterwards",
                     group: {
                         title: "The rest of the list",
+                        description: "This group has a description to tell you about something important",
                         card: {
                             emphasis: 'medium',
                             color: 'alert'

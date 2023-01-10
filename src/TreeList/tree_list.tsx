@@ -36,6 +36,7 @@ export type TreeListItem = {
      */
     group?: {
         title: string,
+        description?: string,
         card?: CardPropType
     }
 }
@@ -90,6 +91,10 @@ function SingleParent(props: { selectedId?: string, item: TreeListItem, onItemSe
                 className="margin-top--one"
             >
                 <Typography text={props.item.group.title} type='title-small' />
+                {
+                    props.item.group.description &&
+                <Typography text={props.item.group.description} type='paragraph-small' />
+                }
             </Card>
         }
         <Card className="vieolo-tree-list-item" padding="none">
