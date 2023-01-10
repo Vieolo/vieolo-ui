@@ -44,18 +44,32 @@ export function TreeListCreator(props: { p: TreeListPropsType }) {
                 {
                     id: "get_started",
                     title: "Get Started",
-                    icon: <IconOne />,
+                    group: {
+                        title: "The Start",
+                        card: {
+                            emphasis: 'medium',
+                            color: 'success'
+                        }
+                    },
+                    endIcon: <IconOne />,
                     children: [
-                        { id: "get_started/introduciton", title: "Introduction", icon: <IconThree />, selected: true },
+                        { id: "get_started/introduciton", title: "Introduction", startIcon: <IconThree />, selected: true },
                         { id: "get_started/team_members", title: "Team Members", children: [{ id: "get_started/add", title: "Add" }, { id: "get_started/edot", title: "Edit" }, { id: "get_started/delete", title: "Delete" }] }
                     ]
                 },
                 {
                     id: "what_after",
                     title: "What you can do afterwards",
-                    icon: <IconTwo />,
+                    group: {
+                        title: "The rest of the list",
+                        card: {
+                            emphasis: 'medium',
+                            color: 'alert'
+                        }
+                    },
+                    endIcon: <IconTwo />,
                     children: [
-                        { id: "what_after/introduction6", title: "Introduction", icon: <IconThree /> },
+                        { id: "what_after/introduction6", title: "Introduction", startIcon: <IconThree /> },
                         { id: "what_after/lots", title: "Lots of things", children: [{ id: "what_after/introduction3", title: "Like this" }, { id: "what_after/introduction4", title: "or that" }, { id: "what_after/introduction5", title: "Or even this" }] },
                         {
                             id: "what_after/very nested",
@@ -72,6 +86,17 @@ export function TreeListCreator(props: { p: TreeListPropsType }) {
                         }
                     ]
                 },
+                {
+                    id: "no_click",
+                    title: "Has no 'onClick' functionality",
+                    blockOnClick: true,
+                    children: [
+                        {
+                            id: "no_click_child_1",
+                            title: "The child of the rogue 'non-clicker'"
+                        }
+                    ]
+                }
             ]}
         />
     </div>
