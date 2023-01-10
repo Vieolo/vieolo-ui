@@ -17,7 +17,13 @@ export type TreeListItem = {
     id: string,
     icon?: React.ReactNode,
     selected?: boolean,
-    children?: TreeListItem[]
+    children?: TreeListItem[],
+    /**
+     * In some cases, the parent row is just a placeholder for the children and has
+     * no actual functionality beside expanding and collapsing the list of children.
+     * It should be used for row that have children
+     */
+    blockOnClick?: boolean
 }
 
 export default function TreeList(props: {
@@ -76,7 +82,7 @@ function SingleParent(props: { selectedId?: string, item: TreeListItem, onItemSe
                 emphasis={isSelected ? "medium" : "none-background"} 
                 padding='half' 
                 className="height--pc-100 width--pc-100 vieolo-tree-list-item__row"
-                onClick={isSelected ? undefined : () => { 
+                onClick={(isSelected || props.item.blockOnClick) ? undefined : () => { 
                     props.onItemSelected(props.item.id, props.item.title)
                 }}
             >

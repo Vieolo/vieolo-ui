@@ -72,6 +72,17 @@ export function TreeListCreator(props: { p: TreeListPropsType }) {
                         }
                     ]
                 },
+                {
+                    id: "no_click",
+                    title: "Has no 'onClick' functionality",
+                    blockOnClick: true,
+                    children: [
+                        {
+                            id: "no_click_child_1",
+                            title: "The child of the rogue 'non-clicker'"
+                        }
+                    ]
+                }
             ]}
         />
     </div>
