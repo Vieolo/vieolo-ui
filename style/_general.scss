@@ -1037,6 +1037,15 @@ html {
 	height: -webkit-fill-available;
 }
 
+@mixin hide-scrollbar {
+	scrollbar-width: none;
+
+	&::-webkit-scrollbar { /* WebKit */
+		width: 0;
+		height: 0;
+	}
+}
+
 .overflow {
 	&--y-scroll {
 		overflow-y: scroll;
@@ -1055,12 +1064,7 @@ html {
 	}
 
 	&--hide-scrollbar {
-		scrollbar-width: none;
-
-		&::-webkit-scrollbar { /* WebKit */
-			width: 0;
-			height: 0;
-		}
+		@include hide-scrollbar;
 	}
 }
 
@@ -1297,6 +1301,16 @@ html {
 		&--bottom-0 {
 			position: sticky;
 			bottom: 0;
+		}
+
+		&--left-0 {
+			position: sticky;
+			left: 0;
+		}
+		
+		&--right-0 {
+			position: sticky;
+			right: 0;
 		}
 	}
 }

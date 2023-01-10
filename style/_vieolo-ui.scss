@@ -1581,9 +1581,14 @@ body {
 }
 
 .vieolo-table {
-	background-color: white;
+	background-color: $background-content-color;
 	border-top-left-radius: $base-unit-half;
 	border-top-right-radius: $base-unit-half;
+
+	&__content {
+		overflow-x: scroll;
+		@include hide-scrollbar;
+	}
 
 	&--headless {
 		border-radius: 0px;
@@ -1595,18 +1600,29 @@ body {
 		display: grid;
 		border-top-left-radius: $base-unit-half;
 		border-top-right-radius: $base-unit-half;
-		z-index: 1;
+		z-index: 3;
+		min-width: fit-content;
 
 		&__cell {
 			height: 40px;
 			display: flex;
 			padding: 0px 4px;
-			display: flex;
 			align-items: center;
 			@include nonselectable;
 
 			p {
 				margin: 0;
+			}
+
+			&--sticky {
+				position: sticky;
+				background-color: $neutral-color;
+				border-radius: inherit;
+				z-index: 3;
+			}
+
+			&--sticky-last {
+				border-right: 1px solid #ddd;
 			}
 		}
 
@@ -1617,15 +1633,31 @@ body {
 
 	&__content-row {
 		display: grid;
-		border-bottom: 1px solid #f2f2f2;
+		border-bottom: 1px solid $neutral-color;
+		min-width: fit-content;
 
 		&__cell {
 			height: 40px;
 			display: flex;
 			padding: 0px 4px;
-			display: flex;
 			flex-direction: column;
 			justify-content: center;
+
+			&--sticky {
+				position: sticky;
+				background-color: $background-content-color;
+				z-index: 2;
+			}
+			
+			&--sticky-checked {
+				position: sticky;
+				z-index: 2;
+				background-color: $secondary-color-light;
+			}
+
+			&--sticky-last {
+				border-right: 1px solid $neutral-color;
+			}
 		}
 
 		$this: &;

@@ -62,6 +62,11 @@ export default function Table(props: {
     onReorder?: (newOrder: TableRow[]) => void,
     width?: string,
     stickyHeader?: boolean,
+    /**
+     * If you expect your table to be bigger than the width of certain (or all) screens, you can
+     * make a few columns stick to the left when the user scrolls horizontally.
+     */
+    stickyColumnCount?: number,
     maxHeight?: string,
     /**
      * Converts the height of each row from 40px to 28px
@@ -140,10 +145,20 @@ export default function Table(props: {
                     }
                     {
                         (props.headers || []).map((h: string | React.ReactNode, i) => {
+                            let cellClassname = "vieolo-table__header-row__cell"
+                            let left = 0
+                            if (props.stickyColumnCount && i < props.stickyColumnCount) {
+                                cellClassname += " vieolo-table__header-row__cell--sticky"
+
+                                if (i === (props.stickyColumnCount - 1)) cellClassname += " vieolo-table__header-row__cell--sticky-last"
+
+                                left = +props.columnGrid.split(" ").map(cg => cg.replace("px", "").replace("fr", ""))[i - 1]
+                            }
+
                             return <div
                                 key={`table_header_row_${i}`}
-                                className="vieolo-table__header-row__cell"
-                                style={{ cursor: (props.disableSort || !props.sortBy || !props.onSortChange || !props.sortDirection) ? 'default' : 'pointer' }}
+                                className={cellClassname}
+                                style={{ cursor: (props.disableSort || !props.sortBy || !props.onSortChange || !props.sortDirection) ? 'default' : 'pointer', left: left || 0 }}
                                 aria-label={`${props.ariaLabel || 'table'} header column ${h}`}
                                 onClick={() => {
                                     if (!props.disableSort && props.onSortChange && props.sortBy && props.sortDirection && typeof h === 'string') {
@@ -225,10 +240,22 @@ export default function Table(props: {
                             }
                             {
                                 row.items.map((r, z) => {
+                                    let cellClassname = "vieolo-table__content-row__cell";                                    
+                                    let left = 0;
+                                    if (props.stickyColumnCount && z < props.stickyColumnCount) {
+                                        if (row.checked) cellClassname += " vieolo-table__content-row__cell--sticky-checked"
+                                        else cellClassname += " vieolo-table__content-row__cell--sticky"
+
+                                        if (z === (props.stickyColumnCount - 1)) cellClassname += " vieolo-table__content-row__cell--sticky-last"
+
+                                        left = +props.columnGrid.split(" ").map(cg => cg.replace("px", "").replace("fr", ""))[z - 1]
+                                    }
+                                    
                                     return <div
-                                        className="vieolo-table__content-row__cell"
+                                        className={cellClassname}
                                         key={`table_row_${row.id}_${z}_div`}
                                         aria-label={`${props.ariaLabel || 'table'} cell ${row.id}_${z}`}
+                                        style={{left: left || 0}}
                                     >
                                         {
                                             typeof r === 'string'
