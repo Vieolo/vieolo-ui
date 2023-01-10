@@ -12,6 +12,7 @@ import IconThree from '@mui/icons-material/Cake';
 import { ViewData } from '../view/main/main';
 import Button from '../Button';
 import Divider from '../Divider';
+import Card from '../Card';
 
 type TreeListPropsType = React.ComponentProps<typeof TreeList>;
 
@@ -32,7 +33,7 @@ export function TreeListCreator(props: { p: TreeListPropsType }) {
 
     let [selected, setSelected] = useState<string>("get_started/introduciton");
 
-    return <div className='width--px-500 max-width--vw-90'>
+    return <Card className='width--px-500 max-width--vw-90' emphasis='medium' color='secondary'>
         <Button text='Change selected' onClick={() => setSelected("what_after/introduction2")} />
 
         <Divider direction='horizontal' length='pc-100' />
@@ -99,5 +100,5 @@ export function TreeListCreator(props: { p: TreeListPropsType }) {
                 }
             ]}
         />
-    </div>
+    </Card>
 }
