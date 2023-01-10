@@ -44,6 +44,13 @@ export function TreeListCreator(props: { p: TreeListPropsType }) {
                 {
                     id: "get_started",
                     title: "Get Started",
+                    group: {
+                        title: "The Start",
+                        card: {
+                            emphasis: 'medium',
+                            color: 'success'
+                        }
+                    },
                     endIcon: <IconOne />,
                     children: [
                         { id: "get_started/introduciton", title: "Introduction", startIcon: <IconThree />, selected: true },
@@ -53,6 +60,13 @@ export function TreeListCreator(props: { p: TreeListPropsType }) {
                 {
                     id: "what_after",
                     title: "What you can do afterwards",
+                    group: {
+                        title: "The rest of the list",
+                        card: {
+                            emphasis: 'medium',
+                            color: 'alert'
+                        }
+                    },
                     endIcon: <IconTwo />,
                     children: [
                         { id: "what_after/introduction6", title: "Introduction", startIcon: <IconThree /> },
