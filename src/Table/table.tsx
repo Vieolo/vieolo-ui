@@ -88,8 +88,9 @@ export default function Table(props: {
      */
     isCheckable?: boolean,
     /**
-     * The on change function of the checkbox in the header
-     * User can check or uncheck all of the items at once
+     * The on change function of the checkbox in the header.
+     * User can check or uncheck all of the items at once.
+     * If this callback is omited, no checkbox will appear in the header
      */
     onCheckAll?: (allAreChecked: boolean) => void,
 }): JSX.Element {
@@ -121,15 +122,21 @@ export default function Table(props: {
                 <div className={`vieolo-table__header-row ${props.stickyHeader ? 'position--sticky--top-0' : ''}`} style={{ gridTemplateColumns: columnGrid }}>
                     {
                         props.isCheckable &&
-                        <div className='center-by-flex-row'>
-                            <Checkbox
-                                onChange={(v) => {
-                                    if (props.onCheckAll) props.onCheckAll(v);
-                                    setAllChecked(v);
-                                }}
-                                value={allChecked}
-                            />
-                        </div>
+                        <>
+                            {   props.onCheckAll
+                                    ? <div className='center-by-flex-row'>
+                                        <Checkbox
+                                            onChange={(v) => {
+                                                if (props.onCheckAll) props.onCheckAll(v);
+                                                setAllChecked(v);
+                                            }}
+                                            value={allChecked}
+                                        />
+                                    </div> 
+                                    : <div></div>
+                            }
+                        </>
+
                     }
                     {
                         (props.headers || []).map((h: string | React.ReactNode, i) => {
@@ -149,7 +156,7 @@ export default function Table(props: {
                                         ? <Typography type={props.headerTypographyType || "title-small"} text={h} />
                                         : <>
                                             {h}
-                                        </>                
+                                        </>
                                 }
                                 {
                                     (props.sortBy === h && !props.disableSort && typeof h === 'string') &&

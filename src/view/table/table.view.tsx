@@ -29,6 +29,7 @@ export function tableOptions(): ViewData {
             withPagination: "boolean",
             withMaxHeight: "boolean",
             checkable: "boolean",
+            removeCheckAll: 'boolean',
             reorderable: 'boolean',
             useCustomHeader: 'boolean',
             headerTypographyType: {
@@ -124,7 +125,7 @@ export function TableCreator(props: { p: TablePropsType }) {
         } : undefined}
         isDense={props.p.isDense}
         isCheckable={(props.p as any).checkable}
-        onCheckAll={v => {
+        onCheckAll={(props.p as any).removeCheckAll ? undefined : v => {
             if (!v) setCheckedList([]);
             else {
                 setCheckedList(finalRows.map(i => i.id));
