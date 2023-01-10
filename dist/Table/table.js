@@ -26,12 +26,22 @@ export default function Table(props) {
         columnGrid = `30px ${columnGrid}`;
     return _jsxs("div", { className: `vieolo-table ${props.removeHeaderRow ? 'vieolo-table--headless' : ''}`, style: style, children: [_jsxs("div", { className: "vieolo-table__content", style: contentStyle, children: [(props.removeHeaderRow !== true || Array.isArray(props.headers)) &&
                         _jsxs("div", { className: `vieolo-table__header-row ${props.stickyHeader ? 'position--sticky--top-0' : ''}`, style: { gridTemplateColumns: columnGrid }, children: [props.isCheckable &&
-                                    _jsx("div", { className: 'center-by-flex-row', children: _jsx(Checkbox, { onChange: (v) => {
-                                                if (props.onCheckAll)
-                                                    props.onCheckAll(v);
-                                                setAllChecked(v);
-                                            }, value: allChecked }) }), (props.headers || []).map((h, i) => {
-                                    return _jsxs("div", { className: "vieolo-table__header-row__cell", style: { cursor: (props.disableSort || !props.sortBy || !props.onSortChange || !props.sortDirection) ? 'default' : 'pointer' }, "aria-label": `${props.ariaLabel || 'table'} header column ${h}`, onClick: () => {
+                                    _jsx(_Fragment, { children: props.onCheckAll
+                                            ? _jsx("div", { className: 'center-by-flex-row', children: _jsx(Checkbox, { onChange: (v) => {
+                                                        if (props.onCheckAll)
+                                                            props.onCheckAll(v);
+                                                        setAllChecked(v);
+                                                    }, value: allChecked }) })
+                                            : _jsx("div", {}) }), (props.headers || []).map((h, i) => {
+                                    let cellClassname = "vieolo-table__header-row__cell";
+                                    let left = 0;
+                                    if (props.stickyColumnCount && i < props.stickyColumnCount) {
+                                        cellClassname += " vieolo-table__header-row__cell--sticky";
+                                        if (i === (props.stickyColumnCount - 1))
+                                            cellClassname += " vieolo-table__header-row__cell--sticky-last";
+                                        left = +props.columnGrid.split(" ").map(cg => cg.replace("px", "").replace("fr", ""))[i - 1];
+                                    }
+                                    return _jsxs("div", { className: cellClassname, style: { cursor: (props.disableSort || !props.sortBy || !props.onSortChange || !props.sortDirection) ? 'default' : 'pointer', left: left || 0 }, "aria-label": `${props.ariaLabel || 'table'} header column ${h}`, onClick: () => {
                                             if (!props.disableSort && props.onSortChange && props.sortBy && props.sortDirection && typeof h === 'string') {
                                                 props.onSortChange(h, props.sortBy === h ? props.sortDirection === 'ascending' ? 'descending' : 'ascending' : (props.defaultDirection || 'ascending'));
                                             }
@@ -68,7 +78,18 @@ export default function Table(props) {
                                                     }
                                                 }, value: row.checked || false }) }), props.onReorder &&
                                         _jsx("div", { className: 'center-by-flex-row cursor--move', children: _jsx(ReorderIcon, {}) }), row.items.map((r, z) => {
-                                        return _jsx("div", { className: "vieolo-table__content-row__cell", "aria-label": `${props.ariaLabel || 'table'} cell ${row.id}_${z}`, children: typeof r === 'string'
+                                        let cellClassname = "vieolo-table__content-row__cell";
+                                        let left = 0;
+                                        if (props.stickyColumnCount && z < props.stickyColumnCount) {
+                                            if (row.checked)
+                                                cellClassname += " vieolo-table__content-row__cell--sticky-checked";
+                                            else
+                                                cellClassname += " vieolo-table__content-row__cell--sticky";
+                                            if (z === (props.stickyColumnCount - 1))
+                                                cellClassname += " vieolo-table__content-row__cell--sticky-last";
+                                            left = +props.columnGrid.split(" ").map(cg => cg.replace("px", "").replace("fr", ""))[z - 1];
+                                        }
+                                        return _jsx("div", { className: cellClassname, "aria-label": `${props.ariaLabel || 'table'} cell ${row.id}_${z}`, style: { left: left || 0 }, children: typeof r === 'string'
                                                 ? _jsx(Typography, { text: r })
                                                 : r }, `table_row_${row.id}_${z}_div`);
                                     })] }, `table_row_${row.id}`);

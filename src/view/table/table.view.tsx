@@ -17,9 +17,7 @@ type TablePropsType = React.ComponentProps<typeof Table>;
 export function tableOptions(): ViewData {
 
     return {
-        constants: {
-            columnGrid: '50px 90px 1fr 50px',
-        } as Partial<TablePropsType>,
+        constants: {} as Partial<TablePropsType>,
         variables: {
             removeHeaders: "boolean",
             disableSort: "boolean",
@@ -29,6 +27,7 @@ export function tableOptions(): ViewData {
             withPagination: "boolean",
             withMaxHeight: "boolean",
             checkable: "boolean",
+            removeCheckAll: 'boolean',
             reorderable: 'boolean',
             useCustomHeader: 'boolean',
             headerTypographyType: {
@@ -56,21 +55,21 @@ export function TableCreator(props: { p: TablePropsType }) {
     let [direction, setDirection] = useState<TableSortDirection>('ascending');
     let [checkedList, setCheckedList] = useState<string[]>([]);
 
-    let headers = ['id', 'Date', 'Description', ''];
+    let headers = ['id', 'Date', 'Description', "Random Column 1", "Random Column 2", ''];
 
     let [normalRows, setNormalRows] = useState<React.ReactNode[][]>([
-        ["1", "2020-10-10", "Some Description", <IconButton size="small" onClick={() => { }} icon={<SampleIcon />} />],
-        ["2", "2020-10-11", "Some Description 2", <IconButton size="small" onClick={() => { }} icon={<SampleIcon />} />]
+        ["1", "2020-10-10", "Some Description", "random info 1", "random info 2", <IconButton size="small" onClick={() => { }} icon={<SampleIcon />} />],
+        ["2", "2020-10-11", "Some Description 2", "random info 1", "random info 2", <IconButton size="small" onClick={() => { }} icon={<SampleIcon />} />]
     ]);
 
     let [clickableRows, setClickableRows] = useState<React.ReactNode[][]>([
-        ["1", "2020-10-10", "Some Description", 'Done'],
-        ["2", "2020-10-11", "Hello World!", 'N/A']
+        ["1", "2020-10-10", "Some Description", "random info 1", "random info 2", 'Done'],
+        ["2", "2020-10-11", "Hello World!", "random info 1", "random info 2", 'N/A']
     ]);
 
     let [manyRows, setManyRow] = useState<React.ReactNode[][]>([
         ...Array(25).fill("").map((z, i) => {
-            return [25 - i, "2020-10-10", "Some Description", 'Done']
+            return [25 - i, "2020-10-10", "Some Description", "random info 1", "random info 2", 'Done']
         })
     ]);
 
@@ -101,9 +100,9 @@ export function TableCreator(props: { p: TablePropsType }) {
     })
 
     return <Table
-        columnGrid={props.p.columnGrid}
+        columnGrid={"50px 90px minmax(200px, 1fr) 100px 100px 50px"}
         disableSort={props.p.disableSort}
-        headers={(props.p as any).removeHeaders ? undefined : ['id', 'Date', 'Description', (props.p as any).useCustomHeader ? <Spinner size='small' /> : ""]}
+        headers={(props.p as any).removeHeaders ? undefined : ['id', 'Date', 'Description', "Random Column 1", "Random Column 2", (props.p as any).useCustomHeader ? <Spinner size='small' /> : ""]}
         onSortChange={(s, d) => {
             setSort(s);
             setDirection(d);
@@ -113,6 +112,7 @@ export function TableCreator(props: { p: TablePropsType }) {
         sortDirection={direction}
         width={props.p.width}
         stickyHeader={props.p.stickyHeader}
+        stickyColumnCount={2}
         maxHeight={props.p.stickyHeader ? "300px" : (props.p as any).withMaxHeight ? "500px" : undefined}
         pagination={(props.p as any).withPagination ? {
             endIndex: 25,
@@ -124,7 +124,7 @@ export function TableCreator(props: { p: TablePropsType }) {
         } : undefined}
         isDense={props.p.isDense}
         isCheckable={(props.p as any).checkable}
-        onCheckAll={v => {
+        onCheckAll={(props.p as any).removeCheckAll ? undefined : v => {
             if (!v) setCheckedList([]);
             else {
                 setCheckedList(finalRows.map(i => i.id));

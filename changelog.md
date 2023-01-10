@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.26.0 (2023-01-10)
+- Improved the overflow of `Table`
+- Added sticky column to `Table` ([#261](https://github.com/Vieolo/vieolo-ui/issues/261))
+- Redesigned the `Checkbox` ([#269](https://github.com/Vieolo/vieolo-ui/issues/269))
+- Added group and ignoring the onClick callback to `TreeList` ([#270](https://github.com/Vieolo/vieolo-ui/issues/270))
+
+#### Breaking Changes
+- Changed the icon to `startIcon` and `endIcon` in `TreeList` ([#270](https://github.com/Vieolo/vieolo-ui/issues/270))
+- The check-all checkbox won't appear if the callback is omited in `Table`
+
 ## 0.25.5 (2022-12-28)
 - Added `TabRow` component ([#141](https://github.com/Vieolo/vieolo-ui/issues/141))
 - Added scroll to the wrap options of the `Flex`

@@ -46,6 +46,11 @@ export default function Table(props: {
     onReorder?: (newOrder: TableRow[]) => void;
     width?: string;
     stickyHeader?: boolean;
+    /**
+     * If you expect your table to be bigger than the width of certain (or all) screens, you can
+     * make a few columns stick to the left when the user scrolls horizontally.
+     */
+    stickyColumnCount?: number;
     maxHeight?: string;
     /**
      * Converts the height of each row from 40px to 28px
@@ -72,8 +77,9 @@ export default function Table(props: {
      */
     isCheckable?: boolean;
     /**
-     * The on change function of the checkbox in the header
-     * User can check or uncheck all of the items at once
+     * The on change function of the checkbox in the header.
+     * User can check or uncheck all of the items at once.
+     * If this callback is omited, no checkbox will appear in the header
      */
     onCheckAll?: (allAreChecked: boolean) => void;
 }): JSX.Element;
