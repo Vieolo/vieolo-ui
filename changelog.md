@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.26.1 (2023-01-10)
+- Added description to the `TreeList` group ([#272](https://github.com/Vieolo/vieolo-ui/issues/272))
+
 ## 0.26.0 (2023-01-10)
 - Improved the overflow of `Table`
 - Added sticky column to `Table` ([#261](https://github.com/Vieolo/vieolo-ui/issues/261))

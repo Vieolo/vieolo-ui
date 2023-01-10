@@ -21,6 +21,7 @@ export type TreeListItem = {
      */
     group?: {
         title: string;
+        description?: string;
         card?: CardPropType;
     };
 };
