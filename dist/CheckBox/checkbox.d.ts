@@ -4,4 +4,6 @@ export default function Checkbox(props: {
     onChange: (v: boolean) => void;
     disabled?: boolean;
     ariaLabel?: string;
+    /** defaults to square */
+    type?: 'square' | 'round';
 }): JSX.Element;
