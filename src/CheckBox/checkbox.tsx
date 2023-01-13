@@ -2,10 +2,12 @@ export default function Checkbox(props: {
     value: boolean,
     onChange: (v: boolean) => void,
     disabled?: boolean,
-    ariaLabel?: string
+    ariaLabel?: string,
+    /** defaults to square */
+    type?: 'square' | 'round'
 }) {
     return <div
-        className={`vieolo-checkbox ${props.disabled ? 'disabled' : ''}`}        
+        className={`vieolo-checkbox vieolo-checkbox--${props.type === 'round' ? 'round' : 'square'} ${props.disabled ? 'disabled' : ''}`}        
     >
         <input 
             type="checkbox" 

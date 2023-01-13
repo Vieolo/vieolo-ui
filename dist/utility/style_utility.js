@@ -20,6 +20,9 @@ export function getEmphasisClasses(emphasis, color, options) {
     }
     else if (emphasis === 'medium') {
         c = ` background-color--${color}-light border--px-0 ${getTextColorClass()}`;
+        c += ` ${getBorderClass()}`;
+        c += ` border--solid`;
+        c += ` border--${color}-light`;
         if (options.hasRipple) {
             c += ` ripple ripple--${color}-normal`;
         }

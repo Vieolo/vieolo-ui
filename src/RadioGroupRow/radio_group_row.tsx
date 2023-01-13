@@ -4,24 +4,18 @@ import React from 'react';
 import RadioGroup from '../RadioGroup';
 
 // Types
-import { RadioButtonType } from '../RadioGroup';
 import { RowHeightType } from '../types/types';
 
 //Private
 import SetRowTemplate from '../private/ComponentRowTemplate';
 
+type RadioGroupPropType = Omit<React.ComponentProps<typeof RadioGroup>, "direction"> 
+
 export default function RadioGroupRow(props: {
     title: string | React.ReactNode,
     subtitle?: string | React.ReactNode,
-    value: string,
-    options: RadioButtonType[],
-    disabled?: boolean,
-    height?: RowHeightType | "default",
-    onOptionChange: (o: string) => void,
-    /** Defaults to 10px */
-    horizontalButtonPadding?: number
-    direction?: 'horizontal' | 'vertical'
-}) {
+    height?: RowHeightType | "default",    
+} & RadioGroupPropType) {
     return <SetRowTemplate
         title={props.title}
         subtitle={props.subtitle}
@@ -31,12 +25,8 @@ export default function RadioGroupRow(props: {
         disabled={props.disabled}
         rightSideComponent={
             <RadioGroup
-                value={props.value}
-                options={props.options}
-                onOptionChange={props.onOptionChange}
-                disabled={props.disabled}
+                {...props}
                 direction={"horizontal"}
-                horizontalButtonPadding={props.horizontalButtonPadding}
             />
         }
     />

@@ -1,5 +1,11 @@
 # Change Log
 
+## 0.27.0 (2023-01-13)
+- Added shape type to the `Checkbox`
+
+#### Breaking Changes
+- Redesigned the `RadioGroup` and `RadioGroupRow`
+
 ## 0.26.1 (2023-01-10)
 - Added description to the `TreeList` group ([#272](https://github.com/Vieolo/vieolo-ui/issues/272))
 

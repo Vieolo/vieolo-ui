@@ -1,14 +1,23 @@
 // Vieolo UI
 import Typography from "../Typography";
+import Flex from "../Flex";
+import Card from "../Card";
 
 // Utility
 import { handleOnKeyDown } from "../utility/onkeydown_utility";
+import { ColorOptionType, GridGapType } from "../types";
+import { BorderRadiusType } from "../types/types";
+import Checkbox from "../CheckBox";
 
 export type RadioButtonType = {
     id: string,
-    /** If passing a component, do not add an on click functionality as it is handled by the Radio Button */
-    button: string | React.ReactNode,
-    ariaLabel?: string
+    ariaLabel?: string,
+    title?: string,
+    subTitle?: string,
+    /** 
+     * If an icon is provided, it will replace the rounded checkbox
+     */
+    icon?: React.ReactNode
 }
 
 export default function RadioGroup(props: {
@@ -17,17 +26,22 @@ export default function RadioGroup(props: {
     onOptionChange: (o: string) => void,
     direction?: 'vertical' | 'horizontal',
     disabled?: boolean,
-    /** Defaults to 10px */
-    horizontalButtonPadding?: number
+    /** Defaults to half */
+    horizontalButtonPadding?: "none" | 'half' | 'one' | 'two',
+    verticalButtonPadding?: "none" | 'half' | 'one' | 'two',
+    /** defaults to primary */
+    color?: ColorOptionType,
+    /** Defaults to none */
+    gap?: GridGapType,
+    /** defaults to half */
+    borderRadius?: BorderRadiusType
 }) {
 
-    let className = `vieolo-radio-group__radio-contents vieolo-radio-group__radio-contents--${props.direction || 'horizontal'}`;
-
-    let buttonClass = 'vieolo-radio-group__radio-button';
-
     return <div className={`vieolo-radio-group${props.disabled ? ' disabled' : ''}`}>
-        <div
-            className={className}
+        <Flex
+            direction={props.direction === 'vertical' ? 'column' : 'row'}
+            rowGap={props.gap || 'none'}
+            columnGap={props.gap || 'none'}
         >
             {
                 props.options.map((o: RadioButtonType) => {
@@ -35,7 +49,7 @@ export default function RadioGroup(props: {
                         key={o.id}
                         aria-label={o.ariaLabel || undefined}
                         tabIndex={props.disabled ? undefined : 0}
-                        className={`${buttonClass} ${props.value === o.id ? buttonClass + "--selected" : ""} ${buttonClass}--${props.direction || 'horizontal'}`}
+                        className={'vieolo-radio-group__button'}
                         onClick={() => {
                             props.onOptionChange(o.id);
                         }}
@@ -47,20 +61,37 @@ export default function RadioGroup(props: {
                                 }
                             })
                         }}
-                        style={{
-                            padding: `0 ${props.horizontalButtonPadding || 10}px`
-                        }}
                     >
-                        {
-                            typeof o.button === 'string'
-                                ? <Typography text={o.button} />
-                                : <>
-                                    {o.button}
-                                </>
-                        }
+                        <Card
+                            className={`padding-vertical--${props.verticalButtonPadding || 'half'} padding-horizontal--${props.horizontalButtonPadding || 'half'}`}
+                            borderRadius={props.borderRadius || 'half'}
+                            color={props.color}
+                            emphasis={props.value === o.id ? 'medium' : 'none'}
+                        >
+                            <Flex columnGap="half" alignItems="center">
+                                {
+                                    o.icon
+                                        ? o.icon
+                                        : <Checkbox type="round" value={props.value === o.id} onChange={() => {}} />
+                                }
+                                {
+                                    (o.title || o.subTitle) &&
+                                    <div>
+                                        {
+                                            o.title &&
+                                            <Typography text={o.title} fontWeight='bold' nonselectable />
+                                        }
+                                        {
+                                            o.subTitle &&
+                                            <Typography text={o.subTitle} type='paragraph-small' nonselectable />
+                                        }
+                                    </div>
+                                }
+                            </Flex>
+                        </Card>
                     </div>
                 })
             }
-        </div>
-    </div>
+        </Flex>
+    </div>   
 }

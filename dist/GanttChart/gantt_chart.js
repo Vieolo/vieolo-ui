@@ -143,10 +143,10 @@ export default function GanttChart(props) {
             resizeItem.el.style.left = `${left}%`;
         }
     }
-    return _jsxs("div", { className: "vieolo-gantt-chart", style: { height: chartHeight + 'px' }, children: [_jsxs("div", { className: "vieolo-gantt-chart__base", children: [_jsx("div", { className: "vieolo-gantt-chart__base__item-column", children: _jsxs("div", { className: "vieolo-gantt-chart__base__item-column__item-title", style: { height: props.columnGroups ? '65px' : '45px' }, children: [_jsx(Typography, { text: props.dataTitle }), _jsx(RadioGroup, { horizontalButtonPadding: 7, onOptionChange: v => setFilter(v), options: [
-                                        { button: _jsx(AllIcon, {}), id: 'All' },
-                                        { button: _jsx(SelectedIcon, {}), id: 'Full' },
-                                        { button: _jsx(UnSelectedIcon, {}), id: 'Empty' },
+    return _jsxs("div", { className: "vieolo-gantt-chart", style: { height: chartHeight + 'px' }, children: [_jsxs("div", { className: "vieolo-gantt-chart__base", children: [_jsx("div", { className: "vieolo-gantt-chart__base__item-column", children: _jsxs("div", { className: "vieolo-gantt-chart__base__item-column__item-title", style: { height: props.columnGroups ? '65px' : '45px' }, children: [_jsx(Typography, { text: props.dataTitle }), _jsx(RadioGroup, { horizontalButtonPadding: 'half', onOptionChange: v => setFilter(v), options: [
+                                        { icon: _jsx(AllIcon, {}), id: 'All' },
+                                        { icon: _jsx(SelectedIcon, {}), id: 'Full' },
+                                        { icon: _jsx(UnSelectedIcon, {}), id: 'Empty' },
                                     ], value: filter })] }) }), props.columnTitles.map((t, i) => {
                         return _jsx("div", { className: "vieolo-gantt-chart__base__data-column", style: { width: colWidth }, children: _jsxs("div", { className: `vieolo-gantt-chart__base__data-column__title-container${t.onClick ? ' clickable' : ''}`, style: { paddingBottom: props.columnGroups ? '0px' : '0', height: props.columnGroups ? '45px' : '45px', width: "100%" }, onClick: () => {
                                     if (t.onClick)
