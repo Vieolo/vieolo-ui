@@ -2310,6 +2310,18 @@ body {
 	width: $base-unit-two;
 	height: $base-unit-two;		
 
+	&--square {
+		input {
+			border-radius: $base-unit-half;
+		}
+	}
+	
+	&--round {
+		input {
+			border-radius: 50%;
+		}
+	}
+
 	input {
 		-webkit-appearance: none;
 		-moz-appearance: none;
@@ -2324,8 +2336,7 @@ body {
 		margin: 0;
 		cursor: pointer;
 		background: transparent;
-		transition: background .3s, border-color .3s, box-shadow .2s;
-		border-radius: $base-unit-half;
+		transition: background .3s, border-color .3s, box-shadow .2s;		
 
 		&:focus {
 			outline: none;
