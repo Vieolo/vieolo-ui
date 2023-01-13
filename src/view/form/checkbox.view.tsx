@@ -16,6 +16,10 @@ export function checkboxOptions(): ViewData {
 
         } as Partial<CheckboxPropsType>,
         variables: {
+            type: {
+                options: ['round', 'square'],
+                default: "square"
+            },
             disabled: 'boolean',
         }
     }
@@ -28,6 +32,7 @@ export function CheckboxCreator(props: {p: CheckboxPropsType}) {
 
     return <Checkbox
         value={value}
+        type={props.p.type}
         onChange={v => setValue(v)}
         disabled={props.p.disabled}
     />

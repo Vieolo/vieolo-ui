@@ -7,6 +7,7 @@ import Card from "../Card";
 import { handleOnKeyDown } from "../utility/onkeydown_utility";
 import { ColorOptionType, GridGapType } from "../types";
 import { BorderRadiusType } from "../types/types";
+import Checkbox from "../CheckBox";
 
 export type RadioButtonType = {
     id: string,
@@ -32,7 +33,6 @@ export default function RadioGroup(props: {
     color?: ColorOptionType,
     /** Defaults to none */
     gap?: GridGapType,
-    isUnselectedTransparent?: boolean
     /** defaults to half */
     borderRadius?: BorderRadiusType
 }) {
@@ -70,19 +70,20 @@ export default function RadioGroup(props: {
                         >
                             <Flex columnGap="half" alignItems="center">
                                 {
-                                    o.icon &&
                                     o.icon
+                                        ? o.icon
+                                        : <Checkbox type="round" value={props.value === o.id} onChange={() => {}} />
                                 }
                                 {
                                     (o.title || o.subTitle) &&
                                     <div>
                                         {
                                             o.title &&
-                                            <Typography text={o.title} fontWeight='bold' />
+                                            <Typography text={o.title} fontWeight='bold' nonselectable />
                                         }
                                         {
                                             o.subTitle &&
-                                            <Typography text={o.subTitle} type='paragraph-small' />
+                                            <Typography text={o.subTitle} type='paragraph-small' nonselectable />
                                         }
                                     </div>
                                 }
