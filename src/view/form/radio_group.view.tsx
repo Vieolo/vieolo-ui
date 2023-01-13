@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 
 // Component
-import RadioGroup from '../../RadioGroup';
+import RadioGroup, { RadioButtonType } from '../../RadioGroup';
+import Card from '../../Card';
 
 // Material UI
 import SampleIcon1 from '@mui/icons-material/AccessibleForwardTwoTone';
@@ -21,16 +22,32 @@ export function radioGroupOptions(): ViewData {
 
         } as Partial<RadioGroupPropsType>,
         variables: {
+            color: 'colors',
             direction: {
                 options: ['horizontal', "vertical"],
                 default: "horizontal"
             },
             horizontalButtonPadding: {
-                options: ["10", "20", "30"],
-                default: 10,
-                type: 'number'
+                options: ["none", "half", "one", "two"],
+                default: "half",
+            },
+            verticalButtonPadding: {
+                options: ["none", "half", "one", "two"],
+                default: "half",
+            },
+            gap: {
+                options: ["none", "half", "one", "two"],
+                default: "none"
             },
             withIcon: {
+                options: [false, true],
+                default: false
+            },
+            withSubtitle: {
+                options: [false, true],
+                default: false
+            },
+            removeTitle: {
                 options: [false, true],
                 default: false
             },
@@ -46,26 +63,37 @@ export function radioGroupOptions(): ViewData {
 export function RadioGroupCreator(props: { p: RadioGroupPropsType }) {
     let [selected, setSelected] = useState<string>("One");
 
-    let textOptions = [
-        {id: 'One', button: 'A Very Long Text'},
-        {id: 'Two', button: 'Two'},
-        {id: 'Three', button: 'Three'},
+    let textOptions: RadioButtonType[] = [
+        { id: 'One', title: 'A Very Long Text', icon: <SampleIcon1 />, subTitle: "Some long sub title explaning the option" },
+        { id: 'Two', title: 'Two', icon: <SampleIcon2 />, subTitle: "Some long sub title explaning the option" },
+        { id: 'Three', title: 'Three', icon: <SampleIcon3 />, subTitle: "Some long sub title explaning the option" },
     ];
 
-    let iconOptions = [
-        { id: 'One', button: <SampleIcon1 /> },
-        { id: 'Two', button: <SampleIcon2 /> },
-        { id: 'Three', button: <SampleIcon3 /> },
-    ];
+    if (!(props.p as any).withIcon) {
+        textOptions = textOptions.map(z => { return { ...z, icon: undefined } })
+    }
+    
+    if (!(props.p as any).withSubtitle) {
+        textOptions = textOptions.map(z => { return { ...z, subTitle: undefined } })
+    }
+    
+    if ((props.p as any).removeTitle) {
+        textOptions = textOptions.map(z => { return { ...z, title: undefined } })
+    }
 
-    return <RadioGroup
-        direction={props.p.direction}
-        onOptionChange={o => setSelected(o)}
-        disabled = {props.p.disabled}
-        options={(props.p as any).withIcon ? iconOptions : textOptions}
-        value={selected}
-        horizontalButtonPadding={props.p.horizontalButtonPadding}
-    />
+    return <Card emphasis='medium' color='accessory-orange' className={props.p.direction === 'vertical' ? 'width--px-300' : undefined}>
+        <RadioGroup
+            direction={props.p.direction}
+            onOptionChange={o => setSelected(o)}
+            disabled={props.p.disabled}
+            options={textOptions}
+            value={selected}
+            horizontalButtonPadding={props.p.horizontalButtonPadding}
+            verticalButtonPadding={props.p.verticalButtonPadding}
+            color={props.p.color}
+            gap={props.p.gap}
+        />
+    </Card>
 
 }
 
