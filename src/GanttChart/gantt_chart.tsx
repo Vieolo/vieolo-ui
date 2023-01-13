@@ -263,12 +263,12 @@ export default function GanttChart(props: {
                 <div className="vieolo-gantt-chart__base__item-column__item-title" style={{ height: props.columnGroups ? '65px' : '45px' }}>
                     <Typography text={props.dataTitle} />
                     <RadioGroup
-                        horizontalButtonPadding={7}
+                        horizontalButtonPadding={'half'}
                         onOptionChange={v => setFilter(v as any)}
                         options={[
-                            { button: <AllIcon />, id: 'All' },
-                            { button: <SelectedIcon />, id: 'Full' },
-                            { button: <UnSelectedIcon />, id: 'Empty' },
+                            { icon: <AllIcon />, id: 'All' },
+                            { icon: <SelectedIcon />, id: 'Full' },
+                            { icon: <UnSelectedIcon />, id: 'Empty' },
                         ]}
                         value={filter}
                     />

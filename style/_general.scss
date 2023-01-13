@@ -1526,6 +1526,10 @@ html {
 }
 
 .padding {
+	&--none {
+		padding: 0;
+	}
+	
 	&--half {
 		padding: $base-unit-half;
 	}
@@ -1560,6 +1564,10 @@ html {
 }
 
 .padding-vertical {
+	&--none {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
 
 	&--half {
 		padding-top: $base-unit-half;
@@ -1603,6 +1611,9 @@ html {
 }
 
 .padding-bottom {
+	&--none {
+		padding-bottom: 0;
+	}
 
 	&--half {
 		padding-bottom: $base-unit-half;
@@ -1638,6 +1649,9 @@ html {
 }
 
 .padding-top {
+	&--none {
+		padding-top: 0;
+	}
 
 	&--half {
 		padding-top: $base-unit-half;
@@ -1675,6 +1689,10 @@ html {
 
 
 .padding-horizontal {
+	&--none {
+		padding-left: 0;
+		padding-right: 0;
+	}
 
 	&--half {
 		padding-left: $base-unit-half;
@@ -1718,6 +1736,9 @@ html {
 }
 
 .padding-right {
+	&--none {
+		padding-right: 0;
+	}
 
 	&--half {
 		padding-right: $base-unit-half;
@@ -1753,6 +1774,9 @@ html {
 }
 
 .padding-left {
+	&--none {
+		padding-left: 0;
+	}
 
 	&--half {
 		padding-left: $base-unit-half;
