@@ -19,7 +19,9 @@ export default function NavDrawer(props: {
     mainItems: DrawerItem[],
     bottomItems?: DrawerItem[],
     onDrawerClose: () => void,
-    footPrint?: React.ReactNode
+    footPrint?: React.ReactNode,
+    /** Defaults to two */
+    itemPaddingLeft?: 'none' | 'half' | 'one' | 'two'
 }) {
     return <div className={`vieolo-nav-drawer`}>
         <div className={`vieolo-nav-drawer__drawer vieolo-nav-drawer__drawer--${props.state}`}>
@@ -36,7 +38,12 @@ export default function NavDrawer(props: {
 
                     {
                         (props.mainItems || []).map(z => {
-                            return <NavDrawerItem item={z} key={z.title} />
+                            return <NavDrawerItem 
+                                key={z.title} 
+                                paddingLeft={props.itemPaddingLeft} 
+                                item={z} 
+                                onClickIntercepted={() => props.onDrawerClose()}
+                            />
                         })
                     }
                 </Flex>
@@ -44,7 +51,12 @@ export default function NavDrawer(props: {
                 <Flex direction="column">
                     {
                         (props.bottomItems || []).map(z => {
-                            return <NavDrawerItem item={z} key={z.title} />
+                            return <NavDrawerItem 
+                                key={z.title} 
+                                item={z} 
+                                paddingLeft={props.itemPaddingLeft} 
+                                onClickIntercepted={() => props.onDrawerClose()}
+                            />
                         })
                     }
                     {
@@ -68,7 +80,7 @@ export default function NavDrawer(props: {
 }
 
 
-function NavDrawerItem(props: { item: DrawerItem }) {
+function NavDrawerItem(props: { item: DrawerItem, paddingLeft?: 'none' | 'half' | 'one' | 'two', onClickIntercepted: () => void }) {
     let t = <Flex alignItems="center" columnGap="one">
         {
             props.item.icon && props.item.icon
@@ -78,6 +90,8 @@ function NavDrawerItem(props: { item: DrawerItem }) {
     let c = `vieolo-nav-drawer__item vieolo-nav-drawer__item--${props.item.selected ? "selected" : "not-selected"}`
 
     c += ` vieolo-nav-drawer__item--${props.item.height || 'medium'}`
+
+    c += ` padding-left--${props.paddingLeft || 'two'}`
 
     if (props.item.newGroup) {
         c += ` margin-top--two `
@@ -93,6 +107,7 @@ function NavDrawerItem(props: { item: DrawerItem }) {
                     // The on click functionality will be handled by the implementor to prevent unnecessary reload of the page
                     e.preventDefault();
                     props.item.onClick();
+                    props.onClickIntercepted();
                 }
             }} 
         >
