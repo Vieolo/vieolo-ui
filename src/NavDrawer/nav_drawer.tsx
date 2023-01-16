@@ -19,7 +19,9 @@ export default function NavDrawer(props: {
     mainItems: DrawerItem[],
     bottomItems?: DrawerItem[],
     onDrawerClose: () => void,
-    footPrint?: React.ReactNode
+    footPrint?: React.ReactNode,
+    /** Defaults to two */
+    itemPaddingLeft?: 'none' | 'half' | 'one' | 'two'
 }) {
     return <div className={`vieolo-nav-drawer`}>
         <div className={`vieolo-nav-drawer__drawer vieolo-nav-drawer__drawer--${props.state}`}>
@@ -36,7 +38,7 @@ export default function NavDrawer(props: {
 
                     {
                         (props.mainItems || []).map(z => {
-                            return <NavDrawerItem item={z} key={z.title} />
+                            return <NavDrawerItem item={z} key={z.title} paddingLeft={props.itemPaddingLeft} />
                         })
                     }
                 </Flex>
@@ -68,7 +70,7 @@ export default function NavDrawer(props: {
 }
 
 
-function NavDrawerItem(props: { item: DrawerItem }) {
+function NavDrawerItem(props: { item: DrawerItem, paddingLeft?: 'none' | 'half' | 'one' | 'two' }) {
     let t = <Flex alignItems="center" columnGap="one">
         {
             props.item.icon && props.item.icon
@@ -78,6 +80,8 @@ function NavDrawerItem(props: { item: DrawerItem }) {
     let c = `vieolo-nav-drawer__item vieolo-nav-drawer__item--${props.item.selected ? "selected" : "not-selected"}`
 
     c += ` vieolo-nav-drawer__item--${props.item.height || 'medium'}`
+
+    c += ` padding-left--${props.paddingLeft || 'two'}`
 
     if (props.item.newGroup) {
         c += ` margin-top--two `

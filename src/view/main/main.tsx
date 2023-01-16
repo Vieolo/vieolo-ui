@@ -261,6 +261,7 @@ export default function MainPage(props: {}): JSX.Element {
             logoRedirectURL: "/"
         }}
         drawer={{
+            itemPaddingLeft: 'one',
             topContent: <div className='padding--one'>
                 <Typography text='Vieolo UI' type='title-large' textAlign='center' />
                 <Spacer height='one' />
@@ -270,8 +271,9 @@ export default function MainPage(props: {}): JSX.Element {
                 { title: "Item One", icon: "+", href: "/" },
                 { title: "Item Two Large", icon: "X", height: 'large' },
                 { title: "Item Three Small", height: 'small' },
+                { title: "Item Three with icon", icon: <ArrowLeft />, height: 'small' },
                 { title: "Item Four", icon: "€", selected: true },
-                { title: "Another Group", selected: false, newGroup: true},
+                { title: "Another Group", selected: true, newGroup: true, icon: <ArrowLeft />},
             ],
             bottomItems: [
                 { title: "Bottom 1", height: 'small' },

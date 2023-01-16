@@ -3,17 +3,12 @@ import { useState } from 'react';
 
 // Vieolo UI
 import Navbar from '../NavBar';
-import NavDrawer, { DrawerItem } from '../NavDrawer';
+import NavDrawer from '../NavDrawer';
 
 // Types
 import { ElevationType } from "../types"
 
-export type PageFrameDrawerOptions = {
-    mainItems: DrawerItem[],
-    bottomItems?: DrawerItem[],
-    topContent?: React.ReactNode,
-    footPrint?: React.ReactNode,
-}
+export type PageFrameDrawerOptions = Omit<React.ComponentProps<typeof NavDrawer>, "state" | "onDrawerClose"> 
 
 export type PageFrameNavbarOptions = {
     elevation?: ElevationType,
@@ -61,11 +56,8 @@ export default function PageFrame(props: {
         {
             props.drawer &&
             <NavDrawer
-                state={drawerOpen ? "open" : 'closed'}
-                mainItems={props.drawer.mainItems}
-                bottomItems={props.drawer.bottomItems}
-                topContent={props.drawer.topContent}
-                footPrint={props.drawer.footPrint}
+                {...props.drawer}
+                state={drawerOpen ? "open" : 'closed'}                
                 onDrawerClose={() => setDrawerOpen(false)}
             />
         }
