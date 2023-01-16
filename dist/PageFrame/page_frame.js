@@ -13,5 +13,5 @@ export default function PageFrame(props) {
                         if ((_a = props.navbar) === null || _a === void 0 ? void 0 : _a.onDrawerButtonClicked)
                             props.navbar.onDrawerButtonClicked();
                     }, onSearchSubmit: props.navbar.onSearchSubmit, rightComponents: props.navbar.rightComponents, searchPlaceholder: props.navbar.searchPlaceholder, title: props.navbar.title, drawerState: drawerOpen ? 'open' : 'close' }), props.drawer &&
-                _jsx(NavDrawer, { state: drawerOpen ? "open" : 'closed', mainItems: props.drawer.mainItems, bottomItems: props.drawer.bottomItems, topContent: props.drawer.topContent, footPrint: props.drawer.footPrint, onDrawerClose: () => setDrawerOpen(false) }), props.children] });
+                _jsx(NavDrawer, { ...props.drawer, state: drawerOpen ? "open" : 'closed', onDrawerClose: () => setDrawerOpen(false) }), props.children] });
 }
