@@ -277,7 +277,7 @@ export default function MainPage(props: {}): JSX.Element {
             ],
             bottomItems: [
                 { title: "Bottom 1", height: 'small' },
-                { title: "Bottom 2", height: 'small' },
+                { title: "Bottom 2 with onClick", height: 'small', href: '/', onClick: () => {} },
             ],
             footPrint: <div>
                 <Divider direction='horizontal' thickness='1' colorType='light' length='pc-100' spaceAround='half' />

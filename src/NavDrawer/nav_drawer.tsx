@@ -38,7 +38,12 @@ export default function NavDrawer(props: {
 
                     {
                         (props.mainItems || []).map(z => {
-                            return <NavDrawerItem item={z} key={z.title} paddingLeft={props.itemPaddingLeft} />
+                            return <NavDrawerItem 
+                                key={z.title} 
+                                paddingLeft={props.itemPaddingLeft} 
+                                item={z} 
+                                onClickIntercepted={() => props.onDrawerClose()}
+                            />
                         })
                     }
                 </Flex>
@@ -46,7 +51,12 @@ export default function NavDrawer(props: {
                 <Flex direction="column">
                     {
                         (props.bottomItems || []).map(z => {
-                            return <NavDrawerItem item={z} key={z.title} />
+                            return <NavDrawerItem 
+                                key={z.title} 
+                                item={z} 
+                                paddingLeft={props.itemPaddingLeft} 
+                                onClickIntercepted={() => props.onDrawerClose()}
+                            />
                         })
                     }
                     {
@@ -70,7 +80,7 @@ export default function NavDrawer(props: {
 }
 
 
-function NavDrawerItem(props: { item: DrawerItem, paddingLeft?: 'none' | 'half' | 'one' | 'two' }) {
+function NavDrawerItem(props: { item: DrawerItem, paddingLeft?: 'none' | 'half' | 'one' | 'two', onClickIntercepted: () => void }) {
     let t = <Flex alignItems="center" columnGap="one">
         {
             props.item.icon && props.item.icon
@@ -97,6 +107,7 @@ function NavDrawerItem(props: { item: DrawerItem, paddingLeft?: 'none' | 'half' 
                     // The on click functionality will be handled by the implementor to prevent unnecessary reload of the page
                     e.preventDefault();
                     props.item.onClick();
+                    props.onClickIntercepted();
                 }
             }} 
         >
