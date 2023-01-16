@@ -1,12 +1,7 @@
 /// <reference types="react" />
-import { DrawerItem } from '../NavDrawer';
+import NavDrawer from '../NavDrawer';
 import { ElevationType } from "../types";
-export type PageFrameDrawerOptions = {
-    mainItems: DrawerItem[];
-    bottomItems?: DrawerItem[];
-    topContent?: React.ReactNode;
-    footPrint?: React.ReactNode;
-};
+export type PageFrameDrawerOptions = Omit<React.ComponentProps<typeof NavDrawer>, "state" | "onDrawerClose">;
 export type PageFrameNavbarOptions = {
     elevation?: ElevationType;
     logo?: React.ReactNode;

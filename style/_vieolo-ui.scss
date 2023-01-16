@@ -1648,7 +1648,7 @@ body {
 				background-color: $background-content-color;
 				z-index: 2;
 			}
-			
+
 			&--sticky-checked {
 				position: sticky;
 				z-index: 2;
@@ -2308,14 +2308,14 @@ body {
 
 .vieolo-checkbox {
 	width: $base-unit-two;
-	height: $base-unit-two;		
+	height: $base-unit-two;
 
 	&--square {
 		input {
 			border-radius: $base-unit-half;
 		}
 	}
-	
+
 	&--round {
 		input {
 			border-radius: 50%;
@@ -2336,18 +2336,18 @@ body {
 		margin: 0;
 		cursor: pointer;
 		background: transparent;
-		transition: background .3s, border-color .3s, box-shadow .2s;		
+		transition: background .3s, border-color .3s, box-shadow .2s;
 
 		&:focus {
 			outline: none;
-			box-shadow: 0px 0px 0px 3px $secondary-color-light;			
+			box-shadow: 0px 0px 0px 3px $secondary-color-light;
 		}
 
 		&::after {
 			content: '';
-			display: block;			
+			display: block;
 			position: absolute;
-			transition: transform .3s ease, opacity .2s;			
+			transition: transform .3s ease, opacity .2s;
 			width: $base-unit-half;
 			height: $base-unit;
 			border: 2px solid $neutral-color;
@@ -2355,7 +2355,7 @@ body {
 			border-left: 0;
 			left: $base-unit-half;
 			top: 10%;
-			transform: rotate(20deg);				
+			transform: rotate(20deg);
 			opacity: 0;
 		}
 
@@ -2366,7 +2366,7 @@ body {
 
 			&:after {
 				opacity: 1;
-				transform: rotate(43deg);				
+				transform: rotate(43deg);
 			}
 		}
 	}
@@ -2737,7 +2737,6 @@ body {
 		top: $navbar-height;
 		width: $drawer-width;
 		left: -$drawer-width;
-		;
 		bottom: 0px;
 		background-color: $background-content-color;
 		padding: 0px;
@@ -2777,7 +2776,6 @@ body {
 		align-items: center;
 		margin-left: 0px;
 		text-decoration: none;
-		padding-left: $base-unit-two;
 		cursor: pointer;
 		@include nonselectable;
 		@include transition;
@@ -2799,7 +2797,7 @@ body {
 		}
 
 		svg {
-			margin-left: 10px;
+			fill: $secondary-color-normal;
 		}
 
 		p {
@@ -2812,6 +2810,16 @@ body {
 			svg,
 			p {
 				color: $secondary-color-text;
+				fill: $secondary-color-text;
+			}
+
+			&:hover {
+
+				svg,
+				p {
+					color: $secondary-color-normal;
+					fill: $secondary-color-normal;
+				}
 			}
 		}
 	}

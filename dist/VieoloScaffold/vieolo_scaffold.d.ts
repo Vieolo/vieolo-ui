@@ -13,5 +13,6 @@ export default function VieoloScaffold(props: {
          */
         path: string;
         page: React.ReactNode;
+        key?: string;
     }[];
 }): JSX.Element;

@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.27.1 (2023-01-16)
+- Added control over left padding in the `NavDrawerItem`
+- Fixed the colors of the `NavDrawer`
+- Fixed the closure of the `NavDrawer` when both href and onclick are present
+
 ## 0.27.0 (2023-01-13)
 - Added shape type to the `Checkbox`
 

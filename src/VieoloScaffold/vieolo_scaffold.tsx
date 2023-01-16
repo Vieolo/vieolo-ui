@@ -16,7 +16,8 @@ export default function VieoloScaffold(props: {
          * ```
          */
         path: string,
-        page: React.ReactNode
+        page: React.ReactNode,
+        key?: string
     }[]
 }) {
     return <PageFrame
@@ -28,9 +29,9 @@ export default function VieoloScaffold(props: {
                 {
                     props.routes.map(r => {
                         if (r.path.includes("/:")) {
-                            return <Route path={r.path} component={r.page as any} key={r.path} />
+                            return <Route path={r.path} component={r.page as any} key={r.key || r.path} />
                         }
-                        return <Route path={r.path} key={r.path}>
+                        return <Route path={r.path} key={r.key || r.path}>
                             {r.page}
                         </Route>
                     })

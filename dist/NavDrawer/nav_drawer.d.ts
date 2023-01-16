@@ -15,4 +15,6 @@ export default function NavDrawer(props: {
     bottomItems?: DrawerItem[];
     onDrawerClose: () => void;
     footPrint?: React.ReactNode;
+    /** Defaults to two */
+    itemPaddingLeft?: 'none' | 'half' | 'one' | 'two';
 }): JSX.Element;
