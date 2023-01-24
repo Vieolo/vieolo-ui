@@ -73,25 +73,7 @@ body {
 		width: 100%;
 	}
 
-	&--border-radius-default {
-		border-radius: $border-radius-full;
-	}
-
-	&--border-radius-full {
-		border-radius: $border-radius-full;
-	}
-
-	&--border-radius-normal {
-		border-radius: $border-radius-normal;
-	}
-
-	&--border-radius-half {
-		border-radius: $border-radius-half;
-	}
-
-	&--border-radius-none {
-		border-radius: 0px;
-	}
+	@include borderRadiusMixin(border-radius, true, $border-radius-full);
 
 	span {
 		@include center-by-flex-row;
@@ -445,6 +427,16 @@ body {
 		outline: none;
 	}
 
+	&--large {
+		height: $row-height-large;
+		width: $row-height-large;
+
+		svg {
+			width: $row-height-small;
+			height: $row-height-small;
+		}
+	}
+	
 	&--medium {
 		height: $row-height-medium;
 		width: $row-height-medium;
@@ -3160,4 +3152,13 @@ body {
 		padding-left: $base-unit;
 		border-left: 1px solid $primary-color-normal;
 	}
+}
+
+
+.vieolo-floating-action-button {
+	position: fixed;
+	z-index: 10;
+	bottom: $base-unit-two;
+	right: $base-unit-two;
+	z-index: 9;
 }

@@ -26,6 +26,7 @@ import FileInput from './FileInput';
 import FileViewer from './FileViewer';
 import FileViewerFrame from './FileViewerFrame';
 import Flex from './Flex';
+import FloatingActionButton from './FloatingActionButton';
 import FormDialog from './FormDialog';
 import FormSection from './FormSection';
 import GanttChart from './GanttChart';
@@ -209,6 +210,7 @@ export {
 	FileViewer,
 	FileViewerFrame,
 	Flex,
+	FloatingActionButton,
 	FormDialog,
 	FormSection,
 	GanttChart,

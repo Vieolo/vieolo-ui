@@ -36,10 +36,7 @@ export function buttonOptions(): ViewData {
                 options: ['content', 'full'],
                 default: 'content'
             },
-            borderRadius: {
-                options: ['default', 'full', 'normal', 'half', 'none'],
-                default: 'default'
-            },
+            borderRadius: 'borderRadius',
             icon: {
                 options: ['None', 'Start', 'End'],
                 default: 'None'
