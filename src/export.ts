@@ -1,5 +1,6 @@
 // Imports
 import ActionCard from './ActionCard';
+import Anchor from './Anchor';
 import BackButton from './BackButton';
 import BackButtonRow from './BackButtonRow';
 import BarChart from './BarChart';
@@ -182,6 +183,7 @@ import {
 
 export {
 	ActionCard,
+	Anchor,
 	BackButton,
 	BackButtonRow,
 	BarChart,
