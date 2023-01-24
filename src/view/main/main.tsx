@@ -62,6 +62,7 @@ import { calendarStatisticOptions, CalendarStatisticCreator } from '../../Calend
 import { SelectSetCreator, selectSetOptions } from '../../SelectSet/select_set.view';
 import { NumberInputSetCreator, numberInputOptions } from '../../NumberInputSet/number_input_set.view';
 import { StringInputSetCreator, stringInputSetOptions } from '../../StringInputSet/string_input_set.view';
+import { FloatingActionButtonCreator, floatingActionButtonOptions } from '../../FloatingActionButton/floating_action_button.view';
 import { WalkthroughCreator, walkthroughOptions } from '../../Walkthrough/walkthrough.view';
 import Select from '../../Select';
 import SwitchRow from '../../SwitchRow';
@@ -110,6 +111,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator, group: "Buttons" },
         "Chip": { title: "Chip", data: chipOptions(), creator: ChipCreator, group: "Buttons" },
         "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator, group: "Buttons" },
+        "FAB": { title: "FAB", data: floatingActionButtonOptions(), creator: FloatingActionButtonCreator, group: "Buttons" },
 
         "Card": { title: "Card", data: cardOptions(), creator: CardCreator, group: "Cards" },
         "Action Card": { title: "Action Card", data: actionCardOptions(), creator: ActionCardCreator, group: "Cards" },

@@ -32,6 +32,10 @@ export function dividerOptions(): ViewData {
             position: {
                 options: ["start", "center", "end"],
                 default: "start"
+            },
+            thickness: {
+                options: ["1", "2", "half"],
+                default: "1"
             }
         }
     }
@@ -47,6 +51,7 @@ export function DividerCreator(props: {p: DividerPropsType}) {
             color={props.p.color}
             colorType={props.p.colorType}
             position={props.p.position}
+            thickness={props.p.thickness}
         />
     </div>
 }

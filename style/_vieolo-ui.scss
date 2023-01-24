@@ -3153,3 +3153,12 @@ body {
 		border-left: 1px solid $primary-color-normal;
 	}
 }
+
+
+.vieolo-floating-action-button {
+	position: fixed;
+	z-index: 10;
+	bottom: $base-unit-two;
+	right: $base-unit-two;
+	z-index: 9;
+}
