@@ -1,5 +1,6 @@
 // Imports
 import ActionCard from './ActionCard';
+import Anchor from './Anchor';
 import BackButton from './BackButton';
 import BackButtonRow from './BackButtonRow';
 import BarChart from './BarChart';
@@ -25,6 +26,7 @@ import FileInput from './FileInput';
 import FileViewer from './FileViewer';
 import FileViewerFrame from './FileViewerFrame';
 import Flex from './Flex';
+import FloatingActionButton from './FloatingActionButton';
 import FormDialog from './FormDialog';
 import FormSection from './FormSection';
 import GanttChart from './GanttChart';
@@ -75,4 +77,4 @@ import VideoViewer from './VideoViewer';
 import VieoloApp from './VieoloApp';
 import VieoloScaffold from './VieoloScaffold';
 import Walkthrough from './Walkthrough';
-export { ActionCard, BackButton, BackButtonRow, BarChart, Button, CalendarStateful, CalendarStateless, CalendarStatistic, Card, Checkbox, Chip, ClickableCard, ConfirmationDialog, ContextMenu, DateInput, DatePicker, DateTimePicker, Divider, DonutChart, DoubleToggleList, DropDownMenu, ExpandableCard, FileInput, FileViewer, FileViewerFrame, Flex, FormDialog, FormSection, GanttChart, Grid, GridContainer, GridThree, GridTwo, IconButton, ImagePicker, ImageViewer, Input, InputSet, ItemRow, List, Modal, Navbar, NavDrawer, NumberInput, NumberInputSet, PDFViewer, Page, PageFrame, PeriodSelector, PeriodOptions, RadioGroup, RadioGroupRow, Select, SelectRow, SelectSet, Spacer, Spinner, StringInput, StringInputSet, SubDashboard, SubNavbarRow, Switch, SwitchRow, TabRow, TabSwitch, Table, TableInteractive, Textarea, TextareaSet, TimeInput, TitlePeriodCard, TreeList, Typography, VideoViewer, VieoloApp, VieoloScaffold, Walkthrough, };
+export { ActionCard, Anchor, BackButton, BackButtonRow, BarChart, Button, CalendarStateful, CalendarStateless, CalendarStatistic, Card, Checkbox, Chip, ClickableCard, ConfirmationDialog, ContextMenu, DateInput, DatePicker, DateTimePicker, Divider, DonutChart, DoubleToggleList, DropDownMenu, ExpandableCard, FileInput, FileViewer, FileViewerFrame, Flex, FloatingActionButton, FormDialog, FormSection, GanttChart, Grid, GridContainer, GridThree, GridTwo, IconButton, ImagePicker, ImageViewer, Input, InputSet, ItemRow, List, Modal, Navbar, NavDrawer, NumberInput, NumberInputSet, PDFViewer, Page, PageFrame, PeriodSelector, PeriodOptions, RadioGroup, RadioGroupRow, Select, SelectRow, SelectSet, Spacer, Spinner, StringInput, StringInputSet, SubDashboard, SubNavbarRow, Switch, SwitchRow, TabRow, TabSwitch, Table, TableInteractive, Textarea, TextareaSet, TimeInput, TitlePeriodCard, TreeList, Typography, VideoViewer, VieoloApp, VieoloScaffold, Walkthrough, };

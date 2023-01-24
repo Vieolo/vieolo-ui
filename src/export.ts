@@ -1,5 +1,6 @@
 // Imports
 import ActionCard from './ActionCard';
+import Anchor from './Anchor';
 import BackButton from './BackButton';
 import BackButtonRow from './BackButtonRow';
 import BarChart from './BarChart';
@@ -25,6 +26,7 @@ import FileInput from './FileInput';
 import FileViewer from './FileViewer';
 import FileViewerFrame from './FileViewerFrame';
 import Flex from './Flex';
+import FloatingActionButton from './FloatingActionButton';
 import FormDialog from './FormDialog';
 import FormSection from './FormSection';
 import GanttChart from './GanttChart';
@@ -182,6 +184,7 @@ import {
 
 export {
 	ActionCard,
+	Anchor,
 	BackButton,
 	BackButtonRow,
 	BarChart,
@@ -207,6 +210,7 @@ export {
 	FileViewer,
 	FileViewerFrame,
 	Flex,
+	FloatingActionButton,
 	FormDialog,
 	FormSection,
 	GanttChart,

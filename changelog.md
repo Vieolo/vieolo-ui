@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.28.0 (2023-01-24)
+- Added the `Anchor` component ([#144](https://github.com/Vieolo/vieolo-ui/issues/144))
+- Made all of the props of `Divider` to be optional
+- Added the `FloatingActionButton` component
+- Added size large to `IconButton`
+- Improved the border radius of `Button`
+
+#### Breaking Changes
+- The default thickness of `Divider` is changed from `half` to `1`
+
 ## 0.27.1 (2023-01-16)
 - Added control over left padding in the `NavDrawerItem`
 - Fixed the colors of the `NavDrawer`
