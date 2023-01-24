@@ -23,7 +23,7 @@ export function iconButtonOptions(): ViewData {
             color: 'colors',
             emphasis: 'emphasis',
             size: {
-                options: ['medium', 'small', 'extra-small'],
+                options: ['large', 'medium', 'small', 'extra-small'],
                 default: 'medium'
             },
             borderRadius: 'borderRadius',
