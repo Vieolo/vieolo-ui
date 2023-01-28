@@ -2,6 +2,7 @@
 import Button from "../Button"
 import Divider, { DividerThickness } from "../Divider/divider"
 import Flex from "../Flex"
+import { EmphasisType } from "../types"
 
 // Types
 import { BorderRadiusType, ColorOptionSubType, ColorOptionType } from "../types/types"
@@ -21,6 +22,10 @@ export default function TabRow(props: {
     selectedUnderlineColor?: ColorOptionType,
     onItemSelect: (value: string) => void,
     selectedItem?: string,
+    /** @default `none-background */
+    normalTabEmphasis?: EmphasisType,
+    /** @default `none-background */
+    selectedTabEmphasis?: EmphasisType,
     /** 
      * Will only affect the selected tab
      * it is usefull when a tab is clicked and the data for the tab has to be feched
@@ -36,6 +41,11 @@ export default function TabRow(props: {
         <Flex columnGap="half" className="padding-horizontal--half overflow--hide-scrollbar" wrap="scroll">
             {
                 props.items.map((item, i) => {
+                    let isSelected = item.value === props.selectedItem;
+                    let emphasis: EmphasisType = 'none-background';
+                    if (isSelected && props.selectedTabEmphasis) emphasis = props.selectedTabEmphasis;
+                    else if (!isSelected && props.normalTabEmphasis) emphasis = props.normalTabEmphasis;
+                    
                     return <Flex
                         key={`${item.value} ${i}`}
                         direction='column'
@@ -51,17 +61,17 @@ export default function TabRow(props: {
                             color={props.tabColor}
                             endIcon={item.endIcon}
                             startIcon={item.startIcon}
-                            emphasis='none-background'
+                            emphasis={emphasis}
                             height={props.tabButtonHeight || 'small'}
                             isTransparent
-                            isLoading={item.value === props.selectedItem && props.isLoading}
+                            isLoading={isSelected && props.isLoading}
                             onClick={() => {
                                 props.onItemSelect(item.value);
                             }}
                         />
 
                         {
-                            item.value === props.selectedItem
+                            isSelected
                                 ? <Divider length="pc-100" thickness="2" color={props.selectedUnderlineColor || 'secondary'} direction='horizontal' colorType="normal" />
                                 : <div style={{height: "2px"}}></div>
                         }
