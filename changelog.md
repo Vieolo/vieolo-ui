@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.28.1 (2023-01-28)
+- Added emphasis to the `TabRow` buttons ([#279](https://github.com/Vieolo/vieolo-ui/issues/279))
+
 ## 0.28.0 (2023-01-24)
 - Added the `Anchor` component ([#144](https://github.com/Vieolo/vieolo-ui/issues/144))
 - Made all of the props of `Divider` to be optional
