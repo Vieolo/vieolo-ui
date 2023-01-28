@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { DividerThickness } from "../Divider/divider";
+import { EmphasisType } from "../types";
 import { BorderRadiusType, ColorOptionSubType, ColorOptionType } from "../types/types";
 export type TabRowItem = {
     text: string;
@@ -15,6 +16,10 @@ export default function TabRow(props: {
     selectedUnderlineColor?: ColorOptionType;
     onItemSelect: (value: string) => void;
     selectedItem?: string;
+    /** @default `none-background */
+    normalTabEmphasis?: EmphasisType;
+    /** @default `none-background */
+    selectedTabEmphasis?: EmphasisType;
     /**
      * Will only affect the selected tab
      * it is usefull when a tab is clicked and the data for the tab has to be feched
