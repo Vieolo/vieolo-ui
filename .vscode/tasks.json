@@ -4,7 +4,8 @@
         {
             "label": "Version Bump -- build",
             "type": "shell",
-            "command": "node",            
+            "command": "node",     
+            "icon": {"id": "chevron-up", "color": "terminal.ansiGreen"},       
             "args": [                
                 "version_bump.mjs",
                 "build"
@@ -18,6 +19,7 @@
             "label": "Version Bump -- minor",
             "type": "shell",
             "command": "node",
+            "icon": {"id": "fold-up", "color": "terminal.ansiGreen"},
             "args": [                
                 "version_bump.mjs",
                 "minor"
@@ -30,6 +32,7 @@
         {
             "label": "End 2 End Test",
             "dependsOrder": "parallel",
+            "icon": {"id": "beaker", "color": "terminal.ansiCyan"},
             "dependsOn": [
                 "Frontend Test Server",
                 "Cypress Test Server"

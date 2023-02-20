@@ -1,6 +1,7 @@
 // React
 import { useEffect } from "react";
-export function useAppearingContainer(container, open, setOpen, onClose) {
+export function useAppearingContainer(// internal
+container, open, setOpen, onClose) {
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (container.current && !container.current.contains(event.target)) {
