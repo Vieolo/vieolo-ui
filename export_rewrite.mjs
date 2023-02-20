@@ -156,7 +156,7 @@ export function rewriteExports() {
 
     let s = fs.readdirSync('./src/')
 
-    let unwanted = ["private", "icons", "utility", "view"];
+    let unwanted = ["private", "hooks", "icons", "utility", "view"];
 
     /** @type FileExport[] */
     let allEx = []

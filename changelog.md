@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.28.2 (2023-02-20)
+- Added `useStringInputState` hook
+- Added `useNumberInputState` hook
+
 ## 0.28.1 (2023-01-28)
 - Added emphasis to the `TabRow` buttons ([#279](https://github.com/Vieolo/vieolo-ui/issues/279))
 
