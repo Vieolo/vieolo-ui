@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.28.3 (2023-04-12)
+- Updated dependencies
+
 ## 0.28.2 (2023-02-20)
 - Added `useStringInputState` hook
 - Added `useNumberInputState` hook

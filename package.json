@@ -1,6 +1,6 @@
 {
   "name": "@vieolo/vieolo-ui",
-  "version": "0.28.2",
+  "version": "0.28.3",
   "private": true,
   "main": "dist/export.js",
   "author": {
@@ -47,12 +47,12 @@
     "@vieolo/device-js": "^0.1.6",
     "@vieolo/file-management": "github:Vieolo/file-management-js#0.2.11",
     "@vieolo/parsers": "github:Vieolo/parsers-js#0.2.4",
-    "@vieolo/validation-js": "github:Vieolo/validation-js#0.2.1",
+    "@vieolo/validation-js": "github:Vieolo/validation-js#0.3.0",
     "d3": "^7.6.1",
     "pdfjs-dist": "^2.9.359",
     "react-cropper": "^2.1.8",
-    "react-router-dom": "^5.2.0",
-    "react-redux": "8.0.5"
+    "react-redux": "8.0.5",
+    "react-router-dom": "^5.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
