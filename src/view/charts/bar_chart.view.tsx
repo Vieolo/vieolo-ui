@@ -64,6 +64,7 @@ export function BarChartCreator(props: { p: BarChartPropsType }) {
         title={(props.p as any).dataType}
         groupType={props.p.groupType}
         removeSpaceBetweenBars={props.p.removeSpaceBetweenBars}
+        // tickFormat={(props.p as any).customTickFormat ? ((t) => `${t}z`) : undefined}
         shortenTickText={(props.p as any).shortenTickText}
     />
 }

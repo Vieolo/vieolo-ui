@@ -48,7 +48,9 @@ export default function BarChart(props: {
     showInlineValue?: boolean,
     tickCount?: number,
     groupType?: 'stacked' | 'grouped',
-    removeSpaceBetweenBars?: boolean
+    removeSpaceBetweenBars?: boolean,
+    shortenTickText?: boolean,
+    tickFormat?: (t: string) => string,
 }) {
 
     let ref = useRef<HTMLDivElement>(null);
@@ -117,7 +119,13 @@ export default function BarChart(props: {
         // Selecting the HTML div
         d3.select(ref.current).html("");
 
-        let finalMargin = props.margin || { top: 30, right: 30, bottom: 70, left: 60 };
+        let longestReference = props.data.map(z => z.referenceAxis).sort((a, b) => b.length - a.length)[0].length;
+        let finalMargin = props.margin || { 
+            top: 20, 
+            right: 20, 
+            bottom: props.direction === 'vertical' ? (longestReference * 5) + 20 : 40, 
+            left: props.direction === 'horizontal' ? (longestReference * 5) + 20 : 40 
+        };
         let width = (ref.current ? ref.current.offsetWidth : 200) - finalMargin.left - finalMargin.right;
         let height = (props.height || (props.direction === 'vertical' ? props.data.length * 50 : 300)) - finalMargin.top - finalMargin.bottom;
         let finalData = props.data;
@@ -189,12 +197,17 @@ export default function BarChart(props: {
         // If the chart is very small and the values of the data are large, the ticks of the data axis can get cramped together
         // So, the implementor can set a maximum number of ticks to be displayed
         if (props.tickCount) {
-            if (props.direction === 'vertical') {
-                leftAxis.ticks(props.tickCount)
-            } else {
-                bottomAxis.ticks(props.tickCount);
-            }
+            (props.direction === 'vertical' ? leftAxis : bottomAxis).ticks(props.tickCount);
         }
+
+        if (props.tickFormat) {
+            (props.direction === 'vertical' ? leftAxis : bottomAxis).tickFormat((v, i) => `${props.tickFormat!(v.toString())}`)
+        } else if (props.shortenTickText) {
+            (props.direction === 'vertical' ? leftAxis : bottomAxis).tickFormat((v, i) => {
+                return new Intl.NumberFormat('en-US', { notation: 'compact' }).format(+v)
+            })
+        }
+
 
         svg.append("g").call(leftAxis);
 
@@ -358,7 +371,7 @@ export default function BarChart(props: {
 
 
 
-    }, [props, props.data, propsRef, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount, props.groupType, props.removeSpaceBetweenBars])
+    }, [props, props.data, propsRef, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount, props.groupType, props.removeSpaceBetweenBars, props.tickFormat, props.shortenTickText])
 
 
 
