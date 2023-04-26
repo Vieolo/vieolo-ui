@@ -383,6 +383,7 @@ export default function MainPage(props: {}): JSX.Element {
                             return <div key={k} className="margin-bottom--one">
                                 <Select
                                     error={false}
+                                    width='full'
                                     items={variable.options.map(o => {
                                         return {
                                             title: o,

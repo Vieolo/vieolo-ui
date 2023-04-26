@@ -31,6 +31,7 @@ export function barChartOptions(): ViewData {
                 options: ["grouped", "stacked"],
                 default: "stacked"
             },
+            fixedHeight: 'boolean',
             sorted: 'boolean',
             showInlineValue: 'booleanTrueDefault',
             removeSpaceBetweenBars: 'boolean'
@@ -49,7 +50,7 @@ export function BarChartCreator(props: { p: BarChartPropsType }) {
     }
 
     return <BarChart
-        height={400}
+        height={(props.p as any).fixedHeight ? 400 : undefined}
         // tickCount={5}
         direction={props.p.direction}
         sorted={props.p.sorted}

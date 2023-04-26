@@ -43,7 +43,7 @@ export default function BarChart(props: {
     sorted?: boolean,
     data: (BarChartData | StackedBarChartData)[],
     ignoreNegativeValues?: boolean,
-    height: number,
+    height?: number,
     margin?: { top: number, right: number, bottom: number, left: number },
     showInlineValue?: boolean,
     tickCount?: number,
@@ -119,7 +119,7 @@ export default function BarChart(props: {
 
         let finalMargin = props.margin || { top: 30, right: 30, bottom: 70, left: 60 };
         let width = (ref.current ? ref.current.offsetWidth : 200) - finalMargin.left - finalMargin.right;
-        let height = props.height - finalMargin.top - finalMargin.bottom;
+        let height = (props.height || (props.direction === 'vertical' ? props.data.length * 50 : 300)) - finalMargin.top - finalMargin.bottom;
         let finalData = props.data;
 
         // If the bar uses a `StackedBarChartData`, the total of each item is added to it manually
