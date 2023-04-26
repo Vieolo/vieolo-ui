@@ -125,8 +125,8 @@ export default function BarChart(props: {
             props.data.map(z => z.referenceAxis).sort((a, b) => b.length - a.length)[0].length
         ].filter(Number))
         let finalMargin = props.margin || { 
-            top: 20, 
-            right: 20, 
+            top: 40,
+            right: 30, 
             bottom: props.direction === 'vertical' ? (longestReference * 3.5) + 20 : 40, 
             left: props.direction === 'horizontal' ? (longestReference * 5) + 20 : 50 
         };
@@ -262,6 +262,7 @@ export default function BarChart(props: {
                     if (isVertical) return height - dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
                     else return dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin)
                 })
+                .attr("rx", 2)
                 // .delay((d, i) => { return i * 20 })            
 
         } else {
