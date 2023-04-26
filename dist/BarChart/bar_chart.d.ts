@@ -29,7 +29,7 @@ export default function BarChart(props: {
     sorted?: boolean;
     data: (BarChartData | StackedBarChartData)[];
     ignoreNegativeValues?: boolean;
-    height: number;
+    height?: number;
     margin?: {
         top: number;
         right: number;
@@ -40,4 +40,7 @@ export default function BarChart(props: {
     tickCount?: number;
     groupType?: 'stacked' | 'grouped';
     removeSpaceBetweenBars?: boolean;
+    shortenTickText?: boolean;
+    tickFormat?: (t: string) => string;
+    maxRefLength?: number;
 }): JSX.Element;

@@ -9,7 +9,7 @@ export default function Chip(props) {
     if (props.disabled)
         c += " disabled";
     c += getEmphasisClasses(props.selected ? 'high' : e, color, {
-        hasRipple: true,
+        hasRipple: props.onChipSelect !== undefined,
         hoverable: props.onChipSelect ? true : false,
         transparentBackground: props.isTransparent
     });

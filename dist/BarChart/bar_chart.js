@@ -57,9 +57,18 @@ export default function BarChart(props) {
         // 7. Bar sized are adjusted
         // Selecting the HTML div
         d3.select(ref.current).html("");
-        let finalMargin = props.margin || { top: 30, right: 30, bottom: 70, left: 60 };
+        let longestReference = Math.min.apply(Math, [
+            (props.maxRefLength || 0),
+            props.data.map(z => z.referenceAxis).sort((a, b) => b.length - a.length)[0].length
+        ].filter(Number));
+        let finalMargin = props.margin || {
+            top: 40,
+            right: 30,
+            bottom: props.direction === 'vertical' ? (longestReference * 3.5) + 20 : 40,
+            left: props.direction === 'horizontal' ? (longestReference * 5) + 20 : 50
+        };
         let width = (ref.current ? ref.current.offsetWidth : 200) - finalMargin.left - finalMargin.right;
-        let height = props.height - finalMargin.top - finalMargin.bottom;
+        let height = (props.height || (props.direction === 'vertical' ? props.data.length * 50 : 300)) - finalMargin.top - finalMargin.bottom;
         let finalData = props.data;
         // If the bar uses a `StackedBarChartData`, the total of each item is added to it manually
         if (ct === 'stacked')
@@ -112,10 +121,28 @@ export default function BarChart(props) {
         // Left Axis
         // In a vertical chart, this is the data axis
         let leftAxis = d3.axisLeft(props.direction === 'vertical' ? dataAxis : refAxis);
+        // Left Axis
+        // In a vertical chart, this is the data axis
+        let bottomAxis = d3.axisBottom(props.direction === 'vertical' ? refAxis : dataAxis);
         // If the chart is very small and the values of the data are large, the ticks of the data axis can get cramped together
         // So, the implementor can set a maximum number of ticks to be displayed
         if (props.tickCount) {
-            leftAxis.ticks(props.tickCount);
+            (props.direction === 'vertical' ? leftAxis : bottomAxis).ticks(props.tickCount);
+        }
+        if (props.tickFormat) {
+            (props.direction === 'vertical' ? leftAxis : bottomAxis).tickFormat((v, i) => `${props.tickFormat(v.toString())}`);
+        }
+        else if (props.shortenTickText) {
+            (props.direction === 'vertical' ? leftAxis : bottomAxis).tickFormat((v, i) => {
+                return new Intl.NumberFormat('en-US', { notation: 'compact' }).format(+v);
+            });
+        }
+        if (props.maxRefLength) {
+            (props.direction === 'vertical' ? bottomAxis : leftAxis).tickFormat((v, i) => {
+                if (v.toString().length <= props.maxRefLength)
+                    return `${v}`;
+                return `${v.toString().substring(0, props.maxRefLength)}`;
+            });
         }
         svg.append("g").call(leftAxis);
         // Bottom axis
@@ -123,7 +150,7 @@ export default function BarChart(props) {
         svg
             .append("g")
             .attr("transform", `translate(0, ${height})`)
-            .call(d3.axisBottom(props.direction === 'vertical' ? refAxis : dataAxis))
+            .call(bottomAxis)
             .selectAll("text")
             .attr("transform", "translate(-10,0)rotate(-45)") // The text displayed in the ref axis is rotated to avoid overlap of long texts
             .style("text-anchor", "end");
@@ -157,7 +184,8 @@ export default function BarChart(props) {
                     return height - dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin);
                 else
                     return dataAxis((axisMin < 0 && d.dataAxis < 0) ? axisMin - d.dataAxis : d.dataAxis + axisMin);
-            });
+            })
+                .attr("rx", 2);
             // .delay((d, i) => { return i * 20 })            
         }
         else {
@@ -265,7 +293,7 @@ export default function BarChart(props) {
                 }
             });
         }
-    }, [props, props.data, propsRef, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount, props.groupType, props.removeSpaceBetweenBars]);
+    }, [props, props.data, propsRef, props.height, props.showInlineValue, props.margin, props.direction, props.sorted, props.tickCount, props.groupType, props.removeSpaceBetweenBars, props.tickFormat, props.shortenTickText]);
     return _jsxs("div", { className: 'vieolo-bar-chart width--pc-100 height--pc-100', children: [(props.title || (props.data.length > 0 && typeof props.data[0].dataAxis !== 'number')) &&
                 _jsxs(GridContainer, { children: [_jsx(Grid, { xl: 6, children: _jsx(Typography, { text: props.title || '', type: 'title-medium' }) }), _jsx(Grid, { xl: 6, children: (props.data.length > 0 && typeof props.data[0].dataAxis !== 'number') &&
                                 _jsx(Flex, { columnGap: 'one', wrap: 'wrap', justifyContent: 'end', children: Object.keys(props.data[0].dataAxis).map((c, i) => {

@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.28.4 (2023-04-26)
+- Added max ref count to `BarChart` ([#209](https://github.com/Vieolo/vieolo-ui/issues/209))
+- Fixed the tick frequency of `BarChart` ([#210](https://github.com/Vieolo/vieolo-ui/issues/210))
+- Adjusted the text of Select to its size ([#281](https://github.com/Vieolo/vieolo-ui/issues/281))
+- Removed the splash of `Chip` when no click callback is provided ([#288](https://github.com/Vieolo/vieolo-ui/issues/288))
+- Fixed the max width of `FormDialog` ([#290](https://github.com/Vieolo/vieolo-ui/issues/290))
+- Made the hight of `BarChart` optional
+
 ## 0.28.3 (2023-04-12)
 - Updated dependencies
 
