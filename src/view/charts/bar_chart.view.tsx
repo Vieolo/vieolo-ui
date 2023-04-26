@@ -39,7 +39,8 @@ export function barChartOptions(): ViewData {
             sorted: 'boolean',
             showInlineValue: 'booleanTrueDefault',
             removeSpaceBetweenBars: 'boolean',
-            shortenTickText: 'boolean'
+            shortenTickText: 'boolean',
+            withMaxLentghRef: 'boolean',
         }
     }
 }
@@ -66,5 +67,6 @@ export function BarChartCreator(props: { p: BarChartPropsType }) {
         removeSpaceBetweenBars={props.p.removeSpaceBetweenBars}
         // tickFormat={(props.p as any).customTickFormat ? ((t) => `${t}z`) : undefined}
         shortenTickText={(props.p as any).shortenTickText}
+        maxRefLength={(props.p as any).withMaxLentghRef ? 7 : undefined}
     />
 }

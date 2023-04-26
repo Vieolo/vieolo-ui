@@ -25,6 +25,16 @@ export let populationData: BarChartData[] = [ // internal
         dataDisplay: "10,400,000"
     },
     {
+        referenceAxis: 'Bosnia and Herzegovina',
+        dataAxis: 3_300_000,
+        dataDisplay: "3,300,000"
+    },
+    {
+        referenceAxis: 'Dominican Republic',
+        dataAxis: 10_900_000,
+        dataDisplay: "10,900,000"
+    },
+    {
         referenceAxis: 'Norway',
         dataAxis: 5_400_000,
         dataDisplay: "5,400,000"

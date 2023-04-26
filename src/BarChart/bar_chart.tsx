@@ -51,6 +51,7 @@ export default function BarChart(props: {
     removeSpaceBetweenBars?: boolean,
     shortenTickText?: boolean,
     tickFormat?: (t: string) => string,
+    maxRefLength?: number
 }) {
 
     let ref = useRef<HTMLDivElement>(null);
@@ -119,12 +120,15 @@ export default function BarChart(props: {
         // Selecting the HTML div
         d3.select(ref.current).html("");
 
-        let longestReference = props.data.map(z => z.referenceAxis).sort((a, b) => b.length - a.length)[0].length;
+        let longestReference = Math.min.apply(Math, [
+            (props.maxRefLength || 0),
+            props.data.map(z => z.referenceAxis).sort((a, b) => b.length - a.length)[0].length
+        ].filter(Number))
         let finalMargin = props.margin || { 
             top: 20, 
             right: 20, 
-            bottom: props.direction === 'vertical' ? (longestReference * 5) + 20 : 40, 
-            left: props.direction === 'horizontal' ? (longestReference * 5) + 20 : 40 
+            bottom: props.direction === 'vertical' ? (longestReference * 3.5) + 20 : 40, 
+            left: props.direction === 'horizontal' ? (longestReference * 5) + 20 : 50 
         };
         let width = (ref.current ? ref.current.offsetWidth : 200) - finalMargin.left - finalMargin.right;
         let height = (props.height || (props.direction === 'vertical' ? props.data.length * 50 : 300)) - finalMargin.top - finalMargin.bottom;
@@ -205,6 +209,13 @@ export default function BarChart(props: {
         } else if (props.shortenTickText) {
             (props.direction === 'vertical' ? leftAxis : bottomAxis).tickFormat((v, i) => {
                 return new Intl.NumberFormat('en-US', { notation: 'compact' }).format(+v)
+            })
+        }
+
+        if (props.maxRefLength) {
+            (props.direction === 'vertical' ? bottomAxis : leftAxis).tickFormat((v, i) => {
+                if (v.toString().length <= props.maxRefLength!) return `${v}`;
+                return `${v.toString().substring(0, props.maxRefLength)}` 
             })
         }
 
