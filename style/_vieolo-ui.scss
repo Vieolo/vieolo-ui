@@ -532,10 +532,11 @@ body {
 			justify-content: center;
 			display: flex;
 			flex-flow: column;
-			width: 120px;
+			width: calc(100% - 30px);
 
 			&__button-title {
 				margin: 0;
+				@include no-text-overflow;
 			}
 
 			&__button-value {
@@ -1454,7 +1455,7 @@ body {
 .vieolo-form-dialog {
 	background-color: white;
 	border-radius: $base-unit-half;
-	max-width: 94vw;
+	max-width: 96vw;
 	max-height: 90vh;
 	overflow-y: scroll;
 	$self: &;
