@@ -31,10 +31,15 @@ export function barChartOptions(): ViewData {
                 options: ["grouped", "stacked"],
                 default: "stacked"
             },
+            tickCount: {
+                options: ["default", "5"],
+                default: "default"
+            },
             fixedHeight: 'boolean',
             sorted: 'boolean',
             showInlineValue: 'booleanTrueDefault',
-            removeSpaceBetweenBars: 'boolean'
+            removeSpaceBetweenBars: 'boolean',
+            shortenTickText: 'boolean'
         }
     }
 }
@@ -51,7 +56,7 @@ export function BarChartCreator(props: { p: BarChartPropsType }) {
 
     return <BarChart
         height={(props.p as any).fixedHeight ? 400 : undefined}
-        // tickCount={5}
+        tickCount={(props.p as any).tickCount === "default" ? undefined : +(props.p as any).tickCount}
         direction={props.p.direction}
         sorted={props.p.sorted}
         data={dataTypes[(props.p as any).dataType]}
@@ -59,5 +64,6 @@ export function BarChartCreator(props: { p: BarChartPropsType }) {
         title={(props.p as any).dataType}
         groupType={props.p.groupType}
         removeSpaceBetweenBars={props.p.removeSpaceBetweenBars}
+        shortenTickText={(props.p as any).shortenTickText}
     />
 }

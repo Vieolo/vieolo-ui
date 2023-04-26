@@ -182,10 +182,18 @@ export default function BarChart(props: {
         // In a vertical chart, this is the data axis
         let leftAxis = d3.axisLeft(props.direction === 'vertical' ? dataAxis : refAxis as any)
 
+        // Left Axis
+        // In a vertical chart, this is the data axis
+        let bottomAxis = d3.axisBottom(props.direction === 'vertical' ? refAxis : dataAxis as any)
+
         // If the chart is very small and the values of the data are large, the ticks of the data axis can get cramped together
         // So, the implementor can set a maximum number of ticks to be displayed
         if (props.tickCount) {
-            leftAxis.ticks(props.tickCount)
+            if (props.direction === 'vertical') {
+                leftAxis.ticks(props.tickCount)
+            } else {
+                bottomAxis.ticks(props.tickCount);
+            }
         }
 
         svg.append("g").call(leftAxis);
@@ -196,7 +204,7 @@ export default function BarChart(props: {
         svg
             .append("g")
             .attr("transform", `translate(0, ${height})`)
-            .call(d3.axisBottom(props.direction === 'vertical' ? refAxis : dataAxis as any))
+            .call(bottomAxis)
             .selectAll("text")
             .attr("transform", "translate(-10,0)rotate(-45)") // The text displayed in the ref axis is rotated to avoid overlap of long texts
             .style("text-anchor", "end");
