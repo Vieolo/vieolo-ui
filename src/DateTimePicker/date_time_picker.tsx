@@ -4,7 +4,7 @@ import DatePicker from "../DatePicker";
 import TimeInput from "../TimeInput";
 
 // Installed Packages
-import VDate from "@vieolo/date";
+import VDate from "@vieolo/vdate";
 
 // Material UI
 import CalendarIcon from '@mui/icons-material/DateRangeRounded';

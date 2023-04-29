@@ -7,7 +7,7 @@ import IconTwo from '@mui/icons-material/Backup';
 import IconThree from '@mui/icons-material/Cake';
 
 // Installed Packages
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 
 // Component
 import GanttChart, { GanttChartColumnGroup, GanttChartColumnTitle, GanttChartRowType, GanttChartItemType } from '../../GanttChart';

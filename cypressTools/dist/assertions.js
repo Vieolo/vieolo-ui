@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // Constants
 const constants_1 = require("./constants");
 // Installed Packages
-const date_1 = __importDefault(require("@vieolo/date"));
+const vdate_1 = __importDefault(require("@vieolo/vdate"));
 class Assertions {
     static assertInputInErrorMode(selector, expectedColor) {
         cy.get(selector).should('have.css', 'border-color').and('eq', expectedColor || constants_1.E2EColors.ERROR_COLOR_NORMAL);
@@ -21,7 +21,7 @@ class Assertions {
         cy.location().its('pathname').should('eq', finalPath);
     }
     static assertDatePickerSelectedDate(label, expectedDate) {
-        cy.getByAriaLabel(`${label} button`).contains((typeof expectedDate === 'string' ? new date_1.default(expectedDate) : expectedDate).formatDate('dd/mm/yyyy'));
+        cy.getByAriaLabel(`${label} button`).contains((typeof expectedDate === 'string' ? new vdate_1.default(expectedDate) : expectedDate).formatDate('dd/mm/yyyy'));
     }
     static assertSnackbar(options) {
         let snackbar = cy.get(".snackbar");

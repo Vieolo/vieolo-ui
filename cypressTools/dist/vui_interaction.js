@@ -4,18 +4,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 // Installed Packages
-const date_1 = __importDefault(require("@vieolo/date"));
+const vdate_1 = __importDefault(require("@vieolo/vdate"));
 class VieoloUIInteraction {
     static selectDateFromDateTimePicker(label, targetDate, time) {
         cy.get(`[aria-label='${label} Date button']`).focus().type('{enter}');
-        cy.get(`[aria-label='${label} Date Search Date']`).focus().type(`${(typeof targetDate === 'string' ? new date_1.default(targetDate) : targetDate).formatDate('dd/mm/yyyy')}{enter}`);
+        cy.get(`[aria-label='${label} Date Search Date']`).focus().type(`${(typeof targetDate === 'string' ? new vdate_1.default(targetDate) : targetDate).formatDate('dd/mm/yyyy')}{enter}`);
         if (time) {
             cy.getByAriaLabel(`${label} Time`).clear().type(time);
         }
     }
     static selectDateFromDatePicker(label, targetDate) {
         cy.get(`[aria-label='${label} button']`).focus().type('{enter}');
-        cy.get(`[aria-label='${label} Search Date']`).focus().type(`${(typeof targetDate === 'string' ? new date_1.default(targetDate) : targetDate).formatDate('dd/mm/yyyy')}{enter}`);
+        cy.get(`[aria-label='${label} Search Date']`).focus().type(`${(typeof targetDate === 'string' ? new vdate_1.default(targetDate) : targetDate).formatDate('dd/mm/yyyy')}{enter}`);
     }
     static ganttGetAllRow() {
         return cy.get(this.GANTT_ROW_CLASS);
