@@ -9,7 +9,7 @@ import Typography from '../../Typography';
 import { ViewData } from '../main/main';
 
 // Installed Packages
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 
 type DateInputPropsType = React.ComponentProps<typeof DateInput>;
 

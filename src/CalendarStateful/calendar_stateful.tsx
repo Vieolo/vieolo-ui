@@ -10,7 +10,7 @@ import NextIcon from '@mui/icons-material/ArrowForwardIosRounded';
 
 
 // Installed Packages
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 
 
 // Internal Components

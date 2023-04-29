@@ -11,7 +11,7 @@ import DropDownMenu from '../DropDownMenu/dropdown_menu';
 
 
 // Installed Packages
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 
 
 

@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 export default class VieoloUIInteraction {
     static GANTT_ROW_CLASS: string;
     static selectDateFromDateTimePicker(label: string, targetDate: VDate | string, time?: string): void;
