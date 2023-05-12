@@ -4,7 +4,7 @@ import InputSet from "../InputSet/input_set"
 // "@vieolo/vieolo-ui/dist/date_picker"
 
 // Installed Packages
-import VDate from "@vieolo/date"
+import VDate from "@vieolo/vdate"
 import { dateDDMMYYYY } from '@vieolo/regex-library';
 
 

@@ -6,7 +6,7 @@ import TableInteractive, { TableInteractiveCell } from '../../TableInteractive';
 
 // Types
 import { ViewData } from '../main/main';
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 import Card from '../../Card';
 
 type TableInteractivePropsType = React.ComponentProps<typeof TableInteractive>;
@@ -29,11 +29,13 @@ export function tableInteractiveOptions(): ViewData {
 
 export function TableInteractiveCreator(props: {p: TableInteractivePropsType}) {
 
-    let [data, setData] = useState<{id: number, date: string, price: number, item: string, group?: number}[]>([]);
+    type td = {id: number, date: string, price: number, item: string, group?: number};
+
+    let [data, setData] = useState<td[]>([]);
 
 
     useEffect(() => {
-        let x = [];
+        let x: td[] = [];
         for (let i = 0; i < 40; i++) {
             x.push({
                 id: i,

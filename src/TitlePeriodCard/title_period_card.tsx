@@ -9,7 +9,7 @@ import IconButton from "../IconButton";
 import { ArrowDown ,ArrowUp } from "../icons";
 
 // Installed Packages
-import VDate from "@vieolo/date";
+import VDate from "@vieolo/vdate";
 
 // Types
 import { BorderRadiusType, CardExtraActionType, ColorOptionType, ElevationType } from "../types/types";

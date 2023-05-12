@@ -1,4 +1,4 @@
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 export default class Assertions {
     static assertInputInErrorMode(selector: string, expectedColor?: string): void;
     static assertInputInNormalMode(selector: string, expectedColor?: string): void;

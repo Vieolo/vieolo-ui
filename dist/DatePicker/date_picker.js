@@ -4,7 +4,7 @@ import { useState, useRef } from 'react';
 // Material UI
 import CalendarIcon from '@mui/icons-material/DateRangeRounded';
 // Installed Packages
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 import Device from '@vieolo/device-js';
 // Vieolo UI
 import CalendarStateful from '../CalendarStateful';

@@ -1,5 +1,5 @@
 // React
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 import React, { useState } from 'react';
 
 // Component

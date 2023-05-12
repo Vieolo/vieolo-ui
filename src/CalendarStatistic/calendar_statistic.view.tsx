@@ -7,7 +7,7 @@ import CalendarStatistic from './calendar_statistic';
 
 // Types
 import { ViewData } from '../view/main/main';
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 import Card from '../Card';
 
 type CalendarStatisticPropsType = React.ComponentProps<typeof CalendarStatistic>;

@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 export default function CalendarStateless(props: {
     includeWeek?: boolean;
     selectedWeek?: number[];

@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import VDate from "@vieolo/date";
+import VDate from "@vieolo/vdate";
 import { BorderRadiusType, CardExtraActionType, ColorOptionType, ElevationType } from "../types/types";
 export default function TitlePeriodCard(props: {
     /**

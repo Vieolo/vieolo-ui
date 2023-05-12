@@ -1,5 +1,5 @@
 import React from 'react';
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 export default function DatePicker(props: {
     /**
      * The custom date picker button to be rendered instead of the default button.

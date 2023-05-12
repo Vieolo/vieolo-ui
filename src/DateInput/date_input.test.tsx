@@ -1,8 +1,8 @@
 // Components
-import { parseInputDateToVDate } from '.';
+import { parseInputDateToVDate } from './date_input';
 
 // Installed Package
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 
 
 describe("DateInput", () => {

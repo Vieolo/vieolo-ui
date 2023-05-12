@@ -2,7 +2,7 @@
 import { E2EColors } from './constants';
 
 // Installed Packages
-import VDate from '@vieolo/date'
+import VDate from '@vieolo/vdate'
 
 export default class Assertions {
     static assertInputInErrorMode(selector: string, expectedColor?: string) {

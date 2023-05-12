@@ -1,5 +1,5 @@
 // Installed Packages
-import VDate from '@vieolo/date'
+import VDate from '@vieolo/vdate'
 
 export default class VieoloUIInteraction {
     static GANTT_ROW_CLASS = '.vieolo-gantt-chart__content-div__row';

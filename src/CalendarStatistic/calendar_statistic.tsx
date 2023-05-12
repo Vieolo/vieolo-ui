@@ -13,7 +13,7 @@ import Typography from '../Typography';
 import Card from '../Card';
 
 // Installed Packages
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 import { toFixed } from '@vieolo/parsers/number_parsers';
 
 // Types
