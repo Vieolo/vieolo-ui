@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.28.5 (2023-05-12)
+- Updated dependencies
+
 ## 0.28.4 (2023-04-26)
 - Added max ref count to `BarChart` ([#209](https://github.com/Vieolo/vieolo-ui/issues/209))
 - Fixed the tick frequency of `BarChart` ([#210](https://github.com/Vieolo/vieolo-ui/issues/210))

@@ -3,7 +3,7 @@ import { jsx as _jsx } from "react/jsx-runtime";
 import InputSet from "../InputSet/input_set";
 // "@vieolo/vieolo-ui/dist/date_picker"
 // Installed Packages
-import VDate from "@vieolo/date";
+import VDate from "@vieolo/vdate";
 import { dateDDMMYYYY } from '@vieolo/regex-library';
 export default function DateInput(props) {
     return _jsx(InputSet, { label: props.label || '', ariaLabel: props.ariaLabel || props.label, disabled: props.disabled, tip: props.tip, autoFocus: props.autoFocus, error: parseInputDateToVDate(props.value) === null, onKeyDown: props.onKeyDown, onChange: v => {

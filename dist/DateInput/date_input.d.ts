@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import VDate from "@vieolo/date";
+import VDate from "@vieolo/vdate";
 export default function DateInput(props: {
     value: string;
     onChange: (date: VDate | null, text: string) => void;

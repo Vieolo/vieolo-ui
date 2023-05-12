@@ -8,7 +8,7 @@ import Typography from '../Typography';
 import IconButton from '../IconButton';
 import DropDownMenu from '../DropDownMenu/dropdown_menu';
 // Installed Packages
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 export var PeriodOptions;
 (function (PeriodOptions) {
     PeriodOptions["day"] = "Day";

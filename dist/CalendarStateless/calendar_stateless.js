@@ -1,6 +1,6 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 // Installed Packages
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 export default function CalendarStateless(props) {
     let today = new VDate();
     let startDate = new VDate(props.currentDate).setToMonthStart().getWeek().start;

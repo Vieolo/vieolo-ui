@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 import { ColorOptionType } from '../types';
 export type CalendarStatisticData = {
     [day: string]: {

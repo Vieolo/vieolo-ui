@@ -8,7 +8,7 @@ import IconButton from "../IconButton";
 // Icons
 import { ArrowDown, ArrowUp } from "../icons";
 // Installed Packages
-import VDate from "@vieolo/date";
+import VDate from "@vieolo/vdate";
 import { useState } from "react";
 export default function TitlePeriodCard(props) {
     let [state, setState] = useState(props.initialState);

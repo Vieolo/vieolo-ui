@@ -1,5 +1,5 @@
 /// <reference types="react" />
-import VDate from '@vieolo/date';
+import VDate from '@vieolo/vdate';
 export declare enum PeriodOptions {
     day = "Day",
     week = "Week",
