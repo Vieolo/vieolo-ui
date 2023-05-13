@@ -230,12 +230,12 @@ export default function MainPage(props: {}): JSX.Element {
                 }
             } else if (variable === 'colors') {
                 finalVariable = {
-                    options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'],
+                    options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary', 'neutral'],
                     default: 'primary'
                 }
             } else if (variable === 'colorsOptional') {
                 finalVariable = {
-                    options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'],
+                    options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary', 'neutral'],
                     default: ''
                 }
             } else if (variable === 'fontWeightOptional') {
@@ -357,12 +357,12 @@ export default function MainPage(props: {}): JSX.Element {
                             }
                         } else if (tempVariable === 'colors') {
                             variable = {
-                                options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
+                                options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'neutral', 'accessory-blue', 'accessory-green', 'accessory-orange'],
                                 default: 'primary'
                             }
                         } else if (tempVariable === 'colorsOptional') {
                             variable = {
-                                options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'accessory-blue', 'accessory-green', 'accessory-orange'],
+                                options: ['primary', 'secondary', 'tertiary', 'success', 'alert', 'error', 'neutral', 'accessory-blue', 'accessory-green', 'accessory-orange'],
                                 default: ''
                             }
                         } else if (tempVariable === 'fontWeightOptional') {

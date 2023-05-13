@@ -1,5 +1,15 @@
 # Change Log
 
+## 0.29.0 (2023-05-13)
+- Added `nuetral` color group ([#273](https://github.com/Vieolo/vieolo-ui/issues/273))
+- Added on click for the `BarChart` ([#294](https://github.com/Vieolo/vieolo-ui/issues/294))
+- Fixed the default height of the `BarChart` ([#295](https://github.com/Vieolo/vieolo-ui/issues/295))
+- Fixed the button size of `TabRow` with long texts ([#296](https://github.com/Vieolo/vieolo-ui/issues/296))
+- Improved the display of inline values in `BarChart`
+
+#### Breaking Changes
+- Removed `neutral-color` variable in SCSS. The same value can be found as `neutral-color-light`
+
 ## 0.28.5 (2023-05-12)
 - Updated dependencies
 

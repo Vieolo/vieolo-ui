@@ -3,8 +3,8 @@ import { BarChartData, StackedBarChartData } from "../../BarChart"
 export let populationData: BarChartData[] = [ // internal
     {
         referenceAxis: 'Germany',
-        dataAxis: 80_000_000,        
-        dataDisplay: "80,000,000.00",
+        dataAxis: 84_270_000,        
+        dataDisplay: "84,270,000.00",
         fillColor: 'primary'
     },
     {
@@ -14,9 +14,21 @@ export let populationData: BarChartData[] = [ // internal
         fillColor: 'secondary'
     },
     {
+        referenceAxis: 'Italy',
+        dataAxis: 58_810_000,
+        dataDisplay: "58,810,000",
+        fillColor: 'alert'
+    },
+    {
+        referenceAxis: 'Canada',
+        dataAxis: 39_890_000,
+        dataDisplay: "39,890,000",
+        fillColor: 'alert'
+    },
+    {
         referenceAxis: 'Denmark',
-        dataAxis: 5_000_000,
-        dataDisplay: "5,000,000",
+        dataAxis: 5_940_000,
+        dataDisplay: "5,940,000",
         fillColor: 'alert'
     },
     {
@@ -33,6 +45,11 @@ export let populationData: BarChartData[] = [ // internal
         referenceAxis: 'Dominican Republic',
         dataAxis: 10_900_000,
         dataDisplay: "10,900,000"
+    },
+    {
+        referenceAxis: 'Chile',
+        dataAxis: 19_960_000,
+        dataDisplay: "19,960,000"
     },
     {
         referenceAxis: 'Norway',
