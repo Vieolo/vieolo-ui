@@ -26,7 +26,7 @@ export default function BarChart(props) {
                 </div>`;
             }).join("");
         }
-        function displayTooltip(parent, e, title, value) {
+        function displayTooltip(parent, e, title, value, id) {
             let rectElement = e.toElement;
             let t = title;
             try {
@@ -38,11 +38,19 @@ export default function BarChart(props) {
             tooltip.html(getTooltipHTML([{ title: t || "", value: value }]))
                 .style('visibility', 'visible')
                 .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
-            d3.select(parent).transition().attr('class', getHoverClass);
+            let el = d3.select(parent).transition().attr('class', getHoverClass);
+            if (props.onBarClick)
+                el.attr("class", d => `${getHoverClass(d)} cursor--pointer`);
+            d3.selectAll(`[data-ref-id='${id || title}']`).attr("class", "typography-paragraph-small color--neutral-normal");
         }
-        function removeTooltip(parent, emptyClass) {
+        /**
+         * @param parent The parent element. This element can be obtained using `this`
+         * @param emptyClass If the classes should be removed. should be used in stacked chart
+         */
+        function removeTooltip(parent, emptyClass, selector, color) {
             tooltip.html(``).style('visibility', 'hidden');
             d3.select(parent).transition().attr('class', d => emptyClass ? "" : getFillClass(d));
+            d3.selectAll(`[data-ref-id='${selector}']`).attr("class", `typography-paragraph-small fill-color--${color || 'primary'}-text`);
         }
         let ct = (props.data[0] && typeof props.data[0].dataAxis !== "number") ? props.groupType || 'stacked' : 'bar';
         let isVertical = props.direction === 'vertical';
@@ -68,7 +76,7 @@ export default function BarChart(props) {
             left: props.direction === 'horizontal' ? (longestReference * 5) + 20 : 50
         };
         let width = (ref.current ? ref.current.offsetWidth : 200) - finalMargin.left - finalMargin.right;
-        let height = (props.height || (props.direction === 'vertical' ? props.data.length * 50 : 300)) - finalMargin.top - finalMargin.bottom;
+        let height = (props.height || (props.direction === 'horizontal' ? props.data.length * 40 : 300)) - finalMargin.top - finalMargin.bottom;
         let finalData = props.data;
         // If the bar uses a `StackedBarChartData`, the total of each item is added to it manually
         if (ct === 'stacked')
@@ -144,20 +152,31 @@ export default function BarChart(props) {
                 return `${v.toString().substring(0, props.maxRefLength)}`;
             });
         }
-        svg.append("g").call(leftAxis);
+        // Left axis
+        // In a horizontal chart, this is the ref axis
+        let LeftAxisTexts = svg
+            .append("g")
+            .call(leftAxis)
+            .selectAll("text");
         // Bottom axis
         // In a vertical chart, this is the ref axis
-        svg
+        let bottomAxisTexts = svg
             .append("g")
             .attr("transform", `translate(0, ${height})`)
             .call(bottomAxis)
             .selectAll("text")
             .attr("transform", "translate(-10,0)rotate(-45)") // The text displayed in the ref axis is rotated to avoid overlap of long texts
             .style("text-anchor", "end");
+        if (props.onBarClick) {
+            // Here, we are adding the values on the `text` elements not the `g` elements
+            (props.direction === 'horizontal' ? LeftAxisTexts : bottomAxisTexts)
+                .attr("class", "tick vieolo-bar-chart__clickable-tick cursor--pointer")
+                .on('click', function (d, i) { props.onBarClick(i); });
+        }
         // Rendering the normal bar chart
         if (ct === 'bar') {
             // Bar Containers
-            svg
+            let barContainers = svg
                 .selectAll("barContainer")
                 .data(finalData)
                 .join("rect")
@@ -167,7 +186,12 @@ export default function BarChart(props) {
                 .attr("height", d => isVertical ? height - dataAxis(0) : refAxis.bandwidth())
                 .attr("class", getFillClass)
                 .on('mouseover', function (d, i) { displayTooltip(this, d, i.referenceAxis, i.dataDisplay); }) // Using `function` keyword is necessary to access `this`
-                .on('mouseout', function () { removeTooltip(this, false); });
+                .on('mouseout', function (d, i) { removeTooltip(this, false, i.id || i.referenceAxis, i.fillColor); });
+            if (props.onBarClick) {
+                barContainers
+                    .on('click', function (d, i) { if (props.onBarClick)
+                    props.onBarClick(i); });
+            }
             // Each Bar
             svg
                 .selectAll("rect")
@@ -256,21 +280,23 @@ export default function BarChart(props) {
                 .append("text")
                 .attr("class", (d) => {
                 let c = "typography-paragraph-small";
+                let fillColor = ("fillColor" in d && d.fillColor) ? d.fillColor : 'primary';
                 if (ct !== 'bar')
                     return c;
                 let section = getInlineValueSection(d, axisMin, axisMax);
                 if (section === 1 || section === -1) {
-                    c += ` fill-color--${d.fillColor || 'primary'}-text`;
+                    c += ` fill-color--${fillColor || 'primary'}-text`;
                 }
                 return c;
             })
                 .attr("x", (d) => {
                 let section = getInlineValueSection(d, axisMin, axisMax);
+                let total = ("total" in d && d.total) ? d.total : +d.dataAxis;
                 if (section === 2) {
-                    return dataAxis(d.total || d.dataAxis) + 5;
+                    return dataAxis(total) + 5;
                 }
                 else if (section === -1) {
-                    return dataAxis(d.total || d.dataAxis) + 5;
+                    return dataAxis(total) + 5;
                 }
                 else if (section === -2) {
                     return 10;
@@ -281,6 +307,13 @@ export default function BarChart(props) {
             })
                 .attr("y", (d) => refAxis(d.referenceAxis))
                 .attr("dy", refAxis.bandwidth() / 1.5)
+                .attr('data-ref-id', (d) => {
+                let section = getInlineValueSection(d, axisMin, axisMax);
+                if (section === 1 || section === -1) {
+                    return `${d.id || d.referenceAxis}`;
+                }
+                return '';
+            })
                 .text((d) => {
                 if (d.dataDisplay !== undefined)
                     return d.dataDisplay;
@@ -331,6 +364,7 @@ function getDataAxisMin(values) {
  * This function determines the section of the placement of the inline value.
  *
  * Values above 0 mean that the text is appearing for a positive value, on the right side of the 0 axis and vice versa
+ *
  * 1 (or -1) mean that the text appears inside the bar and 2 (or -2) means that text appears outside of the bar
  *
  */
