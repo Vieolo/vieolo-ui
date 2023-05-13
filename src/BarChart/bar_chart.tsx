@@ -131,7 +131,7 @@ export default function BarChart(props: {
             left: props.direction === 'horizontal' ? (longestReference * 5) + 20 : 50 
         };
         let width = (ref.current ? ref.current.offsetWidth : 200) - finalMargin.left - finalMargin.right;
-        let height = (props.height || (props.direction === 'vertical' ? props.data.length * 50 : 300)) - finalMargin.top - finalMargin.bottom;
+        let height = (props.height || (props.direction === 'horizontal' ? props.data.length * 40 : 300)) - finalMargin.top - finalMargin.bottom;
         let finalData = props.data;
 
         // If the bar uses a `StackedBarChartData`, the total of each item is added to it manually
