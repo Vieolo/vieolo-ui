@@ -42,7 +42,7 @@ export function TabRowCreator(props: { p: TabRowPropsType }) {
                 { text: "One", value: "One", startIcon: <IconOne /> },
                 { text: "Two", value: "Two", startIcon: <IconTwo />, endIcon: <IconThree /> },
                 { text: "Three", value: "Three", endIcon: <IconFour /> },
-                { text: "Four", value: "Four" },
+                { text: "Some very long tab to check", value: "Four" },
                 { text: "Five", value: "Five" },
                 { text: "Six", value: "Six" },
                 { text: "Seven", value: "Seven" },

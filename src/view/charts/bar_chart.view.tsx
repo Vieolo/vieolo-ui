@@ -41,6 +41,7 @@ export function barChartOptions(): ViewData {
             removeSpaceBetweenBars: 'boolean',
             shortenTickText: 'boolean',
             withMaxLentghRef: 'boolean',
+            withOnClick: 'booleanTrueDefault',
         }
     }
 }
@@ -68,5 +69,6 @@ export function BarChartCreator(props: { p: BarChartPropsType }) {
         // tickFormat={(props.p as any).customTickFormat ? ((t) => `${t}z`) : undefined}
         shortenTickText={(props.p as any).shortenTickText}
         maxRefLength={(props.p as any).withMaxLentghRef ? 7 : undefined}
+        onBarClick={(props.p as any).withOnClick ? (r) => alert(typeof r === 'string' ? r : r.referenceAxis + r.dataDisplay) : undefined}
     />
 }
