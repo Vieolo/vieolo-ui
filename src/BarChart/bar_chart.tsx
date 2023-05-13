@@ -15,6 +15,7 @@ import { ColorOptionType } from '../types';
 
 
 export type BarChartData = {
+    id?: string,
     /** 
      * The X axis in a horizontal bar chart and Y axis in a vertical bar chart.
      * The axis that holds the reference metric
@@ -51,7 +52,8 @@ export default function BarChart(props: {
     removeSpaceBetweenBars?: boolean,
     shortenTickText?: boolean,
     tickFormat?: (t: string) => string,
-    maxRefLength?: number
+    maxRefLength?: number,
+    onBarClick?: (d: BarChartData | string) => void,
 }) {
 
     let ref = useRef<HTMLDivElement>(null);
@@ -89,7 +91,8 @@ export default function BarChart(props: {
                 .style('visibility', 'visible')
                 .style('left', (rectElement.x.baseVal.value + (rectElement.width.baseVal.value / 2)) + 'px');
 
-            d3.select(parent).transition().attr('class', getHoverClass);
+            let el = d3.select(parent).transition().attr('class', getHoverClass);
+            if (props.onBarClick) el.attr("class", d =>  `${getHoverClass(d)} cursor--pointer`)
         }
 
         function removeTooltip(parent: d3.BaseType | SVGRectElement, emptyClass: boolean) {
@@ -220,12 +223,17 @@ export default function BarChart(props: {
         }
 
 
-        svg.append("g").call(leftAxis);
+        // Left axis
+        // In a horizontal chart, this is the ref axis
+        let LeftAxisTexts = svg
+            .append("g")
+            .call(leftAxis)
+            .selectAll("text")
 
 
         // Bottom axis
         // In a vertical chart, this is the ref axis
-        svg
+        let bottomAxisTexts = svg
             .append("g")
             .attr("transform", `translate(0, ${height})`)
             .call(bottomAxis)
@@ -233,11 +241,17 @@ export default function BarChart(props: {
             .attr("transform", "translate(-10,0)rotate(-45)") // The text displayed in the ref axis is rotated to avoid overlap of long texts
             .style("text-anchor", "end");
 
+        if (props.onBarClick) {
+            // Here, we are adding the values on the `text` elements not the `g` elements
+            (props.direction === 'horizontal' ? LeftAxisTexts : bottomAxisTexts)
+                .attr("class", "tick vieolo-bar-chart__clickable-tick cursor--pointer")
+                .on('click', function(d, i) {props.onBarClick!(i as string)})
+        }
 
         // Rendering the normal bar chart
         if (ct === 'bar') {
             // Bar Containers
-            svg
+            let barContainers = svg
                 .selectAll("barContainer")
                 .data(finalData as BarChartData[])
                 .join("rect")
@@ -248,6 +262,11 @@ export default function BarChart(props: {
                 .attr("class", getFillClass)
                 .on('mouseover', function (d, i) { displayTooltip(this, d, i.referenceAxis, i.dataDisplay) }) // Using `function` keyword is necessary to access `this`
                 .on('mouseout', function () { removeTooltip(this, false) });
+            
+            if (props.onBarClick) {
+                barContainers
+                    .on('click', function(d, i: BarChartData) { if (props.onBarClick) props.onBarClick(i) });
+            }
 
             // Each Bar
             svg
