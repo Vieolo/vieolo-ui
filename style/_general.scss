@@ -491,6 +491,16 @@
 		@return $success-color-text;
 	} @else if $colorName == "success" and $colorType == "text-light" {
 		@return $success-color-text-light;
+	} @else if $colorName == "neutral" and $colorType == "normal" {
+		@return $neutral-color-normal;
+	} @else if $colorName == "neutral" and $colorType == "light" {
+		@return $neutral-color-light;
+	} @else if $colorName == "neutral" and $colorType == "transparent" {
+		@return $neutral-color-transparent;
+	} @else if $colorName == "neutral" and $colorType == "text" {
+		@return $neutral-color-text;
+	} @else if $colorName == "neutral" and $colorType == "text-light" {
+		@return $neutral-color-text-light;
 	} @else if $colorName == "accessory-blue" and $colorType == "normal" {
 		@return $accessory-blue-normal;
 	} @else if $colorName == "accessory-blue" and $colorType == "light" {
@@ -541,7 +551,6 @@
 
 	$auxCols: (
 		"hover": $hover-color,
-		"neutral": $neutral-color,
 		"background": $background-color,
 		"content-background": $background-content-color,
 		"background-content": $background-content-color,
@@ -605,7 +614,6 @@
 
 	$auxCols: (
 		"hover": $hover-color, // deprecated (use emphasis instead)
-		"neutral": $neutral-color, // deprecated (use emphasis instead)
 		"background": $background-color,
 		"content-background": $background-content-color, // deprecated (user --background-content instead)
 		"background-content": $background-content-color,

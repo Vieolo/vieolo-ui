@@ -68,9 +68,15 @@ $success-color-text: white !default;
 $success-color-text-light: $success-color-normal !default;
 
 
+$neutral-color-normal: #4b4b4b !default;
+$neutral-color-transparent: rgba(100, 100, 100, 0.2) !default;
+$neutral-color-light: #f2f2f2 !default;
+$neutral-color-text: $neutral-color-light !default;
+$neutral-color-text-light: black !default;
+
+
 // Root Colors
 $background-color: #fffffb !default;
-$neutral-color: #f2f2f2 !default;
 
 $content-background-color: #fffffb !default; // deprecated (use background-content-color instead) 
 $background-content-color: $content-background-color !default;
@@ -114,6 +120,7 @@ $colorOptions: (
 	"error",
 	"alert",
 	"success",
+	"neutral",
 	"accessory-green",
 	"accessory-orange",
 	"accessory-blue"

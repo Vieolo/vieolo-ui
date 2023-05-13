@@ -24,7 +24,7 @@ export function buttonOptions(): ViewData {
         } as Partial<ButtonPropsType>,
         variables: {
             color: {
-                options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'primary', 'secondary', 'success', 'tertiary'] as ColorOptionType[],
+                options: ['accessory-blue', 'accessory-green', 'accessory-orange', 'alert', 'error', 'neutral', 'primary', 'secondary', 'success', 'tertiary'] as ColorOptionType[],
                 default: 'primary'
             },
             emphasis: 'emphasis',
