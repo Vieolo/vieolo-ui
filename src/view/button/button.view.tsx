@@ -19,7 +19,7 @@ export function buttonOptions(): ViewData {
     
     return {
         constants: {
-            onClick: () => { },
+            onClick: () => { alert("clicked") },
             text: "Button"
         } as Partial<ButtonPropsType>,
         variables: {
@@ -47,7 +47,8 @@ export function buttonOptions(): ViewData {
             },
             isTransparent: 'boolean',
             isLoading: 'boolean',
-            isAuxiliaryLoading: 'boolean'
+            isAuxiliaryLoading: 'boolean',
+            disabled: 'boolean'
         }
     }
 }
