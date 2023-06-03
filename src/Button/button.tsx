@@ -76,7 +76,7 @@ export default function Button(props: {
 
 	if (props.className) c += " " + props.className;
 
-	let button = <button className={c} onClick={props.isLoading ? undefined : props.onClick} style={s} aria-label={props.ariaLabel}>
+	let button = <button className={c} onClick={(props.isLoading || props.disabled) ? undefined : props.onClick} style={s} aria-label={props.ariaLabel}>
 		{
 			props.isLoading
 				? <Spinner size={props.height} color={props.color || 'primary'} colorType={e === 'high' ? 'text' : 'normal'}  />
