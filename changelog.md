@@ -1,5 +1,8 @@
 # Change Log
 
+## 0.29.1 (2023-06-03)
+- Fixed the keyboard click of the button when disabled
+
 ## 0.29.0 (2023-05-13)
 - Added `nuetral` color group ([#273](https://github.com/Vieolo/vieolo-ui/issues/273))
 - Added on click for the `BarChart` ([#294](https://github.com/Vieolo/vieolo-ui/issues/294))
