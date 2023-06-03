@@ -29,7 +29,7 @@ export default function Button(props) {
         c += " disabled";
     if (props.className)
         c += " " + props.className;
-    let button = _jsxs("button", { className: c, onClick: props.isLoading ? undefined : props.onClick, style: s, "aria-label": props.ariaLabel, children: [props.isLoading
+    let button = _jsxs("button", { className: c, onClick: (props.isLoading || props.disabled) ? undefined : props.onClick, style: s, "aria-label": props.ariaLabel, children: [props.isLoading
                 ? _jsx(Spinner, { size: props.height, color: props.color || 'primary', colorType: e === 'high' ? 'text' : 'normal' })
                 : _jsx(_Fragment, { children: props.startIcon &&
                         _jsx("span", { className: "start-icon", children: props.startIcon }) }), props.text, props.endIcon &&
