@@ -1,7 +1,7 @@
 {
   "name": "@vieolo/vieolo-ui",
   "version": "0.29.1",
-  "main": "dist/export.js",
+  "main": "export.js",
   "author": {
     "name": "Vieolo OÜ"
   },
@@ -29,7 +29,7 @@
     "@types/react-router-dom": "^5.3.2",
     "cypress": "^11.1.0",
     "cypress-file-upload": "^5.0.8",
-    "cypresstools": "file:cypressTools",
+    "cypresstools": "file:cypressToolsSource",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^4.0.3",
