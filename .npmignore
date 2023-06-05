@@ -5,3 +5,4 @@ cypress/
 cypress.json
 version_bump.mjs
 export_rewrite.mjs
+generate_new_component.mjs
