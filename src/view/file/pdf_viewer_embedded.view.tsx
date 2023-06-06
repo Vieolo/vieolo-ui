@@ -20,12 +20,8 @@ export function pdfViewerEmbeddedOptions(): ViewData {
         variables: {
             filePath: {
                 options: [
-                    '/simple.pdf',
-                    '/simple_2.pdf',
+                    '/simple.pdf',                    
                     '/odd_shaped.pdf',
-                    '/many_pages.pdf',
-                    '/rotated.pdf',
-                    '/annotated.pdf',
                     'non-existend file'
                 ],
                 default: '/simple.pdf'

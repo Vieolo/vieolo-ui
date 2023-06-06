@@ -5,7 +5,7 @@ import { useState } from "react"
 import type { StringInputValueType } from "../types"
 
 // Installed Packages
-import { stringValidation } from "@vieolo/validation-js"
+import { stringValidation } from "@vieolo/validation"
 
 type StringValidationOptions = Omit<Parameters<typeof stringValidation>[0], "value">;
 

@@ -2,7 +2,7 @@
 import InputSet from '../InputSet';
 
 // Installed Packages
-import { stringValidation } from '@vieolo/validation-js';
+import { stringValidation } from '@vieolo/validation';
 
 // Types
 import { StringInputValueType } from '../types/types'

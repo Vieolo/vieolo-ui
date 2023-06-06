@@ -6,7 +6,7 @@ import Button from '../Button/button';
 import Typography from '../Typography';
 
 // Installed Packges
-import { fileNameValidation } from '@vieolo/validation-js';
+import { fileNameValidation } from '@vieolo/validation';
 
 // Types
 import { ColorOptionType, EmphasisType } from '../types/types';

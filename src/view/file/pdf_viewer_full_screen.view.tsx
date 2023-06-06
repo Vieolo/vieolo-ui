@@ -21,9 +21,7 @@ export function pdfViewerFullScreenOptions(): ViewData {
             filePath: {
                 options: [
                     '/simple.pdf',
-                    '/simple_2.pdf',
                     '/odd_shaped.pdf',
-                    '/many_pages.pdf',
                     'non-existend file'
                 ],
                 default: '/simple.pdf'
