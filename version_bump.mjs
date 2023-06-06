@@ -37,9 +37,9 @@ packageJSON.version = fv;
 fs.writeFileSync('./package.json', JSON.stringify(packageJSON, null, 2));
 
 // Updating the Version number of the `cypressTools`
-let ctJSON = JSON.parse(fs.readFileSync('./cypressTools/package.json').toString());
+let ctJSON = JSON.parse(fs.readFileSync('./cypressToolsSource/package.json').toString());
 ctJSON.version = fv;
-fs.writeFileSync('./cypressTools/package.json', JSON.stringify(ctJSON, null, 2));
+fs.writeFileSync('./cypressToolsSource/package.json', JSON.stringify(ctJSON, null, 2));
 
 // Updating the ReadMe file
 let readMe = fs.readFileSync('./README.md').toString();
@@ -95,7 +95,7 @@ rewriteExports();
 
 // Removing the existing dist folder (both the main and the one for cypressTools)
 fs.rmSync("./dist", { recursive: true, force: true });
-fs.rmSync("./cypressTools/dist", { recursive: true, force: true });
+fs.rmSync("./cypressToolsSource/dist", { recursive: true, force: true });
 
 // Building the components
 execSync('npm run build-components');
@@ -103,11 +103,11 @@ tsConfig.compilerOptions.noEmit = true;
 fs.writeFileSync('./tsconfig.json', JSON.stringify(tsConfig, null, 2));
 
 // Building the cypressTools and copy it in the dist folder
-process.chdir("./cypressTools")
+process.chdir("./cypressToolsSource")
 execSync('npm run build');
 process.chdir("..")
-copyFolderRecursiveSync('./cypressTools/dist', './dist')
-fs.renameSync('./dist/dist', './dist/cypressTools')
+copyFolderRecursiveSync('./cypressToolsSource/dist', '.')
+fs.renameSync('./dist', './cypressTools')
 
 
 console.log('\x1b[32m', 'The package is successfully built' ,'\x1b[0m');

@@ -1,7 +1,11 @@
-public/
-cypress/
 .nyc_output/
 .vscode/
+coverage/
+cypress/
+cypressToolsSource/
+node_modules/
+public/
 cypress.json
 version_bump.mjs
 export_rewrite.mjs
+generate_new_component.mjs

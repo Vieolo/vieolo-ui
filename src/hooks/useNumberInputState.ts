@@ -5,7 +5,7 @@ import { useState } from "react"
 import type { NumberInputValueType } from "../types"
 
 // Installed Packages
-import { numberValidation } from "@vieolo/validation-js"
+import { numberValidation } from "@vieolo/validation"
 
 type NumberValidationOptions = Omit<Parameters<typeof numberValidation>[0], "value">;
 

@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.30.0 (2023-06-06)
+- Changed the License
+- Moved the path of the component from `dist` to the main directory
+
 ## 0.29.1 (2023-06-03)
 - Fixed the keyboard click of the button when disabled
 
