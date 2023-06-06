@@ -1,6 +1,9 @@
 # Vieolo UI
 The UI package for front-end applications using React.
 
+
+*VUI is still in early stages and we expect to have many breaking changes before reaching to v1.0.0*
+
 <br>
 
 ## Goals
