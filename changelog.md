@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.30.1 (2023-06-23)
+- Added `Card` props to `FormSection`
+- Added the ability to pass components as secondary value to `FormSection`
+
 ## 0.30.0 (2023-06-06)
 - Changed the License
 - Moved the path of the component from `dist` to the main directory
