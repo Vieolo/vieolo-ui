@@ -47,7 +47,7 @@ export function radioGroupRowOptions(): ViewData {
                 default: 'string'
             },
             responsive: {
-                options: ['off', 'desktop', 'tablet', 'mobile'],
+                options: ['off', 'lg', 'md', 'sm'],
                 default: "off"
             }
 

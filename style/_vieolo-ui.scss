@@ -2668,8 +2668,8 @@ body {
 
 	$self: &;
 	
-	&--responsive-desktop {
-		@media all and (max-width: $desktopBreakPoint) {
+	&--responsive-lg {
+		@media all and (max-width: $lgBreakPoint) {
 			flex-direction: column;	
 			row-gap: $base-unit;
 			
@@ -2679,8 +2679,8 @@ body {
 		}
 	}
 
-	&--responsive-tablet {
-		@media all and (max-width: $tablet10LandscapeBreakPoint) {
+	&--responsive-md {
+		@media all and (max-width: $mdBreakPoint) {
 			flex-direction: column;	
 			row-gap: $base-unit;
 			
@@ -2689,8 +2689,8 @@ body {
 			}
 		}
 	}
-	&--responsive-mobile {
-		@media all and (max-width: $mobileBreakPoint) {
+	&--responsive-sm {
+		@media all and (max-width: $smBreakPoint) {
 			flex-direction: column;	
 			row-gap: $base-unit;
 

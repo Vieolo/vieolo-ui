@@ -8,7 +8,7 @@ import { RowHeightType } from '../types/types';
 import Typography from '../Typography';
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
 
-export type ComponentRowTemplateResponsive = boolean | 'desktop' | 'tablet' | 'mobile'; // internal
+export type ComponentRowTemplateResponsive = boolean | 'lg' | 'md' | 'sm'; // internal
 
 export default function ComponentRowTemplate(props: { // internal
     title: string | React.ReactNode,
@@ -35,8 +35,8 @@ export default function ComponentRowTemplate(props: { // internal
     }
     
     if (props.responsive) {
-        let resB = 'mobile'
-        if (props.responsive !== true && props.responsive !== 'mobile') {
+        let resB = 'sm'
+        if (props.responsive !== true && props.responsive !== 'sm') {
             resB = props.responsive 
         }
         c += ` vieolo-component-row-template--responsive-${resB}`
