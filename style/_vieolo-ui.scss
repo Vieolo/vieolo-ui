@@ -2666,6 +2666,40 @@ body {
 	display: flex;
 	justify-content: space-between;
 
+	$self: &;
+	
+	&--responsive-lg {
+		@media all and (max-width: $lgBreakPoint) {
+			flex-direction: column;	
+			row-gap: $base-unit;
+			
+			#{$self}__title-container {
+				align-items: center;
+			}
+		}
+	}
+
+	&--responsive-md {
+		@media all and (max-width: $mdBreakPoint) {
+			flex-direction: column;	
+			row-gap: $base-unit;
+			
+			#{$self}__title-container {
+				align-items: center;
+			}
+		}
+	}
+	&--responsive-sm {
+		@media all and (max-width: $smBreakPoint) {
+			flex-direction: column;	
+			row-gap: $base-unit;
+
+			#{$self}__title-container {
+				align-items: center;
+			}
+		}
+	}
+	
 	&--clickable {
 		cursor: pointer;
 
@@ -2829,6 +2863,22 @@ body {
 .vieolo-sub-navbar-row {
 	height: $subnavbar-height;
 	background-color: $background-content-color;
+
+	&--elevation-default {
+		box-shadow: none;
+	}
+	
+	&--elevation-0 {
+		box-shadow: none;
+	}
+	
+	&--elevation-1 {
+		box-shadow: 0px 3px 10px -5px rgba(27, 78, 96, 0.2);
+	}
+
+	&--elevation-2 {
+		box-shadow: 0px 3px 10px -5px rgba(27, 78, 96, 0.5);
+	}
 }
 
 
