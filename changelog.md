@@ -1,5 +1,13 @@
 # Change Log
 
+## 0.30.2 (2023-07-01)
+- Added ability to change the direction of `RadioGroup` based on screen size ([#291](https://github.com/Vieolo/vieolo-ui/issues/291))
+- Added ability to change the flex direction of `RadioGroupRow` based on screen size ([#298](https://github.com/Vieolo/vieolo-ui/issues/298))
+- Added elevation to `SubNavbarRow` ([#297](https://github.com/Vieolo/vieolo-ui/issues/297))
+- Added responsive props for `Flex`
+- Centralized the break points for `xl`, `lg`, `md`, and `sm` screen sizes
+- Added responsive sub states to `row-gap`, `column-gap`, and `flex` SCSS classes
+
 ## 0.30.1 (2023-06-23)
 - Added `Card` props to `FormSection`
 - Added the ability to pass components as secondary value to `FormSection`
