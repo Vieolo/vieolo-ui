@@ -2666,6 +2666,40 @@ body {
 	display: flex;
 	justify-content: space-between;
 
+	$self: &;
+	
+	&--responsive-desktop {
+		@media all and (max-width: $desktopBreakPoint) {
+			flex-direction: column;	
+			row-gap: $base-unit;
+			
+			#{$self}__title-container {
+				align-items: center;
+			}
+		}
+	}
+
+	&--responsive-tablet {
+		@media all and (max-width: $tablet11LandscapeBreakPoint) {
+			flex-direction: column;	
+			row-gap: $base-unit;
+			
+			#{$self}__title-container {
+				align-items: center;
+			}
+		}
+	}
+	&--responsive-mobile {
+		@media all and (max-width: $mobileBreakPoint) {
+			flex-direction: column;	
+			row-gap: $base-unit;
+
+			#{$self}__title-container {
+				align-items: center;
+			}
+		}
+	}
+	
 	&--clickable {
 		cursor: pointer;
 
