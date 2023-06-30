@@ -1,13 +1,13 @@
 // Vieolo UI
 import Typography from "../Typography";
-import Flex from "../Flex";
+import Flex, { FlexDirection } from "../Flex";
 import Card from "../Card";
+import Checkbox from "../CheckBox";
 
 // Utility
 import { handleOnKeyDown } from "../utility/onkeydown_utility";
 import { ColorOptionType, GridGapType } from "../types";
 import { BorderRadiusType } from "../types/types";
-import Checkbox from "../CheckBox";
 
 export type RadioButtonType = {
     id: string,
@@ -20,11 +20,20 @@ export type RadioButtonType = {
     icon?: React.ReactNode
 }
 
+type RadioGroupDirection = 'vertical' | 'horizontal';
+
+export type RadioGroupResponsiveChanges = {
+    direction?: RadioGroupDirection
+}
+
 export default function RadioGroup(props: {
     value: string,
     options: RadioButtonType[],
     onOptionChange: (o: string) => void,
-    direction?: 'vertical' | 'horizontal',
+    direction?: RadioGroupDirection,
+    lg?: RadioGroupResponsiveChanges,
+    md?: RadioGroupResponsiveChanges,
+    sm?: RadioGroupResponsiveChanges 
     disabled?: boolean,
     /** Defaults to half */
     horizontalButtonPadding?: "none" | 'half' | 'one' | 'two',
@@ -36,12 +45,19 @@ export default function RadioGroup(props: {
     /** defaults to half */
     borderRadius?: BorderRadiusType
 }) {
+    
+    function getFlexDir(dir?: RadioGroupDirection) : FlexDirection {
+        return dir === 'vertical' ? 'column' : 'row'
+    }
 
     return <div className={`vieolo-radio-group${props.disabled ? ' disabled' : ''}`}>
         <Flex
-            direction={props.direction === 'vertical' ? 'column' : 'row'}
+            direction={getFlexDir(props.direction)}
             rowGap={props.gap || 'none'}
             columnGap={props.gap || 'none'}
+            lg={props.lg && props.lg.direction ? {direction: getFlexDir(props.lg.direction)} : undefined}
+            md={props.md && props.md.direction ? {direction: getFlexDir(props.md.direction)} : undefined}
+            sm={props.sm && props.sm.direction ? {direction: getFlexDir(props.sm.direction)} : undefined}
         >
             {
                 props.options.map((o: RadioButtonType) => {

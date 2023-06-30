@@ -2680,7 +2680,7 @@ body {
 	}
 
 	&--responsive-tablet {
-		@media all and (max-width: $tablet11LandscapeBreakPoint) {
+		@media all and (max-width: $tablet10LandscapeBreakPoint) {
 			flex-direction: column;	
 			row-gap: $base-unit;
 			

@@ -1,13 +1,31 @@
 @use "sass:meta";
 @import "base";
 
+// This mixin adds the passes arguments to the class
+//
+// and then create separate states for the three sizes and then
+// add the arguments to them as well.
+//
+// The final CSS:
+// .something {
+//		&--state {
+//			property: value;
+//			
+//			&--sm {
+//				@media all and (max-width: $mobileBreakPoint) {
+//					property: value;
+//				}
+//			}
+//		}
+//	}
 @mixin interClassSubDesktopVariant($args...) {    
     $sizes: (
         "lg": $laptop13BreakPoint,
         "md": $tablet10LandscapeBreakPoint,
         "sm": $mobileBreakPoint
     );
-    
+
+	// The default state, applied to all sizes
     @each $state, $con in meta.keywords($args) {
         &--#{$state} {
             @each $k, $v in $con {
@@ -15,7 +33,8 @@
                 }
         }
     }
-    
+   
+	// Adding sizees to the original state
     @each $s, $bp in $sizes {
         @each $state, $con in meta.keywords($args) {
         &--#{$state} {
@@ -1820,39 +1839,21 @@ html {
 }
 
 .row-gap {
-	&--none {
-		row-gap: 0px;
-	}
-
-	&--half {
-		row-gap: $base-unit-half;
-	}
-
-	&--one {
-		row-gap: $base-unit;
-	}
-
-	&--two {
-		row-gap: $base-unit * 2;
-	}
+	@include interClassSubDesktopVariant(		
+		$none: (row-gap: 0px),
+		$half: (row-gap: $base-unit-half),
+		$one: (row-gap: $base-unit),
+		$two: (row-gap: $base-unit * 2),
+	)
 }
 
 .column-gap {
-	&--none {
-		column-gap: 0px;
-	}
-
-	&--half {
-		column-gap: $base-unit-half;
-	}
-
-	&--one {
-		column-gap: $base-unit;
-	}
-
-	&--two {
-		column-gap: $base-unit * 2;
-	}
+	@include interClassSubDesktopVariant(
+		$none: (column-gap: 0px),
+		$half: (column-gap: $base-unit-half),
+		$one: (column-gap: $base-unit),
+		$two: (column-gap: $base-unit * 2),
+	)
 }
 
 .row-height {
@@ -2252,79 +2253,40 @@ html {
 	display: flex;
 
 	&--direction {
-		&--column {		
-			flex-direction: column;
-		}
-		
-		&--column-reverse {
-			flex-direction: column-reverse;
-		}
-	
-		&--row {
-			flex-direction: row;
-		}
-		
-		&--row-reverse {
-			flex-direction: row-reverse;
-		}		
+		@include interClassSubDesktopVariant(
+			$column: (flex-direction: column),
+			$column-reverse: (flex-direction: column-reverse), 
+			$row: (flex-direction: row),
+			$row-reverse: (flex-direction: row-reverse)
+		)
 	}	
 
 	&--justify-content {
-		&--start {
-			justify-content: start;
-		}
-
-		&--end {
-			justify-content: end;
-		}
-	
-		&--space-around {
-			justify-content: space-around;
-		}
-	
-		&--space-between {
-			justify-content: space-between;
-		}
-
-		&--center {
-			justify-content: center;
-		}
+		@include interClassSubDesktopVariant(
+			$start: (justify-content: start),
+			$end: (justify-content: end),
+			$space-around: (justify-content: space-around),
+			$space-between: (justify-content: space-between),
+			$center: (justify-content: center),
+		)
 	}
 
 	&--align-items {
-		&--center {
-			align-items: center;
-		}
-
-		&--start {
-			align-items: flex-start;
-		}
-
-		&--end {
-			align-items: flex-end;
-		}
+		@include interClassSubDesktopVariant(
+			$center: (align-items: center),
+			$start: (align-items: flex-start),
+			$end: (align-items: flex-end),
+		)
 	}	
 
 	&--wrap {
-		&--wrap {
-			flex-wrap: wrap;
-		}
-
-		&--nowrap {
-			flex-wrap: nowrap;
-		}
-
-		&--wrap-reverse {
-			flex-wrap: wrap-reverse;
-		}		
-
-		&--scroll-y {
-			overflow-y: scroll;
-		}
-		
-		&--scroll-x {
-			overflow-x: scroll;
-		}
+		@include interClassSubDesktopVariant(
+			$wrap: (flex-wrap: wrap),
+			$nowrap: (flex-wrap: nowrap),
+			$wrap-reverse: (flex-wrap: wrap-reverse),
+			$scroll-y: (overflow-y: scroll),
+			$scroll-x: (overflow-x: scroll),
+		)
 	}
 
 }
