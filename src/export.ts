@@ -133,6 +133,7 @@ import {
 } from './PageFrame';
 import {
 	RadioButtonType as RadioButtonTypeTemp,
+	RadioGroupResponsiveChanges as RadioGroupResponsiveChangesTemp,
 } from './RadioGroup';
 import {
 	SelectItemType as SelectItemTypeTemp,
@@ -293,6 +294,7 @@ export type DrawerItem = DrawerItemTemp;
 export type PageFrameDrawerOptions = PageFrameDrawerOptionsTemp;
 export type PageFrameNavbarOptions = PageFrameNavbarOptionsTemp;
 export type RadioButtonType = RadioButtonTypeTemp;
+export type RadioGroupResponsiveChanges = RadioGroupResponsiveChangesTemp;
 export type SelectItemType = SelectItemTypeTemp;
 export type SpacerSizeType = SpacerSizeTypeTemp;
 export type TabRowItem = TabRowItemTemp;

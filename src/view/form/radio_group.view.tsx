@@ -27,6 +27,10 @@ export function radioGroupOptions(): ViewData {
                 options: ['horizontal', "vertical"],
                 default: "horizontal"
             },
+            mobileDirection: {
+                options: ['horizontal', "vertical"],
+                default: "horizontal"
+            },
             horizontalButtonPadding: {
                 options: ["none", "half", "one", "two"],
                 default: "half",
@@ -84,6 +88,7 @@ export function RadioGroupCreator(props: { p: RadioGroupPropsType }) {
     return <Card emphasis='medium' color='accessory-orange' className={props.p.direction === 'vertical' ? 'width--px-300' : undefined}>
         <RadioGroup
             direction={props.p.direction}
+            sm={{direction: (props.p as any).mobileDirection}}
             onOptionChange={o => setSelected(o)}
             disabled={props.p.disabled}
             options={textOptions}

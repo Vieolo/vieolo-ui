@@ -8,6 +8,8 @@ import { RowHeightType } from '../types/types';
 import Typography from '../Typography';
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
 
+export type ComponentRowTemplateResponsive = boolean | 'lg' | 'md' | 'sm'; // internal
+
 export default function ComponentRowTemplate(props: { // internal
     title: string | React.ReactNode,
     subtitle: string | React.ReactNode,
@@ -16,7 +18,13 @@ export default function ComponentRowTemplate(props: { // internal
     className?: string,
     handleKeyboardNav: boolean,
     rightSideComponent: React.ReactNode,
-    onRowClick?: () => void
+    onRowClick?: () => void,
+    /**
+     * Whether the title column should be positioned on the top of right component to accomodate for smaller screens.
+     * 
+     * You can explicitly determine the breakpoint from which the row is responsive. If a boolean is given, the breakpoint will be considered to the mobile layout
+     */
+    responsive?: ComponentRowTemplateResponsive
 }) {
 
     let c = `vieolo-component-row-template`
@@ -24,6 +32,14 @@ export default function ComponentRowTemplate(props: { // internal
         c += ` row-height--${props.height}`
     } else {
         c += " vieolo-component-row-template--height-default"
+    }
+    
+    if (props.responsive) {
+        let resB = 'sm'
+        if (props.responsive !== true && props.responsive !== 'sm') {
+            resB = props.responsive 
+        }
+        c += ` vieolo-component-row-template--responsive-${resB}`
     }
 
     if (props.onRowClick) c += " vieolo-component-row-template--clickable"
@@ -55,7 +71,7 @@ export default function ComponentRowTemplate(props: { // internal
             >
             {
                 typeof props.title === 'string'
-                    ? <Typography type='paragraph-large' text={props.title} />
+                    ? <Typography type='paragraph-large' fontWeight='bold' text={props.title} />
                     : <>
                         {props.title}
                     </>                

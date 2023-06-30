@@ -90,7 +90,8 @@ which starts the development server. The components are displayed in the `App.ts
 
 ## Components
 
-[`BarChart`](src/BarChart/BarChart.md)
+- [`BarChart`](docs/BarChart/BarChart.md)
+- [`Flex`](docs/Flex/Flex.md)
 
 
 <br>
