@@ -40,7 +40,7 @@ export default function SwitchRow(props: {
         rightSideComponent={
             <Switch
                 on={props.on}
-                onChange={handleChange}
+                onChange={() => {}} // The onChange is handled by the SetRowTemplate
                 switchID={props.switchID}
                 disabled={props.disabled}
                 ariaLabel={`${(props.ariaLabel || props.title)} switch`}
