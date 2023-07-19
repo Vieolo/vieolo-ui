@@ -3,6 +3,7 @@ export default function Checkbox(props: {
     onChange: (v: boolean) => void,
     disabled?: boolean,
     ariaLabel?: string,
+    removeTabIndex?: boolean,
     /** defaults to square */
     type?: 'square' | 'round'
 }) {
@@ -12,6 +13,7 @@ export default function Checkbox(props: {
         <input 
             type="checkbox" 
             checked={props.value} 
+            tabIndex={props.removeTabIndex ? -1 : undefined}
             onChange={e => {
                 e.stopPropagation();
                 if (props.disabled) return;

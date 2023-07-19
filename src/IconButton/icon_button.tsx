@@ -17,7 +17,7 @@ export default function IconButton(props: {
 	size?: 'large' | 'medium' | 'small' | 'extra-small',
 	/** default: none */
 	emphasis?: EmphasisType
-	onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+	onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
 	icon: React.ReactNode,
 	tooltip?: string,
 	tooltipPosition?: 'up' | 'down' | 'left' | 'right' | 'up-left' | 'up-right' | 'down-left' | 'down-right',
@@ -38,7 +38,7 @@ export default function IconButton(props: {
 	let col = props.color || 'primary';
 
 	c += getEmphasisClasses(e, col, {
-		hasRipple: true,
+		hasRipple: props.onClick !== undefined,
 		hoverable: true,
 		borderWidth: props.borderWidth,
 		transparentBackground: props.isTransparent
@@ -50,7 +50,13 @@ export default function IconButton(props: {
 
 	if (props.className) c += " " + props.className;
 
-	return <button className={c} onClick={props.isLoading ? undefined : props.onClick} style={props.style || {}} type={props.type} aria-label={props.ariaLabel} >
+	return <button 
+		className={c} 
+		onClick={props.isLoading ? undefined : props.onClick} 
+		style={props.style || {}} 
+		type={props.type} 
+		aria-label={props.ariaLabel} 
+	>
 		{props.isLoading ? <Spinner size={props.size} color={col} colorType={e === 'high' ? 'text' : 'normal'} /> : props.icon}
 		{
 			props.tooltip &&

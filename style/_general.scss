@@ -1358,7 +1358,50 @@ html {
 }
 
 
+.margin {
+	&--none {
+		margin: 0;
+	}
+	
+	&--half {
+		margin: $base-unit-half;
+	}
+
+	&--one {
+		margin: $base-unit;
+	}
+
+	&--two {
+		margin: $base-unit * 2;
+	}
+
+	&--5 {
+		margin: 5px
+	}
+
+	&--10 {
+		margin: 10px
+	}
+
+	&--20 {
+		margin: 20px
+	}
+
+	&--30 {
+		margin: 30px
+	}
+
+	&--40 {
+		margin: 40px
+	}
+}
+
 .margin-vertical {
+	&--none {
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
 	&--half {
 		margin-top: $base-unit-half;
 		margin-bottom: $base-unit-half;
@@ -1396,6 +1439,10 @@ html {
 }
 
 .margin-top {
+	&--none {
+		margin-top: 0;
+	}
+
 	&--half {
 		margin-top: $base-unit-half;		
 	}
@@ -1426,6 +1473,10 @@ html {
 }
 
 .margin-bottom {
+	&--none {
+		margin-bottom: 0;
+	}
+
 	&--half {
 		margin-bottom: $base-unit-half;		
 	}
@@ -1456,6 +1507,11 @@ html {
 }
 
 .margin-horizontal {
+	&--none {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
 	&--half {
 		margin-left: $base-unit-half;
 		margin-right: $base-unit-half;
@@ -1493,6 +1549,10 @@ html {
 }
 
 .margin-left {
+	&--none {
+		margin-left: 0;
+	}
+
 	&--half {
 		margin-left: $base-unit-half;
 	}
@@ -1523,6 +1583,10 @@ html {
 }
 
 .margin-right {
+	&--none {
+		margin-right: 0;
+	}
+
 	&--half {
 		margin-right: $base-unit-half;
 	}

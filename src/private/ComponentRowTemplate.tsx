@@ -52,6 +52,10 @@ export default function ComponentRowTemplate(props: { // internal
     return <div 
         className={c} 
         tabIndex={props.handleKeyboardNav ? 0 : undefined}
+        onClick={e => {
+            e.stopPropagation();
+            if (props.onRowClick) props.onRowClick();
+        }}
         onKeyDown={e => {
             e.stopPropagation();
             if (!props.handleKeyboardNav || !props.onRowClick) return;
@@ -64,10 +68,6 @@ export default function ComponentRowTemplate(props: { // internal
     >
         <div 
             className={"vieolo-component-row-template__title-container"}
-            onClick={e => {
-                e.stopPropagation();
-                if (props.onRowClick) props.onRowClick();
-            }}
             >
             {
                 typeof props.title === 'string'
