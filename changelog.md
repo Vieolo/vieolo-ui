@@ -1,5 +1,14 @@
 # Change Log
 
+## v0.30.3 (2023-07-19)
+- Fixed the height of the `ComponentRowTemplate` in responsive mode ([#299](https://github.com/Vieolo/vieolo-ui/issues/299))
+- Added standalone margin SCSS class ([#300](https://github.com/Vieolo/vieolo-ui/issues/300))
+- Added gap between the buttons of `FormDialog` ([#301](https://github.com/Vieolo/vieolo-ui/issues/301))
+- `TableRow` can now accept a number as id ([#302](https://github.com/Vieolo/vieolo-ui/issues/302))
+- `onClick` of the `IconButton` is now optional ([#303](https://github.com/Vieolo/vieolo-ui/issues/303))
+- Improved the keyboard hover of `RadioGroup`
+- Improved the `onClick` callback of `SwitchRow`
+
 ## v0.30.2 (2023-07-01)
 - Added ability to change the direction of `RadioGroup` based on screen size ([#291](https://github.com/Vieolo/vieolo-ui/issues/291))
 - Added ability to change the flex direction of `RadioGroupRow` based on screen size ([#298](https://github.com/Vieolo/vieolo-ui/issues/298))
