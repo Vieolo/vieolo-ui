@@ -88,7 +88,7 @@ export default function RadioGroup(props: {
                                 {
                                     o.icon
                                         ? o.icon
-                                        : <Checkbox type="round" value={props.value === o.id} onChange={() => {}} />
+                                        : <Checkbox type="round" value={props.value === o.id} onChange={() => {}} removeTabIndex />
                                 }
                                 {
                                     (o.title || o.subTitle) &&

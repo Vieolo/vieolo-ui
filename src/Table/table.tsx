@@ -17,7 +17,7 @@ import { TypographyOptionTypes } from '../types';
 export type TableSortDirection = 'ascending' | 'descending';
 
 export type TableRow = {
-    id: string,
+    id: string | number,
     items: React.ReactNode[],
     /** 
      * If a function is passed, the entire row will be clickable.
@@ -206,7 +206,7 @@ export default function Table(props: {
                                 if (row.onClick) row.onClick();
                             }}
                             draggable={props.onReorder !== undefined}
-                            onDragStart={e => setDraggedRow({ id: row.id, index: i })}
+                            onDragStart={e => setDraggedRow({ id: row.id.toString(), index: i })}
                             onDragEnd={e => {
                                 setDraggedRow(null)
                             }}

@@ -2665,13 +2665,19 @@ body {
 	border: 2px solid transparent;
 	display: flex;
 	justify-content: space-between;
+	border: 1px solid red;
 
 	$self: &;
+
+	&--height-default {
+		height: $row-height-large;
+	}
 	
 	&--responsive-lg {
 		@media all and (max-width: $lgBreakPoint) {
 			flex-direction: column;	
 			row-gap: $base-unit;
+			height: auto;
 			
 			#{$self}__title-container {
 				align-items: center;
@@ -2683,6 +2689,7 @@ body {
 		@media all and (max-width: $mdBreakPoint) {
 			flex-direction: column;	
 			row-gap: $base-unit;
+			height: auto;
 			
 			#{$self}__title-container {
 				align-items: center;
@@ -2693,6 +2700,7 @@ body {
 		@media all and (max-width: $smBreakPoint) {
 			flex-direction: column;	
 			row-gap: $base-unit;
+			height: auto;
 
 			#{$self}__title-container {
 				align-items: center;
@@ -2715,9 +2723,6 @@ body {
 		outline: none;
 	}
 
-	&--height-default {
-		height: $row-height-large;
-	}
 
 	p {
 		margin: 0;

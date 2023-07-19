@@ -125,7 +125,7 @@ export default function FormDialog(props: {
         {
             (!props.removeCancelButton || !props.removeSaveButton || props.extraButtons || (props.extraButtons || []).length > 0) &&
             <div className="vieolo-form-dialog__footer">
-                <Flex justifyContent="start" alignItems="center" columnGap="one">
+                <Flex justifyContent="start" alignItems="center" columnGap="half">
                     {
                         !props.removeCancelButton &&
                         <Button
@@ -159,7 +159,7 @@ export default function FormDialog(props: {
                     }
                 </Flex>
 
-                <Flex alignItems="center" justifyContent="end">
+                <Flex alignItems="center" justifyContent="end" columnGap="half">
                     {
                         (props.extraButtons || []).map((e, i) => {
                             return <Button
