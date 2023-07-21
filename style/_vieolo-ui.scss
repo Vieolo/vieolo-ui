@@ -3182,6 +3182,12 @@ body {
 	$self: &;
 
 	&--full {
+		&:hover {
+			img {
+				opacity: 0.5;
+			}
+		}
+
 		.vieolo-file-input {
 			position: absolute;
 			top: 0;
@@ -3195,6 +3201,7 @@ body {
 			z-index: 2;
 			pointer-events: none;
 			border-radius: $border-radius-normal;
+			
 		}
 	}
 }
