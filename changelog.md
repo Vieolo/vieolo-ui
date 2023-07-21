@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.30.4 (2023-07-21)
+- `Select` starts searching items when alphanumeric key press ([#285](https://github.com/Vieolo/vieolo-ui/issues/285))
+- Fixed the `Chip` text CSS color ([#289](https://github.com/Vieolo/vieolo-ui/issues/289))
+- Improved the hover state of the image picker
+- Improved the type of page in `VieoloScaffold`
+
 ## v0.30.3 (2023-07-19)
 - Fixed the height of the `ComponentRowTemplate` in responsive mode ([#299](https://github.com/Vieolo/vieolo-ui/issues/299))
 - Added standalone margin SCSS class ([#300](https://github.com/Vieolo/vieolo-ui/issues/300))

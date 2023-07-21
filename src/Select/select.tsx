@@ -237,9 +237,20 @@ export default function Select(props: SelectProps) {
                 if (props.disabled) return
                 handleOnKeyDown(e, {
                     onEnter: () => {
-                        if (!open) handleOpen(undefined, true);
-                        else if (itemKeyboardFocus) {
+                        if (!open) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            handleOpen(undefined, true);
+                        } else if (itemKeyboardFocus) {
                             handleSelectItem(filtered.find(f => f.value === itemKeyboardFocus))
+                        }
+                    },
+                    onAlphaNumeric: () => {
+                        if (!open) {
+                            e.stopPropagation();
+                            e.preventDefault();
+                            handleOpen(undefined, true);
+                            setSearchQuery(e.key)
                         }
                     },
                     onArrowDown: () => {

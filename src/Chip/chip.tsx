@@ -88,7 +88,7 @@ export default function Chip(props: {
 				props.icon
 			}
 
-			<p className={props.icon ? "margin-left--5" : ""}>{props.label}</p>
+			{props.label}
 
 			{
 				((props.onButtonClick && props.buttonIcon) || (props.buttonComponent)) &&
