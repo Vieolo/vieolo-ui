@@ -16,7 +16,7 @@ export default function VieoloScaffold(props: {
          * ```
          */
         path: string,
-        page: React.ReactNode,
+        page: React.ReactNode | React.ComponentType<any>,
         key?: string
     }[]
 }) {
