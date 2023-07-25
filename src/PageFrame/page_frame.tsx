@@ -50,6 +50,7 @@ export default function PageFrame(props: {
                 searchPlaceholder={props.navbar.searchPlaceholder}
                 title={props.navbar.title}
                 drawerState={drawerOpen ? 'open' : 'close'}
+                alwaysOpen={props.drawer?.alwaysOpen}
             />
         }
 
@@ -62,6 +63,12 @@ export default function PageFrame(props: {
             />
         }
 
-        {props.children}
+        {
+            (!props.drawer || !props.drawer.alwaysOpen)
+                ? props.children
+                : <div className={`vieolo-page-frame--with-always-open-drawer vieolo-page-frame--with-always-open-drawer--responsive-${props.drawer.alwaysOpen.responsiveBreakpoint}`}>
+                    {props.children}
+                </div>
+        }
     </div>
 }

@@ -8,6 +8,8 @@ import Device, { DeviceSizeCategory } from '@vieolo/device-js';
 // Icons
 import ArrowRight from '@mui/icons-material/ArrowRight';
 import ArrowLeft from '@mui/icons-material/ArrowLeft';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChromeReaderMode from '@mui/icons-material/ChromeReaderMode';
 
 // Main Creators
 import { spinnerOptions, SpinnerCreator } from '../auxiliary/spinner.view';
@@ -74,6 +76,7 @@ import List from '../../List';
 import Typography from '../../Typography';
 import Spacer from '../../Spacer';
 import Divider from '../../Divider';
+import RadioGroup from '../../RadioGroup';
 
 
 type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDefault" | "borderRadius" | 'fontWeightOptional' | 'emphasis' | 'typographyOptions' | {
@@ -103,6 +106,7 @@ export default function MainPage(props: {}): JSX.Element {
     let [selectedDataOptions, setSelectedDataOptions] = useState<ViewData | undefined>(undefined);
     let [showComponent, setShowComponent] = useState<boolean>(false);
     let [finalState, setFinalState] = useState<{ [key: string]: any } | undefined>(undefined);
+    let [drawerMode, setDrawerMode] = useState<string>("tucked");
     let history = useHistory();
 
     let items: { [key: string]: ViewItemData } = {
@@ -260,9 +264,21 @@ export default function MainPage(props: {}): JSX.Element {
         navbar={{
             title: 'Vieolo UI',
             logo: <img src='https://vieolo.com/static/logo-nav.svg' height={30} width={30} alt={"logo"} />,
-            logoRedirectURL: "/"
+            logoRedirectURL: "/",
+            rightComponents: [
+                <RadioGroup
+                    key={'navbar_state_radio_group'}
+                    onOptionChange={v => { setDrawerMode(v) }}
+                    value={drawerMode}
+                    options={[
+                        {id: "tucked", icon: <MenuIcon />},
+                        {id: "alwaysOpen", icon: <ChromeReaderMode />},
+                    ]}
+                />
+            ]
         }}
         drawer={{
+            alwaysOpen: drawerMode === 'alwaysOpen' ? {responsiveBreakpoint: 'sm'} : undefined,
             itemPaddingLeft: 'one',
             topContent: <div className='padding--one'>
                 <Typography text='Vieolo UI' type='title-large' textAlign='center' />
