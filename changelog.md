@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.30.5 (2023-07-25)
+- Improved the padding of the `Card` ([#305](https://github.com/Vieolo/vieolo-ui/issues/305))
+- Added `ConfirmationDialog` to `VieoloScaffold` ([#197](https://github.com/Vieolo/vieolo-ui/issues/197))
+- Added support for always open navbar drawer
+
 ## v0.30.4 (2023-07-21)
 - `Select` starts searching items when alphanumeric key press ([#285](https://github.com/Vieolo/vieolo-ui/issues/285))
 - Fixed the `Chip` text CSS color ([#289](https://github.com/Vieolo/vieolo-ui/issues/289))
