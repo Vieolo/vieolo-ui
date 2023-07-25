@@ -1,8 +1,3 @@
-// React
-import { Fragment } from "react"
-
-// Typography
-
 // Vieolo UI
 import { ColorOptionType, EmphasisType, BorderRadiusType } from "../types/types"
 import Modal from "../Modal"

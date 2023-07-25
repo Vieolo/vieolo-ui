@@ -3,8 +3,12 @@ import { Switch, Route } from "react-router-dom";
 
 // Vieolo UI
 import PageFrame, { PageFrameDrawerOptions, PageFrameNavbarOptions } from "../PageFrame";
+import ConfirmationDialog from "../ConfirmationDialog";
+
+type ConfirmationDialogPropType = React.ComponentProps<typeof ConfirmationDialog>;
 
 export default function VieoloScaffold(props: {
+    confirmation?: ConfirmationDialogPropType,
     drawer?: PageFrameDrawerOptions,
     navbar?: PageFrameNavbarOptions,
     routes: {
@@ -38,5 +42,12 @@ export default function VieoloScaffold(props: {
                 }
             </Switch>
         </main>
+        
+        {
+			props.confirmation &&
+			<ConfirmationDialog
+                {...props.confirmation}
+			/>
+		}
     </PageFrame>
 }

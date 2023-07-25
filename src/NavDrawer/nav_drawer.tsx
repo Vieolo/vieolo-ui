@@ -18,13 +18,27 @@ export default function NavDrawer(props: {
     topContent?: React.ReactNode,
     mainItems: DrawerItem[],
     bottomItems?: DrawerItem[],
-    onDrawerClose: () => void,
-    footPrint?: React.ReactNode,
+    onDrawerClose?: () => void,
+    footPrint?: React.ReactNode, 
+    alwaysOpen?: {
+        responsiveBreakpoint: 'xl' | 'lg' | 'md' | 'sm',
+    },
     /** Defaults to two */
     itemPaddingLeft?: 'none' | 'half' | 'one' | 'two'
 }) {
+    
+    let drawerClass = `vieolo-nav-drawer__drawer vieolo-nav-drawer__drawer--${props.state}`
+    
+    if (props.alwaysOpen) {
+        drawerClass += ` vieolo-nav-drawer__drawer--always-open`
+    }
+    
+    if (props.alwaysOpen) {
+        drawerClass += ` vieolo-nav-drawer__drawer--responsive-${props.alwaysOpen.responsiveBreakpoint}`
+    }
+
     return <div className={`vieolo-nav-drawer`}>
-        <div className={`vieolo-nav-drawer__drawer vieolo-nav-drawer__drawer--${props.state}`}>
+        <div className={drawerClass}>
             <Flex direction="column" justifyContent="space-between" className="height--pc-100">
 
                 <Flex direction="column">
@@ -42,7 +56,9 @@ export default function NavDrawer(props: {
                                 key={z.title} 
                                 paddingLeft={props.itemPaddingLeft} 
                                 item={z} 
-                                onClickIntercepted={() => props.onDrawerClose()}
+                                onClickIntercepted={() => {
+                                    if (props.onDrawerClose) props.onDrawerClose()
+                                }}
                             />
                         })
                     }
@@ -55,7 +71,9 @@ export default function NavDrawer(props: {
                                 key={z.title} 
                                 item={z} 
                                 paddingLeft={props.itemPaddingLeft} 
-                                onClickIntercepted={() => props.onDrawerClose()}
+                                onClickIntercepted={() => {
+                                    if (props.onDrawerClose) props.onDrawerClose()
+                                }}
                             />
                         })
                     }
@@ -70,7 +88,7 @@ export default function NavDrawer(props: {
             <div
                 className={`vieolo-nav-drawer__outer-area__${props.state}`}
                 onClick={() => {
-                    if (props.state === 'open') props.onDrawerClose()
+                    if (props.state === 'open' && props.onDrawerClose) props.onDrawerClose()
                 }}
             >
 

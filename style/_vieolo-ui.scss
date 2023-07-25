@@ -2763,21 +2763,111 @@ body {
 	top: 0;
 	left: 0;
 	right: 0;
+	
+	$self: &;
+	
+	&--with-always-open-drawer {
+		left: $drawer-width;
+		
+		#{$self}__drawer-button {
+			display: none;
+		}
+		
+
+		&--responsive-lg {
+			@media all and (max-width: $lgBreakPoint) {
+				left: 0;
+				#{$self}__drawer-button {
+					display: block;
+				}
+			}
+		}
+
+		&--responsive-md {
+			@media all and (max-width: $mdBreakPoint) {
+				left: 0;
+				#{$self}__drawer-button {
+					display: block;
+				}
+			}
+		}
+		&--responsive-sm {
+			@media all and (max-width: $smBreakPoint) {
+				left: 0;
+				#{$self}__drawer-button {
+					display: block;
+				}
+			}
+		}
+	}
 }
 
+.vieolo-page-frame {
+	&--with-always-open-drawer {
+		padding-left: $drawer-width;
+		
+		&--responsive-lg {
+			@media all and (max-width: $lgBreakPoint) {
+				padding-left: 0;
+			}
+		}
+
+		&--responsive-md {
+			@media all and (max-width: $mdBreakPoint) {
+				padding-left: 0;
+			}
+		}
+		&--responsive-sm {
+			@media all and (max-width: $smBreakPoint) {
+				padding-left: 0;
+			}
+		}
+	}
+}
 
 .vieolo-nav-drawer {
 
 	&__drawer {
 		position: fixed;
-		top: $navbar-height;
 		width: $drawer-width;
+		top: $navbar-height;
 		left: -$drawer-width;
+		padding: 0px;
 		bottom: 0px;
 		background-color: $background-content-color;
-		padding: 0px;
 		z-index: 999;
 		@include transition;
+
+		
+		&--always-open {
+			left: 0;
+			padding: 10px 0;
+			overflow-y: auto;
+			top: 0;
+		}
+		
+		&--responsive-lg {
+			@media all and (max-width: $lgBreakPoint) {
+				top: $navbar-height;
+				left: -$drawer-width;
+				padding: 0px;
+			}
+		}
+
+		&--responsive-md {
+			@media all and (max-width: $mdBreakPoint) {
+				top: $navbar-height;
+				left: -$drawer-width;
+				padding: 0px;
+			}
+		}
+		&--responsive-sm {
+			@media all and (max-width: $smBreakPoint) {
+				top: $navbar-height;
+				left: -$drawer-width;
+				padding: 0px;
+			}
+		}
 
 		&--open {
 			left: 0;

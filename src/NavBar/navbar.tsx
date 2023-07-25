@@ -27,7 +27,10 @@ export default function Navbar(props: {
     onSearchSubmit?: (query: string) => void,
     rightComponents?: React.ReactNode[],
     searchPlaceholder?: string,
-    drawerState?: 'open' | 'close'
+    drawerState?: 'open' | 'close',
+    alwaysOpen?: {
+        responsiveBreakpoint: 'xl' | 'lg' | 'md' | 'sm'
+    }
 }) {
 
     let [query, setQuery] = useState<string>("");
@@ -39,13 +42,19 @@ export default function Navbar(props: {
     } else if (props.logo) {
         logo = props.logo
     }
+    
+    let c = 'vieolo-navbar';
 
-    return <Card elevation={props.elevation} className="vieolo-navbar" borderRadius="none">
+    if (props.alwaysOpen) {
+        c += ` vieolo-navbar--with-always-open-drawer vieolo-navbar--with-always-open-drawer--responsive-${props.alwaysOpen.responsiveBreakpoint}`
+    }
+
+    return <Card elevation={props.elevation} className={c} borderRadius="none">
         <Flex justifyContent="space-between" alignItems="center" className="height--pc-100">
             <Flex alignItems="center" columnGap="one">
                 {
-                    props.hasDrawerButton &&
-                    <>
+                    (props.hasDrawerButton) &&
+                    <div className="vieolo-navbar__drawer-button">
                         {
                             props.drawerButton ||
                             <IconButton
@@ -57,7 +66,7 @@ export default function Navbar(props: {
                                 }}
                             />
                         }
-                    </>
+                    </div>
                 }
 
                 {
