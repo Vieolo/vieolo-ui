@@ -16,7 +16,7 @@ export default function Card(props: {
     height?: string,
     width?: string,
     children?: React.ReactNode,
-    padding?: 'none' | 'half' | 'one',
+    padding?: 'none' | 'half' | 'one' | 'two',
     ariaLabel?: string,
     style?: React.CSSProperties,
     className?: string,
