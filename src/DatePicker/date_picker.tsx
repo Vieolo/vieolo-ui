@@ -18,6 +18,8 @@ import { useAppearingContainer } from '../hooks/useAppearingContainer';
 
 // Utility
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
+import IconButton from '../IconButton';
+import { CloseIcon } from '../icons';
 
 
 export default function DatePicker(props: {
@@ -46,7 +48,8 @@ export default function DatePicker(props: {
     dateFormat?: DateFormats,
     /** default: medium */
     width?: 'small' | 'medium' | 'full',
-    error?: boolean
+    error?: boolean,
+    onClear?: () => void,
 }): JSX.Element {
 
     let [open, setOpen] = useState<boolean>(false);
@@ -85,7 +88,18 @@ export default function DatePicker(props: {
                 <Typography text={props.selectedDate ? props.selectedDate.formatDate(props.dateFormat || 'dd/mm/yyyy') : ""} fontWeight='bold' type='paragraph-small' />
                 <Typography type='caption-large' text={(props.showSelectedWeek && props.selectedDate) ? `Week ${props.selectedDate.getWeek().weekNumber}` : ""} />
             </div>
-            <CalendarIcon />
+            {
+                (props.onClear && props.selectedDate) 
+                    ? <IconButton 
+                        icon={<CloseIcon />}
+                        size='extra-small'
+                        color='error'
+                        onClick={() => {
+                            props.onClear!()
+                        }}
+                    />
+                    : <CalendarIcon />
+            }
         </div>
 
 

@@ -28,6 +28,7 @@ export function datePickerOptions(): ViewData {
             showTitle: 'booleanTrueDefault',
             disabled: 'boolean',
             error: 'boolean',
+            clearable: 'boolean',
             width: {
                 options: ['small', 'medium', 'full'],
                 default: "medium"
@@ -43,7 +44,7 @@ export function datePickerOptions(): ViewData {
 
 export function DatePickerCreator(props: { p: DatePickerPropsType }) {
 
-    let [date, setDate] = useState<VDate>(new VDate());
+    let [date, setDate] = useState<VDate | undefined>(new VDate());
 
     return <GridContainer columnGap='one'>
         <Grid xl={4} >
@@ -58,7 +59,8 @@ export function DatePickerCreator(props: { p: DatePickerPropsType }) {
                 disabled={props.p.disabled}
                 width={props.p.width}
                 dateFormat={props.p.dateFormat}
-                selectedWeek={{
+                onClear={(props.p as any).clearable ? () => setDate(undefined) : undefined}
+                selectedWeek={!date ? undefined : {
                     startDate: date.getWeek().start,
                     weekNumber: date.getWeek().weekNumber
                 }}
