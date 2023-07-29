@@ -5,7 +5,7 @@ import React, { useState, useRef } from 'react';
 import CalendarIcon from '@mui/icons-material/DateRangeRounded';
 
 // Installed Packages
-import VDate from '@vieolo/vdate';
+import VDate, { DateFormats } from '@vieolo/vdate';
 import Device from '@vieolo/device-js';
 
 // Vieolo UI
@@ -18,6 +18,8 @@ import { useAppearingContainer } from '../hooks/useAppearingContainer';
 
 // Utility
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
+import IconButton from '../IconButton';
+import { CloseIcon } from '../icons';
 
 
 export default function DatePicker(props: {
@@ -42,7 +44,12 @@ export default function DatePicker(props: {
     /** Whether to show the week number of the selected date in the dafault button */
     showSelectedWeek?: boolean,
     ariaLabel?: string,
-    disabled?: boolean
+    disabled?: boolean,
+    dateFormat?: DateFormats,
+    /** default: medium */
+    width?: 'small' | 'medium' | 'full',
+    error?: boolean,
+    onClear?: () => void,
 }): JSX.Element {
 
     let [open, setOpen] = useState<boolean>(false);
@@ -64,21 +71,36 @@ export default function DatePicker(props: {
         else if (props.selectedWeek) return props.selectedWeek.startDate;
         else return new VDate().setToDateStart();
     }
+    
+    let bc = "vieolo-date-picker__button-container__default-button"
+    let buttonContainerClass = bc; 
+    buttonContainerClass += ` ${bc}--${props.width || 'medium'}`
+    
+    if (props.error) {
+        buttonContainerClass += ` ${bc}--error`
+    } else {
+        buttonContainerClass += ` ${bc}--normal`
+    }
 
-    let datePickerButton = props.buttonComponent || <div className="vieolo-date-picker__button-container__default-button">
-        <div className="vieolo-date-picker__button-container__default-button__text-container">
+    let datePickerButton = props.buttonComponent ||
+        <div className={buttonContainerClass}>
             <div>
-                <Typography type='caption-large' text={props.title || ""} />
-            </div>
-            <div>
-                <Typography text={props.selectedDate ? props.selectedDate.formatDate('dd/mm/yyyy') : ""} />
-            </div>
-            <div>
+                <Typography text={props.selectedDate ? props.selectedDate.formatDate(props.dateFormat || 'dd/mm/yyyy') : ""} fontWeight='bold' type='paragraph-small' />
                 <Typography type='caption-large' text={(props.showSelectedWeek && props.selectedDate) ? `Week ${props.selectedDate.getWeek().weekNumber}` : ""} />
             </div>
+            {
+                (props.onClear && props.selectedDate) 
+                    ? <IconButton 
+                        icon={<CloseIcon />}
+                        size='extra-small'
+                        color='error'
+                        onClick={() => {
+                            props.onClear!()
+                        }}
+                    />
+                    : <CalendarIcon />
+            }
         </div>
-        <CalendarIcon />
-    </div>
 
 
     const calendarStatefulCompoment = <CalendarStateful
@@ -107,6 +129,14 @@ export default function DatePicker(props: {
     />
 
     return <div className={`vieolo-date-picker ${props.disabled ? 'disabled' : ''}`} ref={container}>
+        {
+            props.title &&
+            <div className="label-container">
+                <label>
+                    {props.title}
+                </label>
+            </div>
+        }
         <div
             className='vieolo-date-picker__button-container'
             onClick={() => setOpen(!open)}
@@ -123,13 +153,13 @@ export default function DatePicker(props: {
                         setOpenedByKeyboard(!open);
                     },
                     onEscape: () => {
-                        if(open) {
+                        if (open) {
                             setOpen(false);
                             setOpenedByKeyboard(false);
                         }
                     },
                     onTab: () => {
-                        if(open) {
+                        if (open) {
                             setOpen(false);
                             setOpenedByKeyboard(false);
                         }
@@ -143,7 +173,7 @@ export default function DatePicker(props: {
         {
             open && (Device.isTouchOnlyDevice ?
                 <Modal onClose={() => setOpen(false)}>
-                    {calendarStatefulCompoment}                    
+                    {calendarStatefulCompoment}
                 </Modal>
                 : calendarStatefulCompoment
             )

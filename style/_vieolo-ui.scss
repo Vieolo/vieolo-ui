@@ -136,6 +136,7 @@ body {
 
 .vieolo-input-set,
 .vieolo-select-set,
+.vieolo-date-picker,
 .vieolo-textarea-set {
 	.label-container {
 		height: 30px;
@@ -436,7 +437,7 @@ body {
 			height: $row-height-small;
 		}
 	}
-	
+
 	&--medium {
 		height: $row-height-medium;
 		width: $row-height-medium;
@@ -1896,7 +1897,6 @@ body {
 
 .vieolo-date-picker {
 	position: relative;
-	display: inline-block;
 
 	&__button-container {
 
@@ -1912,21 +1912,41 @@ body {
 		}
 
 		&__default-button {
-			width: 140px;
-			padding: 2px $base-unit;
+			// background-color: $neutral-color-light;
+			height: 30px;
 			display: flex;
-			justify-content: space-between;
 			align-items: center;
-			height: 56px;
-			@include card-no-shadow;
-			@include card-selectable;
-			@include ripple-tertiary;
-
-			&__text-container {
-				height: 50px;
-				display: grid;
-				grid-template-rows: 33% 33% 34%;
+			justify-content: space-between;
+			border-radius: $base-unit-half;
+			font-size: 14px;
+			box-sizing: border-box;
+			padding: 2px $base-unit-half;
+			cursor: pointer;
+			
+			svg {
+				height: 20px;
 			}
+
+			&--small {
+				width: 100px;
+			}
+
+			&--medium {
+				width: 160px;
+			}
+
+			&--full {
+				width: 100%;
+			}
+
+			&--normal {
+				border: 2px solid $neutral-color-light;
+			}
+			
+			&--error {
+				border: 2px solid $error-color-normal;
+			}
+
 		}
 	}
 
@@ -2668,13 +2688,13 @@ body {
 	&--height-default {
 		height: $row-height-large;
 	}
-	
+
 	&--responsive-lg {
 		@media all and (max-width: $lgBreakPoint) {
-			flex-direction: column;	
+			flex-direction: column;
 			row-gap: $base-unit;
 			height: auto;
-			
+
 			#{$self}__title-container {
 				align-items: center;
 			}
@@ -2683,18 +2703,7 @@ body {
 
 	&--responsive-md {
 		@media all and (max-width: $mdBreakPoint) {
-			flex-direction: column;	
-			row-gap: $base-unit;
-			height: auto;
-			
-			#{$self}__title-container {
-				align-items: center;
-			}
-		}
-	}
-	&--responsive-sm {
-		@media all and (max-width: $smBreakPoint) {
-			flex-direction: column;	
+			flex-direction: column;
 			row-gap: $base-unit;
 			height: auto;
 
@@ -2703,7 +2712,19 @@ body {
 			}
 		}
 	}
-	
+
+	&--responsive-sm {
+		@media all and (max-width: $smBreakPoint) {
+			flex-direction: column;
+			row-gap: $base-unit;
+			height: auto;
+
+			#{$self}__title-container {
+				align-items: center;
+			}
+		}
+	}
+
 	&--clickable {
 		cursor: pointer;
 
@@ -2763,20 +2784,21 @@ body {
 	top: 0;
 	left: 0;
 	right: 0;
-	
+
 	$self: &;
-	
+
 	&--with-always-open-drawer {
 		left: $drawer-width;
-		
+
 		#{$self}__drawer-button {
 			display: none;
 		}
-		
+
 
 		&--responsive-lg {
 			@media all and (max-width: $lgBreakPoint) {
 				left: 0;
+
 				#{$self}__drawer-button {
 					display: block;
 				}
@@ -2786,14 +2808,17 @@ body {
 		&--responsive-md {
 			@media all and (max-width: $mdBreakPoint) {
 				left: 0;
+
 				#{$self}__drawer-button {
 					display: block;
 				}
 			}
 		}
+
 		&--responsive-sm {
 			@media all and (max-width: $smBreakPoint) {
 				left: 0;
+
 				#{$self}__drawer-button {
 					display: block;
 				}
@@ -2805,7 +2830,7 @@ body {
 .vieolo-page-frame {
 	&--with-always-open-drawer {
 		padding-left: $drawer-width;
-		
+
 		&--responsive-lg {
 			@media all and (max-width: $lgBreakPoint) {
 				padding-left: 0;
@@ -2817,6 +2842,7 @@ body {
 				padding-left: 0;
 			}
 		}
+
 		&--responsive-sm {
 			@media all and (max-width: $smBreakPoint) {
 				padding-left: 0;
@@ -2838,14 +2864,14 @@ body {
 		z-index: 999;
 		@include transition;
 
-		
+
 		&--always-open {
 			left: 0;
 			padding: 10px 0;
 			overflow-y: auto;
 			top: 0;
 		}
-		
+
 		&--responsive-lg {
 			@media all and (max-width: $lgBreakPoint) {
 				top: $navbar-height;
@@ -2861,6 +2887,7 @@ body {
 				padding: 0px;
 			}
 		}
+
 		&--responsive-sm {
 			@media all and (max-width: $smBreakPoint) {
 				top: $navbar-height;
@@ -2958,11 +2985,11 @@ body {
 	&--elevation-default {
 		box-shadow: none;
 	}
-	
+
 	&--elevation-0 {
 		box-shadow: none;
 	}
-	
+
 	&--elevation-1 {
 		box-shadow: 0px 3px 10px -5px rgba(27, 78, 96, 0.2);
 	}
@@ -3291,7 +3318,7 @@ body {
 			z-index: 2;
 			pointer-events: none;
 			border-radius: $border-radius-normal;
-			
+
 		}
 	}
 }
