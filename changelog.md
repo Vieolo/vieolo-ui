@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.30.7 (2023-08-03)
+- Fixed the reference of the container of the `PDFViewer`
+- Added `stretch` to `Flex` ([#308](https://github.com/Vieolo/vieolo-ui/issues/308))
+
 ## v0.30.6 (2023-07-29)
 - Redesigned the `DatePicker` ([#286](https://github.com/Vieolo/vieolo-ui/issues/286))
 - Added the ability to clear the value of `DatePicker`
