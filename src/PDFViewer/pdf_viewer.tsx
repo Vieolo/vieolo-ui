@@ -55,7 +55,7 @@ export default function PDFViewer(props: {
 
 	let [documentLoadError, setDocumentLoadError] = useState<boolean>(false);
 
-	let focusRef = useRef<HTMLImageElement>(null);
+	let focusRef = useRef<HTMLDivElement>(null);
 
 	let fileName = (props.fileName || (typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name)).trim();
 
@@ -126,55 +126,33 @@ export default function PDFViewer(props: {
 		// eslint-disable-next-line
 	}, [props.fileName, props.filePath, props.onClose, props.context])
 
-	let content;
-
 	let state: 'error' | 'loading' | 'done' = documentLoadError ? 'error' : !doc ? 'loading' : 'done';
+	let pages = [];
 
-	if (state === 'error') {
-		content = <span className='vieolo-pdf-viewer-component__content'>
-			<Typography text={props.errorMessage || "There was a problem loading the PDF file!"} color={'error'} />
-		</span>
-	} else {
-		if (state === 'loading') content = <span className='vieolo-pdf-viewer-component__content'>
-			<Spinner />
-			<Spacer height='one' />
-			<Typography text={fileName} />
-		</span>
-		else {
-			let pages = [];
-
-			for (let i = 1; i <= totalPage; i++) {
-				pages.push(
-					<PDFPage
-						key={`pdf_page_${i}`}
-						pageNumber={i}
-						pdf={doc!}
-						fileName={fileName}
-						context={props.context}
-						zoomMultiple={zoomMultiple}
-						rotation={rotation}
-						containerWidth={focusRef.current!.offsetWidth}
-						containerHeight={focusRef.current!.offsetHeight}
-						onGainFocus={fn => setCurrentPage(fn)}
-						onSizeChange={(width, height) => {
-							if (height !== pageHeight) setPageHeight(height);
-						}}
-						pageHeight={pageHeight}
-					/>
-				)
-			}
-
-			content = <>
-				<div
-					className={`vieolo-pdf-viewer-component__canvas-container ${mode === 'full screen' ? 'vieolo-pdf-viewer-component__canvas-container--full' : ''}`}
-					ref={focusRef}
-					style={mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction + (Device.sizeCategory() === DeviceSizeCategory.mobile ? 40 : 30)}px)` } : undefined}
-				>
-					{pages}
-				</div>
-			</>
+	if (state === 'done' && focusRef.current) {
+		for (let i = 1; i <= totalPage; i++) {
+			pages.push(
+				<PDFPage
+					key={`pdf_page_${i}`}
+					pageNumber={i}
+					pdf={doc!}
+					fileName={fileName}
+					context={props.context}
+					zoomMultiple={zoomMultiple}
+					rotation={rotation}
+					containerWidth={(focusRef.current || { offsetWidth: 0 }).offsetWidth}
+					containerHeight={(focusRef.current || { offsetHeight: 0 }).offsetHeight}
+					onGainFocus={fn => setCurrentPage(fn)}
+					onSizeChange={(width, height) => {
+						if (height !== pageHeight) setPageHeight(height);
+					}}
+					pageHeight={pageHeight}
+				/>
+			)
 		}
 	}
+
+
 
 	let viewerClass = `vieolo-pdf-viewer-component vieolo-pdf-viewer-component--${state}`;
 
@@ -230,7 +208,35 @@ export default function PDFViewer(props: {
 			page={state === 'done' ? `${currentPage} / ${totalPage}` : ""}
 		/>
 
-		{content}
+
+		<div
+			className={`vieolo-pdf-viewer-component__canvas-container ${mode === 'full screen' ? 'vieolo-pdf-viewer-component__canvas-container--full' : ''}`}
+			ref={focusRef}
+			style={mode === 'embedded' ? { height: `calc(100vh - ${props.heightDeduction + (Device.sizeCategory() === DeviceSizeCategory.mobile ? 40 : 30)}px)` } : undefined}
+		>
+
+			{
+				state === 'error' &&
+				<span className='vieolo-pdf-viewer-component__content'>
+					<Typography text={props.errorMessage || "There was a problem loading the PDF file!"} color={'error'} />
+				</span>
+			}
+
+			{
+				state === 'loading' &&
+				<span className='vieolo-pdf-viewer-component__content'>
+					<Spinner />
+					<Spacer height='one' />
+					<Typography text={fileName} />
+				</span>
+			}
+
+			{
+				pages.length > 0 &&
+				pages
+			}
+		</div>
+
 
 	</div>
 
