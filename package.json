@@ -1,6 +1,6 @@
 {
   "name": "@vieolo/vieolo-ui",
-  "version": "0.30.7",
+  "version": "0.30.8",
   "main": "export.js",
   "author": {
     "name": "Vieolo OÜ"
@@ -46,7 +46,7 @@
     "@vieolo/file-management": "^0.4.1",
     "@vieolo/parsers": "^0.3.1",
     "@vieolo/validation": "^0.4.0",
-    "@vieolo/vdate": "^2.2.0",
+    "@vieolo/vdate": "^2.2.2",
     "d3": "^7.8.5",
     "pdfjs-dist": "^2.9.359",
     "react-cropper": "^2.1.8",
