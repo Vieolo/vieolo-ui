@@ -75,6 +75,7 @@ export default function CalendarStateful(props: {
                     e.preventDefault();
                     e.stopPropagation();
                     if (searchDate === null) return null;
+                    if ((props.minDate && searchDate.isBefore(props.minDate)) || (props.maxDate && searchDate.isAfter(props.maxDate))) return null
                     props.onDateSelect(searchDate);
                 }}>
                     <DateInput

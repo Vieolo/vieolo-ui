@@ -29,6 +29,7 @@ export function datePickerOptions(): ViewData {
             disabled: 'boolean',
             error: 'boolean',
             clearable: 'boolean',
+            hadDateLimit: 'boolean',
             width: {
                 options: ['small', 'medium', 'full'],
                 default: "medium"
@@ -45,6 +46,14 @@ export function datePickerOptions(): ViewData {
 export function DatePickerCreator(props: { p: DatePickerPropsType }) {
 
     let [date, setDate] = useState<VDate | undefined>(new VDate());
+    
+    let minDate: VDate | undefined = undefined;
+    let maxDate: VDate | undefined = undefined;
+
+    if ((props.p as any).hadDateLimit) {
+        minDate = new VDate().addDay(-10)
+        maxDate = new VDate().addDay(10)
+    }
 
     return <GridContainer columnGap='one'>
         <Grid xl={4} >
@@ -60,6 +69,8 @@ export function DatePickerCreator(props: { p: DatePickerPropsType }) {
                 width={props.p.width}
                 dateFormat={props.p.dateFormat}
                 onClear={(props.p as any).clearable ? () => setDate(undefined) : undefined}
+                minDate={minDate}
+                maxDate={maxDate}
                 selectedWeek={!date ? undefined : {
                     startDate: date.getWeek().start,
                     weekNumber: date.getWeek().weekNumber
