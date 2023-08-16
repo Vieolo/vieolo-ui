@@ -20,8 +20,12 @@ export default function ProgressBar(props: {
     }
     max: number,
     value: number,
-    color?: ColorOptionType
+    color?: ColorOptionType,
+    dataTestID?: string
 }) {
+    
+    let perc = (props.value / props.max) * 100;
+
     return <div className="vieolo-progress-bar">
 
         {
@@ -58,8 +62,9 @@ export default function ProgressBar(props: {
         <div className="vieolo-progress-bar__bar-container">
             <div
                 className={`vieolo-progress-bar__bar-container__bar background-color--${props.color || 'primary'}-normal`}
-                style={{ width: `${(props.value / props.max) * 100}%` }}
-                title={`${((props.value / props.max) * 100).toFixed(2)}%`}
+                style={{ width: `${perc}%` }}
+                title={`${perc.toFixed(2)}%`}
+                date-testid={`${props.dataTestID || ""}${perc.toFixed(2)}%`}
             ></div>
         </div>
         
