@@ -46,12 +46,21 @@ export function WalkthroughCreator(props: { p: WalkthroughPropsType }) {
             onNext={() => setCurrentPage((currentPage + 1) === totalPage ? 0 : currentPage + 1)}
             onSkip={() => setCurrentPage(currentPage + 1)}
             totalPage={totalPage}
-            backButtonText={"Go Back"}
-            backButtonIcon={<BackIcon />}
-            nextButtonText={"Next Page"}
-            skipButtonText={"Skip for now"}
-            skipButtonIcon={<SkipIcon />}
-            startButtonText={"Yee haa"}
+            backButtonConfig={{
+                text: "Go Back",
+                startIcon: <BackIcon />
+            }}
+            nextButtonConfig={{
+                text: "Next Page",
+            }}
+            skipButtonConfig={{
+                text: "Skip for now",
+                startIcon: <SkipIcon />
+            }}
+            startButtonConfig={{
+                text: "Yee haa",
+                color: 'accessory-orange'
+            }}
             progressBarConfig={{
                 color: 'secondary',
                 thickness: '1'

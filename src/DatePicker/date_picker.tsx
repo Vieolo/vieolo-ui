@@ -50,6 +50,8 @@ export default function DatePicker(props: {
     width?: 'small' | 'medium' | 'full',
     error?: boolean,
     onClear?: () => void,
+    minDate?: VDate,
+    maxDate?: VDate
 }): JSX.Element {
 
     let [open, setOpen] = useState<boolean>(false);
@@ -105,6 +107,8 @@ export default function DatePicker(props: {
 
     const calendarStatefulCompoment = <CalendarStateful
         showSearchInput={openedByKeyboard}
+        minDate={props.minDate}
+        maxDate={props.maxDate}
         onKeyboardExit={() => setOpen(false)}
         title={(Device.isTouchOnlyDevice && props.title) ? props.title : undefined}
         onDateSelect={s => {

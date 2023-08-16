@@ -1,5 +1,5 @@
 // Vieolo UI
-import FormDialog, { FormDialogAccessoryButton } from "../FormDialog"
+import FormDialog, { FormDialogAccessoryButton, FormDialogMainButton } from "../FormDialog"
 import Divider from "../Divider";
 import { ColorOptionType } from "../types";
 
@@ -40,16 +40,11 @@ export default function Walkthrough(props: {
     displayType?: "modal" | "inline",
     currentPage: number,
     totalPage: number,
-    backButtonText?: string,
-    backButtonIcon?: React.ReactNode,
-    skipButtonText?: string,
-    skipButtonIcon?: React.ReactNode,
-    nextButtonText?: string,
-    nextButtonIcon?: React.ReactNode,
-    startButtonText?: string,
-    startButtonIcon?: React.ReactNode,
-    doneButtonText?: string,
-    doneButtonIcon?: React.ReactNode,
+    backButtonConfig?: FormDialogMainButton,
+    skipButtonConfig?: FormDialogMainButton,
+    nextButtonConfig?: FormDialogMainButton,
+    startButtonConfig?: FormDialogMainButton,
+    doneButtonConfig?: FormDialogMainButton,
     disableNextButton?: boolean,
     pages: WalkthroughSinglePage[],
     progressBarConfig?: {
@@ -76,35 +71,39 @@ export default function Walkthrough(props: {
 
     if (props.currentPage !== 0 && !page.preventBack) {
         extraButtonsLeft.push({
-            color: 'error',
+            ...(props.backButtonConfig || {}),
+            color: (props.backButtonConfig && props.backButtonConfig.color) ? props.backButtonConfig.color : 'error',
             onClick: () => props.onBack(),
-            text: props.backButtonText || 'Back',
-            emphasis: 'none-background',
-            startIcon: props.backButtonIcon
+            text: (props.backButtonConfig && props.backButtonConfig.text) ? props.backButtonConfig.text : "Back",
+            emphasis: (props.backButtonConfig && props.backButtonConfig.emphasis) ? props.backButtonConfig.emphasis : 'none-background',
+            startIcon: (props.backButtonConfig && props.backButtonConfig.startIcon) ? props.backButtonConfig.startIcon : undefined
         })
     }
 
     if ((props.currentPage + 1) !== props.totalPage && !page.preventSkip) {
         extraButtons.push({
-            color: 'primary',
+            ...(props.skipButtonConfig || {}),
+            color: (props.skipButtonConfig && props.skipButtonConfig.color) ? props.skipButtonConfig.color : 'primary',
             onClick: () => props.onSkip(),
-            text: props.skipButtonText || 'Skip',
-            emphasis: 'low',
-            startIcon: props.skipButtonIcon
+            text: (props.skipButtonConfig && props.skipButtonConfig.text) ? props.skipButtonConfig.text : "Skip",
+            emphasis: (props.skipButtonConfig && props.skipButtonConfig.emphasis) ? props.skipButtonConfig.emphasis : 'low',
+            startIcon: (props.skipButtonConfig && props.skipButtonConfig.startIcon) ? props.skipButtonConfig.startIcon : undefined
         })
     }
     
     // Setting the text for the `Next` button
-    let saveButtonText = props.nextButtonText || "Next"
-    let saveButtonIcon = props.nextButtonIcon
+    let saveButtonConfig = props.nextButtonConfig || {};
+    let saveButtonText = saveButtonConfig.text || "Next"
 
     if (props.currentPage === 0 && page.index === 0) {
-        saveButtonText = props.startButtonText || "Start"
-        saveButtonIcon = props.startButtonIcon
+        saveButtonConfig = props.startButtonConfig || {}
+        saveButtonText = saveButtonConfig.text || "Start"
     } else if ((props.currentPage + 1) === props.totalPage) {
-        saveButtonText = props.doneButtonText || "Done"
-        saveButtonIcon = props.doneButtonIcon
+        saveButtonConfig = props.doneButtonConfig || {}
+        saveButtonText = saveButtonConfig.text || "Done"
     }
+
+    let saveButtonIcon = saveButtonConfig.startIcon
  
     return <FormDialog
         headerTitle={`${page.index ? page.index + ". " : ""} ${page.title}`.trim()}
@@ -121,6 +120,7 @@ export default function Walkthrough(props: {
         extraButtonsLeft={extraButtonsLeft}        
         padding={0}
         saveButtonConfig={{
+            ...saveButtonConfig, 
             text: saveButtonText,            
             startIcon: saveButtonIcon
         }}        

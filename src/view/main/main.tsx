@@ -66,6 +66,7 @@ import { NumberInputSetCreator, numberInputOptions } from '../../NumberInputSet/
 import { StringInputSetCreator, stringInputSetOptions } from '../../StringInputSet/string_input_set.view';
 import { FloatingActionButtonCreator, floatingActionButtonOptions } from '../../FloatingActionButton/floating_action_button.view';
 import { WalkthroughCreator, walkthroughOptions } from '../../Walkthrough/walkthrough.view';
+import { ProgressBarCreator, progressBarOptions } from '../../ProgressBar/progress_bar.view';
 import Select from '../../Select';
 import SwitchRow from '../../SwitchRow';
 import PageFrame from '../../PageFrame';
@@ -126,6 +127,7 @@ export default function MainPage(props: {}): JSX.Element {
         "Bar Chart": { title: "Bar Chart", data: barChartOptions(), creator: BarChartCreator, group: "Charts" },
         "Gantt Chart": { title: "Gantt Chart", data: ganttChartOptions(), creator: GanttChartCreator, group: "Charts" },
         "Donut Chart": { title: "Donut Chart", data: donutChartOptions(), creator: DonutChartCreator, group: "Charts" },
+        "Progress Bar": { title: "Progress Bar", data: progressBarOptions(), creator: ProgressBarCreator, group: "Charts" },
         
         "Calendar Statistic": { title: "Calendar Statistic", data: calendarStatisticOptions(), creator: CalendarStatisticCreator, group: "Date and Time" },
         "Date Input": { title: "Date Input", data: dateInputOptions(), creator: DateInputCreator, group: "Date and Time" },

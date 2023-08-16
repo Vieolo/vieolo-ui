@@ -1,5 +1,14 @@
 # Change Log
 
+## v0.31.0 (2023-08-16)
+- Fixed the license of the project ([#309](https://github.com/Vieolo/vieolo-ui/issues/309))
+- Added `ProgressBar` component ([#310](https://github.com/Vieolo/vieolo-ui/issues/310))
+- Added color options for `Walkthrough` buttons ([#312](https://github.com/Vieolo/vieolo-ui/issues/312))
+- Added min and max dates for `DatePicker` ([#313](https://github.com/Vieolo/vieolo-ui/issues/313))
+
+#### Breaking Changes
+- Changed the props of the buttons of `Walkthrough`
+
 ## v0.30.8 (2023-08-07)
 - Updated dependencies
 
