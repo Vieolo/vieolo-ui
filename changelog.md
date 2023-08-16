@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.31.1 (2023-08-17)
+- Fixed the onClick callback of `DatePicker`
+
 ## v0.31.0 (2023-08-16)
 - Fixed the license of the project ([#309](https://github.com/Vieolo/vieolo-ui/issues/309))
 - Added `ProgressBar` component ([#310](https://github.com/Vieolo/vieolo-ui/issues/310))
