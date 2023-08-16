@@ -3346,3 +3346,20 @@ body {
 	right: $base-unit-two;
 	z-index: 9;
 }
+
+
+.vieolo-progress-bar {
+
+	&__bar-container {
+		height: $base-unit;
+		background-color: $neutral-color-light;
+		width: 100%;
+		border-radius: $border-radius-half;
+		
+		&__bar {
+			height: $base-unit;
+			border-radius: inherit;
+		}
+		
+	}
+}

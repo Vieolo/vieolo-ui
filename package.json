@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/Vieolo/vieolo-ui.git/issues"
   },
-  "license": "UNLICENSED",
+  "license": "MIT-0",
   "devDependencies": {
     "@cypress/code-coverage": "^3.9.12",
     "@cypress/instrument-cra": "^1.4.0",
