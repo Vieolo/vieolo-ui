@@ -143,7 +143,10 @@ export default function DatePicker(props: {
         }
         <div
             className='vieolo-date-picker__button-container'
-            onClick={() => setOpen(!open)}
+            onClick={e => {
+                e.stopPropagation();
+                setOpen(!open);
+            }}
             tabIndex={0}
             role="button"
             aria-label={`${props.ariaLabel || props.title || "date picker"} button`}
