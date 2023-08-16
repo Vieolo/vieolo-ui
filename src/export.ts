@@ -50,6 +50,7 @@ import PDFViewer from './PDFViewer';
 import Page from './Page';
 import PageFrame from './PageFrame';
 import PeriodSelector , { PeriodOptions } from './PeriodSelector';
+import ProgressBar from './ProgressBar';
 import RadioGroup from './RadioGroup';
 import RadioGroupRow from './RadioGroupRow';
 import Select from './Select';
@@ -236,6 +237,7 @@ export {
 	PageFrame,
 	PeriodSelector,
 	PeriodOptions,
+	ProgressBar,
 	RadioGroup,
 	RadioGroupRow,
 	Select,
