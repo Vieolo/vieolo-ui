@@ -182,6 +182,7 @@ import {
 	TypographyOptionTypes as TypographyOptionTypesTemp,
 	NumberInputValueType as NumberInputValueTypeTemp,
 	StringInputValueType as StringInputValueTypeTemp,
+	TablePaginationType as TablePaginationTypeTemp,
 } from './types';
 
 
@@ -327,3 +328,4 @@ export type CardExtraActionType = CardExtraActionTypeTemp;
 export type TypographyOptionTypes = TypographyOptionTypesTemp;
 export type NumberInputValueType = NumberInputValueTypeTemp;
 export type StringInputValueType = StringInputValueTypeTemp;
+export type TablePaginationType = TablePaginationTypeTemp;
