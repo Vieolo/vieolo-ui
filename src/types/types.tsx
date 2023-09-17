@@ -60,3 +60,26 @@ export type StringInputValueType = {
     errorMessage?: string,
     isValid: boolean
 }
+
+export type TablePaginationType = {
+    /** The current page number */
+    pageNumber: number,
+    /** The total number of pages */
+    totalPageCount?: number,
+
+    hasNextPage: boolean,
+
+    startIndex?: number,
+    endIndex?: number,
+    totalIndex?: number,
+
+    /** The number of items in a single page */
+    pageItemCount: number,
+    onPageChange: (newPage: number) => void,
+    onPageItemCountChange?: (newCount: number) => void,
+
+    /** default: [10, 15, 20, 25] */
+    pageItemCountOptions?: number[],
+    /** The text to appear next to the page item count's select. default to English */
+    itemsPerPageText?: string,
+}

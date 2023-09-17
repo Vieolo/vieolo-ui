@@ -68,6 +68,7 @@ import TabRow from './TabRow';
 import TabSwitch from './TabSwitch';
 import Table from './Table';
 import TableInteractive from './TableInteractive';
+import TablePagination from './TablePagination';
 import Textarea from './Textarea';
 import TextareaSet from './TextareaSet';
 import TimeInput from './TimeInput';
@@ -181,6 +182,7 @@ import {
 	TypographyOptionTypes as TypographyOptionTypesTemp,
 	NumberInputValueType as NumberInputValueTypeTemp,
 	StringInputValueType as StringInputValueTypeTemp,
+	TablePaginationType as TablePaginationTypeTemp,
 } from './types';
 
 
@@ -255,6 +257,7 @@ export {
 	TabSwitch,
 	Table,
 	TableInteractive,
+	TablePagination,
 	Textarea,
 	TextareaSet,
 	TimeInput,
@@ -325,3 +328,4 @@ export type CardExtraActionType = CardExtraActionTypeTemp;
 export type TypographyOptionTypes = TypographyOptionTypesTemp;
 export type NumberInputValueType = NumberInputValueTypeTemp;
 export type StringInputValueType = StringInputValueTypeTemp;
+export type TablePaginationType = TablePaginationTypeTemp;

@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.31.2 (2023-09-17)
+- Added the option to change the default typography type of `Table` ([#46](https://github.com/Vieolo/vieolo-ui/issues/46))
+- Added an independent and improved `TablePagination` component ([#55](https://github.com/Vieolo/vieolo-ui/issues/55))
+
 ## v0.31.1 (2023-08-17)
 - Fixed the onClick callback of `DatePicker`
 
