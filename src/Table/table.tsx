@@ -1,18 +1,17 @@
 // React
 import React, { useState } from 'react';
-import IconButton from '../IconButton';
+import TablePagination from '../TablePagination';
 
 // Vieolo UI
 import Typography from '../Typography';
 import Checkbox from '../CheckBox';
 
 // Material UI
-import LeftArrowIcon from '@mui/icons-material/ArrowLeft';
-import RightArrowIcon from '@mui/icons-material/ArrowRight';
 import ReorderIcon from '@mui/icons-material/DragHandleRounded';
 
 // Types
 import { TypographyOptionTypes } from '../types';
+import { TablePaginationType } from '../types/types';
 
 export type TableSortDirection = 'ascending' | 'descending';
 
@@ -41,6 +40,7 @@ export default function Table(props: {
      */
     removeHeaderRow?: boolean,
     headerTypographyType?: TypographyOptionTypes
+    defaultTypographyType?: TypographyOptionTypes
     rows: TableRow[],
     columnGrid: string,
     disableSort?: boolean,
@@ -77,16 +77,7 @@ export default function Table(props: {
      * If the max height prop is provided, the pagination will appear below the max height,
      * adding to the total height
      */
-    pagination?: {
-        pageNumber: number,
-        hasNextPage: boolean,
-        startIndex: number,
-        endIndex: number,
-        totalIndex?: number,
-        pageItemCount: number,
-        onPageChange: (newPage: number) => void,
-        onPageItemCountChange?: (newCount: number) => void
-    },
+    pagination?: TablePaginationType,
     /**
      * If true, all rows will have a checkbox in the start, allowing the user to check a row
      * A column of 30px will be added to the beginning of the column grid
@@ -128,17 +119,17 @@ export default function Table(props: {
                     {
                         props.isCheckable &&
                         <>
-                            {   props.onCheckAll
-                                    ? <div className='center-by-flex-row'>
-                                        <Checkbox
-                                            onChange={(v) => {
-                                                if (props.onCheckAll) props.onCheckAll(v);
-                                                setAllChecked(v);
-                                            }}
-                                            value={allChecked}
-                                        />
-                                    </div> 
-                                    : <div></div>
+                            {props.onCheckAll
+                                ? <div className='center-by-flex-row'>
+                                    <Checkbox
+                                        onChange={(v) => {
+                                            if (props.onCheckAll) props.onCheckAll(v);
+                                            setAllChecked(v);
+                                        }}
+                                        value={allChecked}
+                                    />
+                                </div>
+                                : <div></div>
                             }
                         </>
 
@@ -240,7 +231,7 @@ export default function Table(props: {
                             }
                             {
                                 row.items.map((r, z) => {
-                                    let cellClassname = "vieolo-table__content-row__cell";                                    
+                                    let cellClassname = "vieolo-table__content-row__cell";
                                     let left = 0;
                                     if (props.stickyColumnCount && z < props.stickyColumnCount) {
                                         if (row.checked) cellClassname += " vieolo-table__content-row__cell--sticky-checked"
@@ -250,16 +241,16 @@ export default function Table(props: {
 
                                         left = +props.columnGrid.split(" ").map(cg => cg.replace("px", "").replace("fr", ""))[z - 1]
                                     }
-                                    
+
                                     return <div
                                         className={cellClassname}
                                         key={`table_row_${row.id}_${z}_div`}
                                         aria-label={`${props.ariaLabel || 'table'} cell ${row.id}_${z}`}
-                                        style={{left: left || 0}}
+                                        style={{ left: left || 0 }}
                                     >
                                         {
                                             typeof r === 'string'
-                                                ? <Typography text={r} />
+                                                ? <Typography text={r} type={props.defaultTypographyType || 'paragraph-medium'} />
                                                 : r
                                         }
                                     </div>
@@ -273,30 +264,12 @@ export default function Table(props: {
 
         {
             props.pagination &&
-            <div className={`vieolo-table__pagination-row ${props.maxHeight && 'position--sticky--bottom-0'}`}>
-                <div className="width--px-150 flex flex--space-around flex--align-items-center">
-                    <IconButton
-                        icon={<LeftArrowIcon />}
-                        onClick={() => props.pagination!.onPageChange(props.pagination!.pageNumber - 1)}
-                        color='primary'
-                        size='small'
-                        disabled={props.pagination!.pageNumber === 1}
-                        ariaLabel={`${props.ariaLabel || 'table'} pagination previous page`}
-                    />
-
-                    <div className="width--px-100 border-radius--half background-color--primary-normal padding-vertical--5 center-by-flex-row">
-                        <Typography text={`${props.pagination.startIndex} - ${props.pagination.endIndex}`} className="color--primary-text" ariaLabel={`${props.ariaLabel || 'table'} page number`} />
-                    </div>
-
-                    <IconButton
-                        icon={<RightArrowIcon />}
-                        onClick={() => props.pagination!.onPageChange(props.pagination!.pageNumber + 1)}
-                        color='primary'
-                        size='small'
-                        disabled={!props.pagination!.hasNextPage}
-                        ariaLabel={`${props.ariaLabel || 'table'} pagination next page`}
-                    />
-                </div>
+            <div className="vieolo-table__pagination-row">
+                <TablePagination
+                    pagination={props.pagination}
+                    ariaLabel={props.ariaLabel}
+                    maxHeight={props.maxHeight}
+                />
             </div>
         }
     </div>

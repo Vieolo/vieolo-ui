@@ -1667,9 +1667,13 @@ body {
 	}
 
 	&__pagination-row {
-		display: flex;
-		flex-direction: row-reverse;
-		padding: $base-unit-half;
+		margin-top: $base-unit;
+	}
+}
+
+.vieolo-table-pagination {
+	.vieolo-select {
+		width: 80px;
 	}
 }
 
