@@ -34,7 +34,7 @@ export default function TablePagination(props: {
 
 
     return <div className={`vieolo-table-pagination ${props.maxHeight && 'position--sticky--bottom-0'}`}>
-        <Flex justifyContent='space-between' alignItems='center' direction='row-reverse'>
+        <Flex justifyContent='space-between' alignItems='center' direction='row-reverse' sm={{direction: 'column'}} rowGap='one'>
 
             <Flex alignItems='center'>
                 <IconButton
