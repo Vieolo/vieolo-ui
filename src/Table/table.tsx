@@ -40,6 +40,7 @@ export default function Table(props: {
      */
     removeHeaderRow?: boolean,
     headerTypographyType?: TypographyOptionTypes
+    defaultTypographyType?: TypographyOptionTypes
     rows: TableRow[],
     columnGrid: string,
     disableSort?: boolean,
@@ -249,7 +250,7 @@ export default function Table(props: {
                                     >
                                         {
                                             typeof r === 'string'
-                                                ? <Typography text={r} />
+                                                ? <Typography text={r} type={props.defaultTypographyType || 'paragraph-medium'} />
                                                 : r
                                         }
                                     </div>

@@ -30,6 +30,7 @@ export function tableOptions(): ViewData {
             removeCheckAll: 'boolean',
             reorderable: 'boolean',
             useCustomHeader: 'boolean',
+            defaultTypographyType: 'typographyOptions',
             headerTypographyType: {
                 default: 'title-small',
                 options: [
@@ -141,6 +142,7 @@ export function TableCreator(props: { p: TablePropsType }) {
             else if (context === 'normalRows') setNormalRows(nl.map(z => z.items));
         }}
         headerTypographyType={props.p.headerTypographyType}
+        defaultTypographyType={props.p.defaultTypographyType}
     />
 
 }
