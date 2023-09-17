@@ -90,10 +90,10 @@ export function TableCreator(props: { p: TablePropsType }) {
         return {
             id: i.id,
             items: i.items,
-            checked: checkedList.includes(i.id),
+            checked: checkedList.includes(i.id.toString()),
             onCheckChange: () => {
-                if (checkedList.includes(i.id)) setCheckedList(checkedList.filter(z => z !== i.id));
-                else setCheckedList([...checkedList, i.id]);
+                if (checkedList.includes(i.id.toString())) setCheckedList(checkedList.filter(z => z !== i.id));
+                else setCheckedList([...checkedList, i.id.toString()]);
             },
             onClick: i.onClick
         }
@@ -116,18 +116,21 @@ export function TableCreator(props: { p: TablePropsType }) {
         maxHeight={props.p.stickyHeader ? "300px" : (props.p as any).withMaxHeight ? "500px" : undefined}
         pagination={(props.p as any).withPagination ? {
             endIndex: 25,
-            hasNextPage: false,
+            hasNextPage: true,
             onPageChange: () => { },
+            onPageItemCountChange: () => {},
             pageItemCount: 25,
             pageNumber: 1,
             startIndex: 1,
+            totalIndex: 100,
+            totalPageCount: 4
         } : undefined}
         isDense={props.p.isDense}
         isCheckable={(props.p as any).checkable}
         onCheckAll={(props.p as any).removeCheckAll ? undefined : v => {
             if (!v) setCheckedList([]);
             else {
-                setCheckedList(finalRows.map(i => i.id));
+                setCheckedList(finalRows.map(i => i.id.toString()));
             }
         }}
         onReorder={!(props.p as any).reorderable ? undefined : nl => {
