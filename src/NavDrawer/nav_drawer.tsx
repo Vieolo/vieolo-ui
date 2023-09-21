@@ -4,13 +4,15 @@ import Spacer from "../Spacer"
 import Typography from "../Typography"
 
 export type DrawerItem = {
+    /** The title of the item. If custom component is also provided, the title acts as key */
     title: string,
     icon?: React.ReactNode,
     selected?: boolean,
     href?: string,
     onClick?: () => void,
     height?: 'medium' | 'large' | 'small',
-    newGroup?: boolean
+    newGroup?: boolean,
+    customComponent?: React.ReactNode
 }
 
 export default function NavDrawer(props: {
@@ -52,6 +54,11 @@ export default function NavDrawer(props: {
 
                     {
                         (props.mainItems || []).map(z => {
+                            
+                            if (z.customComponent) return <div key={z.title}>
+                                {z.customComponent}
+                            </div>
+                            
                             return <NavDrawerItem 
                                 key={z.title} 
                                 paddingLeft={props.itemPaddingLeft} 

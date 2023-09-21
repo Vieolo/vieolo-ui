@@ -78,6 +78,7 @@ import Typography from '../../Typography';
 import Spacer from '../../Spacer';
 import Divider from '../../Divider';
 import RadioGroup from '../../RadioGroup';
+import Button from '../../Button';
 
 
 type ViewDataVariable = 'colors' | 'colorsOptional' | 'boolean' | "booleanTrueDefault" | "borderRadius" | 'fontWeightOptional' | 'emphasis' | 'typographyOptions' | {
@@ -294,6 +295,7 @@ export default function MainPage(props: {}): JSX.Element {
                 { title: "Item Three with icon", icon: <ArrowLeft />, height: 'small' },
                 { title: "Item Four", icon: "€", selected: true },
                 { title: "Another Group", selected: true, newGroup: true, icon: <ArrowLeft />},
+                { title: "Custom Component", customComponent: <Button text='Custom Component' height='small' />},
             ],
             bottomItems: [
                 { title: "Bottom 1", height: 'small' },

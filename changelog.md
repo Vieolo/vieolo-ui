@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.31.3 (2023-09-21)
+- Added the ability to use custom components in the Drawer main fields
+
 ## v0.31.2 (2023-09-17)
 - Added the option to change the default typography type of `Table` ([#46](https://github.com/Vieolo/vieolo-ui/issues/46))
 - Added an independent and improved `TablePagination` component ([#55](https://github.com/Vieolo/vieolo-ui/issues/55))
