@@ -12,12 +12,20 @@ import ReorderIcon from '@mui/icons-material/DragHandleRounded';
 // Types
 import { TypographyOptionTypes } from '../types';
 import { TablePaginationType } from '../types/types';
+import { useScreenSize } from '../hooks/useScreenSize';
+import { getNextScreenSize } from '../utility/screen_utility';
 
 export type TableSortDirection = 'ascending' | 'descending';
 
 export type TableRow = {
     id: string | number,
     items: React.ReactNode[],
+    /** The items to be displayed in lg (laptop) screen size and smaller */
+    lg?: React.ReactNode[]
+    /** The items to be displayed in md (tablet) screen size and smaller */
+    md?: React.ReactNode[]
+    /** The items to be displayed in sm (mobile) screen size */
+    sm?: React.ReactNode[],
     /** 
      * If a function is passed, the entire row will be clickable.
      * It is recommended to avoid using clickable components inside the row when making the row clickable
@@ -33,8 +41,17 @@ export type TableRow = {
     onCheckChange?: () => void
 }
 
-export default function Table(props: {
+type TableGeneralProps = {
     headers?: string[] | React.ReactNode[],
+    headerTypographyType?: TypographyOptionTypes,
+    defaultTypographyType?: TypographyOptionTypes,
+    columnGrid?: string,
+}
+
+
+
+
+export default function Table(props: TableGeneralProps & {
     /**
      * @deprecated The headers row is now optional, leaving which will result in absense of header row
      */
@@ -42,7 +59,6 @@ export default function Table(props: {
     headerTypographyType?: TypographyOptionTypes
     defaultTypographyType?: TypographyOptionTypes
     rows: TableRow[],
-    columnGrid: string,
     disableSort?: boolean,
     sortBy?: string,
     sortDirection?: TableSortDirection,
@@ -89,7 +105,29 @@ export default function Table(props: {
      * If this callback is omited, no checkbox will appear in the header
      */
     onCheckAll?: (allAreChecked: boolean) => void,
+    columnGrid: string,
+    lg?: TableGeneralProps,
+    md?: TableGeneralProps,
+    sm?: TableGeneralProps,
 }): JSX.Element {
+
+    let screensize = useScreenSize()
+
+    function getScreenAwareProp<T extends keyof TableGeneralProps>(key: T): TableGeneralProps[T] {
+        let currentSize = screensize;
+        for (let i = 0; i < 4; i++) {
+            if (currentSize === 'xl') {
+                return props[key]
+            }
+
+            else if (props[currentSize] && props[currentSize]![key]) {
+                return props[currentSize]![key]
+            } else {
+                currentSize = getNextScreenSize(currentSize)
+            }
+        }
+        return props[key]
+    }
 
     let [allChecked, setAllChecked] = useState<boolean>(false);
 
@@ -107,14 +145,20 @@ export default function Table(props: {
         contentStyle.overflowY = 'scroll';
     }
 
-    let columnGrid = props.columnGrid;
-    if (props.isCheckable || props.onReorder) columnGrid = `30px ${columnGrid}`;
+    // Getting the screen aware props
+    let columnGrid = getScreenAwareProp('columnGrid')!;
+    let headers = getScreenAwareProp('headers');
+    let defaultTypographyType = getScreenAwareProp('defaultTypographyType');
+    let headerTypographyType = getScreenAwareProp('headerTypographyType');
 
-    return <div className={`vieolo-table ${props.removeHeaderRow ? 'vieolo-table--headless' : ''}`} style={style}>
+    if (props.isCheckable || props.onReorder) columnGrid = `30px ${columnGrid}`;
+    
+
+    return <div key={screensize} className={`vieolo-table ${props.removeHeaderRow ? 'vieolo-table--headless' : ''}`} style={style}>
 
         <div className="vieolo-table__content" style={contentStyle}>
             {
-                (props.removeHeaderRow !== true || Array.isArray(props.headers)) &&
+                (props.removeHeaderRow !== true || Array.isArray(headers)) &&
                 <div className={`vieolo-table__header-row ${props.stickyHeader ? 'position--sticky--top-0' : ''}`} style={{ gridTemplateColumns: columnGrid }}>
                     {
                         props.isCheckable &&
@@ -135,7 +179,7 @@ export default function Table(props: {
 
                     }
                     {
-                        (props.headers || []).map((h: string | React.ReactNode, i) => {
+                        (headers || []).map((h: string | React.ReactNode, i) => {
                             let cellClassname = "vieolo-table__header-row__cell"
                             let left = 0
                             if (props.stickyColumnCount && i < props.stickyColumnCount) {
@@ -143,7 +187,7 @@ export default function Table(props: {
 
                                 if (i === (props.stickyColumnCount - 1)) cellClassname += " vieolo-table__header-row__cell--sticky-last"
 
-                                left = +props.columnGrid.split(" ").map(cg => cg.replace("px", "").replace("fr", ""))[i - 1]
+                                left = +columnGrid.split(" ").map(cg => cg.replace("px", "").replace("fr", ""))[i - 1]
                             }
 
                             return <div
@@ -159,7 +203,7 @@ export default function Table(props: {
                             >
                                 {
                                     typeof h === 'string'
-                                        ? <Typography type={props.headerTypographyType || "title-small"} text={h} />
+                                        ? <Typography type={headerTypographyType || "title-small"} text={h} />
                                         : <>
                                             {h}
                                         </>
@@ -187,7 +231,22 @@ export default function Table(props: {
                         let className = `${baseClass}`;
                         if (props.isDense) className += ` ${baseClass}--dense`
                         if (row.checked) className += ` ${baseClass}--checked`
-                        if (row.onClick) className += ' clickable'
+                        if (row.onClick) className += ` ${baseClass}--clickable`
+
+                        let items = row.items;
+
+                        let currentSize = screensize;
+                        for (let i = 0; i < 4; i++) {
+                            if (currentSize === 'xl') {
+                                break;
+                            } else if (row[currentSize]) {
+                                items = row[currentSize]!;
+                                break;
+                            } else {
+                                currentSize = getNextScreenSize(currentSize)
+                            }
+                        }
+                        
 
                         return <div
                             key={`table_row_${row.id}`}
@@ -230,7 +289,7 @@ export default function Table(props: {
                                 </div>
                             }
                             {
-                                row.items.map((r, z) => {
+                                items.map((r, z) => {
                                     let cellClassname = "vieolo-table__content-row__cell";
                                     let left = 0;
                                     if (props.stickyColumnCount && z < props.stickyColumnCount) {
@@ -239,7 +298,7 @@ export default function Table(props: {
 
                                         if (z === (props.stickyColumnCount - 1)) cellClassname += " vieolo-table__content-row__cell--sticky-last"
 
-                                        left = +props.columnGrid.split(" ").map(cg => cg.replace("px", "").replace("fr", ""))[z - 1]
+                                        left = +columnGrid.split(" ").map(cg => cg.replace("px", "").replace("fr", ""))[z - 1]
                                     }
 
                                     return <div
@@ -250,7 +309,7 @@ export default function Table(props: {
                                     >
                                         {
                                             typeof r === 'string'
-                                                ? <Typography text={r} type={props.defaultTypographyType || 'paragraph-medium'} />
+                                                ? <Typography text={r} type={defaultTypographyType || 'paragraph-medium'} />
                                                 : r
                                         }
                                     </div>

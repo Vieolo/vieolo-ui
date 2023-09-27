@@ -8,7 +8,7 @@ import NavDrawer from '../NavDrawer';
 // Types
 import { ElevationType } from "../types"
 
-export type PageFrameDrawerOptions = Omit<React.ComponentProps<typeof NavDrawer>, "state" | "onDrawerClose"> 
+export type PageFrameDrawerOptions = Omit<React.ComponentProps<typeof NavDrawer>, "state" | "onDrawerClose" | 'openItems' | "onOpenItemsChange"> 
 
 export type PageFrameNavbarOptions = {
     elevation?: ElevationType,
@@ -31,6 +31,12 @@ export default function PageFrame(props: {
 }) {
 
     let [drawerOpen, setDrawerOpen] = useState<boolean>(false);
+    let [openItems, setOpenItems] = useState<string[]>(
+        props.drawer 
+            ? props.drawer.mainItems.filter(z => z.children && z.children.length > 0 && z.children.find(x => x.selected)).map(z => z.title)
+            : []
+    );
+
 
     return <div className="vieolo-page-frame">
         {
@@ -60,6 +66,8 @@ export default function PageFrame(props: {
                 {...props.drawer}
                 state={drawerOpen ? "open" : 'closed'}                
                 onDrawerClose={() => setDrawerOpen(false)}
+                openItems={openItems}
+                onOpenItemsChange={n => setOpenItems(n)}
             />
         }
 

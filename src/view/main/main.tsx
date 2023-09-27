@@ -290,6 +290,10 @@ export default function MainPage(props: {}): JSX.Element {
             </div>,
             mainItems: [
                 { title: "Item One", icon: "+", href: "/" },
+                { title: "Item Width Children", icon: <ArrowLeft />, href: "/", height: 'small', children: [
+                    {title: "Button", href: '/?tab=Button', selected: true},
+                    {title: "Card", href: '/?tab=Card', selected: false, icon: <ArrowLeft />},
+                ]},
                 { title: "Item Two Large", icon: "X", height: 'large' },
                 { title: "Item Three Small", height: 'small' },
                 { title: "Item Three with icon", icon: <ArrowLeft />, height: 'small' },

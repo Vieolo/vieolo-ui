@@ -30,6 +30,7 @@ type viewPortWidthFinal = `${viewPortWidth}${viewPortSizes}`;
 type viewPortPercentFinal = `${viewPortPercent}${viewPortSizes}`;
 
 export type WidthAndHeightSize = "none" | "half" | "one" | "two" | "px-600" | "px-500" | "px-400" | "px-300" | "px-200" | "px-100" | "px-50" | viewPortWidthFinal | viewPortHeightFinal | viewPortPercentFinal;
+export type ScreenSizeType = 'xl' | 'lg' | 'md' | 'sm'
 
 
 export type CardExtraActionType = {

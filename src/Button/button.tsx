@@ -6,9 +6,12 @@ import DropDownMenu, { DropDownMenuItemType } from '../DropDownMenu/dropdown_men
 import Spinner from '../Spinner/spinner';
 
 // Types
-import { EmphasisType, BorderRadiusType, ColorOptionType } from '../types/types';
+import { EmphasisType, BorderRadiusType, ColorOptionType, ScreenSizeType } from '../types/types';
 import { getEmphasisClasses } from '../utility/style_utility';
 
+type ButtonGenerlProps = {
+	height?: 'large' | 'medium' | 'small' | 'extra-small',
+}
 
 export default function Button(props: {
 	text: string,
@@ -43,13 +46,41 @@ export default function Button(props: {
 		isLoading?: boolean
 	},
 	ariaLabel?: string,
-	isLoading?: boolean
+	isLoading?: boolean,
+	
+	lg?: ButtonGenerlProps,
+	md?: ButtonGenerlProps,
+	sm?: ButtonGenerlProps,
 }) {
-	let s: React.CSSProperties = {};
-	let h = props.height || 'medium';
+	
+    function getClassName(size?: ScreenSizeType) {
+		let s = ''
+		if (!size || size === 'xl') {
+			s = props.height || 'medium'	
+		} else {
+			let so = props[size]
+			if (so) {
+				s = so.height || ''
+			}
+			
+			if (s.trim()) s = `${s}--${size}`
+		}
+		
+		if (s.trim()) return `vieolo-button--${s}`
+		return ''
+    }
+
+    let xlClass = "vieolo-button " + getClassName()
+    let lgClass = props.lg ? getClassName('lg') : " "
+    let mdClass = props.md ? getClassName('md') : " "
+    let smClass = props.sm ? getClassName('sm') : " "    
+
 	let w = props.width || 'content';
-	let c: string = `vieolo-button vieolo-button--${h} vieolo-button--${w}-width vieolo-button--border-radius-${props.borderRadius || 'default'}`;
+    let c = xlClass + lgClass + mdClass + smClass
+	c += `vieolo-button--${w}-width vieolo-button--border-radius-${props.borderRadius || 'default'}`;
+
 	let e = props.emphasis || 'high';
+	let s: React.CSSProperties = {};
 
 
 	if (props.toLowerCase) {
