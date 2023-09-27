@@ -22,7 +22,6 @@ export function useScreenSize() {
     useEffect(() => {
         function handleResize() {
             setSize(allSizes[Device.sizeCategory()])
-            console.log("useEffect resize")
         }
 
         window.addEventListener("resize", handleResize);
