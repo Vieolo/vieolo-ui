@@ -127,6 +127,7 @@ import {
 	ListItem as ListItemTemp,
 } from './List';
 import {
+	DrawerSubItem as DrawerSubItemTemp,
 	DrawerItem as DrawerItemTemp,
 } from './NavDrawer';
 import {
@@ -178,6 +179,7 @@ import {
 	RowHeightType as RowHeightTypeTemp,
 	RowStyleType as RowStyleTypeTemp,
 	WidthAndHeightSize as WidthAndHeightSizeTemp,
+	ScreenSizeType as ScreenSizeTypeTemp,
 	CardExtraActionType as CardExtraActionTypeTemp,
 	TypographyOptionTypes as TypographyOptionTypesTemp,
 	NumberInputValueType as NumberInputValueTypeTemp,
@@ -295,6 +297,7 @@ export type GanttChartRowType = GanttChartRowTypeTemp;
 export type GanttChartColumnTitle = GanttChartColumnTitleTemp;
 export type GanttChartColumnGroup = GanttChartColumnGroupTemp;
 export type ListItem = ListItemTemp;
+export type DrawerSubItem = DrawerSubItemTemp;
 export type DrawerItem = DrawerItemTemp;
 export type PageFrameDrawerOptions = PageFrameDrawerOptionsTemp;
 export type PageFrameNavbarOptions = PageFrameNavbarOptionsTemp;
@@ -324,6 +327,7 @@ export type ElevationType = ElevationTypeTemp;
 export type RowHeightType = RowHeightTypeTemp;
 export type RowStyleType = RowStyleTypeTemp;
 export type WidthAndHeightSize = WidthAndHeightSizeTemp;
+export type ScreenSizeType = ScreenSizeTypeTemp;
 export type CardExtraActionType = CardExtraActionTypeTemp;
 export type TypographyOptionTypes = TypographyOptionTypesTemp;
 export type NumberInputValueType = NumberInputValueTypeTemp;

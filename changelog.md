@@ -1,5 +1,15 @@
 # Change Log
 
+## v0.31.4 (2023-09-27)
+- Added responsive props to `IconButton` ([#263](https://github.com/Vieolo/vieolo-ui/issues/263))
+- Fixed the z-index of `Drawer` ([#307](https://github.com/Vieolo/vieolo-ui/issues/307))
+- Improved the spacing of `Chip` ([#319](https://github.com/Vieolo/vieolo-ui/issues/319))
+- Added responsive layout to `Table` ([#320](https://github.com/Vieolo/vieolo-ui/issues/320))
+- Added expandable cards to `Drawer` ([#321](https://github.com/Vieolo/vieolo-ui/issues/321))
+- Improved the hover behavior of `TableRow` ([#322](https://github.com/Vieolo/vieolo-ui/issues/322))
+- Added `useScreenSize` hook
+- Added responsive props to `Button`
+
 ## v0.31.3 (2023-09-21)
 - Added the ability to use custom components in the Drawer main fields
 
