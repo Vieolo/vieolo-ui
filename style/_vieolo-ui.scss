@@ -886,13 +886,19 @@ body {
 				height: calc($base-unit * 1.5);
 				width: calc($base-unit * 1.5);
 			}
+			
+			.vieolo-icon-button {
+				height: calc($base-unit * 1.5);
+			}
 		}
 	}
 
 	&__content {
 		height: $row-height-small;
 		padding: 2px $base-unit-half;
-		@include center-by-flex-row;
+		display: flex;
+		align-items: center;
+		column-gap: $base-unit-half;
 		font-size: 11px;
 		font-weight: $font-weight-bold;
 		@include nonselectable;
