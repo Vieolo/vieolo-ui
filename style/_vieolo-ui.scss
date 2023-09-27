@@ -427,44 +427,55 @@ body {
 	&:active {
 		outline: none;
 	}
-
-	&--large {
+	
+	@include interClassContentVariant(large, medium, small, extra-small) using ($state) {
 		height: $row-height-large;
+		@if $state == medium {
+			height: $row-height-medium;
+		}
+		@if $state == small {
+			height: $row-height-small;
+		}
+		@if $state == extra-small {
+			height: calc($row-height-small - $base-unit-half);
+		}
+		
+		
+		
 		width: $row-height-large;
+		@if $state == medium {
+			width: $row-height-medium;
+		}
+		@if $state == small {
+			width: $row-height-small;
+		}
+		@if $state == extra-small {
+			width: calc($row-height-small - $base-unit-half);
+		}
 
 		svg {
 			width: $row-height-small;
+			@if $state == medium {
+				width: $row-height-small - $base-unit-half;
+			}
+			@if $state == small {
+				width: $row-height-small - $base-unit;
+			}
+			@if $state == extra-small {
+				width: calc($row-height-small - $base-unit-half - $base-unit);
+			}
+			
+
 			height: $row-height-small;
-		}
-	}
-
-	&--medium {
-		height: $row-height-medium;
-		width: $row-height-medium;
-
-		svg {
-			width: $row-height-small - $base-unit-half;
-			height: $row-height-small - $base-unit-half;
-		}
-	}
-
-	&--small {
-		height: $row-height-small;
-		width: $row-height-small;
-
-		svg {
-			width: $row-height-small - $base-unit;
-			height: $row-height-small - $base-unit;
-		}
-	}
-
-	&--extra-small {
-		height: calc($row-height-small - $base-unit-half);
-		width: calc($row-height-small - $base-unit-half);
-
-		svg {
-			width: calc($row-height-small - $base-unit-half - $base-unit);
-			height: calc($row-height-small - $base-unit-half - $base-unit);
+			@if $state == medium {
+				height: $row-height-small - $base-unit-half;
+			}
+			@if $state == small {
+				height: $row-height-small - $base-unit;
+			}
+			@if $state == extra-small {
+				height: calc($row-height-small - $base-unit-half - $base-unit);
+			}
 		}
 	}
 

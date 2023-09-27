@@ -55,6 +55,9 @@ export function IconButtonCreator(props: { p: IconButtonPropsType }) {
         borderWidth={props.p.borderWidth}
         isLoading={props.p.isLoading}
         isTransparent={props.p.isTransparent}
+        md={{
+            size: 'extra-small'
+        }}
     />
 
     if (props.p.isTransparent) {

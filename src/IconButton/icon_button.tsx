@@ -3,10 +3,13 @@ import React from 'react';
 import Spinner from '../Spinner/spinner';
 
 // Type
-import { BorderRadiusType, ColorOptionType, EmphasisType } from '../types/types';
+import { BorderRadiusType, ColorOptionType, EmphasisType, ScreenSizeType } from '../types/types';
 import { getBorderRadiusClasses, getEmphasisClasses } from '../utility/style_utility';
 
 
+type IconButtonGenerlProps = {
+	size?: 'large' | 'medium' | 'small' | 'extra-small',
+}
 
 
 export default function IconButton(props: {
@@ -28,10 +31,36 @@ export default function IconButton(props: {
 	type?: 'button' | 'submit' | 'reset',
 	ariaLabel?: string,
 	isTransparent?: boolean,
-	isLoading?: boolean
-}) {	
-	let c = `vieolo-icon-button vieolo-icon-button--${props.size || 'medium'}`;
+	isLoading?: boolean,
 
+	lg?: IconButtonGenerlProps,
+	md?: IconButtonGenerlProps,
+	sm?: IconButtonGenerlProps,
+}) {	
+    function getClassName(size?: ScreenSizeType) {
+		let s = ''
+		if (!size || size === 'xl') {
+			s = props.size || 'medium'	
+		} else {
+			let so = props[size]
+			if (so) {
+				s = so.size || ''
+			}
+			
+			if (s.trim()) s = `${s}--${size}`
+		}
+		
+		if (s.trim()) return `vieolo-icon-button--${s}`
+		return ''
+    }
+
+    let xlClass = "vieolo-icon-button " + getClassName()
+    let lgClass = props.lg ? getClassName('lg') : " "
+    let mdClass = props.md ? getClassName('md') : " "
+    let smClass = props.sm ? getClassName('sm') : " "    
+
+    let c = xlClass + lgClass + mdClass + smClass
+	
 	c += getBorderRadiusClasses('vieolo-icon-button', props.borderRadius || 'default')
 
 	let e = props.emphasis || 'none';
