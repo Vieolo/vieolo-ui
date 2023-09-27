@@ -187,7 +187,7 @@ export default function Table(props: {
                         let className = `${baseClass}`;
                         if (props.isDense) className += ` ${baseClass}--dense`
                         if (row.checked) className += ` ${baseClass}--checked`
-                        if (row.onClick) className += ' clickable'
+                        if (row.onClick) className += ` ${baseClass}--clickable`
 
                         return <div
                             key={`table_row_${row.id}`}

@@ -1664,6 +1664,13 @@ body {
 				background-color: $secondary-color-light;
 			}
 		}
+		
+		&--clickable {
+			&:hover {
+				cursor: pointer;
+				border-color: $primary-color-normal;	
+			}
+		}
 	}
 
 	&__pagination-row {
