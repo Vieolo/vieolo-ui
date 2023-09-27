@@ -89,6 +89,9 @@ export function ButtonCreator(props: { p: ButtonPropsType }) {
                         isLoading: (props.p as any).isAuxiliaryLoading
                     }
         }
+        md={{
+            height: 'large'
+        }}
     />
 
     if (props.p.isTransparent) {

@@ -48,24 +48,24 @@ body {
 		width: $base-unit * 2;
 	}
 
-	&--large {
+	@include interClassContentVariant(large, medium, small, extra-small) using ($state) {
 		height: $row-height-large;
-	}
 
-	&--medium {
-		height: $row-height-medium;
-	}
+		@if $state == medium {
+			height: $row-height-medium;
+		}
 
-	&--small {
-		height: $row-height-small;
-	}
+		@if $state == small {
+			height: $row-height-small;
+		}
 
-	&--extra-small {
-		height: $base-unit-two;
+		@if $state == extra-small {
+			height: $base-unit-two;
 
-		svg {
-			height: $base-unit * 1.5;
-			width: $base-unit * 1.5;
+			svg {
+				height: $base-unit * 1.5;
+				width: $base-unit * 1.5;
+			}
 		}
 	}
 
@@ -430,51 +430,40 @@ body {
 	
 	@include interClassContentVariant(large, medium, small, extra-small) using ($state) {
 		height: $row-height-large;
-		@if $state == medium {
-			height: $row-height-medium;
-		}
-		@if $state == small {
-			height: $row-height-small;
-		}
-		@if $state == extra-small {
-			height: calc($row-height-small - $base-unit-half);
-		}
-		
-		
-		
 		width: $row-height-large;
-		@if $state == medium {
-			width: $row-height-medium;
-		}
-		@if $state == small {
-			width: $row-height-small;
-		}
-		@if $state == extra-small {
-			width: calc($row-height-small - $base-unit-half);
-		}
 
 		svg {
+			height: $row-height-small;
 			width: $row-height-small;
-			@if $state == medium {
+		}
+
+		@if $state == medium {
+			height: $row-height-medium;
+			width: $row-height-medium;
+
+			svg {
+				height: $row-height-small - $base-unit-half;
 				width: $row-height-small - $base-unit-half;
 			}
-			@if $state == small {
+		}
+
+		@if $state == small {
+			height: $row-height-small;
+			width: $row-height-small;
+
+			svg {
+				height: $row-height-small - $base-unit;
 				width: $row-height-small - $base-unit;
 			}
-			@if $state == extra-small {
-				width: calc($row-height-small - $base-unit-half - $base-unit);
-			}
-			
+		}
 
-			height: $row-height-small;
-			@if $state == medium {
-				height: $row-height-small - $base-unit-half;
-			}
-			@if $state == small {
-				height: $row-height-small - $base-unit;
-			}
-			@if $state == extra-small {
+		@if $state == extra-small {
+			height: calc($row-height-small - $base-unit-half);
+			width: calc($row-height-small - $base-unit-half);
+
+			svg {
 				height: calc($row-height-small - $base-unit-half - $base-unit);
+				width: calc($row-height-small - $base-unit-half - $base-unit);
 			}
 		}
 	}
