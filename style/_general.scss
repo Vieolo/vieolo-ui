@@ -1,7 +1,7 @@
 @use "sass:meta";
 @import "base";
 
-// This mixin adds the passes arguments to the class
+// This mixin adds the passed arguments to the class
 //
 // and then create separate states for the three sizes and then
 // add the arguments to them as well.
@@ -47,6 +47,86 @@
                 }
             }
         }
+    }
+} 
+
+
+// This mixin takes a state of class and generates sub-states for sizes
+// Look at icon button for example
+//
+// For example:
+// .some-class {
+// 		@include interClassContentVariant(one, two) using ($state) {
+//			color: red;
+//			@if $state == two {
+//				color: blue
+//			}
+//			
+//			p { font-size: 20px }
+//		}
+// }
+//
+// Converts to:
+//
+// .some-class {
+// 		&--one {
+// 			color: red;
+//			
+//			p { font-size: 20px }
+//		}
+// 		&--two {
+// 			color: blue;
+//			
+//			p { font-size: 20px }
+//		}
+//
+// 		&--one {
+//			$--lg {
+//				@media (...) {
+// 					color: red;
+//			
+//					p { font-size: 20px }
+//				}
+//			}
+//		}
+// 		&--one {
+//			$--lg {
+//				@media (...) {
+// 					color: blue;
+//			
+//					p { font-size: 20px }
+//				}
+//			}
+//		}
+//
+//		and so on for md and sm
+// }
+@mixin interClassContentVariant($states...) {    
+    $sizes: (
+        "lg": $lgBreakPoint,
+        "md": $mdBreakPoint,
+        "sm": $smBreakPoint,
+    );
+	
+	@each $state in $states {
+		// The default state, applied to all sizes
+		&--#{$state} {
+			@content($state);
+		}
+	}
+
+   
+	// Adding sizees to the original state
+    @each $s, $bp in $sizes {
+		@each $state in $states {
+			&--#{$state} {
+				&--#{$s} {
+					@media all and (max-width: $bp) {
+						@content($state);
+					}
+				}
+			}
+		}
     }
 } 
 
@@ -2317,6 +2397,7 @@ html {
 	display: flex;
 
 	&--direction {
+		// e.g. flex--direction--column--sm
 		@include interClassSubDesktopVariant(
 			$column: (flex-direction: column),
 			$column-reverse: (flex-direction: column-reverse), 

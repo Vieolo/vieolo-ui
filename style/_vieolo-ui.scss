@@ -48,24 +48,24 @@ body {
 		width: $base-unit * 2;
 	}
 
-	&--large {
+	@include interClassContentVariant(large, medium, small, extra-small) using ($state) {
 		height: $row-height-large;
-	}
 
-	&--medium {
-		height: $row-height-medium;
-	}
+		@if $state == medium {
+			height: $row-height-medium;
+		}
 
-	&--small {
-		height: $row-height-small;
-	}
+		@if $state == small {
+			height: $row-height-small;
+		}
 
-	&--extra-small {
-		height: $base-unit-two;
+		@if $state == extra-small {
+			height: $base-unit-two;
 
-		svg {
-			height: $base-unit * 1.5;
-			width: $base-unit * 1.5;
+			svg {
+				height: $base-unit * 1.5;
+				width: $base-unit * 1.5;
+			}
 		}
 	}
 
@@ -427,44 +427,44 @@ body {
 	&:active {
 		outline: none;
 	}
-
-	&--large {
+	
+	@include interClassContentVariant(large, medium, small, extra-small) using ($state) {
 		height: $row-height-large;
 		width: $row-height-large;
 
 		svg {
-			width: $row-height-small;
 			height: $row-height-small;
+			width: $row-height-small;
 		}
-	}
 
-	&--medium {
-		height: $row-height-medium;
-		width: $row-height-medium;
+		@if $state == medium {
+			height: $row-height-medium;
+			width: $row-height-medium;
 
-		svg {
-			width: $row-height-small - $base-unit-half;
-			height: $row-height-small - $base-unit-half;
+			svg {
+				height: $row-height-small - $base-unit-half;
+				width: $row-height-small - $base-unit-half;
+			}
 		}
-	}
 
-	&--small {
-		height: $row-height-small;
-		width: $row-height-small;
+		@if $state == small {
+			height: $row-height-small;
+			width: $row-height-small;
 
-		svg {
-			width: $row-height-small - $base-unit;
-			height: $row-height-small - $base-unit;
+			svg {
+				height: $row-height-small - $base-unit;
+				width: $row-height-small - $base-unit;
+			}
 		}
-	}
 
-	&--extra-small {
-		height: calc($row-height-small - $base-unit-half);
-		width: calc($row-height-small - $base-unit-half);
+		@if $state == extra-small {
+			height: calc($row-height-small - $base-unit-half);
+			width: calc($row-height-small - $base-unit-half);
 
-		svg {
-			width: calc($row-height-small - $base-unit-half - $base-unit);
-			height: calc($row-height-small - $base-unit-half - $base-unit);
+			svg {
+				height: calc($row-height-small - $base-unit-half - $base-unit);
+				width: calc($row-height-small - $base-unit-half - $base-unit);
+			}
 		}
 	}
 
@@ -886,13 +886,19 @@ body {
 				height: calc($base-unit * 1.5);
 				width: calc($base-unit * 1.5);
 			}
+			
+			.vieolo-icon-button {
+				height: calc($base-unit * 1.5);
+			}
 		}
 	}
 
 	&__content {
 		height: $row-height-small;
 		padding: 2px $base-unit-half;
-		@include center-by-flex-row;
+		display: flex;
+		align-items: center;
+		column-gap: $base-unit-half;
 		font-size: 11px;
 		font-weight: $font-weight-bold;
 		@include nonselectable;
@@ -1662,6 +1668,13 @@ body {
 		&--checked {
 			& {
 				background-color: $secondary-color-light;
+			}
+		}
+		
+		&--clickable {
+			&:hover {
+				cursor: pointer;
+				border-color: $primary-color-normal;	
 			}
 		}
 	}
@@ -2865,9 +2878,12 @@ body {
 		padding: 0px;
 		bottom: 0px;
 		background-color: $background-content-color;
-		z-index: 999;
+		z-index: 20;
 		@include transition;
 
+		@media all and (max-width: $mobileBreakPoint) {
+			z-index: 999;
+		}
 
 		&--always-open {
 			left: 0;
@@ -2915,7 +2931,7 @@ body {
 			right: 0;
 			left: 0;
 			bottom: 0;
-			z-index: 998;
+			z-index: 19;
 			background-color: rgba(0, 0, 0, 0.4);
 			transition: all 0.5s ease;
 		}
@@ -2978,6 +2994,37 @@ body {
 					fill: $secondary-color-normal;
 				}
 			}
+		}
+		
+		&__child {
+			width: $drawer-item-width - $base-unit-two;
+			margin-left: $base-unit-two;
+			height: $row-height-small;
+			border-left: 3px solid $secondary-color-light;
+			text-decoration: none;
+			
+			&--selected {
+				border-left: $base-unit-half solid $secondary-color-normal;
+			}
+			
+			&:hover {
+				background-color: $secondary-color-light;
+				cursor: pointer;
+			}
+			
+			.flex {
+				height: 100%;
+			}
+			
+			svg {
+				height: $base-unit-two;
+				fill: $secondary-color-normal;
+			}
+			
+			p {
+				font-size: 14px;
+			}
+			
 		}
 	}
 }

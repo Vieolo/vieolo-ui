@@ -11,6 +11,7 @@ import SampleIcon from '@mui/icons-material/RefreshRounded';
 // Types
 import { ViewData } from '../main/main';
 import Spinner from '../../Spinner/spinner';
+import Flex from '../../Flex';
 
 type TablePropsType = React.ComponentProps<typeof Table>;
 
@@ -78,6 +79,18 @@ export function TableCreator(props: { p: TablePropsType }) {
         return {
             id: i.toString(),
             items: r,
+            md: [
+                r[0], 
+                <Flex direction='column'>
+                    <span>{r[2]}</span>
+                    <span>{r[1]}</span>
+                </Flex>,
+                <Flex direction='column'>
+                    <span>{r[3]}</span>
+                    <span>{r[4]}</span>
+                </Flex>,
+                r[5]
+            ],
             onClick: (props.p as any).rowClickable ? () => alert(`Index ${i} is selected`) : undefined
         }
     });
@@ -91,6 +104,9 @@ export function TableCreator(props: { p: TablePropsType }) {
         return {
             id: i.id,
             items: i.items,
+            lg: i.lg,
+            md: i.md,
+            sm: i.sm,
             checked: checkedList.includes(i.id.toString()),
             onCheckChange: () => {
                 if (checkedList.includes(i.id.toString())) setCheckedList(checkedList.filter(z => z !== i.id));
@@ -101,9 +117,19 @@ export function TableCreator(props: { p: TablePropsType }) {
     })
 
     return <Table
+        // The following are screen aware props
         columnGrid={"50px 90px minmax(200px, 1fr) 100px 100px 50px"}
-        disableSort={props.p.disableSort}
         headers={(props.p as any).removeHeaders ? undefined : ['id', 'Date', 'Description', "Random Column 1", "Random Column 2", (props.p as any).useCustomHeader ? <Spinner size='small' /> : ""]}
+        headerTypographyType={props.p.headerTypographyType}
+        defaultTypographyType={props.p.defaultTypographyType}
+
+        md={{
+            columnGrid: '50px minmax(150px, 1fr) 130px 50px',
+            headers: (props.p as any).removeHeaders ? undefined : ['id', 'Description', "Random Column", (props.p as any).useCustomHeader ? <Spinner size='small' /> : ""]
+        }}
+
+        
+        disableSort={props.p.disableSort}
         onSortChange={(s, d) => {
             setSort(s);
             setDirection(d);
@@ -141,8 +167,6 @@ export function TableCreator(props: { p: TablePropsType }) {
             else if (context === 'manyRows') setManyRow(nl.map(z => z.items));
             else if (context === 'normalRows') setNormalRows(nl.map(z => z.items));
         }}
-        headerTypographyType={props.p.headerTypographyType}
-        defaultTypographyType={props.p.defaultTypographyType}
     />
 
 }
