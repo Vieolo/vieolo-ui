@@ -2992,6 +2992,37 @@ body {
 				}
 			}
 		}
+		
+		&__child {
+			width: $drawer-item-width - $base-unit-two;
+			margin-left: $base-unit-two;
+			height: $row-height-small;
+			border-left: 3px solid $secondary-color-light;
+			text-decoration: none;
+			
+			&--selected {
+				border-left: $base-unit-half solid $secondary-color-normal;
+			}
+			
+			&:hover {
+				background-color: $secondary-color-light;
+				cursor: pointer;
+			}
+			
+			.flex {
+				height: 100%;
+			}
+			
+			svg {
+				height: $base-unit-two;
+				fill: $secondary-color-normal;
+			}
+			
+			p {
+				font-size: 14px;
+			}
+			
+		}
 	}
 }
 
