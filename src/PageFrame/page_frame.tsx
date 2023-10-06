@@ -33,7 +33,7 @@ export default function PageFrame(props: {
     let [drawerOpen, setDrawerOpen] = useState<boolean>(false);
     let [openItems, setOpenItems] = useState<string[]>(
         props.drawer 
-            ? props.drawer.mainItems.filter(z => z.children && z.children.length > 0 && z.children.find(x => x.selected)).map(z => z.title)
+            ? props.drawer.mainItems.filter(z => z.children && z.children.length > 0 && z.children.some(x => x.selected)).map(z => z.title)
             : []
     );
 
