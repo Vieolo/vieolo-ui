@@ -40,6 +40,7 @@ export default function TablePagination(props: {
                 <IconButton
                     icon={<FirstPageIcon />}
                     size='small'
+                    sm={{size: 'medium'}}
                     onClick={() => props.pagination.onPageChange(1)}
                     disabled={props.pagination.pageNumber === 1}
                     ariaLabel={`${props.ariaLabel || 'table'} pagination first page`}
@@ -48,6 +49,7 @@ export default function TablePagination(props: {
                 <IconButton
                     icon={<LeftArrowIcon />}
                     size='small'
+                    sm={{size: 'medium'}}
                     onClick={() => props.pagination.onPageChange(props.pagination.pageNumber - 1)}
                     disabled={props.pagination.pageNumber === 1}
                     ariaLabel={`${props.ariaLabel || 'table'} pagination previous page`}
@@ -64,6 +66,7 @@ export default function TablePagination(props: {
                 <IconButton
                     icon={<RightArrowIcon />}
                     size='small'
+                    sm={{size: 'medium'}}
                     disabled={props.pagination.pageNumber === props.pagination.totalPageCount || !props.pagination.hasNextPage}
                     onClick={() => props.pagination!.onPageChange(props.pagination.pageNumber + 1)}
                     ariaLabel={`${props.ariaLabel || 'table'} pagination next page`}
@@ -74,6 +77,7 @@ export default function TablePagination(props: {
                     <IconButton
                         icon={<LastPageIcon />}
                         size='small'
+                        sm={{size: 'medium'}}
                         disabled={props.pagination.pageNumber === props.pagination.totalPageCount || !props.pagination.hasNextPage}
                         ariaLabel={`${props.ariaLabel || 'table'} pagination last page`}
                         onClick={() => {

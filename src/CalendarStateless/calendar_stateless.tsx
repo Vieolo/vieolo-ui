@@ -62,8 +62,8 @@ export default function CalendarStateless(props: {
 
         if (
             thisDate.getMonth() !== props.currentDate.getMonth() ||
-            (props.minDate && thisDate.isBefore(props.minDate)) ||
-            (props.maxDate && thisDate.isAfter(props.maxDate))
+            (props.minDate && thisDate.isBefore(props.minDate) && !thisDate.isOnSameDay(props.minDate)) ||
+            (props.maxDate && thisDate.isAfter(props.maxDate) && !thisDate.isOnSameDay(props.maxDate))
         ) className += " disabled";
         else if (props.selectedDate && props.selectedDate.includes(thisDate.formatDate('yyyy-mm-dd'))) className += " vieolo-calendar-stateless-component__selected";
 
