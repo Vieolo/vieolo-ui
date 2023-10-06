@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.31.5 (2023-10-07)
+- Fixed the minimum date of `DatePicker` ([#314](https://github.com/Vieolo/vieolo-ui/issues/314))
+- Increased the size of the buttons of `TablePagination` ([#323](https://github.com/Vieolo/vieolo-ui/issues/323))
+
 ## v0.31.4 (2023-09-27)
 - Added responsive props to `IconButton` ([#263](https://github.com/Vieolo/vieolo-ui/issues/263))
 - Fixed the z-index of `Drawer` ([#307](https://github.com/Vieolo/vieolo-ui/issues/307))
