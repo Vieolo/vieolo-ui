@@ -39,7 +39,8 @@ export default function CalendarStateful(props: {
     onKeyboardExit?: () => void,
     ariaLabel?: string,
     dateCellAriaLabelSuffix?: string,
-    title?: string
+    title?: string,
+    firstDayOfWeek?: 0 | 1
 }) {
 
     let [currentDate, setCurrentDate] = useState<VDate>(new VDate().setToDateStart());
@@ -168,6 +169,7 @@ export default function CalendarStateful(props: {
             minDate={props.minDate}
             ariaLabel={props.ariaLabel + " day container"}
             dateCellAriaLabelSuffix={props.dateCellAriaLabelSuffix}
+            firstDayOfWeek={props.firstDayOfWeek}
         />
     </div>
 }

@@ -51,7 +51,8 @@ export default function DatePicker(props: {
     error?: boolean,
     onClear?: () => void,
     minDate?: VDate,
-    maxDate?: VDate
+    maxDate?: VDate,
+    firstDayOfWeek?: 0 | 1
 }): JSX.Element {
 
     let [open, setOpen] = useState<boolean>(false);
@@ -109,6 +110,7 @@ export default function DatePicker(props: {
         showSearchInput={openedByKeyboard}
         minDate={props.minDate}
         maxDate={props.maxDate}
+        firstDayOfWeek={props.firstDayOfWeek}
         onKeyboardExit={() => setOpen(false)}
         title={(Device.isTouchOnlyDevice && props.title) ? props.title : undefined}
         onDateSelect={s => {

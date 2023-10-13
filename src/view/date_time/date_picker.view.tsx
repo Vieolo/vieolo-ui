@@ -30,6 +30,10 @@ export function datePickerOptions(): ViewData {
             error: 'boolean',
             clearable: 'boolean',
             hadDateLimit: 'boolean',
+            firstDayOfWeek: {
+                options: ["1", "0"],
+                default: "1"
+            },
             width: {
                 options: ['small', 'medium', 'full'],
                 default: "medium"
@@ -71,6 +75,7 @@ export function DatePickerCreator(props: { p: DatePickerPropsType }) {
                 onClear={(props.p as any).clearable ? () => setDate(undefined) : undefined}
                 minDate={minDate}
                 maxDate={maxDate}
+                firstDayOfWeek={+(props.p.firstDayOfWeek as any) as any}
                 selectedWeek={!date ? undefined : {
                     startDate: date.getWeek().start,
                     weekNumber: date.getWeek().weekNumber
