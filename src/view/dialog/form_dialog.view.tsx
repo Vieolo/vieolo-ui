@@ -37,7 +37,8 @@ export function formDialogOptions(): ViewData {
             removeCancelButton: 'boolean',
             removeSaveButton: 'boolean',
             withExtraButtons: 'boolean',
-            isLoading: 'boolean'
+            isLoading: 'boolean',
+            disableOverflowScroll: 'boolean'
         }
     }
 }
@@ -68,6 +69,7 @@ export function FormDialogCreator(props: { p: FormDialogPropsType }) {
             removeCancelButton={props.p.removeCancelButton}
             removeSaveButton={props.p.removeSaveButton}
             saveButtonDisabled={props.p.saveButtonDisabled}
+            disableOverflowScroll={props.p.disableOverflowScroll}
         >
             <p>The contents of the dialog</p>
             <p>Click on the cancel button to see toggle the inline mode</p>

@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.31.6 (2023-10-13)
+- Added the ability to disable overflow scroll in `FormDialog` ([#287](https://github.com/Vieolo/vieolo-ui/issues/287))
+- Added support for Sunday as the first day of the week ([#304](https://github.com/Vieolo/vieolo-ui/issues/304))
+- Fixed the export of `useScreenSize` ([#324](https://github.com/Vieolo/vieolo-ui/issues/324))
+
 ## v0.31.5 (2023-10-07)
 - Fixed the minimum date of `DatePicker` ([#314](https://github.com/Vieolo/vieolo-ui/issues/314))
 - Increased the size of the buttons of `TablePagination` ([#323](https://github.com/Vieolo/vieolo-ui/issues/323))
