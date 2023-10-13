@@ -33,7 +33,7 @@ import { RadioGroupRowCreator, radioGroupRowOptions  } from '../form/radio_group
 import { SelectRowCreator, selectRowOptions } from '../form/select_row.view';
 import { FormSectionCreator, formSectionOptions } from '../form/form_section.view';
 import { TabSwitchCreator, tabSwitchOptions } from '../layout/tab_switch.view';
-import { DatePickerCreator, datePickerOptions } from '../date_time/date_picker.view';
+import { DatePickerCreator, datePickerOptions } from '../../DatePicker/date_picker.view';
 import { ganttChartOptions, GanttChartCreator } from '../charts/gantt_chart.view';
 import { checkboxOptions, CheckboxCreator } from '../form/checkbox.view';
 import { fileInputOptions, FileInputCreator } from '../form/file_input.view';

@@ -15,20 +15,40 @@ export default function CalendarStateless(props: {
     minDate?: VDate,
     maxDate?: VDate,
     dateCellAriaLabelSuffix?: string,
-    ariaLabel?: string
+    ariaLabel?: string,
+    firstDayOfWeek?: 0 | 1
 }) {
 
     let today = new VDate();
-    let startDate = new VDate(props.currentDate).setToMonthStart().getWeek().start;
-    let endDate = new VDate(props.currentDate).setToMonthEnd().getWeek().end;
+    let monthStart = props.currentDate.setToMonthStart()
+    let monthEnd = props.currentDate.setToMonthEnd()
+    let startDate = monthStart.getWeek().start;
+    let endDate = monthEnd.getWeek().end;
+    
+    if (props.firstDayOfWeek === 0) {
+        startDate = startDate.addDay(-1)
+        endDate = endDate.addDay(6)
+    }
 
     let dayCards: { [weekStart: string]: React.ReactNode[] } = {};
 
-    for (let i = 0; i < 45; i++) {
+    for (let i = 0; i < 55; i++) {
 
         let thisDate = new VDate(startDate).addDay(i);
         if (thisDate.isAfter(endDate)) break;
         let thisWeek = thisDate.getWeek();
+        
+        if (props.firstDayOfWeek === 0) {
+            if (thisDate.getDay() === 0) {
+                thisWeek.start = thisWeek.start.addDay(6)
+                thisWeek.end = thisWeek.end.addDay(6)
+            } else {
+                thisWeek.start = thisWeek.start.addDay(-1)
+                thisWeek.end = thisWeek.end.addDay(-1)
+            }
+            
+            if (thisWeek.start.isAfter(monthEnd) || thisWeek.end.isBefore(monthStart)) continue;
+        }
 
         if (thisDate.getDay() === 1 && props.includeWeek) {
             let weekClass = "vieolo-calendar-stateless-component__week-col";
@@ -82,7 +102,6 @@ export default function CalendarStateless(props: {
         )
     }
 
-
     return <div className="vieolo-calendar-stateless-component" aria-label={props.ariaLabel}>
         <div className={`vieolo-calendar-stateless-component__calendar-content ${props.includeWeek ? 'vieolo-calendar-stateless-component__calendar-content--with-week' : ''}`}>
             <div className={`vieolo-calendar-stateless-component__row-header vieolo-calendar-stateless-component__row-header--${props.includeWeek ? 'with-week' : 'no-week'}`}>
@@ -90,13 +109,11 @@ export default function CalendarStateless(props: {
                     props.includeWeek &&
                     <div className="vieolo-calendar-stateless-component__week-col">W</div>
                 }
-                <div>M</div>
-                <div>T</div>
-                <div>W</div>
-                <div>T</div>
-                <div>F</div>
-                <div>S</div>
-                <div>S</div>
+                {
+                    (props.firstDayOfWeek === 0 ? ["S", "M", "T", "W", "T", "F", "S"] : ["M", "T", "W", "T", "F", "S", "S"]).map((z, i) => {
+                        return <div key={i}>{z}</div>
+                    })
+                }
             </div>
             {
                 Object.keys(dayCards).map(w => {
