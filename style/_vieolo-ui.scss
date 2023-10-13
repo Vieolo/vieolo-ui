@@ -1463,6 +1463,12 @@ body {
 	max-height: 90vh;
 	overflow-y: scroll;
 	$self: &;
+	
+	&--overflow-scroll {
+		#{$self}__content {
+			overflow-y: scroll;
+		}
+	}
 
 	&--keyboard-open {
 
@@ -1521,7 +1527,6 @@ body {
 
 	&__content {
 		max-height: calc(90vh - $row-height-medium - $row-height-large);
-		overflow-y: scroll;
 
 		@include for-touch-device {
 			max-height: calc(80vh - $row-height-large - $row-height-large);

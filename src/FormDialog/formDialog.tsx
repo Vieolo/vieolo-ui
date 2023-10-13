@@ -63,7 +63,8 @@ export default function FormDialog(props: {
     inline?: boolean,
     ariaLabel?: string,
     className?: string,
-    isLoading?: boolean
+    isLoading?: boolean,
+    disableOverflowScroll?: boolean
 }) {
 
     let [virtKeyboardOffset, setVirtKeyboardOffset] = useState<number>(0);
@@ -95,6 +96,10 @@ export default function FormDialog(props: {
     if (!props.inline && virtKeyboardOffset > 0) {
         dClass += " vieolo-form-dialog--keyboard-open"
         footerButtonSize = "small"
+    }
+    
+    if (!props.disableOverflowScroll) {
+        dClass += " vieolo-form-dialog--overflow-scroll"
     }
 
     let dialog = <div className={dClass} aria-label={props.ariaLabel}>
