@@ -5,14 +5,14 @@ import React, { useState } from 'react';
 import VDate from '@vieolo/vdate';
 
 // Component
-import DatePicker from '../../DatePicker';
+import DatePicker from '.';
 
 // Types
-import { ViewData } from '../main/main';
-import GridContainer from '../../GridContainer';
-import Grid from '../../Grid';
-import InputSet from '../../InputSet';
-import SelectSet from '../../SelectSet/select_set';
+import { ViewData } from '../view/main/main';
+import GridContainer from '../GridContainer';
+import Grid from '../Grid';
+import InputSet from '../InputSet';
+import SelectSet from '../SelectSet/select_set';
 
 type DatePickerPropsType = React.ComponentProps<typeof DatePicker>;
 
