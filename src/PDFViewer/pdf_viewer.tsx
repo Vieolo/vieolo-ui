@@ -1,5 +1,5 @@
 // React
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // Components
 import Modal from '../Modal/modal';
@@ -89,42 +89,6 @@ export default function PDFViewer(props: {
 		// eslint-disable-next-line
 	}, [props.filePath]);
 
-	function handlePopState(e: PopStateEvent) {
-		if (props.context === 'full screen') {
-			if (props.onClose) {
-				e.preventDefault()
-				props.onClose();
-			}
-		} else {
-			e.preventDefault()
-			setMode("embedded");
-			if (props.onExpandToggle) props.onExpandToggle("embedded");
-		}
-		window.removeEventListener('popstate', handlePopState);
-	}
-
-
-	function handleBrowserBack() {
-		let u = new URL(window.location as any);
-		let f = (props.fileName || (typeof props.filePath === 'string' ? props.filePath.split('___').slice(-1)[0] : props.filePath.name)).trim();
-		u.searchParams.set('pdf_file_in_view', f);
-		window.history.pushState({}, '', u.toString());
-		window.addEventListener("popstate", handlePopState);
-	}
-
-
-	useEffect(() => {
-		if (props.context === 'full screen') {
-			handleBrowserBack();
-		}
-
-		return () => {
-			if (window.location.search.includes("pdf_file_in_view")) {
-				window.history.back();
-			}
-		}
-		// eslint-disable-next-line
-	}, [props.fileName, props.filePath, props.onClose, props.context])
 
 	let state: 'error' | 'loading' | 'done' = documentLoadError ? 'error' : !doc ? 'loading' : 'done';
 	let pages = [];
@@ -180,12 +144,8 @@ export default function PDFViewer(props: {
 				if (m === 'full screen') {
 					setMode('full screen');
 					if (props.onExpandToggle) props.onExpandToggle("full screen");
-					handleBrowserBack();
 				}
 				else {
-					if (window.location.search.includes("pdf_file_in_view")) {
-						window.history.back();
-					}
 					setMode('embedded');
 					if (props.onExpandToggle) props.onExpandToggle("embedded");
 				}
@@ -242,7 +202,22 @@ export default function PDFViewer(props: {
 
 	if (mode === 'embedded') return viewer;
 	else return <Modal
-		onClose={() => { }}
+		onClose={() => {
+			// Here, we are handling the browser back button.
+			// Since the PDF Viewer is full screen, the only way to close the `Modal` is to
+			// click the back button
+			// 
+			// If the viewer started as `embedded` and has been set to `full screen` by the user,
+			// we set the mode to `embedded`
+			//
+			// Else if the viewer start as `full screen` (which means will remain `full screen` in its lifetime)
+			// and there is a a `onClose` callback, we trigger the `onClose`
+			if (props.context === 'embedded' && mode === 'full screen') {
+				setMode('embedded');
+			} else if (props.context === 'full screen' && mode === 'full screen' && props.onClose) {
+				props.onClose()
+			}
+		}}
 	>
 		<div className="width--vw-100 height--vh-100">
 			{viewer}

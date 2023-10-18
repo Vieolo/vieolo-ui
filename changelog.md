@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.31.7 (2023-10-19)
+- `Modal` now handles the browser back button ([#253](https://github.com/Vieolo/vieolo-ui/issues/253))
+- Fixed the height of `Button` in responsive mode ([#328](https://github.com/Vieolo/vieolo-ui/issues/328))
+
 ## v0.31.6 (2023-10-13)
 - Added the ability to disable overflow scroll in `FormDialog` ([#287](https://github.com/Vieolo/vieolo-ui/issues/287))
 - Added support for Sunday as the first day of the week ([#304](https://github.com/Vieolo/vieolo-ui/issues/304))

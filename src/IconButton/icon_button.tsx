@@ -50,7 +50,7 @@ export default function IconButton(props: {
 			if (s.trim()) s = `${s}--${size}`
 		}
 		
-		if (s.trim()) return `vieolo-icon-button--${s}`
+		if (s.trim()) return `vieolo-icon-button--${s} `
 		return ''
     }
 

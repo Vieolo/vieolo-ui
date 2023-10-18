@@ -17,21 +17,19 @@ export default function Modal({ onClose, position, children }: {
             onCloseRef.current(event);
         }
     }, [container]);
-
+    
+    
     const onCloseRef = React.useRef(onClose);
-    React.useEffect(
+    useEffect(
         () => {
             onCloseRef.current = onClose;
         }
     );
 
     useEffect(() => {
-
-
         document.addEventListener("click", handleClickOutside);
         let main = document.querySelector('main');
         if (main) main.style.overflow = 'hidden';
-
 
         return () => {
             document.removeEventListener("click", handleClickOutside);
@@ -39,6 +37,34 @@ export default function Modal({ onClose, position, children }: {
             if (main) main.style.removeProperty("overflow");
         }
     }, [container, handleClickOutside]);
+    
+    
+    useEffect(() => {
+        const handleBrowserBack = (e: PopStateEvent) => {
+            e.preventDefault();
+            window.history.replaceState({}, '');
+            console.log("handle browser back")
+            console.log(window.history.length)
+            onClose(e as any);
+        }
+        
+        window.history.pushState({modal: true}, '');
+        window.addEventListener('popstate', handleBrowserBack);
+        
+        return () => {
+            window.removeEventListener('popstate', handleBrowserBack);
+            console.log("destroyer")
+            console.log(window.history.length)
+            console.log(window.history.state)
+            if (window.history.state && window.history.state.modal) {
+                // window.history.replaceState({}, '');
+                window.history.back();
+            }
+        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+
 
     let className = "vieolo-modal";
 

@@ -90,7 +90,7 @@ export function ButtonCreator(props: { p: ButtonPropsType }) {
                     }
         }
         md={{
-            height: 'large'
+            height: 'extra-small'
         }}
     />
 
