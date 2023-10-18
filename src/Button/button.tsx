@@ -66,7 +66,7 @@ export default function Button(props: {
 			if (s.trim()) s = `${s}--${size}`
 		}
 		
-		if (s.trim()) return `vieolo-button--${s}`
+		if (s.trim()) return `vieolo-button--${s} `
 		return ''
     }
 
