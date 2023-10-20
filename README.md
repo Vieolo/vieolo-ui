@@ -68,7 +68,8 @@ You're good to go. You can now modify the components of Vieolo UI as you wish to
 
 Components can be imported individually. This type of import will produce the smallest build size after the tree shaking
 ```js
-import IconButton from '@vieolo/vieolo-ui/IconButton'
+import Button from '@vieolo/vieolo-ui/Button';
+import IconButton from '@vieolo/vieolo-ui/IconButton';
 ```
 
 (Not Recommended)
@@ -92,6 +93,7 @@ which starts the development server. The components are displayed in the `App.ts
 
 - [`BarChart`](docs/BarChart/BarChart.md)
 - [`Flex`](docs/Flex/Flex.md)
+- [`Modal`](docs/Modal/Modal.md)
 
 
 <br>

@@ -123,7 +123,8 @@ export default function FileViewerFrame(props: {
                 <IconButton
                     size="extra-small"
                     icon={<ExpandIcon />}
-                    onClick={() => {
+                    onClick={(e) => {
+                        e.stopPropagation();
                         if (props.mode === 'embedded') {
                             props.onModeChange("full screen");
                         }
