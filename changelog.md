@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.31.8 (2023-10-20)
+- Disabled the browser history handling for `Modal` in development mode. The behavior is unchanged in the production mode. ([#311](https://github.com/Vieolo/vieolo-ui/issues/311))
+
 ## v0.31.7 (2023-10-19)
 - `Modal` now handles the browser back button ([#253](https://github.com/Vieolo/vieolo-ui/issues/253))
 - Fixed the height of `Button` in responsive mode ([#328](https://github.com/Vieolo/vieolo-ui/issues/328))
