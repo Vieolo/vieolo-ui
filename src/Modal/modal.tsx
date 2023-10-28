@@ -11,12 +11,18 @@ export default function Modal({ onClose, position, children }: {
 }) {
 
     let [container,] = useState(useRef<HTMLDivElement>(null));
+    let [id,] = useState<number>(new Date().getTime());
 
     let handleClickOutside = useCallback((event: onCloseEvent) => {
-        if (container.current && !(container.current as any).contains(event.target)) {
+        if (
+            container.current && 
+            !(container.current as any).contains(event.target) &&
+            container.current.getAttribute("modal-id") === id.toString()
+        ) {
+            event.stopPropagation();
             onCloseRef.current(event);
         }
-    }, [container]);
+    }, [container, id]);
 
 
     const onCloseRef = React.useRef(onClose);
@@ -41,25 +47,34 @@ export default function Modal({ onClose, position, children }: {
 
     useEffect(() => {
         const handleBrowserBack = (e: PopStateEvent) => {
+            // This callback is fired AFTER the browser has poped the state
+            // So, the state is NOT reflective of the state that has just been poped
+            // There are cases where two modals are places on top of each other
+            // In those cases, if the current state equals to this modal ID, it means
+            // that the current modal is was the lower modal and the top modal has just
+            // been poped
+            // So, we won't close this modal just yet 
             e.preventDefault();
-            window.history.replaceState({}, '');
-            onClose(e as any);
+            if (e.state !== `modal ${id}`) {
+                onClose(e as any);
+            }
         }
 
         let origin = window.location.origin.toLowerCase();
         let debug = origin.includes("localhost") || origin.includes("127.0.0.1");
+        // debug = false;
 
         if (!debug) {
-            window.history.pushState({ modal: true }, '');
+            window.history.pushState(`modal ${id}`, '');
             window.addEventListener('popstate', handleBrowserBack);
         }
 
         return () => {
             if (!debug) {
                 window.removeEventListener('popstate', handleBrowserBack);
-                if (window.history.state && window.history.state.modal) {
+                if (window.history.state === `modal ${id}`) {
                     // window.history.replaceState({}, '');
-                    window.history.back();
+                    window.history.go(-1)
                 }
             }
         }
@@ -75,7 +90,7 @@ export default function Modal({ onClose, position, children }: {
     }
 
     return <div className={className} onClick={e => handleClickOutside(e)}>
-        <div className="modal-content" ref={container as any}>
+        <div className="modal-content" ref={container as any} modal-id={id}>
             {children}
         </div>
     </div>
