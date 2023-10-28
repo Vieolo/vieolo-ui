@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.31.9 (2023-10-29)
+- Improved the closure of `Modal`
+
 ## v0.31.8 (2023-10-20)
 - Disabled the browser history handling for `Modal` in development mode. The behavior is unchanged in the production mode. ([#311](https://github.com/Vieolo/vieolo-ui/issues/311))
 
