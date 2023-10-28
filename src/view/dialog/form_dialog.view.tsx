@@ -4,14 +4,18 @@ import React, { useState } from 'react';
 // Component
 import FormDialog from '../../FormDialog';
 import IconButton from '../../IconButton';
+import DatePicker from '../../DatePicker';
+import Select from '../../Select';
+import Input from '../../Input';
 
 // Material UI
 import SampleIcon from '@mui/icons-material/RefreshRounded';
 
+// Installed Packages
+import VDate from '@vieolo/vdate';
+
 // Types
 import { ViewData } from '../main/main';
-import Select from '../../Select';
-import Input from '../../Input';
 
 type FormDialogPropsType = React.ComponentProps<typeof FormDialog>;
 
@@ -47,6 +51,7 @@ export function formDialogOptions(): ViewData {
 export function FormDialogCreator(props: { p: FormDialogPropsType }) {
 
     let [inline, setInline] = useState<boolean>(true)
+    let [date, setDate] = useState<VDate>(new VDate())
 
     return <div className="background-color--primary-light padding--one center-by-flex-row">
         <FormDialog
@@ -71,6 +76,11 @@ export function FormDialogCreator(props: { p: FormDialogPropsType }) {
             saveButtonDisabled={props.p.saveButtonDisabled}
             disableOverflowScroll={props.p.disableOverflowScroll}
         >
+
+            <DatePicker 
+                onDateSelect={v => setDate(v)} 
+                selectedDate={date}
+            />
             <p>The contents of the dialog</p>
             <p>Click on the cancel button to see toggle the inline mode</p>
             <p>Click on the cancel button to see toggle the inline mode</p>
