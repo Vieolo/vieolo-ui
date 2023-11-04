@@ -43,10 +43,8 @@ export function fileViewerOptions(): ViewData {
                 options: ["embedded", "full screen"],
                 default: "embedded"
             },
-            expandable: {
-                options: [false, true],
-                default: true
-            }
+            expandable: 'booleanTrueDefault',
+            disableDownload: 'boolean'
         }
     }
 }
@@ -64,6 +62,7 @@ export function FileViewerCreator(props: { p: FileViewerPropsType }) {
             onClose={props.p.onClose}
             expandable={props.p.expandable}
             fileName={(props.p.file as string).split("/")[1]}
+            disableDownload={props.p.disableDownload}
         />
     </div>
 }

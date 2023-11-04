@@ -1,5 +1,5 @@
 // React
-import { toFixed } from '@vieolo/parsers';
+import { toFixed } from '@vieolo/parsers/number_parsers';
 import React, { useState } from 'react';
 
 // Component

@@ -1,5 +1,5 @@
 // React
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ImageViewer from '../ImageViewer';
 import PDFViewer from '../PDFViewer';
 import Spinner from '../Spinner';
@@ -30,7 +30,10 @@ export default function FileViewer(props: {
 	 * This error message apears when there is an issue with loading the file.
 	 * If nothing provided, the default message is displayed
 	 */
-	errorMessage?: string
+	errorMessage?: string,
+    disableDownload?: boolean,
+    /** The component to be displayed when the given file is not supported */
+    fileNotSupportedComponent?: React.ReactNode,
 }) {
 
     let [file, setFile] = useState<File | undefined | null>(undefined);
@@ -70,10 +73,13 @@ export default function FileViewer(props: {
     let fileType = file.type;    
 
     if (fileType === 'application/pdf') return <PDFViewer {...props} filePath={file} heightDeduction={props.heightDeduction === undefined ? 100 : props.heightDeduction} />
-    else if (["image/jpg", "image/jpeg", "image/png"].includes(fileType)) return <ImageViewer file={file} fileName={props.fileName} context={props.context} onClose={props.onClose} />
+    else if (["image/jpg", "image/jpeg", "image/png"].includes(fileType)) return <ImageViewer file={file} fileName={props.fileName} context={props.context} onClose={props.onClose} disableDownload={props.disableDownload} />
     else if (["audio/mpeg"].includes(fileType)) return <div></div>
-    else if (["video/mp4", "video/webm"].includes(fileType)) return <VideoViewer file={file} context={props.context} onClose={props.onClose} />
+    else if (["video/mp4", "video/webm"].includes(fileType)) return <VideoViewer file={file} context={props.context} onClose={props.onClose} disableDownload={props.disableDownload} />
     else return <div>
-        <Typography text='The given file is not supported!' />
+        {
+            props.fileNotSupportedComponent ||
+            <Typography text='The given file is not supported!' />
+        }
     </div>
 }

@@ -40,7 +40,8 @@ export default function PDFViewer(props: {
 	 * This error message apears when there is an issue with loading the file.
 	 * If nothing provided, the default message is displayed
 	 */
-	errorMessage?: string
+	errorMessage?: string,
+	disableDownload?: boolean,
 }) {
 	let [doc, setDoc] = useState<PDFDocumentProxy | null>(null);
 	let [totalPage, setTotalPage] = useState<number>(0);
@@ -131,6 +132,7 @@ export default function PDFViewer(props: {
 			context={props.context}
 			expandable={props.expandable || false}
 			mode={mode}
+			disableDownload={props.disableDownload}
 			onDownload={async () => {
 				let { downloadBlob } = await import("@vieolo/file-management/download");
 				if (typeof props.filePath === 'string') {

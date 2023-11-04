@@ -8,7 +8,8 @@ import FileViewerFrame from "../FileViewerFrame"
 export default function VideoViewer(props: {
     file: string | File,
     context: 'embedded' | 'full screen',
-    onClose?: () => void
+    onClose?: () => void,
+    disableDownload?: boolean,
 }) {
 
     let [mode, setMode] = useState<'full screen' | 'embedded'>(props.context);
@@ -17,6 +18,7 @@ export default function VideoViewer(props: {
         context={props.context}
         expandable
         mode={mode}
+        disableDownload={props.disableDownload}
         onDownload={async () => { 
             let { downloadBlob } = await import("@vieolo/file-management/download");
             if (typeof props.file === 'string') {

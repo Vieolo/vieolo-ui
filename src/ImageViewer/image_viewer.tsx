@@ -9,7 +9,8 @@ export default function ImageViewer(props: {
     file: string | File,
     fileName: string,
     context: 'embedded' | 'full screen',
-    onClose?: () => void
+    onClose?: () => void,
+    disableDownload?: boolean,
 }) {
 
     let imgSrc = typeof props.file === 'string' ? props.file : window.URL.createObjectURL(props.file)
@@ -18,6 +19,7 @@ export default function ImageViewer(props: {
     let frame = <FileViewerFrame
         context={props.context}
         expandable
+        disableDownload={props.disableDownload}
         mode={mode}
         onDownload={async () => {
             let { downloadBlob } = await import("@vieolo/file-management/download");
