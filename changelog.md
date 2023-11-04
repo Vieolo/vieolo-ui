@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.31.10 (2023-11-04)
+- Added the ability to remove the download button in the `FileViewer`
+- Added the ability to display a custom component when file is not supported by `FileViewer`
+
 ## v0.31.9 (2023-10-29)
 - Improved the closure of `Modal`
 

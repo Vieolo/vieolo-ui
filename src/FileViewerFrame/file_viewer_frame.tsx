@@ -30,6 +30,7 @@ export default function FileViewerFrame(props: {
     onRotationChange?: (c: "+" | "-") => void,
     onShare: () => void,
     onDownload: () => void,
+    disableDownload?: boolean,
     expandable: boolean
 }) {
     
@@ -92,12 +93,15 @@ export default function FileViewerFrame(props: {
                 />
             }
 
-            <IconButton
-                size="extra-small"
-                icon={<DownloadIcon />}
-                disabled={props.isLoading}
-                onClick={props.onDownload}
-            />
+            {
+                !props.disableDownload &&
+                <IconButton
+                    size="extra-small"
+                    icon={<DownloadIcon />}
+                    disabled={props.isLoading}
+                    onClick={props.onDownload}
+                />
+            }
 
             {
                 props.onRotationChange &&

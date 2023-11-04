@@ -14,7 +14,7 @@ import { CloseIcon } from '../icons/icons';
 import { ColorOptionType } from '../types/types';
 
 // Installed Packages
-import { toFixedFloat } from '@vieolo/parsers';
+import { toFixedFloat } from '@vieolo/parsers/number_parsers';
 
 
 export type TableInteractiveCell = {
