@@ -19,6 +19,7 @@ import { PeriodSelectorCreator, periodSelectorOptions } from '../date_time/perio
 import { IconButtonCreator, iconButtonOptions } from '../button/icon_button.view';
 import { ButtonCreator, buttonOptions } from '../button/button.view';
 import { ChipCreator, chipOptions } from '../button/chip.view';
+import { TimeoutChipCreator, timeoutChipOptions } from '../../TimeoutChip/timeout_chip.view';
 import { InputSetCreator, inputSetOptions } from '../form/input_set.view';
 import { ListCreator, listOptions } from '../list/list.view';
 import { SwitchRowCreator, switchRowOptions } from '../form/switch_row.view';
@@ -116,6 +117,7 @@ export default function MainPage(props: {}): JSX.Element {
 
         "Button": { title: "Button", data: buttonOptions(), creator: ButtonCreator, group: "Buttons" },
         "Chip": { title: "Chip", data: chipOptions(), creator: ChipCreator, group: "Buttons" },
+        "Timeout Chip": { title: "Timeout Chip", data: timeoutChipOptions(), creator: TimeoutChipCreator, group: "Buttons" },
         "Icon Button": { title: "Icon Button", data: iconButtonOptions(), creator: IconButtonCreator, group: "Buttons" },
         "FAB": { title: "FAB", data: floatingActionButtonOptions(), creator: FloatingActionButtonCreator, group: "Buttons" },
 

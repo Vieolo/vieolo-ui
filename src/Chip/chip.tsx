@@ -6,6 +6,7 @@ import { getEmphasisClasses } from '../utility/style_utility';
 
 // Components
 import IconButton from '../IconButton';
+import { EmphasisType } from '../types';
 
 
 export default function Chip(props: {
@@ -25,7 +26,7 @@ export default function Chip(props: {
 	/** The custom button component which will appear on the right side of the Chip and has a higher priority than the default button */
 	color?: ColorOptionType,
 	buttonComponent?: React.ReactNode,
-	emphasis?: 'medium' | 'low' | 'low-normal' | 'none' | 'none-normal' | 'none-background',
+	emphasis?: EmphasisType,
 	isTransparent?: boolean,
 	borderRadius?: BorderRadiusType
 	id?: string,
