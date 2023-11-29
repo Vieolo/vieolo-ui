@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.31.12 (2023-11-29)
+- Fixed the debug mode detection of `Modal`
+
 ## v0.31.11 (2023-11-29)
 - Added new component: `TimeoutChip` ([#230](https://github.com/Vieolo/vieolo-ui/issues/230))
 - Added the ability to set the form dialogs to full screen in the mobile layout ([#315](https://github.com/Vieolo/vieolo-ui/issues/315))

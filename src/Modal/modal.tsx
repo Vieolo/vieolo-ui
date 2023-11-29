@@ -60,8 +60,8 @@ export default function Modal({ onClose, position, children }: {
             }
         }
 
-        let origin = window.location.origin.toLowerCase();
-        let debug = origin.includes("localhost") || origin.includes("127.0.0.1");
+        // When the url is using HTTP, it will be considered to be in debug mode
+        let debug = window.location.protocol === 'http:'
         // debug = false;
 
         if (!debug) {
