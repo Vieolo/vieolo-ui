@@ -64,7 +64,9 @@ export default function FormDialog(props: {
     ariaLabel?: string,
     className?: string,
     isLoading?: boolean,
-    disableOverflowScroll?: boolean
+    disableOverflowScroll?: boolean,
+    /** If set to true, the dialog will be set to full screen in the mobile (sm) layout */
+    smFullScreen?: boolean,
 }) {
 
     let [virtKeyboardOffset, setVirtKeyboardOffset] = useState<number>(0);
@@ -92,6 +94,10 @@ export default function FormDialog(props: {
 
     let dClass = "vieolo-form-dialog";
     let footerButtonSize: 'small' | "medium" = "medium"
+    
+    if (!props.inline && props.smFullScreen) {
+        dClass += " vieolo-form-dialog--sm-full"
+    }
 
     if (!props.inline && virtKeyboardOffset > 0) {
         dClass += " vieolo-form-dialog--keyboard-open"
@@ -103,7 +109,7 @@ export default function FormDialog(props: {
     }
 
     let dialog = <div className={dClass} aria-label={props.ariaLabel}>
-        <div className="vieolo-form-dialog__header flex-row-space-between">
+        <div className="vieolo-form-dialog__header">
             <Typography type="title-small" text={props.headerTitle} />
             {
                 props.headerRightComponent === 'close' &&
@@ -114,6 +120,9 @@ export default function FormDialog(props: {
                     }}
                     color={'primary'}
                     size={'small'}
+                    sm={{
+                        size: 'medium'
+                    }}
                     aria-label={props.ariaLabel ? `${props.ariaLabel} close button` : undefined}
                 />
             }
@@ -129,7 +138,7 @@ export default function FormDialog(props: {
 
         {
             (!props.removeCancelButton || !props.removeSaveButton || props.extraButtons || (props.extraButtons || []).length > 0) &&
-            <div className="vieolo-form-dialog__footer">
+            <div className="vieolo-form-dialog__footer" style={(virtKeyboardOffset && props.smFullScreen) ? { bottom: `${virtKeyboardOffset}px`} : undefined}>
                 <Flex justifyContent="start" alignItems="center" columnGap="half">
                     {
                         !props.removeCancelButton &&

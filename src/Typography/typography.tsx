@@ -30,6 +30,7 @@ export default function Typography(props: {
     ariaLabel?: string,        
     style?: React.CSSProperties,    
     nonselectable?: boolean,
+    noTextOverflow?: boolean,
     /** This is the title that appears natively by the browser when the user hovers over the text */
     hoverTitle?: string,
     lg?: TypographyStyle,
@@ -72,6 +73,7 @@ export default function Typography(props: {
 
     if (props.className) finalC += `${props.className} `
     if (props.nonselectable) finalC += `nonselectable `    
+    if (props.noTextOverflow) finalC += `no-text-overflow `    
 
     return <p
         className={finalC.trim()}
