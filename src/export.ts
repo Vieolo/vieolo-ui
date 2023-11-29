@@ -72,6 +72,7 @@ import TablePagination from './TablePagination';
 import Textarea from './Textarea';
 import TextareaSet from './TextareaSet';
 import TimeInput from './TimeInput';
+import TimeoutChip from './TimeoutChip';
 import TitlePeriodCard from './TitlePeriodCard';
 import TreeList from './TreeList';
 import Typography from './Typography';
@@ -263,6 +264,7 @@ export {
 	Textarea,
 	TextareaSet,
 	TimeInput,
+	TimeoutChip,
 	TitlePeriodCard,
 	TreeList,
 	Typography,

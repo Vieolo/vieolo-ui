@@ -42,7 +42,8 @@ export function formDialogOptions(): ViewData {
             removeSaveButton: 'boolean',
             withExtraButtons: 'boolean',
             isLoading: 'boolean',
-            disableOverflowScroll: 'boolean'
+            disableOverflowScroll: 'boolean',
+            smFullScreen: 'booleanTrueDefault',
         }
     }
 }
@@ -75,11 +76,18 @@ export function FormDialogCreator(props: { p: FormDialogPropsType }) {
             removeSaveButton={props.p.removeSaveButton}
             saveButtonDisabled={props.p.saveButtonDisabled}
             disableOverflowScroll={props.p.disableOverflowScroll}
+            smFullScreen={props.p.smFullScreen}
         >
 
             <DatePicker 
                 onDateSelect={v => setDate(v)} 
                 selectedDate={date}
+            />
+            
+            <Input 
+                error={false}
+                onChange={() => {}}
+                value=''
             />
             <p>The contents of the dialog</p>
             <p>Click on the cancel button to see toggle the inline mode</p>
