@@ -37,8 +37,8 @@ export default function TimeoutChip(props: ChipPropType & {
         icon={activated ? props.timeoutIcon : props.normalIcon}
         color={activated ? props.timeoutColor : props.normalColor}
         emphasis={activated ? props.timeoutEmphasis : props.normalEmphasis}
-        onChipSelect={async () => {
-            await navigator.clipboard.writeText(props.label)
+        onChipSelect={!props.onChipSelect ? undefined : async () => {
+            if (props.onChipSelect) props.onChipSelect()
             setActivated(true)
         }}
     />
