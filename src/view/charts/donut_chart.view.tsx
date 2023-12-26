@@ -33,6 +33,7 @@ export function donutChartOptions(): ViewData {
             },
             disabled: 'boolean',
             sorted: 'boolean',
+            removeLabels: 'boolean',
         }
     }
 }
@@ -93,6 +94,7 @@ export function DonutChartCreator(props: { p: DonutChartPropsType }) {
         disabled={props.p.disabled}
         height={300}
         sorted={props.p.sorted}
+        removeLabels={props.p.removeLabels}
         onClick={(d) => {
             if (selected && d.id === selected.id) setSelected(undefined)            
             else setSelected(d)

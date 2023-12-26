@@ -25,6 +25,7 @@ export default function DonutChart(props: {
     /** if ommited, The default value of 300px is used instead */
     height?: number,
     sorted?: boolean,
+    removeLabels?: boolean,
     onClick?: (d: DonutChartData) => void,
 }) {
 
@@ -115,7 +116,7 @@ export default function DonutChart(props: {
             .text(function (d) {
                 if (finalData.length === 0) {
                     return ""
-                }else if (finalData[0].percent !== undefined) {
+                } else if (finalData[0].percent !== undefined) {
                     return percent(d.index);
                 } else {
                     return title(d.index)
@@ -132,81 +133,87 @@ export default function DonutChart(props: {
 
 
         // Creating the texts
-        var text = svg.select(".labels").selectAll("text")
-            .data(pie);
 
-        text.enter()
-            .append("text")
-            .attr("class", "typography-paragraph-small")
-            .attr("dy", ".35em")
-            .text(function (d) {
-                if (hasSelected && !finalData[d.index].selected) return ""
-                return percent(d.index)
-            })
-            .merge(text as any)
-            .transition()
-            .duration(1000)
-            .attrTween("transform", function (d) {
-                (this as any)._current = (this as any)._current || d;
-                const interpolate = d3.interpolate((this as any)._current, d);
-                (this as any)._current = interpolate(0);
-                return function (t) {
-                    const d2 = interpolate(t);
-                    const pos = outerArc.centroid(d2 as any);
-                    pos[0] = outerRadius * (midAngle(d2) < Math.PI ? 1 : -1);
-                    return "translate(" + pos + ")";
-                };
-            })
-            .styleTween("text-anchor", function (d) {
-                (this as any)._current = (this as any)._current || d;
-                const interpolate = d3.interpolate((this as any)._current, d);
-                (this as any)._current = interpolate(0);
-                return function (t) {
-                    const d2 = interpolate(t);
-                    return midAngle(d2) < Math.PI ? "start" : "end";
-                };
-            });
+        if (!props.removeLabels) {
+            var text = svg.select(".labels").selectAll("text")
+                .data(pie);
 
-        text.exit()
-            .remove();
+            text.enter()
+                .append("text")
+                .attr("class", "typography-paragraph-small font-weight--bold")
+                .attr("dy", ".35em")
+                .text(function (d) {
+                    if (hasSelected && !finalData[d.index].selected) return ""
+                    return percent(d.index)
+                })
+                .merge(text as any)
+                .transition()
+                .duration(1000)
+                .attrTween("transform", function (d) {
+                    (this as any)._current = (this as any)._current || d;
+                    const interpolate = d3.interpolate((this as any)._current, d);
+                    (this as any)._current = interpolate(0);
+                    return function (t) {
+                        const d2 = interpolate(t);
+                        const pos = outerArc.centroid(d2 as any);
+                        pos[0] = outerRadius * (midAngle(d2) < Math.PI ? 1 : -1);
+                        return "translate(" + pos + ")";
+                    };
+                })
+                .styleTween("text-anchor", function (d) {
+                    (this as any)._current = (this as any)._current || d;
+                    const interpolate = d3.interpolate((this as any)._current, d);
+                    (this as any)._current = interpolate(0);
+                    return function (t) {
+                        const d2 = interpolate(t);
+                        return midAngle(d2) < Math.PI ? "start" : "end";
+                    };
+                });
 
-        function midAngle(d: any) {
-            return d.startAngle + (d.endAngle - d.startAngle) / 2;
+            text.exit()
+                .remove();
+
+            function midAngle(d: any) {
+                return d.startAngle + (d.endAngle - d.startAngle) / 2;
+            }
+
+            // Creating the lines connecting the lables to the slices
+            const polyline = svg
+                .select(".lines")
+                .selectAll("polyline")
+                .data(pie);
+
+            polyline
+                .join("polyline")
+                .attr("stroke", "black")
+                .attr("stroke-width", d => {
+                    if (hasSelected && !finalData[d.index].selected) return "0px"
+                    return "1px"
+                })
+                .attr("fill", "none")
+                .transition()
+                .duration(1000)
+                .attrTween("points", function (d) {
+                    (this as any)._current = (this as any)._current || d;
+                    const interpolate = d3.interpolate((this as any)._current, d);
+                    (this as any)._current = interpolate(0);
+                    return function (t) {
+                        const d2 = interpolate(t);
+                        const pos = outerArc.centroid(d2 as any);
+                        pos[0] = outerRadius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
+                        return [arc.centroid(d2 as any), outerArc.centroid(d2 as any), pos] as any;
+                    };
+                });
+
+            polyline.exit().remove();
         }
 
-        // Creating the lines connecting the lables to the slices
-        const polyline = svg
-            .select(".lines")
-            .selectAll("polyline")
-            .data(pie);
 
-        polyline
-            .join("polyline")
-            .attr("stroke", "black")
-            .attr("stroke-width", d => {
-                if (hasSelected && !finalData[d.index].selected) return "0px"
-                return "1px"
-            })
-            .attr("fill", "none")
-            .transition()
-            .duration(1000)
-            .attrTween("points", function (d) {
-                (this as any)._current = (this as any)._current || d;
-                const interpolate = d3.interpolate((this as any)._current, d);
-                (this as any)._current = interpolate(0);
-                return function (t) {
-                    const d2 = interpolate(t);
-                    const pos = outerArc.centroid(d2 as any);
-                    pos[0] = outerRadius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
-                    return [arc.centroid(d2 as any), outerArc.centroid(d2 as any), pos] as any;
-                };
-            });
-
-        polyline.exit().remove();
+    }, [props, props.data, propsRef, props.height, props.sorted, props.removeLabels])
 
 
-    }, [props, props.data, propsRef, props.height, props.sorted])
-
-
-    return <div className={`vieolo-donut-chart width--pc-100 height--pc-100 ${props.disabled ? "disabled" : ""}`} ref={ref}></div>
+    return <div 
+        className={`vieolo-donut-chart width--pc-100 height--pc-100 ${props.disabled ? "disabled" : ""}`} 
+        ref={ref}
+    ></div>
 }
