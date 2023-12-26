@@ -28,6 +28,10 @@ export default function DonutChart(props: {
     disabled?: boolean,
     /** if ommited, The default value of 300px is used instead */
     height?: number,
+    /** default: 400px */
+    width?: number,
+    /** The viewbox of the SVG */
+    viewbox?: string,
     sorted?: boolean,
     removeLabels?: boolean,
     onClick?: (d: DonutChartData) => void,
@@ -61,8 +65,8 @@ export default function DonutChart(props: {
         d3.select(ref.current).html("");
 
         // Calculating the width and height of the chart
-        let width = ref.current?.offsetWidth || 400
-        let height = Math.min(width * 0.4, props.height || 300)
+        let width = ref.current?.offsetWidth || props.width || 400;
+        let height = Math.min( (props.width && props.height) ? props.height : width * 0.4, props.height || 300)
 
         // List of titles (N), values (V), and the final filtered list of values (I)
         const N = props.data.length === 0 ? [""] : d3.map(finalData, z => z.title);
@@ -95,7 +99,7 @@ export default function DonutChart(props: {
         const svg = d3.select(ref.current).append("svg")
             .attr("width", width)
             .attr("height", height)
-            .attr("viewBox", [-width / 2, -height / 2, width, height])
+            .attr("viewBox", props.viewbox || [-width / 2, -height / 2, width, height])
             .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
 
         // Creating the slices with possible onClick method
@@ -218,11 +222,10 @@ export default function DonutChart(props: {
         }
 
 
-    }, [props, props.data, propsRef, props.height, props.sorted, props.removeLabels])
-
+    }, [props, props.data, propsRef, props.height, props.sorted, props.removeLabels, props.width, props.viewbox])
 
     return <div 
-        className={`vieolo-donut-chart width--pc-100 height--pc-100 ${props.disabled ? "disabled" : ""}`} 
+        className={`vieolo-donut-chart ${props.disabled ? "disabled" : ""}`} 
         ref={ref}
     ></div>
 }

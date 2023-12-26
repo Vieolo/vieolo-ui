@@ -51,6 +51,7 @@ import Page from './Page';
 import PageFrame from './PageFrame';
 import PeriodSelector , { PeriodOptions } from './PeriodSelector';
 import ProgressBar from './ProgressBar';
+import ProgressChip from './ProgressChip';
 import RadioGroup from './RadioGroup';
 import RadioGroupRow from './RadioGroupRow';
 import Select from './Select';
@@ -243,6 +244,7 @@ export {
 	PeriodSelector,
 	PeriodOptions,
 	ProgressBar,
+	ProgressChip,
 	RadioGroup,
 	RadioGroupRow,
 	Select,
