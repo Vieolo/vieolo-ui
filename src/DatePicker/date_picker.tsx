@@ -97,7 +97,8 @@ export default function DatePicker(props: {
                         icon={<CloseIcon />}
                         size='extra-small'
                         color='error'
-                        onClick={() => {
+                        onClick={(e) => {
+                            e.stopPropagation();
                             props.onClear!()
                         }}
                     />
