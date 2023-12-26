@@ -66,7 +66,10 @@ export function DonutChartCreator(props: { p: DonutChartPropsType }) {
         let f: DonutChartData = {
             title: `Donut ${i + 1}`,
             id: i.toString(),            
-            selected: selected && selected.id === i.toString()
+            selected: selected && selected.id === i.toString(),
+            color: i === 11 
+                ? 'secondary'
+                : i === 10 ? 'primary' : undefined,
         }
 
         if ((props.p as any).dataType.includes("Percentage")) {

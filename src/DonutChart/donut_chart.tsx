@@ -1,6 +1,9 @@
 // React
 import React, { useState, useEffect, useRef } from 'react';
 
+// Vieolo UI
+import { ColorOptionType } from '../types/types';
+
 // Installed Packages
 import { toFixed } from '@vieolo/parsers/number_parsers';
 import * as d3 from 'd3';
@@ -15,6 +18,7 @@ export type DonutChartData = {
     /** This value is displayed when the legend is selected and is not considered in the calculations */
     displayValue?: string,
     selected?: boolean,
+    color?: ColorOptionType
 }
 
 export default function DonutChart(props: {
@@ -103,8 +107,13 @@ export default function DonutChart(props: {
             .data(pie)
             .join("path")
             .attr("fill", d => {
+                if (!hasSelected && finalData[d.index] && finalData[d.index].color) return "";
                 if (hasSelected && !finalData[d.index].selected) return "#ddd"
                 return color(N[d.index])
+            })
+            .attr("class",d => {
+                if (!hasSelected && finalData[d.index] && finalData[d.index].color) return `fill-color--${finalData[d.index].color}-normal`                
+                return ''
             })
             .attr("d", arc as any)
             .on("click", (e, d) => {
