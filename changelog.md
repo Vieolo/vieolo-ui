@@ -1,5 +1,11 @@
 # Change Log
 
+## v0.31.13 (2023-12-27)
+- Added `ProgressChip` ([#274](https://github.com/Vieolo/vieolo-ui/issues/274))
+- Added the ability to remove `DonutChart` markers ([#276](https://github.com/Vieolo/vieolo-ui/issues/276))
+- Added the ability to set single color of `DonutChart` slice ([#277](https://github.com/Vieolo/vieolo-ui/issues/277))
+- Added the fix for close button of the `DatePicker` ([#331](https://github.com/Vieolo/vieolo-ui/issues/331))
+
 ## v0.31.12 (2023-11-29)
 - Fixed the debug mode detection of `Modal`
 

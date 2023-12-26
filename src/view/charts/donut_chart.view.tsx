@@ -33,6 +33,7 @@ export function donutChartOptions(): ViewData {
             },
             disabled: 'boolean',
             sorted: 'boolean',
+            removeLabels: 'boolean',
         }
     }
 }
@@ -65,7 +66,10 @@ export function DonutChartCreator(props: { p: DonutChartPropsType }) {
         let f: DonutChartData = {
             title: `Donut ${i + 1}`,
             id: i.toString(),            
-            selected: selected && selected.id === i.toString()
+            selected: selected && selected.id === i.toString(),
+            color: i === 11 
+                ? 'secondary'
+                : i === 10 ? 'primary' : undefined,
         }
 
         if ((props.p as any).dataType.includes("Percentage")) {
@@ -93,6 +97,7 @@ export function DonutChartCreator(props: { p: DonutChartPropsType }) {
         disabled={props.p.disabled}
         height={300}
         sorted={props.p.sorted}
+        removeLabels={props.p.removeLabels}
         onClick={(d) => {
             if (selected && d.id === selected.id) setSelected(undefined)            
             else setSelected(d)
