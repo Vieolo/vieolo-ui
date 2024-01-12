@@ -4,15 +4,21 @@ import React, { useState, useRef, useEffect, CSSProperties } from 'react';
 // Vieolo UI
 import Typography from '../Typography';
 import SwitchRow from '../SwitchRow';
+import IconButton from '../IconButton';
 
 // Installed Packages
 import Device from '@vieolo/device-js';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 // Types
 import { ColorOptionType } from '../types/types';
 
 // Utility
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
+
+
+type IconButtonType = Omit<React.ComponentProps<typeof IconButton>, "onClick" | "icon" | 'disabled'> 
+
 
 export type DropDownMenuSwitch = {
     on: boolean,
@@ -29,18 +35,21 @@ export type DropDownMenuItemType = {
     icon?: React.ReactNode,
     color?: ColorOptionType,
     switch?: DropDownMenuSwitch,
-    topBorder?: boolean
+    topBorder?: boolean,
+    hidden?: boolean,
 }
 
 
 type DropDownMenuProps = {
-    buttonComponent: React.ReactNode,
+    buttonComponent?: React.ReactNode,
+    defaultButtonConfig?: IconButtonType,
     disabled?: boolean,
     items: DropDownMenuItemType[],
     onItemSelect: (value: string) => void,
     className?: string,
     /** @deprecated The positioning of the dropdown is calculated automatically */
-    position?: 'left' | 'right'
+    position?: 'left' | 'right',
+    disableIfAllItemsHidden?: boolean,
 }
 
 
@@ -54,6 +63,9 @@ export default function DropDownMenu(props: DropDownMenuProps) {
     let [container,] = useState(useRef<HTMLDivElement>(null));
     let [itemKeyboardFocus, setItemKeyboardFocus] = useState<string>("");
     let itemKeyboardRef = useRef<HTMLDivElement>(null);
+    
+    let finalItems = props.items.filter(z => !z.hidden);
+    let disabled = props.disabled || (finalItems.length === 0 && props.disableIfAllItemsHidden)
 
     useEffect(() => {
 
@@ -88,7 +100,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 
 
     function handleOpen(e?: React.MouseEvent<HTMLDivElement, MouseEvent>, openedByKeyboard?: boolean) {
-        if (!props.disabled) {
+        if (!disabled) {
             if (e) e.stopPropagation();
             if (!open && !Device.isTouchOnlyDevice) {
                 let rect = container.current!.getBoundingClientRect();
@@ -120,7 +132,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
                 setBottom(b);
             }
             setOpen(!open);
-            if (openedByKeyboard) setItemKeyboardFocus(props.items[0].value);
+            if (openedByKeyboard) setItemKeyboardFocus(finalItems[0].value);
         }
     };
 
@@ -132,7 +144,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
 
     let className = "vieolo-dropdown-menu";
     if (props.className) className += ` ${props.className}`;
-    if (props.disabled) className += " disabled";
+    if (disabled) className += " disabled";
 
     let style: CSSProperties = {}
 
@@ -153,7 +165,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
                     onEnter: () => {
                         if (!open) handleOpen(undefined, true);
                         else if (itemKeyboardFocus) {
-                            handleSelectItem(props.items.find(i => i.value === itemKeyboardFocus));
+                            handleSelectItem(finalItems.find(i => i.value === itemKeyboardFocus));
                             setOpen(false);
                         }
                     },
@@ -161,9 +173,9 @@ export default function DropDownMenu(props: DropDownMenuProps) {
                         e.stopPropagation();
                         e.preventDefault();
                         if (open) {
-                            let lastIndex = props.items.findIndex(i => i.value === itemKeyboardFocus);
-                            if (lastIndex < props.items.length - 1) {
-                                setItemKeyboardFocus(props.items[lastIndex + 1].value);
+                            let lastIndex = finalItems.findIndex(i => i.value === itemKeyboardFocus);
+                            if (lastIndex < finalItems.length - 1) {
+                                setItemKeyboardFocus(finalItems[lastIndex + 1].value);
                             }
                         } else {
                             handleOpen(undefined, true);
@@ -173,9 +185,9 @@ export default function DropDownMenu(props: DropDownMenuProps) {
                         e.stopPropagation();
                         e.preventDefault();
                         if (open) {
-                            let lastIndex = props.items.findIndex(i => i.value === itemKeyboardFocus);
+                            let lastIndex = finalItems.findIndex(i => i.value === itemKeyboardFocus);
                             if (lastIndex > 0) {
-                                setItemKeyboardFocus(props.items[lastIndex - 1].value);
+                                setItemKeyboardFocus(finalItems[lastIndex - 1].value);
                             }
                         } else {
                             handleOpen(undefined, true);
@@ -196,7 +208,15 @@ export default function DropDownMenu(props: DropDownMenuProps) {
                 })
             }}
         >
-            {props.buttonComponent}
+            {
+                props.buttonComponent ||
+                <IconButton 
+                    icon={<MoreVertIcon />}
+                    {...props.defaultButtonConfig}
+                    size={(props.defaultButtonConfig && props.defaultButtonConfig.size) ? props.defaultButtonConfig.size : 'small'}
+                    disabled={disabled}
+                />
+            }
         </div>
 
         {
@@ -212,7 +232,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
                 </div>
                 <div className={`vieolo-dropdown-menu__dropdown`} style={style} >
                     {
-                        props.items.map((item, i) => {
+                        finalItems.map((item, i) => {
                             return <DropDownMenuItem
                                 key={`${item.value}_${i}`}
                                 title={item.title}

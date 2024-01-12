@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.31.14 (2024-01-12)
+- Added default button to the `DropDownMenu` ([#332](https://github.com/Vieolo/vieolo-ui/issues/332))
+- Added hidden field to `DropDownMenu`'s items ([#333](https://github.com/Vieolo/vieolo-ui/issues/333))
+
 ## v0.31.13 (2023-12-27)
 - Added `ProgressChip` ([#274](https://github.com/Vieolo/vieolo-ui/issues/274))
 - Added the ability to remove `DonutChart` markers ([#276](https://github.com/Vieolo/vieolo-ui/issues/276))
