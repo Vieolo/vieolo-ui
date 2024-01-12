@@ -4,15 +4,21 @@ import React, { useState, useRef, useEffect, CSSProperties } from 'react';
 // Vieolo UI
 import Typography from '../Typography';
 import SwitchRow from '../SwitchRow';
+import IconButton from '../IconButton';
 
 // Installed Packages
 import Device from '@vieolo/device-js';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 // Types
 import { ColorOptionType } from '../types/types';
 
 // Utility
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
+
+
+type IconButtonType = Omit<React.ComponentProps<typeof IconButton>, "onClick" | "icon" | 'disabled'> 
+
 
 export type DropDownMenuSwitch = {
     on: boolean,
@@ -35,7 +41,8 @@ export type DropDownMenuItemType = {
 
 
 type DropDownMenuProps = {
-    buttonComponent: React.ReactNode,
+    buttonComponent?: React.ReactNode,
+    defaultButtonConfig?: IconButtonType,
     disabled?: boolean,
     items: DropDownMenuItemType[],
     onItemSelect: (value: string) => void,
@@ -201,7 +208,15 @@ export default function DropDownMenu(props: DropDownMenuProps) {
                 })
             }}
         >
-            {props.buttonComponent}
+            {
+                props.buttonComponent ||
+                <IconButton 
+                    icon={<MoreVertIcon />}
+                    {...props.defaultButtonConfig}
+                    size={(props.defaultButtonConfig && props.defaultButtonConfig.size) ? props.defaultButtonConfig.size : 'small'}
+                    disabled={disabled}
+                />
+            }
         </div>
 
         {
