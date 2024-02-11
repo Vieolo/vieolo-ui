@@ -1,6 +1,6 @@
 {
   "name": "@vieolo/vieolo-ui",
-  "version": "0.31.14",
+  "version": "0.31.15",
   "main": "export.js",
   "author": {
     "name": "Vieolo OÜ"
@@ -43,7 +43,7 @@
     "@mui/icons-material": "^5.10.6",
     "@mui/material": "^5.10.7",
     "@vieolo/device-js": "^0.2.0",
-    "@vieolo/file-management": "^0.4.1",
+    "@vieolo/file-management": "^0.4.3",
     "@vieolo/parsers": "^0.3.1",
     "@vieolo/validation": "^0.4.0",
     "@vieolo/vdate": "^2.2.2",
