@@ -1,7 +1,7 @@
 // React
 import React, { Fragment, useEffect, useRef, useState, CSSProperties } from 'react';
 
-//Installed Packages
+// Installed Packages
 import Device from '@vieolo/device-js';
 
 // Material UI
@@ -11,6 +11,7 @@ import CloseIcon from '@mui/icons-material/CloseRounded';
 // Vieolo UI
 import IconButton from '../IconButton';
 import Typography from '../Typography';
+import Checkbox from '../CheckBox';
 
 // Utility
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
@@ -196,6 +197,7 @@ export default function Select(props: SelectProps) {
             onKeyboardFocus={itemKeyboardFocus === item.value}
             onSelect={(t: SelectItemType) => handleSelectItem(t)}
             itemRef={item.value === itemKeyboardFocus ? itemKeyboardRef : undefined}
+            multipleChoice={props.multipleChoice}
         />)
     }
 
@@ -367,12 +369,13 @@ function SelectItem(props: {
     onSelect: (item: SelectItemType) => void,
     previousItem?: SelectItemType,
     onKeyboardFocus: boolean,
-    itemRef?: React.RefObject<HTMLDivElement>
+    itemRef?: React.RefObject<HTMLDivElement>,
+    multipleChoice?: boolean,
 }) {
 
     let className = "vieolo-select__select-item";
 
-    if (props.isSelected) className += " vieolo-select__select-item--selected";
+    if (props.isSelected && !props.multipleChoice) className += " vieolo-select__select-item--selected";
     if (props.item.category) className += " vieolo-select__select-item--category";
     if (props.item.subTitle) className += " vieolo-select__select-item--subtitle";
     if (props.onKeyboardFocus) className += " vieolo-select__select-item--keyboard-focus";
@@ -392,6 +395,14 @@ function SelectItem(props: {
             role="listitem"
             aria-label={props.item.title}
         >
+            {
+                props.multipleChoice &&
+                <Checkbox 
+                    onChange={() => {}}
+                    value={props.isSelected}
+                    removeTabIndex
+                />
+            }
             {
                 props.item.icon && props.item.icon
             }
