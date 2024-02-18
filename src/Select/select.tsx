@@ -49,6 +49,7 @@ export default function Select(props: SelectProps) {
     let [left, setLeft] = useState<number>(0);
     let [bottom, setBottom] = useState<number>(0);
     let [right, setRight] = useState<number>(0);
+    let [width, setWidth] = useState<number>(160);
     let [virtKeyboardOffset, setVirtKeyboardOffset] = useState<number>(0);
     // eslint-disable-next-line
     let [container, setContainer] = useState(useRef<HTMLDivElement>(null));
@@ -145,6 +146,7 @@ export default function Select(props: SelectProps) {
             setLeft(l);
             setTop(t);
             setBottom(b);
+            setWidth(rect.width)
         }
         setOpen(true);
         setSearchQuery("");
@@ -174,6 +176,7 @@ export default function Select(props: SelectProps) {
         if (left !== 0) style.left = left;
         if (top !== 0) style.top = top;
         if (bottom !== 0) style.bottom = bottom;
+        if (width !== 0) style.width = Math.max(width, 160)
     }
 
     // On Android devices, virtualKeyboardOffset is sometimes a negative value instead of 0
