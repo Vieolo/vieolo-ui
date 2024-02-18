@@ -1,7 +1,7 @@
 // React
 import React, { Fragment, useEffect, useRef, useState, CSSProperties } from 'react';
 
-//Installed Packages
+// Installed Packages
 import Device from '@vieolo/device-js';
 
 // Material UI
@@ -11,6 +11,7 @@ import CloseIcon from '@mui/icons-material/CloseRounded';
 // Vieolo UI
 import IconButton from '../IconButton';
 import Typography from '../Typography';
+import Checkbox from '../CheckBox';
 
 // Utility
 import { handleOnKeyDown } from '../utility/onkeydown_utility';
@@ -48,6 +49,7 @@ export default function Select(props: SelectProps) {
     let [left, setLeft] = useState<number>(0);
     let [bottom, setBottom] = useState<number>(0);
     let [right, setRight] = useState<number>(0);
+    let [width, setWidth] = useState<number>(160);
     let [virtKeyboardOffset, setVirtKeyboardOffset] = useState<number>(0);
     // eslint-disable-next-line
     let [container, setContainer] = useState(useRef<HTMLDivElement>(null));
@@ -144,6 +146,7 @@ export default function Select(props: SelectProps) {
             setLeft(l);
             setTop(t);
             setBottom(b);
+            setWidth(rect.width)
         }
         setOpen(true);
         setSearchQuery("");
@@ -173,6 +176,7 @@ export default function Select(props: SelectProps) {
         if (left !== 0) style.left = left;
         if (top !== 0) style.top = top;
         if (bottom !== 0) style.bottom = bottom;
+        if (width !== 0) style.width = Math.max(width, 160)
     }
 
     // On Android devices, virtualKeyboardOffset is sometimes a negative value instead of 0
@@ -196,6 +200,7 @@ export default function Select(props: SelectProps) {
             onKeyboardFocus={itemKeyboardFocus === item.value}
             onSelect={(t: SelectItemType) => handleSelectItem(t)}
             itemRef={item.value === itemKeyboardFocus ? itemKeyboardRef : undefined}
+            multipleChoice={props.multipleChoice}
         />)
     }
 
@@ -236,13 +241,15 @@ export default function Select(props: SelectProps) {
             onKeyDown={e => {
                 if (props.disabled) return
                 handleOnKeyDown(e, {
-                    onEnter: () => {
+                    onEnter: (k) => {
                         if (!open) {
                             e.stopPropagation();
                             e.preventDefault();
                             handleOpen(undefined, true);
                         } else if (itemKeyboardFocus) {
-                            handleSelectItem(filtered.find(f => f.value === itemKeyboardFocus))
+                            if (!(props.searchable && itemKeyboardFocus && k === 'Space')) {
+                                handleSelectItem(filtered.find(f => f.value === itemKeyboardFocus))
+                            } 
                         }
                     },
                     onAlphaNumeric: () => {
@@ -367,12 +374,13 @@ function SelectItem(props: {
     onSelect: (item: SelectItemType) => void,
     previousItem?: SelectItemType,
     onKeyboardFocus: boolean,
-    itemRef?: React.RefObject<HTMLDivElement>
+    itemRef?: React.RefObject<HTMLDivElement>,
+    multipleChoice?: boolean,
 }) {
 
     let className = "vieolo-select__select-item";
 
-    if (props.isSelected) className += " vieolo-select__select-item--selected";
+    if (props.isSelected && !props.multipleChoice) className += " vieolo-select__select-item--selected";
     if (props.item.category) className += " vieolo-select__select-item--category";
     if (props.item.subTitle) className += " vieolo-select__select-item--subtitle";
     if (props.onKeyboardFocus) className += " vieolo-select__select-item--keyboard-focus";
@@ -392,6 +400,14 @@ function SelectItem(props: {
             role="listitem"
             aria-label={props.item.title}
         >
+            {
+                props.multipleChoice &&
+                <Checkbox 
+                    onChange={() => {}}
+                    value={props.isSelected}
+                    removeTabIndex
+                />
+            }
             {
                 props.item.icon && props.item.icon
             }
