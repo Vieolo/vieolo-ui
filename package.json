@@ -1,6 +1,6 @@
 {
   "name": "@vieolo/vieolo-ui",
-  "version": "0.31.15",
+  "version": "0.31.16",
   "main": "export.js",
   "author": {
     "name": "Vieolo OÜ"
@@ -32,7 +32,7 @@
     "cypresstools": "file:cypressToolsSource",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "^4.0.3",
+    "react-scripts": "^5.0.1",
     "sass": "^1.43.4",
     "typescript": "^4.3.2",
     "web-vitals": "^2.0.1"

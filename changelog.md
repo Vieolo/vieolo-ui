@@ -1,5 +1,10 @@
 # Change Log
 
+## v0.31.16 (2024-02-18)
+- Improved the display of the multi choice `Select`
+- Fixed the width of the `Select` drop down for full width ([#282](https://github.com/Vieolo/vieolo-ui/issues/282))
+- Fixed the searchable `Select` with white space ([#336](https://github.com/Vieolo/vieolo-ui/issues/336))
+
 ## v0.31.15 (2024-02-11)
 - Updated dependencies
 
