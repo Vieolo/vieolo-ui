@@ -241,13 +241,15 @@ export default function Select(props: SelectProps) {
             onKeyDown={e => {
                 if (props.disabled) return
                 handleOnKeyDown(e, {
-                    onEnter: () => {
+                    onEnter: (k) => {
                         if (!open) {
                             e.stopPropagation();
                             e.preventDefault();
                             handleOpen(undefined, true);
                         } else if (itemKeyboardFocus) {
-                            handleSelectItem(filtered.find(f => f.value === itemKeyboardFocus))
+                            if (!(props.searchable && itemKeyboardFocus && k === 'Space')) {
+                                handleSelectItem(filtered.find(f => f.value === itemKeyboardFocus))
+                            } 
                         }
                     },
                     onAlphaNumeric: () => {

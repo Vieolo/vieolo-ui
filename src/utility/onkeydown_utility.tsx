@@ -1,5 +1,5 @@
 export function handleOnKeyDown(e: React.KeyboardEvent<HTMLDivElement>, options: {
-    onEnter?: () => void,
+    onEnter?: (k: 'Space' | 'Enter') => void,
     onArrowDown?: () => void,
     onArrowUp?: () => void,
     onEscape?: () => void,
@@ -8,7 +8,7 @@ export function handleOnKeyDown(e: React.KeyboardEvent<HTMLDivElement>, options:
     onAlphaNumeric?: () => void,
 }) {
     if (e.code === "Enter" || e.code === "Space") {
-        if (options.onEnter) options.onEnter();
+        if (options.onEnter) options.onEnter(e.code);
     } else if (e.code === "ArrowDown") {
         if (options.onArrowDown) options.onArrowDown();
     } else if (e.code === "ArrowUp") {
