@@ -28,6 +28,7 @@ export default function PageFrame(props: {
     children?: React.ReactNode,
     navbar?: PageFrameNavbarOptions,
     drawer?: PageFrameDrawerOptions,
+    hideNavbar?: boolean,
 }) {
 
     let [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -40,7 +41,7 @@ export default function PageFrame(props: {
 
     return <div className="vieolo-page-frame">
         {
-            props.navbar &&
+            (props.navbar && !props.hideNavbar)  &&
             <Navbar
                 drawerButton={props.navbar.drawerButton}
                 elevation={props.navbar.elevation}
