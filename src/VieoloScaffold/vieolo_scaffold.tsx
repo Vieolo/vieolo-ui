@@ -11,6 +11,7 @@ export default function VieoloScaffold(props: {
     confirmation?: ConfirmationDialogPropType,
     drawer?: PageFrameDrawerOptions,
     navbar?: PageFrameNavbarOptions,
+    hideNavbar?: boolean,
     routes: {
         /** 
          * @example
@@ -27,6 +28,7 @@ export default function VieoloScaffold(props: {
     return <PageFrame
         drawer={props.drawer}
         navbar={props.navbar}
+        hideNavbar={props.hideNavbar}
     >
         <main>
             <Switch>

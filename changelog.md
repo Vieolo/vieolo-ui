@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.31.17 (2024-03-03)
+- Added `hideNavbar` to `VieoloScaffold`
+
 ## v0.31.16 (2024-02-18)
 - Improved the display of the multi choice `Select`
 - Fixed the width of the `Select` drop down for full width ([#282](https://github.com/Vieolo/vieolo-ui/issues/282))
