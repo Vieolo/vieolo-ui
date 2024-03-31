@@ -312,7 +312,7 @@ export default function Select(props: SelectProps) {
             }}>
                 {
                     props.title &&
-                    <Typography type='paragraph-small' text={props.title} className="vieolo-select__select-button__button-text__button-title" />
+                    <Typography type='caption-large' text={props.title} className="vieolo-select__select-button__button-text__button-title" />
                 }
                 {
                     (!props.title && props.placeHolder && (!props.selectedItems || props.selectedItems.length === 0)) &&
@@ -321,7 +321,7 @@ export default function Select(props: SelectProps) {
                 {
                     (props.searchable && open && !Device.isTouchOnlyDevice)
                         ? searchInput
-                        : <Typography type='title-small' text={thisSelectedItems.map(s => s.title).join(", ")} className="vieolo-select__select-button__button-text__button-value" />
+                        : <Typography type='paragraph-small' text={thisSelectedItems.map(s => s.title).join(", ")} className="vieolo-select__select-button__button-text__button-value" fontWeight='bold' />
                 }
             </div>
 
