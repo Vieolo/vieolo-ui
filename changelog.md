@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.31.18 (2024-03-31)
+- Improved the display of values in `Select`
+
 ## v0.31.17 (2024-03-03)
 - Added `hideNavbar` to `VieoloScaffold`
 
