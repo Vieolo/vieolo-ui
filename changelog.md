@@ -1,5 +1,9 @@
 # Change Log
 
+## v0.31.19 (2024-07-06)
+- Added `showTitle` to `Select`
+- Added data test ID to `Switch`
+
 ## v0.31.18 (2024-03-31)
 - Improved the display of values in `Select`
 

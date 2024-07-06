@@ -321,7 +321,13 @@ export default function Select(props: SelectProps) {
                 {
                     (props.searchable && open && !Device.isTouchOnlyDevice)
                         ? searchInput
-                        : <Typography type='paragraph-small' text={thisSelectedItems.map(s => s.title).join(", ")} className="vieolo-select__select-button__button-text__button-value" fontWeight='bold' />
+                        : <Typography 
+                            type='paragraph-small' 
+                            text={thisSelectedItems.map(s => s.title).join(", ")} 
+                            className="vieolo-select__select-button__button-text__button-value" 
+                            fontWeight='bold' 
+                            showTitle
+                        />
                 }
             </div>
 

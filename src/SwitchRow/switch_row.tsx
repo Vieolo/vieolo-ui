@@ -18,6 +18,7 @@ export default function SwitchRow(props: {
     switchID: string,
     disabled?: boolean,
     ariaLabel?: string,
+    dataTestID?: string,
     /**
      * The height of the row
      * To change the default height, override the "vieolo-swith-set--default-height" CSS class
@@ -44,6 +45,7 @@ export default function SwitchRow(props: {
                 switchID={props.switchID}
                 disabled={props.disabled}
                 ariaLabel={`${(props.ariaLabel || props.title)} switch`}
+                dataTestID={props.dataTestID}
             />
         }
     />
