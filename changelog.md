@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.31.20 (2024-07-17)
+- Pinned the version of `PDFJS`
+
 ## v0.31.19 (2024-07-06)
 - Added `showTitle` to `Select`
 - Added data test ID to `Switch`
