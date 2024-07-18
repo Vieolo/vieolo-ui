@@ -40,7 +40,7 @@ export default function Button(props: {
 	/** Adds an Icon button to the right side of the button */
 	auxiliary?: {
 		icon: React.ReactNode,
-		onClick: (dropDownItemValue?: string) => void,
+		onClick: (dropDownItemValue?: string, event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
 		dropDownMenuItems?: DropDownMenuItemType[],
 		ariaLabel?: string,
 		isLoading?: boolean
@@ -145,8 +145,8 @@ export default function Button(props: {
 				width: 40,
 				minWidth: 10,
 			}}
-			onClick={() => {
-				if (!props.auxiliary!.dropDownMenuItems || props.auxiliary!.dropDownMenuItems.length === 0) props.auxiliary!.onClick();
+			onClick={e => {
+				if (!props.auxiliary!.dropDownMenuItems || props.auxiliary!.dropDownMenuItems.length === 0) props.auxiliary!.onClick(undefined, e);
 			}}
 		>
 			{props.auxiliary.isLoading ? <Spinner size={props.height} color={props.color || 'primary'} colorType={e === 'high' ? 'text' : 'normal'} /> : props.auxiliary.icon}
