@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.31.21 (2024-07-18)
+- Added event to the auxiliary `Button`
+
 ## v0.31.20 (2024-07-17)
 - Pinned the version of `PDFJS`
 
