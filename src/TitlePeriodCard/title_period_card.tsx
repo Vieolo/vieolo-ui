@@ -9,7 +9,7 @@ import IconButton from "../IconButton";
 import { ArrowDown ,ArrowUp } from "../icons";
 
 // Installed Packages
-import VDate from "@vieolo/vdate";
+import VDate, { DateFormats } from "@vieolo/vdate";
 
 // Types
 import { BorderRadiusType, CardExtraActionType, ColorOptionType, ElevationType } from "../types/types";
@@ -26,7 +26,7 @@ export default function TitlePeriodCard(props: {
     description?: string,
     start: VDate | string,
     end: VDate | string,
-    dateDisplayFormat?: "yyyy-mm-dd" | "dd/mm/yyyy" | "mm/dd/yyyy" | "month dd, yyyy",
+    dateDisplayFormat?: DateFormats,
     /** default: "Day" */
     singleDayText?: string,
     /** default: "Days" */
