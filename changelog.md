@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.31.22 (2024-07-19)
+- Fixed the date format of `TitlePeriodCard`
+
 ## v0.31.21 (2024-07-18)
 - Added event to the auxiliary `Button`
 
