@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.31.23 (2024-10-01)
+- Updated dependencies
+
 ## v0.31.22 (2024-07-19)
 - Fixed the date format of `TitlePeriodCard`
 
