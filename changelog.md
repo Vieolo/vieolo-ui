@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.31.24 (2024-10-03)
+- Fixed the deprecated SCSS classes
+
 ## v0.31.23 (2024-10-01)
 - Updated dependencies
 
