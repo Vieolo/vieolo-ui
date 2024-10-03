@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.31.25 (2024-10-04)
+- Fixed the positioning of drop down menu in small and non-touch screens
+
 ## v0.31.24 (2024-10-03)
 - Fixed the deprecated SCSS classes
 

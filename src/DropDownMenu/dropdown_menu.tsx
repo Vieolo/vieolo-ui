@@ -118,7 +118,7 @@ export default function DropDownMenu(props: DropDownMenuProps) {
                     b = 0;
                 }
 
-                if (props.position === 'right' || (rect.x - (260 - rect.width)) < 260) {
+                if (props.position === 'right' || (rect.x < 260 && (rect.x - (260 - rect.width)) < 260)) {
                     l = rect.left;
                     r = 0;
                 } else {
