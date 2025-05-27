@@ -1,5 +1,8 @@
 # Change Log
 
+## v0.31.26 (2025-05-27)
+- Exported `NumberValidationOptions` ([#342](https://github.com/Vieolo/vieolo-ui/issues/342))
+
 ## v0.31.25 (2024-10-04)
 - Fixed the positioning of drop down menu in small and non-touch screens
 
