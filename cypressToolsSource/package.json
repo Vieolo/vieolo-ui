@@ -1,6 +1,6 @@
 {
   "name": "cypresstools",
-  "version": "0.31.25",
+  "version": "0.31.26",
   "description": "Cypress custom commands and functions to test applications made with Vieolo UI",
   "main": "dist/index.js",
   "scripts": {

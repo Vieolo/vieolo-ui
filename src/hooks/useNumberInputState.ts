@@ -7,7 +7,7 @@ import type { NumberInputValueType } from "../types"
 // Installed Packages
 import { numberValidation } from "@vieolo/validation"
 
-type NumberValidationOptions = Omit<Parameters<typeof numberValidation>[0], "value">;
+export type NumberValidationOptions = Omit<Parameters<typeof numberValidation>[0], "value">;
 
 /**
  * Creates an state for the number input value type. It takes the validation arguments, checks the validitiy of the initial number (in string format) and returns the states along with the validation.
@@ -24,10 +24,10 @@ type NumberValidationOptions = Omit<Parameters<typeof numberValidation>[0], "val
 export function useNumberInputState(
     validation: NumberValidationOptions, initialText?: string
 ): [NumberInputValueType, React.Dispatch<React.SetStateAction<NumberInputValueType>>, NumberValidationOptions] {
-    let [n, setN] = useState<NumberInputValueType>({ 
+    let [n, setN] = useState<NumberInputValueType>({
         number: +(initialText || '0'),
-        text: initialText || '', 
-        isValid: numberValidation({...validation, value: initialText || ''}).isValid 
+        text: initialText || '',
+        isValid: numberValidation({ ...validation, value: initialText || '' }).isValid
     })
 
     return [n, setN, validation]
